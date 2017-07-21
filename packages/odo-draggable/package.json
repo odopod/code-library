@@ -1,0 +1,44 @@
+{
+  "name": "@odopod/odo-draggable",
+  "description": "A class for versatile, performant draggability.",
+  "version": "1.0.0",
+  "main": "dist/odo-draggable.js",
+  "odoModule": "src/draggable.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
+    }
+  ],
+  "dependencies": {
+    "@odopod/odo-device": "../odo-device",
+    "@odopod/odo-helpers": "../odo-helpers",
+    "@odopod/odo-pointer": "../odo-pointer",
+    "tiny-emitter": "^2.0.1"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-draggable",
+  "files": [
+    "css",
+    "dist",
+    "src",
+    "index.js"
+  ],
+  "odoKeywords": [
+    "ui"
+  ],
+  "keywords": [
+    "odo",
+    "odo-component",
+    "odopod",
+    "drag",
+    "draggable"
+  ],
+  "license": "MIT",
+  "repository": "odopod/odo",
+  "scripts": {
+    "link-local": "node ../../scripts/link-local-packages.js",
+    "test": "gulp code-quality test"
+  }
+}

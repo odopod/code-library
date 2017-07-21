@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mocha Test Runner</title>
+  <link rel="stylesheet" href="../../../node_modules/mocha/mocha.css">
+  <link rel="stylesheet" href="../css/odo-tabs.css" />
+  <link rel="stylesheet" href="../css/odo-tabs-theme.css" />
+
+</head>
+
+<body>
+
+  <div id="mocha"></div>
+
+  <div id="basic-fixture" style="display:none;">
+    <div>
+      <ul id="tabs-demo" class="tabs-list clearfix">
+        <li class="odo-tabs__tab"><a href="#demo1_pane1" class="demo-tab">Tab 1</a></li>
+        <li class="odo-tabs__tab"><a href="#demo1_pane2" class="demo-tab">Tab 2</a></li>
+        <li class="odo-tabs__tab"><a href="#demo1_pane3" class="demo-tab">Tab 3</a></li>
+        <li class="odo-tabs__tab"><a href="#demo1_pane4" class="demo-tab">Tab 4</a></li>
+      </ul>
+
+      <div class="tab-panes">
+        <div id="demo1_pane1" class="tab-pane">
+          <h4>Pane 1</h4>
+          <p><a href="#link1">A link</a></p>
+          <p>Asdf.</p>
+        </div>
+        <div id="demo1_pane2" class="tab-pane">
+          <h4>Pane 2</h4>
+          <p><a href="#link2">A link</a></p>
+          <p>Qwerty.</p>
+        </div>
+        <div id="demo1_pane3" class="tab-pane">
+          <h4>Pane 3</h4>
+          <p><a href="#link3">A link</a></p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div id="demo1_pane4" class="tab-pane">
+          <h4>Pane 4</h4>
+          <p><a href="#link4">A link</a></p>
+          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="hash-fixture" style="display:none;">
+    <div>
+      <ul id="hash-demo" class="tabs-list clearfix">
+        <li class="odo-tabs__tab"><a data-hash="dolphin" href="#demo2_pane1" class="demo-tab">Dolphin</a></li>
+        <li class="odo-tabs__tab"><a data-hash="lemming" href="#demo2_pane2" class="demo-tab">Lemming</a></li>
+        <li class="odo-tabs__tab"><a data-hash="tyrannosaurus" href="#demo2_pane3" class="demo-tab">Tyrannosaurus</a></li>
+        <li class="odo-tabs__tab"><a data-hash="shark" href="#demo2_pane4" class="demo-tab">Shark</a></li>
+      </ul>
+
+      <div class="tab-panes">
+        <div id="demo2_pane1" class="tab-pane">
+          <h4>Pane 1</h4>
+          <p><a href="#link1">A link</a></p>
+          <p>Asdf.</p>
+        </div>
+        <div id="demo2_pane2" class="tab-pane">
+          <h4>Pane 2</h4>
+          <p><a href="#link2">A link</a></p>
+          <p>Qwerty.</p>
+        </div>
+        <div id="demo2_pane3" class="tab-pane">
+          <h4>Pane 3</h4>
+          <p><a href="#link3">A link</a></p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div id="demo2_pane4" class="tab-pane">
+          <h4>Pane 4</h4>
+          <p><a href="#link4">A link</a></p>
+          <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="start-at-second-fixture" style="display:none;">
+    <div>
+      <ul id="tabs-demo" class="tabs-list clearfix">
+        <li class="odo-tabs__tab"><a id="test-anchor1" href="#test_pane1" class="demo-tab">Tab 1</a></li>
+        <li class="odo-tabs__tab"><a id="test-anchor2" href="#test_pane2" class="demo-tab">Tab 2</a></li>
+        <li class="odo-tabs__tab"><a id="test-anchor3" href="#test_pane3" class="demo-tab">Tab 3</a></li>
+      </ul>
+
+      <div class="tab-panes">
+        <div id="test_pane1" class="tab-pane">
+          <h4>Pane 1</h4>
+          <p><a href="#link1">A link</a></p>
+          <p>Asdf.</p>
+        </div>
+        <div id="test_pane2" class="tab-pane is-selected">
+          <h4>Pane 2</h4>
+          <p><a href="#link2">A link</a></p>
+          <p>Qwerty.</p>
+        </div>
+        <div id="test_pane3" class="tab-pane">
+          <h4>Pane 3</h4>
+          <p><a href="#link3">A link</a></p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Polyfills -->
+  <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Testing Framework. -->
+  <script src="../../../node_modules/mocha/mocha.js"></script>
+  <script src="../../../node_modules/chai/chai.js"></script>
+  <script src="../../../node_modules/sinon/pkg/sinon.js"></script>
+
+  <!-- Dependencies. -->
+  <script src="../node_modules/tiny-emitter/dist/tinyemitter.min.js"></script>
+  <script src="../node_modules/@odopod/odo-device/dist/odo-device.min.js"></script>
+  <script src="../node_modules/@odopod/odo-helpers/dist/odo-helpers.min.js"></script>
+  <script src="../node_modules/@odopod/odo-window-events/dist/odo-window-events.min.js"></script>
+
+  <script>
+  window.expect = chai.expect;
+  mocha.setup('bdd');
+
+  var resource;
+  // Add ?debug to the url to use the instrumented code when not in PhantomJS
+  if (window._phantom || window.location.search.indexOf('debug') > -1) {
+    resource = '../dist/odo-tabs.instrumented.js';
+  } else {
+    resource = '../dist/odo-tabs.js';
+  }
+
+  document.write('<script src="' + resource + '"><\/script>');
+  </script>
+
+  <!-- Specs. -->
+  <script src="specs.js"></script>
+
+  <script>mocha.run();</script>
+</body>
+
+</html>

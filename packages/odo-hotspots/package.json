@@ -1,0 +1,36 @@
+{
+  "name": "@odopod/odo-hotspots",
+  "description": "A component which positions and opens hotspots.",
+  "version": "1.0.0",
+  "main": "dist/odo-hotspots.js",
+  "style": "css/odo-hotspots.css",
+  "odoModule": "src/hotspots.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
+    }
+  ],
+  "dependencies": {
+    "debounce": "^1.0.0",
+    "tiny-emitter": "^2.0.1"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-hotspots",
+  "odoKeywords": [
+    "ui"
+  ],
+  "keywords": [
+    "odo",
+    "odo-component",
+    "odopod",
+    "hotspots"
+  ],
+  "license": "MIT",
+  "repository": "odopod/odo",
+  "scripts": {
+    "link-local": "node ../../scripts/link-local-packages.js",
+    "test": "gulp code-quality test"
+  }
+}

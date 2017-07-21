@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CSS Utilities &middot; Odo Sassplate Style Guide</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/docs.css">
+  </head>
+  <body class="odopod-style-guide">
+
+<header class="docs-page-header">
+  <div class="container">
+      <div class="row">
+        <div class="col-4@sm">
+          <a href="index.html" class="docs-header-link-back text-link text-link--icon">
+            <svg class="icon icon--small" viewBox="0 0 24 24">
+              <path d="M15 20c-.3 0-.6-.1-.8-.3l-6-7c-.3-.4-.3-.9 0-1.3l6-7c.4-.4 1-.5 1.4-.1.4.4.5 1 .1 1.4L10.3 12l5.4 6.3c.4.4.3 1.1-.1 1.4-.1.2-.4.3-.6.3z"></path>
+            </svg><span class="text-link__text">Style guide home</span>
+          </a>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-6@sm">
+        <h2 class="docs-type-display-1">CSS Utilities</h2>
+      </div>
+      <div class="col-6@sm type--right">
+        <p class="docs-type-subhead-1">Odopod</p>
+        <p class="docs-type-subhead-1 marginless">Odo Sassplate</p>
+      </div>
+    </div>
+  </div>
+</header>
+    <main id="main" role="main">
+
+
+
+<section class="docs-simplesheet__section" id="vertical-spacers">
+  <div class="container">
+    <div class="row">
+      <div class="col-12@sm">
+        <h2 class="docs-type-header-1">Vertical Spacers</h2>
+        <blockquote class="docs-blockquote">
+          <p>Add global top and bottom padding at a variety of sizes which adjust to breakpoints automatically.</p>
+        </blockquote>
+        <p class="docs-type-body-2">Available options are any combination of <code>.spacer-top-</code> or <code>.spacer-btm-</code> with any of the available sizes: <code>none</code>,&#32;<code>small</code>,&#32;<code>medium</code>,&#32;&#32;or&#32;<code>large</code>. For example, <code>.spacer-top-small</code> or <code>.spacer-btm-large</code>.</p>
+        <p class="docs-type-body-2">Breakpoint suffixes for spacer classes are also available (e.g. <code>.spacer-btm-medium@md</code>)</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12@sm">
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th></th>
+                <th>none</th>
+                <th>small</th>
+                <th>medium</th>
+                <th>large</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <th>xs</th>
+                  <td>0</td>
+                  <td>24</td>
+                  <td>36</td>
+                  <td>48</td>
+              </tr>
+              <tr>
+                <th>sm</th>
+                  <td>0</td>
+                  <td></td>
+                  <td>40</td>
+                  <td>64</td>
+              </tr>
+              <tr>
+                <th>md</th>
+                  <td>0</td>
+                  <td>32</td>
+                  <td>48</td>
+                  <td>80</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row spacer-top-small">
+      <div class="col-9@sm">
+          <div class="spacer-top-none" style="background-color:rgb(80, 80, 80)"></div>
+          <div class="spacer-top-small" style="background-color:rgb(60, 60, 60)"></div>
+          <div class="spacer-top-medium" style="background-color:rgb(40, 40, 40)"></div>
+          <div class="spacer-top-large" style="background-color:rgb(20, 20, 20)"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs-simplesheet__section" id="media-objects">
+  <div class="container">
+    <div class="row">
+      <div class="col-12@sm">
+        <h2 class="docs-type-header-1">Media Object</h2>
+        <blockquote class="docs-blockquote">
+          <p>An object (like an image) and content to the right or left. <a href="http://stubbornella.org/content/?p=497" class="type-link-text-1">Source</a></p>
+        </blockquote>
+        <p class="docs-type-body-2">To place the object to the left, use <code>.pull-left</code> on the media-object, or right using <code>.pull-right</code>.</p>
+        <p class="docs-type-body-3">The element with the float on it does not have to be an anchor tag.</p>
+        <p class="docs-type-body-3"><strong class="type--bold">Heads up!</strong> <code>max-width: 100%;</code> does not constrain the image. Hi resolution images may grow larger than you expect. To avoid this, set a width on the image.</p>
+      </div>
+    </div>
+    <div class="row spacer-top-small">
+      <div class="col-9@sm">
+        <div class="media docs-media-object-example">
+          <a href="#" class="pull-left"><img src="https://placehold.it/64/222626" alt="Generic placeholder image" class="media-object"></a>
+          <div class="media__body">
+            <h4 class="media__heading docs-type-header-4">Media heading</h4>
+            <p class="docs-type-body-3">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+          </div>
+        </div>
+        <div class="media docs-media-object-example"><a href="#" class="pull-left"><img src="https://placehold.it/64/222626" alt="Generic placeholder image" class="media-object"></a>
+          <div class="media__body">
+            <h4 class="media__heading docs-type-header-4">Media heading</h4>
+            <p class="docs-type-body-3">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+            <div class="media"><a href="#" class="pull-left"><img src="https://placehold.it/64/222626" alt="Generic placeholder image" class="media-object"></a>
+              <div class="media__body">
+                <h4 class="media__heading docs-type-header-4">Nested media heading</h4>
+                <p class="docs-type-body-3">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="media docs-media-object-example"><a href="#" class="pull-right"><img src="https://placehold.it/64/222626" alt="Generic placeholder image" class="media-object"></a>
+          <div class="media__body">
+            <h4 class="media__heading docs-type-header-4">Media heading, image pull-right</h4>
+            <p class="docs-type-body-3">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row spacer-top-small">
+      <div class="col-12@sm">
+        <h3 class="docs-type-header-4">Markup</h3>
+        <div class="docs-markup-container docs-dark-block">
+          <pre><code class="language-markup">&lt;div class="media"&gt;
+  &lt;a class="pull-left" href="#"&gt;
+    &lt;img class="media-object" src="https://placehold.it/64x64" alt="Generic placeholder image"&gt;
+  &lt;/a&gt;
+  &lt;div class="media__body"&gt;
+    &lt;h4 class="media__heading"&gt;Media heading&lt;/h4&gt;
+    &lt;p&gt;Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="docs-simplesheet__section" id="flag-objects">
+  <div class="container">
+    <div class="row">
+      <div class="col-12@sm">
+        <h2 class="docs-type-header-1">Flag Object</h2>
+        <blockquote class="docs-blockquote">
+          <p>An object (like an image) and content to the right or left. <a href="http://stubbornella.org/content/?p=497" class="type-link-text-1">Source</a></p>
+        </blockquote>
+        <p class="docs-type-body-3"><strong class="type--bold">Heads up!</strong> For this method to work, the image cannot have <code>max-width: 100%;</code> so it is set to <code>none</code>. Hi resolution images may grow larger than you expect. To avoid this, set a width on the image.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-9@sm">
+        <div class="flag docs-flag-object-example">
+          <div class="flag__image"><img src="https://placehold.it/120/222626" alt=""></div>
+          <div class="flag__body">
+            <p class="docs-type-body-2">Pellentesque habitant.</p>
+          </div>
+        </div>
+        <div class="flag flag--top docs-flag-object-example">
+          <div class="flag__image"><img src="https://placehold.it/120/222626" alt=""></div>
+          <div class="flag__body">
+            <p class="docs-type-body-2"><strong class="type--bold">Top aligned</strong>. Pellentesque habitant.</p>
+          </div>
+        </div>
+        <div class="flag flag--bottom docs-flag-object-example">
+          <div class="flag__image"><img src="https://placehold.it/120/222626" alt=""></div>
+          <div class="flag__body">
+            <p class="docs-type-body-2"><strong class="type--bold">Bottom aligned</strong>. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row spacer-top-small">
+      <div class="col-12@sm">
+        <h3 class="docs-type-header-4">Markup</h3>
+        <div class="docs-markup-container docs-dark-block">
+          <pre><code class="language-markup">&lt;div class="flag flag--bottom"&gt;
+  &lt;div class="flag__image"&gt;
+    &lt;img src="https://placehold.it/120/222626"&gt;
+  &lt;/div&gt;
+  &lt;div class="flag__body"&gt;
+    &lt;p&gt;Bottom aligned. Pellentesque habitant...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="docs-simplesheet__section" id="vertical-centering">
+  <div class="container">
+    <div class="row spacer-btm-small">
+      <div class="col-12@sm">
+        <h2 class="docs-type-header-1 spacer-btm-small">Vertical Centering</h2>
+        <h2 class="docs-type-header-2">Ghost Centering</h2>
+        <p class="docs-type-body-2">Uses a full-height pseudo element (ghost) and vertically aligns the sibling <code>.ghost-center</code> element to it.</p>
+        <div style="height:200px;" class="ghost-center-wrap type--center docs-dark-block">
+          <div class="ghost-center">I’m centered.</div>
+        </div>
+      </div>
+    </div>
+    <div class="row spacer-top-small spacer-btm-medium">
+      <div class="col-12@sm">
+        <h3 class="docs-type-header-5">Markup</h3>
+        <div class="docs-markup-container docs-dark-block">
+          <pre><code class="language-markup">&lt;div class="ghost-center-wrap type--center"&gt;
+  &lt;div class="ghost-center"&gt;I’m centered.&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="row spacer-btm-small">
+      <div class="col-12@sm">
+        <h2 class="docs-type-header-2">Table Centering</h2>
+        <p class="docs-type-body-2">Uses CSS’ <code>display: table</code> and <code>display: table-cell</code>. Remember that <code>table</code>s only take up as much space as they need, so you’ll probably have to use the <code>width-full</code> class on your <code>.table-center-wrap</code> element.</p>
+        <div style="height:200px;" class="table-center-wrap docs-dark-block">
+          <div class="table-center">I’m centered.</div>
+        </div>
+      </div>
+    </div>
+    <div class="row spacer-top-small">
+      <div class="col-12@sm">
+        <h3 class="docs-type-header-5">Markup</h3>
+        <div class="docs-markup-container docs-dark-block">
+          <pre><code class="language-markup">&lt;div class="table-center-wrap"&gt;
+  &lt;div class="table-center"&gt;I’m centered.&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="docs-simplesheet__section" id="fill-parent">
+  <div class="container">
+    <div class="row spacer-btm-small">
+      <div class="col-12@sm">
+        <h2 class="docs-type-header-1 spacer-btm-small">Fill Parent</h2>
+        <p class="docs-type-body-2">Use <code>.fill-parent</code> to set <code>position: absolute;</code>, with <code>top</code>, <code>left</code>, <code>right</code>, and <code>bottom</code> values all set to <code>0</code> so that it fills its containing block.</p>
+        <p class="docs-type-body-3"><strong class="type--bold">Heads up!</strong> The parent element needs to be <code>position:relative;</code></p>
+        <div style="height:200px; width:100%; background:green;" class="relative">
+          <div class="fill-parent docs-dark-block">I fill the containing block.</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="row spacer-top-small spacer-btm-medium">
+      <div class="col-12@sm">
+        <h3 class="docs-type-header-4">Markup</h3>
+        <div class="docs-markup-container docs-dark-block">
+          <pre><code class="language-markup">&lt;div class="relative" style="height:200px; width:100%; background:green;"&gt;
+  &lt;div class="fill-parent" style="background:gray;"&gt;I fill the containing block.&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="docs-simplesheet__section" id="css-classes">
+  <div class="container">
+    <div class="row">
+      <div class="col-12@sm">
+        <h2 class="docs-type-header-1">Helper Classes</h2>
+        <blockquote class="docs-blockquote">
+          <p>Great for Composibility.</p>
+        </blockquote>
+        <p class="docs-type-body-1">Use these classes to avoid creating a new single CSS rule which would do the exact same thing.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12@sm">
+        <div class="docs-markup-container docs-dark-block">
+          <pre><code class="language-scss">.relative { position: relative; }
+.static { position: static; }
+.ib { display: inline-block; }
+.block { display: block; }
+.flex { display: flex; }
+
+.pull-left { float: left; }
+.pull-right { float: right; }
+
+.marginless { margin: 0 !important; }
+.paddingless { padding: 0 !important; }
+
+.no-transition { transition: none !important; }
+.no-transition-duration { transition-duration: 0ms !important; }
+
+.height-inherit { height: inherit; }
+.height-full { height: 100%; }
+.no-min-height { min-height: 0; }
+
+.width-inherit { width: inherit; }
+.width-full { width: 100%; }
+.no-min-width { min-width: 0; }
+
+.grab { cursor: grab; }
+
+.grab.grabbing,
+.grabbing,
+.grabbing .grab {
+  cursor: grabbing;
+}
+
+// -ms-user-select in IE 10. IE9 needs the attribute on _every_ child.
+// http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+// https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
+[unselectable="on"],
+.unselectable {
+  user-select: none;
+}
+
+// Heads up! This method sets font-size: 0 on .ghost-center-wrap and resets it to font-size: 16px
+// on .ghost-center. You may have to set the font-size yourself on children of .ghost-center.
+// ems and %s don't work because the parent has font-size:0
+.ghost-center-wrap {
+  @include ghost();
+}
+
+// table-layout fixed is needed for FF and Opera
+// @see http://stackoverflow.com/questions/2923710/why-do-firefox-and-opera-ignore-max-width-inside-of-display-table-cell
+// @see https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
+.table-center-wrap {
+  display: table;
+  table-layout: fixed;
+}
+
+.table-center {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.flex--align-center { align-items: center; }
+.flex--justify-center { justify-content: center; }
+
+.clearfix { @include clearfix(); }
+.fill-parent { @include fill-parent(); }
+
+.fade {
+  opacity: 0;
+  transition: opacity .15s linear;
+
+  &.in {
+    opacity: 1;
+  }
+}
+
+.responsive-image-cover {
+  @include fill-parent();
+  @include background-cover();
+  width: 100%;
+  height: 100%;
+}
+
+.podium-responsive-img--cover img {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+}
+
+// Place on an element (like the body) to prevent the mouse from scrolling it.
+// This does not work for touch devices.
+.no-overflow,
+.no-scroll {
+  overflow: hidden;
+}
+
+.off-screen {
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+// Hide from both screenreaders and browsers: h5bp.com/u
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+// Hide only visually, but have it available for screenreaders: h5bp.com/v
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+// Hide visually and from screenreaders, but maintain layout
+.invisible {
+  visibility: hidden;
+}
+
+.unstyled-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.unstyled-button {
+  padding: 0;
+  background: none;
+  border: 0;
+
+  // Remove focus outline for nested button elements. Button must be nested in
+  // Firefox for display inline-flex to work.
+  &:focus {
+    outline: 0;
+  }
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+    </main>
+<script src="js/docs.js"></script>
+  </body>
+</html>

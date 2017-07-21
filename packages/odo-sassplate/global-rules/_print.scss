@@ -1,0 +1,53 @@
+// http://www.smashingmagazine.com/2013/03/tips-and-tricks-for-print-style-sheets/
+
+// Viewport sizes (as of Nov. 2015):
+// Chrome: 550px
+// Firefox: 810px
+// Safari: based on the size of the viewport when you hit print.
+// IE9: 670px
+// Edge: 670px
+
+@media print {
+  .hidden\@print {
+    display: none !important;
+  }
+
+  .spacer-top-none\@print {
+    padding-top: 0;
+  }
+
+  .spacer-btm-none\@print {
+    padding-bottom: 0;
+  }
+
+  html {
+    background-color: white;
+  }
+
+  main {
+    overflow: visible;
+  }
+
+  body {
+    width: 100%;
+  }
+
+  // Margins are customizable if desired.
+  // @page {
+  //   margin: 2cm;
+  // }
+
+  // Prevent headings from being printed at the bottom of the page.
+  h2,
+  h3 {
+     page-break-after: avoid;
+  }
+
+  // Prevent large elements, such as unordered lists and images, from being split
+  // across multiple pages.
+  .tile,
+  ul,
+  img {
+     page-break-inside: avoid;
+  }
+}

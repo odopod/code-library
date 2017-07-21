@@ -1,0 +1,100 @@
+//
+// Functions
+// -------------------
+
+// strip units from any number. "50px" returns 50.
+@function strip-units($number) {
+  @return $number / ($number * 0 + 1);
+}
+
+// convert px to em, with regard to its context. Most context will be 16px.
+@function px-em($px, $context: 16) {
+  @return strip-units($px) / strip-units($context) + 0em;
+}
+
+@function px-rem($px, $context: $base-pixel-size) {
+  @return strip-units($px) / strip-units($context) + 0rem;
+}
+
+@function em-px($em, $context: $base-pixel-size) {
+  @return strip-units($em) * strip-units($context) + 0px;
+}
+
+@function rem-px($rem, $context: $base-pixel-size) {
+  @return strip-units($rem) * strip-units($context) + 0px;
+}
+
+@function rem-em($remVal) {
+  @return strip-units($remVal) + 0em;
+}
+
+@function em-rem($emVal) {
+  @return strip-units($emVal) + 0rem;
+}
+
+@function get-font-family($family) {
+  @if (map-has-key($font-families, $family)) {
+    @return unquote(map-get($font-families, $family));
+  } @else {
+    @return $family;
+  }
+}
+
+@function to-string($value) {
+  @return inspect($value);
+}
+
+@function to-px($value) {
+  @return strip-units($value) + 0px;
+}
+
+// In node-sass >= v3.4.0, keys in a map can be of the type color.
+// For example: `$colors: (green: #bada55)` needs to be accessed by the `green`
+// color without first casting it to a string.
+@function get-color($name) {
+  @if global-variable-exists('colors') and map-has-key($colors, $name) {
+    @return map-get($colors, $name);
+  } @else {
+    @return $name;
+  }
+}
+
+@function z($layer) {
+  @if not map-has-key($z-layers, $layer) {
+    @warn "No layer found for `#{$layer}` in $z-layers map. Property omitted.";
+  }
+
+  @return map-get($z-layers, $layer);
+}
+
+@function get-breakpoint-query($bp, $isMaxWidth: false) {
+  $breakpoint: map-get($breakpoints, $bp);
+  $media: if($isMaxWidth, 'max-width', 'min-width');
+
+  @if $isMaxWidth {
+    $breakpoint: $breakpoint - 1px;
+  }
+
+  @if map-has-key($breakpoints, $bp) {
+    @return "(#{$media}: #{$breakpoint})";
+  } @else {
+    @warn "#{$bp} not recognized. Valid breakpoints: #{map-keys($breakpoints)}";
+    @return false;
+  }
+}
+
+@function get-media-query($query, $isScreenOnly: true) {
+  @if $isScreenOnly {
+    @if $query == false {
+      @return "screen";
+    } @else {
+      @return "screen and #{$query}";
+    }
+  } @else {
+    @if $query == false {
+      @return "all";
+    } @else {
+      @return $query;
+    }
+  }
+}

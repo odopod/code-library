@@ -1,0 +1,355 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Draggable Demo</title>
+  <link rel="stylesheet" href="../../../docs/demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+  <link rel="stylesheet" href="../css/odo-draggable.css">
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.4.1/themes/prism.css">
+</head>
+
+<body>
+
+  <main role="main">
+    <div class="container">
+
+      <h1>Odo Draggable</h1>
+      <p>A class for versatile, performant draggability.</p>
+      <h3>Support</h3>
+      <p>IE9+.</p>
+      <h3>Dependencies</h3>
+      <p>Odo Pointer, Odo Device, Odo Helpers, Tiny Emitter.</p>
+      <p>Odo Pointer also expects <code>Object.assign</code> from ES6 to be available.</p>
+
+      <section>
+        <h2 id="x-axis">X Axis</h2>
+        <div class="space-bottom">
+          <div id="draggable-x" class="draggable draggable-element-demo draggable-x"></div>
+        </div>
+
+        <div class="space-bottom">
+          <button onclick="x.setPosition(50, 50);">Set to 50%</button>
+          <button onclick="x.setPosition(0, 0);">Set to 0</button>
+        </div>
+        <div class="space-bottom">
+          <button id="limit-toggle" class="limitless">
+            <span class="no-limit">Remove limits</span>
+            <span class="limit">Set limits on draggable</span>
+          </button>
+        </div>
+
+        <h3>Setup</h3>
+        <pre><code class="language-javascript">var x = new OdoDraggable(document.getElementById('draggable-x'), {
+  axis: 'x'
+});</code></pre>
+
+        <h3>Position</h3>
+        <p>Set the position of the draggable element. The parameters are percentages, so <code>50</code> equates to <code>50%</code>.</p>
+        <pre><code class="language-javascript">// Set to 50%
+x.setPosition(50, 50);
+
+// Set to 0
+x.setPosition(0, 0);</code></pre>
+        <p>The position of the draggable element can be retrieved with <code>getPosition</code>. Optionally specify the first parameter as <code>true</code> to get the percentage coordinates instead of pixels.
+        <pre><code class="language-javascript">x.setPosition(50, 50);
+// Get pixels
+x.getPosition(); // Coordinate {x: 480, y: 0}
+// Get percentages
+x.getPosition(true);// Coordinate {x: 50, y: 0}</code></pre>
+
+        <h3>Limits</h3>
+        <p>You can also sets <code>limits</code> on the draggable instance, which restricts it to given boundaries. The only parameter is a <code>Rect</code>. <code>Rect</code>s have a <code>left</code>, <code>top</code>, <code>width</code>, and <code>height</code> and can be accessed from the <code>math</code> property of <code>OdoHelpers</code>.</p>
+        <p>In this example, the draggable stops at the edges of the <code>.container</code> element. Since the draggable is centered within the container and the draggable starts at <code>0, 0</code>, the <code>left</code> limit needs to be negative half the leftover space. The minimum x position is the <code>left</code> value. The maximum x is the <code>left + width</code>. The width in this case, is the leftover space (20% because draggable is 80%). The y axis works the same way, but in this example, the <code>top</code> and <code>height</code> parameters don't matter because this draggable is restricted to the <code>x</code> axis.</p>
+        <pre><code class="language-javascript">var math = OdoHelpers.math;
+var draggableWidth = x.element.offsetWidth;
+var containerWidth = container.offsetWidth;
+
+var left = (containerWidth - draggableWidth) / -2;
+var top = 0;
+var width = containerWidth - draggableWidth;
+var height = 0;
+var rect = new math.Rect(left, top, width, height);
+x.setLimits(rect);</code></pre>
+      </section>
+
+      <section>
+        <h2 id="y-axis">Y Axis</h2>
+        <p><strong>Heads up!</strong> Any draggable element on the Y axis requires its parent to have a <strong>height</strong> to work with the fallback <code>left</code> and <code>top</code> positioning.</p>
+        <div class="space-bottom" style="height:200px;">
+          <div id="draggable-y" class="draggable draggable-element-demo"></div>
+        </div>
+
+        <div class="space-bottom">
+          <button onclick="y.isEnabled = false;">Disable</button>
+          <button onclick="y.isEnabled = true;">Enable</button>
+        </div>
+
+        <h3>Setup</h3>
+        <pre><code class="language-javascript">var y = new OdoDraggable(document.getElementById('draggable-y'), {
+  axis: 'y'
+});</code></pre>
+        <h3>Disabling</h3>
+        <p>The draggable instance can be disabled (and re-enabled). The carousel, for example, disables dragging while its animating.</p>
+        <pre><code class="language-javascript">// Disable draggable
+y.isEnabled = false;
+
+// Enable draggable.
+y.isEnabled = true;</code></pre>
+      </section>
+
+      <section>
+        <h2 id="both-axis">Both Axis</h2>
+        <p>Just like the Y axis note above, the element which contains the draggable element must have a <strong>height</strong>, otherwise the <code>top</code> percentage value is not relative to anything and is calculated as zero.</p>
+        <div class="space-bottom" style="height:200px;">
+          <div id="draggable-xy" class="draggable draggable-element-demo"></div>
+        </div>
+
+        <div class="space-bottom">
+          <button onclick="xy.friction = 0.4;">Set friction to 0.4</button>
+          <button onclick="xy.friction = 1;">Set friction to 1</button>
+        </div>
+
+        <h3>Setup</h3>
+        <pre><code class="language-javascript">var xy = new OdoDraggable(document.getElementById('draggable-xy'), {
+  axis: 'xy'
+});</code></pre>
+
+        <h3>Friction</h3>
+        <p>You can make a draggable instance act like it is resisting the user's touch by setting a friction value. A value of <code>1</code> represents no friction; 100% of the user's movements are translated into movement of the draggable instance. Use a value less than 1, like <code>0.4</code>, and the draggable element does not move completely in sync with your pointing device.</p>
+        <pre><code class="language-javascript">// Give it friction, like the edge slide of a carousel.
+xy.friction = 0.4;
+
+// Remove friction.
+xy.friction = 1;</code></pre>
+
+
+      <section>
+        <h2 id="throwable">Throwable</h2>
+        <p>Give it a toss.</p>
+        <div id="get-my-bounds" class="space-bottom" style="height:300px;background-color:rgb(240, 240, 240);">
+          <div id="draggable-throw-me" class="draggable draggable-throw-demo draggable-element-demo"></div>
+        </div>
+
+        <p>By default, draggable instances are not throwable. Use the <code>isThrowable</code> option to enable it. You must also set a boundary for the throwable element, otherwise you can throw it off the screen!</p>
+        <pre><code class="language-javascript">// Create new draggable
+var throwable = new OdoDraggable(document.getElementById('draggable-throw-me'), {
+  axis: 'xy',
+  isThrowable: true
+});
+
+var element = throwable.element;
+var parent = element.parentNode;
+var draggableWidth = element.offsetWidth;
+var draggableHeight = element.offsetHeight;
+var containerWidth = parent.offsetWidth;
+var containerHeight = parent.offsetHeight;
+
+var left = 0;
+var top = 0;
+var width = containerWidth - draggableWidth;
+var height = containerHeight - draggableHeight;
+var rect = new OdoHelpers.math.Rect(left, top, width, height);
+
+// Set a boundary for the draggable so that it won't be thrown outside of its parent.
+throwable.setLimits(rect);</code></pre>
+
+        <h3>More like a carousel</h3>
+        <p>This example uses the same markup and css as the Odo Carousel, except the <code>.carousel-element</code>'s width is set to fit the exact amount of slides (width is <code>500%</code> instead of <code>2000%</code>).</p>
+        <div class="carousel space-bottom">
+          <div class="carousel-wrapper">
+            <div id="draggable-carousel" class="carousel-element">
+              <div class="carousel-slide">
+                <div class="table-center-wrap text-center" style="padding:0 10%;">
+                  <div class="table-center">
+                    1<br>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="table-center-wrap text-center" style="padding:0 10%;">
+                  <div class="table-center">
+                    2<br>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="table-center-wrap text-center" style="padding:0 10%;">
+                  <div class="table-center">
+                    3<br>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="table-center-wrap text-center" style="padding:0 10%;">
+                  <div class="table-center">
+                    4<br>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="table-center-wrap text-center" style="padding:0 10%;">
+                  <div class="table-center">
+                    5<br>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <label>
+            Throw Friction
+            <input id="throw-friction" type="number" step="0.01" value="0.94" min="0" max="0.99"/>
+          </label>
+          <br>
+          <label>
+            Amplifier
+            <input id="amplifier" type="number" step="4" value="24" min="0" max="100"/>
+          </label>
+          <br>
+          <label>
+            Velocity Stop
+            <input id="velocity-stop" type="number" step="0.01" value="0.08" min="0" max="0.5"/>
+          </label>
+          <br>
+          <button id="back-to-defaults">Reset</button>
+        </div>
+
+        <p>Here we follow the same steps. Set the <code>isThrowable</code> option and then set limits.</p>
+        <pre><code class="language-javascript">var freescroll = new OdoDraggable(document.getElementById('draggable-carousel'), {
+  axis: 'x',
+  isThrowable: true
+});
+
+var element = freescroll.element;
+var parent = element.parentNode;
+var draggableWidth = element.offsetWidth;
+var containerWidth = parent.offsetWidth;
+
+var left = -draggableWidth + containerWidth;
+var top = 0;
+var width = -left;
+var height = 0;
+var rect = new OdoHelpers.math.Rect(left, top, width, height);
+
+freescroll.setLimits(rect);</code></pre>
+      </section>
+
+      <section>
+        <h3 id="events">Events</h3>
+        <p>Draggable emits three events: <code>START</code>, <code>MOVE</code>, and <code>END</code>.</p>
+        <pre><code class="language-javascript">instance.on(OdoDraggable.EventType.START, function(pointerEvent) {
+  console.log('drag started', pointerEvent);
+});
+
+instance.on(OdoDraggable.EventType.MOVE, function (pointerEvent) {
+  console.log('drag move:', pointerEvent);
+});
+
+instance.on(OdoDraggable.EventType.END, function (pointerEvent) {
+  console.log('drag ended:', pointerEvent);
+});</code></pre>
+
+        <h3 id="pointer-event">PointerEvent</h3>
+        <p>Here is the data contained within a drag end event from the first draggable on this page. There are a few simple properties here that have already determined the drag movement compared to its axis.</p>
+        <pre><code class="language-javascript">{
+  axisDirection: "left",
+  currentVelocity: {
+    x: 1.88,
+    y: 0.14
+  }
+  delta: {
+    x: -32,
+    y: 0
+  },
+  deltaTime: 203,
+  didMoveOnAxis: true,
+  direction: "left", // OdoPointer.Direction.LEFT
+  distance: 32,
+  end: {
+    x: -32,
+    y: 0
+  },
+  isDirectionOnAxis: true,
+  position: {
+    percent: {
+      x: -3.2160804020100504,
+      y: 0
+    },
+    pixel: {
+      x: -32,
+      y: 0
+    },
+  },
+  start: {
+    x: 0,
+    y: 0
+  },
+  target: div,
+  type: "ododraggable:end", // OdoDraggable.EventType.END
+  velocity: {
+    x: 0.15763546798029557,
+    y: 0
+  }
+}</code></pre>
+
+        <h3 id="disposal">Disposal</h3>
+        <p>To properly destroy a draggable instance, you must call the <code>dispose</code> method. This removes event listeners, nullifies DOM references, and performs other clean up.</p>
+        <pre><code class="language-javascript">xy.dispose();</code></pre>
+
+        <h3 id="options">Options</h3>
+        <pre><code class="language-javascript">OdoDraggable.Defaults = {
+  // Draggable axis.
+  axis: OdoPointer.Axis.X,
+
+  // Amplifies throw velocity by this value. Higher values make the throwable
+  // travel farther and faster.
+  amplifier: 24,
+
+  // Once the velocity has gone below this threshold, throwing stops.
+  velocityStop: 0.08,
+
+  // On each throw frame, the velocity is multiplied by this friction value.
+  // It must be less than 1. Higher values let the throwable slide farther and longer.
+  throwFriction: 0.94,
+
+  // Whether the draggable will keep its movement momentum after the user releases.
+  isThrowable: false
+}</code></pre>
+      </section>
+    </div>
+  </main>
+
+  <!-- Polyfills -->
+  <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Dependencies. -->
+  <script src="../node_modules/tiny-emitter/dist/tinyemitter.min.js"></script>
+  <script src="../node_modules/@odopod/odo-device/dist/odo-device.min.js"></script>
+  <script src="../node_modules/@odopod/odo-helpers/dist/odo-helpers.min.js"></script>
+  <script src="../node_modules/@odopod/odo-pointer/dist/odo-pointer.min.js"></script>
+
+  <!-- Minified Source. -->
+  <script src="../dist/odo-draggable.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.4.1/prism.js"></script>
+
+</body>
+
+</html>

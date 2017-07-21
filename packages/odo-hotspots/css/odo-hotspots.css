@@ -1,0 +1,156 @@
+.odo-hotspot__container {
+  position: relative;
+}
+
+.odo-hotspot {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  margin-left: -16px;
+  margin-top: -16px;
+  border-radius: 50%;
+}
+
+.odo-hotspot.is-open {
+  z-index: 2;
+}
+
+.odo-hotspot__button {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  -webkit-transition: 240ms cubic-bezier(0.165, 0.840, 0.440, 1.000);
+          transition: 240ms cubic-bezier(0.165, 0.840, 0.440, 1.000);
+}
+
+.odo-hotspot.is-open .odo-hotspot__button {
+  background-color: rgb(20, 34, 41);
+}
+
+.odo-hotspot__content {
+  position: absolute;
+  z-index: 1;
+  left: 9999px;
+  width: 300px;
+  padding: 0;
+  margin: 0;
+  background: white;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+  opacity: 0;
+
+  /**
+   * When the hotspot is closing, the position transition needs to be delayed
+   * until others have finished.
+   */
+  -webkit-transition:
+    top 0s 500ms,
+    right 0s 500ms,
+    bottom 0s 500ms,
+    left 0s 500ms,
+    opacity 300ms cubic-bezier(0.165, 0.840, 0.440, 1.000),
+    -webkit-transform 500ms cubic-bezier(0.165, 0.840, 0.440, 1.000);
+  transition:
+    top 0s 500ms,
+    right 0s 500ms,
+    bottom 0s 500ms,
+    left 0s 500ms,
+    opacity 300ms cubic-bezier(0.165, 0.840, 0.440, 1.000),
+    transform 500ms cubic-bezier(0.165, 0.840, 0.440, 1.000);
+}
+
+.odo-hotspot.is-open .odo-hotspot__content {
+  opacity: 1;
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
+
+  /**
+   * Modify the transition-delays. When the hotspot is opening, it should be
+   * positioned immediately.
+   */
+  -webkit-transition-delay: 0s, 0s, 0s, 0s, 0s, 0s;
+          transition-delay: 0s, 0s, 0s, 0s, 0s, 0s;
+}
+
+/* Left of hotspot */
+.odo-hotspot--left .odo-hotspot__content {
+  left: auto;
+  right: 9999px;
+  -webkit-transform: translate(-20px, 0);
+          transform: translate(-20px, 0);
+}
+
+/* Right of hotspot */
+.odo-hotspot--right .odo-hotspot__content {
+  left: 9999px;
+  right: auto;
+  -webkit-transform: translate(20px, 0);
+          transform: translate(20px, 0);
+}
+
+.odo-hotspot--left.is-open .odo-hotspot__content {
+  right: 48px;
+}
+
+.odo-hotspot--right.is-open .odo-hotspot__content {
+  left: 48px;
+}
+
+/* Top and bottom anchors */
+.odo-hotspot--top .odo-hotspot__content {
+  bottom: -16px;
+}
+
+.odo-hotspot--bottom .odo-hotspot__content {
+  top: -16px;
+}
+
+/* Plus to Clear + x */
+.odo-hotspot__icon {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 50%;
+  margin-top: -25%;
+  margin-left: -25%;
+}
+
+.odo-hotspot__icon::before,
+.odo-hotspot__icon::after {
+  content: '';
+  position: absolute;
+  background-color: rgb(20, 34, 41);
+  transition: 300ms cubic-bezier(0.165, 0.840, 0.440, 1.000);
+}
+
+.odo-hotspot__icon::before {
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 100%;
+  margin-left: -2px;
+}
+
+.odo-hotspot__icon::after {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  margin-top: -2px;
+}
+
+.odo-hotspot.is-open .odo-hotspot__icon::before,
+.odo-hotspot.is-open .odo-hotspot__icon::after {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  background-color: white;
+}

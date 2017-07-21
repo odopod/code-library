@@ -1,0 +1,38 @@
+{
+  "name": "@odopod/odo-scroll-animation",
+  "description": "Performant scroll listeners.",
+  "version": "1.0.0",
+  "main": "dist/odo-scroll-animation.js",
+  "odoModule": "src/scroll-animation.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
+    }
+  ],
+  "devDependencies": {},
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-scroll-animation",
+  "files": [
+    "css",
+    "dist",
+    "src",
+    "index.js"
+  ],
+  "odoKeywords": [
+    "events"
+  ],
+  "keywords": [
+    "odo",
+    "odo-component",
+    "odopod",
+    "scroll",
+    "event"
+  ],
+  "license": "MIT",
+  "repository": "odopod/odo",
+  "scripts": {
+    "link-local": "node ../../scripts/link-local-packages.js",
+    "test": "gulp code-quality test"
+  }
+}

@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odo Scroll Feedback Demo</title>
+  <link rel="stylesheet" href="../../../docs/demo.css" />
+
+
+  <link rel="stylesheet" href="styles/demo.css" />
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.5.1/themes/prism.css">
+</head>
+
+<body>
+
+  <button id="pause-toggle">Pause</button>
+
+  <main role="main" id="main">
+
+    <div class="section">
+      <div class="container">
+        <h1>Odo Scroll Feedback</h1>
+        <p>The Scroll Feedback class is an event emitter. It listens for input from the user: mouse, keyboard, or touch. Based on the input, the <code>OdoScrollFeedback</code> instance will emit navigation events with a <code>direction</code> property signifying which way the user should be taken. It's up to the implementer to decide what to do with these events.</p>
+        <h3>Support</h3>
+        <p>IE9+</p>
+        <h3>Dependencies</h3>
+        <p><a href="https://github.com/scottcorgan/tiny-emitter">TinyEmitter</a>. Assumes <code>Object.assign</code> and <code>Element.prototype.closest</code> exist. You may need to polyfill these.</p>
+        <h2>Basic Usage</h2>
+        <p>In this example, the <code>body</code> element is the main element given to the scroll feedback class. It will be used to bind event listeners to (mouse wheels).</p>
+        <pre><code class="language-javascript">var scrollFeedback = new OdoScrollFeedback(document.body);
+
+scrollFeedback.on(OdoScrollFeedback.Events.NAVIGATE, function (data) {
+  switch (data.direction) {
+    case OdoScrollFeedback.Direction.NEXT:
+      console.log('go to the next state');
+      break;
+    case OdoScrollFeedback.Direction.PREVIOUS:
+      console.log('go to the previous state');
+      break;
+    case OdoScrollFeedback.Direction.START:
+      console.log('home key pressed');
+      break;
+    case OdoScrollFeedback.Direction.END:
+      console.log('end key pressed');
+      break;
+  }
+});</code></pre>
+
+        <div class="scroll-to-continue">Scroll to Continue ↓</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <h2 class="section__title">Free Scrolling</h2>
+        <p>The <code>OdoScrollFeedback</code> instance will disable native scrolling on whatever element you instantiate it with. On this page, the body has been used, so you are unable to scroll the page with the mouse or keyboard.</p>
+        <p>If you wish a section to be free-scrolling, there are two options. The first is to have the free-scrolling section outside (not a child element) of element given to the <code>OdoScrollFeedback</code>. Alternatively, you can use the <code>ignore</code> option. Make this a selector string and if a parent of the <code>event.target</code> matches the selector, the event will be ignored.</p>
+        <pre><code class="language-javascript">var scrollFeedback = new OdoScrollFeedback(document.body, {
+  ignore: '.js-free-scroll'
+});</code></pre>
+        <p>The <a href="#footer" id="to-footer">footer</a> on this page uses the <code>ignore option</code>.</p>
+
+        <div class="js-free-scroll flexy scroll-block-box" data-class="js-free-scroll" data-tag="div">
+          <div class="flexy__centered">Try scrolling inside me.</div>
+        </div>
+        <div class="scroll-to-continue">Scroll to Continue ↓</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <h2 class="section__title">Timing</h2>
+        <p>The timings and thresholds are fully customizable via an options object. The defaults try to strike a balance between scrolling with a lot of force and not feeling stuck.</p>
+
+        <h3>Options</h3>
+        <p>Each option is described below. The <code>ignore</code> option lets the user scroll/swipe inside an element and the <code>OdoScrollFeedback</code> class will not try to interpret the user's intent.</p>
+        <pre><code class="language-javascript">OdoScrollFeedback.Defaults = {
+  ignore: null, // A selector string matching elements which should not be interpreted
+  movementThreshold: 5, // Amount needed in deltaY (touch or mouse wheel) before event is emitted.
+  scrollEndDelay: 350, // The amount of time between scrolls to trigger scroll end
+  scrollTimerDelay: 2000 // Delay before one continuous scroll triggers scroll end
+};</code></pre>
+
+        <div class="scroll-to-continue">Scroll to Continue ↓</div>
+      </div>
+    </div>
+
+    <div class="section compliment">
+      <div class="container">
+        <div class="flexy">
+          <div class="flexy__centered compliment__text">No one looks better in a hat than you.</div>
+        </div>
+        <div class="scroll-to-continue">Scroll to Continue ↓</div>
+      </div>
+    </div>
+
+    <div class="section compliment">
+      <div class="container">
+        <div class="flexy">
+          <div class="flexy__centered compliment__text">You always have the best ideas.</div>
+        </div>
+        <div class="scroll-to-continue">Scroll to Continue ↓</div>
+      </div>
+    </div>
+
+    <div class="section compliment">
+      <div class="container">
+        <div class="flexy">
+          <div class="flexy__centered compliment__text">Is there anything you <em>can&rsquo;t</em> do?</div>
+        </div>
+        <div class="scroll-to-continue">Scroll to Continue ↓</div>
+      </div>
+    </div>
+
+    <div class="section compliment">
+      <div class="container">
+        <div class="flexy">
+          <div class="flexy__centered compliment__text">Don&rsquo;t tell anyone, but you&rsquo;re my favorite.</div>
+        </div>
+        <div class="scroll-to-continue">Scroll to Continue ↓</div>
+      </div>
+    </div>
+
+    <div class="section compliment">
+      <div class="container">
+        <div class="flexy">
+          <div class="flexy__centered compliment__text">I wish I could put you in my pocket and carry you around with me all day.</div>
+        </div>
+        <div class="scroll-to-continue">Scroll to Continue ↓</div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="js-free-scroll scrollable-footer flexy">
+    <div class="flexy__centered">
+      <p>I'm the footer. Scroll me!</p>
+      <p><a href="http://ourstereo.com/compliment/" target="_blank">More compliments.</a></p>
+    </div>
+  </footer>
+
+  <!-- Polyfills -->
+  <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+  <script src="../node_modules/element-closest/element-closest.js"></script>
+
+  <!-- Dependencies -->
+  <script src="../node_modules/tiny-emitter/dist/tinyemitter.min.js"></script>
+
+  <!-- Minified Source. -->
+  <script src="../dist/odo-scroll-feedback.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+   <script src="https://cdn.jsdelivr.net/prism/1.5.1/prism.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mocha Test Runner</title>
+  <link rel="stylesheet" href="../../../node_modules/mocha/mocha.css">
+</head>
+
+<body>
+
+  <div id="mocha"></div>
+
+  <div id="fixture" style="display:none;">
+    <div class="js-fixture">
+      <div data-id="fixture1" style="height:500px;overflow:hidden;background-color:ghostwhite;">
+        <div style="float: left; width: 50%;">Lorem ipsum dolor sit amet</div>
+        <div style="float: left; width: 50%; position:relative">
+          <div class="js-element-to-affix" data-anchor="fixture1">
+            <div style="height:50px; background-color: tan;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="margin-fixture" style="display:none;">
+    <div class="js-fixture">
+      <div data-id="fixture2" style="height:500px;overflow:hidden;background-color:ghostwhite;">
+        <div style="float: left; width: 50%;">Lorem ipsum dolor sit amet</div>
+        <div style="float: left; width: 50%; position:relative">
+          <div class="js-element-to-affix" data-anchor="fixture2" style="margin-top:10px; margin-bottom: 3px;">
+            <div style="height:50px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <img src="1x1.jpg" alt="an image">
+
+  <!-- Polyfills -->
+  <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Testing Framework. -->
+  <script src="../../../node_modules/mocha/mocha.js"></script>
+  <script src="../../../node_modules/chai/chai.js"></script>
+  <script src="../../../node_modules/sinon/pkg/sinon.js"></script>
+
+  <!-- Dependencies. -->
+  <script src="../node_modules/@odopod/odo-scroll-animation/dist/odo-scroll-animation.js"></script>
+  <script src="../node_modules/@odopod/odo-window-events/dist/odo-window-events.js"></script>
+
+  <script>
+  window.expect = chai.expect;
+  mocha.setup('bdd');
+
+  var resource;
+  // Add ?debug to the url to use the instrumented code when not in PhantomJS
+  if (window._phantom || window.location.search.indexOf('debug') > -1) {
+    resource = '../dist/odo-affix.instrumented.js';
+  } else {
+    resource = '../dist/odo-affix.js';
+  }
+
+  document.write('<script src="' + resource + '"><\/script>');
+  </script>
+
+  <!-- Specs. -->
+  <script src="specs.js"></script>
+
+  <script>mocha.run();</script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mocha Test Runner</title>
+  <link rel="stylesheet" href="../../../node_modules/mocha/mocha.css">
+  <link rel="stylesheet" href="../css/odo-dual-viewer.css" />
+  <link rel="stylesheet" href="../css/odo-dual-viewer-theme.css" />
+
+</head>
+
+<body>
+
+  <div id="mocha"></div>
+
+  <div id="basic-fixture" style="display:none;">
+    <div id="regular" class="odo-dual-viewer">
+      <div class="odo-dual-viewer__wrap odo-dual-viewer__overlay">
+        <div class="odo-dual-viewer__inner">
+
+          <div class="odo-dual-viewer__object">
+          </div>
+
+        </div>
+      </div>
+
+      <div class="odo-dual-viewer__wrap odo-dual-viewer__underlay">
+        <div class="odo-dual-viewer__inner">
+
+          <div class="odo-dual-viewer__object">
+          </div>
+
+        </div>
+      </div>
+
+      <div class="odo-dual-viewer__scrubber"></div>
+
+      <div class="container">
+        <div class="odo-dual-viewer__scrubber-bounds">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Polyfills -->
+  <script src="../../../node_modules/classlist.js/classList.min.js"></script>
+  <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Testing Framework. -->
+  <script src="../../../node_modules/mocha/mocha.js"></script>
+  <script src="../../../node_modules/chai/chai.js"></script>
+  <script src="../../../node_modules/sinon/pkg/sinon.js"></script>
+
+  <!-- Dependencies. -->
+  <script src="../node_modules/tiny-emitter/dist/tinyemitter.min.js"></script>
+  <script src="../node_modules/@odopod/odo-window-events/dist/odo-window-events.min.js"></script>
+  <script src="../node_modules/@odopod/odo-device/dist/odo-device.min.js"></script>
+  <script src="../node_modules/@odopod/odo-helpers/dist/odo-helpers.min.js"></script>
+  <script src="../node_modules/@odopod/odo-pointer/dist/odo-pointer.min.js"></script>
+  <script src="../node_modules/@odopod/odo-draggable/dist/odo-draggable.min.js"></script>
+  <script src="../node_modules/@odopod/odo-object-fit/dist/odo-object-fit.min.js"></script>
+
+  <script>
+  window.expect = chai.expect;
+  mocha.setup('bdd');
+
+  var resource;
+  // Add ?debug to the url to use the instrumented code when not in PhantomJS
+  if (window._phantom || window.location.search.indexOf('debug') > -1) {
+    resource = '../dist/odo-dual-viewer.instrumented.js';
+  } else {
+    resource = '../dist/odo-dual-viewer.js';
+  }
+
+  document.write('<script src="' + resource + '"><\/script>');
+  </script>
+
+  <!-- Specs. -->
+  <script src="specs.js"></script>
+
+  <script>mocha.run();</script>
+</body>
+
+</html>

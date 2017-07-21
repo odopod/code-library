@@ -1,0 +1,38 @@
+{
+  "name": "@odopod/odo-helpers",
+  "description": "A collection of helper methods for Odo projects.",
+  "version": "1.0.0",
+  "main": "dist/odo-helpers.js",
+  "odoModule": "index.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
+    }
+  ],
+  "dependencies": {
+    "@odopod/odo-device": "../odo-device"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-helpers",
+  "files": [
+    "css",
+    "dist",
+    "src",
+    "index.js"
+  ],
+  "odoKeywords": [
+    "utilities"
+  ],
+  "keywords": [
+    "odo-component",
+    "odopod"
+  ],
+  "license": "MIT",
+  "repository": "odopod/odo",
+  "scripts": {
+    "link-local": "node ../../scripts/link-local-packages.js",
+    "test": "gulp code-quality test"
+  }
+}

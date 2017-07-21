@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Odo Responsive Attributes Demo</title>
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.5.1/themes/prism.css">
+
+  <link rel="stylesheet" href="../demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+</head>
+
+<body>
+
+<main role="main">
+  <div class="container">
+
+    <h1>Odo Responsive Attributes</h1>
+    <p>Parse data attributes with respect to their breakpoints.</p>
+    <h2>Support</h2>
+    <p>IE9+ with <code>matchMedia</code> polyfill.</p>
+    <h2>Dependencies</h2>
+    <p>Odo Base Component, native <code>matchMedia</code> (IE10+)</p>
+
+    <h3>Setup</h3>
+    <p>Imagine you're building a component which clamps multi-line text differently per breakpoint.</p>
+    <pre><code class="language-markup">&lt;div id="clamper" data-responsive.xs="2" data-responsive.md="3"&gt;&lt;/div&gt;</code></pre>
+
+    <p>This component will parse those attributs into the following object:</p>
+    <pre><code class="language-javascript">{xs: "2", sm: "2", md: "3", lg: "3"}</code></pre>
+
+    <p>Notice the <code>sm</code> breakpoint was not specified, but it has a value. It gets this value from the last value. <code>xs</code> => <code>sm</code> => <code>md</code> => <code>lg</code>.</p>
+
+    <p>You can also provide a default value which will take precendence over the &ldquo;last value&rdquo;.</p>
+    <pre><code class="language-markup">&lt;div id="clamper" data-responsive="2" data-responsive.md="4"&gt;&lt;/div&gt;</code></pre>
+    <pre><code class="language-javascript">{xs: "2", sm: "2", md: "4", lg: "2"}</code></pre>
+
+    <p>Now initialize the responsive attributes component:</p>
+    <pre><code class="language-javascript">const clamper = new OdoResponsiveAttributes(document.getElementById('clamper'));
+console.log(clamper.values); // Object with `xs`, `sm`, `md`, and `lg` keys.
+console.log(clamper.currentValue); // Value based on the current breakpoint.
+</code></pre>
+
+    <h3>Custom Attribute Name</h3>
+    <p>The second parameter in the constructor is a string for the name of the attribute.</p>
+    <pre><code class="language-markup">&lt;div id="clamper" data-clamp.xs="2" data-clamp.md="3"&gt;&lt;/div&gt;</code></pre>
+    <pre><code class="language-javascript">const clamper = new OdoResponsiveAttributes(document.getElementById('clamper'), 'clamp');</code></pre>
+
+    <h3>Updating</h3>
+    <p>OdoResponsiveAttributes instances do not update themselves when the browser is resized. This forces you to do it, but allows for better performance because you can batch your reads (this component) and your writes (whatever you do with this information).</p>
+    <p>You could call <code>instance.update</code> on the window resize event, or if you&rsquo;re using <code>OdoBaseComponent</code>, it can be done inside the <code>onMediaQueryChange()</code> method.</p>
+    <pre><code class="language-javascript">class Clamper extends OdoBaseComponent {
+  constructor(element) {
+    super(element, true);
+    this.attributes = new OdoResponsiveAttributes(element, 'clamp');
+    this.doClamp(this.attributes.currentValue);
+  }
+
+  onMediaQueryChange() {
+    let linesToClamp = this.attributes.update().currentValue;
+    this.doClamp(linesToClamp);
+  }
+
+  doClamp(linesToClamp) {
+    console.log('lines to clamp:', linesToClamp);
+  }
+
+  dispose() {
+    this.attributes.dispose();
+    super.dispose();
+  }
+}
+
+new Clamper(document.getElementById('clamper'));</code></pre>
+
+    <h2>Breakpoint Delimiter</h2>
+    <p>By default, the delimiter for the responsive key suffix is a period <code>.</code>. It would be awesome to use <code>@</code> as the delimiter, but although <code>getAttribute()</code> reads <code>@</code> as expected, using <code>@</code> inside <code>setAttribute()</code> throws an error. You can change the delimiter by updating <code>OdoResponsiveAttributes.BREAKPOINT_DELIMITER</code>.</p>
+
+    <div id="clamper" class="odo-clamp"
+      data-clamp.xs="2"
+      data-clamp.md="3"
+    ></div>
+
+    <div id="classy" class="odo-class-name-switcher"
+      data-class-name.xs="container foo"
+      data-class-name.sm="flexxy"
+    ></div>
+
+    <div id="classy2" class="odo-class-name-switcher"
+      data-responsive.xs="container foo"
+      data-responsive.sm="container flexxy"
+      data-responsive.md="row bar"
+      data-responsive.lg="column"
+    ></div>
+
+    <div id="default-value"
+      data-responsive="foo"
+      data-responsive.md="bar"
+    ></div>
+
+  </div>
+</main>
+
+  <!-- Polyfills. -->
+  <script src="../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Dependencies -->
+  <script src="../node_modules/tiny-emitter/dist/tinyemitter.min.js"></script>
+  <script src="../odo-base-component/dist/odo-base-component.js"></script>
+
+  <!-- Source. -->
+  <script src="dist/odo-responsive-attributes.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.5.1/prism.js"></script>
+
+</body>
+
+</html>

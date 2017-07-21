@@ -1,0 +1,105 @@
+
+// .container
+.#{$grid-container} {
+  width: map-get($grid-container-size, xs);
+  max-width: $grid-max-width--mobile;
+  margin-left: auto;
+  margin-right: auto;
+  @include clearfix();
+}
+
+.#{$grid-container}--full\@xs {
+  width: auto;
+  max-width: none;
+}
+
+// .row
+.#{$grid-row} {
+  margin-left: map-get($grid-gutter-width, xs) / -2;
+  margin-right: map-get($grid-gutter-width, xs) / -2;
+  @include clearfix();
+}
+
+.#{$grid-row}--flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.#{$grid-row}--centered {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.#{$grid-row}--flex::after,
+.#{$grid-row}--centered::after {
+  content: none;
+}
+
+// .aspect
+.#{$grid-ratio-name} {
+  @include keep-aspect();
+}
+
+// .aspect-1x1 etc.
+@include sassplate-grid-ratios();
+
+// .aspect > div or .aspect-inner
+.#{$grid-ratio-name} > div,
+.#{$grid-ratio-inner-name} {
+  @extend .fill-parent;
+}
+
+// Create basic styles for every grid class.
+@include sassplate-grid-columns();
+
+@include breakpoint(sm, true) {
+  @include sassplate-grid(xs, 6);
+  @include sassplate-gutterless-row(xs);
+}
+
+@include breakpoint(sm) {
+
+  @if map-has-key($grid-gutter-width, sm) {
+    @include sassplate-breakpoint-grid-gutters(sm);
+  }
+
+  @include sassplate-grid(sm);
+  @include sassplate-gutterless-row(sm);
+
+  // Add more padding to the container class.
+  .#{$grid-container} {
+    width: map-get($grid-container-size, sm);
+    max-width: $grid-max-width--desktop;
+  }
+}
+
+@include breakpoint(md) {
+
+  @if map-has-key($grid-gutter-width, md) {
+    @include sassplate-breakpoint-grid-gutters(md);
+  }
+
+  @include sassplate-grid(md);
+  @include sassplate-gutterless-row(md);
+
+  .#{$grid-container} {
+    width: map-get($grid-container-size, md);
+  }
+}
+
+@include breakpoint(lg) {
+
+  @if map-has-key($grid-gutter-width, lg) {
+    @include sassplate-breakpoint-grid-gutters(lg);
+  }
+
+  @include sassplate-grid(lg);
+  @include sassplate-gutterless-row(lg);
+
+  .#{$grid-container} {
+    width: map-get($grid-container-size, lg);
+  }
+}
+
+@include sassplate-gutterless-row();

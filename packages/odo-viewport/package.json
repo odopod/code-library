@@ -1,0 +1,40 @@
+{
+  "name": "@odopod/odo-viewport",
+  "description": "Viewport enter and exit monitoring for elements.",
+  "version": "1.0.0",
+  "main": "dist/odo-viewport.js",
+  "odoModule": "src/viewport.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
+    }
+  ],
+  "dependencies": {
+    "@odopod/odo-window-events": "../odo-window-events"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-viewport",
+  "files": [
+    "css",
+    "dist",
+    "src",
+    "index.js"
+  ],
+  "odoKeywords": [
+    "events"
+  ],
+  "keywords": [
+    "odo",
+    "odo-component",
+    "odopod",
+    "viewport"
+  ],
+  "license": "MIT",
+  "repository": "odopod/odo",
+  "scripts": {
+    "link-local": "node ../../scripts/link-local-packages.js",
+    "test": "gulp code-quality test"
+  }
+}

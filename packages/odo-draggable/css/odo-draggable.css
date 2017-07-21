@@ -1,0 +1,21 @@
+.draggable {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.grabbable {
+  cursor: move;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  cursor: grab;
+}
+
+.grabbable.grabbing,
+.grabbing,
+.grabbing .grabbable {
+  cursor: move;
+  cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
+  cursor: grabbing;
+}

@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Odo Object Fit Demo</title>
+  <link rel="stylesheet" href="../demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.5.1/themes/prism.css">
+</head>
+
+<body>
+
+<main role="main">
+  <div class="container">
+
+    <h1>Odo Object Fit</h1>
+    <p>A polyfill for CSS' <code>object-fit: cover;</code> If the browser supports <code>object-fit</code>, it will not run. The media element should have full width and height as well as the <code>object-fit</code> property.</p>
+    <p>This component <strong>handles image and video loading</strong> internally and sets the size of the media element when its metadata is available.</p>
+    <h3>Support</h3>
+    <p>IE9+</p>
+    <p>Native support: Chrome 31, Firefox 36, Safari 7.1, Opera 19, iOS Safari 8, Android browser 4.4.4.</p>
+    <p>Your browser <span id="support" data-support="supports">does not support</span> CSS <code>object-fit</code>. This component <span id="wwofd" data-support="will not run">will adjust images and video</span>.</p>
+    <h3>Dependencies</h3>
+    <p>None.</p>
+
+    <h2>Cover vs. Nothing</h2>
+    <div class="clearfix space-bottom">
+      <div class="half clip fixed-height">
+        <img id="my-cover" class="my-cover" src="https://placehold.it/350x150" alt="a placeholder image">
+      </div>
+      <div class="half clip fixed-height">
+        <img src="https://placehold.it/350x150" alt="a placeholder image" class="not-fitted">
+      </div>
+      <div class="half">With object fitting.</div>
+      <div class="half">Without object fitting.</div>
+    </div>
+
+    <h3>Markup</h3>
+    <pre><code class="language-markup">&lt;img id="my-cover" class="my-cover" src="https://placehold.it/350x150" alt=""&gt;</code></pre>
+
+    <h3>Styles</h3>
+    <p>These rules are required. You must add them to your image or video which is being fitted.</p>
+    <pre><code class="language-css">.my-cover {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+}</code></pre>
+
+    <h3>Script</h3>
+    <p>ObjectFit does not keep track of fitted elements. When its parent element changes size, you must fit the object again.</p>
+    <pre><code class="language-javascript">OdoObjectFit.cover(document.getElementById('my-cover'));
+window.addEventListener('resize', function() {
+  OdoObjectFit.cover(document.getElementById('my-cover'));
+});</code></pre>
+
+    <h2>Responsive Image and Video</h2>
+    <div class="clearfix space-bottom">
+      <div class="half clip fixed-height">
+        <img class="my-cover coveralls" src="https://placehold.it/320x400/1abc9c/ffffff&text=320w"
+          sizes="(max-width: 1290px) 46.5vw, 600px"
+          srcset="https://placehold.it/320x400/1abc9c/ffffff&text=320w 320w,
+          https://placehold.it/640x800/1abc9c/ffffff&text=640w 640w,
+          https://placehold.it/760x900/1abc9c/ffffff&text=760w 760w,
+          https://placehold.it/1016x1270/1abc9c/ffffff&text=1016w 1016w,
+          https://placehold.it/1400x1750/1abc9c/ffffff&text=1400w 1400w,
+          https://placehold.it/1520x1900/1abc9c/ffffff&text=1520w 1520w,
+          https://placehold.it/2032x2540/1abc9c/ffffff&text=2032w 2032w,
+          https://placehold.it/2800x3500/1abc9c/ffffff&text=2800w 2800w">
+      </div>
+      <div class="half clip fixed-height">
+        <video class="my-cover coveralls" autoplay loop style="-webkit-backface-visibility: hidden;-webkit-transform: scale(1);">
+          <source src="https://fat.gfycat.com/CookedBarrenAgama.webm" type="video/webm">
+          <source src="https://fat.gfycat.com/CookedBarrenAgama.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="half">Responsive image with img[srcset]</div>
+      <div class="half">Autoplaying cinemagraph <a href="https://www.reddit.com/r/Cinemagraphs/comments/2rpzva/gotg_continuous_wreckage/">Continuous Wreckage</a></div>
+    </div>
+
+    <h2>Deferred image loading</h2>
+    <p>These images do not have a <code>src</code> attribute. It's added after the page has loaded.</p>
+    <div class="clearfix space-bottom">
+      <div class="half clip fixed-height">
+        <img class="my-cover" data-src="https://placehold.it/350x150" alt="a placeholder image">
+      </div>
+      <div class="half clip fixed-height">
+        <img data-src="https://placehold.it/350x150" alt="a placeholder image" class="not-fitted">
+      </div>
+      <div class="half">With object fitting.</div>
+      <div class="half">Without object fitting.</div>
+    </div>
+
+    <h3>Pass an array of elements</h3>
+    <p>It can be array-like, like a Nodelist or arguments.</p>
+    <pre><code class="language-javascript">OdoObjectFit.cover(document.querySelectorAll('.coveralls'));</code></pre>
+
+    <h2>Using Contain</h2>
+    <p>You may also specify that the media element should be completely contained/visible within its parent element.</p>
+    <div class="clearfix space-bottom">
+      <div class="half clip fixed-height">
+        <img class="my-contain" src="https://placehold.it/320x180/e74c3c/ffffff&text=320w"
+          sizes="(max-width: 1290px) 46.5vw, 600px"
+          srcset="https://placehold.it/320x180/e74c3c/ffffff&text=320w 320w,
+          https://placehold.it/640x360/e74c3c/ffffff&text=640w 640w,
+          https://placehold.it/760x428/e74c3c/ffffff&text=760w 760w,
+          https://placehold.it/1016x572/e74c3c/ffffff&text=1016w 1016w,
+          https://placehold.it/1400x788/e74c3c/ffffff&text=1400w 1400w,
+          https://placehold.it/1520x855/e74c3c/ffffff&text=1520w 1520w,
+          https://placehold.it/2032x1143/e74c3c/ffffff&text=2032w 2032w,
+          https://placehold.it/2800x1575/e74c3c/ffffff&text=2800w 2800w">
+      </div>
+      <div class="half clip fixed-height">
+        <video class="my-contain" autoplay loop style="-webkit-backface-visibility: hidden;-webkit-transform: scale(1);">
+          <source src="https://fat.gfycat.com/CookedBarrenAgama.webm" type="video/webm">
+          <source src="https://fat.gfycat.com/CookedBarrenAgama.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="half">Landscape img[srcset]</div>
+      <div class="half">Landscape video</div>
+    </div>
+
+    <h3>Setup</h3>
+    <p>Use the static <code>contain</code> method to polyfill <code>object-fit: contain</code>.</p>
+    <pre><code class="language-css">.my-contain {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: contain;
+}</code></pre>
+    <pre><code class="language-javascript">OdoObjectFit.contain(document.querySelectorAll('.my-contain'));</code></pre>
+
+  </div>
+</main>
+
+  <!-- Polyfills -->
+
+  <!-- Minified Source. -->
+  <script src="dist/odo-object-fit.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.5.1/prism.js"></script>
+
+</body>
+
+</html>

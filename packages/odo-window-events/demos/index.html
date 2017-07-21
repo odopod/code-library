@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odo Window Events Demo</title>
+  <link rel="stylesheet" href="../../../docs/demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.4.1/themes/prism.css">
+</head>
+
+<body>
+
+  <main role="main" id="main">
+    <div class="bar">
+      <div class="container" style="height:inherit;">
+        <div class="table-center-wrap" style="height:inherit;">
+          <div class="table-center">
+            <div class="pair">
+              <span>Scrolls:</span>
+              <span id="output1">0</span>
+            </div>
+            <div class="pair">
+              <span>Fast Scrolls:</span>
+              <span id="output2">0</span>
+            </div>
+            <div class="pair">
+              <span>Resizes:</span>
+              <span id="output3">0</span>
+            </div>
+            <div class="pair">
+              <span>Leading Resizes:</span>
+              <span id="output4">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div id="space"></div>
+
+      <h1>Odo Window Events</h1>
+      <p>This component keeps track of callbacks for window <code>resize</code> and <code>scroll</code> events. These callbacks are debounced and throttled, respectively. If you need higher fidelity scrolling, check out <strong>odo-scroll-animation</strong>.</p>
+      <h3>Support</h3>
+      <p>IE9+</p>
+      <h3>Dependencies</h3>
+      <p>None. <a href="https://www.npmjs.com/package/throttleit">Throttle</a> and <a href="https://www.npmjs.com/package/debounce">debounce</a> packages are bundled.</p>
+
+      <section>
+        <h2>Register a Callback</h2>
+        <p>To listen for scroll events, register your callback with the <code>onScroll</code> method or the <code>onFastScroll</code> method. They are throttled to <code>500</code> and <code>150</code> milliseconds, respectively.</p>
+        <pre><code class="language-javascript">let scrolls = 0;
+OdoWindowEvents.onScroll(() => {
+  scrolls += 1;
+  output1.innerHTML = scrolls;
+});</code></pre>
+        <p>To listen for resize events, register your callback with the <code>onResize</code> method or the <code>onLeadingResize</code> method. They are debounced to <code>500</code> milliseconds.</p>
+        <pre><code class="language-javascript">let resizes = 0;
+OdoWindowEvents.onResize(() => {
+  resizes += 1;
+  output3.innerHTML = resizes;
+});</code></pre>
+      </section>
+
+      <section>
+        <h2>Remove a Callback</h2>
+        <p>To remove a registered callback, use the <code>remove</code> method with the id returned from registering it.</p>
+        <pre><code class="language-javascript">const id = OdoWindowEvents.onFastScroll(myCallback);
+OdoWindowEvents.remove(id);</code></pre>
+      </section>
+    </div>
+  </main>
+
+  <!-- Minified Source. -->
+  <script src="../dist/odo-window-events.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.4.1/prism.js"></script>
+
+</body>
+
+</html>

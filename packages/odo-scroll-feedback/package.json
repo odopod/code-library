@@ -1,0 +1,42 @@
+{
+  "name": "@odopod/odo-scroll-feedback",
+  "description": "Based user input from mouse, keyboard, and touch, the `ScrollFeedback` instance will emit navigation events.",
+  "version": "1.0.0",
+  "main": "dist/odo-scroll-feedback.js",
+  "odoModule": "src/scroll-feedback.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
+    }
+  ],
+  "dependencies": {
+    "tiny-emitter": "^2.0.1"
+  },
+  "devDependencies": {
+    "element-closest": "^2.0.1"
+  },
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-scroll-feedback",
+  "files": [
+    "css",
+    "dist",
+    "src",
+    "index.js"
+  ],
+  "odoKeywords": [
+    "events"
+  ],
+  "keywords": [
+    "odo",
+    "odo-component",
+    "odopod",
+    "scroll jack"
+  ],
+  "license": "MIT",
+  "repository": "odopod/odo",
+  "scripts": {
+    "link-local": "node ../../scripts/link-local-packages.js",
+    "test": "gulp code-quality test"
+  }
+}

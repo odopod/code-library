@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en" class="no-js">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odo Responsive Images Demo</title>
+
+  <link rel="stylesheet" href="../demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+  <link rel="stylesheet" href="css/odo-responsive-images.css" />
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.5.1/themes/prism.css">
+
+  <!--[if IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/2014.01.31/classList.min.js"></script><![endif]-->
+
+  <script>
+    document.documentElement.classList.remove('no-js');
+    document.documentElement.classList.add('js');
+  </script>
+
+</head>
+
+<body>
+
+  <div id="main" role="main">
+
+    <div class="container">
+      <h1>Odo Responsive Images</h1>
+      <p>Native responsive images with deferred loading.</p>
+      <p>The main purpose of this component is to lazy-load responsive images. After deciding when to load the image, it uses picturefill and native responsive images. This component does not control which sources are chosen for the image.</p>
+      <h3>Support</h3>
+      <p>IE9+ (with a <code>classList</code> polyfill).</p>
+      <h3>Dependencies</h3>
+      <p>Picturefill, Odo Viewport, debounce (bundled), <code>Array.from</code>.</p>
+      <h3>Styles</h3>
+      <p>This component has required css - <a href="css/odo-responsive-images.css">css/odo-responsive-images.css</a>.</p>
+      <h3>Usage</h3>
+      <p>Images are not immediately watched, you <strong>must</strong> call <code>initialize()</code>. This allows you to change the <code>OdoResponsiveImages</code> class before anything meaningful happens.</p>
+      <pre><code class="language-javascript">import OdoResponsiveImages from '@odopod/odo-responsive-images';
+OdoResponsiveImages.initialize();</code></pre>
+    </div>
+
+    <section class="hidden-overflow">
+      <div class="container">
+        <h2>Deferred Loading</h2>
+        <p>To defer the loading, do not use a <code>&lt;picture&gt;</code> element. Use a <code>&lt;div&gt;</code> and add the <code>odo-responsive-img</code> class.</p>
+
+
+        <div class="odo-responsive-img">
+          <!--[if IE 9]><video style="display: none;"><![endif]-->
+          <source srcset="https://source.unsplash.com/category/buildings/800x400" media="(min-width: 992px)">
+          <source srcset="https://source.unsplash.com/category/technology/600x300" media="(min-width: 768px)">
+          <source srcset="https://source.unsplash.com/category/nature/400x200">
+          <!--[if IE 9]></video><![endif]-->
+          <img alt="picture 1 description">
+          <noscript>
+            <img src="https://source.unsplash.com/category/nature/400x200" alt="picture 1 description">
+          </noscript>
+        </div>
+
+        <h3>Markup</h3>
+        <h4>IE9 Conditional Comments</h4>
+        <p>To support IE9, you will need to wrap a <code>video</code> element wrapper around the source elements in your picture tag. You can do this using conditional comments, like so:</p>
+        <pre><code class="language-markup">&lt;div class="odo-responsive-img"&gt;
+  &lt;!--[if IE 9]&gt;&lt;video style="display: none;"&gt;&lt;![endif]--&gt;
+  &lt;source srcset="https://source.unsplash.com/category/buildings/800x400" media="(min-width: 992px)"&gt;
+  &lt;source srcset="https://source.unsplash.com/category/technology/600x300" media="(min-width: 768px)"&gt;
+  &lt;source srcset="https://source.unsplash.com/category/nature/400x200"&gt;
+  &lt;!--[if IE 9]&gt;&lt;/video&gt;&lt;![endif]--&gt;
+  &lt;img alt="picture 1 description"&gt;
+  &lt;noscript&gt;
+    &lt;img src="https://source.unsplash.com/category/nature/400x200" alt="picture 1 description"&gt;
+  &lt;/noscript&gt;
+&lt;/div&gt;</code></pre>
+
+        <h4>Avoid Multiple Image Downloads</h4>
+        <p>In order to avoid downloading more than one image for a single picture, the <code>&lt;img&gt;</code>&rsquo;s <code>src</code> and <code>srcset</code> attributes are left blank. If <code>src</code> is set, any browser which does not support <code>&lt;picture&gt;</code> could potentially download multiple images. If <code>srcset</code> is set, any browser which supports <code>srcset</code> but does not support <code>&lt;picture&gt;</code> could potentially download multiple images.</p>
+
+        <p>However, this means in order to support JavaScript-disabled browsers (and possibly search engines), you will need a fallback image wrapped in <code>&lt;noscript&gt;</code>. Please note, the <code>&lt;noscript&gt;</code> is not added to the generated <code>&lt;picture&gt;</code> element.</p>
+
+        <h3>Hi Resolution Support</h3>
+        <p>To support retina screens, simply modify the <code>srcset</code> attribute. The Opera developer blog has <a href="https://dev.opera.com/articles/responsive-images/">a great article</a> with many different combinations for images sizes, hi-dpi screens, mime-types, and art direction. I highly recommend looking at that article to give you an idea of how to structure your responsive image.</p>
+        <p>Here is a simple example using the <code>2x</code> descriptor in the <code>srcset</code>. On a non-retina screen, you will see an image from the &ldquo;architecture&rdquo;, &ldquo;animals&rdquo;, or &ldquo;nature&rdquo; categories of <a href="https://placeimg.com/">placeimg</a> depending on your screen size. For retina screens, you will see the same categories in grayscale.</p>
+        <div class="odo-responsive-img">
+          <!--[if IE 9]><video style="display: none;"><![endif]-->
+          <source srcset="https://placeimg.com/800/400/arch 1x, https://placeimg.com/1600/800/arch/grayscale 2x" media="(min-width: 992px)">
+          <source srcset="https://placeimg.com/600/300/animals 1x, https://placeimg.com/1200/600/animals/grayscale 2x" media="(min-width: 768px)">
+          <source srcset="https://placeimg.com/400/200/nature 1x, https://placeimg.com/800/400/nature/grayscale 2x">
+          <!--[if IE 9]></video><![endif]-->
+          <img alt="picture 1 description">
+          <noscript>
+            <img src="https://placeimg.com/400/200/nature" alt="picture 1 description">
+          </noscript>
+        </div>
+        <pre><code class="language-markup">&lt;div class="odo-responsive-img"&gt;
+  &lt;!--[if IE 9]&gt;&lt;video style="display: none;"&gt;&lt;![endif]--&gt;
+  &lt;source srcset="https://placeimg.com/800/400/arch 1x, https://placeimg.com/1600/800/arch/grayscale 2x" media="(min-width: 992px)"&gt;
+  &lt;source srcset="https://placeimg.com/600/300/animals 1x, https://placeimg.com/1200/600/animals/grayscale 2x" media="(min-width: 768px)"&gt;
+  &lt;source srcset="https://placeimg.com/400/200/nature 1x, https://placeimg.com/800/400/nature/grayscale 2x"&gt;
+  &lt;!--[if IE 9]&gt;&lt;/video&gt;&lt;![endif]--&gt;
+  &lt;img alt="picture 1 description"&gt;
+  &lt;noscript&gt;
+    &lt;img src="https://placeimg.com/400/200/nature" alt="picture 1 description"&gt;
+  &lt;/noscript&gt;
+&lt;/div&gt;</code></pre>
+
+        <h3>Background Images</h3>
+        <p>You can add a <code>data-type="background"</code> attribute to set visibility hidden on the <code>&lt;img&gt;</code> element and have the responsive image component set the <code>background-image</code> property of your responsive image to that image's source.</p>
+
+
+        <div class="odo-responsive-img my-background" data-type="background">
+          <!--[if IE 9]><video style="display: none;"><![endif]-->
+          <source srcset="https://placeimg.com/800/400/arch" media="(min-width: 992px)">
+          <source srcset="https://placeimg.com/600/300/animals" media="(min-width: 768px)">
+          <source srcset="https://placeimg.com/400/200/nature">
+          <!--[if IE 9]></video><![endif]-->
+          <img alt="picture 2 description">
+          <noscript>
+            <img src="https://placeimg.com/400/200/nature" alt="picture 1 description">
+          </noscript>
+        </div>
+
+        <pre><code class="language-markup">&lt;div class="odo-responsive-img" data-type="background"&gt;
+  &lt;!--[if IE 9]&gt;&lt;video style="display: none;"&gt;&lt;![endif]--&gt;
+  &lt;source srcset="https://placeimg.com/800/400/arch" media="(min-width: 992px)"&gt;
+  &lt;source srcset="https://placeimg.com/600/300/animals" media="(min-width: 768px)"&gt;
+  &lt;source srcset="https://placeimg.com/400/200/nature"&gt;
+  &lt;!--[if IE 9]&gt;&lt;/video&gt;&lt;![endif]--&gt;
+  &lt;img alt="picture 2 description"&gt;
+  &lt;noscript&gt;
+    &lt;img src="https://placeimg.com/400/200/nature" alt="picture 1 description"&gt;
+  &lt;/noscript&gt;
+&lt;/div&gt;</code></pre>
+
+        <h3>Using img[srcset]</h3>
+        <p>Odo Responsive Images also work with the native <code>srcset</code> attribute for responsive images. The key difference is you must use a <code>data-srcset</code> attribute instead of <code>srcset</code>. This also works with the <code>data-type="background"</code> attribute.</p>
+        <div class="odo-responsive-img">
+          <img data-srcset="
+            https://placehold.it/400x200/e74c3c/ffffff&text=srcset+-+400x200 400w,
+            https://placehold.it/600x300/e74c3c/ffffff&text=srcset+-+600x300 600w,
+            https://placehold.it/800x400/e74c3c/ffffff&text=srcset+-+800x400 800w,
+            https://placehold.it/1200x600/e74c3c/ffffff&text=srcset+-+1200x600 1200w" sizes="(min-width:1291px) 1200px, 93vw" alt="I have a source set">
+          <noscript>
+            <img src="https://placehold.it/400x200/e74c3c/ffffff&text=srcset+-+400x200" alt="I have a source set">
+          </noscript>
+        </div>
+
+        <p>Since JavaScript adds the <code>srcset</code> attribute, there should also be a <code>&lt;noscript&gt;</code> with a fallback image.</p>
+        <pre><code class="language-markup">&lt;div class="odo-responsive-img"&gt;
+  &lt;img data-srcset="
+    https://placehold.it/400x200/e74c3c/ffffff&text=srcset+-+400x200 400w,
+    https://placehold.it/600x300/e74c3c/ffffff&text=srcset+-+600x300 600w,
+    https://placehold.it/800x400/e74c3c/ffffff&text=srcset+-+800x400 800w,
+    https://placehold.it/1200x600/e74c3c/ffffff&text=srcset+-+1200x600 1200w" sizes="(min-width:1291px) 1200px, 93vw" alt="I have a source set"&gt;
+  &lt;noscript&gt;
+    &lt;img src="https://placehold.it/400x200/e74c3c/ffffff&text=srcset+-+400x200" alt="I have a source set"&gt;
+  &lt;/noscript&gt;
+&lt;/div&gt;</code></pre>
+
+
+        <h3>Simple Carousel</h3>
+        <p>Demonstrating how the responsive images will work inside a carousel and similar components with off-screen images.</p>
+        <div class="fake-carousel">
+          <div class="fake-carousel__element clearfix space-bottom">
+            <div class="fake-carousel__slide">
+              <div class="odo-responsive-img carousel-background-img" data-type="background">
+                <img data-srcset="
+                  https://placehold.it/400x200/3498db/ffffff&text=Slide[srcset]+1+-+400x200 400w,
+                  https://placehold.it/600x300/3498db/ffffff&text=Slide[srcset]+1+-+600x300 600w,
+                  https://placehold.it/800x400/3498db/ffffff&text=Slide[srcset]+1+-+800x400 800w,
+                  https://placehold.it/1200x600/3498db/ffffff&text=Slide[srcset]+1+-+1200x600 1200w" sizes="(min-width:1291px) 600px, 46.5vw" alt="I have a source set">
+                <noscript>
+                  <img src="https://placehold.it/400x200/3498db/ffffff&text=Slide[srcset]+1+-+400x200" alt="I have a source set">
+                </noscript>
+              </div>
+            </div>
+            <div class="fake-carousel__slide">
+              <div class="odo-responsive-img">
+                <!--[if IE 9]><video style="display: none;"><![endif]-->
+                <source srcset="https://placehold.it/800x400/32b353/ffffff&text=Slide+2+-+800x400" media="(min-width: 992px)">
+                <source srcset="https://placehold.it/600x300/32b353/ffffff&text=Slide+2+-+600x300" media="(min-width: 768px)">
+                <source srcset="https://placehold.it/400x200/32b353/ffffff&text=Slide+2+-+400x200">
+                <!--[if IE 9]></video><![endif]-->
+                <img alt="slide 2 picture description">
+                <noscript>
+                  <img src="https://placehold.it/400x200/32b353/ffffff&text=Slide+2+-+400x200" alt="slide 2 picture description">
+                </noscript>
+              </div>
+            </div>
+            <div class="fake-carousel__slide">
+              <div class="odo-responsive-img">
+                <!--[if IE 9]><video style="display: none;"><![endif]-->
+                <source srcset="https://placehold.it/800x400/9b59b6/ffffff&text=Slide+3+-+800x400" media="(min-width: 992px)">
+                <source srcset="https://placehold.it/600x300/9b59b6/ffffff&text=Slide+3+-+600x300" media="(min-width: 768px)">
+                <source srcset="https://placehold.it/400x200/9b59b6/ffffff&text=Slide+3+-+400x200">
+                <!--[if IE 9]></video><![endif]-->
+                <img alt="slide 3 picture description">
+                <noscript>
+                  <img src="https://placehold.it/400x200/9b59b6/ffffff&text=Slide+3+-+400x200" alt="slide 3 picture description">
+                </noscript>
+              </div>
+            </div>
+            <div class="fake-carousel__slide">
+              <div class="odo-responsive-img">
+                <!--[if IE 9]><video style="display: none;"><![endif]-->
+                <source srcset="https://placehold.it/800x400/e67e22/ffffff&text=Slide+4+-+800x400" media="(min-width: 992px)">
+                <source srcset="https://placehold.it/600x300/e67e22/ffffff&text=Slide+4+-+600x300" media="(min-width: 768px)">
+                <source srcset="https://placehold.it/400x200/e67e22/ffffff&text=Slide+4+-+400x200">
+                <!--[if IE 9]></video><![endif]-->
+                <img alt="slide 4 picture description">
+                <noscript>
+                  <img src="https://placehold.it/400x200/e67e22/ffffff&text=Slide+4+-+400x200" alt="slide 4 picture description">
+                </noscript>
+              </div>
+            </div>
+          </div>
+          <div class="controls fake-carousel__controls">
+            <button class="fake-carousel__previous">Previous</button>
+            <button class="fake-carousel__next">Next</button>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Immediate Loading</h2>
+        <p>To load responsive images without deferred loading, simply use the native <code>picture</code> syntax. If you check the network profile for this page load, you will notice that these two images load first.</p>
+      </div>
+
+      <div class="container">
+        <div class="half">
+          <picture>
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="https://placeimg.com/800/400/arch" media="(min-width: 992px)">
+            <source srcset="https://placeimg.com/600/300/animals" media="(min-width: 768px)">
+            <source srcset="https://placeimg.com/400/200/nature">
+            <!--[if IE 9]></video><![endif]-->
+            <img alt="picture 1 description">
+          </picture>
+        </div>
+        <div class="half">
+          <img srcset="
+            https://placehold.it/400x200&text=srcset+-+400x200 400w,
+            https://placehold.it/600x300&text=srcset+-+600x300 600w,
+            https://placehold.it/800x400&text=srcset+-+800x400 800w" sizes="50vw" alt="I have a source set">
+        </div>
+      </div>
+      <div class="container">
+
+        <h3>Picture Syntax</h3>
+        <p>Picture should be used for responsive images which require art-direction. For example, an image set which has different ratios or crops at different sizes.</p>
+        <pre><code class="language-markup">&lt;picture&gt;
+  &lt;!--[if IE 9]&gt;&lt;video style="display: none;"&gt;&lt;![endif]--&gt;
+  &lt;source srcset="https://placeimg.com/800/400/arch" media="(min-width: 992px)"&gt;
+  &lt;source srcset="https://placeimg.com/600/300/animals" media="(min-width: 768px)"&gt;
+  &lt;source srcset="https://placeimg.com/400/200/nature"&gt;
+  &lt;!--[if IE 9]&gt;&lt;/video&gt;&lt;![endif]--&gt;
+  &lt;img alt="picture 1 description"&gt;
+&lt;/picture&gt;</code></pre>
+
+        <h3>Srcset Syntax</h3>
+        <p>Each image in a source set should be the exact same, except at a different size/scale. This allows the browser to choose which image is best for the user given its current conditions (i.e. network, pixel density, signal strength).</p>
+        <pre><code class="language-markup">&lt;img srcset="
+  https://placehold.it/400x200&text=srcset+-+400x200 400w,
+  https://placehold.it/600x300&text=srcset+-+600x300 600w,
+  https://placehold.it/800x400&text=srcset+-+800x400 800w" sizes="50vw" alt="I have a source set"&gt;</code></pre>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Public Methods &amp; Properties</h2>
+        <p><code>OdoResponsiveImages</code> is a singleton. It exposes a few methods and properties which can be useful.</p>
+
+        <h3>updateOffsets()</h3>
+        <p>If the offset of an image changes without the page scrolling, <code>OdoViewport</code> will not know and neither will this component. A responsive image inside a carousel, for example, will need to be notified when the slide changes. This method is debounced at 300ms.</p>
+        <pre><code class="language-javascript">OdoResponsiveImages.updateOffsets();</code></pre>
+
+        <h3>flush()</h3>
+        <p>Cleans up all references and listeners for current images. <code>OdoResponsiveImages</code> will no longer be doing anything until a new image is added.</p>
+        <pre><code class="language-javascript">OdoResponsiveImages.flush();</code></pre>
+
+        <h3>add(element)</h3>
+        <p>Add more images for the responsive images component to watch. The first parameter is an element or array of elements. The element should be the parent element of the <code>&lt;img&gt;</code>.</p>
+        <pre><code class="language-javascript">OdoResponsiveImages.add(myResponsiveImage);</code></pre>
+
+        <h3>remove(element)</h3>
+        <p>Remove images from the responsive images component. The first parameter is an element or array of elements. The element should be the parent element of the <code>&lt;img&gt;</code>. This method is useful when you are completely removing content from the DOM.</p>
+        <pre><code class="language-javascript">OdoResponsiveImages.remove(myResponsiveImage);</code></pre>
+
+        <h3>load(element)</h3>
+        <p>Force the load of an element or group of elements instead of waiting for it to come into the viewport. The first parameter is an element or array of elements. The element should be the parent element of the <code>&lt;img&gt;</code>.</p>
+        <pre><code class="language-javascript">OdoResponsiveImages.load(myResponsiveImage);</code></pre>
+
+        <h3>images</h3>
+        <p>An array of viewport item id strings and picture elements. Once an image loads, it is removed from this list unless it is a background image.</p>
+        <pre><code class="language-javascript">OdoResponsiveImages.images</code></pre>
+
+        <h3>ClassName</h3>
+        <p>The class name strings for Odo Responsive Images.</p>
+        <pre><code class="language-javascript">OdoResponsiveImages.ClassName = {
+  IMAGE: 'odo-responsive-img',
+  LOADED: 'odo-responsive-img--loaded'
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="space-bottom">
+      <div class="container">
+        <h2>Deferred</h2>
+        <div class="half">
+          <div class="odo-responsive-img">
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="https://placehold.it/800x400&text=A++800x400" media="(min-width: 992px)">
+            <source srcset="https://placehold.it/600x300&text=A++600x300" media="(min-width: 768px)">
+            <source srcset="https://placehold.it/400x200&text=A++400x200">
+            <!--[if IE 9]></video><![endif]-->
+            <img alt="picture 1 description">
+            <noscript>
+              <img src="https://placehold.it/800x400&text=A++800x400" alt="picture 1 description">
+            </noscript>
+          </div>
+        </div>
+        <div class="half">
+          <div class="odo-responsive-img my-background" data-type="background">
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="https://placehold.it/800x400&text=B++800x400" media="(min-width: 992px)">
+            <source srcset="https://placehold.it/600x300&text=B++600x300" media="(min-width: 768px)">
+            <source srcset="https://placehold.it/400x200&text=B++400x200">
+            <!--[if IE 9]></video><![endif]-->
+            <img alt="picture 2 description">
+            <noscript>
+              <img src="https://placehold.it/800x400&text=B++800x400" alt="picture 2 description">
+            </noscript>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="space-bottom">
+      <div class="container">
+        <h2>Deferred</h2>
+        <div class="half">
+          <div class="odo-responsive-img">
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="https://placeimg.com/800/400/arch" media="(min-width: 992px)">
+            <source srcset="https://placeimg.com/600/300/animals" media="(min-width: 768px)">
+            <source srcset="https://placeimg.com/400/200/nature">
+            <!--[if IE 9]></video><![endif]-->
+            <img alt="picture 1 description">
+            <noscript>
+              <img src="https://placeimg.com/800/400/arch" alt="picture 1 description">
+            </noscript>
+          </div>
+        </div>
+        <div class="half">
+          <div class="odo-responsive-img my-contain" data-type="background">
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="https://placeimg.com/800/400/arch" media="(min-width: 992px)">
+            <source srcset="https://placeimg.com/600/300/animals" media="(min-width: 768px)">
+            <source srcset="https://placeimg.com/400/200/nature">
+            <!--[if IE 9]></video><![endif]-->
+            <img alt="picture 1 description">
+            <noscript>
+              <img src="https://placeimg.com/800/400/arch" alt="picture 1 description">
+            </noscript>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="space-bottom">
+      <div class="container">
+        <h2>Deferred</h2>
+        <div class="half">
+          <div class="odo-responsive-img">
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="https://placehold.it/800x400&text=C++800x400" media="(min-width: 992px)">
+            <source srcset="https://placehold.it/600x300&text=C++600x300" media="(min-width: 768px)">
+            <source srcset="https://placehold.it/400x200&text=C++400x200">
+            <!--[if IE 9]></video><![endif]-->
+            <img alt="picture 1 description">
+            <noscript>
+              <img src="https://placehold.it/800x400&text=C++800x400" alt="picture 1 description">
+            </noscript>
+          </div>
+        </div>
+        <div class="half">
+          <div class="odo-responsive-img my-background" data-type="background">
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="https://placehold.it/800x400&text=D++800x400" media="(min-width: 992px)">
+            <source srcset="https://placehold.it/600x300&text=D++600x300" media="(min-width: 768px)">
+            <source srcset="https://placehold.it/400x200&text=D++400x200">
+            <!--[if IE 9]></video><![endif]-->
+            <img alt="picture 2 description">
+            <noscript>
+              <img src="https://placehold.it/800x400&text=D++800x400" alt="picture 2 description">
+            </noscript>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="space-bottom">
+      <div class="container">
+        <h2>Deferred</h2>
+        <div class="half">
+          <div class="odo-responsive-img">
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="https://placehold.it/800x400&text=E++800x400" media="(min-width: 992px)">
+            <source srcset="https://placehold.it/600x300&text=E++600x300" media="(min-width: 768px)">
+            <source srcset="https://placehold.it/400x200&text=E++400x200">
+            <!--[if IE 9]></video><![endif]-->
+            <img alt="picture 1 description">
+            <noscript>
+              <img src="https://placehold.it/800x400&text=E++800x400" alt="picture 1 description">
+            </noscript>
+          </div>
+        </div>
+        <div class="half">
+          <div class="odo-responsive-img my-background" data-type="background">
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="https://placehold.it/800x400&text=F++800x400" media="(min-width: 992px)">
+            <source srcset="https://placehold.it/600x300&text=F++600x300" media="(min-width: 768px)">
+            <source srcset="https://placehold.it/400x200&text=F++400x200">
+            <!--[if IE 9]></video><![endif]-->
+            <img alt="picture 2 description">
+            <noscript>
+              <img src="https://placehold.it/800x400&text=F++800x400" alt="picture 2 description">
+            </noscript>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="space-bottom">
+      <div class="container">
+        <h2>Background image stretching beyond both edges</h2>
+      </div>
+      <div class="cool-background-wrapper">
+
+        <div class="odo-responsive-img cool-full-centered" data-type="background">
+          <!--[if IE 9]><video style="display: none;"><![endif]-->
+          <source srcset="https://placehold.it/992x400&text=Full-bleed+background+large" media="(min-width: 992px)">
+          <source srcset="https://placehold.it/768x400&text=Full-bleed+background+medium" media="(min-width: 768px)">
+          <source srcset="https://placehold.it/400x400&text=Full-bleed+background+small">
+          <!--[if IE 9]></video><![endif]-->
+          <img alt="picture 1 description">
+          <noscript>
+            <img src="https://placehold.it/992x400&text=Full-bleed+background+large" alt="picture 1 description">
+          </noscript>
+        </div>
+
+        <div class="cool-content">
+          <div class="container">
+            <div class="half">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="space-bottom">
+      <div class="container">
+        <h2>Deferred</h2>
+        <div class="half">
+          <div class="odo-responsive-img">
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="https://placehold.it/800x400&text=G++800x400" media="(min-width: 992px)">
+            <source srcset="https://placehold.it/600x300&text=G++600x300" media="(min-width: 768px)">
+            <source srcset="https://placehold.it/400x200&text=G++400x200">
+            <!--[if IE 9]></video><![endif]-->
+            <img alt="picture 1 description">
+            <noscript>
+              <img src="https://placehold.it/800x400&text=G++800x400" alt="picture 1 description">
+            </noscript>
+          </div>
+        </div>
+        <div class="half">
+          <div class="odo-responsive-img my-background" data-type="background">
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="https://placehold.it/800x400&text=H++800x400" media="(min-width: 992px)">
+            <source srcset="https://placehold.it/600x300&text=H++600x300" media="(min-width: 768px)">
+            <source srcset="https://placehold.it/400x200&text=H++400x200">
+            <!--[if IE 9]></video><![endif]-->
+            <img alt="picture 2 description">
+            <noscript>
+              <img src="https://placehold.it/800x400&text=H++800x400" alt="picture 2 description">
+            </noscript>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Polyfills -->
+  <script src="scripts/raf.js"></script>
+  <script src="../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Dependencies -->
+  <script src="../odo-window-events/dist/odo-window-events.min.js"></script>
+  <script src="../odo-viewport/dist/odo-viewport.js"></script>
+  <script src="../node_modules/picturefill/dist/picturefill.min.js"></script>
+
+  <!-- Minified Source. -->
+  <script src="dist/odo-responsive-images.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.5.1/prism.js"></script>
+
+</body>
+
+</html>

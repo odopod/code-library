@@ -1,0 +1,58 @@
+body {
+  padding-bottom: 600px;
+}
+
+main {
+  display: block;
+}
+
+.bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  width: 100%;
+  height: 50px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  background: white;
+}
+
+#space {
+  height: 50px;
+}
+
+.pair {
+  display: inline-block;
+}
+
+.pair + .pair {
+  margin-left: 20px;
+}
+
+@media (max-width: 760px) {
+  .container {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .bar .table-center-wrap {
+    display: block;
+  }
+
+  .bar .table-center {
+    display: -webkit-flex;
+    display: flex;
+    height: inherit;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .pair {
+    font-size: 12px;
+  }
+
+  .pair + .pair {
+    margin-left: 0;
+  }
+}

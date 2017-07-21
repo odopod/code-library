@@ -1,0 +1,18 @@
+main {
+  overflow: visible;
+}
+
+.odo-dropdown__button,
+.odo-dropdown__option {
+  font-size: 14px;
+}
+
+.odo-dropdown--options-below .odo-dropdown__options {
+  -webkit-transform: translate(0, 45px);
+  transform: translate(0, 45px);
+}
+
+.some-label {
+  display: inline-block;
+  margin-bottom: 4px;
+}

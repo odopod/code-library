@@ -1,0 +1,1 @@
+const OdoResponsiveClasses = window.OdoResponsiveClasses;

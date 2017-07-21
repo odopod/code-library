@@ -1,0 +1,249 @@
+#basic-hotspots {
+  background-color: rgb(240, 240, 240);
+}
+
+.odo-hotspot__content img {
+  display: block;
+  max-width: 100%;
+}
+
+.odo-hotspot__content figcaption {
+  padding: 1em 1.25em 1em 1em;
+}
+
+#basic-hotspots .odo-hotspot {
+  opacity: 0;
+  -webkit-transition: opacity 200ms ease;
+          transition: opacity 200ms ease;
+}
+
+#basic-hotspots .odo-hotspot:nth-child(2) {
+  -webkit-transition-delay: 120ms;
+          transition-delay: 120ms;
+}
+
+#basic-hotspots .odo-hotspot:nth-child(3) {
+  -webkit-transition-delay: 240ms;
+          transition-delay: 240ms;
+}
+
+#basic-hotspots .odo-hotspot:nth-child(4) {
+  -webkit-transition-delay: 360ms;
+          transition-delay: 360ms;
+}
+
+#basic-hotspots.is-loaded .odo-hotspot {
+  opacity: 1;
+}
+
+.aspect .odo-hotspot__button:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ZOOM IN */
+.odo-hotspots--zoom-in .odo-hotspot__content {
+  -webkit-transition:
+    top 0s 400ms,
+    right 0s 400ms,
+    bottom 0s 400ms,
+    left 0s 400ms,
+    opacity 300ms cubic-bezier(0.165, 0.840, 0.440, 1.000),
+    -webkit-transform 400ms cubic-bezier(0.165, 0.840, 0.440, 1.000);
+  transition:
+    top 0s 400ms,
+    right 0s 400ms,
+    bottom 0s 400ms,
+    left 0s 400ms,
+    opacity 300ms cubic-bezier(0.165, 0.840, 0.440, 1.000),
+    transform 400ms cubic-bezier(0.165, 0.840, 0.440, 1.000);
+}
+
+.odo-hotspots--zoom-in .odo-hotspot.is-open .odo-hotspot__content {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.odo-hotspots--zoom-in .odo-hotspot--left .odo-hotspot__content,
+.odo-hotspots--zoom-in .odo-hotspot--right .odo-hotspot__content {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+}
+
+/**
+ * Transform from corners.
+ *
+ * Depending on where you've positioned the hotspot content, you may be ok using
+ * the named values that are commented out below. The other transform origins
+ * below are the exact center of the button to make it appear the content comes
+ * from the button.
+ */
+.odo-hotspots--zoom-in .odo-hotspot--left.odo-hotspot--top .odo-hotspot__content {
+  /*-webkit-transform-origin: right bottom;
+            transform-origin: right bottom;*/
+  -webkit-transform-origin: -webkit-calc(100% + 32px) -webkit-calc(100% - 32px);
+          transform-origin: calc(100% + 32px) calc(100% - 32px);
+}
+
+.odo-hotspots--zoom-in .odo-hotspot--left.odo-hotspot--bottom .odo-hotspot__content {
+  /*-webkit-transform-origin: right top;
+            transform-origin: right top;*/
+  -webkit-transform-origin: -webkit-calc(100% + 32px) 32px;
+          transform-origin: calc(100% + 32px) 32px;
+}
+
+.odo-hotspots--zoom-in .odo-hotspot--right.odo-hotspot--top .odo-hotspot__content {
+  /*-webkit-transform-origin: left bottom;
+            transform-origin: left bottom;*/
+  -webkit-transform-origin: -32px -webkit-calc(100% - 32px);
+          transform-origin: -32px calc(100% - 32px);
+}
+
+.odo-hotspots--zoom-in .odo-hotspot--right.odo-hotspot--bottom .odo-hotspot__content {
+  /*-webkit-transform-origin: left top;
+            transform-origin: left top;*/
+  -webkit-transform-origin: -32px 32px;
+          transform-origin: -32px 32px;
+}
+
+
+/* ZOOM OUT */
+.odo-hotspots--zoom-out .odo-hotspot__content {
+  -webkit-transition:
+    top 0s 500ms,
+    right 0s 500ms,
+    bottom 0s 500ms,
+    left 0s 500ms,
+    opacity 250ms cubic-bezier(0.165, 0.840, 0.440, 1.000),
+    -webkit-transform 500ms cubic-bezier(0.165, 0.840, 0.440, 1.000);
+  transition:
+    top 0s 500ms,
+    right 0s 500ms,
+    bottom 0s 500ms,
+    left 0s 500ms,
+    opacity 250ms cubic-bezier(0.165, 0.840, 0.440, 1.000),
+    transform 500ms cubic-bezier(0.165, 0.840, 0.440, 1.000);
+}
+
+.odo-hotspots--zoom-out .odo-hotspot.is-open .odo-hotspot__content {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.odo-hotspots--zoom-out .odo-hotspot--left .odo-hotspot__content,
+.odo-hotspots--zoom-out .odo-hotspot--right .odo-hotspot__content {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+/* FADE */
+.odo-hotspots--fade .odo-hotspot img {
+  width: 100%;
+}
+
+.odo-hotspots--fade .odo-hotspot {
+  width: 48px;
+  height: 48px;
+  margin-left: -24px;
+  margin-top: -24px;
+}
+
+.odo-hotspots--fade .odo-hotspot__content {
+  width: 320px;
+
+  -webkit-transition:
+    top 0s 300ms,
+    right 0s 300ms,
+    bottom 0s 300ms,
+    left 0s 300ms,
+    opacity 300ms cubic-bezier(0.165, 0.840, 0.440, 1.000);
+  transition:
+    top 0s 300ms,
+    right 0s 300ms,
+    bottom 0s 300ms,
+    left 0s 300ms,
+    opacity 300ms cubic-bezier(0.165, 0.840, 0.440, 1.000);
+}
+
+.odo-hotspot--left.is-open .odo-hotspot__content {
+  right: 60px;
+}
+
+.odo-hotspot--right.is-open .odo-hotspot__content {
+  left: 60px;
+}
+
+.odo-hotspot--top .odo-hotspot__content {
+  bottom: 0px;
+}
+
+.odo-hotspot--bottom .odo-hotspot__content {
+  top: 0;
+}
+
+.odo-hotspots--fade .odo-hotspot.is-open .odo-hotspot__content {
+  -webkit-transition-delay: 0s, 0s, 0s, 0s, 0s;
+          transition-delay: 0s, 0s, 0s, 0s, 0s;
+}
+
+.odo-hotspots--fade .odo-hotspot--left .odo-hotspot__content,
+.odo-hotspots--fade .odo-hotspot--right .odo-hotspot__content {
+  -webkit-transform: none;
+          transform: none;
+}
+
+/* Button */
+.odo-hotspots--fade .odo-hotspot__button {
+  background-color: #5677fc;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26), 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+}
+
+/* Button hover */
+.odo-hotspots--fade .odo-hotspot__button:hover {
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+/* Button open */
+.odo-hotspots--fade .odo-hotspot.is-open .odo-hotspot__button {
+  background-color: #5677fc;
+}
+
+.odo-hotspots--fade .odo-hotspot__icon {
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+}
+
+.odo-hotspots--fade .odo-hotspot__icon::before {
+  width: 2px;
+  margin-left: -1px;
+}
+
+.odo-hotspots--fade .odo-hotspot__icon::after {
+  height: 2px;
+  margin-top: -1px;
+}
+
+/* Icon */
+.odo-hotspots--fade .odo-hotspot__icon::before,
+.odo-hotspots--fade .odo-hotspot__icon::after {
+  background-color: white;
+  transition: 300ms cubic-bezier(0.165, 0.840, 0.440, 1.000);
+}
+
+/* Button hover: Icon */
+.odo-hotspots--fade .odo-hotspot__button:hover .odo-hotspot__icon::before,
+.odo-hotspots--fade .odo-hotspot__button:hover .odo-hotspot__icon::after {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+/* Icon open*/
+.odo-hotspots--fade .odo-hotspot.is-open .odo-hotspot__icon::before,
+.odo-hotspots--fade .odo-hotspot.is-open .odo-hotspot__icon::after {
+  background-color: white;
+  -webkit-transform: rotate(225deg);
+          transform: rotate(225deg);
+}

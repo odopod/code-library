@@ -1,0 +1,114 @@
+.draggable-element-demo {
+  z-index: 1; /* Put above code examples */
+  width: 100%;
+  height: 200px;
+  background-color: #2ecc71;
+  outline: 2px solid #9b59b6;
+}
+
+.draggable-x {
+  width: 80%;
+  margin: auto;
+}
+
+#limit-toggle:not(.limitless) .limit,
+#limit-toggle.limitless .no-limit {
+  display: none;
+}
+
+.draggable-throw-demo {
+  width: 20%;
+  height: 60px;
+  outline: none;
+  border-radius: 8px;
+}
+.draggable-throw-demo.grabbing {
+  background-color: #2E97CC;
+}
+
+.carousel {
+  position: relative;
+}
+
+.carousel-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 400px;
+}
+
+.carousel-element {
+  position: relative;
+  width: 2000%;
+  height: inherit;
+  background-color: #2ecc71;
+
+  /* You can disable selection on the carousel */
+
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+
+}
+
+/* Clearfix for the slides */
+.carousel-element:before,
+.carousel-element:after {
+  content: '';
+  display: table;
+}
+.carousel-element:after {
+  clear: both;
+}
+
+.carousel-slide {
+  float: left;
+  width: 5%;
+  height: 100%;
+  /* Prevent slides from collapsing, making calculations incorrect. */
+  min-height: 1px;
+  overflow: hidden;
+}
+
+.carousel-element {
+  width: 500%;
+}
+
+.carousel-slide {
+  width: 20%;
+  color: white;
+  background-color: #2ecc71;
+  border: 1px solid #9b59b6;
+  border-right: none;
+}
+
+.carousel-slide:last-child {
+  border-right: 1px solid #9b59b6;
+}
+
+#draggable-carousel .carousel-slide:nth-child(2) {
+  background-color: #2EBFCC;
+}
+
+#draggable-carousel .carousel-slide:nth-child(3) {
+  background-color: #CC2E3B;
+}
+
+#draggable-carousel .carousel-slide:nth-child(4) {
+  background-color: #8A2ECC;
+}
+
+#draggable-carousel .carousel-slide:nth-child(5) {
+  background-color: #f1c40f;
+}
+
+
+.controls label {
+  display: block;
+}
+
+input:invalid {
+  border: 1px solid #e74c3c;
+  box-shadow: 0 0 6px #e74c3c;
+}

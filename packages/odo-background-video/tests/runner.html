@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mocha Test Runner</title>
+  <link rel="stylesheet" href="../../../node_modules/mocha/mocha.css">
+  <link rel="stylesheet" href="../css/odo-background-video.css">
+  <link rel="stylesheet" href="../node_modules/@odopod/odo-video/css/odo-video.css"/>
+</head>
+
+<body>
+
+  <div id="mocha"></div>
+
+  <div id="fixture" style="display:none;">
+    <div class="odo-background-video">
+      <div class="odo-background-video__fallback-img hidden">
+        <!--[if IE 9]><video style="display: none;"><![endif]-->
+        <source srcset="https://source.unsplash.com/category/buildings/1024x400" media="(min-width: 1024px)">
+        <source srcset="https://source.unsplash.com/category/technology/768x300" media="(min-width: 768px)">
+        <source srcset="https://source.unsplash.com/category/nature/480x200">
+        <!--[if IE 9]></video><![endif]-->
+        <img alt="test image">
+        <noscript>
+          <img src="https://source.unsplash.com/category/nature/480x200" alt="test image">
+        </noscript>
+      </div>
+      <div class="odo-video hidden">
+        <video preload="auto" loop muted playsinline>
+          <source src="../demos/test-video.webm" type="video/webm"/>
+          <source src="../demos/test-video.mp4" type="video/mp4"/>
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <div id="no-video-fixture" style="display:none;">
+    <div class="odo-background-video">
+      <div class="odo-background-video__fallback-img hidden">
+        <!--[if IE 9]><video style="display: none;"><![endif]-->
+        <source srcset="https://source.unsplash.com/category/buildings/1024x400" media="(min-width: 1024px)">
+        <source srcset="https://source.unsplash.com/category/technology/768x300" media="(min-width: 768px)">
+        <source srcset="https://source.unsplash.com/category/nature/480x200">
+        <!--[if IE 9]></video><![endif]-->
+        <img alt="test image">
+        <noscript>
+          <img src="https://source.unsplash.com/category/nature/480x200" alt="test image">
+        </noscript>
+      </div>
+    </div>
+  </div>
+
+  <!-- Polyfills -->
+  <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Testing Framework. -->
+  <script src="../../../node_modules/mocha/mocha.js"></script>
+  <script src="../../../node_modules/chai/chai.js"></script>
+  <script src="../../../node_modules/sinon/pkg/sinon.js"></script>
+
+  <!-- Dependencies. -->
+  <script src="../node_modules/picturefill/dist/picturefill.min.js"></script>
+  <script src="../node_modules/screenfull/dist/screenfull.js"></script>
+  <script src="../node_modules/@odopod/odo-window-events/dist/odo-window-events.js"></script>
+  <script src="../node_modules/@odopod/odo-object-fit/dist/odo-object-fit.js"></script>
+  <script src="../node_modules/@odopod/odo-viewport/dist/odo-viewport.js"></script>
+  <script src="../node_modules/@odopod/odo-responsive-images/dist/odo-responsive-images.js"></script>
+
+  <script>
+  //WHY WONT YOU WORK IN AN EXTERNAL FILE
+  window.OdoVideo = function (element, options) {
+    this.element = element;
+    this.videoEl = this._findVideoElement();
+  };
+
+  window.OdoVideo.prototype.play = function() {
+    return this.videoEl.play();
+  };
+
+  window.OdoVideo.prototype.pause = function() {
+    this.videoEl.pause();
+  };
+
+  window.OdoVideo.prototype._findVideoElement = function() {
+    return this.element.getElementsByTagName('video')[0];
+  };
+
+  window.OdoVideo.prototype.getVideoElement = function() {
+    return this.videoEl;
+  };
+
+  window.OdoVideo.prototype.dispose = function() {
+    this.element = null;
+    this.videoEl = null;
+  }
+
+  window.OdoVideo.prototype.listenOnData = function(evt, cb) {
+    cb();
+  };
+
+  window.OdoVideo.autoplay = Promise.resolve(true);
+
+  window.OdoVideo.support = false;
+  window.OdoVideo.Controls = {
+    NONE: 'none'
+  };
+  window.OdoVideo.VideoEvents = {
+    LOADED_DATA: {
+      name: 'loadeddata',
+      readyState: 2
+    }
+  }
+  window.OdoVideo.ControlsCreator = function() {};
+
+  window.expect = chai.expect;
+  mocha.setup('bdd');
+
+  var resource;
+  // Add ?debug to the url to use the instrumented code when not in PhantomJS
+  if (window._phantom || window.location.search.indexOf('debug') > -1) {
+    resource = '../dist/odo-background-video.instrumented.js';
+  } else {
+    resource = '../dist/odo-background-video.js';
+  }
+
+  document.write('<script src="' + resource + '"><\/script>');
+  </script>
+
+  <!-- Specs. -->
+  <script src="specs.js"></script>
+
+  <script>
+    mocha.run();
+  </script>
+</body>
+
+</html>

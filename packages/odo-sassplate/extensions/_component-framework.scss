@@ -1,0 +1,228 @@
+$number-properties: (
+  "width",
+  "height",
+  "top",
+  "right",
+  "bottom",
+  "left",
+  "padding",
+  "padding-top",
+  "padding-right",
+  "padding-bottom",
+  "padding-left",
+  "margin",
+  "margin-top",
+  "margin-right",
+  "margin-bottom",
+  "margin-left",
+  "border-top-width",
+  "border-right-width",
+  "border-bottom-width",
+  "border-left-width",
+  "border-radius",
+  "font-size"
+);
+
+$color-properties: (
+  "color",
+  "background-color",
+  "border-color",
+  "outline-color",
+  "fill",
+  "stroke"
+);
+
+$special-properties: (
+  "__comment__",
+  "docs-demo",
+
+  "breakpoints",
+  "qualifiers",
+  "modifiers",
+  "children",
+  "raw",
+
+  "visited",
+  "hover",
+  "active",
+  "focus",
+
+  "size",
+  "font-family",
+  "line-height"
+);
+
+// Compiles all supplied properties in a map to css. ui elements (buttons, etc)
+// go through this as well.
+@mixin sassplate-output-properties($properties, $bp: null, $parentProperties: null) {
+
+  @each $property, $value in $properties {
+
+    // Allow number-like properties to be specified without units.
+    @if sassplate-list-contains-value($number-properties, $property) {
+      @if $property == "margin-top" and $value == "flat" {
+        margin-top: $text-flat-top-amount;
+      } @else {
+        @include set-value-with-units($property, $value);
+      }
+
+    } @else if sassplate-list-contains-value($color-properties, $property) {
+      // Look for colors specified in variables first.
+      #{$property}: get-color($value);
+
+      // Is a "special" property which is treated differently than a regular declaration.
+    } @else if sassplate-list-contains-value($special-properties, $property) {
+
+      // Shortcut for width & height.
+      @if $property == "size" {
+        $s: map-get($properties, "size");
+        @include set-value-with-units("width", $s);
+        @include set-value-with-units("height", $s);
+
+      } @else if $property == "font-family" {
+        // Get the font family from the families map.
+        font-family: get-font-family(map-get($properties, "font-family"));
+
+      } @else if $property == "line-height" {
+        // If the value is untitless and less than 9, we'll assume it's supposed to be
+        // used as a unitless line-height. If you need a px line-height < 9, include
+        // "px" in the type-definition.
+        $line-height: map-get($properties, "line-height");
+
+        @if unitless($line-height) and $line-height < 9 {
+          line-height: $line-height;
+        } @else {
+          @include set-value-with-units("line-height", $line-height);
+        }
+
+      } @else if $property == "hover" or $property == "active" or $property == "focus" or $property == "visited" {
+        // Specify each state as a group. Use this mixin to populate the state's property:value pairs.
+        &:#{$property} {
+          @include sassplate-output-properties($value, $bp, $properties);
+        }
+
+      } @else if $property == "children" {
+        // Allow selectors to have "children" which can be targeted.
+        @each $selector, $childProperties in $value {
+          #{$selector} {
+            @include sassplate-output-properties($childProperties, $bp, $properties);
+          }
+        }
+      }
+
+    } @else {
+      // Regular declaration for non-numeric properties.
+      $type: type-of($value);
+      @if $type == "map" {
+        $msg: "#{$value} (a Sass map) isn't a valid CSS value for the specified property: `#{$property}`.";
+        @error $msg;
+      }
+
+      @if $type == "string" {
+        $value: unquote($value);
+      }
+
+      #{$property}: $value;
+    }
+  }
+}
+
+@function sassplate-list-contains-value($list, $value) {
+  @return index($list, $value) != null;
+}
+
+@function sassplate-sanitize-selector($str) {
+  @return unquote("" + $str);
+}
+
+@function get-value-with-units($val) {
+  $valid-units: ("%", "em", "rem", "vw", "vh", "vmin", "vmax");
+
+  // If this isn't a number, return the original value.
+  @if type-of($val) == number {
+
+    @if sassplate-list-contains-value($valid-units, unit($val)) {
+      @return $val;
+
+    } @else {
+      // Keep values with `0` unitless.
+      @if ($val != 0) {
+        $val: $val + 0px;
+      }
+
+      @return $val;
+    }
+  } @else {
+    @return $val;
+  }
+}
+
+@mixin set-value-with-units($attr, $val) {
+  #{$attr}: get-value-with-units($val);
+}
+
+@mixin sassplate-make-component($properties) {
+
+  // Compile all of the default properties.
+  @include sassplate-output-properties($properties, null, null);
+
+  // If other breakpoint rules are defined, loop through them and do the same.
+  @if map-has-key($properties, breakpoints) {
+    $sizes: map-get($properties, breakpoints);
+
+    @each $breakpoint, $bpProperties in $sizes {
+      // Creates a min-width breakpoint for each defined size.
+      @include breakpoint($breakpoint) {
+        // Same as before, but nested in a mq this time.
+        @include sassplate-output-properties($bpProperties, $breakpoint, $properties);
+      }
+    }
+  }
+}
+
+// This loops through each section (Headers, Body, etc.)
+@mixin sassplate-process-components($definitions) {
+
+  // Loop through each component in this section.
+  @each $selector, $properties in $definitions {
+    $selector: sassplate-sanitize-selector($selector);
+
+    .#{$selector} {
+      @include sassplate-make-component($properties);
+    }
+
+    // Allow any selector to be appended to the main selector.
+    @if map-has-key($properties, "raw") {
+      @each $sel, $rawProperties in map-get($properties, "raw") {
+        $sel: sassplate-sanitize-selector($sel);
+
+        .#{$selector}#{$sel} {
+          @include sassplate-make-component($rawProperties);
+        }
+      }
+    }
+
+    // Modifiers are variants of a class, with only a few attributes that are different.
+    @if map-has-key($properties, "modifiers") {
+      @each $modifierName, $modifierProperties in map-get($properties, "modifiers") {
+        $modifierName: sassplate-sanitize-selector($modifierName);
+
+        .#{$selector}--#{$modifierName} {
+          @include sassplate-make-component($modifierProperties);
+        }
+      }
+    }
+
+    // Qualifiers are for overriding properties based on a class on the <html> element.
+    // If the component has a qualifiers object, create the qualifier selector classnames and populate them with whatever override properties
+    // are in the type-definition qualifiers.
+    // ex: .cn type-header-1
+    @if map-has-key($properties, "qualifiers") {
+      @each $qualifierName, $qualifierProperties in map-get($properties, "qualifiers") {
+        .#{$qualifierName} .#{$selector} {
+          @include sassplate-make-component($qualifierProperties);
+        }
+      }
+    }
+  }
+}

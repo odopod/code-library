@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Odo Sticky Headers Demo</title>
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.5.1/themes/prism.css">
+
+  <link rel="stylesheet" href="../../../docs/demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+</head>
+
+<body>
+
+<header class="sticky-nav" style="display:none;">
+  <div class="sticky-nav__inner">
+    <div class="container sticky-nav__container">
+      <div class="sticky-nav__content">
+        <h2 class="sticky-nav__title">Odo Sticky Headers</h2>
+        <p class="sticky-nav__description" title="This sticky isn&rsquo;t managed by OdoStickyHeaders. Image it&rsquo;s the main site nav."><span class="hidden@xs">This sticky isn&rsquo;t managed by OdoStickyHeaders. Imagine it&rsquo;s the</span> main site nav<span class="hidden@xs">.</span></p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main role="main">
+  <div class="container">
+
+    <h1>Odo Sticky Headers</h1>
+    <p>A mananger for sticky things</p>
+    <h3>Support</h3>
+    <p>IE9+</p>
+    <h3>Dependencies</h3>
+    <p>Odo Scroll Animation, Odo Window Events. ES6 <code>Map</code> and <code>Array.from</code>.</p>
+
+    <h3>Setup</h3>
+    <p>Create an instance of <code>OdoStickyHeaders</code> to manage each sticky item. Add your stickies to the manager with <code>add</code>.</p>
+    <pre><code class="language-javascript">let stickyMananger = new OdoStickyHeaders();
+let stickies = Array.from(document.querySelectorAll('.my-sticky'));
+stickyMananger.add(stickies);</code></pre>
+
+    <h2>Public Methods &amp; Properties</h2>
+    <h3>add(elements)</h3>
+    <p>Track an element to be sticky. <code>add</code> takes an element or array of elements.</p>
+
+    <h3>mode</h3>
+    <p>Set the mode to either push headers (<code>OdoStickyHeaders.Mode.PUSH</code>, which is the default) or to stack them on top of each other (<code>OdoStickyHeaders.Mode.STACK</code>).</p>
+
+    <h3>remove(element)</h3>
+    <p>Remove a sticky item instance by its element from the mananger.</p>
+
+    <h3>update()</h3>
+    <p>Update offsets and recalculate where each sticky should be. Use this when offsets on the page (e.g. the position of a sticky header) changes due to something other than a window resize.</p>
+
+    <h3>recalculate()</h3>
+    <p>Recalculate values without getting new offsets.</p>
+
+    <h3>dispose()</h3>
+    <p>Remove all sticky elements and event listeners.</p>
+
+    <h3>stickyHolder = element</h3>
+    <p>Set the location of sticky elements to be place in the DOM. <code>element</code> is the element which sticky items will be appended to when they are "fixed".</p>
+
+    <h3>uiOverlap = function():number</h3>
+    <p>Define a custom getter to determine overlap. The amount that the ui overlaps the top of the page. A sticky navigation, for example, would cause an overlap equal to its height. This value is used to determine when sticky items should become sticky, basically changing where the top of the viewport is.</p>
+
+    <h3>uiOffset = function():number</h3>
+    <p>Define a custom getter to determine offset. Where to start positioning new sticky items (setting their <code>top</code> while they're "fixed"). By default it's the same as the ui overlap, but can be customized.</p>
+    <p>For example, if you have a sticky navigation which hides itself when the user scrolls, you should specify a UI offset which returns <code>0</code>. If your sticky elements are placed inside the sticky nav which is now off the screen, you will want to provide a UI offset getter function so that it's not <code>0</code>.</p>
+  </div>
+
+  <div class="container space-bottom">
+    <h2>Demo</h2>
+    <h3>Sticky Holder and UI Overlap</h3>
+    <p>There is a hidden sticky nav on this page. Click this button to show it and make it the sticky element holder.</p>
+    <button id="set-sticky-holder">Click me</button>
+    <pre><code class="language-javascript">setStickyHolderBtn.addEventListener('click', function () {
+  // Show the sticky nav.
+  stickyNav.style.display = '';
+
+  // Tell OdoStickyHeaders to put elements inside the sticky nav when they're "fixed".
+  stickyMananger.stickyHolder = stickyNavInner;
+
+  // Set the UI overlap to the size of the sticky nav.
+  stickyMananger.uiOverlap = function () {
+    return stickyNav.offsetHeight;
+  };
+
+  // Showing the sticky nav caused elements on the page to move.
+  stickyMananger.update();
+});</code></pre>
+
+    <p>Hide the sticky nav and unset it as the sticky holder.</p>
+    <button id="unset-sticky-holder" disabled>Click me</button>
+    <pre><code class="language-javascript">unsetStickyHolderBtn.addEventListener('click', function () {
+  // Hide sticky nav.
+  stickyNav.style.display = 'none';
+
+  // Leave sticky elements where they are when they're "fixed".
+  stickyMananger.stickyHolder = null;
+
+  stickyMananger.uiOverlap = function () {
+    return 0;
+  };
+
+  // Offsets changed.
+  stickyMananger.update();
+});</code></pre>
+
+    <h3>Change the mode</h3>
+    <p>The secondary mode for OdoStickyHeaders is to stack each header.</p>
+    <button id="set-mode-push" disabled>Push</button>
+    <pre><code class="language-javascript">setModePushBtn.addEventListener('click', function () {
+  stickyMananger.mode = OdoStickyHeaders.Mode.PUSH;
+  stickyMananger.update();
+});</code></pre>
+    <button id="set-mode-stack">Stack</button>
+    <pre><code class="language-javascript">setModeStackBtn.addEventListener('click', function () {
+  stickyMananger.mode = OdoStickyHeaders.Mode.STACK;
+  stickyMananger.update();
+});</code></pre>
+  </div>
+
+  <article class="an-article">
+    <header class="my-sticky">
+      <div class="container">
+        <h3 class="article-header">See owner, run in terror</h3>
+      </div>
+    </header>
+    <div class="container an-article__inner">
+      <p>Vommit food and eat it again run in circles sleep on dog bed, force dog to sleep on floor Cat ipsum dolor sit amet, instantly break out into full speed gallop across the house for no reason so chase imaginary bugs lick the other cats. Scratch leg; meow for can opener to feed me human is washing you why halp oh the horror flee scratch hiss bite yet scream at teh bath or hunt anything that moves, when in doubt, wash eat owner's food and see owner, run in terror. Scream at teh bath drink water out of the faucet so i am the best purr for no reason sweet beast. Sleep nap hola te quiero but sit on the laptop swat at dog, or who's the baby. Intently stare at the same spot roll on the floor purring your whiskers off mark territory, but present belly, scratch hand when stroked. Immediately regret falling into bathtub hack up furballs damn that dog yet hola te quiero chase mice, so all of a sudden cat goes crazy.</p>
+      <p>If it smells like fish eat as much as you wish. Refuse to drink water except out of someone's glass climb leg, yet wake up human for food at 4am so sit by the fire stare at wall turn and meow stare at wall some more meow again continue staring yet leave hair everywhere, but scratch the furniture. Eat owner's food howl uncontrollably for no reason burrow under covers, so caticus cuteicus groom yourself 4 hours - checked, have your beauty sleep 18 hours - checked, be fabulous for the rest of the day - checked! chase ball of string or spread kitty litter all over house. Then cats take over the world scratch the furniture for need to chase tail hide when guests come over, so jump around on couch, meow constantly until given food, kitty loves pigs, or human is washing you why halp oh the horror flee scratch hiss bite.</p>
+      <blockquote>Lick the plastic bag</blockquote>
+      <p>Meowwww swat at dog, meowzer! sit by the fire jump around on couch, meow constantly until given food, so asdflkjaertvlkjasntvkjn (sits on keyboard) but eat the fat cats food. Cat is love, cat is life fall over dead (not really but gets sypathy) but put toy mouse in food bowl run out of litter box at full speed . Stare out the window has closed eyes but still sees you touch water with paw then recoil in horror lick butt, and chew iPad power cord. Fall over dead (not really but gets sypathy) sweet beast human give me attention meow stand in front of the computer screen, so stand in front of the computer screen jump launch to pounce upon little yarn mouse, bare fangs at toy run hide in litter box until treats are fed or play time.</p>
+      <footer><a href="http://www.cupcakeipsum.com/">Cat Ipsum</a> - Litter your copy with more kitty.</footer>
+    </div>
+  </article>
+
+  <article class="an-article">
+    <header class="my-sticky">
+      <div class="container">
+        <h3 class="article-header">Another one</h3>
+      </div>
+    </header>
+    <div class="container an-article__inner">
+      <p>Put it this way, it took me twenty five years to get these plants, twenty five years of blood sweat and tears, and I’m never giving up, I’m just getting started. Fan luv. I told you all this before, when you have a swimming pool, do not use chlorine, use salt water, the healing, salt water is the healing. You smart, you loyal, you a genius. I’m up to something. Watch your back, but more importantly when you get out the shower, dry your back, it’s a cold world out there. They don’t want us to eat.</p>
+      <blockquote>They don&rsquo;t want us to win.</blockquote>
+      <p>The other day the grass was brown, now it’s green because I ain’t give up. Never surrender. Congratulations, you played yourself. Celebrate success right, the only way, apple. Mogul talk. A major key, never panic. Don’t panic, when it gets crazy and rough, don’t panic, stay calm. The weather is amazing, walk with me through the pathway of more success. Take this journey with me, Lion! You see that bamboo behind me though, you see that bamboo? Ain’t nothin’ like bamboo. Bless up.</p>
+      <p>Celebrate success right, the only way, apple. You see that bamboo behind me though, you see that bamboo? Ain’t nothin’ like bamboo. Bless up. Cloth talk. The ladies always say Khaled you smell good, I use no cologne. Cocoa butter is the key. You smart, you loyal, you a genius. The key to success is to keep your head above the water, never give up. Let’s see what Chef Dee got that they don’t want us to eat.</p>
+      <footer><a href="http://www.cupcakeipsum.com/">Khaled Ipsum</a> - generate major keys to success.</footer>
+    </div>
+  </article>
+
+  <article class="an-article">
+    <header class="my-sticky">
+      <div class="container">
+        <h3 class="article-header">Neutra kale chips crucifix vice</h3>
+      </div>
+    </header>
+    <div class="container an-article__inner">
+      <p>Raw denim flexitarian tofu fashion axe, tumblr vegan deep v waistcoat listicle food truck celiac intelligentsia. Fixie disrupt polaroid, semiotics taxidermy brooklyn street art synth kale chips mlkshk pabst butcher. Mumblecore plaid fashion axe sustainable narwhal small batch, pinterest neutra blog. Locavore portland skateboard, ethical tofu selfies affogato authentic drinking vinegar cronut. Tote bag health goth lumbersexual bespoke, church-key bushwick thundercats neutra etsy kombucha roof party pour-over gochujang pitchfork. Try-hard mixtape ugh, banh mi post-ironic williamsburg four loko celiac scenester venmo bushwick 90's.</p>
+      <blockquote>Gochujang you probably haven't heard of them williamsburg, taxidermy tacos cray kogi bicycle rights 90's retro whatever craft beer four dollar toast.</blockquote>
+      <p>Occupy umami mustache, retro kitsch microdosing williamsburg man bun quinoa selfies pinterest four dollar toast try-hard. Stumptown kale chips knausgaard, small batch man bun trust fund street art tousled. Selfies whatever helvetica, cred ethical swag viral twee tacos post-ironic normcore photo booth disrupt. Pabst pinterest schlitz, +1 tumblr ethical PBR&amp;B kitsch direct trade crucifix scenester paleo sustainable. Tilde vice offal direct trade trust fund. Typewriter blog sustainable single-origin coffee, kinfolk pour-over slow-carb wayfarers YOLO fap offal bushwick taxidermy shoreditch umami.</p>
+      <footer><a href="http://hipsum.co/">HIPSTER IPSUM</a> - Artisanal filler text for your site or project.</footer>
+    </div>
+  </article>
+
+  <article class="an-article">
+    <header class="my-sticky">
+      <div class="container">
+        <h3 class="article-header">Tiramisu tootsie roll jelly beans</h3>
+      </div>
+    </header>
+    <div class="container an-article__inner">
+      <p>Powder cookie caramels cheesecake apple pie liquorice toffee tootsie roll. Lemon drops bonbon icing gummi bears. Pie tootsie roll cake cheesecake gummi bears.
+      Gummies toffee candy canes sesame snaps cake dessert jujubes. Donut cotton candy tootsie roll sugar plum croissant apple pie caramels. Lollipop pie wafer marzipan sesame snaps ice cream. Bear claw croissant sweet roll.</p>
+      <p>Jelly beans chocolate cake brownie oat cake brownie lollipop caramels icing pie. Carrot cake pudding marshmallow sweet brownie gummi bears chocolate bar cupcake. Gingerbread apple pie soufflé wafer icing jujubes toffee fruitcake danish.</p>
+      <p>Cookie wafer apple pie cookie pie icing. Cotton candy ice cream donut sesame snaps. Bear claw powder jujubes halvah icing bear claw pie. Candy bonbon candy chocolate bonbon liquorice chocolate brownie chocolate bar.</p>
+      <footer><a href="http://www.cupcakeipsum.com/">Cupcake Ipsum</a> - Sugar-coated Lorem Ipsum Generator</footer>
+    </div>
+  </article>
+
+  <article class="an-article">
+    <header class="my-sticky">
+      <div class="container">
+        <h3 class="article-header">The voodoo sacerdos flesh eater</h3>
+      </div>
+    </header>
+    <div class="container an-article__inner">
+      <p>Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead survivor dictum mauris. Hi mindless mortuis soulless creaturas, imo evil stalking monstra adventus resi dentevil vultus comedat cerebella viventium. Qui animated corpse, cricket bat max brucks terribilem incessu zomby. Suscitat mortuos comedere carnem virus. Zonbi tattered for solum oculi eorum defunctis go lum cerebro. Nescio brains an Undead zombies. Sicut malus putrid voodoo horror. Nigh tofth eliv ingdead.</p>
+      <p>Cum horribilem walking dead resurgere de crazed sepulcris creaturis, zombie sicut de grave feeding iride et serpens. Pestilentia, shaun ofthe dead scythe animated corpses ipsa screams. Pestilentia est plague haec decaying ambulabat mortuos. Sicut zeder apathetic malus voodoo. Aenean a dolor plan et terror soulless vulnerum contagium accedunt, mortui iam vivam unlife. Qui tardius moveri, brid eof reanimator sed in magna copia sint terribiles undeath legionis. Alii missing oculis aliorum sicut serpere crabs nostram. Putridi braindead odores kill and infect, aere implent left four dead.</p>
+      <blockquote>An hoc dead snow braaaiiiins sociopathic incipere Clairvius Narcisse, an ante? Is bello mundi z?</blockquote>
+      <p>Powder cookie caramels cheesecake apple pie liquorice toffee tootsie roll. Lemon drops bonbon icing gummi bears. Pie tootsie roll cake cheesecake gummi bears.
+      Gummies toffee candy canes sesame snaps cake dessert jujubes. Donut cotton candy tootsie roll sugar plum croissant apple pie caramels. Lollipop pie wafer marzipan sesame snaps ice cream. Bear claw croissant sweet roll.
+      Jelly beans chocolate cake brownie oat cake brownie lollipop caramels icing pie. Carrot cake pudding marshmallow sweet brownie gummi bears chocolate bar cupcake. Gingerbread apple pie soufflé wafer icing jujubes toffee fruitcake danish.
+      Cookie wafer apple pie cookie pie icing. Cotton candy ice cream donut sesame snaps. Bear claw powder jujubes halvah icing bear claw pie. Candy bonbon candy chocolate bonbon liquorice chocolate brownie chocolate bar.</p>
+      <footer><a href="http://www.cupcakeipsum.com/">Zombie Ipsum</a> - Frightful filler for your damned designs.</footer>
+    </div>
+  </article>
+
+  <article class="an-article">
+    <header class="my-sticky">
+      <div class="container">
+        <h3 class="article-header">See owner, run in terror</h3>
+      </div>
+    </header>
+    <div class="container an-article__inner">
+      <p>Vommit food and eat it again run in circles sleep on dog bed, force dog to sleep on floor Cat ipsum dolor sit amet, instantly break out into full speed gallop across the house for no reason so chase imaginary bugs lick the other cats. Scratch leg; meow for can opener to feed me human is washing you why halp oh the horror flee scratch hiss bite yet scream at teh bath or hunt anything that moves, when in doubt, wash eat owner's food and see owner, run in terror. Scream at teh bath drink water out of the faucet so i am the best purr for no reason sweet beast. Sleep nap hola te quiero but sit on the laptop swat at dog, or who's the baby. Intently stare at the same spot roll on the floor purring your whiskers off mark territory, but present belly, scratch hand when stroked. Immediately regret falling into bathtub hack up furballs damn that dog yet hola te quiero chase mice, so all of a sudden cat goes crazy.</p>
+      <p>If it smells like fish eat as much as you wish. Refuse to drink water except out of someone's glass climb leg, yet wake up human for food at 4am so sit by the fire stare at wall turn and meow stare at wall some more meow again continue staring yet leave hair everywhere, but scratch the furniture. Eat owner's food howl uncontrollably for no reason burrow under covers, so caticus cuteicus groom yourself 4 hours - checked, have your beauty sleep 18 hours - checked, be fabulous for the rest of the day - checked! chase ball of string or spread kitty litter all over house. Then cats take over the world scratch the furniture for need to chase tail hide when guests come over, so jump around on couch, meow constantly until given food, kitty loves pigs, or human is washing you why halp oh the horror flee scratch hiss bite.</p>
+      <blockquote>Lick the plastic bag</blockquote>
+      <p>Meowwww swat at dog, meowzer! sit by the fire jump around on couch, meow constantly until given food, so asdflkjaertvlkjasntvkjn (sits on keyboard) but eat the fat cats food. Cat is love, cat is life fall over dead (not really but gets sypathy) but put toy mouse in food bowl run out of litter box at full speed . Stare out the window has closed eyes but still sees you touch water with paw then recoil in horror lick butt, and chew iPad power cord. Fall over dead (not really but gets sypathy) sweet beast human give me attention meow stand in front of the computer screen, so stand in front of the computer screen jump launch to pounce upon little yarn mouse, bare fangs at toy run hide in litter box until treats are fed or play time.</p>
+      <footer><a href="http://www.cupcakeipsum.com/">Cat Ipsum</a> - Litter your copy with more kitty.</footer>
+    </div>
+  </article>
+
+  <article class="an-article">
+    <header class="my-sticky">
+      <div class="container">
+        <h3 class="article-header">Another one</h3>
+      </div>
+    </header>
+    <div class="container an-article__inner">
+      <p>Put it this way, it took me twenty five years to get these plants, twenty five years of blood sweat and tears, and I’m never giving up, I’m just getting started. Fan luv. I told you all this before, when you have a swimming pool, do not use chlorine, use salt water, the healing, salt water is the healing. You smart, you loyal, you a genius. I’m up to something. Watch your back, but more importantly when you get out the shower, dry your back, it’s a cold world out there. They don’t want us to eat.</p>
+      <blockquote>They don&rsquo;t want us to win.</blockquote>
+      <p>The other day the grass was brown, now it’s green because I ain’t give up. Never surrender. Congratulations, you played yourself. Celebrate success right, the only way, apple. Mogul talk. A major key, never panic. Don’t panic, when it gets crazy and rough, don’t panic, stay calm. The weather is amazing, walk with me through the pathway of more success. Take this journey with me, Lion! You see that bamboo behind me though, you see that bamboo? Ain’t nothin’ like bamboo. Bless up.</p>
+      <p>Celebrate success right, the only way, apple. You see that bamboo behind me though, you see that bamboo? Ain’t nothin’ like bamboo. Bless up. Cloth talk. The ladies always say Khaled you smell good, I use no cologne. Cocoa butter is the key. You smart, you loyal, you a genius. The key to success is to keep your head above the water, never give up. Let’s see what Chef Dee got that they don’t want us to eat.</p>
+      <footer><a href="http://www.cupcakeipsum.com/">Khaled Ipsum</a> - generate major keys to success.</footer>
+    </div>
+  </article>
+
+  <article class="an-article">
+    <header class="my-sticky">
+      <div class="container">
+        <h3 class="article-header">Neutra kale chips crucifix vice</h3>
+      </div>
+    </header>
+    <div class="container an-article__inner">
+      <p>Raw denim flexitarian tofu fashion axe, tumblr vegan deep v waistcoat listicle food truck celiac intelligentsia. Fixie disrupt polaroid, semiotics taxidermy brooklyn street art synth kale chips mlkshk pabst butcher. Mumblecore plaid fashion axe sustainable narwhal small batch, pinterest neutra blog. Locavore portland skateboard, ethical tofu selfies affogato authentic drinking vinegar cronut. Tote bag health goth lumbersexual bespoke, church-key bushwick thundercats neutra etsy kombucha roof party pour-over gochujang pitchfork. Try-hard mixtape ugh, banh mi post-ironic williamsburg four loko celiac scenester venmo bushwick 90's.</p>
+      <blockquote>Gochujang you probably haven't heard of them williamsburg, taxidermy tacos cray kogi bicycle rights 90's retro whatever craft beer four dollar toast.</blockquote>
+      <p>Occupy umami mustache, retro kitsch microdosing williamsburg man bun quinoa selfies pinterest four dollar toast try-hard. Stumptown kale chips knausgaard, small batch man bun trust fund street art tousled. Selfies whatever helvetica, cred ethical swag viral twee tacos post-ironic normcore photo booth disrupt. Pabst pinterest schlitz, +1 tumblr ethical PBR&amp;B kitsch direct trade crucifix scenester paleo sustainable. Tilde vice offal direct trade trust fund. Typewriter blog sustainable single-origin coffee, kinfolk pour-over slow-carb wayfarers YOLO fap offal bushwick taxidermy shoreditch umami.</p>
+      <footer><a href="http://hipsum.co/">HIPSTER IPSUM</a> - Artisanal filler text for your site or project.</footer>
+    </div>
+  </article>
+
+  <article class="an-article">
+    <header class="my-sticky">
+      <div class="container">
+        <h3 class="article-header">Tiramisu tootsie roll jelly beans</h3>
+      </div>
+    </header>
+    <div class="container an-article__inner">
+      <p>Powder cookie caramels cheesecake apple pie liquorice toffee tootsie roll. Lemon drops bonbon icing gummi bears. Pie tootsie roll cake cheesecake gummi bears.
+      Gummies toffee candy canes sesame snaps cake dessert jujubes. Donut cotton candy tootsie roll sugar plum croissant apple pie caramels. Lollipop pie wafer marzipan sesame snaps ice cream. Bear claw croissant sweet roll.</p>
+      <p>Jelly beans chocolate cake brownie oat cake brownie lollipop caramels icing pie. Carrot cake pudding marshmallow sweet brownie gummi bears chocolate bar cupcake. Gingerbread apple pie soufflé wafer icing jujubes toffee fruitcake danish.</p>
+      <p>Cookie wafer apple pie cookie pie icing. Cotton candy ice cream donut sesame snaps. Bear claw powder jujubes halvah icing bear claw pie. Candy bonbon candy chocolate bonbon liquorice chocolate brownie chocolate bar.</p>
+      <footer><a href="http://www.cupcakeipsum.com/">Cupcake Ipsum</a> - Sugar-coated Lorem Ipsum Generator</footer>
+    </div>
+  </article>
+
+  <article class="an-article">
+    <header class="my-sticky">
+      <div class="container">
+        <h3 class="article-header">The voodoo sacerdos flesh eater</h3>
+      </div>
+    </header>
+    <div class="container an-article__inner">
+      <p>Zombie ipsum reversus ab viral inferno, nam rick grimes malum cerebro. De carne lumbering animata corpora quaeritis. Summus brains sit​​, morbo vel maleficia? De apocalypsi gorger omero undead survivor dictum mauris. Hi mindless mortuis soulless creaturas, imo evil stalking monstra adventus resi dentevil vultus comedat cerebella viventium. Qui animated corpse, cricket bat max brucks terribilem incessu zomby. Suscitat mortuos comedere carnem virus. Zonbi tattered for solum oculi eorum defunctis go lum cerebro. Nescio brains an Undead zombies. Sicut malus putrid voodoo horror. Nigh tofth eliv ingdead.</p>
+      <p>Cum horribilem walking dead resurgere de crazed sepulcris creaturis, zombie sicut de grave feeding iride et serpens. Pestilentia, shaun ofthe dead scythe animated corpses ipsa screams. Pestilentia est plague haec decaying ambulabat mortuos. Sicut zeder apathetic malus voodoo. Aenean a dolor plan et terror soulless vulnerum contagium accedunt, mortui iam vivam unlife. Qui tardius moveri, brid eof reanimator sed in magna copia sint terribiles undeath legionis. Alii missing oculis aliorum sicut serpere crabs nostram. Putridi braindead odores kill and infect, aere implent left four dead.</p>
+      <blockquote>An hoc dead snow braaaiiiins sociopathic incipere Clairvius Narcisse, an ante? Is bello mundi z?</blockquote>
+      <p>Powder cookie caramels cheesecake apple pie liquorice toffee tootsie roll. Lemon drops bonbon icing gummi bears. Pie tootsie roll cake cheesecake gummi bears.
+      Gummies toffee candy canes sesame snaps cake dessert jujubes. Donut cotton candy tootsie roll sugar plum croissant apple pie caramels. Lollipop pie wafer marzipan sesame snaps ice cream. Bear claw croissant sweet roll.
+      Jelly beans chocolate cake brownie oat cake brownie lollipop caramels icing pie. Carrot cake pudding marshmallow sweet brownie gummi bears chocolate bar cupcake. Gingerbread apple pie soufflé wafer icing jujubes toffee fruitcake danish.
+      Cookie wafer apple pie cookie pie icing. Cotton candy ice cream donut sesame snaps. Bear claw powder jujubes halvah icing bear claw pie. Candy bonbon candy chocolate bonbon liquorice chocolate brownie chocolate bar.</p>
+      <footer><a href="http://www.cupcakeipsum.com/">Zombie Ipsum</a> - Frightful filler for your damned designs.</footer>
+    </div>
+  </article>
+
+</main>
+
+  <!-- Polyfills. -->
+  <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Dependencies -->
+  <script src="../node_modules/@odopod/odo-scroll-animation/dist/odo-scroll-animation.min.js"></script>
+  <script src="../node_modules/@odopod/odo-window-events/dist/odo-window-events.min.js"></script>
+
+  <!-- Source. -->
+  <script src="../dist/odo-sticky-headers.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.5.1/prism.js"></script>
+
+</body>
+
+</html>

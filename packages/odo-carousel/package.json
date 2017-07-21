@@ -1,0 +1,46 @@
+{
+  "name": "@odopod/odo-carousel",
+  "description": "Performant, awesome carousels.",
+  "version": "1.0.0",
+  "main": "dist/odo-carousel.js",
+  "style": "css/odo-carousel.css",
+  "odoModule": "src/carousel.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
+    }
+  ],
+  "dependencies": {
+    "@odopod/odo-device": "../odo-device",
+    "@odopod/odo-draggable": "../odo-draggable",
+    "@odopod/odo-helpers": "../odo-helpers",
+    "@odopod/odo-pointer": "../odo-pointer",
+    "tiny-emitter": "^2.0.1"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-carousel",
+  "files": [
+    "css",
+    "dist",
+    "src",
+    "index.js"
+  ],
+  "odoKeywords": [
+    "ui"
+  ],
+  "keywords": [
+    "odo",
+    "odo-component",
+    "odopod",
+    "carousel",
+    "slideshow"
+  ],
+  "license": "MIT",
+  "repository": "odopod/odo",
+  "scripts": {
+    "link-local": "node ../../scripts/link-local-packages.js",
+    "test": "gulp code-quality test"
+  }
+}

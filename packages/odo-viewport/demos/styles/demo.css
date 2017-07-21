@@ -1,0 +1,150 @@
+body {
+  padding-bottom: 1000px;
+}
+
+.viewport-demo-element {
+  height: 200px;
+  background-color: #3498db;
+}
+
+.filler {
+  height: 300px;
+  background-color: #95a5a6;
+  margin-bottom: 30px;
+}
+
+.is-in-view,
+[in-view="true"] {
+  background-color: #f1c40f;
+}
+
+#title[in-view="true"] {
+  background-color: transparent;
+  text-shadow: 1px 1px 3px #999999;
+}
+
+
+.fake-carousel {
+  overflow: visible;
+}
+
+.fake-carousel__element {
+  position: relative;
+  width: 2000%;
+  height: auto;
+  overflow: hidden;
+  transition: 300ms ease-out;
+}
+
+.fake-carousel__slide {
+  float: left;
+  width: 5%;
+  height: inherit;
+  min-height: 1px;
+  overflow: hidden;
+  background-color: ghostwhite;
+}
+
+.fake-carousel__slide::before {
+  content: 'I am a slide.';
+  position: absolute;
+  z-index: 0;
+}
+
+.fake-carousel__slide > * {
+  position: relative;
+  z-index: 2;
+}
+
+.fake-carousel__slide img {
+  width: 100%;
+}
+
+.hidden-overflow {
+  overflow: hidden;
+}
+
+.fake-carousel__slide .viewport-demo-element {
+  border: 1px solid coral;
+}
+
+.ruler {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  max-width: 100%;
+}
+
+.ruler__tick {
+  position: absolute;
+  left: 0;
+}
+
+.ruler__tick::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 1px;
+  background-color: red;
+  transition: 200ms;
+}
+
+.ruler--full .ruler__tick::before {
+  width: 100vw;
+}
+
+.ruler__tick--25pct {
+  bottom: 25vh;
+}
+
+.ruler__tick--50pct {
+  bottom: 50vh;
+}
+
+.ruler__tick--75pct {
+  bottom: 75vh;
+}
+
+.ruler__tick--100pct {
+  top: 0;
+}
+
+.ruler__tick--100px {
+  bottom: 100px;
+}
+
+.ruler__tick--200px {
+  bottom: 200px;
+}
+
+.ruler__tick--400px {
+  bottom: 400px;
+}
+
+.ruler__tick-text {
+  position: absolute;
+  top: -9px;
+  left: 24px;
+  transition: 200ms;
+}
+.ruler--full .ruler__tick-text {
+  left: 2px;
+}
+
+@media (max-width: 1199px) {
+  .ruler__tick-text {
+    text-shadow:
+      1px -1px 0px white,
+      -1px -1px 0px white,
+      -1px 1px 0px white,
+      1px 1px 0px white;
+  }
+}
+
+.ruler__tick--100pct .ruler__tick-text {
+  top: 0;
+}

@@ -1,0 +1,40 @@
+{
+  "name": "@odopod/odo-on-swipe",
+  "description": "Provide event hook for swipes on an element.",
+  "version": "1.0.0",
+  "main": "dist/odo-on-swipe.js",
+  "odoModule": "src/on-swipe.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
+    }
+  ],
+  "dependencies": {
+    "@odopod/odo-pointer": "../odo-pointer"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-on-swipe",
+  "files": [
+    "css",
+    "dist",
+    "src",
+    "index.js"
+  ],
+  "odoKeywords": [
+    "events"
+  ],
+  "keywords": [
+    "odo",
+    "odo-component",
+    "odopod",
+    "swipe"
+  ],
+  "license": "MIT",
+  "repository": "odopod/odo",
+  "scripts": {
+    "link-local": "node ../../scripts/link-local-packages.js",
+    "test": "gulp code-quality test"
+  }
+}

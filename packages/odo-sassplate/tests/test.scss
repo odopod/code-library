@@ -1,0 +1,328 @@
+@import "true";
+@import "../extensions/imports";
+@import "../extensions/common";
+@import "../extensions/grid-framework";
+@import "../extensions/component-framework";
+
+// Variables
+@include test-module('Variables') {
+
+  @include test('can be imported from JSON') {
+    @include assert-true(global-variable-exists("type-definitions"));
+    @include assert-true(global-variable-exists("ui-components"));
+    @include assert-true(global-variable-exists("colors"));
+    @include assert-true(global-variable-exists("font-families"));
+    @include assert-true(global-variable-exists("gradients"));
+    @include assert-true(global-variable-exists("vertical-spacers"));
+    @include assert-true(global-variable-exists("aspect-boxes"));
+  }
+
+  @include test('will have variables defined in _variables.scss') {
+    @include assert-equal($grid-columns, 12);
+    @include assert-equal($grid-container, 'container');
+  }
+
+  @include test('defaults can be overridden') {
+    @include assert-equal($grid-max-width--mobile, 640px);
+    $grid-max-width--mobile: 800px;
+    @include assert-equal($grid-max-width--mobile, 800px);
+  }
+}
+
+// Functions
+@include test-module('Functions') {
+
+  @include test('can strip units') {
+    @include assert-equal(strip-units(50px), 50);
+    @include assert-equal(strip-units(50em), 50);
+    @include assert-equal(strip-units(50rem), 50);
+    @include assert-equal(strip-units(50), 50);
+    @include assert-equal(strip-units(0px), 0);
+    @include assert-equal(strip-units(0), 0);
+  }
+
+  @include test('converts pixels to ems') {
+    @include assert-equal(px-em(16px), 1em);
+    @include assert-equal(px-em(32px, 10px), 3.2em);
+  }
+
+  @include test('converts pixels to rems') {
+    @include assert-equal(px-rem(16px), 1rem);
+    @include assert-equal(px-rem(32px, 10px), 3.2rem);
+  }
+
+  @include test('converts ems to pixels') {
+    @include assert-equal(em-px(1em), 16px);
+    @include assert-equal(em-px(1em, 10em), 10px);
+  }
+
+  @include test('converts rems to pixels') {
+    @include assert-equal(rem-px(1rem), 16px);
+    @include assert-equal(rem-px(1rem, 10rem), 10px);
+  }
+
+  @include test('converts rems to ems') {
+    @include assert-equal(rem-em(1rem), 1em);
+  }
+
+  @include test('converts ems to rems') {
+    @include assert-equal(em-rem(1em), 1rem);
+  }
+
+  @include test('can retrieve font family lists') {
+    @include assert-equal(get-font-family(sans-serif), '"Helvetica Neue", Helvetica, Arial, sans-serif');
+    @include assert-equal(get-font-family(foo), 'foo');
+  }
+
+  @include test('can retrieve colors') {
+    @include assert-equal(get-color(teal), #00a38a);
+    @include assert-equal(get-color('teal'), 'teal');
+  }
+
+  @include test('can create a breakpoint query') {
+    @include assert-equal(get-breakpoint-query(sm), '(min-width: 768px)');
+    @include assert-equal(get-breakpoint-query(sm, true), '(max-width: 767px)');
+
+    // A breakpoint which doesn't exist.
+    @include assert-equal(get-breakpoint-query(this-will-warn-you), false);
+  }
+
+  @include test('can create a media query') {
+    $query: '(min-width: 768px)';
+    $badQuery: false;
+    @include assert-equal(get-media-query($query, true), 'screen and (min-width: 768px)');
+    @include assert-equal(get-media-query($query, false), '(min-width: 768px)');
+    @include assert-equal(get-media-query($badQuery, true), 'screen');
+    @include assert-equal(get-media-query($badQuery, false), 'all');
+  }
+}
+
+// Mixins
+@include test-module('Mixins') {
+
+  @include test('breakpoint - with default parameters') {
+
+    // Default params.
+    @include assert {
+      @include output {
+        @include breakpoint(md) {
+          color: gray;
+        }
+      }
+
+      @include expect {
+        @media screen and (min-width: 1024px) {
+          color: gray;
+        }
+      }
+    }
+  }
+
+  @include test('breakpoint - max width true and screen only false') {
+    @include assert {
+      @include output {
+        @include breakpoint(md, true, false) {
+          color: gray;
+        }
+      }
+
+      @include expect {
+        @media (max-width: 1023px) {
+          color: gray;
+        }
+      }
+    }
+  }
+
+  @include test('breakpoint - invalid breakpoint key') {
+    @include assert {
+      @include output {
+        @include breakpoint(this-will-warn-you) {
+          color: gray;
+        }
+      }
+
+      @include expect {
+        @media screen {
+          color: gray;
+        }
+      }
+    }
+  }
+
+  @include test('breakpoint - xs breakpoint name') {
+    @include assert {
+      @include output {
+        @include breakpoint(xs) {
+          color: tan;
+        }
+      }
+
+      @include expect {
+        color: tan;
+      }
+    }
+  }
+
+  // Normal
+  @include test('breakpoints') {
+    @include assert {
+      @include output {
+        @include breakpoints(sm, md) {
+          color: teal;
+        }
+      }
+
+      @include expect {
+        @media screen and (min-width: 768px) and (max-width: 1023px) {
+          color: teal;
+        }
+      }
+    }
+  }
+
+  @include test('breakpoints - start larger than end') {
+    @include assert {
+      @include output {
+        @include breakpoints(lg, md) {
+          color: teal;
+        }
+      }
+
+      @include expect {
+        color: teal;
+      }
+    }
+  }
+
+  @include test('breakpoints - `xs` as start') {
+    @include assert {
+      @include output {
+        @include breakpoints(xs, md) {
+          color: teal;
+        }
+      }
+
+      @include expect {
+        @media screen and (max-width: 1023px) {
+          color: teal;
+        }
+      }
+    }
+  }
+
+  @include test('breakpoints - invalid breakpoint key') {
+    @include assert {
+      @include output {
+        @include breakpoints(sm, will-warn-you) {
+          color: aqua;
+        }
+      }
+
+      @include expect {
+        color: aqua;
+      }
+    }
+  }
+
+  @include test('augment-hit-area') {
+    @include assert {
+      @include output {
+        @include augment-hit-area();
+      }
+
+      @include expect {
+        &::after {
+          content: '';
+          position: absolute;
+          z-index: 1;
+          top: -50%;
+          left: -50%;
+          display: block;
+          width: 200%;
+          height: 200%;
+        }
+      }
+    }
+  }
+
+  @include test('augment-hit-area - custom size') {
+    @include assert {
+      @include output {
+        @include augment-hit-area(200%);
+      }
+
+      @include expect {
+        &::after {
+          content: '';
+          position: absolute;
+          z-index: 1;
+          top: -100%;
+          left: -100%;
+          display: block;
+          width: 300%;
+          height: 300%;
+        }
+      }
+    }
+  }
+
+  @include test('augment-hit-area - with ::before') {
+    @include assert {
+      @include output {
+        @include augment-hit-area(100%, 'before');
+      }
+
+      @include expect {
+        &::before {
+          content: '';
+          position: absolute;
+          z-index: 1;
+          top: -50%;
+          left: -50%;
+          display: block;
+          width: 200%;
+          height: 200%;
+        }
+      }
+    }
+  }
+
+  @include test('aspect') {
+    @include assert {
+      @include output {
+        @include aspect(4, 3);
+      }
+
+      @include expect {
+        padding-bottom: 75%;
+      }
+    }
+  }
+
+  @include test('size') {
+    @include assert {
+      @include output {
+        @include size(20px);
+      }
+
+      @include expect {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  @include test('size - with height') {
+    @include assert {
+      @include output {
+        @include size(20px, 30px);
+      }
+
+      @include expect {
+        width: 20px;
+        height: 30px;
+      }
+    }
+  }
+}

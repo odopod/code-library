@@ -1,0 +1,950 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odo Helpers Demo</title>
+
+  <link rel="stylesheet" href="../demo.css" />
+  <link rel="stylesheet" href="styles/helpers.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+  <link rel="stylesheet" href="styles/theme.css" />
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.4.1/themes/prism.css">
+</head>
+
+<body>
+
+  <div id="main" role="main">
+
+    <div class="container">
+      <h1>Odo Helpers</h1>
+      <p>All the little things.</p>
+      <h3>Support</h3>
+      <p>IE9+ with polyfill</p>
+      <p>To support IE&lt;=11, you will also need to add a `classList` polyfill.</p>
+      <p>This component polyfills <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/matches"><code>Element.prototype.matches</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/closest"><code>Element.prototype.closest</code></a> by bundling the <a href="https://www.npmjs.com/package/element-closest">element-closest</a> package.</p>
+      <h3>Dependencies</h3>
+      <p>Odo Device, <code>Object.assign</code>, <code>String.prototype.includes</code></p>
+    </div>
+
+    <section>
+      <div class="container">
+        <h2>Animation Helpers</h2>
+
+        <div class="example">
+          <h3>onTransitionEnd and cancelTransitionEnd</h3>
+          <div class="clearfix">
+            <div class="half relative">
+              <div id="animate-my-left" class="block space-bottom"></div>
+            </div>
+            <div class="half">
+              <output class="well" id="left-output"></output>
+            </div>
+          </div>
+          <div>
+            <button id="left-animator">Click me</button>
+          </div>
+
+          <h4>Setup</h4>
+          <p>When the button is clicked, this example cancels the last transition end listener. It then updates the text and waits for a new transition end callback.</p>
+          <pre><code class="language-javascript">var transitionEndCount = 0;
+var transitionId = null;
+var $block = $('#animate-my-left');
+var $output = $('#left-output');
+
+$('#left-animator').on('click', function() {
+  animation.cancelTransitionEnd(transitionId);
+  $output.text('waiting for transition: ' + transitionEndCount);
+  $block.toggleClass('active');
+
+  transitionId = animation.onTransitionEnd($block, function() {
+    $output.text('transition ended: ' + transitionEndCount++);
+  });
+});</code></pre>
+          <h4>Method Signature</h4>
+          <p>This method can take an optional context to <code>call</code> the callback function with, a specific property to wait for the transition event on, and an optional timeout (in milliseconds) before the transition is considered complete and the callback will be invoked.</p>
+          <p><code>elem</code> can be either a regular <code>Element</code> or <code>jQuery</code> instance.</p>
+          <pre><code class="language-javascript">var transitionId = animation.onTransitionEnd(elem, fn, context, optProperty, optTimeout);
+animation.cancelTransitionEnd(transitionId);</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>onAnimationEnd(elem, fn, context)</h3>
+          <p>For keyframe animations that do not infinitely loop, you can get a callback when it finishes. In this example, the <code>spinning</code> class is added to the element which adds an <code>animation-name</code> property.</p>
+          <p>Side note: this is how you can restart a keyframe animation.</p>
+          <div class="my-keyframes block space-bottom"></div>
+          <div>
+            <button id="spin-it">Spin It</button>
+          </div>
+          <h4>Styles (prefixes omitted)</h4>
+          <pre><code class="language-css">.my-keyframes {
+  animation-duration: 500ms;
+  animation-timing-function: ease-out;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.my-keyframes.spinning {
+  animation-name: spin;
+}
+
+@keyframes spin {
+  50% {
+    border-radius: 50%;
+    background-color: #27ae60;
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}</code></pre>
+          <pre><code class="language-javascript">$('#spin-it').on('click', function() {
+  var $block = $('.my-keyframes');
+  $block.addClass('spinning spun');
+  animation.onAnimationEnd($block, function() {
+    $block.removeClass('spinning');
+  }, this);
+});</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>Fading elements</h3>
+          <h4>fadeOutElement(elem, optFn, optThis, optInvisible)</h4>
+          <h4>fadeInElement(elem, optFn, optThis, optInvisible)</h4>
+          <h4>fadeElement(elem, optFn, optThis, optInvisible, optIsOut)</h4>
+          <p>Fade an element in or out using classes. <code>elem</code> is the element to fade. You can also provide a callback for the second parameter, a context, and whether or not to add visibility:hidden|visible when the transition finishes.</p>
+          <p class="alert alert--warning"><strong>Warning!</strong> This requires you to have 3 css classes. <code>fade</code>, <code>in</code>, and <code>invisible</code>.</p>
+          <div id="darth-fader" class="block space-bottom"></div>
+          <div>
+            <button id="fade-it">Fade out</button>
+            <button id="show-it">Fade in</button>
+          </div>
+          <pre><code class="language-javascript">animation.fadeOutElement(document.getElementById('darth-fader'));</code></pre>
+          <p>Using all the parameters:</p>
+          <pre><code class="language-javascript">animation.fadeOutElement(document.getElementById('darth-fader'), function() {
+  console.log('Faded out.', this.hello);
+}, { hello: 'world' }, true);</code></pre>
+
+          <h4>Remove the transition listener</h4>
+          <p>The fade methods use <code>onTransitionEnd</code> internally and return the the same value <code>onTransitionEnd</code> does.</p>
+          <pre><code class="language-javascript">var fadeId = animation.fadeInElement(document.getElementById('darth-fader'));
+animation.cancelTransitionEnd(fadeId);</code></pre>
+
+          <h4>Required CSS</h4>
+          <pre><code class="language-css">.fade {
+  transition: opacity 150ms ease-out;
+  opacity: 0;
+}
+
+.fade.in {
+  opacity: 1;
+}
+
+.invisible {
+  visibility: hidden;
+}</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>scrollTo(position, speed, callback, easing) and scrollToTop()</h3>
+          <p>With <code>scrollTo</code> and <code>scrollToTop</code>, you can animate the scroll top of the window.</p>
+          <div>
+            <button id="started-from-the-bottom">Start from the bottom</button>
+            <button id="take-me-to-the-top">To the top</button>
+          </div>
+          <pre><code class="language-javascript">$('#started-from-the-bottom').on('click', function() {
+  var bottom = $(document).height() - $(window).height();
+  var duration = 600;
+  var easing = function (k) {
+    return -k * (k - 2);
+  };
+  OdoHelpers.animation.scrollTo(bottom, duration, function() {
+    console.log('done!');
+  }, easing);
+});
+
+$('#take-me-to-the-top').on('click', function() {
+  OdoHelpers.animation.scrollToTop();
+});</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>Animation Stepper</h3>
+          <p>A <code>requestAnimationFrame</code> throttled replacement for jQuery's animate. It is a simple class for providing a stepping function for each animation frame over a given length of time. Its API is similar to the <code>AnimationPlayer</code> in <a href="http://updates.html5rocks.com/2014/05/Web-Animations---element-animate-is-now-in-Chrome-36">Element.animate</a>.</p>
+          <div class="clearfix space-bottom">
+            <div class="half half--padding">
+              <div id="yolo-rapper">
+                <div id="yolo-center"></div>
+                <div id="yolo" class="block"></div>
+              </div>
+            </div>
+            <div class="half">
+              <output id="stepper-output" class="well"></output>
+            </div>
+          </div>
+          <div>
+            <button id="step-it">Step it</button>
+          </div>
+          <pre><code class="language-javascript">var stepper;
+$('#step-it').on('click', function() {
+  // Stop any previous steppers from finishing.
+  if (stepper) {
+    stepper.cancel();
+  }
+
+  stepper = new OdoHelpers.animation.Stepper({
+    start: 0,
+    end: 180,
+    duration: 800,
+    context: { taco: 'Tuesday' },
+    step: function(value, percent) {
+      // this === { taco: 'Tuesday' }
+      // Position block
+      &hellip;
+      // Update display.
+      $stepOutput.html(value.toFixed(0) + '/180&lt;br&gt;' + Math.round(percent * 100) + '%')
+    },
+    // Custom easing
+    easing: function(k) {
+      return -(--k * k * k * k - 1);
+    }
+  });
+
+  stepper.onfinish = function() {
+    $stepOutput.html($stepOutput.html() + '&lt;br&gt;Done!');
+  };
+});</code></pre>
+        <h3>More easings</h3>
+        <ul>
+          <li><a href="https://github.com/gre/bezier-easing">bezier-easing</a> project which can convert a CSS easing to a JavaScript function.</li>
+          <li>An <a href="https://gist.github.com/gre/1650294">easing gist</a></li>
+          <li><a href="http://gsgd.co.uk/sandbox/jquery/easing/jquery.easing.1.3.js">jQuery easings</a></li>
+        </ul>
+        </div>
+      </div>
+
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Array Helpers</h2>
+        <p>Array utility methods can be found on <code>OdoHelpers.array</code>.</p>
+        <div class="example">
+          <h3>closest(arr, num)</h3>
+          <p>Given an array of numbers, find the item in the array closest to a given number.</p>
+          <pre><code class="language-javascript">array.closest([0, 100, 200, 300, 400, 500], 180) // 200</code></pre>
+        </div>
+        <div class="example">
+          <h3>closestLessThan(arr, num)</h3>
+          <p>Given an array of numbers, find the item in the array closest to a given number while also less than the given number.</p>
+          <pre><code class="language-javascript">array.closestLessThan([0, 100, 200, 300, 400, 500], 180) // 100</code></pre>
+        </div>
+        <div class="example">
+          <h3>closestGreaterThan(arr, num)</h3>
+          <p>Given an array of numbers, find the item in the array closest to a given number while also greater than the given number.</p>
+          <pre><code class="language-javascript">array.closestGreaterThan([0, 100, 200, 300, 400, 500], 200) // 300</code></pre>
+        </div>
+        <div class="example">
+          <h3>chunk(array, size)</h3>
+          <p>Make an array of smaller arrays from an array.</p>
+          <pre><code class="language-javascript">var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+array.chunk(arr, 4) // [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10]]
+array.chunk(arr, 5) // [[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]]</code></pre>
+        </div>
+        <div class="example">
+          <h3>getLongestString(stringsArray)</h3>
+          <p>Identify the longest string in a array of strings.</p>
+          <pre><code class="language-javascript">array.getLongestString(['foo', 'bar', 'that', 'baz']) // 'that'</code></pre>
+        </div>
+        <div class="example">
+          <h3>remove(array, item)</h3>
+          <p>Remove an item from an array.</p>
+          <pre><code class="language-javascript">var letters = ['a', 'b', 'c', 'd'];
+array.remove(letters, 'c');
+console.log(letters); // ['a', 'b', 'd'];</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Browser Helpers</h2>
+        <div class="example">
+          <h3>Setting Hash</h3>
+          <p>Sets the window location hash. This will create an entry in the user's history.</p>
+          <button id="hash-click" role="button">Set Hash</button>
+          <pre><code class="language-javascript">$('#hash-click').on('click', function() {
+  browser.setHash('#awwyiss');
+})</code></pre>
+        </div>
+        <div class="example">
+          <h3>Setting History State</h3>
+          <p>Sets the URL's hash like <code>setHash</code>, but this method does not create an entry in the user's history (unless the browser doesn't support <code>replaceState</code> (IE9)).</p>
+          <button id="replace-hash-click" role="button">Replace Hash</button>
+          <pre><code class="language-javascript">$('#replace-hash-click').on('click', function() {
+  browser.replaceWithHash('#awwyissssss');
+})</code></pre>
+        </div>
+        <div class="example">
+          <h3>User agent sniffing 🙃</h3>
+          <p>Because sometimes you can't feature-test things.</p>
+          <div class="example">
+            <pre><code class="language-javascript">browser.isAndroidOS(navigator.userAgent);
+browser.isIOS(navigator.userAgent);
+browser.isChrome(navigator.userAgent);
+browser.isIE(navigator.userAgent);
+browser.isEdge(navigator.userAgent);
+browser.getIOSVersion(navigator.userAgent);
+browser.hasScrollEvents(navigator.userAgent);
+browser.isNativeAndroid(navigator.userAgent);</code></pre>
+          </div>
+
+          <div class="space-bottom">
+            <select class="js-user-agent-list">
+              <option selected>Current Browser</option>
+              <optgroup label="iOS">
+                <option value="Mozilla/5.0 (iPod; U; CPU iPhone OS 4_3_3 like Mac OS X; ja-jp) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5">iPod 4.3.3</option>
+                <option value="Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3">iPhone 5.0.0</option>
+                <option value="Mozilla/5.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/600.1.3 (KHTML, like Gecko) Version/8.0 Mobile/12A4345d Safari/600.1.4">iPhone 8.0.0</option>
+                <option value="Mozilla/5.0 (iPad; CPU OS 8_1_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) GSA/5.1.42378 Mobile/12B440 Safari/600.1.4">iPhone 8.1.2</option>
+                <option value="Mozilla/5.0 (iPhone; CPU iPhone OS 8_4 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) CriOS/43.0.2357.61 Mobile/12H143 Safari/600.1.4 (000980)">iPhone 8.4.0 Chrome</option>
+                <option value="Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E277 Safari/602.1">iPhone 7 iOS 10.3 Safari</option>
+              </optgroup>
+              <optgroup label="Android">
+                <option value="Mozilla/5.0 (Linux; U; Android 2.3.6; en-us; SGH-T679 Build/GINGERBREAD) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1">Galaxy Exhibit 2.3.6</option>
+                <option value="Mozilla/5.0 (Linux; U; Android 4.0.3; ko-kr; LG-L160L Build/IML74K) AppleWebkit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30">Android 4.0.3</option>
+                <option value="Mozilla/5.0 (Linux; Android 4.4.2; Nexus 5 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.99 Mobile Safari/537.36">Nexus 5 Android 4.4.2 Chrome 32</option>
+              </optgroup>
+              <optgroup label="Other">
+                <option value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36">macOS 10.11.6 Chrome 57</option>
+                <option value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/601.7.8 (KHTML, like Gecko) Version/9.1.3 Safari/601.7.8">macOS 10.11.6 Safari 9.1.3</option>
+                <option value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.114 Safari/537.36 OPR/22.0.1471.50">macOS 10.9.2 Opera 22</option>
+                <option value="Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)">Windows 7 IE9</option>
+                <option value="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)">Windows 7 IE10</option>
+                <option value="Mozilla/5.0 (Windows NT 6.3; Trident/7.0; .NET4.0E; .NET4.0C; Tablet PC 2.0; rv:11.0) like Gecko">Windows 8.1 IE11</option>
+                <option value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10166">Windows 10 Edge 12</option>
+                <option value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393">Windows 10 Edge 14</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="space-bottom">
+            <input type="text" class="js-user-agent big-field">
+          </div>
+
+          <table class="the-table">
+            <tr>
+              <td>isAndroidOS</td>
+              <td class="the-table__output js-is-android-os"></td>
+            </tr>
+            <tr>
+              <td>isIOS</td>
+              <td class="the-table__output js-is-ios"></td>
+            </tr>
+            <tr>
+              <td>hasScrollEvents</td>
+              <td class="the-table__output js-has-scroll-events"></td>
+            </tr>
+            <tr>
+              <td>getIOSVersion</td>
+              <td class="the-table__output js-get-ios-version"></td>
+            </tr>
+            <tr>
+              <td>isChrome</td>
+              <td class="the-table__output js-is-chrome"></td>
+            </tr>
+            <tr>
+              <td>isNativeAndroid</td>
+              <td class="the-table__output js-is-native-android"></td>
+            </tr>
+            <tr>
+              <td>isIE</td>
+              <td class="the-table__output js-is-ie"></td>
+            </tr>
+            <tr>
+              <td>isEdge</td>
+              <td class="the-table__output js-is-edge"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Coordinate</h2>
+        <p>Class for representing coordinates and positions.</p>
+
+        <div class="example">
+          <h3>Coordinate(optX, optY)</h3>
+          <p>If the <code>x</code> or <code>y</code> value is not specified, it will be zero.</p>
+          <pre><code class="language-javascript">var Coordinate = OdoHelpers.coordinate;
+var start = new Coordinate(10, 50);
+console.log(start.x); // 10
+console.log(start.y); // 50</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>distance(a, b)</h3>
+          <p>Calculate the distance between two coordinates.</p>
+          <pre><code class="language-javascript">var end = new Coordinate(50, 100);
+Coordinate.difference(start, end); // -64.03</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>equals(a, b)</h3>
+          <p>Determine whether two coordinates are the same.</p>
+          <pre><code class="language-javascript">var p1 = new Coordinate(10, 10);
+var p2 = new Coordinate(10, 10);
+var p3 = new Coordinate(21, 10);
+Coordinate.equals(p1, p1); // true
+Coordinate.equals(p1, p3); // false</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>sum(a, b)</h3>
+          <p>Calculate the sum between two coordinates as a new Coordinate.</p>
+          <pre><code class="language-javascript">Coordinate.sum(start, end); // {x: 60, y: 150 }</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>difference(a, b)</h3>
+          <p>Calculate the difference between two coordinates as a new Coordinate.</p>
+          <pre><code class="language-javascript">Coordinate.difference(start, end); // {x: -40, y: -50 }</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>product(a, b)</h3>
+          <p>Calculate the product between two coordinates as a new Coordinate.</p>
+          <pre><code class="language-javascript">Coordinate.product(start, end); // {x: 500, y: 5000 }</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>quotient(a, b)</h3>
+          <p>Calculate the quotient between two coordinates as a new Coordinate.</p>
+          <pre><code class="language-javascript">Coordinate.quotient(start, end); // {x: 0.2, y: 0.5 }</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>scale(a, sx, optSy)</h3>
+          <p>Returns a scaled clone of <code>a</code> without modifying <code>a</code>.</p>
+          <pre><code class="language-javascript">Coordinate.scale(start, 0.5); // {x: 5, y: 25 }</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>clone()</h3>
+          <p>Returns a new coordinate with this coordinates points.</p>
+          <pre><code class="language-javascript">var position = new Coordinate(100, 100);
+var p2 = position.clone();
+console.log(p2); // { x: 100, y: 100 }</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>scale(sx, optSy)</h3>
+          <p>Scales this coordinate by the given scale factors.</p>
+          <pre><code class="language-javascript">var position = new Coordinate(100, 100);
+position.scale(0.6);
+console.log(position); // { x: 60, y: 60 }</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>translate(tx, ty)</h3>
+          <p>Translates this box by the given offsets. If a <code>Coordinate</code> is given, then the x and y values are translated by the coordinate's x and y. Otherwise, x and y are translated by <code>tx</code> and <code>opt_ty</code> respectively.</p>
+          <pre><code class="language-javascript">var position = new Coordinate(100, 100);
+position.translate(5, 10);
+console.log(position); // { x: 105, y: 110 }
+position.translate(new Coordinate(-5, -10));
+console.log(position); // { x: 100, y: 100 }</code></pre>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Device Helpers</h2>
+        <p>Cross-device helpers.</p>
+
+        <div class="example">
+          <h3>getTranslate(x, y)</h3>
+          <p>Returns a string to be used with transforms.</p>
+          <pre><code class="language-javascript">OdoHelpers.device.getTranslate(0, '25%') // 'translate(0, 25%)</code></pre>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>DOM Helpers</h2>
+        <p>There are more than what&rsquo;s listed here. The unlisted ones are self-explanatory.</p>
+
+        <div class="example">
+          <h3>getRelativeDepth(node, parentNode)</h3>
+          <p>Returns the depth of the given node relative to the given parent node, or -1 if the given node is not a descendant of the given parent node. E.g. if <code>node == parentNode</code> it returns <code>0</code>, if <code>node.parentNode == parentNode</code> it returns <code>1</code>, etc.</p>
+          <pre><code class="language-markup">&lt;grandpa&gt;
+  &lt;mom&gt;
+    I'm a text node.
+    &lt;bob&gt;&lt;/bob&gt;
+  &lt;/mom&gt;
+&lt;/grandpa&gt;</code></pre>
+          <pre><code class="language-javascript">var dom = OdoHelpers.dom;
+var bob = document.querySelector('bob');
+var grandpa = document.querySelector('grandpa');
+dom.getRelativeDepth(bob, grandpa); // 1</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>getNthSibling(node, n, optIsForward)</h3>
+          <p>Retrieves the nth sibling of an element, or null if the would be nth sibling does not exist. Heads up! This function excludes text nodes.</p>
+          <pre><code class="language-markup">&lt;carousel&gt;
+  &lt;slide data-start&gt;&lt;/slide&gt;
+  &lt;slide&gt;&lt;/slide&gt;
+  &lt;slide&gt;&lt;/slide&gt;
+  &lt;slide data-find-me&gt;&lt;/slide&gt;
+&lt;/carousel&gt;</code></pre>
+          <pre><code class="language-javascript">var start = document.querySelector('slide[data-start]');
+dom.getNthSibling(start, 3); // &lt;slide data-find-me&gt;&lt;/slide&gt;
+dom.getNthSibling(start, 4); // null</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>DOM Ready Promise</h3>
+          <p> Returns a promise that resolves once the document ready state is 'interactive'. If the <code>DOMContentLoaded</code> event has not been dispatched yet, the promise will resolve after this event is fired.</p>
+
+          <p class="inline-middle"> Dom.ready resolved</p>
+          <div id="dom-ready" class="block block--dom block--aim inline-middle"></div>
+          <span class="inline-middle time-text" id="dom-ready-text"></span>
+          <pre><code class="language-javascript">dom.ready.then(function() {
+  var end = new Date().getTime() - date;
+  $('#dom-ready-text').text(end + ' ms');
+  $('#dom-ready').addClass('block--fired');
+});</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>DOM Loaded Promise</h3>
+          <p> Returns a promise that resolves once the document ready state is 'complete'. If the <code>load</code> event has not been dispatched yet, the promise will resolve after this event is fired.</p>
+
+          <p class="inline-middle"> Dom.loaded resolved</p>
+          <div id="dom-loaded" class="block block--dom block--aim inline-middle"></div>
+          <span class="inline-middle time-text" id="dom-loaded-text"></span>
+          <pre><code class="language-javascript">dom.loaded.then(function() {
+  var end = new Date().getTime() - date;
+  $('#dom-loaded-text').text(end + ' ms');
+  $('#dom-loaded').addClass('block--fired');
+});</code></pre>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Math Helpers</h2>
+        <p>Math utilities</p>
+
+        <div class="example">
+          <h3>clamp(value, min, max)</h3>
+          <p>Takes a number and clamps it to within the provided bounds.</p>
+          <pre><code class="language-javascript">math.clamp(100, 0, 10) // 10
+math.clamp(5, 0, 10) // 5
+math.clamp(-1, 0, 10) // 0</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>sign(number)</h3>
+          <p>Returns the sign of a number, indicating whether the number is positive, negative or zero.</p>
+          <pre><code class="language-javascript">math.sign(-5) // -1
+math.sign(9) // 1
+math.sign("4") // 1
+math.sign(0) // 0</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>wrapAroundList(index, displacement, length)</h3>
+          <p>Calculates the offset index for a circular list. For example, a looping carousel. When you're at the last slide and increment the slide to wish to go to, it should go to the first one.</p>
+          <pre><code class="language-javascript">var currentIndex = 3;
+var listLength = 4;
+math.wrapAroundList(currentIndex, 1, listLength); // 0
+math.wrapAroundList(currentIndex, 2, listLength); // 1
+math.wrapAroundList(currentIndex, 3, listLength); // 2
+math.wrapAroundList(currentIndex, 4, listLength); // 3
+math.wrapAroundList(currentIndex, 5, listLength); // 0</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>Box</h3>
+          <p>Class for representing a box. A box is specified as a top, right, bottom, and left. A box is useful for representing margins and padding.</p>
+          <pre><code class="language-javascript">var marginBox = new math.Box(top, right, bottom, left);</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>Rect</h3>
+          <p>Class for representing rectangular regions.</p>
+          <pre><code class="language-javascript">var boundary = new math.Rect(left, top, width, height);</code></pre>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>String Helpers</h2>
+        <p>Get gooder with words #yolo.</p>
+
+        <div class="example">
+          <h3>capitalize(str)</h3>
+          <p>Be proper!</p>
+          <pre><code class="language-javascript">string.capitalize('foo'); // 'Foo'
+string.capitalize('foo bar'); // 'Foo bar'</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>hyphenate(str)</h3>
+          <p>Hyphenates a javascript style string to a css one.</p>
+          <pre><code class="language-javascript">string.hyphenate('MozBoxSizing'); // '-moz-box-sizing.'
+string.hyphenate('boxShadow'); // 'box-shadow'</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>random(str)</h3>
+          <p>Creates a random string for IDs, etc.</p>
+          <pre><code class="language-javascript">string.random(); // 'qw7i22r19k9'
+string.random(); // '75042h5b3xr'</code></pre>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Style Helpers</h2>
+        <!-- <p></p> -->
+
+        <div class="example">
+          <h3>Size, Padding, and Margins</h3>
+          <p>Get the height and width of an element when the display is not none with <code>getSize</code>. If it or its parent is display none, this won't work properly.</p>
+          <div class="clearfix">
+            <div class="half">
+              <div id="get-me" style="margin:5px auto 1em 2%;padding:1em 2% 5px 0;background:tan;">I have margins and padding.</div>
+            </div>
+            <div class="half">
+              <output id="its-raining" class="well"></output>
+            </div>
+          </div>
+          <div>
+            <button id="get-margins">Get margins</button>
+            <button id="get-paddings">Get paddings</button>
+            <button id="get-size">Get size</button>
+          </div>
+          <pre><code class="language-markup">&lt;div id="get-me" style="margin:5px auto 1em 2%;padding:1em 2% 5px 0;background:tan;"&gt;I have margins and padding.&lt;/div&gt;</code></pre>
+          <pre><code class="language-javascript">var element = document.getElementById('get-me');
+var output = document.getElementById('its-raining');
+
+var echo = function(str) {
+  output.innerHTML = JSON.stringify(str, null, ' ');
+};
+
+$('#get-margins').on('click', function() {
+  echo(style.getMarginBox(element));
+});
+
+$('#get-paddings').on('click', function() {
+  echo(style.getPaddingBox(element));
+});
+
+$('#get-size').on('click', function() {
+  echo(style.getSize(element));
+});</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>getElementsSize(elements, dimension)</h3>
+          <p>Returns the size (width or height) of a list of elements, including margins. It takes an array (not a <code>NodeList</code>) of elements and a dimension.</p>
+
+          <div class="clearfix">
+            <div class="half">
+              <div id="get-elements-wrapper" class="clearfix">
+                <div class="block"></div>
+                <div class="block"></div>
+                <div class="block"></div>
+              </div>
+            </div>
+            <div class="half">
+              <output id="output-elements-size" class="well"></output>
+            </div>
+          </div>
+          <div>
+            <button id="get-elements-size">Get children [width]</button>
+          </div>
+          <pre><code class="language-javascript">var wrapper = document.getElementById('get-elements-wrapper');
+var output = document.getElementById('output-elements-size');
+
+$('#get-elements-size').on('click', function() {
+  var width = style.getElementsSize(dom.getChildren(wrapper), 'width');
+  output.textContent = width + ' pixels';
+});</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>forceRedraw()</h3>
+          <p>Force the page to be repainted in WebKit and Blink. This is often useful for native Android browsers because they do not update their state often enough, for example, after checking a checkbox.</p>
+          <p>In this example, you won't see anything change.</p>
+          <button id="force-redraw">Force a redraw</button>
+          <pre><code class="language-javascript">$('#force-redraw').on('click', style.forceRedraw);</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>causeLayout(element)</h3>
+          <p>Ask the browser for a property that will cause it to recalculate styles and layout the element (and possibly surrounding/parent elements).</p>
+          <p>In this example, the block is resting at <code>1</code> opacity. We want it to fade up from <code>0</code> to <code>1</code> opacity. By asking for the <code>offsetWidth</code> of the block (which is what <code>causeLayout</code> does), it forces the browser to apply any operations in the previous batch. Without the layout, the browser will batch-process your code and it will only see the block is supposed to be <code>1</code> opacity and it's already at <code>1</code> opacity, so there won't be a transition.</p>
+          <div id="blocktacular" class="block space-bottom"></div>
+          <label class="space-bottom">
+            <input type="checkbox" id="should-i-do-it"/>
+            Cause layout
+          </label>
+          <div>
+            <button id="lets-get-ready-to-rumble">Transition it</button>
+          </div>
+          <pre><code class="language-css">#blocktacular.faded {
+  opacity: 0;
+}
+
+#blocktacular.active {
+  opacity: 1;
+  transition: 400ms;
+}</code></pre>
+          <pre><code class="language-javascript">var checkbox = document.getElementById('should-i-do-it');
+var block = document.getElementById('blocktacular');
+
+$('#lets-get-ready-to-rumble').on('click', function() {
+
+  $(block).addClass('faded');
+
+  if (checkbox.checked) {
+    style.causeLayout(block);
+  }
+
+  $(block).addClass('active');
+
+  setTimeout(function() {
+    $(block).removeClass('faded active');
+  }, 500);
+});</code></pre>
+
+          <div class="example">
+            <h3>evenHeights(groups)</h3>
+            <p>Can we base-align the descriptions?</p>
+            <p>Use <code>evenHeights</code> to find the tallest element then set all the elements to that height.</p>
+            <div class="row clearfix space-bottom" id="first-row">
+              <div class="column">
+                <div class="product">
+                  <h6 class="product__title">SFO - Odo Hotspots</h6>
+                  <p class="product__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+              </div>
+              <div class="column">
+                <div class="product">
+                  <h6 class="product__title">Odo Scroll Animation</h6>
+                  <p class="product__description">Ut enim ad minim veniam.</p>
+                </div>
+              </div>
+              <div class="column">
+                <div class="product">
+                  <h6 class="product__title">SFO - Odo The Longest Component of All Time!</h6>
+                  <p class="product__description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                </div>
+              </div>
+              <div class="column">
+                <div class="product">
+                  <h6 class="product__title">Odo Carousel</h6>
+                  <p class="product__description">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <button id="even-the-heights">Yeah... even the titles</button>
+            </div>
+            <pre><code class="language-javascript">$('#even-the-heights').on('click', function() {
+  var tallest = style.evenHeights($('#first-row .product__title').get());
+  console.log(tallest); // 34 ish
+});</code></pre>
+
+            <p>Aww, now the column backgrounds are still not aligned.</p>
+            <p>Multiple groups of elements can also be set. In this example, the second rows' <code>.product</code> and <code>.product__title</code> are set to the same height. This is much more performant than calling <code>evenHeights</code> twice.</p>
+            <div class="row clearfix space-bottom" id="second-row">
+              <div class="column">
+                <div class="product">
+                  <h6 class="product__title">Odo Carousel</h6>
+                  <p class="product__description">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+              </div>
+              <div class="column">
+                <div class="product">
+                  <h6 class="product__title">SFO - Odo The Longest Component of All Time!</h6>
+                  <p class="product__description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                </div>
+              </div>
+              <div class="column">
+                <div class="product">
+                  <h6 class="product__title">Odo Scroll Animation</h6>
+                  <p class="product__description">Ut enim ad minim veniam.</p>
+                </div>
+              </div>
+              <div class="column">
+                <div class="product">
+                  <h6 class="product__title">SFO - Odo Hotspots</h6>
+                  <p class="product__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <button id="even-them-all">Even wrapper and title</button>
+            </div>
+            <pre><code class="language-javascript">$('#even-them-all').on('click', function() {
+  var groups = [
+    $('#second-row .product__title').get(),
+    $('#second-row .product').get()
+  ];
+  var tallestArray = style.evenHeights(groups);
+  console.log(tallestArray); // [34, 140] ish
+});</code></pre>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Timer Class</h2>
+        <p>A simple timer class. The timer does not start automatically when initialized. <code>OdoHelpers.timer</code></p>
+
+        <div class="example">
+          <h3>continuous Option</h3>
+          <p>If <code>true</code>, the timer will automatically restart itself when it expires.</p>
+          <div class="space-bottom">
+            <div id="timer-block" class="block"></div>
+          </div>
+          <div>
+            <div id="is-timer-running" class="space-bottom">Timer running.</div>
+            <button id="resume-timer">Resume</button>
+            <button id="pause-timer">Pause</button>
+            <label><input type="checkbox" id="continuous-timer"> Continuous</label>
+          </div>
+
+          <pre><code class="language-javascript">var continuous = false;
+var duration = 400;
+var timer = new Timer(function() {
+  $('#timer-block').css('backgroundColor', 'hsl(' + Math.round(Math.random() * 360) + ',58%,50%)');
+}, duration, continuous);</code></pre>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>General Utilities</h2>
+        <p>Found in <code>OdoHelpers.utilities</code>.</p>
+
+        <div class="example">
+          <h3>defaultsTo(obj, defaultValue, test)</h3>
+          <p>Fall back to a specified default if an input is undefined or null. Optionally provide your own test for the value to pass.</p>
+
+          <pre><code class="language-javascript">utilities.defaultsTo('foo', 'bar') // 'foo'
+utilities.defaultsTo(5, {}) // 5
+utilities.defaultsTo(null, 'bar') // 'bar'
+var fn = function() {};
+utilities.defaultsTo(fn, 'bar', typeof fn === 'function') // fn
+utilities.defaultsTo(fn, 'bar', typeof fn === 'number') // 'bar'</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>isString(obj)</h3>
+          <pre><code class="language-javascript">utilities.isString(5); // false
+utilities.isString('JavaScript'); // true</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>isDefined(obj)</h3>
+          <pre><code class="language-javascript">utilities.isDefined(5); // true
+utilities.isDefined(null); // false</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>getNumberOption(value, defaultValue)</h3>
+          <p>Parse a value as a number. If it's not numeric, then the default value will be returned.</p>
+
+          <pre><code class="language-javascript">utilities.getNumberOption(5.2, 'foo'); // 5.2
+utilities.getNumberOption('5.2', 'foo'); // 5.2
+utilities.getNumberOption({}, 10); // 10</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>getStringOption(value, defaultValue)</h3>
+          <p>Parse a value as a string. If it's not a string, then the default value will be returned.</p>
+
+          <pre><code class="language-javascript">utilities.getStringOption(5.2, 'foo'); // 'foo'
+utilities.getStringOption('bar', 'foo'); // 'bar'</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>getPercentageOption(value, defaultValue)</h3>
+          <p>Parse a value as a percentage. If it's a string with '%' in it, it will be parsed as a string, otherwise it will be parsed as a number.</p>
+
+          <pre><code class="language-javascript">utilities.getPercentageOption('50%', '100%'); // '50%'
+utilities.getPercentageOption(50, '100%'); // 50
+utilities.getPercentageOption(null, '100%'); // '100%'</code></pre>
+        </div>
+
+        <div class="example">
+          <h3>noop()</h3>
+          <p>A function which does nothing.</p>
+          <pre><code class="language-javascript">utilities.noop();</code></pre>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Events</h2>
+        <p>Can be found on <code>OdoHelpers.events</code>.</p>
+
+        <div class="example">
+          <p>Need a cross-browser <code>transitionend</code> event name or the correct <code>pointerdown</code> string?</p>
+          <pre><code class="language-javascript">var events = OdoHelpers.events;
+console.log('transition end event name: ' + events.TRANSITIONEND);
+console.log('animation end event name: ' + events.ANIMATIONEND);
+console.log('pointer move event name: ' + events.POINTERMOVE);</code></pre>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Polyfills -->
+  <script src="../node_modules/classlist.js/classList.min.js"></script>
+  <script src="../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Dependencies. -->
+  <script src="../odo-device/dist/odo-device.min.js"></script>
+
+  <!-- Minified Source. -->
+  <script src="dist/odo-helpers.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.4.1/prism.js"></script>
+</body>
+
+</html>

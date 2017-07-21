@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odo Carousel Demo</title>
+
+  <link rel="stylesheet" href="../demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+  <link rel="stylesheet" href="css/odo-carousel.css" />
+  <link rel="stylesheet" href="css/odo-carousel-theme.css" />
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.4.1/themes/prism.css">
+</head>
+
+<body>
+
+<main role="main">
+  <div class="container">
+
+    <h1>Odo Carousel</h1>
+    <p>Performant, awesome carousels.</p>
+    <h3>Support</h3>
+    <p>IE9+ with polyfill</p>
+    <p>To support IE&lt;=11, you will also need to add <code>classList</code> polyfill.</p>
+    <h3>Dependencies</h3>
+    <p>Odo Device, Odo Helpers, Odo Draggable, Tiny Emitter.</p>
+    <p>Odo Pointer, Draggable, and Carousel also expect <code>Object.assign</code> from ES6 to be available.</p>
+    <h3>Styles</h3>
+    <p>This component has required css - <a href="css/odo-carousel.css">css/odo-carousel.css</a>. The theme (<a href="css/odo-carousel-theme.css">css/odo-carousel-theme.css</a>) should also be included and customized to your design.</p>
+
+    <section>
+      <h2 id="regular-title">Regular</h2>
+      <p>By default, carousels are draggable, have overflow, are horizontal, are not looped, are not slideshows, are not &ldquo;jumped&rdquo;, and do not have pagination. You can add slides, reset the carousel so it purges its cache of elements and finds the new ones, set the selected index, go previous or next slides, start a slideshow, pause a slideshow, and use the other public methods.</p>
+
+      <div id="regular" class="odo-carousel" aria-labelledby="regular-title">
+        <div class="odo-carousel__wrapper">
+          <ul class="odo-carousel__element">
+            <li class="odo-carousel__slide" data-color="1">
+              <div class="carousel-demo-inner">
+                <span>1</span>
+              </div>
+            </li>
+            <li class="odo-carousel__slide" data-color="2">
+              <div class="carousel-demo-inner">
+                <span>2</span>
+              </div>
+            </li>
+            <li class="odo-carousel__slide" data-color="3">
+              <div class="carousel-demo-inner">
+                <span>3</span>
+              </div>
+            </li>
+            <li class="odo-carousel__slide" data-color="4">
+              <div class="carousel-demo-inner">
+                <span>4</span>
+              </div>
+            </li>
+            <li class="odo-carousel__slide" data-color="5">
+              <div class="carousel-demo-inner">
+                <span>5</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Markup</h3>
+      <pre><code class="language-markup">&lt;h2 id="regular-title"&gt;Regular&lt;/h2&gt;
+&lt;div id="regular" class="odo-carousel" aria-labelledby="regular-title"&gt;
+  &lt;div class=&quot;odo-carousel__wrapper&quot;&gt;
+    &lt;ul class="odo-carousel__element"&gt;
+      &lt;li class="odo-carousel__slide"&gt;1&lt;/li&gt;
+      &lt;li class="odo-carousel__slide"&gt;2&lt;/li&gt;
+      &lt;li class="odo-carousel__slide"&gt;3&lt;/li&gt;
+      &lt;li class="odo-carousel__slide"&gt;4&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+      <h3>Setup</h3>
+      <pre><code class="language-javascript">var regular = new OdoCarousel(document.getElementById('regular'));</code></pre>
+
+      <h3>Methods</h3>
+      <p>You can also enable/disable the carousel by setting <code>instance.isEnabled</code>.</p>
+      <pre rel="JavaScript"><code class="language-javascript">// Some useful public methods.
+goToPreviousSlide();
+goToNextSlide();
+setSelectedIndex(zeroBasedIndex);
+setDraggable(shouldBeDraggable);
+isFirstSlide();
+isLastSlide();
+getSelectedIndex();
+getCarouselElement();
+getSlides();
+getSlide(zeroBasedIndex);
+addSlide(slideHtml);
+reset();
+startSlideshow();
+pauseSlideshow();</code></pre>
+    </section>
+
+    <section>
+      <h2 id="looped-with-images-title">Looped with images</h2>
+      <p>Add the <code>isLooped</code> option to make the carousel cycle infinitely. It takes slides from the start and appends them to the end when going forwards, and in end to start going backwards.</p>
+
+      <div id="looped" class="odo-carousel looped-demo space-bottom">
+        <div class="odo-carousel__wrapper">
+          <ul class="odo-carousel__element">
+
+            <li class="odo-carousel__slide demo-img-slide">
+                <img src="https://placehold.it/320x400/0089fa/ffffff&text=1+320w"
+                  alt="an image for slide 1"
+                  sizes="(max-width: 1290px) 93vw, 1200px"
+                  srcset="https://placehold.it/640x800/0089fa/ffffff&text=1+640w 640w,
+                  https://placehold.it/760x400/0089fa/ffffff&text=1+760w 760w,
+                  https://placehold.it/1016x400/0089fa/ffffff&text=1+1016w 1016w,
+                  https://placehold.it/1400x400/0089fa/ffffff&text=1+1400w 1400w,
+                  https://placehold.it/1520x800/0089fa/ffffff&text=1+1520w 1520w,
+                  https://placehold.it/2032x800/0089fa/ffffff&text=1+2032w 2032w,
+                  https://placehold.it/2800x800/0089fa/ffffff&text=1+2800w 2800w">
+            </li>
+
+            <li class="odo-carousel__slide demo-img-slide">
+                <img src="https://placehold.it/320x400/ff002b/ffffff&text=2+320w"
+                  alt="an image for slide 2"
+                  sizes="(max-width: 1290px) 93vw, 1200px"
+                  srcset="https://placehold.it/640x800/ff002b/ffffff&text=2+640w 640w,
+                  https://placehold.it/760x400/ff002b/ffffff&text=2+760w 760w,
+                  https://placehold.it/1016x400/ff002b/ffffff&text=2+1016w 1016w,
+                  https://placehold.it/1400x400/ff002b/ffffff&text=2+1400w 1400w,
+                  https://placehold.it/1520x800/ff002b/ffffff&text=2+1520w 1520w,
+                  https://placehold.it/2032x800/ff002b/ffffff&text=2+2032w 2032w,
+                  https://placehold.it/2800x800/ff002b/ffffff&text=2+2800w 2800w">
+            </li>
+
+            <li class="odo-carousel__slide demo-img-slide">
+                <img src="https://placehold.it/320x400/ffa900/ffffff&text=3+320w"
+                  alt="an image for slide 3"
+                  sizes="(max-width: 1290px) 93vw, 1200px"
+                  srcset="https://placehold.it/640x800/ffa900/ffffff&text=3+640w 640w,
+                  https://placehold.it/760x400/ffa900/ffffff&text=3+760w 760w,
+                  https://placehold.it/1016x400/ffa900/ffffff&text=3+1016w 1016w,
+                  https://placehold.it/1400x400/ffa900/ffffff&text=3+1400w 1400w,
+                  https://placehold.it/1520x800/ffa900/ffffff&text=3+1520w 1520w,
+                  https://placehold.it/2032x800/ffa900/ffffff&text=3+2032w 2032w,
+                  https://placehold.it/2800x800/ffa900/ffffff&text=3+2800w 2800w">
+            </li>
+
+            <li class="odo-carousel__slide demo-img-slide">
+                <img src="https://placehold.it/320x400/00a753/ffffff&text=4+320w"
+                  alt="an image for slide 4"
+                  sizes="(max-width: 1290px) 93vw, 1200px"
+                  srcset="https://placehold.it/640x800/00a753/ffffff&text=4+640w 640w,
+                  https://placehold.it/760x400/00a753/ffffff&text=4+760w 760w,
+                  https://placehold.it/1016x400/00a753/ffffff&text=4+1016w 1016w,
+                  https://placehold.it/1400x400/00a753/ffffff&text=4+1400w 1400w,
+                  https://placehold.it/1520x800/00a753/ffffff&text=4+1520w 1520w,
+                  https://placehold.it/2032x800/00a753/ffffff&text=4+2032w 2032w,
+                  https://placehold.it/2800x800/00a753/ffffff&text=4+2800w 2800w">
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div>
+        <button id="enabler">Disable</button>
+      </div>
+
+      <h3>Setup</h3>
+      <pre><code class="language-javascript">var looped = new OdoCarousel(document.getElementById('looped'), {
+  isLooped: true
+});</code></pre>
+
+      <h3>Add a slide</h3>
+      <pre rel="JavaScript"><code class="language-javascript">var slideHtml = '&lt;div class="odo-carousel__slide"&gt;5&lt;/div&gt;';
+addSlide(slideHtml);</code></pre>
+    </section>
+
+    <section>
+      <h2 id="jumped-and-looped-with-pagination-title">Jumped and Looped with pagination</h2>
+      <p>By default, the carousel does not add pagination. To add pagination, add a <code>pagination</code> option to the carousel. This demo also shows how you can change the easing of the animation with <code>easing: 'ease'</code>.</p>
+
+      <div id="jumped" class="odo-carousel carousel--jumped">
+        <div class="odo-carousel__wrapper">
+          <div class="odo-carousel__element">
+            <div class="odo-carousel__slide" data-color="1">
+              <a href="https://google.com" target="_blank" rel="noopener" class="carousel-demo-inner">
+                <span>link 1</span>
+              </a>
+            </div>
+            <div class="odo-carousel__slide" data-color="2">
+              <a href="https://github.com" target="_blank" rel="noopener" class="carousel-demo-inner">
+                <span>link 2</span>
+              </a>
+            </div>
+            <div class="odo-carousel__slide" data-color="3">
+              <a href="http://www.odopod.com" target="_blank" rel="noopener" class="carousel-demo-inner">
+                <span>link 3</span>
+              </a>
+            </div>
+            <div class="odo-carousel__slide" data-color="4">
+              <a href="http://codepen.io/" target="_blank" rel="noopener" class="carousel-demo-inner">
+                <span>link 4</span>
+              </a>
+            </div>
+            <div class="odo-carousel__slide" data-color="5">
+              <a href="https://www.reddit.com" target="_blank" rel="noopener" class="carousel-demo-inner">
+                <span>link 5</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Setup</h3>
+      <pre><code class="language-javascript">var jumped = new OdoCarousel(document.getElementById('jumped'), {
+  isLooped: true,
+  isJumped: true,
+  pagination: true,
+  easing: 'ease'
+});</code></pre>
+    </section>
+
+    <section>
+      <h2 id="vertical-and-looped-title">Vertical and Looped</h2>
+      <p>Carousels can be vertical too with <code>isVertical</code> option. This demo changes the duration of the animation with <code>animationSpeed: 500</code>. The paddles and pagination are customized with <code>getNavPaddleHtml</code> and <code>getPaginationHtml</code>. You have access to the carousel's templating method through <code>OdoCarousel.template</code>.</p>
+      <div id="vertical" class="odo-carousel odo-carousel--vertical carousel--stacked-pagination">
+        <div class="odo-carousel__wrapper">
+          <div class="odo-carousel__element">
+            <div class="odo-carousel__slide" data-color="1"><div class="carousel-demo-inner"><span>1</span></div></div>
+            <div class="odo-carousel__slide" data-color="2"><div class="carousel-demo-inner"><span>2</span></div></div>
+            <div class="odo-carousel__slide" data-color="3"><div class="carousel-demo-inner"><span>3</span></div></div>
+            <div class="odo-carousel__slide" data-color="4"><div class="carousel-demo-inner"><span>4</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Setup</h3>
+      <pre><code class="language-javascript">var vertical = new OdoCarousel(document.getElementById('vertical'), {
+  isVertical: true,
+  isLooped: true,
+  animationSpeed: 500,
+  pagination: true,
+  template: {
+    paddleNextInner: '&lt;svg viewBox="0 0 24 24"&gt;&lt;path d="M7.4 8.3L6 9.7l6 6 6-6-1.4-1.4-4.6 4.6z"&gt;&lt;/path&gt;&lt;/svg&gt;',
+    paddlePrevInner: '&lt;svg viewBox="0 0 24 24"&gt;&lt;path d="M16.6 15.7l1.4-1.4-6-6-6 6 1.4 1.4 4.6-4.6 4.6 4.6z"/&gt;&lt;/svg&gt;'
+  },
+  getNavPaddleHtml: function () {
+    return '';
+  },
+  getPaginationHtml: function (instance) {
+    var totalSlides = instance.getSlides().length;
+
+    var previousPaddle = OdoCarousel.template(instance.options.template.paddlePrev, {
+      paddleInner: instance.options.template.paddlePrevInner,
+    });
+    var nextPaddle = OdoCarousel.template(instance.options.template.paddleNext, {
+      paddleInner: instance.options.template.paddleNextInner,
+    });
+
+    var dotsHtml = '';
+    for (var i = 0; i < totalSlides; i++) {
+      dotsHtml += OdoCarousel.template(instance.options.template.paginationDot, {
+        index: i,
+        index1: i + 1,
+        slideId: instance.getSlide(i).id,
+      });
+    }
+
+    var open = '&lt;nav role="tablist" class="' + OdoCarousel.Classes.PAGINATION +
+      ' ' + OdoCarousel.Classes.PADDLES + '"&gt;';
+    var close = '&lt;/nav&gt;';
+
+    return open + previousPaddle + dotsHtml + nextPaddle + close;
+  }
+});</code></pre>
+    </section>
+
+    <section>
+      <h2 id="looped-multiple-neighbors-title">Looped Multiple Neighbors</h2>
+      <p>A slide neighbor is the slide which is beside another. You can change the number of neighbors the active slide has with the <code>neighborCount</code> option. This one has <code>4</code> neighbors.</p>
+
+      <div class="neighbor-count-demo">
+        <div id="neighbors" class="odo-carousel">
+          <div class="odo-carousel__wrapper">
+            <div class="odo-carousel__element">
+              <div class="odo-carousel__slide" data-color="1"><div class="carousel-demo-inner"><span>1</span></div></div>
+              <div class="odo-carousel__slide" data-color="2"><div class="carousel-demo-inner"><span>2</span></div></div>
+              <div class="odo-carousel__slide" data-color="3"><div class="carousel-demo-inner"><span>3</span></div></div>
+              <div class="odo-carousel__slide" data-color="4"><div class="carousel-demo-inner"><span>4</span></div></div>
+              <div class="odo-carousel__slide" data-color="5"><div class="carousel-demo-inner"><span>5</span></div></div>
+              <div class="odo-carousel__slide" data-color="6"><div class="carousel-demo-inner"><span>6</span></div></div>
+              <div class="odo-carousel__slide" data-color="7"><div class="carousel-demo-inner"><span>7</span></div></div>
+              <div class="odo-carousel__slide" data-color="8"><div class="carousel-demo-inner"><span>8</span></div></div>
+              <div class="odo-carousel__slide" data-color="9"><div class="carousel-demo-inner"><span>9</span></div></div>
+              <div class="odo-carousel__slide" data-color="10"><div class="carousel-demo-inner"><span>10</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Markup</h3>
+      <pre><code class="language-markup">&lt;div id="neighbors" class="odo-carousel"&gt;
+  &lt;div class="odo-carousel__wrapper"&gt;
+    &lt;div class="odo-carousel__element"&gt;
+      &lt;div class="odo-carousel__slide" data-color="1"&gt;1&lt;/div&gt;
+      &lt;div class="odo-carousel__slide" data-color="2"&gt;2&lt;/div&gt;
+      &lt;div class="odo-carousel__slide" data-color="3"&gt;3&lt;/div&gt;
+      &lt;div class="odo-carousel__slide" data-color="4"&gt;4&lt;/div&gt;
+      &lt;div class="odo-carousel__slide" data-color="5"&gt;5&lt;/div&gt;
+      &lt;div class="odo-carousel__slide" data-color="6"&gt;6&lt;/div&gt;
+      &lt;div class="odo-carousel__slide" data-color="7"&gt;7&lt;/div&gt;
+      &lt;div class="odo-carousel__slide" data-color="8"&gt;8&lt;/div&gt;
+      &lt;div class="odo-carousel__slide" data-color="9"&gt;9&lt;/div&gt;
+      &lt;div class="odo-carousel__slide" data-color="10"&gt;10&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+      <h3>Setup</h3>
+      <pre><code class="language-javascript">var neighbors = new OdoCarousel(document.getElementById('neighbors'), {
+  isLooped: true,
+  neighborCount: 4
+});</code></pre>
+    </section>
+
+    <section>
+      <h2 id="centered-slides-title">Centered Slides</h2>
+      <p>The <code>isCentered</code> option will position the slides in the center of the carousel wrapper element. This works well when your slides are smaller than the carousel wrapper.</p>
+
+      <div id="centered-demo" class="odo-carousel">
+        <div class="odo-carousel__wrapper">
+          <div class="odo-carousel__element">
+            <div class="odo-carousel__slide" data-color="1"><div class="carousel-demo-inner"><span>1</span></div></div>
+            <div class="odo-carousel__slide" data-color="2"><div class="carousel-demo-inner"><span>2</span></div></div>
+            <div class="odo-carousel__slide" data-color="3"><div class="carousel-demo-inner"><span>3</span></div></div>
+            <div class="odo-carousel__slide" data-color="4"><div class="carousel-demo-inner"><span>4</span></div></div>
+            <div class="odo-carousel__slide" data-color="5"><div class="carousel-demo-inner"><span>5</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Setup</h3>
+      <pre><code class="language-javascript">var centered = new OdoCarousel(document.getElementById('centered-demo'), {
+  isCentered: true,
+});</code></pre>
+    </section>
+
+    <section>
+      <h2 id="bidirectional-carousel-with-only-2-slides-title">Bidirectional Carousel with only 2 slides</h2>
+      <p>Looped carousels containing only <code>2</code> slides need special rendering to allow bidirectional navigation. Simply setting <code>isLooped: true</code> will properly enable this functionality.</p>
+
+      <div class="bidirectional-demo">
+        <div id="bidirectional" class="odo-carousel">
+          <div class="odo-carousel__wrapper">
+            <div class="odo-carousel__element">
+              <div class="odo-carousel__slide" data-color="1"><div class="carousel-demo-inner"><span>1</span></div></div>
+              <div class="odo-carousel__slide" data-color="2"><div class="carousel-demo-inner"><span>2</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Markup</h3>
+      <pre><code class="language-markup">&lt;div id="bidirectional" class="odo-carousel"&gt;
+  &lt;div class="odo-carousel__wrapper"&gt;
+    &lt;div class="odo-carousel__element"&gt;
+      &lt;div class="odo-carousel__slide" data-color="1"&gt;1&lt;/div&gt;
+      &lt;div class="odo-carousel__slide" data-color="2"&gt;2&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+      <h3>Setup</h3>
+      <pre><code class="language-javascript">var bidirectional = new OdoCarousel(document.getElementById('bidirectional'), {
+  isLooped: true,
+  pagination: true
+});</code></pre>
+    </section>
+
+    <section>
+      <h2 id="slideshow-title">Slideshow</h2>
+      <p>To autplay the carousel, you must start it with <code>startSlideshow()</code>. If the carousel is not looped, the slideshow will stop at the end.</p>
+      <p>
+        <span style="display:inline-block;">
+          <button id="pause">Pause</button>
+        </span>
+        <span style="display:inline-block;">
+          <button id="play">Play</button>
+        </span>
+      </p>
+
+      <div id="slideshow" class="odo-carousel">
+        <div class="odo-carousel__wrapper">
+          <div class="odo-carousel__element">
+            <div class="odo-carousel__slide" data-color="1"><div class="carousel-demo-inner"><span>1</span></div></div>
+            <div class="odo-carousel__slide" data-color="2"><div class="carousel-demo-inner"><span>2</span></div></div>
+            <div class="odo-carousel__slide" data-color="3"><div class="carousel-demo-inner"><span>3</span></div></div>
+            <div class="odo-carousel__slide" data-color="4"><div class="carousel-demo-inner"><span>4</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Setup</h3>
+      <pre><code class="language-javascript">var slideshow = new OdoCarousel(document.getElementById('slideshow'), {
+  slideshowSpeed: 1500,
+  animationSpeed: 600
+});</code></pre>
+
+      <h3>Playing and Pausing the Slideshow</h3>
+      <pre rel="JavaScript"><code class="language-javascript">startSlideshow();
+pauseSlideshow();</code></pre>
+    </section>
+
+    <section class="slide-children-demo">
+      <h2 id="slide-children-with-start-index-title">Slide Children with start index</h2>
+      <p>Add the special class name <code>odo-carousel__slide-child</code> and when the carousel gets to the last slide, it will use the widths of the slide children so that the whole last slide does not move over completely.</p>
+
+      <div id="slide-children" class="odo-carousel">
+        <div class="odo-carousel__wrapper">
+          <div class="odo-carousel__element">
+            <div class="odo-carousel__slide">
+              <div class="odo-carousel__slide-child third">
+                <div class="carousel-demo-inner"><span>1A</span></div>
+              </div>
+              <div class="odo-carousel__slide-child third">
+                <div class="carousel-demo-inner"><span>1B</span></div>
+              </div>
+              <div class="odo-carousel__slide-child third">
+                <div class="carousel-demo-inner"><span>1C</span></div>
+              </div>
+            </div>
+
+            <div class="odo-carousel__slide">
+              <div class="odo-carousel__slide-child third">
+                <div class="carousel-demo-inner"><span>2A</span></div>
+              </div>
+              <div class="odo-carousel__slide-child third">
+                <div class="carousel-demo-inner"><span>2B</span></div>
+              </div>
+              <div class="odo-carousel__slide-child third">
+                <div class="carousel-demo-inner"><span>2C</span></div>
+              </div>
+            </div>
+
+            <div class="odo-carousel__slide">
+              <div class="odo-carousel__slide-child third">
+                <div class="carousel-demo-inner"><span>3A</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Slide Markup</h3>
+      <pre><code class="language-markup">&lt;div class="odo-carousel__slide"&gt;
+  &lt;div class="odo-carousel__slide-child third"&gt;1A&lt;/div&gt;
+  &lt;div class="odo-carousel__slide-child third"&gt;1B&lt;/div&gt;
+  &lt;div class="odo-carousel__slide-child third"&gt;1C&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="odo-carousel__slide"&gt;
+  &lt;div class="odo-carousel__slide-child third"&gt;2A&lt;/div&gt;
+  &lt;div class="odo-carousel__slide-child third"&gt;2B&lt;/div&gt;
+  &lt;div class="odo-carousel__slide-child third"&gt;2C&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="odo-carousel__slide"&gt;
+  &lt;div class="odo-carousel__slide-child third"&gt;3A&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+      <h3>CSS</h3>
+      <pre><code class="language-css">.slide-children-demo .odo-carousel__slide-child.third {
+  float: left;
+  width: 33.333%;
+  height: 100%;
+}</code></pre>
+
+      <h3>Setup</h3>
+      <pre><code class="language-javascript">var slideChildren = new OdoCarousel(document.getElementById('slide-children'), {
+  startIndex: 1,
+  template: {
+    paddleNextInner: '&lt;div style="width:100%;height:100%;background-color:rgba(0, 0, 0, 0.5);border-radius:50%;"&gt;&lt;/div&gt;',
+    paddlePrevInner: '&lt;div style="width:100%;height:100%;background-color:rgba(0, 0, 0, 0.5);border-radius:50%;"&gt;&lt;/div&gt;'
+  }
+});</code></pre>
+    </section>
+
+    <section class="vertical-slide-children-demo">
+      <h2 id="vertical-slide-children-title">Vertical Slide Children</h2>
+
+      <div id="slide-children-vertical" class="odo-carousel odo-carousel--vertical">
+        <div class="odo-carousel__wrapper">
+          <div class="odo-carousel__element">
+            <div class="odo-carousel__slide">
+              <div class="odo-carousel__slide-child third">
+                <div class="carousel-demo-inner"><span>1A</span></div>
+              </div>
+              <div class="odo-carousel__slide-child third">
+                <div class="carousel-demo-inner"><span>1B</span></div>
+              </div>
+              <div class="odo-carousel__slide-child third">
+                <div class="carousel-demo-inner"><span>1C</span></div>
+              </div>
+            </div>
+
+            <div class="odo-carousel__slide">
+              <div class="odo-carousel__slide-child third">
+                <div class="carousel-demo-inner"><span>2A</span></div>
+              </div>
+              <div class="odo-carousel__slide-child third">
+                <div class="carousel-demo-inner"><span>2B</span></div>
+              </div>
+              <div class="odo-carousel__slide-child third">
+                <div class="carousel-demo-inner"><span>2C</span></div>
+              </div>
+            </div>
+
+            <div class="odo-carousel__slide">
+              <div class="odo-carousel__slide-child third">
+                <div class="carousel-demo-inner"><span>3A</span></div>
+              </div>
+              <div class="odo-carousel__slide-child third">
+                <div class="carousel-demo-inner"><span>3B</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <h3>Slide Markup</h3>
+      <pre><code class="language-markup">&lt;div class="odo-carousel__slide"&gt;
+  &lt;div class="odo-carousel__slide-child third"&gt;1A&lt;/div&gt;
+  &lt;div class="odo-carousel__slide-child third"&gt;1B&lt;/div&gt;
+  &lt;div class="odo-carousel__slide-child third"&gt;1C&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="odo-carousel__slide"&gt;
+  &lt;div class="odo-carousel__slide-child third"&gt;2A&lt;/div&gt;
+  &lt;div class="odo-carousel__slide-child third"&gt;2B&lt;/div&gt;
+  &lt;div class="odo-carousel__slide-child third"&gt;2C&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="odo-carousel__slide"&gt;
+  &lt;div class="odo-carousel__slide-child third"&gt;3A&lt;/div&gt;
+  &lt;div class="odo-carousel__slide-child third"&gt;3B&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+      <h3>CSS</h3>
+      <pre><code class="language-css">.vertical-slide-children-demo .odo-carousel__slide-child.third {
+  width: 100%;
+  height: 33.333%;
+}</code></pre>
+    </section>
+
+    <section>
+      <h2 id="fading-carousel-title">Fading Carousel</h2>
+      <p>These behave like slideshows. They have touch/pointer/mouse events bound to them and will change slides when it interprets a horizontal swipe. Devices without CSS transitions will not see a fade animation (IE9).</p>
+      <div id="darth-fader" class="odo-carousel odo-carousel--fade">
+        <div class="odo-carousel__wrapper">
+          <div class="odo-carousel__element">
+            <div class="odo-carousel__slide" data-color="1">
+              <div class="carousel-demo-inner">
+                <span>1</span>
+              </div>
+            </div>
+            <div class="odo-carousel__slide" data-color="2">
+              <div class="carousel-demo-inner">
+                <span>2</span>
+              </div>
+            </div>
+            <div class="odo-carousel__slide" data-color="3">
+              <div class="carousel-demo-inner">
+                <span>3</span>
+              </div>
+            </div>
+            <div class="odo-carousel__slide" data-color="4">
+              <div class="carousel-demo-inner">
+                <span>4</span>
+              </div>
+            </div>
+            <div class="odo-carousel__slide" data-color="5">
+              <div class="carousel-demo-inner">
+                <span>5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <h3>Slide Markup</h3>
+      <p>Is the same as regular carousels, except the main carousel element has a <code>odo-carousel--fade</code> class on it.</p>
+      <pre><code class="language-markup">&lt;div id="darth-fader" class="odo-carousel odo-carousel--fade"&gt;
+  &lt;div class="odo-carousel__wrapper"&gt;
+    &lt;div class="odo-carousel__element"&gt;
+      &lt;div class="odo-carousel__slide" data-color="1"&gt;1&lt;/div&gt;
+      &lt;div class="odo-carousel__slide" data-color="2"&gt;2&lt;/div&gt;
+      &lt;div class="odo-carousel__slide" data-color="3"&gt;3&lt;/div&gt;
+      &lt;div class="odo-carousel__slide" data-color="4"&gt;4&lt;/div&gt;
+      &lt;div class="odo-carousel__slide" data-color="5"&gt;5&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+      <h3>Setup</h3>
+      <p>The only extra option with fading carousels is <code>crossfadeAmount</code>, which is a number between [inclusive] <code>0.0</code> and <code>1.0</code>. A crossfade of 1.0 means that both slides will fade at the same time. A crossfade of zero means the previous slide will wait until the next slide has completely faded in before it fades out.</p>
+      <pre><code class="language-javascript">var darthFader = new OdoCarousel(document.getElementById('darth-fader'), {
+  isFade: true,
+  isLooped: true
+});</code></pre>
+    </section>
+
+    <section>
+      <h2 id="events-title">Events</h2>
+      <p>Odo Carousel emits 3 events: <code>WILL_NAVIGATE</code>, <code>SLIDE_START</code>, and <code>SLIDE_END</code>. If the <code>preventDefault</code> method is called on the event object from the <code>WILL_NAVIGATE</code> event, it will prevent the carousel from navigating. The <code>SLIDE_START</code> and <code>SLIDE_END</code> events contain useful properties for customizing your own carousel: <code>event.from</code> index, <code>event.to</code> index, and <code>event.hasSlideChanged</code> (the slide could animate back to the closest slide instead of going to a new one).</p>
+      <pre><code class="language-javascript">var regular = new OdoCarousel(document.getElementById('regular'));
+
+regular.on(OdoCarousel.EventType.SLIDE_END, function (event) {
+  console.log(event);
+});</code></pre>
+    </section>
+
+    <section>
+      <h2 id="options-title">Options</h2>
+      <p>These are the default options for the carousel. They can all be overridden.</p>
+
+      <pre><code class="language-javascript">Defaults: {
+  startIndex: 0,
+  isVertical: false,
+  isLooped: false,
+  isJumped: false,
+  isFade: false,
+  isCentered: false,
+  neighborCount: 1,
+  slideshowSpeed: 1000,
+  animationSpeed: 400,
+  crossfadeAmount: 0.875,
+  easing: 'cubic-bezier(0.250, 0.460, 0.450, 0.940)',
+  pagination: false,
+  getNavPaddleHtml: null,
+  getPaginationHtml: null,
+  template: {
+    paddles: '&lt;nav class="odo-carousel__nav-paddles">{{ prev }}{{ next }}&lt;/nav&gt;',
+    paddleNext: '&lt;a href="javascript:void(0)" class="odo-carousel__nav-paddle odo-carousel__nav-next"&gt;{{ paddleInner }}&lt;/a&gt;',
+    paddlePrev: '&lt;a href="javascript:void(0)" class="odo-carousel__nav-paddle odo-carousel__nav-prev"&gt;{{ paddleInner }}&lt;/a&gt;',
+    paddleNextInner: '&lt;svg viewBox="75.4 27 461.2 738"&gt;&lt;path d="M167.7 27l368.9 369-368.9 369-92.3-92.3 276.7-276.7-276.7-276.7z"/&gt;&lt;/svg&gt;',
+    paddlePrevInner: '&lt;svg viewBox="75.396 26.994 461.208 738.012"&gt;&lt;path d="M444.336 765.006l-368.94-369.006 368.94-369.006 92.268 92.268-276.738 276.738 276.738 276.738z"/&gt;&lt;/svg&gt;',
+    pagination: '&lt;nav class="odo-carousel__pagination"&gt;{{ dots }}&lt;/nav&gt;',
+    paginationDot: '&lt;a href="javascript:void(0)" class="odo-carousel__pagination-dot" data-index="{{ index }}"&gt;&lt;/a&gt;',
+    paginationDotSecondary: '&lt;a href="javascript:void(0)" class="odo-carousel__pagination-dot" data-index="{{ index }}" data-secondary-index="{{ secondaryIndex }}" data-hidden="{{ hidden }}"&gt;&lt;/a&gt;',
+  },
+}</code></pre>
+
+      <h3>Templates</h3>
+      <p>The carousel uses a simple template engine to replace double curlies with data for the paddles and pagination. You can either change a single template with the the template options, or completely change the structure using <code>getNavPaddleHtml</code> and <code>getPaginationHtml</code>. Here&rsquo;s a few examples of how the templates work which you can paste in the console.</p>
+
+      <pre><code class="language-javascript">OdoCarousel.template("Today is {{ day }}", {
+  day: 'Friday'
+}); // "Today is Friday"
+
+OdoCarousel.template("Today is {{ month.day }}", {
+  month: {
+    day: "Friday"
+  }
+}); // "Today is Friday
+
+OdoCarousel.template("Today is {{ day }}", {
+  dayOfTheWeek: 'Friday',
+  day: function () {
+    return this.dayOfTheWeek;
+  }
+}); // "Today is Friday"
+</code></pre>
+
+      <p>To customize the structure of paddles or pagination, use the <code>getNavPaddleHtml</code> and <code>getPaginationHtml</code> methods, respectively. Like the <em>Vertical and Looped</em> example, you need to return a string for the carousel to use (it can be empty). Click events on the carousel are delegated, so anything inside the main carousel element with the pagination dot class or next/previous class will trigger the carousel to navigate.</p>
+    </section>
+
+  </div>
+</main>
+  <!-- Polyfills -->
+  <script src="../node_modules/classlist.js/classList.min.js"></script>
+  <script src="../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Dependencies. -->
+  <script src="../node_modules/tiny-emitter/dist/tinyemitter.min.js"></script>
+  <script src="../odo-device/dist/odo-device.min.js"></script>
+  <script src="../odo-helpers/dist/odo-helpers.min.js"></script>
+  <script src="../odo-pointer/dist/odo-pointer.min.js"></script>
+  <script src="../odo-draggable/dist/odo-draggable.min.js"></script>
+
+  <!-- Source. -->
+  <script src="dist/odo-carousel.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.4.1/prism.js"></script>
+
+</body>
+
+</html>

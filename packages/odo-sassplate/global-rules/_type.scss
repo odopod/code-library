@@ -1,0 +1,45 @@
+// Things you should add:
+// body color. Do you want font-smoothing on?
+// default link styling `main a[href]:not([class])`
+
+code:not([class*="language"]) {
+  display: inline-block;
+  padding: 1px 0 2px;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgb(245, 245, 245);
+  border-radius: 3px;
+  font-family: Menlo, Consolas, "Liberation Mono", Courier, monospace;
+}
+
+code:not([class*="language"])::before,
+code:not([class*="language"])::after {
+  content: "\00a0";
+  letter-spacing: -.2em;
+}
+
+// Loop through each type section (Headers, Body-Copy, etc.)
+@each $typeSection, $typeSectionDefinitions in $type-definitions {
+  @include sassplate-process-components($typeSectionDefinitions);
+}
+
+// TODO Make more generic? e.g. [class*="type-body-"] .text-link
+.type-body-5 .text-link {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.type--uppercase { text-transform: uppercase; };
+.type--italic { font-style: italic; };
+.type--bold { font-weight: bold; }
+.type--regular { font-weight: normal; }
+.type--thin {font-weight: lighter; }
+.type--left { text-align: left; }
+.type--center { text-align: center; }
+.type--right { text-align: right; }
+.type--overflow { @include text-overflow(); }
+
+// Needs important to override margin-bottom on classes which already have a margin-bottom
+.type--flat-btm { margin-bottom: $text-flat-btm-amount !important; }
+.type--flat-btm\:last:last-child { margin-bottom: $text-flat-btm-amount !important; }
+.type--auto-top { margin-top: auto; }

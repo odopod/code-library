@@ -1,0 +1,77 @@
+// Responsive Utility Classes
+//
+// !important is used because these classes are global overrides to visibility,
+// and should be able to determine visibility at the intended breakpoint and
+// should supersede any others rules.
+
+$hiddenClass: ".hidden\\@";
+
+@include breakpoint(sm, true) {
+  .type--left\@xs { text-align: left; }
+  .type--center\@xs { text-align: center; }
+  .type--right\@xs { text-align: right; }
+
+  #{$hiddenClass}xs,
+  #{$hiddenClass}xs-sm,
+  #{$hiddenClass}xs-md,
+  #{$hiddenClass}xs-lg,
+  #{$hiddenClass}xs-sm-md,
+  #{$hiddenClass}xs-sm-lg,
+  #{$hiddenClass}xs-md-lg {
+    display: none !important;
+  }
+}
+
+@include breakpoints(sm, md) {
+  #{$hiddenClass}sm,
+  #{$hiddenClass}xs-sm,
+  #{$hiddenClass}sm-md,
+  #{$hiddenClass}sm-lg,
+  #{$hiddenClass}xs-sm-md,
+  #{$hiddenClass}xs-sm-lg,
+  #{$hiddenClass}sm-md-lg {
+    display: none !important;
+  }
+}
+
+@include breakpoint(sm) {
+  .type--left\@sm\+ { text-align: left; }
+  .type--center\@sm\+ { text-align: center; }
+  .type--right\@sm\+ { text-align: right; }
+}
+
+@include breakpoints(md, lg) {
+  #{$hiddenClass}md,
+  #{$hiddenClass}sm-md,
+  #{$hiddenClass}xs-md,
+  #{$hiddenClass}md-lg,
+  #{$hiddenClass}xs-sm-md,
+  #{$hiddenClass}sm-md-lg,
+  #{$hiddenClass}xs-md-lg {
+    display: none !important;
+  }
+}
+
+@include breakpoint(md) {
+  .type--left\@md\+ { text-align: left; }
+  .type--center\@md\+ { text-align: center; }
+  .type--right\@md\+ { text-align: right; }
+}
+
+@include breakpoint(lg) {
+  #{$hiddenClass}lg,
+  #{$hiddenClass}sm-lg,
+  #{$hiddenClass}md-lg,
+  #{$hiddenClass}xs-lg,
+  #{$hiddenClass}sm-md-lg,
+  #{$hiddenClass}xs-sm-lg,
+  #{$hiddenClass}xs-md-lg {
+    display: none !important;
+  }
+}
+
+@include breakpoint(lg) {
+  .type--left\@lg\+ { text-align: left; }
+  .type--center\@lg\+ { text-align: center; }
+  .type--right\@lg\+ { text-align: right; }
+}

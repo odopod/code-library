@@ -1,0 +1,35 @@
+{
+  "name": "@odopod/odo-sassplate",
+  "description": "Delete-key friendly SCSS boilerplate.",
+  "version": "1.0.0",
+  "main": "gulpfile.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
+    }
+  ],
+  "dependencies": {
+    "normalize.css": "^7.0.0"
+  },
+  "devDependencies": {
+    "@odopod/style-guide": "1.0.0",
+    "mkdirp": "^0.5.1",
+    "node-sass": "^4.3.0",
+    "node-sass-json-importer": "^3.0.0",
+    "sass-true": "^2.1.4"
+  },
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-sassplate",
+  "files": [
+    "components",
+    "extensions",
+    "global-rules",
+    "styles.scss"
+  ],
+  "license": "MIT",
+  "repository": "odopod/odo",
+  "scripts": {
+    "test": "../../node_modules/.bin/mocha tests/test.js"
+  }
+}

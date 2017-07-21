@@ -1,0 +1,211 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viewport Demo</title>
+  <link rel="stylesheet" href="../../../docs/demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.4.1/themes/prism.css">
+</head>
+
+<body>
+
+  <main role="main">
+
+    <div class="ruler">
+      <div class="ruler__tick ruler__tick--25pct"><span class="ruler__tick-text">25%</span></div>
+      <div class="ruler__tick ruler__tick--50pct"><span class="ruler__tick-text">50%</span></div>
+      <div class="ruler__tick ruler__tick--75pct"><span class="ruler__tick-text">75%</span></div>
+      <div class="ruler__tick ruler__tick--100pct"><span class="ruler__tick-text">100%</span></div>
+      <div class="ruler__tick ruler__tick--200px"><span class="ruler__tick-text">200px</span></div>
+      <div class="ruler__tick ruler__tick--100px"><span class="ruler__tick-text">100px</span></div>
+    </div>
+
+    <div class="container">
+
+      <h1 id="title">Odo Viewport</h1>
+      <p>Viewport enter and exit monitoring for elements.</p>
+      <h3>Support</h3>
+      <p>IE9+. This component expects <code>window.requestAnimationFrame</code> and <code>window.cancelAnimationFrame</code> to exist. A <a href="scripts/raf.js">polyfill is included</a> on the page for demo and testing purposes, but it&rsquo;s likely you already have this in your project.</p>
+      <h3>Dependencies</h3>
+      <p>Odo Window Events, ES6 <code>Object.assign</code> and <code>Map</code>.</p>
+
+      <div class="space-bottom">
+        <button id="ruler-toggle">Extend Ruler</button>
+      </div>
+      <div class="filler">filler</div>
+      <div class="filler">filler</div>
+      <div class="filler">filler</div>
+
+      <section>
+        <h2>Viewport Enter</h2>
+        <p>This example only registers a <code>enter</code> handler. After it is called, the viewport item is removed from the viewport instance&rsquo;s list of viewport items. If there are no more viewport items left to watch, the viewport instance will remove its window scroll and resize listeners. Adding a new viewport item will trigger the viewport instance to add the listeners again.</p>
+
+        <div id="demo-enter" class="viewport-demo-element"></div>
+
+        <h3>Setup</h3>
+        <pre><code class="language-javascript">OdoViewport.add({
+  element: document.getElementById('demo-enter'),
+  enter: function () {
+    this.className += ' is-in-view';
+  }
+});</code></pre>
+
+        <p>Inside the callback, <code>this</code> is the element (demo-enter here). The first parameter is the <code>ViewportItem</code>.</p>
+      </section>
+
+    </div>
+    <section>
+      <div class="container">
+        <h2>Viewport Enter and Exit</h2>
+        <p>The <code>exit</code> callback will be triggered once the element has completely left the viewport after entering it.</p>
+
+        <div id="demo-enter-exit" class="viewport-demo-element"></div>
+
+        <h3>Setup</h3>
+        <pre><code class="language-javascript">OdoViewport.add({
+  element: document.getElementById('demo-enter-exit'),
+  enter: function () {
+    this.setAttribute('in-view', true);
+  },
+  exit: function () {
+    this.removeAttribute('in-view');
+  }
+});</code></pre>
+      </div>
+
+      <div class="container">
+        <h3>An element which could span the viewport</h3>
+      </div>
+      <div style="position:relative;height:0;padding-bottom:56.25%;width:100%;overflow:hidden;">
+        <div id="demo-enter-exit-full" class="viewport-demo-element" style="position:absolute;top:0;left:0;height:100%;width:100%;"></div>
+      </div>
+    </section>
+
+    <div class="container">
+      <section>
+        <h2>Threshold</h2>
+        <p>A threshold can be set to determine when the element is &ldquo;in view&rdquo;. The default is <code>200</code> pixels. This value can also be a percentage string, like <code>'50%'</code> or a value between zero and one which represents a percentage e.g. <code>0.4</code>. The offset is from the top of the element and the percentage refers to the height of the viewport.</p>
+
+        <h4><code>50</code> Pixel Threshold</h4>
+        <div id="demo-threshold-50" class="viewport-demo-element"></div>
+
+        <pre><code class="language-javascript">OdoViewport.add({
+  element: document.getElementById('demo-threshold-50'),
+  threshold: 50,
+  enter: function () {
+    this.setAttribute('in-view', true);
+  },
+  exit: function () {
+    this.removeAttribute('in-view');
+  }
+});</code></pre>
+
+        <h4><code>'50%'</code> Threshold</h4>
+        <div id="demo-threshold-percent" class="viewport-demo-element"></div>
+
+        <pre><code class="language-javascript">OdoViewport.add({
+  element: document.getElementById('demo-threshold-percent'),
+  threshold: '50%',
+  enter: function () {
+    this.setAttribute('in-view', true);
+  },
+  exit: function () {
+    this.removeAttribute('in-view');
+  }
+});</code></pre>
+
+        <h4><code>-300</code> Pixel Threshold</h4>
+        <div id="demo-threshold-negative" class="viewport-demo-element"></div>
+
+        <pre><code class="language-javascript">OdoViewport.add({
+  element: document.getElementById('demo-threshold-negative'),
+  threshold: -300,
+  enter: function () {
+    this.setAttribute('in-view', true);
+  },
+  exit: function () {
+    this.removeAttribute('in-view');
+  }
+});</code></pre>
+      </section>
+
+      <section>
+        <h2>Offsets</h2>
+        <p>The viewport component is highly dependent on correct offset values. If you have responsive images which load when near the viewport, or code blocks which are transformed, or anything else that <strong>changes the offset</strong> of the <strong>element</strong> being watched, you must notify the viewport component. Offsets are updated on window resize.</p>
+
+        <pre><code class="language-javascript">// Update element width, height, offset, and process new values.
+OdoViewport.update();</code></pre>
+      </section>
+
+      <section>
+        <h2>Removing Viewport Items</h2>
+        <p>To properly destroy a viewport item, use the static <code>remove</code> method with the id which <code>add</code> returns.</p>
+
+        <pre><code class="language-javascript">var enterExitId = OdoViewport.add({
+  element: document.getElementById('demo-enter-exit'),
+  enter: function () {
+    this.setAttribute('in-view', true);
+  },
+  exit: function () {
+    this.removeAttribute('in-view');
+  }
+});
+
+OdoViewport.remove(enterExitId);</code></pre>
+      </section>
+    </div>
+    <div class="hidden-overflow">
+      <section class="container">
+        <h2>Horizontal Offset Elements</h2>
+        <p>Elements which are outside the viewport horizontally are not considered to be "in view". Carousels, for example, often have slides outside the horizontal viewport.</p>
+
+        <div class="fake-carousel">
+          <div class="fake-carousel__element clearfix space-bottom">
+            <div class="fake-carousel__slide">
+              <div class="viewport-demo-element">1</div>
+            </div>
+            <div class="fake-carousel__slide">
+              <div class="viewport-demo-element">2</div>
+            </div>
+            <div class="fake-carousel__slide">
+              <div class="viewport-demo-element">3</div>
+            </div>
+            <div class="fake-carousel__slide">
+              <div class="viewport-demo-element">4</div>
+            </div>
+          </div>
+          <div class="controls fake-carousel__controls">
+            <button class="fake-carousel__previous">Previous</button>
+            <button class="fake-carousel__next">Next</button>
+            <button class="fake-carousel__update">Update Viewport Offsets</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Polyfills -->
+  <script src="scripts/raf.js"></script>
+  <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Dependencies. -->
+  <script src="../node_modules/@odopod/odo-window-events/dist/odo-window-events.min.js"></script>
+
+  <!-- Minified Source. -->
+  <script src="../dist/odo-viewport.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.4.1/prism.js"></script>
+
+</body>
+
+</html>

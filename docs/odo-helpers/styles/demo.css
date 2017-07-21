@@ -1,0 +1,60 @@
+.example + .example {
+  border-top: 2px solid #32b353;
+  margin-top: 2em;
+}
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.alert--warning {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+}
+
+.fade {
+  -webkit-transition: opacity 150ms ease-out;
+          transition: opacity 150ms ease-out;
+  opacity: 0;
+}
+
+.fade.in {
+  opacity: 1;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.block--dom {
+  -webkit-transition: background-color 800ms ease-out;
+          transition: background-color 800ms ease-out;
+}
+
+.block--aim {
+  background-color: red !important;
+}
+
+.block--fired {
+  background-color: green !important;
+}
+
+.inline-middle {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.inline-middle + .inline-middle {
+  margin-left: 10px;
+}
+
+.time-text {
+  font-size: .75em;
+  color: blue;
+}
+
+

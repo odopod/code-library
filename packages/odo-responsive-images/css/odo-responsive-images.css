@@ -1,0 +1,28 @@
+picture,
+picture img,
+.odo-responsive-img img {
+  display: block;
+}
+
+.odo-responsive-img {
+  opacity: 0;
+  -webkit-transition: opacity 400ms ease-out;
+          transition: opacity 400ms ease-out;
+}
+
+.no-js .odo-responsive-img,
+.odo-responsive-img--loaded {
+  opacity: 1;
+}
+
+.odo-responsive-img[data-type="background"] img {
+  visibility: hidden;
+}
+
+.no-js .odo-responsive-img > img {
+  display: none;
+}
+
+.no-js .odo-responsive-img[data-type="background"] img {
+  visibility: visible;
+}

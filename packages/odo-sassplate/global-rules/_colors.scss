@@ -1,0 +1,30 @@
+
+@each $name, $value in $colors {
+  $name: inspect($name);
+  .type--#{$name} {
+    color: $value;
+  }
+
+  .fill--#{$name} {
+    fill: $value !important; // Override `.text-link .icon` rule
+  }
+
+  .stroke--#{$name} {
+    stroke: $value;
+  }
+
+  .background--#{$name} {
+    background-color: $value;
+  }
+}
+
+@each $name, $values in $gradients {
+  $cFrom: map-get($values, 'from');
+  $cTo: map-get($values, 'to');
+
+  $dir: if(map-has-key($values, 'direction'), map-get($values, 'direction'), to bottom right);
+
+  .background--#{inspect($name)} {
+    background-image: linear-gradient($dir, $cFrom, $cTo);
+  }
+}

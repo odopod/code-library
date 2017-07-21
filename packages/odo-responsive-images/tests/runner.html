@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mocha Test Runner</title>
+  <link rel="stylesheet" href="../../../node_modules/mocha/mocha.css">
+  <link rel="stylesheet" href="../css/odo-responsive-images.css" />
+  <!--[if IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/2014.01.31/classList.min.js"></script><![endif]-->
+</head>
+
+<body>
+
+  <div id="mocha"></div>
+
+  <div id="basic-fixture" style="display:none;">
+    <div class="odo-responsive-img">
+      <!--[if IE 9]><video style="display: none;"><![endif]-->
+      <source srcset="1x1.jpg" media="(min-width: 992px)">
+      <source srcset="1x1.jpg" media="(min-width: 768px)">
+      <source srcset="1x1.jpg">
+      <!--[if IE 9]></video><![endif]-->
+      <img alt="picture 1 description">
+      <noscript>
+        <img src="1x1.jpg" alt="picture 1 description">
+      </noscript>
+    </div>
+  </div>
+
+  <div id="background-fixture" style="display:none;">
+    <div class="odo-responsive-img" data-type="background">
+      <!--[if IE 9]><video style="display: none;"><![endif]-->
+      <source srcset="1x1.jpg" media="(min-width: 992px)">
+      <source srcset="1x1.jpg" media="(min-width: 768px)">
+      <source srcset="1x1.jpg">
+      <!--[if IE 9]></video><![endif]-->
+      <img alt="picture 1 description">
+      <noscript>
+        <img src="1x1.jpg" alt="picture 1 description">
+      </noscript>
+    </div>
+  </div>
+
+  <div id="srcset-fixture" style="display:none;">
+    <div class="odo-responsive-img">
+      <img data-srcset="
+        1x1.jpg 1w,
+        1x1.jpg 1w,
+        1x1.jpg 1w,
+        1x1.jpg 1w" sizes="(min-width:1291px) 1200px, 93vw" alt="I have a source set">
+    </div>
+  </div>
+
+  <div id="srcset-background-fixture" style="display:none;">
+    <div class="odo-responsive-img" data-type="background">
+      <img data-srcset="
+        1x1.jpg 1w,
+        1x1.jpg 1w,
+        1x1.jpg 1w,
+        1x1.jpg 1w" sizes="(min-width:1291px) 1200px, 93vw" alt="I have a source set">
+    </div>
+  </div>
+
+  <div id="threshold-fixture" style="display:none;">
+    <div class="odo-responsive-img" data-threshold="200">
+      <!--[if IE 9]><video style="display: none;"><![endif]-->
+      <source srcset="1x1.jpg" media="(min-width: 992px)">
+      <source srcset="1x1.jpg" media="(min-width: 768px)">
+      <source srcset="1x1.jpg">
+      <!--[if IE 9]></video><![endif]-->
+      <img alt="picture 1 description">
+      <noscript>
+        <img src="1x1.jpg" alt="picture 1 description">
+      </noscript>
+    </div>
+  </div>
+
+  <!-- Polyfills -->
+  <script src="../demos/scripts/raf.js"></script>
+  <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Testing Framework. -->
+  <script src="../../../node_modules/mocha/mocha.js"></script>
+  <script src="../../../node_modules/chai/chai.js"></script>
+  <script src="../../../node_modules/sinon/pkg/sinon.js"></script>
+
+  <!-- Dependencies -->
+  <script src="../node_modules/@odopod/odo-window-events/dist/odo-window-events.min.js"></script>
+  <script src="../node_modules/@odopod/odo-viewport/dist/odo-viewport.min.js"></script>
+  <script src="../node_modules/picturefill/dist/picturefill.min.js"></script>
+
+  <script>
+    var count = 0;
+    function uniqueId() {
+      return 'unique' + count++;
+    }
+    window.sinon.stub(window.OdoViewport, 'add').callsFake(function (options) {
+      if (Array.isArray(options)) {
+        return options.map(uniqueId);
+      }
+
+      return uniqueId();
+    });
+    window.sinon.stub(window.OdoViewport, 'update');
+    window.sinon.stub(window.OdoViewport, 'remove');
+  </script>
+
+  <script>
+  window.expect = chai.expect;
+  mocha.setup('bdd');
+
+  var resource;
+  // Add ?debug to the url to use the instrumented code when not in PhantomJS
+  if (window._phantom || window.location.search.indexOf('debug') > -1) {
+    resource = '../dist/odo-responsive-images.instrumented.js';
+  } else {
+    resource = '../dist/odo-responsive-images.js';
+  }
+
+  document.write('<script src="' + resource + '"><\/script>');
+  </script>
+
+  <!-- Specs. -->
+  <script src="specs.js"></script>
+
+  <script>mocha.run();</script>
+</body>
+
+</html>

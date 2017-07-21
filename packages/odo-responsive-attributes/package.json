@@ -1,0 +1,41 @@
+{
+  "name": "@odopod/odo-responsive-attributes",
+  "description": "Parse data attributes with respect to their breakpoints.",
+  "version": "1.0.0",
+  "main": "dist/odo-responsive-attributes.js",
+  "odoModule": "src/responsive-attributes.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
+    }
+  ],
+  "dependencies": {
+    "@odopod/odo-base-component": "../odo-base-component"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-responsive-attributes",
+  "files": [
+    "css",
+    "dist",
+    "src",
+    "index.js"
+  ],
+  "odoKeywords": [
+    "utilities"
+  ],
+  "keywords": [
+    "odo",
+    "odo-component",
+    "odopod",
+    "responsive",
+    "attribute"
+  ],
+  "license": "MIT",
+  "repository": "odopod/odo",
+  "scripts": {
+    "link-local": "node ../../scripts/link-local-packages.js",
+    "test": "gulp code-quality test"
+  }
+}

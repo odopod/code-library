@@ -1,0 +1,17 @@
+
+@each $componentSection, $componentSectionDefinitions in $ui-components {
+  // $componentSection: Buttons, etc. Not needed here - they're for Docs.
+  @include sassplate-process-components($componentSectionDefinitions);
+};
+
+// Remove pointer events from svg elements inside buttons because they sometimes
+// make them unclickable.
+// `pointer-events` works in IE9+ because it's on an SVG element.
+// https://css-tricks.com/links-inline-svg-staying-target-events/
+// IE 11 / Win 7 bug:
+// https://connect.microsoft.com/IE/feedback/details/796745/mouse-events-are-not-delivered-at-all-anymore-when-inside-an-svg-a-use-is-removed-from-the-dom
+// Suggested workaround is to target `<use>` instead of `<svg>`.
+a svg.icon use,
+button svg.icon use {
+  pointer-events: none;
+}

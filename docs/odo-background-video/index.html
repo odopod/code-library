@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Odo Background Video Demo</title>
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.5.1/themes/prism.css">
+
+  <link rel="stylesheet" href="../demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+  <link rel="stylesheet" href="css/odo-background-video.css">
+  <link rel="stylesheet" href="../odo-responsive-images/css/odo-responsive-images.css"/>
+  <link rel="stylesheet" href="../odo-video/css/odo-video.css"/>
+</head>
+
+<body>
+
+<main role="main">
+  <div class="container">
+
+    <h1>Odo Background Video</h1>
+    <p>Add a odo video component which plays in the background when the element comes into view and falls back to an image if the browser cannot autoplay video.</p>
+    <h3>Support</h3>
+    <p>IE9+</p>
+    <h3>Dependencies</h3>
+    <p>Odo Object Fit, Odo Responsive Images, Odo Video, Odo Viewport, Odo Window Events</p>
+  </div>
+
+  <div>
+    <div class="aspect aspect--16x9">
+      <div class="aspect-inner">
+        <div id="background-example-one" class="odo-background-video">
+          <div class="odo-background-video__fallback-img hidden">
+            <!--[if IE 9]><video style="display: none;"><![endif]-->
+            <source srcset="https://source.unsplash.com/category/buildings/1024x400" media="(min-width: 1024px)">
+            <source srcset="https://source.unsplash.com/category/technology/768x300" media="(min-width: 768px)">
+            <source srcset="https://source.unsplash.com/category/nature/480x200">
+            <!--[if IE 9]></video><![endif]-->
+            <img alt="test image">
+            <noscript>
+              <img src="https://source.unsplash.com/category/nature/480x200" alt="test image">
+            </noscript>
+          </div>
+          <div class="odo-video hidden">
+            <video preload="auto" loop muted playsinline>
+              <source src="https://d1235ca2z646oc.cloudfront.net/videos/processed/33/ColdWinterDream-HD.mp4.webm" type="video/webm"/>
+              <source src="https://d1235ca2z646oc.cloudfront.net/videos/processed/33/ColdWinterDream-HD.mp4.mp4" type="video/mp4"/>
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <blockquote class="container" cite="http://www.wedistill.io/videos/coldwinterdream-hd">
+      Video by Denis Despair on <a href="http://www.wedistill.io/videos/coldwinterdream-hd">wedistill.io</a>
+    </blockquote>
+  </div>
+
+  <div class="container">
+    <h2>Basic Odo Background Video</h2>
+    <h3>Markup</h3>
+    <p>The image fallback for this component is a Odo Responsive Image which defers loading. It uses the same markup, except the <code>.odo-responsive-img</code> class is removed until this component knows whether the browser can autoplay video or not.</p>
+<pre><code class="language-markup">&lt;div id="background-example-one" class="odo-background-video"&gt;
+  &lt;div class="odo-background-video__fallback-img hidden"&gt;
+    &lt;!--[if IE 9]&gt;&lt;video style="display: none;"&gt;&lt;![endif]--&gt;
+    &lt;source srcset="https://source.unsplash.com/category/buildings/800x400" media="(min-width: 992px)"&gt;
+    &lt;source srcset="https://source.unsplash.com/category/technology/600x300" media="(min-width: 768px)"&gt;
+    &lt;source srcset="https://source.unsplash.com/category/nature/400x200"&gt;
+    &lt;!--[if IE 9]&gt;&lt;/video&gt;&lt;![endif]--&gt;
+    &lt;img alt="picture 1 description"&gt;
+    &lt;noscript&gt;
+      &lt;img src="https://source.unsplash.com/category/nature/400x200" alt="picture 1 description"&gt;
+    &lt;/noscript&gt;
+  &lt;/div&gt;
+  &lt;div class="odo-video hidden"&gt;
+    &lt;video preload="auto" loop muted playsinline&gt;
+      &lt;source src="https://d1235ca2z646oc.cloudfront.net/videos/processed/33/ColdWinterDream-HD.mp4.webm" type="video/webm"/&gt;
+      &lt;source src="https://d1235ca2z646oc.cloudfront.net/videos/processed/33/ColdWinterDream-HD.mp4.mp4" type="video/mp4"/&gt;
+    &lt;/video&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre><br/>
+    <h3> Setup </h3>
+    <pre><code class="language-javascript">var backgroundOne = new OdoBackgroundVideo(document.querySelector('#background-example-one'));</code></pre>
+
+    <h3>Public Methods</h3>
+    <p>The following properties are available on the <code>OdoBackgroundVideo</code> instance</p>
+    <pre><code class="language-javascript">var video = instance.videoElement; // getter that returns the DOM video element
+var image = instance.imageElement; // getter that returns the DOM image element</code></pre>
+  </div>
+</main>
+
+  <!-- Polyfills -->
+  <script src="../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Dependencies. -->
+  <script src="../node_modules/picturefill/dist/picturefill.min.js"></script>
+  <script src="../node_modules/screenfull/dist/screenfull.js"></script>
+  <script src="../odo-window-events/dist/odo-window-events.js"></script>
+  <script src="../odo-object-fit/dist/odo-object-fit.js"></script>
+  <script src="../odo-viewport/dist/odo-viewport.js"></script>
+  <script src="../odo-responsive-images/dist/odo-responsive-images.js"></script>
+  <script src="../odo-video/dist/odo-video.js"></script>
+
+  <!-- Minified Source. -->
+  <script src="dist/odo-background-video.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.5.1/prism.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,726 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Odo &middot; A collection of JavaScript components by Odopod</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="demo.css">
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+    <div class="odient"></div>
+    <main role="main">
+
+      <div class="container intro">
+        <div class="row">
+          <div class="col-12@sm">
+            <h1 class="type-display-title">Odopod Code Library</h1>
+          </div>
+          <div class="col-9@sm">
+            <p class="type-display-subhead">A collection of vanilla JavaScript components used in <a href="http://www.odopod.com">
+              <svg viewBox="0 0 136 39.207" enable-background="new 0 0 136 39.207"><title>odopod</title><g><path d="M37.982 0v11.113c-1.442-.834-3.116-1.312-4.901-1.312-5.413 0-9.802 4.388-9.802 9.802s4.388 9.802 9.802 9.802 9.802-4.388 9.802-9.802v-19.603h-4.901zm-4.901 24.505c-2.707 0-4.901-2.194-4.901-4.901s2.194-4.901 4.901-4.901 4.901 2.194 4.901 4.901c0 2.706-2.194 4.901-4.901 4.901zM9.802 9.802c-5.414 0-9.802 4.388-9.802 9.802s4.388 9.802 9.802 9.802 9.802-4.388 9.802-9.802-4.389-9.802-9.802-9.802zm0 14.703c-2.707 0-4.901-2.194-4.901-4.901s2.194-4.901 4.901-4.901 4.901 2.194 4.901 4.901-2.195 4.901-4.901 4.901zM131.099 0v11.113c-1.442-.834-3.116-1.312-4.901-1.312-5.413 0-9.802 4.388-9.802 9.802s4.388 9.802 9.802 9.802c5.413 0 9.802-4.388 9.802-9.802v-19.603h-4.901zm-4.901 24.505c-2.707 0-4.901-2.194-4.901-4.901s2.194-4.901 4.901-4.901 4.901 2.194 4.901 4.901c0 2.706-2.194 4.901-4.901 4.901zM102.919 9.802c-5.413 0-9.802 4.388-9.802 9.802s4.388 9.802 9.802 9.802c5.413 0 9.802-4.388 9.802-9.802s-4.389-9.802-9.802-9.802zm0 14.703c-2.707 0-4.901-2.194-4.901-4.901s2.194-4.901 4.901-4.901 4.901 2.194 4.901 4.901-2.194 4.901-4.901 4.901zM56.36 9.802c-5.413 0-9.802 4.388-9.802 9.802s4.388 9.802 9.802 9.802 9.802-4.388 9.802-9.802-4.388-9.802-9.802-9.802zm0 14.703c-2.707 0-4.901-2.194-4.901-4.901s2.194-4.901 4.901-4.901 4.901 2.194 4.901 4.901-2.194 4.901-4.901 4.901zM74.739 39.207v-11.113c1.442.834 3.116 1.312 4.901 1.312 5.413 0 9.802-4.388 9.802-9.802s-4.388-9.802-9.802-9.802-9.802 4.388-9.802 9.802v19.604h4.901zm4.901-24.504c2.707 0 4.901 2.194 4.901 4.901s-2.194 4.901-4.901 4.901-4.901-2.194-4.901-4.901 2.194-4.901 4.901-4.901z"/></g></svg>
+            </a> projects.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container card components-container">
+
+        <div class="row">
+          <div class="col-9@sm">
+            <h4 class="filter__label">Filter</h4>
+            <div class="filter__options clearfix">
+              <button class="filter__button" data-group="ui">ui</button>
+              <button class="filter__button" data-group="utilities">utilities</button>
+              <button class="filter__button" data-group="events">events</button>
+            </div>
+            <input class="filter__search js-shuffle-search" type="search" placeholder="Search..." aria-label="Search odo components">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="odo-components clearfix">
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["ui"]'>
+                <a class="odo-component__inner" href="odo-affix/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Affix</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (133 / 133)
+Branches: 100% (32 / 32)
+Functions: 100% (27 / 27)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-ui-blue.svg" alt="tag: ui">
+                      </p>
+
+                    <p>Makes an element fixed position while its within a container.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-affix" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["ui"]'>
+                <a class="odo-component__inner" href="odo-background-video/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Background Video</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (56 / 56)
+Branches: 100% (10 / 10)
+Functions: 100% (16 / 16)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-ui-blue.svg" alt="tag: ui">
+                      </p>
+
+                    <p>Plays in the background when the element comes into view and falls back to an image if the browser cannot autoplay video.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-background-video" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["utilities"]'>
+                <a class="odo-component__inner" href="odo-base-component/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Base Component</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (33 / 33)
+Branches: 100% (16 / 16)
+Functions: 100% (17 / 17)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-utilities-blue.svg" alt="tag: utilities">
+                      </p>
+
+                    <p>Base component for odo components. Includes media query listeners and exports base globals</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-base-component" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["ui"]'>
+                <a class="odo-component__inner" href="odo-carousel/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Carousel</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (472 / 472)
+Branches: 100% (225 / 225)
+Functions: 100% (108 / 108)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-ui-blue.svg" alt="tag: ui">
+                      </p>
+
+                    <p>Performant, awesome carousels.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-carousel" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["utilities"]'>
+                <a class="odo-component__inner" href="odo-device/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Device</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (44 / 44)
+Branches: 100% (14 / 14)
+Functions: 100% (6 / 6)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-utilities-blue.svg" alt="tag: utilities">
+                      </p>
+
+                    <p>Device-specific settings for JS and CSS</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-device" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["ui"]'>
+                <a class="odo-component__inner" href="odo-dialog/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Dialog</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (223 / 223)
+Branches: 100% (77 / 77)
+Functions: 100% (46 / 46)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-ui-blue.svg" alt="tag: ui">
+                      </p>
+
+                    <p>Responsive window dialog component focused on a11y and extendibility</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-dialog" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["ui"]'>
+                <a class="odo-component__inner" href="odo-draggable/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Draggable</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (114 / 114)
+Branches: 100% (19 / 19)
+Functions: 100% (34 / 34)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-ui-blue.svg" alt="tag: ui">
+                      </p>
+
+                    <p>A class for versatile, performant draggability.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-draggable" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["ui"]'>
+                <a class="odo-component__inner" href="odo-dropdown/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Dropdown</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (178 / 178)
+Branches: 100% (47 / 47)
+Functions: 100% (39 / 39)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-ui-blue.svg" alt="tag: ui">
+                      </p>
+
+                    <p>Custom dropdown component that defaults to native select elements on touch devices.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-dropdown" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["ui"]'>
+                <a class="odo-component__inner" href="odo-dual-viewer/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Dual Viewer</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (121 / 121)
+Branches: 100% (31 / 31)
+Functions: 100% (20 / 20)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-ui-blue.svg" alt="tag: ui">
+                      </p>
+
+                    <p>A draggable UI component which reveals two panes.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-dual-viewer" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["utilities"]'>
+                <a class="odo-component__inner" href="odo-helpers/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Helpers</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (337 / 337)
+Branches: 100% (153 / 153)
+Functions: 100% (47 / 47)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-utilities-blue.svg" alt="tag: utilities">
+                      </p>
+
+                    <p>A collection of helper methods for Odo projects.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-helpers" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["ui"]'>
+                <a class="odo-component__inner" href="odo-hotspots/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Hotspots</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (183 / 183)
+Branches: 100% (56 / 56)
+Functions: 100% (50 / 50)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-ui-blue.svg" alt="tag: ui">
+                      </p>
+
+                    <p>A component which positions and opens hotspots.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-hotspots" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["utilities"]'>
+                <a class="odo-component__inner" href="odo-module/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Module</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (57 / 57)
+Branches: 100% (36 / 36)
+Functions: 100% (10 / 10)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-utilities-blue.svg" alt="tag: utilities">
+                      </p>
+
+                    <p>Augment a class' static methods with helpers</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-module" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["utilities"]'>
+                <a class="odo-component__inner" href="odo-object-fit/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Object Fit</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (49 / 49)
+Branches: 100% (24 / 24)
+Functions: 100% (13 / 13)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-utilities-blue.svg" alt="tag: utilities">
+                      </p>
+
+                    <p>Fits media elements (img, video). It polyfills CSS' object-fit: cover; If the browser supports object-fit, it will not run.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-object-fit" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["events"]'>
+                <a class="odo-component__inner" href="odo-on-swipe/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">On Swipe</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (10 / 10)
+Branches: 100% (3 / 3)
+Functions: 100% (3 / 3)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-events-blue.svg" alt="tag: events">
+                      </p>
+
+                    <p>Provide event hook for swipes on an element.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-on-swipe" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["events"]'>
+                <a class="odo-component__inner" href="odo-pointer/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Pointer</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (215 / 215)
+Branches: 100% (109 / 109)
+Functions: 100% (47 / 47)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-events-blue.svg" alt="tag: events">
+                      </p>
+
+                    <p>An abstraction for pointer, mouse, and touch events.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-pointer" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["utilities"]'>
+                <a class="odo-component__inner" href="odo-responsive-attributes/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Responsive Attributes</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (18 / 18)
+Branches: 100% (6 / 6)
+Functions: 100% (8 / 8)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-utilities-blue.svg" alt="tag: utilities">
+                      </p>
+
+                    <p>Parse data attributes with respect to their breakpoints.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-responsive-attributes" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["utilities"]'>
+                <a class="odo-component__inner" href="odo-responsive-classes/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Responsive Classes</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (32 / 32)
+Branches: 100% (3 / 3)
+Functions: 100% (18 / 18)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-utilities-blue.svg" alt="tag: utilities">
+                      </p>
+
+                    <p>Swap class names of elements using responsive attributes.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-responsive-classes" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["ui"]'>
+                <a class="odo-component__inner" href="odo-responsive-images/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Responsive Images</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (102 / 102)
+Branches: 100% (36 / 36)
+Functions: 100% (29 / 29)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-ui-blue.svg" alt="tag: ui">
+                      </p>
+
+                    <p>Native responsive images with deferred loading.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-responsive-images" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["ui"]'>
+                <a class="odo-component__inner" href="odo-reveal/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Reveal</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (39 / 39)
+Branches: 100% (7 / 7)
+Functions: 100% (14 / 14)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-ui-blue.svg" alt="tag: ui">
+                      </p>
+
+                    <p>Reveal elements on the page as they come into view.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-reveal" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='[]'>
+                <a class="odo-component__inner" href="odo-sassplate/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Sassplate</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+
+                    <p>Delete-key friendly SCSS boilerplate.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-sassplate" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["events"]'>
+                <a class="odo-component__inner" href="odo-scroll-animation/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Scroll Animation</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (52 / 52)
+Branches: 100% (30 / 30)
+Functions: 100% (4 / 4)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-events-blue.svg" alt="tag: events">
+                      </p>
+
+                    <p>Performant scroll listeners.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-scroll-animation" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["events"]'>
+                <a class="odo-component__inner" href="odo-scroll-feedback/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Scroll Feedback</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (121 / 121)
+Branches: 100% (45 / 45)
+Functions: 100% (19 / 19)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-events-blue.svg" alt="tag: events">
+                      </p>
+
+                    <p>Based user input from mouse, keyboard, and touch, the `ScrollFeedback` instance will emit navigation events.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-scroll-feedback" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["utilities"]'>
+                <a class="odo-component__inner" href="odo-share/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Share</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (103 / 103)
+Branches: 100% (52 / 52)
+Functions: 100% (24 / 24)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-utilities-blue.svg" alt="tag: utilities">
+                      </p>
+
+                    <p>Share links to social media.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-share" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["ui"]'>
+                <a class="odo-component__inner" href="odo-sticky-headers/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Sticky Headers</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (157 / 157)
+Branches: 100% (65 / 65)
+Functions: 100% (45 / 45)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-ui-blue.svg" alt="tag: ui">
+                      </p>
+
+                    <p>A mananger for sticky things</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-sticky-headers" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["ui"]'>
+                <a class="odo-component__inner" href="odo-tabs/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Tabs</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (144 / 144)
+Branches: 100% (30 / 30)
+Functions: 100% (27 / 27)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-ui-blue.svg" alt="tag: ui">
+                      </p>
+
+                    <p>A component for switching between panes of content.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-tabs" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["events"]'>
+                <a class="odo-component__inner" href="odo-tap/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Tap</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (47 / 47)
+Branches: 100% (18 / 18)
+Functions: 100% (12 / 12)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-events-blue.svg" alt="tag: events">
+                      </p>
+
+                    <p>A service to interpret taps on elements.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-tap" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["ui"]'>
+                <a class="odo-component__inner" href="odo-video/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Video</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (264 / 264)
+Branches: 100% (69 / 69)
+Functions: 100% (64 / 64)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-ui-blue.svg" alt="tag: ui">
+                      </p>
+
+                    <p>A lightweight html5 video wrapper.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-video" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["events"]'>
+                <a class="odo-component__inner" href="odo-viewport/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Viewport</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (127 / 127)
+Branches: 98.6% (70 / 71)
+Functions: 100% (35 / 35)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-events-blue.svg" alt="tag: events">
+                      </p>
+
+                    <p>Viewport enter and exit monitoring for elements.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-viewport" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+              <div class="odo-component col-12@xs col-6@sm col-4@md" data-groups='["events"]'>
+                <a class="odo-component__inner" href="odo-window-events/">
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">Window Events</span>
+                      <span class="odo-component__badge">v1.0.0</span>
+                    </h2>
+
+
+                      <p class="odo-component__meta">
+                          <img height="20" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" title="Statements: 100% (39 / 39)
+Branches: 100% (0 / 0)
+Functions: 100% (8 / 8)" alt="coverage">
+                          <img height="20" src="https://img.shields.io/badge/tag-events-blue.svg" alt="tag: events">
+                      </p>
+
+                    <p>Reusable, throttled events on the window object.</p>
+                  </div>
+                </a>
+                <a href="https://github.com/odopod/code-library/tree/master/packages/odo-window-events" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+            <div class="col-12@xs col-6@sm col-4@md shuffle-sizer"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="container">
+      <div class="row">
+        <div class="col-12@xs">
+          <svg viewBox="0 0 896 1024" width="16" height="16">
+            <title>coded</title>
+            <path d="M608 192l-96 96 224 224L512 736l96 96 288-320L608 192zM288 192L0 512l288 320 96-96L160 512l224-224L288 192z" />
+          </svg>&#32;with&#32;<svg viewBox="0 0 768.199 1024" height="16" width="16">
+            <title>love</title>
+            <path d="M384 864c399-314 384-425 384-512s-72-192-192-192-192 128-192 128-72-128-192-128-192 105-192 192-15 198 384 512z" />
+          </svg>&#32;by&#32;<a href="http://www.odopod.com" target="_blank" rel="noopener" class="footer-link">Odopod</a>.</span>
+        </div>
+      </div>
+    </footer>
+    <script defer src="node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+    <script defer src="node_modules/shufflejs/dist/shuffle.min.js"></script>
+    <script defer src="index.js"></script>
+  </body>
+</html>

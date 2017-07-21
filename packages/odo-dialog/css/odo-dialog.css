@@ -1,0 +1,138 @@
+body.odo-dialog-open {
+  position: relative;
+  overflow: hidden;
+}
+
+.odo-dialog {
+  position: fixed;
+  z-index: 1050;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  height: 100vh;
+  /* If you modify the contents of the modal, you may run into issues: https://bugs.webkit.org/show_bug.cgi?id=158342 */
+  -webkit-overflow-scrolling: touch;
+  -webkit-transition: 250ms ease transform, 250ms ease opacity;
+  transition: 250ms ease transform, 250ms ease opacity;
+}
+
+.odo-dialog--open {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+/* Layer promote the dialog while it's open to prevent paints on scroll. */
+.odo-dialog--visible {
+  will-change: transform;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.odo-dialog--visible + .odo-dialog-backdrop {
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+/* Remove focus ring from role=dialog element because the user cannot really
+do anything with it when it's focused and it looks weird to sighted users. It's
+really only focused so that the next time the user hits tab, they go to content
+within the dialog. */
+.odo-dialog__element:focus {
+  outline: 0;
+}
+
+.odo-dialog-backdrop {
+  position: fixed;
+  z-index: 1040;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .75);
+  -webkit-transition: opacity 250ms ease-out;
+          transition: opacity 250ms ease-out;
+}
+
+.odo-dialog--enter + .odo-dialog-backdrop,
+.odo-dialog--leave-active + .odo-dialog-backdrop {
+  opacity: 0;
+}
+
+.odo-dialog__content {
+  position: relative;
+  z-index: 1;
+  margin: auto;
+}
+
+.odo-dialog--enter,
+.odo-dialog--leave {
+  will-change: transform, opacity;
+}
+
+/* Fade and scale down by default */
+.odo-dialog--enter,
+.odo-dialog--leave-active {
+  opacity: 0;
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+/* Fade transition */
+.odo-dialog--fade.odo-dialog--enter,
+.odo-dialog--fade.odo-dialog--leave-active {
+  -webkit-transform: none;
+          transform: none;
+}
+
+/* Fade and scale up */
+.odo-dialog--zoom-in.odo-dialog--enter,
+.odo-dialog--zoom-in.odo-dialog--leave-active {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+}
+
+.odo-dialog--full .odo-dialog__content,
+.odo-dialog--full .odo-dialog__inner {
+  width: inherit;
+  height: inherit;
+  margin: 0;
+}
+
+.odo-dialog__inner {
+  position: relative;
+  margin-top: 2.5vh;
+  margin-bottom: 2.5vh;
+  background-color: #fff;
+}
+
+.odo-dialog__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 32px;
+  text-align: center;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-transition: 150ms ease;
+  transition: 150ms ease;
+}

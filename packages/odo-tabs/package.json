@@ -1,0 +1,43 @@
+{
+  "name": "@odopod/odo-tabs",
+  "description": "A component for switching between panes of content.",
+  "version": "1.0.0",
+  "main": "dist/odo-tabs.js",
+  "style": "css/odo-tabs.css",
+  "odoModule": "src/tabs.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
+    }
+  ],
+  "dependencies": {
+    "@odopod/odo-helpers": "../odo-helpers",
+    "@odopod/odo-window-events": "../odo-window-events",
+    "tiny-emitter": "^2.0.1"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-tabs",
+  "files": [
+    "css",
+    "dist",
+    "src",
+    "index.js"
+  ],
+  "odoKeywords": [
+    "ui"
+  ],
+  "keywords": [
+    "odo",
+    "odo-component",
+    "odopod",
+    "tabs"
+  ],
+  "license": "MIT",
+  "repository": "odopod/odo",
+  "scripts": {
+    "link-local": "node ../../scripts/link-local-packages.js",
+    "test": "gulp code-quality test"
+  }
+}

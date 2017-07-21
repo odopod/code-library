@@ -1,0 +1,157 @@
+.odo-carousel__slide {
+  height: 400px;
+  color: white;
+  background-color: gray;
+}
+
+.odo-carousel__slide[data-color="1"] {
+  background-color: #1abc9c;
+}
+.odo-carousel__slide[data-color="2"] {
+  background-color: #2ecc71;
+}
+.odo-carousel__slide[data-color="3"] {
+  background-color: #3498db;
+}
+.odo-carousel__slide[data-color="4"] {
+  background-color: #9b59b6;
+}
+.odo-carousel__slide[data-color="5"] {
+  background-color: #34495e;
+}
+.odo-carousel__slide[data-color="6"] {
+  background-color: #f1c40f;
+}
+.odo-carousel__slide[data-color="7"] {
+  background-color: #e67e22;
+}
+.odo-carousel__slide[data-color="8"] {
+  background-color: #e74c3c;
+}
+.odo-carousel__slide[data-color="9"] {
+  background-color: #8e44ad;
+}
+.odo-carousel__slide[data-color="10"] {
+  background-color: #95a5a6;
+}
+.carousel-demo-inner {
+  height: 100%;
+  display: -webkit-flex;
+  display: flex;
+}
+.carousel-demo-inner span {
+  margin: auto;
+}
+
+a.carousel-demo-inner:focus span {
+  color: black;
+  font-size: 24px;
+}
+
+a.carousel-demo-inner:hover span {
+  font-size: 32px;
+}
+
+.demo-img-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.looped-demo .odo-carousel__wrapper {
+  overflow: visible;
+}
+
+.carousel--jumped {
+  overflow: hidden;
+}
+
+.neighbor-count-demo {
+  width: 60%;
+  margin: auto;
+}
+
+.slide-children-demo .odo-carousel__slide {
+  background-color: transparent;
+}
+
+.slide-children-demo .odo-carousel__slide-child.third {
+  float: left;
+  width: 33.333%;
+  height: 100%;
+  background-color: #1abc9c;
+}
+
+.slide-children-demo .odo-carousel__slide-child.third:nth-child(2) {
+  background-color: #2ecc71;
+}
+
+.slide-children-demo .odo-carousel__slide-child.third:nth-child(3) {
+  background-color: #3498db;
+}
+
+.vertical-slide-children-demo .odo-carousel__slide {
+  background-color: transparent;
+}
+
+.vertical-slide-children-demo .odo-carousel__slide-child.third {
+  width: 100%;
+  height: 33.333%;
+  background-color: #1abc9c;
+}
+
+.vertical-slide-children-demo .odo-carousel__slide-child.third:nth-child(2) {
+  background-color: #2ecc71;
+}
+
+.vertical-slide-children-demo .odo-carousel__slide-child.third:nth-child(3) {
+  background-color: #3498db;
+}
+
+.carousel--stacked-pagination .odo-carousel__pagination {
+  top: auto;
+  left: 0;
+  bottom: 0;
+  height: auto;
+  width: auto;
+  margin: 0 0 2.5% 2.5%;
+}
+
+.carousel--stacked-pagination .odo-carousel__nav-paddle {
+  position: static;
+  margin: 0;
+}
+
+.carousel--stacked-pagination .odo-carousel__pagination-dot {
+  display: block;
+  margin: 0 auto 6px;
+}
+
+.carousel--stacked-pagination .odo-carousel__nav-prev {
+  margin-bottom: 10px;
+}
+
+.carousel--stacked-pagination .odo-carousel__nav-next {
+  margin-top: 10px;
+}
+
+/* 80% width = 80 / 2000 */
+#centered-demo .odo-carousel__slide:nth-child(1) {
+  width: 4%;
+}
+
+#centered-demo .odo-carousel__slide:nth-child(2) {
+  width: 2%;
+}
+
+#centered-demo .odo-carousel__slide:nth-child(4) {
+  width: 5%;
+}
+
+#centered-demo .odo-carousel__slide:nth-child(4) {
+  width: 3.2%;
+}
+
+#centered-demo .odo-carousel__slide:nth-child(5) {
+  width: 3.75%;
+}

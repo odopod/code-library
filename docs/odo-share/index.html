@@ -1,0 +1,716 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odo Share Demo</title>
+  <link rel="stylesheet" href="../demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.5.1/themes/prism.css">
+</head>
+
+<body>
+
+  <main role="main">
+    <div class="container">
+
+      <h1>Odo Share</h1>
+      <p>Share links to social media.</p>
+
+      <h3>Support</h3>
+      <ul>
+        <li>IE11+. IE9+ if you polyfill <a href="http://caniuse.com/#feat=dataset"><code>dataset</code></a>.</li>
+      </ul>
+
+      <h3>Dependencies</h3>
+      <ul>
+        <li><code>Object.assign</code></li>
+        <li><code>Array.from</code></li>
+        <li><code>Array.prototype.find</code></li>
+      </ul>
+
+      <h3>Supported Services</h3>
+      <ul>
+        <li>Facebook</li>
+        <li>Twitter</li>
+        <li>Google Plus</li>
+        <li>Tumblr</li>
+        <li>LinkedIn</li>
+        <li>Email</li>
+      </ul>
+
+      <h3>GoTo</h3>
+      <ul>
+        <li><a href="#the-basics">The Basics</a></li>
+        <li><a href="#advanced">Advanced</a></li>
+        <li><a href="#caveats">Caveats</a></li>
+        <li><a href="#services-api">Services API</a></li>
+      </ul>
+
+      <section id="the-basics" style="padding-top: 40px;">
+        <h2>The Basics</h2>
+
+        <section>
+          <h3>Quickstart</h3>
+          <p>The very basics to get the OdoShare component up and running.</p>
+
+          <ul>
+            <li>
+              <p>Share the current page with Twitter when the user clicks the button:</p>
+              <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter"&gt;Share on Twitter&lt;/a&gt;</code></pre>
+              <p>Demo: <a href="#" class="odo-share" data-service="twitter">Share on Twitter</a></p>
+            </li>
+
+            <li>
+              <p>Share the current page with Twitter with a default text of <code>I shared the thing!</code> when the user clicks the button:</p>
+              <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter" data-text="I shared the thing!"&gt;Share on Twitter&lt;/a&gt;</code></pre>
+              <p>Demo: <a href="#" class="odo-share" data-service="twitter" data-text="I shared the thing!">Share on Twitter</a></p>
+            </li>
+
+            <li>
+              <p>Share <code>http://odopod.com/</code> with Facebook when the user clicks the button:</p>
+              <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="facebook" data-url="http://odopod.com/"&gt;Share on Facebook&lt;/a&gt;</code></pre>
+              <p>Demo: <a href="#" class="odo-share" data-service="facebook" data-url="http://odopod.com/">Share on Facebook</a></p>
+            </li>
+
+            <li>
+              <p>Immediately invoke a twitter share for the current page. No element necessary, as this is done via javascript:</p>
+              <pre><code class="language-javascript">OdoShare.share({
+  service: 'twitter'
+});</code></pre>
+            </li>
+          </ul>
+        </section>
+      </section>
+
+      <section id="advanced" style="padding-top: 40px;">
+        <h2>Advanced</h2>
+
+        <section>
+          <h3>Dynamic Data</h3>
+          <p>The sharing data is determined on every share, not on page load. So you can continuously change the data being shared from the same OdoShare instance at any time without issue.</p>
+
+          <div style="padding-bottom: 20px;">
+            Demo:
+            <input id="example-1-url" type="text" placeholder="http://odopod.com/" value="http://odopod.com/"/>
+            <select id="example-1-service">
+              <option value="facebook">Facebook</option>
+              <option value="twitter">Twitter</option>
+              <option value="googleplus">Google Plus</option>
+              <option value="linkedin">LinkedIn</option>
+            </select>
+            <a href="#" id="example-1-share">Share it!</a>
+          </div>
+
+          <pre><code class="language-markup">&lt;input id="example-1-url" type="text" placeholder="http://odopod.com/" value="http://odopod.com/"/&gt;
+
+&lt;select id="example-1-service"&gt;
+  &lt;option value="facebook"&gt;Facebook&lt;/option&gt;
+  &lt;option value="twitter"&gt;Twitter&lt;/option&gt;
+  &lt;option value="googleplus"&gt;Google Plus&lt;/option&gt;
+  &lt;option value="linkedin"&gt;LinkedIn&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;a href="#" id="example-1-share"&gt;Share it!&lt;/a&gt;
+</code></pre>
+          <pre><code class="language-javascript">const share = document.getElementById('example-1-share');
+const urlField = document.getElementById('example-1-url');
+const serviceField = document.getElementById('example-1-service');
+
+share.addEventListener('click', (evt) => {
+  evt.preventDefault();
+
+  OdoShare.share({
+    service: serviceField.value,
+    data: {
+      url: urlField.value,
+    },
+  });
+});</code></pre>
+        </section>
+
+        <section>
+          <h3>Interceptors</h3>
+          <p>You can intercept OdoShare from immediately opening a new share window. A practical example of this might be making an ajax request before the sharing can take place. Just return a promise.</p>
+
+          Demo: <a href="#" id="example-2-share" data-service="twitter" data-url="http://odopod.com">Share after one second</a>
+
+          <pre><code class="language-markup">&lt;a href="#" id="example-2-share" data-service="twitter" data-url="http://www.odopod.com"&gt;Share after one second&lt;/a&gt;</code></pre>
+          <pre><code class="language-javascript">const share = document.getElementById('example-2-share');
+
+OdoShare.add({
+  element: share,
+  before(/* output */) {
+    // Perform something asynchronous.
+    return new Promise((resolve) => {
+      setTimeout(resolve, 1000);
+    });
+  },
+});
+</code></pre>
+
+        </section>
+
+        <section>
+          <h3>Data Rewriting</h3>
+          <p>You can modify the data being shared by OdoShare even after the user has clicked the share button. Simply return a new data object back from the <code>before()</code> callback. You might need to do this if you first need to hit an API to get updated share data, but only once the user has attempted to share.</p>
+
+          Demo: <a href="#" id="example-3-share" data-service="twitter" data-url="https://google.com">Share https://google.com!</a>
+
+          <pre><code class="language-markup">&lt;a href="#" id="example-3-share" data-service="twitter" data-url="https://google.com"&gt;Share https://google.com!&lt;/a&gt;</code></pre>
+          <pre><code class="language-javascript">const share = document.getElementById('example-3-share');
+
+OdoShare.add({
+  element: share,
+  before(/* output */) {
+    // decodeURIComponent(output.params.url) => "http://odopod.com"
+
+    // Rewrite the data before we perform the share.
+    return {
+      url: 'http://www.odopod.com',
+    };
+  },
+  after(/* output */) {
+    // decodeURIComponent(output.params.url) => "http://www.odopod.com"
+  },
+});
+</code></pre>
+
+        </section>
+
+        <section>
+          <h3>Halt Share Action</h3>
+          <p>You can halt the share action even if the user has started sharing by returning <code>false</code> from the <code>before</code> option. You likely won't ever need to do this, but if you do you have that choice!</p>
+
+          Demo: <a href="#" id="example-4-share" data-service="twitter">Share with Confirm</a>
+
+          <pre><code class="language-markup">&lt;a href="#" id="example-4-share" data-service="twitter"&gt;Share with Confirm&lt;/a&gt;</code></pre>
+          <pre><code class="language-javascript">const share = document.getElementById('example-4-share');
+
+OdoShare.add({
+  element: share,
+  before() {
+    if (confirm('Are you sure you want to share this page?')) {
+      // Returning null or undefined won't change the original data.
+      return null;
+    }
+
+    // Halt the share process.
+    return false;
+  },
+});
+</code></pre>
+
+        </section>
+
+      </section>
+
+      <section id="caveats" style="padding-top: 40px;">
+        <h2>Caveats</h2>
+
+        <section>
+          <h3>Facebook sharing and query strings</h3>
+          <p>Sharing links with Facebook that contain complex query strings is very complicated. Facebook likes to strip out any spaces (<code>%20</code>) and replace them with plusses (<code>+</code>). To avoid this we need to encode query string text twice, <b>then decode it back on the client side</b>.</p>
+
+          <pre><code class="language-javascript">var base = 'http://www.greetingcards.com/';
+var text = 'Happy Mother\'s Day!';
+var textEncoded = encodeURIComponent(text); // Happy%20Mother's%20Day!
+var queryString = '?text=' + encodeURIComponent(textEncoded);
+var url = base + queryString;
+
+OdoShare.share({
+  service: 'facebook',
+  data: {
+    url: url
+  },
+  before: function (output) {
+    console.log(output.params.u);
+    // ->  "http%3A%2F%2Fgreetingcards.com%2F%3Ftext%3DHappy%252520Mother's%252520Day!"
+  }
+});
+</code></pre>
+        <br>
+        <p>The URL that is sent through OdoShare is:</p>
+        <code>http%3A%2F%2Fgreetingcards.com%2F%3Ftext%3DHappy%252520Mother's%252520Day!</code>
+        <br>
+        <br>
+        <p>When this url is opened from Facebook, the resulting URL is:</p>
+        <code>http://greetingcards.com/?text=Happy%2520Mother's%2520Day!</code>
+        <br>
+        <br>
+        <p>You must decode this url on the client side of your website via</p>
+        <pre><code class="language-javascript">var rewriteBase = '?text=';
+var parts = window.location.href.split(rewriteBase);
+if (parts.length > 1) {
+  var url = parts[0] + rewriteBase + decodeURIComponent(parts[1]);
+
+  // Use pushstate if possible
+  if (Modernizr.history) {
+    history.pushState({url: url}, '', url);
+  } else {
+    window.location.href = url;
+  }
+}
+</code></pre>
+        <br>
+        <p>When decoded, this transforms correctly back into:</p>
+        <code>http://greetingcards.com/?text=Happy%20Mother's%20Day!</code>
+        </section>
+      </section>
+
+      <section id="services-api" style="padding-top: 40px;">
+        <h2>Services API</h2>
+
+        <ul>
+          <li><a href="#services-api-facebook">Facebook</a></li>
+          <li><a href="#services-api-twitter">Twitter</a></li>
+          <li><a href="#services-api-google-plus">Google Plus</a></li>
+          <li><a href="#services-api-tumblr">Tumblr</a></li>
+          <li><a href="#services-api-linkedin">LinkedIn</a></li>
+          <li><a href="#services-api-email">Email</a></li>
+        </ul>
+
+        <section id="services-api-facebook">
+          <h3>Facebook</h3>
+
+          <div class="container">
+            <section>
+              <ul>
+                <li><a href="#services-api-facebook-url">url</a></li>
+              </ul>
+            </section>
+            <section id="services-api-facebook-url">
+              <h4>data.url (string)</h4>
+              <div class="container">
+                <p>The URL of the page to share. Default: <code>window.location.href</code></p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="facebook" data-url="{{ data.url }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="facebook" data-url="http://odopod.com/"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'facebook',
+  data: {
+    url: 'http://odopod.com/'
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-facebook">Back to facebook API</a></p>
+              </div>
+            </section>
+            <p style="padding-bottom: 20px;"><a href="#services-api">Back to Services API</a></p>
+          </div>
+        </section>
+
+        <section id="services-api-twitter">
+          <h3>Twitter</h3>
+
+          <div class="container">
+            <section>
+              <ul>
+                <li><a href="#services-api-twitter-url">url</a></li>
+                <li><a href="#services-api-twitter-via">via</a></li>
+                <li><a href="#services-api-twitter-text">text</a></li>
+                <li><a href="#services-api-twitter-recommend">recommend</a></li>
+                <li><a href="#services-api-twitter-language">language</a></li>
+                <li><a href="#services-api-twitter-resolvesTo">resolvesTo</a></li>
+                <li><a href="#services-api-twitter-hashtags">hashtags</a></li>
+              </ul>
+            </section>
+            <section id="services-api-twitter-url">
+              <h4>data.url (string)</h4>
+              <div class="container">
+                <p>The URL of the page to share. Default: <code>window.location.href</code></p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter" data-url="{{ data.url }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter" data-url="http://odopod.com/"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'twitter',
+  data: {
+    url: 'http://odopod.com/'
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-twitter">Back to Twitter API</a></p>
+              </div>
+            </section>
+            <section id="services-api-twitter-via">
+              <h4>data.via (string)</h4>
+              <div class="container">
+                <p>Screen name of the user to attribute the Tweet to. The preceding <code>@</code> is optional.</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter" data-via="{{ data.via }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter" data-via="@odopod"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter" data-via="odopod"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'twitter',
+  data: {
+    via: '@odopod'
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-twitter">Back to Twitter API</a></p>
+              </div>
+            </section>
+            <section id="services-api-twitter-text">
+              <h4>data.text (string)</h4>
+              <div class="container">
+                <p>The default Tweet text.</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter" data-text="{{ data.text }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter" data-text="I shared the thing!"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'twitter',
+  data: {
+    text: 'I shared the thing!'
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-twitter">Back to Twitter API</a></p>
+              </div>
+            </section>
+            <section id="services-api-twitter-recommend">
+              <h4>data.recommend (string or array)</h4>
+              <div class="container">
+                <p>Related accounts. More than one recommend account may be defined if each item is separated by a comma. The preceding <code>@</code> is optional.</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter" data-recommend="{{ data.recommend[,...] }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter" data-recommend="@odopod"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter" data-recommend="@odopod,@Vestride"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'twitter',
+  data: {
+    recommend: ['@odopod', '@Vestride']
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-twitter">Back to Twitter API</a></p>
+              </div>
+            </section>
+            <section id="services-api-twitter-language">
+              <h4>data.language (string)</h4>
+              <div class="container">
+                <p>The language for the tweet sheet. Default: <code>"en"</code></p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter" data-language="{{ data.language }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter" data-language="fr"&gt;Partager sur Twitter&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'twitter',
+  data: {
+    language: 'fr'
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-twitter">Back to Twitter API</a></p>
+              </div>
+            </section>
+            <section id="services-api-twitter-resolvesTo">
+              <h4>data.resolvesTo (string)</h4>
+              <div class="container">
+                <p>URL to which your shared URL resolves. This will increase the tweet count for that page; this is especially important for pages that contain query strings or hashes. They should all resolve to the same location.</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter" data-resolves-to="{{ data.resolvesTo }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter" data-url="http://odopod.com/?foo=bar" data-resolves-to="http://odopod.com/"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'twitter',
+  data: {
+    url: 'http://odopod.com/?foo=bar',
+    resolvesTo: 'http://odopod.com/'
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-twitter">Back to Twitter API</a></p>
+              </div>
+            </section>
+            <section id="services-api-twitter-hashtags">
+              <h4>data.hashtags (string or array)</h4>
+              <div class="container">
+                <p>Hashtags to append to the tweet text. More than one hashtag may be defined if each item is separated by a comma. The <code>#</code> is optional.</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter" data-hashtags="{{ data.hashtags[,...] }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter" data-hashtags="#odoshare"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="twitter" data-hashtags="#winning,#odopod"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'twitter',
+  data: {
+    hashtags: ['#winning', '#odopod']
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-twitter">Back to Twitter API</a></p>
+              </div>
+              <p style="padding-bottom: 20px;"><a href="#services-api">Back to Services API</a></p>
+            </section>
+          </div>
+        </section>
+
+        <section id="services-api-google-plus">
+          <h3>Google Plus</h3>
+
+          <div class="container">
+            <section>
+              <ul>
+                <li><a href="#services-api-google-plus-url">url</a></li>
+              </ul>
+            </section>
+            <section id="services-api-google-plus-url">
+              <h4>data.url (string)</h4>
+              <div class="container">
+                <p>The URL of the page to share. Default: <code>window.location.href</code></p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="googleplus" data-url="{{ data.url }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="googleplus" data-url="http://odopod.com/"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'googleplus',
+  data: {
+    url: 'http://odopod.com/'
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-google-plus">Back to Google Plus API</a></p>
+              </div>
+              <p style="padding-bottom: 20px;"><a href="#services-api">Back to Services API</a></p>
+            </section>
+          </div>
+        </section>
+
+        <section id="services-api-tumblr">
+          <h3>Tumblr</h3>
+
+          <div class="container">
+            <section>
+              <ul>
+                <li><a href="#services-api-tumblr-url">url</a></li>
+                <li><a href="#services-api-tumblr-title">title</a></li>
+              </ul>
+            </section>
+            <section id="services-api-tumblr-url">
+              <h4>data.url (string)</h4>
+              <div class="container">
+                <p>The URL of the page to share. Default: <code>window.location.href</code></p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="tumblr" data-url="{{ data.url }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="tumblr" data-url="http://odopod.com/"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'tumblr',
+  data: {
+    url: 'http://odopod.com/'
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-tumblr">Back to Tumblr API</a></p>
+              </div>
+            </section>
+            <section id="services-api-tumblr-title">
+              <h4>data.title (string)</h4>
+              <div class="container">
+                <p>The title of the content to share. Default: <code>document.title</code></p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="tumblr" data-title="{{ data.title }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="tumblr" data-title="Odoshare all the things!"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'tumblr',
+  data: {
+    title: 'Odoshare all the things!'
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-tumblr">Back to Tumblr API</a></p>
+              </div>
+              <p style="padding-bottom: 20px;"><a href="#services-api">Back to Services API</a></p>
+            </section>
+          </div>
+        </section>
+
+        <section id="services-api-linkedin">
+          <h3>LinkedIn</h3>
+
+          <div class="container">
+            <section>
+              <ul>
+                <li><a href="#services-api-linkedin-url">url</a></li>
+                <li><a href="#services-api-linkedin-title">title</a></li>
+                <li><a href="#services-api-linkedin-mini">mini</a></li>
+                <li><a href="#services-api-linkedin-ro">ro</a></li>
+              </ul>
+            </section>
+            <section id="services-api-linkedin-url">
+              <h4>data.url (string)</h4>
+              <div class="container">
+                <p>The URL of the page to share. Default: <code>window.location.href</code></p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="linkedin" data-url="{{ data.url }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="linkedin" data-url="http://odopod.com/"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'linkedin',
+  data: {
+    url: 'http://odopod.com/'
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-linkedin">Back to LinkedIn API</a></p>
+              </div>
+            </section>
+            <section id="services-api-linkedin-title">
+              <h4>data.title (string)</h4>
+              <div class="container">
+                <p>The title of the content to share. Default: <code>document.title</code></p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="linkedin" data-title="{{ data.title }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="linkedin" data-title="Odoshare all the things!"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'linkedin',
+  data: {
+    title: 'Odoshare all the things!'
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-linkedin">Back to LinkedIn API</a></p>
+              </div>
+            </section>
+            <section id="services-api-linkedin-mini">
+              <h4>data.mini (boolean)</h4>
+              <div class="container">
+                <p>Use the mini-version of the LinkedIn share plugin*. Default: <code>true</code></p>
+                <p>* I'm not actually sure what this does.</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="linkedin" data-mini="{{ data.mini }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="linkedin" data-mini="true"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'linkedin',
+  data: {
+    mini: true
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-linkedin">Back to LinkedIn API</a></p>
+              </div>
+            </section>
+            <section id="services-api-linkedin-ro">
+              <h4>data.ro (boolean)</h4>
+              <div class="container">
+                <p>I'll be honest, I have no idea what this does, and couldn't find an documentation on it. Default: <code>false</code></p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="linkedin" data-ro="{{ data.ro }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="linkedin" data-ro="false"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'linkedin',
+  data: {
+    ro: false
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-linkedin">Back to LinkedIn API</a></p>
+              </div>
+            </section>
+            <p style="padding-bottom: 20px;"><a href="#services-api">Back to Services API</a></p>
+          </div>
+        </section>
+
+        <section id="services-api-email">
+          <h3>Email</h3>
+
+          <div class="container">
+            <section>
+              <ul>
+                <li><a href="#services-api-email-to">to</a></li>
+                <li><a href="#services-api-email-cc">cc</a></li>
+                <li><a href="#services-api-email-bcc">bcc</a></li>
+                <li><a href="#services-api-email-subject">subject</a></li>
+                <li><a href="#services-api-email-body">body</a></li>
+              </ul>
+            </section>
+            <section id="services-api-email-to">
+              <h4>data.to (string, array)</h4>
+              <div class="container">
+                <p>Who to send the email to. This may be a single recipient, or an array of recipients.
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="email" data-to="{{ data.to[,...] }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="email" data-to="foo@odopod.com"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="email" data-to="foo@odopod.com,bar@odopod.com"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'email',
+  data: {
+    to: ['foo@odopod.com', 'bar@odopod.com']
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-email">Back to Email API</a></p>
+              </div>
+            </section>
+            <section id="services-api-email-cc">
+              <h4>data.cc (string, array)</h4>
+              <div class="container">
+                <p>Who to CC the email to. This may be a single recipient, or an array of recipients.
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="email" data-cc="{{ data.cc[,...] }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="email" data-cc="foo@odopod.com"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="email" data-cc="foo@odopod.com,bar@odopod.com"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'email',
+  data: {
+    cc: ['foo@odopod.com', 'bar@odopod.com']
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-email">Back to Email API</a></p>
+              </div>
+            </section>
+            <section id="services-api-email-bcc">
+              <h4>data.bcc (string, array)</h4>
+              <div class="container">
+                <p>Who to BCC the email to. This may be a single recipient, or an array of recipients.
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="email" data-bcc="{{ data.bcc[,...] }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="email" data-bcc="foo@odopod.com"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="email" data-bcc="foo@odopod.com,bar@odopod.com"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'email',
+  data: {
+    bcc: ['foo@odopod.com', 'bar@odopod.com']
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-email">Back to Email API</a></p>
+              </div>
+            </section>
+            <section id="services-api-email-subject">
+              <h4>data.subject (string)</h4>
+              <div class="container">
+                <p>The subject of the email. Default: <code>document.title</code>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="email" data-subject="{{ data.subject }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="email" data-subject="Odopod"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'email',
+  data: {
+    subject: 'Odopod'
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-email">Back to Email API</a></p>
+              </div>
+            </section>
+            <section id="services-api-email-body">
+              <h4>data.body (string)</h4>
+              <div class="container">
+                <p>The body of the email. Default: <code>window.location.href</code>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="email" data-body="{{ data.body }}"&gt;&lt;/a&gt;</code></pre>
+                <p>Example(s):</p>
+                <pre><code class="language-markup">&lt;a href="#" class="odo-share" data-service="email" data-body="Check this out!"&gt;Share&lt;/a&gt;</code></pre>
+                <pre><code class="language-javascript">OdoShare.share({
+  service: 'email',
+  data: {
+    body: "Check this out!"
+  }
+});</code></pre>
+                <p style="padding-top: 20px;"><a href="#services-api-email">Back to Email API</a></p>
+              </div>
+            </section>
+            <p style="padding-bottom: 20px;"><a href="#services-api">Back to Services API</a></p>
+          </div>
+        </section>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Polyfills -->
+  <script src="../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Minified Source. -->
+  <script src="dist/odo-share.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.5.1/prism.js"></script>
+
+</body>
+
+</html>

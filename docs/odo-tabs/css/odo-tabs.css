@@ -1,0 +1,28 @@
+.odo-tabs__panes {
+  position: relative;
+  -webkit-transition: height 300ms ease-out;
+          transition: height 300ms ease-out;
+  overflow: hidden;
+}
+
+.odo-tabs__pane {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  opacity: 0;
+  will-change: opacity;
+  -webkit-transition: all 300ms ease-out;
+          transition: all 300ms ease-out;
+  visibility: hidden;
+}
+
+.odo-tabs__pane.is-selected {
+  position: relative;
+  z-index: 2;
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition-delay: 200ms;
+          transition-delay: 200ms;
+}

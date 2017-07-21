@@ -1,0 +1,53 @@
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.fixed-height {
+  height: 250px;
+  background-color: rgb(230, 230, 230);
+}
+
+.fixed-height + .fixed-height {
+  background-color: rgb(240, 240, 240);
+}
+
+@media (min-width: 1200px) {
+  .fixed-height {
+    height: 350px;
+  }
+}
+
+.not-fitted {
+  width: 100%;
+}
+
+.clip {
+  overflow: hidden;
+}
+
+.my-cover {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+}
+
+.my-contain {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: contain;
+}
+
+#support {
+  color: crimson;
+}
+
+#support[supports-object-fit] {
+  color: mediumseagreen;
+}
+
+#wwofd {
+  font-style: italic;
+}

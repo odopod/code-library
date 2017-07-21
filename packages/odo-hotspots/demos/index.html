@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odo Hotspots Demo</title>
+
+  <link rel="stylesheet" href="../../../docs/demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+  <link rel="stylesheet" href="../css/odo-hotspots.css" />
+  <link rel="stylesheet" href="../css/odo-hotspots-theme.css" />
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.4.1/themes/prism.css">
+</head>
+
+<body>
+
+  <main id="main" role="main">
+
+    <div class="container">
+      <h1>Odo Hotspots</h1>
+      <p>Positions and opens hotspots.</p>
+      <h3>Support</h3>
+      <p>IE9+ with polyfills</p>
+      <p>To support IE&lt;=11, you will need to add a <code>classList</code> polyfill.</p>
+      <h3>Dependencies</h3>
+      <p><code>Array.from</code></p>
+      <h3>Styles</h3>
+      <p>This component has required css - <a href="../css/odo-hotspots.css">css/odo-hotspots.css</a>. The theme (<a href="../css/odo-hotspots-theme.css">css/odo-hotspots-theme.css</a> should also be included and customized to your design.</p>
+    </div>
+
+    <section>
+      <div class="container">
+        <h2>Basic Hotspots</h2>
+        <p>A hotspot contains a &ldquo;button&rdquo; and &ldquo;content,&rdquo; which both reside within a &ldquo;wrapper.&rdquo; You can put anything you want inside the hotspot content element. If you do not give the hotspot wrapper (<code>odo-hotspot</code>) a position class, it will position the content for you.</p>
+      </div>
+
+      <div class="container">
+
+        <div id="basic-hotspots" class="odo-hotspot__container aspect aspect-16x9">
+          <div class="aspect-inner">
+            <img class="my-img" src="https://placeimg.com/1000/563/tech" alt="A Placeholder image">
+            <div class="odo-hotspot" data-position="10,20">
+              <button class="odo-hotspot__button" aria-label="Cat story 1"><span class="odo-hotspot__icon"></span></button>
+              <figure class="odo-hotspot__content">
+                <img src="https://placekitten.com/g/300/169" alt="Look, kittens!">
+                <figcaption>Intently stare at the same spot rub face on everything, or nap all day. Make muffins all of a sudden cat goes crazy. Chew foot cat snacks throwup on your pillow leave hair everywhere, so sleep nap inspect anything brought into the house find something else more interesting.</figcaption>
+              </figure>
+            </div>
+
+            <div class="odo-hotspot" data-position="50,80">
+              <button class="odo-hotspot__button" aria-label="Cat story 2"><span class="odo-hotspot__icon"></span></button>
+              <figure class="odo-hotspot__content">
+                <img src="https://placekitten.com/g/400/225" alt="Look, kittens!">
+                <figcaption>Chase dog then run away. Rub face on everything have secret plans, so hunt by meowing loudly at 5am next to human slave food dispenser. Hunt anything that moves roll on the floor purring your whiskers off or chew foot hunt by meowing loudly at 5am next to human slave food dispenser or mark territory.</figcaption>
+              </figure>
+            </div>
+
+            <div class="odo-hotspot" data-position="08,70">
+              <button class="odo-hotspot__button" aria-label="Cat story 3"><span class="odo-hotspot__icon"></span></button>
+              <figure class="odo-hotspot__content">
+                <img src="https://placekitten.com/g/500/281" alt="Look, kittens!">
+                <figcaption>Chew iPad power cord leave dead animals as gifts stare at ceiling, or intrigued by the shower. Missing until dinner time swat at dog why must they do that behind the couch, for shove bum in owner's face like camera lens and lick arm hair. Swat at dog chew iPad power cord, or kick up litter.</figcaption>
+              </figure>
+            </div>
+
+            <div class="odo-hotspot odo-hotspot--left odo-hotspot--bottom" data-position="90,10">
+              <button class="odo-hotspot__button" aria-label="Cat story 4"><span class="odo-hotspot__icon"></span></button>
+              <figure class="odo-hotspot__content">
+                <img src="https://placekitten.com/g/600/338" alt="Look, kittens!">
+                <figcaption>Present belly, scratch hand when stroked jump off balcony, onto stranger's head for why must they do that, but find empty spot in cupboard and sleep all day, and intently stare at the same spot, or hack up furballs.</figcaption>
+              </figure>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="controls">
+          <h4>Controls</h4>
+          <label for="animations">Try a different animation.</label>
+          <select id="animations">
+            <option value="" selected>Slide</option>
+            <option value="zoom-out">Zoom Out</option>
+            <option value="zoom-in">Zoom In</option>
+            <option value="fade">Fade &amp; Blue</option>
+          </select>
+          <button id="randomize">Randomize Hotspot Placement</button>
+        </div>
+
+        <h3>Markup</h3>
+        <p>Any class name that starts with <code>odo-hotspot</code> is required except the button icon.</p>
+        <h4>The Wrapper</h4>
+        <p>It needs a <code>data-position</code> attribute to represent the x and y coordinates of the hotspot. It will be positioned with <code>top</code> and <code>left</code> properties as a percentage. So <code>data-position="10,20"</code> will result in <code>style="left:10%;top:20%;</code>. This is also the element to receive the <code>is-open</code> class when showing a hotspot.</p>
+        <h4>The Button</h4>
+        <p>The button is what's being clicked/tapped. It also contains the plus/close icon. This is optional. You may replace it with something more fitting to your project or keep it.</p>
+        <h4>The Content</h4>
+        <p>You may place anything you want inside the content element. It does <em>not</em> have to be a <code>figure</code> element.</p>
+        <h4>Positioning</h4>
+        <p>In the example below, the first three hotspots do not have a position set on them. The hotspots class will see this and decide where to position the content. The last hotspot has both a side and an anchor defined (left|right and top|bottom, respectively). The hotspots class will <em>not</em> override these positions nor change them.</p>
+        <pre><code class="language-markup">&lt;div id=&quot;basic-hotspots&quot; class=&quot;odo-hotspot__container&quot;&gt;
+  &lt;div class=&quot;odo-hotspot&quot; data-position=&quot;10,20&quot;&gt;
+    &lt;button class=&quot;odo-hotspot__button&quot; aria-label="Cat story 1"&gt;&lt;span class=&quot;odo-hotspot__icon&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+    &lt;figure class=&quot;odo-hotspot__content&quot;&gt;&hellip;&lt;/figure&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;odo-hotspot&quot; data-position=&quot;50,80&quot;&gt;
+    &lt;button class=&quot;odo-hotspot__button&quot; aria-label="Cat story 2"&gt;&lt;span class=&quot;odo-hotspot__icon&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+    &lt;figure class=&quot;odo-hotspot__content&quot;&gt;&hellip;&lt;/figure&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;odo-hotspot&quot; data-position=&quot;08,70&quot;&gt;
+    &lt;button class=&quot;odo-hotspot__button&quot; aria-label="Cat story 3"&gt;&lt;span class=&quot;odo-hotspot__icon&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+    &lt;figure class=&quot;odo-hotspot__content&quot;&gt;&hellip;&lt;/figure&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;odo-hotspot odo-hotspot--left odo-hotspot--bottom&quot; data-position=&quot;90,10&quot;&gt;
+    &lt;button class=&quot;odo-hotspot__button&quot; aria-label="Cat story 4"&gt;&lt;span class=&quot;odo-hotspot__icon&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+    &lt;figure class=&quot;odo-hotspot__content&quot;&gt;&hellip;&lt;/figure&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <h3>Setup</h3>
+        <pre><code class="language-javascript">var hotspots = new OdoHotspots(document.getElementById('basic-hotspots'));</code></pre>
+        <h4>Responsive Images</h4>
+        <p>Be aware that the hotspot content's dimensions (width and height) are used in calculations. If you have a lazy-loaded image it is your responsibility to refresh the hotspots when that image loads. The Odo Hotspots binds an event listener to the window load event and triggers a refresh then.</p>
+        <pre><code class="language-javascript">hotspots.refresh();</code></pre>
+
+        <h3>Preventing Default Functionality</h3>
+        <p>There are two events which <code>OdoHotspots</code> emits in which the default action can be prevented. When clicking on a hotspot, a <code>WILL_OPEN</code> event is emitted. If <code>preventDefault</code> is called on this event by a listener, the hotspot will not open. The second event is <code>WILL_CLOSE</code>, which, when prevented, stops the hotspot from closing.</p>
+        <pre><code class="language-javascript">hotspots.on(OdoHotspots.EventType.WILL_OPEN, function(data) {
+  var hotspot = data.hotspot;
+
+  // Prevent hotspot from opening.
+  data.preventDefault();
+
+  // Do custom thing.
+  &hellip;
+}, false);</code></pre>
+      <p><code>OdoHotspots</code> does not do anything special for mobile layouts. You will likely want to <code>dispose</code> of the instance and do something completely different or prevent the hotspot from opening like above and show the content in a different manner.</p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Polyfills -->
+  <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+  <script src="../../../node_modules/classlist.js/classList.min.js"></script>
+  <script src="scripts/raf.js"></script>
+
+  <!-- Dependencies -->
+  <script src="../node_modules/tiny-emitter/dist/tinyemitter.min.js"></script>
+
+  <!-- Minified Source. -->
+  <script src="../dist/odo-hotspots.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.4.1/prism.js"></script>
+
+</body>
+
+</html>

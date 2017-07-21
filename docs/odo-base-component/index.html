@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Odo Base Component Demo</title>
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.5.1/themes/prism.css">
+
+  <link rel="stylesheet" href="../demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+</head>
+
+<body>
+
+<main role="main">
+  <div class="container">
+
+    <h1 class="page-title">Odo Base Component</h1>
+    <p>Base component for odo components. Inherits from EventEmitter and includes media query listeners. It's meant to be inherited from.</p>
+    <h3>Support</h3>
+    <p>IE9+</p>
+    <h3>Dependencies</h3>
+    <p>TinyEmitter, debounce (bundled)</p>
+
+  </div>
+
+  <section class="container">
+    <h2>Basic Base Component</h2>
+    <p>The Odo Base component essentially is an ES6 bootstrap for modules you may want to build. It should be used with class inheritence to extend functionality of the module you wish to create.</p>
+
+    <p>By creating, or extending, the base component, a developer with have reference to the element as well as public methods to find children elements.</p>
+
+    <h3>Setup</h3>
+    <pre><code class="language-javascript">import OdoBaseComponent from '@odopod/odo-base-component';
+
+class CoolModule extends OdoBaseComponent {
+  constructor(element) {
+    super(element);
+  }
+}</code></pre>
+  </section>
+
+  <section class="container">
+    <h2>Base Component - media query listeners</h2>
+    <em>Browsers without <code>window.matchMedia</code> or the <code>addListener</code> method will not have any media query listeners.</em>
+
+    <p>Additionally, the base component can also bootstrap your module to listen on media queries using native <code>matchMedia</code> method. By opting into listening to media queries defined within the base component, you can override the <code>onMediaQueryChange</code> method to set your module to respond to different breakpoints, as well as access instance and static methods related to each media query defined.</p>
+
+    <p>The media queries defined within the base component:</p>
+    <ul style="list-style: none; padding: 0;">
+      <li><code>OdoBaseComponent.queries.xs</code> - below 767px</li>
+      <li><code>OdoBaseComponent.queries.sm</code> - between 768px and 1023px</li>
+      <li><code>OdoBaseComponent.queries.md</code> - between 1024px and 1391px</li>
+      <li><code>OdoBaseComponent.queries.lg</code> - above 1392px</li>
+    </ul>
+
+    <h3>Setup</h3>
+    <pre><code class="language-javascript">class CoolModule extends OdoBaseComponent {
+  constructor(element) {
+    super(element, true);
+  }
+
+  onMediaQueryChange() {
+    // Do something
+  }
+}</code></pre>
+
+    <h3>Public Instance Methods</h3>
+    <p>The following methods will return child elements of your base component:</p>
+    <h4>getElementByClass(className)</h4>
+    <p>Returns the first DOM element matching the class name or null if there are no matches.</p>
+    <h4>getElementsByClass(className)</h4>
+    <p>Retrieve elements by class name within the main element for this class.</p>
+    <h4>getElementsBySelector(selector)</h4>
+    <p>Retrieve elements by selector within the main element for this class.</p>
+    <h4>onMediaQueryChange()</h4>
+    <p>The media query listeners detected a change. Override this method to add your own implementation.</p>
+    <h4>dispose()</h4>
+    <p>Remove element references, event listeners, and media query listeners for the current instance.</p>
+
+    <h3>Static Properties &amp; Methods</h3>
+    <h4>breakpoint</h4>
+    <p>Returns an object with <code>matches</code> and <code>current</code>. This is an alias for <code>OdoBaseComponent.matches</code> and <code>OdoBaseComponent.getCurrentBreakpoint()</code>.</p>
+    <pre><code class="language-javascript">OdoBaseComponent.breakpoint.matches('xs'); // true or false
+OdoBaseComponent.breakpoint.current // 'xs', 'sm', 'md', or 'lg'
+</code></pre>
+    <h4>matches(breakpointKey)</h4>
+    <p>Query the media query list to see if it currently matches. Will throw an error if the key is not recognized.</p>
+    <h4>getCurrentBreakpoint()</h4>
+    <p>Loop through the 4 media query lists to determine which one currently matches. Returns the key which matches.</p>
+    <h4>defineBreakpoints(breakpoints)</h4>
+    <p>Allows you to redefine the default breakpoints. If you want to redefine breakpoints, make sure you call this method before initializing classes which inherit from Odo Base Component. The only argument should be an array of 3 numbers.</p>
+    <pre><code class="language-javascript">OdoBaseComponent.defineBreakpoints([760, 992, 1200]);</code></pre>
+  </section>
+</main>
+
+  <!-- Dependencies. -->
+  <script src="../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+  <script src="../node_modules/tiny-emitter/dist/tinyemitter.min.js"></script>
+
+  <!-- Minified Source. -->
+  <script src="dist/odo-base-component.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.5.1/prism.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odo Device Demo</title>
+
+  <link rel="stylesheet" href="../../../docs/demo.css" />
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.4.1/themes/prism.css">
+</head>
+
+<body>
+
+  <div id="main" role="main">
+
+    <div class="container space-bottom">
+      <h1>Odo Device</h1>
+      <p>Device-specific settings for JS and CSS</p>
+      <h3>Support</h3>
+      <p>IE9+</p>
+      <h3>Dependencies</h3>
+      <p>None.</p>
+    </div>
+
+    <div class="container">
+      <h2>Settings</h2>
+
+      <pre><code class="language-javascript">OdoDevice.HAS_TRANSITIONS = <span id="has-transitions">null</span>;
+OdoDevice.HAS_CSS_ANIMATIONS = <span id="has-animations">null</span>;
+OdoDevice.HAS_TRANSFORMS = <span id="has-transforms">null</span>;
+OdoDevice.CAN_TRANSITION_TRANSFORMS = <span id="can-transition-transforms">null</span>;
+OdoDevice.HAS_TOUCH_EVENTS = <span id="has-touch-events">null</span>;
+OdoDevice.HAS_POINTER_EVENTS = <span id="has-pointer-events">null</span>;
+OdoDevice.HAS_LOCAL_STORAGE = <span id="has-local-storage">null</span>;
+
+/**
+ * Prefixed style properties.
+ * @enum {string|boolean}
+ */
+OdoDevice.Dom = {
+  ANIMATION: <span id="dom-animation"></span>,
+  ANIMATION_DURATION: <span id="dom-animationDuration"></span>,
+  TRANSFORM: <span id="dom-transform"></span>,
+  TRANSITION: <span id="dom-transition"></span>,
+  TRANSITION_PROPERTY: <span id="dom-transitionProperty"></span>,
+  TRANSITION_DURATION: <span id="dom-transitionDuration"></span>,
+  TRANSITION_TIMING_FUNCTION: <span id="dom-transitionTimingFunction"></span>,
+  TRANSITION_DELAY: <span id="dom-transitionDelay"></span>,
+};
+
+/**
+ * Prefixed css properties.
+ * @enum {string}
+ */
+OdoDevice.Css = {
+  ANIMATION: '<span id="css-animation"></span>',
+  ANIMATION_DURATION: '<span id="css-animationDuration"></span>',
+  TRANSFORM: '<span id="css-transform"></span>',
+  TRANSITION: '<span id="css-transition"></span>',
+  TRANSITION_PROPERTY: '<span id="css-transitionProperty"></span>',
+  TRANSITION_DURATION: '<span id="css-transitionDuration"></span>',
+  TRANSITION_TIMING_FUNCTION: '<span id="css-transitionTimingFunction"></span>',
+  TRANSITION_DELAY: '<span id="css-transitionDelay"></span>',
+};
+</code></pre>
+    </div>
+
+    <div class="container">
+      <h2>Methods</h2>
+
+      <h4>prefixed(propName, value)</h4>
+      <p>Like <code>Modernizr.prefixed</code>, returns the prefixed style property if it exists. You can provide a second argument to test if the value sticks after applying it. In some cases a browser will not support all the values for a property. iOS 9.3, for example, supports <code>touch-action: manipulation</code>, but not <code>touch-action: pan-y</code>.</p>
+      <pre><code class="language-javascript">OdoDevice.prefixed('tapHighlightColor') // 'WebkitTapHighlightColor'
+OdoDevice.prefixed('touchAction', 'pan-y') // `"touchAction"` in Chrome `false` in iOS 9.3</code></pre>
+      <h4>hyphenate(str)</h4>
+      <p>Hyphenates a javascript style string to a css one.</p>
+      <pre><code class="language-javascript">OdoDevice.hyphenate('WebkitTapHighlightColor') // '-webkit-tap-highlight-color'</code></pre>
+    </div>
+
+
+  </div>
+
+  <!-- Minified Source. -->
+  <script src="../dist/odo-device.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.4.1/prism.js"></script>
+
+</body>
+
+</html>

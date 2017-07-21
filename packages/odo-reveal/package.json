@@ -1,0 +1,46 @@
+{
+  "name": "@odopod/odo-reveal",
+  "description": "Reveal elements on the page as they come into view.",
+  "version": "1.0.0",
+  "main": "dist/odo-reveal.js",
+  "style": "css/odo-reveal.css",
+  "odoModule": "src/reveal.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
+    }
+  ],
+  "dependencies": {
+    "@odopod/odo-device": "../odo-device",
+    "@odopod/odo-helpers": "../odo-helpers",
+    "@odopod/odo-viewport": "../odo-viewport"
+  },
+  "devDependencies": {
+    "@odopod/odo-responsive-images": "../odo-responsive-images"
+  },
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-reveal",
+  "files": [
+    "css",
+    "dist",
+    "src",
+    "index.js"
+  ],
+  "odoKeywords": [
+    "ui"
+  ],
+  "keywords": [
+    "odo",
+    "odo-component",
+    "odopod",
+    "reveal",
+    "animation"
+  ],
+  "license": "MIT",
+  "repository": "odopod/odo",
+  "scripts": {
+    "link-local": "node ../../scripts/link-local-packages.js",
+    "test": "gulp code-quality test"
+  }
+}

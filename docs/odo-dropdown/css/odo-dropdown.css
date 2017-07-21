@@ -1,0 +1,161 @@
+.odo-dropdown {
+  position: relative;
+  width: 196px;
+}
+
+.odo-dropdown--native .odo-dropdown__select {
+  z-index: 1;
+  visibility: visible;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  opacity: 0;
+  background-color: #ffffff;
+}
+
+.odo-dropdown:focus {
+  outline: none;
+}
+
+.odo-dropdown__button {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 13px 20px 13px 18px;
+  transition: border-color 200ms ease-out;
+  border: 2px solid #dfe4e6;
+  border-radius: 3px;
+  background: none;
+  color: #5a6872;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+.odo-dropdown__button:hover {
+  color: #30373d;
+}
+
+.odo-dropdown__select:focus + .odo-dropdown__button,
+.odo-dropdown__button:focus {
+  border-color: #1b9ec6;
+  outline: none;
+}
+
+.odo-dropdown__button:disabled {
+  border-color: #eef0f2;
+  cursor: auto;
+}
+
+.odo-dropdown__button:disabled .odo-dropdown__default,
+.odo-dropdown__button:disabled .odo-dropdown__value {
+  color: #dfe4e6;
+}
+
+.odo-dropdown__button:disabled .odo-dropdown__button-icon {
+  fill: #dfe4e6;
+}
+
+.odo-dropdown__button-icon {
+  width: 10px;
+  height: 10px;
+  margin-top: 1px;
+  transition: 200ms ease-out;
+  fill: #bec5c7;
+}
+
+.odo-dropdown__button:hover:not(:disabled) .odo-dropdown__button-icon {
+  fill: #30373d;
+}
+
+.odo-dropdown--open .odo-dropdown__button-icon {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.odo-dropdown__button-inner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.odo-dropdown__select {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  font-size: 16px; /* Avoid zooming the page on iOS on focus */
+}
+
+.odo-dropdown__options {
+  position: absolute;
+  z-index: 40;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  width: 100%;
+  transition: opacity 200ms ease-out;
+  opacity: 0;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.odo-dropdown__options--open {
+  opacity: 1;
+}
+
+.odo-dropdown--open .odo-dropdown__options {
+  visibility: visible;
+  overflow-y: auto;
+  max-height: 232px;
+}
+
+.odo-dropdown__options::-webkit-scrollbar {
+  width: 7px;
+  -webkit-appearance: none;
+}
+
+.odo-dropdown__options::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0.5);
+  box-shadow: 0 0 1px rgba(255,255,255,0.5);
+}
+
+.odo-dropdown__option {
+  padding: 13px 20px;
+  cursor: pointer;
+  color: #596c73;
+}
+
+.odo-dropdown__option:not(.odo-dropdown__option--disabled):hover,
+.odo-dropdown__option:not(.odo-dropdown__option--disabled):focus {
+  color: #30373d;
+  outline: 0;
+  background-color: #dfe4e6;
+}
+
+.odo-dropdown__option--active {
+  color: #30373d;
+}
+
+.odo-dropdown__option--disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.odo-dropdown__value:empty,
+.no-js .odo-dropdown__button {
+  display: none;
+}
+
+.no-js .odo-dropdown__select {
+  position: static;
+  opacity: 1;
+  z-index: auto;
+}

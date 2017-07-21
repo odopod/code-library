@@ -1,0 +1,59 @@
+
+@if not global-variable-exists("type-definitions") {
+  @error "Unable to find type definitions.";
+}
+
+$breakpoints: (
+  xs: 0px,
+  sm: 768px,
+  md: 1024px,
+  lg: 1392px,
+  xl: 1680px
+) !default;
+
+$base-pixel-size: 16 !default;
+
+$text-flat-top-amount: -0.2em !default;
+$text-flat-btm-amount: -0.2em !default;
+
+// Number of columns in the grid.
+$grid-columns: 12 !default;
+
+// Padding between columns. Gets divided in half for the left and right.
+$grid-gutter-width: (
+  xs: 8px,
+  sm: 16px,
+) !default;
+
+$grid-max-width--desktop: 1200px !default;
+$grid-max-width--mobile: 640px !default;
+
+$grid-container: 'container' !default;
+$grid-row: 'row' !default;
+$grid-prefix: 'col' !default;
+$grid-sizes: (xs, sm, md, lg) !default;
+$grid-ratio-name: 'aspect' !default;
+$grid-ratio-inner-name: 'aspect__inner' !default;
+
+$grid-container-size: (
+  xs: 93%,
+  sm: 86%,
+) !default;
+
+// 86% => 0.86
+$_grid-width-percent: map-get($grid-container-size, sm) / 100%;
+// 0.86 => 0.07
+$_grid-margin-percent: (1 - $_grid-width-percent) / 2;
+
+// Size of the window when the grid row has hit max-width.
+$_viewport-at-max-grid-width: $grid-max-width--desktop / $_grid-width-percent;
+$viewport-at-max-grid-width: round($_viewport-at-max-grid-width) + 0px;
+$margin-at-max-grid-width: round($_viewport-at-max-grid-width * $_grid-margin-percent) + 0px;
+
+$z-layers: (
+) !default;
+
+$shadows: (
+) !default;
+
+$media-object-margin: map-get($grid-gutter-width, sm) !default;

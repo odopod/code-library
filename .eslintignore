@@ -1,0 +1,9 @@
+dist
+docs
+node_modules
+coverage
+
+# Generated demo and test files.
+demo.js
+raf.js
+specs.js

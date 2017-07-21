@@ -1,0 +1,148 @@
+.relative { position: relative; }
+.static { position: static; }
+.ib { display: inline-block; }
+.block { display: block; }
+.flex { display: flex; }
+
+.pull-left { float: left; }
+.pull-right { float: right; }
+
+.marginless { margin: 0 !important; }
+.paddingless { padding: 0 !important; }
+
+.no-transition { transition: none !important; }
+.no-transition-duration { transition-duration: 0ms !important; }
+
+.height-inherit { height: inherit; }
+.height-full { height: 100%; }
+.no-min-height { min-height: 0; }
+
+.width-inherit { width: inherit; }
+.width-full { width: 100%; }
+.no-min-width { min-width: 0; }
+
+.grab { cursor: grab; }
+
+.grab.grabbing,
+.grabbing,
+.grabbing .grab {
+  cursor: grabbing;
+}
+
+// -ms-user-select in IE 10. IE9 needs the attribute on _every_ child.
+// http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+// https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
+[unselectable="on"],
+.unselectable {
+  user-select: none;
+}
+
+// Heads up! This method sets font-size: 0 on .ghost-center-wrap and resets it to font-size: 16px
+// on .ghost-center. You may have to set the font-size yourself on children of .ghost-center.
+// ems and %s don't work because the parent has font-size:0
+.ghost-center-wrap {
+  @include ghost();
+}
+
+// table-layout fixed is needed for FF and Opera
+// @see http://stackoverflow.com/questions/2923710/why-do-firefox-and-opera-ignore-max-width-inside-of-display-table-cell
+// @see https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
+.table-center-wrap {
+  display: table;
+  table-layout: fixed;
+}
+
+.table-center {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.align-items-center { align-items: center; }
+.justify-content-center { justify-content: center; }
+
+.clearfix { @include clearfix(); }
+.fill-parent { @include fill-parent(); }
+
+.fade {
+  opacity: 0;
+  transition: opacity .15s linear;
+
+  &.in {
+    opacity: 1;
+  }
+}
+
+.responsive-image-cover {
+  @include fill-parent();
+  @include background-cover();
+  width: 100%;
+  height: 100%;
+}
+
+// Overflow hidden because polyfills will resize the image within.
+.odo-responsive-img--cover { overflow: hidden; }
+.odo-responsive-img--cover img {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+}
+
+// Place on an element (like the body) to prevent the mouse from scrolling it.
+// This does not work for touch devices.
+.no-overflow,
+.no-scroll {
+  overflow: hidden;
+}
+
+.off-screen {
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+// Hide from both screenreaders and browsers: h5bp.com/u
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+// Hide only visually, but have it available for screenreaders: h5bp.com/v
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+// Hide visually and from screenreaders, but maintain layout
+.invisible {
+  visibility: hidden;
+}
+
+.unstyled-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.unstyled-button {
+  padding: 0;
+  background: none;
+  border: 0;
+
+  // Remove focus outline for nested button elements. Button must be nested in
+  // Firefox for display inline-flex to work.
+  &:focus {
+    outline: 0;
+  }
+}

@@ -1,0 +1,421 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odo Dual Viewer Demo</title>
+
+  <link rel="stylesheet" href="../../../docs/demo.css" />
+  <link rel="stylesheet" href="../node_modules/@odopod/odo-draggable/css/odo-draggable.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+  <link rel="stylesheet" href="../css/odo-dual-viewer.css" />
+  <link rel="stylesheet" href="../css/odo-dual-viewer-theme.css" />
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.5.1/themes/prism.css">
+</head>
+
+<body>
+
+  <div id="main" role="main">
+
+    <div class="container">
+      <h1>Dual Viewer</h1>
+      <p>A draggable UI component which reveals two panes.</p>
+      <p>IE9+ with polyfill.</p>
+      <p>To support IE&lt;=11, you will also need to add <code>classList</code> polyfill.</p>
+      <h3>Dependencies</h3>
+      <p>Odo Window Events, Odo Helpers, Odo Draggable, Odo Object Fit.</p>
+      <p><code>Object.assign</code> should also be available.</p>
+      <h3>Styles</h3>
+      <p>This component has required css - <a href="../css/odo-dual-viewer.css">css/odo-dual-viewer.css</a>. The theme (<a href="../css/odo-dual-viewer-theme.css">css/odo-dual-viewer-theme.css</a>) should also be included and customized to your design.</p>
+    </div>
+
+    <section>
+      <div class="container">
+        <h2>Horizontal With Images</h2>
+        <p>By default, the dual viewer is horizontal. When the user releases the scrubber, it will animate to the start, end, or center, depending on the <code>zones</code> option.</p>
+      </div>
+
+      <div id="regular" class="odo-dual-viewer">
+        <div class="odo-dual-viewer__wrap odo-dual-viewer__overlay">
+          <div class="odo-dual-viewer__inner">
+
+            <div class="odo-dual-viewer__object">
+              <img class="odo-dual-viewer__media" src="https://placehold.it/320x400/1abc9c/ffffff&text=320w"
+                sizes="(max-width: 1290px) 93vw, 1200px"
+                srcset="https://placehold.it/640x800/1abc9c/ffffff&text=640w 640w,
+                https://placehold.it/760x400/1abc9c/ffffff&text=760w 760w,
+                https://placehold.it/1016x400/1abc9c/ffffff&text=1016w 1016w,
+                https://placehold.it/1400x400/1abc9c/ffffff&text=1400w 1400w,
+                https://placehold.it/1520x800/1abc9c/ffffff&text=1520w 1520w,
+                https://placehold.it/2032x800/1abc9c/ffffff&text=2032w 2032w,
+                https://placehold.it/2800x800/1abc9c/ffffff&text=2800w 2800w">
+            </div>
+
+          </div>
+        </div>
+
+        <div class="odo-dual-viewer__wrap odo-dual-viewer__underlay">
+          <div class="odo-dual-viewer__inner">
+
+            <div class="odo-dual-viewer__object">
+              <img class="odo-dual-viewer__media" src="https://placehold.it/320x400/3498db/ffffff&text=320w"
+                sizes="(max-width: 1290px) 93vw, 1200px"
+                srcset="https://placehold.it/640x800/3498db/ffffff&text=640w 640w,
+                https://placehold.it/760x400/3498db/ffffff&text=760w 760w,
+                https://placehold.it/1016x400/3498db/ffffff&text=1016w 1016w,
+                https://placehold.it/1400x400/3498db/ffffff&text=1400w 1400w,
+                https://placehold.it/1520x800/3498db/ffffff&text=1520w 1520w,
+                https://placehold.it/2032x800/3498db/ffffff&text=2032w 2032w,
+                https://placehold.it/2800x800/3498db/ffffff&text=2800w 2800w">
+            </div>
+
+          </div>
+        </div>
+
+        <div class="odo-dual-viewer__scrubber">
+          <div class="odo-dual-viewer__scrubber-handle grabbable"></div>
+        </div>
+
+        <p class="dual-viewer__help">Slide right or left to reveal more of one perspective.</p>
+
+        <!-- Used only in the DualViewer js to get boundaries -->
+        <div class="container">
+          <div class="odo-dual-viewer__scrubber-bounds">
+          </div>
+        </div>
+      </div>
+
+      <div class="container controls">
+        <button id="animate-to">Animate to:</button>
+        <input id="animate-to-value" type="number" step="10" min="0" max="100" value="10" />
+        <span>percent</span>
+      </div>
+
+      <div class="container">
+        <h3>Markup</h3>
+        <p>This markup needs to be followed closely and is dependent on the <a href="styles/odo-dual-viewer.css">dual viewer's css</a>. You may put anything inside <code>odo-dual-viewer__object</code>. This example is full-bleed, but it doesn&rsquo;t have to be. See the video demo below for one that isn&rsquo;t.</p>
+        <pre><code class="language-markup">&lt;div id="regular" class="odo-dual-viewer"&gt;
+  &lt;div class="odo-dual-viewer__wrap odo-dual-viewer__overlay"&gt;
+    &lt;div class="odo-dual-viewer__inner"&gt;
+      &lt;div class="odo-dual-viewer__object"&gt;
+        &lt;img class="odo-dual-viewer__media" src="https://placehold.it/320x400/1abc9c/ffffff&text=320w"&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="odo-dual-viewer__wrap odo-dual-viewer__underlay"&gt;
+    &lt;div class="odo-dual-viewer__inner"&gt;
+      &lt;div class="odo-dual-viewer__object"&gt;
+        &lt;img class="odo-dual-viewer__media" src="https://placehold.it/320x400/3498db/ffffff&text=320w"&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="odo-dual-viewer__scrubber"&gt;
+    &lt;div class="odo-dual-viewer__scrubber-handle grabbable"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="container"&gt;
+    &lt;div class="odo-dual-viewer__scrubber-bounds"&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <h3>Setup</h3>
+        <pre><code class="language-javascript">var dualViewer = new OdoDualViewer(document.getElementById('regular'), {});</code></pre>
+
+        <h3>Scrubber Boundaries</h3>
+        <p>The <code>odo-dual-viewer__scrubber-bounds</code> element determines the limits of the draggable (scrubber). In this example, it is wrapped in a <code>container</code> element, but that only applies to this page. The dual viewer will calculate the limits based on the distance from the left edge of <code>odo-dual-viewer</code> to the left edge of <code>odo-dual-viewer__scrubber-bounds</code>. The right edge is based on the <code>width</code> of the scrubber bounds element.</p>
+
+        <h3>Animating the dual viewer</h3>
+        <p>You can programmatically animate the position of the scrubber in the dual viewer with the <code>animateTo</code> method. The only parameter is a value between <code>0</code> and <code>1</code>, which represents the percentage to animate to. This value will be clamped to the scrubber&rsquo;s limits.</p>
+        <pre><code class="language-javascript">document.getElementById('animate-to').addEventListener('click', function () {
+  var value = parseInt(document.getElementById('animate-to-value').value, 10);
+  dualViewer.animateTo(value / 100);
+});</code></pre>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Vertical With Images</h2>
+      </div>
+
+      <div id="vert" class="odo-dual-viewer">
+        <div class="odo-dual-viewer__wrap odo-dual-viewer__overlay">
+          <div class="odo-dual-viewer__inner">
+
+            <div class="odo-dual-viewer__object">
+              <img class="odo-dual-viewer__media" src="https://placehold.it/320x400/1abc9c/ffffff&text=320w"
+                sizes="(max-width: 1290px) 93vw, 1200px"
+                srcset="https://placehold.it/640x800/1abc9c/ffffff&text=640w 640w,
+                https://placehold.it/760x400/1abc9c/ffffff&text=760w 760w,
+                https://placehold.it/1016x400/1abc9c/ffffff&text=1016w 1016w,
+                https://placehold.it/1400x400/1abc9c/ffffff&text=1400w 1400w,
+                https://placehold.it/1520x800/1abc9c/ffffff&text=1520w 1520w,
+                https://placehold.it/2032x800/1abc9c/ffffff&text=2032w 2032w,
+                https://placehold.it/2800x800/1abc9c/ffffff&text=2800w 2800w">
+            </div>
+
+          </div>
+        </div>
+
+        <div class="odo-dual-viewer__wrap odo-dual-viewer__underlay">
+          <div class="odo-dual-viewer__inner">
+
+            <div class="odo-dual-viewer__object">
+              <img class="odo-dual-viewer__media" src="https://placehold.it/320x400/3498db/ffffff&text=320w"
+                sizes="(max-width: 1290px) 93vw, 1200px"
+                srcset="https://placehold.it/640x800/3498db/ffffff&text=640w 640w,
+                https://placehold.it/760x400/3498db/ffffff&text=760w 760w,
+                https://placehold.it/1016x400/3498db/ffffff&text=1016w 1016w,
+                https://placehold.it/1400x400/3498db/ffffff&text=1400w 1400w,
+                https://placehold.it/1520x800/3498db/ffffff&text=1520w 1520w,
+                https://placehold.it/2032x800/3498db/ffffff&text=2032w 2032w,
+                https://placehold.it/2800x800/3498db/ffffff&text=2800w 2800w">
+            </div>
+
+          </div>
+        </div>
+
+        <div class="odo-dual-viewer__scrubber">
+          <div class="odo-dual-viewer__scrubber-handle grabbable"></div>
+        </div>
+
+        <p class="dual-viewer__help">Slide right or left to reveal more of one perspective.</p>
+
+        <!-- Used only in the DualViewer js to get boundaries -->
+        <div class="container">
+          <div class="odo-dual-viewer__scrubber-bounds">
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <h3>Markup</h3>
+        <p>The markup for this vertical demo is identical to the horizontal demo above, except the id attribute is different.</p>
+
+        <h3>Setup</h3>
+        <pre><code class="language-javascript">var vertical = new OdoDualViewer(document.getElementById('vert'), {
+  isVertical: true
+});</code></pre>
+      </div>
+    </section>
+
+    <section class="container">
+      <h2>Horizontal With Videos</h2>
+      <p>The dual viewer can hold any type of content. This one holds some html5 videos from <a href="https://gfycat.com/">gfycat</a>. The first is <a href="https://www.gfycat.com/BestReflectingJunco"><em>Moon and cloudlapse</em></a> and the second is <a href="https://www.gfycat.com/EsteemedJovialHoneybadger"><em>Pouring Beauty Iceland</em></a>.</p>
+
+      <div id="dual-viewer-videos" class="odo-dual-viewer">
+        <div class="odo-dual-viewer__wrap odo-dual-viewer__overlay">
+          <div class="odo-dual-viewer__inner">
+
+            <div class="odo-dual-viewer__object">
+              <video class="odo-dual-viewer__media" autoplay loop>
+                <source src="https://zippy.gfycat.com/BestReflectingJunco.webm" type="video/webm">
+                <source src="https://zippy.gfycat.com/BestReflectingJunco.mp4" type="video/mp4">
+              </video>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="odo-dual-viewer__wrap odo-dual-viewer__underlay">
+          <div class="odo-dual-viewer__inner">
+
+            <div class="odo-dual-viewer__object">
+              <video class="odo-dual-viewer__media" autoplay loop>
+                <source src="https://zippy.gfycat.com/EsteemedJovialHoneybadger.webm" type="video/webm">
+                <source src="https://zippy.gfycat.com/EsteemedJovialHoneybadger.mp4" type="video/mp4">
+              </video>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="odo-dual-viewer__scrubber">
+          <div class="odo-dual-viewer__scrubber-handle grabbable"></div>
+        </div>
+
+        <p class="dual-viewer__help">Slide right or left to reveal more of one perspective.</p>
+
+        <!-- Used only in the DualViewer js to get boundaries -->
+        <div class="odo-dual-viewer__scrubber-bounds" style="width:80%;margin:auto;"></div>
+      </div>
+
+      <h3>Markup</h3>
+      <p>The markup is nearly identical. <code>&lt;img&gt;</code>s have been replaced by <code>&lt;video&gt;</code>s and the scrubber bounds element now has inline styles defining its width.</p>
+      <pre><code class="language-markup">&lt;div id="dual-viewer-videos" class="odo-dual-viewer"&gt;
+  &lt;div class="odo-dual-viewer__wrap odo-dual-viewer__overlay"&gt;
+    &lt;div class="odo-dual-viewer__inner"&gt;
+      &lt;div class="odo-dual-viewer__object"&gt;
+        &lt;video class="odo-dual-viewer__media" autoplay loop&gt;
+          &lt;source src="https://zippy.gfycat.com/BestReflectingJunco.webm" type="video/webm"&gt;
+          &lt;source src="https://zippy.gfycat.com/BestReflectingJunco.mp4" type="video/mp4"&gt;
+        &lt;/video&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="odo-dual-viewer__wrap odo-dual-viewer__underlay"&gt;
+    &lt;div class="odo-dual-viewer__inner"&gt;
+      &lt;div class="odo-dual-viewer__object"&gt;
+        &lt;video class="odo-dual-viewer__media" autoplay loop&gt;
+          &lt;source src="https://zippy.gfycat.com/EsteemedJovialHoneybadger.webm" type="video/webm"&gt;
+          &lt;source src="https://zippy.gfycat.com/EsteemedJovialHoneybadger.mp4" type="video/mp4"&gt;
+        &lt;/video&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="odo-dual-viewer__scrubber"&gt;
+    &lt;div class="odo-dual-viewer__scrubber-handle grabbable"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Not part of odo-dual-viewer.css - absolutely positioned --&gt;
+  &lt;p class="dual-viewer__help"&gt;Slide right or left to reveal more of one perspective.&lt;/p&gt;
+
+  &lt;div class="odo-dual-viewer__scrubber-bounds" style="width:80%;margin:auto;"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+      <h3>Setup</h3>
+      <pre><code class="language-javascript">var vid = new OdoDualViewer(document.getElementById('dual-viewer-videos'), {
+  animationDuration: 400,
+  zones: [0.3, 0.4, 0.6, 0.7]
+});</code></pre>
+
+      <h3>Zones</h3>
+      <p>When the user releases the scrubber, the dual viewer uses the position of scrubber as a percentage as a <em>zone</em>. The default <code>zones</code> option is <code>[0.33, 0.33, 0.66, 0.66]</code>. The first value in the array represents the <strong>lower</strong> zone. If the scrubber position (as a percent) is less than that value, the dual viewer will animate to <code>0</code> percent (within the boundaries). The second and third values create a zone for the <strong>middle</strong>. When the scrubber is released in the middle zone, it animates to the center. The last value is the <strong>upper</strong> zone. Any value above it will animate the scrubber to <code>1</code> percent (within the boundaries).</p>
+      <pre class="no-language"><code class="language-bash">L = lower zone
+M = middle zone
+U = upper zone
+
++-------------------------------------+
+|          |   |       |   |          |
+|          |   |       |   |          |
+|    L     |   |   M   |   |     U    |
+|          |   |       |   |          |
+|          |   |       |   |          |
++-------------------------------------+
+        |          |         |
+       0.25       0.5       0.75
+</code></pre>
+      <p>If the scrubber is released between zones, nothing will happen.</p>
+      <p>Zones work the same way for vertical dual viewers with the lower zone on top and the upper zone at the bottom.</p>
+      <p>Like the example above, zones can overlap. The lower and upper zones take precedence over the middle.</p>
+
+      <h3>Events</h3>
+      <p>The dual viewer emits a <code>CAME_TO_REST</code> event when the handle stops animating.</p>
+      <pre><code class="language-javascript">vid.on(OdoDualViewer.EventType.CAME_TO_REST, function(event) {
+  switch (event.position) {
+    case OdoDualViewer.Position.START:
+      console.log('Handle came to rest at the start');
+      break;
+    case OdoDualViewer.Position.END:
+      console.log('Handle came to rest at the end');
+      break;
+    case OdoDualViewer.Position.CENTER:
+      console.log('Handle came to rest in the center');
+      break;
+  }
+});</code></pre>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>No Zones</h2>
+        <p>This example does not use zones to animate to a resting position.</p>
+      </div>
+
+      <div id="no-zones" class="odo-dual-viewer">
+        <div class="odo-dual-viewer__wrap odo-dual-viewer__overlay">
+          <div class="odo-dual-viewer__inner">
+
+            <div class="odo-dual-viewer__object">
+              <img class="odo-dual-viewer__media" src="https://placehold.it/320x400/1abc9c/ffffff&text=320w"
+                sizes="(max-width: 1290px) 93vw, 1200px"
+                srcset="https://placehold.it/640x800/1abc9c/ffffff&text=640w 640w,
+                https://placehold.it/760x400/1abc9c/ffffff&text=760w 760w,
+                https://placehold.it/1016x400/1abc9c/ffffff&text=1016w 1016w,
+                https://placehold.it/1400x400/1abc9c/ffffff&text=1400w 1400w,
+                https://placehold.it/1520x800/1abc9c/ffffff&text=1520w 1520w,
+                https://placehold.it/2032x800/1abc9c/ffffff&text=2032w 2032w,
+                https://placehold.it/2800x800/1abc9c/ffffff&text=2800w 2800w">
+            </div>
+
+          </div>
+        </div>
+
+        <div class="odo-dual-viewer__wrap odo-dual-viewer__underlay">
+          <div class="odo-dual-viewer__inner">
+
+            <div class="odo-dual-viewer__object">
+              <img class="odo-dual-viewer__media" src="https://placehold.it/320x400/3498db/ffffff&text=320w"
+                sizes="(max-width: 1290px) 93vw, 1200px"
+                srcset="https://placehold.it/640x800/3498db/ffffff&text=640w 640w,
+                https://placehold.it/760x400/3498db/ffffff&text=760w 760w,
+                https://placehold.it/1016x400/3498db/ffffff&text=1016w 1016w,
+                https://placehold.it/1400x400/3498db/ffffff&text=1400w 1400w,
+                https://placehold.it/1520x800/3498db/ffffff&text=1520w 1520w,
+                https://placehold.it/2032x800/3498db/ffffff&text=2032w 2032w,
+                https://placehold.it/2800x800/3498db/ffffff&text=2800w 2800w">
+            </div>
+
+          </div>
+        </div>
+
+        <div class="odo-dual-viewer__scrubber">
+          <div class="odo-dual-viewer__scrubber-handle grabbable"></div>
+        </div>
+
+        <!-- Used only in the DualViewer js to get boundaries -->
+        <div class="container">
+          <div class="odo-dual-viewer__scrubber-bounds">
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <h3>Setup</h3>
+        <pre><code class="language-javascript">var noZones = new OdoDualViewer(document.getElementById('no-zones'), {
+  hasZones: false,
+  startPosition: 0.1
+});</code></pre>
+
+        <h3>Starting Position</h3>
+        <p>The starting position of the scrubber and the amount revealed when the module is initialized can be changed. By default, it's 50%, but using the <code>startPosition</code> option and a value between zero and one, you may change this behavior.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Polyfills -->
+  <script src="../../../node_modules/classlist.js/classList.min.js"></script>
+  <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Dependencies. -->
+  <script src="../node_modules/tiny-emitter/dist/tinyemitter.min.js"></script>
+  <script src="../node_modules/@odopod/odo-window-events/dist/odo-window-events.min.js"></script>
+  <script src="../node_modules/@odopod/odo-device/dist/odo-device.min.js"></script>
+  <script src="../node_modules/@odopod/odo-helpers/dist/odo-helpers.min.js"></script>
+  <script src="../node_modules/@odopod/odo-pointer/dist/odo-pointer.min.js"></script>
+  <script src="../node_modules/@odopod/odo-draggable/dist/odo-draggable.min.js"></script>
+  <script src="../node_modules/@odopod/odo-object-fit/dist/odo-object-fit.min.js"></script>
+
+  <!-- Source. -->
+  <script src="../dist/odo-dual-viewer.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="../node_modules/picturefill/dist/picturefill.min.js"></script>
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.5.1/prism.js"></script>
+
+</body>
+
+</html>

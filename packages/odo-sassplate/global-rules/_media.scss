@@ -1,0 +1,53 @@
+// Media objects
+// Source: http://stubbornella.org/content/?p=497
+// --------------------------------------------------
+
+// Common styles
+// -------------------------
+
+// Clear the floats
+.media,
+.media__body {
+  overflow: hidden;
+}
+
+// Proper spacing between instances of .media
+.media,
+.media .media {
+  margin-top: $media-object-margin * 2;
+}
+
+.media:first-child {
+  margin-top: 0;
+}
+
+// For images and videos, set to block
+.media__object {
+  display: block;
+}
+
+// Reset margins on headings for tighter default spacing
+.media__heading {
+  margin-bottom: 5px;
+}
+
+// Media image alignment
+// -------------------------
+
+.media {
+  > .pull-left {
+    margin-right: $media-object-margin;
+  }
+  > .pull-right {
+    margin-left: $media-object-margin;
+  }
+}
+
+// Media list variation
+// -------------------------
+
+// Undo default ul/ol styles
+.media-list {
+  padding-left: 0;
+  list-style: none;
+}

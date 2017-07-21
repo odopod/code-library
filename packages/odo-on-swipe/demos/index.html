@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odo On-Swipe Demo</title>
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.5.1/themes/prism.css">
+
+  <link rel="stylesheet" href="../../../docs/demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+
+</head>
+
+<body>
+  <main role="main">
+    <div class="container">
+
+      <h1>Odo On Swipe</h1>
+      <p>Provide event hook for swipes on an element.</p>
+      <h3>Support</h3>
+      <p>IE9+.</p>
+      <h3>Dependencies</h3>
+      <p>Odo Pointer</p>
+
+      <p>It defaults to using the x axis. This can be changed with the <code>axis</code> parameter.</p>
+      <div style="height:300px;width:100%;" class="js-on-swipe background-aqua text-center table-center-wrap" data-axis="x">
+        <div class="table-center">
+          <span style="color:white;">Swipe me</span>
+        </div>
+      </div>
+      <pre><code class="language-javascript">function swiped(event) {
+  element.textContent = 'Swiped ' + event.direction;
+}</code></pre>
+
+      <pre><code class="language-javascript">new OdoOnSwipe(element, swiped);</code></pre>
+
+      <h2>Y Axis<small> (will block vertical scrolling on touch)</small></h2>
+      <div style="height:300px;width:100%;" class="js-on-swipe background-aqua text-center table-center-wrap" data-axis="y">
+        <div class="table-center">
+          <span style="color:white;">Swipe me</span>
+        </div>
+      </div>
+      <h3>Markup</h3>
+      <pre><code class="language-markup">&lt;div class="js-on-swipe" data-axis="y"&gt;&hellip;&lt;/div&gt;</code></pre>
+      <pre><code class="language-javascript">new OdoOnSwipe(element, swiped, OdoPointer.Axis.Y);</code></pre>
+
+      <h2>Both Axis<small> (will block scrolling on touch)</small></h2>
+      <div style="height:300px;width:100%;" class="js-on-swipe background-aqua text-center table-center-wrap" data-axis="xy">
+        <div class="table-center">
+          <span style="color:white;">Swipe me</span>
+        </div>
+      </div>
+      <h3>Markup</h3>
+      <pre><code class="language-markup">&lt;div class="js-on-swipe" data-axis="xy"&gt;&hellip;&lt;/div&gt;</code></pre>
+      <pre><code class="language-javascript">new OdoOnSwipe(element, swiped, OdoPointer.Axis.BOTH);</code></pre>
+    </div>
+  </main>
+
+  <!-- Polyfills -->
+  <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Syntax Highlighter -->
+   <script src="https://cdn.jsdelivr.net/prism/1.5.1/prism.js"></script>
+
+  <!-- Dependencies. -->
+  <script src="../node_modules/tiny-emitter/dist/tinyemitter.min.js"></script>
+  <script src="../node_modules/@odopod/odo-device/dist/odo-device.min.js"></script>
+  <script src="../node_modules/@odopod/odo-helpers/dist/odo-helpers.min.js"></script>
+  <script src="../node_modules/@odopod/odo-pointer/dist/odo-pointer.min.js"></script>
+
+  <!-- Minified Source. -->
+  <script src="../dist/odo-on-swipe.min.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+</body>
+
+</html>

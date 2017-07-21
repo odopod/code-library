@@ -1,0 +1,48 @@
+{
+  "name": "@odopod/odo-dual-viewer",
+  "description": "A draggable UI component which reveals two panes.",
+  "version": "1.0.0",
+  "main": "dist/odo-dual-viewer.js",
+  "style": "css/odo-dual-viewer.css",
+  "odoModule": "src/dual-viewer.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
+    }
+  ],
+  "dependencies": {
+    "@odopod/odo-draggable": "../odo-draggable",
+    "@odopod/odo-helpers": "../odo-helpers",
+    "@odopod/odo-object-fit": "../odo-object-fit",
+    "@odopod/odo-window-events": "../odo-window-events",
+    "tiny-emitter": "^2.0.1"
+  },
+  "devDependencies": {
+    "picturefill": "^3.0.2"
+  },
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-dual-viewer",
+  "files": [
+    "css",
+    "dist",
+    "src",
+    "index.js"
+  ],
+  "odoKeywords": [
+    "ui"
+  ],
+  "keywords": [
+    "odo",
+    "odo-component",
+    "odopod",
+    "dual viewer",
+    "slider"
+  ],
+  "license": "MIT",
+  "repository": "odopod/odo",
+  "scripts": {
+    "link-local": "node ../../scripts/link-local-packages.js",
+    "test": "gulp code-quality test"
+  }
+}

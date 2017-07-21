@@ -1,0 +1,44 @@
+{
+  "name": "@odopod/odo-base-component",
+  "description": "Base component for odo components. Includes media query listeners and exports base globals",
+  "version": "1.0.0",
+  "main": "dist/odo-base-component.js",
+  "odoModule": "src/base-component.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
+    },
+    {
+      "name": "Evan Vaughn"
+    }
+  ],
+  "dependencies": {
+    "debounce": "^1.0.0",
+    "tiny-emitter": "^2.0.1"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-base-component",
+  "files": [
+    "css",
+    "dist",
+    "src",
+    "index.js"
+  ],
+  "odoKeywords": [
+    "utilities"
+  ],
+  "keywords": [
+    "odo",
+    "odo-component",
+    "odopod",
+    "base class"
+  ],
+  "license": "MIT",
+  "repository": "odopod/odo",
+  "scripts": {
+    "link-local": "node ../../scripts/link-local-packages.js",
+    "test": "gulp code-quality test"
+  }
+}

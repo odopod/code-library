@@ -1,0 +1,57 @@
+
+// Flag objects
+// Source: http://csswizardry.com/2013/05/the-flag-object/
+// --------------------------------------------------
+
+.flag {
+  display: table;
+  width: 100%;
+}
+
+// Proper spacing between instances of .media
+.flag,
+.flag .flag {
+  margin-top: $media-object-margin * 2;
+}
+
+.flag:first-child {
+  margin-top: 0;
+}
+
+.flag__image,
+.flag__body {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.flag--top .flag__image,
+.flag--top .flag__body {
+  vertical-align: top;
+}
+
+.flag--bottom .flag__image,
+.flag--bottom .flag__body {
+  vertical-align: bottom;
+}
+
+.flag__image {
+  padding-right: $media-object-margin;
+
+  > img {
+    display: block;
+    max-width: none;
+  }
+}
+
+.flag--reverse .flag__image {
+  padding-right: 0;
+  padding-left: $media-object-margin;
+}
+
+.flag__body {
+  width: 100%;
+
+  & :last-child {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,91 @@
+img {
+  max-width: 100%;
+}
+
+.my-background {
+  background-size: 200px;
+  background-repeat: repeat;
+}
+
+.my-contain {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: midnightblue;
+}
+
+section {
+  min-height: 300px;
+}
+
+.fake-carousel {
+  overflow: visible;
+}
+
+.fake-carousel__element {
+  position: relative;
+  width: 2000%;
+  height: auto;
+  overflow: hidden;
+  transition: 300ms ease-out;
+}
+
+.fake-carousel__slide {
+  float: left;
+  width: 5%;
+  height: inherit;
+  min-height: 1px;
+  overflow: hidden;
+  background-color: ghostwhite;
+}
+
+.fake-carousel__slide::before {
+  content: 'I am a slide.';
+  position: absolute;
+  z-index: 0;
+}
+
+.fake-carousel__slide > * {
+  position: relative;
+  z-index: 2;
+}
+
+.fake-carousel__slide img {
+  width: 100%;
+}
+
+.hidden-overflow {
+  overflow: hidden;
+}
+
+.carousel-background-img {
+  background-size: 50% auto;
+}
+
+.cool-background-wrapper {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+}
+
+.cool-full-centered {
+  position: absolute;
+  left: 50%;
+  width: 120%;
+  height: 100%;
+  -webkit-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.cool-content {
+  position: absolute;
+  width: 100%;
+  height: inherit;
+}
+
+.cool-content .half {
+  margin-top: 40px;
+}

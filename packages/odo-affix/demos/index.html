@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Odo Affix Demo</title>
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.4.1/themes/prism.css">
+
+  <link rel="stylesheet" href="../../../docs/demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+  <link rel="stylesheet" href="styles/theme.css" />
+</head>
+
+<body>
+
+<main role="main">
+  <div class="container">
+
+    <h1>Odo Affix</h1>
+    <p>Makes an element fixed position while its within a container.</p>
+    <h3>Support</h3>
+    <p>IE9+</p>
+    <h3>Dependencies</h3>
+    <p>Odo Scroll Animation, Odo Window Events</p>
+
+
+    <div class="row" id="example1">
+      <div class="col-3@sm hidden@xs">
+        <div class="my-sidebar js-my-sidebar" data-anchor="example1" style="margin-bottom: 10px;">
+          <p>Written by</p>
+          <p>Foo Barbaz<br><a href="#">foo.barbaz@fake.com</a></p>
+
+          <p>Date March 28, 2016</p>
+
+          <p>Rating: *****</p>
+
+          <button id="set-ui-overlap" data-reset="Set UI Overlap to 0">Set UI Overlap to 50</button>
+        </div>
+      </div>
+      <div class="col-7@sm col-offset-1@sm">
+        <h3>Setup</h3>
+        <p>Create an element with an <code>id</code>. Add your element-to-be-affixed and give it a <code>data-anchor</code> attribute which is the same as the <code>id</code> of the anchor you just created.</p>
+        <pre rel="HTML"><code class="language-markup">&lt;div id="example1" style="position: relative;"&gt;
+  &lt;div data-anchor="example1" class="js-my-sidebar" style="margin-bottom: 10px;"&gt;&hellip;&lt;/div&gt;
+  &lt;div class="my-example-content"&gt;&hellip;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        <p>The affixed-element's container <strong>must be positioned</strong>. In this example, I have made it <code>position:relative</code> with the style attribute. It cannot be <code>static</code>. If your affix element disappears at the bottom of its container, this is why. The affixed-element does not have to be the direct descendant of the anchor element.</p>
+        <pre rel="JavaScript"><code class="language-javascript">let affix = new OdoAffix(document.querySelector('.js-my-sidebar'));</code></pre>
+        <h3>Setting UI Overlap</h3>
+        <p>You can also set specify the offset from the top of the page by setting <code>uiOverlap</code> method. This is useful when you have other sticky things on the page, like navigation. By default, the offset is zero.</p>
+        <pre rel="JavaScript"><code class="language-javascript">affix.uiOverlap = function () {
+  return 50;
+};</code></pre>
+        <h3>Margins</h3>
+        <p>To specify the distance from the top and bottom of the element, use margins. This component will read the margins and use those in its calculations. For example, in the above example, the affix-element has a <code>margin-bottom</code> of 10 pixels.</p>
+        <img class="hidden@xs" src="https://source.unsplash.com/category/technology/400x225" alt="Alternative text" sizes="(min-width:1392px) 755px, (min-width:1024px) 54vw, 100vw" srcset="https://source.unsplash.com/category/technology/400x225 400w,
+          https://source.unsplash.com/category/technology/720x405 720w,
+          https://source.unsplash.com/category/technology/755x425 755w,
+          https://source.unsplash.com/category/technology/1110x625 1110w,
+          https://source.unsplash.com/category/technology/1510x850 1510w">
+        <p class="hidden@xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <img class="hidden@xs" src="https://source.unsplash.com/category/buildings/400x225" alt="Alternative text" sizes="(min-width:1392px) 755px, (min-width:1024px) 54vw, 100vw" srcset="https://source.unsplash.com/category/buildings/400x225 400w,
+          https://source.unsplash.com/category/buildings/720x405 720w,
+          https://source.unsplash.com/category/buildings/755x425 755w,
+          https://source.unsplash.com/category/buildings/1110x625 1110w,
+          https://source.unsplash.com/category/buildings/1510x850 1510w">
+        <p class="hidden@xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+    </div>
+
+    <div class="row big-nav-content space-bottom" id="example2">
+      <div class="big-nav-content__copy col-4@xs col-8@sm">
+        <h3>Notifying the instance of changes</h3>
+        <p>Imagine you have a collapsible list in your affix-element. When toggled, it affects the height of your affix-element, and the instance needs to know about it.</p>
+        <pre rel="JavaScript"><code class="language-javascript">// Notify the instance that the height changed.
+affix2.update();</code></pre>
+        <p>If you have modified something which changes the layout of the page, like inserting content above any affix instance, you will need to notify all the instances that the height of the document changed. Using the static <code>update</code> method is more performant that updating each instance individually.</p>
+        <pre rel="JavaScript"><code class="language-javascript">// Notify the class that page layout changed.
+OdoAffix.update();</code></pre>
+        <p>OdoAffix automatically listens <code>load</code> events from images on the page and checks if the document's height has changed. To avoid your page jumping when images load, place them inside an element which maintains its aspect ratio, like these colored blocks.</p>
+        <h3>Custom Scrollbars</h3>
+        <p>You may want to add a custom scrollbar to the affixed element because on macOS, they disappear after you finish scrolling. The user may not realize there is more content. On this demo page, I've added the following CSS:</p>
+        <pre rel="CSS"><code class="language-css">.odo-affix--scrollbars::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+
+.odo-affix--scrollbars::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0,0,0,.5);
+  box-shadow: 0 0 1px rgba(255,255,255,.5);
+}</code></pre>
+        <button class="space-bottom" id="toggle-scrollbar" onclick="document.querySelector('.js-my-big-nav').classList.toggle('odo-affix--scrollbars');">Toggle custom scrollbar for the big list</button>
+        <div class="aspect aspect--16x9 background--yellow"><div class="aspect__inner"></div></div>
+        <p class="hidden@xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div class="aspect aspect--16x9 background--blue"><div class="aspect__inner"></div></div>
+        <p class="hidden@xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+      <div class="big-nav-content__nav col-2@xs col-3@sm col-offset-1@sm">
+        <div class="js-my-big-nav odo-affix odo-affix--scrollbars" data-anchor="example2" style="margin-top: 20px; margin-bottom: 10px;">
+          <button id="link-toggle" data-reset="Show all links">Show relevant links</button>
+          <ul>
+            <li class="relevant"><a href="#lorem">Lorem</a></li>
+            <li class="relevant"><a href="#ipsum">ipsum</a></li>
+            <li class="relevant"><a href="#dolor">dolor</a></li>
+            <li class="relevant"><a href="#sit">sit</a></li>
+            <li class="relevant"><a href="#amet">amet</a></li>
+            <li class="relevant"><a href="#consectetur">consectetur</a></li>
+            <li class="relevant"><a href="#adipisicing">adipisicing</a></li>
+            <li class="relevant"><a href="#elit">elit</a></li>
+            <li class="relevant"><a href="#sed">sed</a></li>
+            <li class="relevant"><a href="#do">do</a></li>
+            <li class="relevant"><a href="#eiusmod">eiusmod</a></li>
+            <li class="relevant"><a href="#tempor">tempor</a></li>
+            <li><a href="#incididunt">incididunt</a></li>
+            <li><a href="#ut">ut</a></li>
+            <li><a href="#labore">labore</a></li>
+            <li><a href="#et">et</a></li>
+            <li><a href="#dolore">dolore</a></li>
+            <li><a href="#magna">magna</a></li>
+            <li><a href="#aliqua">aliqua</a></li>
+            <li><a href="#ut">Ut</a></li>
+            <li><a href="#enim">enim</a></li>
+            <li><a href="#ad">ad</a></li>
+            <li><a href="#minim">minim</a></li>
+            <li><a href="#veniam">veniam</a></li>
+            <li><a href="#quis">quis</a></li>
+            <li><a href="#nostrud">nostrud</a></li>
+            <li><a href="#exercitation">exercitation</a></li>
+            <li><a href="#ullamco">ullamco</a></li>
+            <li><a href="#laboris">laboris</a></li>
+            <li><a href="#nisi">nisi</a></li>
+            <li><a href="#ut">ut</a></li>
+            <li><a href="#aliquip">aliquip</a></li>
+            <li><a href="#ex">ex</a></li>
+            <li><a href="#ea">ea</a></li>
+            <li><a href="#commodo">commodo</a></li>
+            <li><a href="#consequat.">consequat.</a></li>
+            <li><a href="#duis">Duis</a></li>
+            <li><a href="#aute">aute</a></li>
+            <li><a href="#irure">irure</a></li>
+            <li><a href="#dolor">dolor</a></li>
+            <li><a href="#in">in</a></li>
+            <li><a href="#reprehenderit">reprehenderit</a></li>
+            <li><a href="#in">in</a></li>
+            <li><a href="#voluptate">voluptate</a></li>
+            <li><a href="#velit">velit</a></li>
+            <li><a href="#esse">esse</a></li>
+            <li><a href="#cillum">cillum</a></li>
+            <li><a href="#dolore">dolore</a></li>
+            <li><a href="#eu">eu</a></li>
+            <li><a href="#fugiat">fugiat</a></li>
+            <li><a href="#nulla">nulla</a></li>
+            <li><a href="#pariatur">pariatur</a></li>
+            <li><a href="#excepteur">Excepteur</a></li>
+            <li><a href="#sint">sint</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="aspect aspect--16x9 background--green"><div class="aspect__inner"></div></div>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <div class="aspect aspect--16x9 background--purple"><div class="aspect__inner"></div></div>
+  </div>
+
+</main>
+  <!-- Polyfills -->
+  <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Dependencies. -->
+  <script src="../node_modules/@odopod/odo-scroll-animation/dist/odo-scroll-animation.js"></script>
+  <script src="../node_modules/@odopod/odo-window-events/dist/odo-window-events.js"></script>
+
+  <!-- Minified Source. -->
+  <script src="../dist/odo-affix.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.4.1/prism.js"></script>
+
+</body>
+
+</html>

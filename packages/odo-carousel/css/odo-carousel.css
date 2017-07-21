@@ -1,0 +1,99 @@
+/* Required styles */
+
+.odo-carousel {
+  position: relative;
+}
+
+.odo-carousel__wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 400px;
+}
+
+.odo-carousel__element {
+  position: relative;
+  width: 2000%;
+  height: inherit;
+  padding: 0;
+  margin: 0;
+
+  /* You can disable selection on the carousel */
+  /*
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  */
+}
+
+/* Clearfix for the slides */
+.odo-carousel__element::before,
+.odo-carousel__element::after {
+  content: '';
+  display: table;
+}
+.odo-carousel__element::after {
+  clear: both;
+}
+
+.odo-carousel__slide {
+  float: left;
+  display: block;
+  width: 5%;
+  height: 100%;
+  /* Prevent slides from collapsing, making calculations incorrect. */
+  min-height: 1px;
+  overflow: hidden;
+}
+
+.odo-carousel--vertical .odo-carousel__wrapper {
+  overflow: hidden;
+}
+
+.odo-carousel--vertical .odo-carousel__element {
+  width: auto;
+  height: 100%;
+}
+
+.odo-carousel--vertical .odo-carousel__element .odo-carousel__slide {
+  float: none;
+  width: auto;
+}
+
+.odo-carousel--fade .odo-carousel__element {
+  width: auto;
+}
+
+.odo-carousel--fade .odo-carousel__slide {
+  position: relative;
+  z-index: 1;
+  float: left;
+  width: 100%;
+  height: 100%;
+  margin-right: -100%; /* has the effect of stacking the slides */
+  opacity: 0;
+}
+
+.odo-carousel--fade .odo-carousel__slide--behind {
+  z-index: 2;
+}
+
+.odo-carousel--fade .odo-carousel__slide--visible {
+  opacity: 1;
+  z-index: 3;
+}
+
+.grabbable {
+  cursor: move;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.grabbable.grabbing,
+.grabbing,
+.grabbing .grabbable {
+  cursor: move;
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}

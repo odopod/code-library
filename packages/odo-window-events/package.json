@@ -1,0 +1,46 @@
+{
+  "name": "@odopod/odo-window-events",
+  "description": "Reusable, throttled events on the window object.",
+  "version": "1.0.0",
+  "main": "dist/odo-window-events.js",
+  "odoModule": "src/window-events.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
+    },
+    {
+      "name": "Matt Zaso",
+      "email": "matt@odopod.com"
+    }
+  ],
+  "dependencies": {
+    "debounce": "^1.0.0",
+    "throttleit": "^1.0.0"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-window-events",
+  "files": [
+    "css",
+    "dist",
+    "src",
+    "index.js"
+  ],
+  "odoKeywords": [
+    "events"
+  ],
+  "keywords": [
+    "odo",
+    "odo-component",
+    "odopod",
+    "window",
+    "event"
+  ],
+  "license": "MIT",
+  "repository": "odopod/odo",
+  "scripts": {
+    "link-local": "node ../../scripts/link-local-packages.js",
+    "test": "gulp code-quality test"
+  }
+}

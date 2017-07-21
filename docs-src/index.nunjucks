@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Odo &middot; A collection of JavaScript components by Odopod</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="demo.css">
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+    <div class="odient"></div>
+    <main role="main">
+
+      <div class="container intro">
+        <div class="row">
+          <div class="col-12@sm">
+            <h1 class="type-display-title">Odopod Code Library</h1>
+          </div>
+          <div class="col-9@sm">
+            <p class="type-display-subhead">A collection of vanilla JavaScript components used in <a href="http://www.odopod.com">
+              <svg viewBox="0 0 136 39.207" enable-background="new 0 0 136 39.207"><title>odopod</title><g><path d="M37.982 0v11.113c-1.442-.834-3.116-1.312-4.901-1.312-5.413 0-9.802 4.388-9.802 9.802s4.388 9.802 9.802 9.802 9.802-4.388 9.802-9.802v-19.603h-4.901zm-4.901 24.505c-2.707 0-4.901-2.194-4.901-4.901s2.194-4.901 4.901-4.901 4.901 2.194 4.901 4.901c0 2.706-2.194 4.901-4.901 4.901zM9.802 9.802c-5.414 0-9.802 4.388-9.802 9.802s4.388 9.802 9.802 9.802 9.802-4.388 9.802-9.802-4.389-9.802-9.802-9.802zm0 14.703c-2.707 0-4.901-2.194-4.901-4.901s2.194-4.901 4.901-4.901 4.901 2.194 4.901 4.901-2.195 4.901-4.901 4.901zM131.099 0v11.113c-1.442-.834-3.116-1.312-4.901-1.312-5.413 0-9.802 4.388-9.802 9.802s4.388 9.802 9.802 9.802c5.413 0 9.802-4.388 9.802-9.802v-19.603h-4.901zm-4.901 24.505c-2.707 0-4.901-2.194-4.901-4.901s2.194-4.901 4.901-4.901 4.901 2.194 4.901 4.901c0 2.706-2.194 4.901-4.901 4.901zM102.919 9.802c-5.413 0-9.802 4.388-9.802 9.802s4.388 9.802 9.802 9.802c5.413 0 9.802-4.388 9.802-9.802s-4.389-9.802-9.802-9.802zm0 14.703c-2.707 0-4.901-2.194-4.901-4.901s2.194-4.901 4.901-4.901 4.901 2.194 4.901 4.901-2.194 4.901-4.901 4.901zM56.36 9.802c-5.413 0-9.802 4.388-9.802 9.802s4.388 9.802 9.802 9.802 9.802-4.388 9.802-9.802-4.388-9.802-9.802-9.802zm0 14.703c-2.707 0-4.901-2.194-4.901-4.901s2.194-4.901 4.901-4.901 4.901 2.194 4.901 4.901-2.194 4.901-4.901 4.901zM74.739 39.207v-11.113c1.442.834 3.116 1.312 4.901 1.312 5.413 0 9.802-4.388 9.802-9.802s-4.388-9.802-9.802-9.802-9.802 4.388-9.802 9.802v19.604h4.901zm4.901-24.504c2.707 0 4.901 2.194 4.901 4.901s-2.194 4.901-4.901 4.901-4.901-2.194-4.901-4.901 2.194-4.901 4.901-4.901z"/></g></svg>
+            </a> projects.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container card components-container">
+
+        <div class="row">
+          <div class="col-9@sm">
+            <h4 class="filter__label">Filter</h4>
+            <div class="filter__options clearfix">
+              {% for keyword in keywords %}
+              <button class="filter__button" data-group="{{ keyword }}">{{ keyword }}</button>
+              {% endfor %}
+            </div>
+            <input class="filter__search js-shuffle-search" type="search" placeholder="Search..." aria-label="Search odo components">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="odo-components clearfix">
+            {% for component in components %}
+              <div class="odo-component{% if component.isBeta %} odo-component--beta{% endif %} col-12@xs col-6@sm col-4@md" data-groups='{{ stringify(component.keywords) }}'>
+                {% if component.hasDemo %}
+                <a class="odo-component__inner" href="{{ component.name }}/">
+                {% else %}
+                <div class="odo-component__inner">
+                {% endif %}
+                  <div class="odo-component__content">
+                    <h2 class="odo-component__title">
+                      <span class="odo-component__title-text">{{ component.niceName }}</span>
+                      <span class="odo-component__badge">v{{ component.version }}</span>
+                    </h2>
+
+                    {% if component.isBeta %}
+                      <div class="beta-stripe">beta</div>
+                    {% endif %}
+
+                    {% if component.keywords | length or component.hasCoverage %}
+                      <p class="odo-component__meta">
+                        {% if component.hasCoverage %}
+                          <img height="20" src="{{ component.getCoverageBadge() }}" title="{{ component.getCoverageSummary() }}" alt="coverage">
+                        {% endif %}
+                        {% for label in component.keywords %}
+                          <img height="20" src="{{ component.getKeywordBadge(label) }}" alt="tag: {{ label }}">
+                        {% endfor %}
+                      </p>
+                    {% endif %}
+
+                    <p>{{ component.description }}</p>
+                  </div>
+                {% if component.hasDemo %}
+                </a>
+                {% else %}
+                </div>
+                {% endif %}
+                <a href="{{ component.repo }}" class="odo-component__github-link" title="View package on GitHub">
+                  <img src="assets/github-icon.svg" alt="GitHub" class="odo-component__github-img">
+                </a>
+              </div>
+            {% endfor %}
+            <div class="col-12@xs col-6@sm col-4@md shuffle-sizer"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="container">
+      <div class="row">
+        <div class="col-12@xs">
+          <svg viewBox="0 0 896 1024" width="16" height="16">
+            <title>coded</title>
+            <path d="M608 192l-96 96 224 224L512 736l96 96 288-320L608 192zM288 192L0 512l288 320 96-96L160 512l224-224L288 192z" />
+          </svg>&#32;with&#32;<svg viewBox="0 0 768.199 1024" height="16" width="16">
+            <title>love</title>
+            <path d="M384 864c399-314 384-425 384-512s-72-192-192-192-192 128-192 128-72-128-192-128-192 105-192 192-15 198 384 512z" />
+          </svg>&#32;by&#32;<a href="http://www.odopod.com" target="_blank" rel="noopener" class="footer-link">Odopod</a>.</span>
+        </div>
+      </div>
+    </footer>
+    <script defer src="node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+    <script defer src="node_modules/shufflejs/dist/shuffle.min.js"></script>
+    <script defer src="index.js"></script>
+  </body>
+</html>

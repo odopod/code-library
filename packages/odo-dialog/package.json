@@ -1,0 +1,45 @@
+{
+  "name": "@odopod/odo-dialog",
+  "description": "Responsive window dialog component focused on a11y and extendibility",
+  "version": "1.0.0",
+  "main": "dist/odo-dialog.js",
+  "style": "css/odo-dialog.css",
+  "odoModule": "src/dialog.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
+    }
+  ],
+  "dependencies": {
+    "@odopod/odo-device": "../odo-device",
+    "@odopod/odo-helpers": "../odo-helpers",
+    "tiny-emitter": "^2.0.1"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-dialog",
+  "files": [
+    "css",
+    "dist",
+    "src",
+    "index.js"
+  ],
+  "odoKeywords": [
+    "ui"
+  ],
+  "keywords": [
+    "odo",
+    "odo-component",
+    "odopod",
+    "dialog",
+    "modal",
+    "takeover"
+  ],
+  "license": "MIT",
+  "repository": "odopod/odo",
+  "scripts": {
+    "link-local": "node ../../scripts/link-local-packages.js",
+    "test": "gulp code-quality test"
+  }
+}

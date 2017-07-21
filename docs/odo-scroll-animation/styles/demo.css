@@ -1,0 +1,54 @@
+body {
+  padding-bottom: 600px;
+}
+
+.bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  width: 100%;
+  height: 50px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  background: white;
+}
+
+#space {
+  height: 50px;
+}
+
+#scroller-thing {
+  position: relative;
+  width: 400px;
+  max-width: 100%;
+  height: 300px;
+  box-shadow: inset 0 0 4px 1px rgba(0, 0, 0, 0.2);
+  background: white;
+  overflow: auto;
+}
+
+#scroller-thing::before {
+  content: '#scroller-thing';
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 4px;
+  border: 1px solid rgba(68, 68, 68, 0.8);
+  border-radius: 0 4px 4px 4px;
+  color: #444;
+  background-color: rgba(255, 255, 255, 0.8);
+  background-clip: padding-box;
+  background-size: 284px;
+}
+
+@media (max-height: 600px) {
+  #scroller-thing {
+    height: 200px;
+  }
+}
+
+.scroller-inner {
+  height: 1000px;
+  background: #ff4e56 url(https://github.com/odopod.png?size=200);
+  background-size: 25% auto;
+}

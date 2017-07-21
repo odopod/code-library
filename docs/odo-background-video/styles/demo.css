@@ -1,0 +1,22 @@
+.aspect {
+  padding-bottom: 100%;
+  position: relative;
+  height: 0;
+  overflow: hidden;
+}
+
+.aspect--16x9 {
+  padding-bottom: 56.25%;
+}
+
+.aspect-inner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.hidden {
+  display: none !important;
+}

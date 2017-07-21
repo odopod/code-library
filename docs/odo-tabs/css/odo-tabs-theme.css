@@ -1,0 +1,119 @@
+.tabs-list {
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.odo-tabs__tab {
+  float: left;
+}
+
+.demo-tab {
+  position: relative;
+  z-index: 1;
+  display: block;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: cornflowerblue;
+  background-color: rgb(245, 245, 245);
+}
+
+.demo-tab:hover {
+  color: blueviolet;
+}
+
+.demo-tab:focus {
+  z-index: 2;
+  outline: 0;
+  box-shadow: inset 0 0 0 1px mediumseagreen;
+}
+
+.demo-tab:active {
+  color: mediumseagreen;
+}
+
+.demo-tab.is-selected {
+  background-color: rgb(225, 225, 225);
+}
+
+.demo-tab:focus.is-selected {
+  box-shadow: inset 0 0 0 1px rgba(60, 179, 113, 0.4);
+}
+
+.odo-tabs__panes {
+  background-color: rgb(225, 225, 225);
+}
+
+.odo-tabs__panes h4 {
+  margin-top: 0;
+}
+
+.odo-tabs__pane {
+  padding: 16px 20px;
+  box-sizing: border-box;
+}
+
+.odo-tabs__pane :last-child {
+  margin-bottom: 0;
+}
+
+/* Before tabs have initialized, make the first pane rendered in the document flow. */
+.tabs-list:not(.odo-tabs) + .odo-tabs__panes .odo-tabs__pane:first-child {
+  position: relative;
+}
+
+/* Zoom out effect */
+.odo-tabs--zoom-out + .odo-tabs__panes .odo-tabs__pane {
+  -webkit-transform: scale(0.6);
+  transform: scale(0.6);
+  -webkit-transition-timing-function: cubic-bezier(0.165, 0.840, 0.440, 1.000);
+          transition-timing-function: cubic-bezier(0.165, 0.840, 0.440, 1.000);
+  -webkit-transition-duration: 300ms;
+          transition-duration: 300ms;
+}
+
+.odo-tabs--zoom-out + .odo-tabs__panes .odo-tabs__pane.is-selected {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition-delay: 300ms;
+          transition-delay: 300ms;
+}
+
+/* Slide effect */
+.odo-tabs--slide + .odo-tabs__panes .odo-tabs__pane {
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
+  -webkit-transition-timing-function: cubic-bezier(0.445, 0.050, 0.550, 0.950);
+          transition-timing-function: cubic-bezier(0.445, 0.050, 0.550, 0.950);
+  -webkit-transition-duration: 300ms;
+          transition-duration: 300ms;
+}
+
+.odo-tabs--slide + .odo-tabs__panes .odo-tabs__pane.is-selected {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+  -webkit-transition-delay: 300ms;
+          transition-delay: 300ms;
+}
+
+/* Zoom in effect */
+.odo-tabs--zoom-in + .odo-tabs__panes {
+  overflow: visible;
+}
+
+.odo-tabs--zoom-in + .odo-tabs__panes .odo-tabs__pane {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+  -webkit-transition-timing-function: cubic-bezier(0.165, 0.840, 0.440, 1.000);
+          transition-timing-function: cubic-bezier(0.165, 0.840, 0.440, 1.000);
+  -webkit-transition-duration: 300ms;
+          transition-duration: 300ms;
+}
+
+.odo-tabs--zoom-in + .odo-tabs__panes .odo-tabs__pane.is-selected {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition-delay: 300ms;
+          transition-delay: 300ms;
+}

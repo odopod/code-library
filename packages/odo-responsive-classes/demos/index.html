@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Odo Responsive Classes Demo</title>
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.5.1/themes/prism.css">
+
+  <link rel="stylesheet" href="../../../docs/demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+</head>
+
+<body>
+
+<main role="main">
+  <div class="container">
+
+    <h1>Odo Responsive Classes</h1>
+    <p>Swap class names of elements using responsive attributes.</p>
+    <h2>Support</h2>
+    <p>IE9+</p>
+    <h2>Dependencies</h2>
+    <p>Odo Base Component, Odo Responsive Attributes</p>
+
+    <h3>Markup</h3>
+    <p>Add the <code>odo-responsive-classes</code> class to the element and breakpoint attributes matching Odo Responsive Attributes.</p>
+    <pre><code class="language-markup">&lt;div class="odo-responsive-classes" data-class.xs="green with-padding" data-class.sm="blue"&gt;&lt;/div&gt;</code></pre>
+
+    <h3>Demo</h3>
+    <p>This component will run automatically when the page loads.</p>
+    <div class="odo-responsive-classes" data-class.xs="green with-padding" data-class.sm="blue">
+      This text will be green at the <code>xs</code> breakpoint and blue otherwise.
+    </div>
+
+    <h2>API</h2>
+    <h3>initializeAll(context = document.body)</h3>
+    <p>Add more responsive classes after page load from a parent element.</p>
+    <pre><code class="language-javascript">OdoResponsiveClasses.initializeAll(containingElement)</code></pre>
+
+    <h3>disposeAll(context = document.body)</h3>
+    <p>Dispose of all instances from within a context.</p>
+    <pre><code class="language-javascript">OdoResponsiveClasses.disposeAll(containingElement)</code></pre>
+
+    <h3>addAll(elements)</h3>
+    <p>Optimize creating multiple instances.</p>
+    <pre><code class="language-javascript">OdoResponsiveClasses.addAll([element1, element2])</code></pre>
+
+    <h3>removeAll(elements)</h3>
+    <p>Dispose of an array of elements.</p>
+    <pre><code class="language-javascript">OdoResponsiveClasses.removeAll([element1, element2])</code></pre>
+
+    <h2>More Markup Examples</h2>
+    <pre><code class="language-markup">&lt;div class="odo-responsive-classes" data-class.xs="container"&gt;&lt;/div&gt;</code></pre>
+    <pre><code class="language-markup">&lt;div class="odo-responsive-classes" data-class="row" data-class.xs="container"&gt;&lt;/div&gt;</code></pre>
+
+  </div>
+</main>
+
+  <!-- Polyfills. -->
+  <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Dependencies -->
+  <script src="../node_modules/tiny-emitter/dist/tinyemitter.min.js"></script>
+  <script src="../node_modules/@odopod/odo-base-component/dist/odo-base-component.js"></script>
+  <script src="../node_modules/@odopod/odo-responsive-attributes/dist/odo-responsive-attributes.js"></script>
+
+  <!-- Source. -->
+  <script src="../dist/odo-responsive-classes.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.5.1/prism.js"></script>
+
+</body>
+
+</html>

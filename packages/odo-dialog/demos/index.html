@@ -1,0 +1,410 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Odo Dialog Demo</title>
+  <link rel="stylesheet" href="../../../docs/demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+  <link rel="stylesheet" href="../css/odo-dialog.css" />
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.5.1/themes/prism.css">
+</head>
+
+<body>
+
+<main role="main">
+  <div class="container">
+
+    <h1>Odo Dialog</h1>
+    <p>Responsive window dialog component focused on a11y and extendibility</p>
+    <h3>Support</h3>
+    <p>IE9+ with polyfills</p>
+    <p>To support IE&lt;=11, you will also need to add <code>classList</code> polyfill.</p>
+    <h3>Dependencies</h3>
+    <p>Odo Helpers</p>
+
+    <h3>Styles</h3>
+    <p>This component has required css - <a href="../css/odo-dialog.css">css/odo-dialog.css</a>.</p>
+
+    <h2>Default Dialogs</h2>
+    <p>By default, open dialogs have all the content centered within the screen, as well as have a fade animation for opening/closing.</p>
+
+    <div class="example">
+
+      <h3>The default, unstyled dialog</h3>
+
+      <button data-odo-dialog-open="default">
+        <span>Open the default dialog</span>
+      </button>
+
+      <div class="odo-dialog" id="default" role="dialog" aria-labelledby="default-title" aria-hidden="true">
+        <div class="odo-dialog__content" role="document">
+          <div class="odo-dialog__inner">
+            <h2 class="no-margin-top" id="default-title">Cat Ipsum</h2>
+            <p>Generate some placeholder text with <a href="http://www.catipsum.com/" target="_blank" rel="noopener">Cat Ipsum</a>!</p>
+            <p>Hunt by meowing loudly at 5am next to human slave food dispenser scream at teh bath. Friends are not food.</p>
+            <button type="button" class="odo-dialog__close" data-odo-dialog-close aria-label="Close this dialog window">&times;</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="example">
+      <h3>A styled dialog</h3>
+      <p>See the <a href="styles/demo.css">demo.css</a> for the styles.</p>
+
+      <button data-odo-dialog-open="styled">Open a styled dialog</button>
+
+      <div class="odo-dialog" id="styled" role="dialog" aria-hidden="true">
+        <div class="odo-dialog__content container" role="document">
+          <div class="odo-dialog__inner">
+            <div class="aspect aspect--16x9">
+              <div class="aspect__inner">
+                <img alt="A shoreline by Gabriel Santiago from unsplash.com"
+                  sizes="93vw"
+                  src="https://images.unsplash.com/uploads/1413142095961484763cf/d141726c?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1600&h=900&fit=crop&s=ee92275e2ccd1ac127fc593a762edf93"
+                  srcset="https://images.unsplash.com/uploads/1413142095961484763cf/d141726c?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&h=450&fit=crop&s=b856a657791eb453a34470893b88c1bf 800w,
+                    https://images.unsplash.com/uploads/1413142095961484763cf/d141726c?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1600&h=900&fit=crop&s=ee92275e2ccd1ac127fc593a762edf93 1600w,
+                    https://images.unsplash.com/uploads/1413142095961484763cf/d141726c?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=2400&h=1350&fit=crop&s=b5373724cf8bb3ded0433cdcf4328edb 2400w">
+              </div>
+            </div>
+            <div class="tombstoned-content">
+              <h2 class="tombstoned-content__title">A shoreline in Vancouver, Canada</h2>
+            </div>
+            <div class="some-content">
+              <p>Run outside as soon as door open run in circles, yet jump launch to pounce upon little yarn mouse, bare fangs at toy run hide in litter box until treats are fed then cats take over the world curl up and sleep on the freshly laundered towels for wack the mini furry mouse. Make meme, make cute face kitten is playing with dead mouse a nice warm laptop for me to sit on spot something, big eyes, big eyes, crouch, shake butt, prepare to pounce but bleghbleghvomit my furball really tie the room together. Meowing non stop for food. Lounge in doorway licks paws ignore the squirrels, you'll never catch them anyway or stick butt in face always hungry, if it smells like fish eat as much as you wish or rub face on everything. Spend all night ensuring people don't sleep sleep all day attack the dog then pretend like nothing happened so stare at ceiling light spill litter box, scratch at owner, destroy all furniture, especially couch for why must they do that intently sniff hand. <a href="http://www.catipsum.com/" target="_blank" rel="noopener">Cat Ipsum</a></p>
+              <p>Step on your keyboard while you're gaming and then turn in a circle my left donut is missing, as is my right for unwrap toilet paper hide head under blanket so no one can see but pee in the shoe for howl uncontrollably for no reason. Cat snacks where is my slave? I'm getting hungry cats making all the muffins my left donut is missing, as is my right hola te quiero kitty scratches couch bad kitty. Sit and stare kitty loves pigs meowing non stop for food, yet kitty loves pigs yet leave dead animals as gifts, so jump launch to pounce upon little yarn mouse, bare fangs at toy run hide in litter box until treats are fed milk the cow. </p>
+              <p>Scream for no reason at 4 am nap all day, for plays league of legends or put butt in owner's face i could pee on this if i had the energy. Meowzer! always hungry chase red laser dot howl uncontrollably for no reason for chew foot. Damn that dog climb a tree, wait for a fireman jump to fireman then scratch his face, friends are not food. Sit by the fire go into a room to decide you didn't want to be in there anyway, chew on cable, lie in the sink all day yet bleghbleghvomit my furball really tie the room together. My left donut is missing, as is my right purr while eating chirp at birds. Have secret plans eat all the power cords, rub face on everything chase the pig around the house human is washing you why halp oh the horror flee scratch hiss bite claws in your leg. Knock over christmas tree. Climb leg spit up on light gray carpet instead of adjacent linoleum with tail in the air.</p>
+            </div>
+            <button type="button" class="odo-dialog__close" data-odo-dialog-close aria-label="Close this dialog window">&times;</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <br/>
+
+    <pre><code class="language-markup">&lt;button data-odo-dialog-open="default"&gt;Open the default dialog&lt;/button&gt;
+
+&lt;!-- Could be elsewhere in your markup -->
+&lt;div class="odo-dialog" id="default" role="dialog" aria-labelledby="default-title" aria-hidden="true"&gt;
+  &lt;div class="odo-dialog__content" role="document"&gt;
+    &lt;div class="odo-dialog__inner"&gt;
+      &lt;h2 id="default-title"&gt;Cat Ipsum&lt;/h2&gt;
+      &lt;p&gt;Generate some placeholder text with &lt;a href="http://www.catipsum.com/" target="_blank" rel="noopener"&gt;Cat Ipsum&lt;/a&gt;!&lt;/p&gt;
+      &lt;p&gt;Hunt by meowing loudly at 5am next to human slave food dispenser scream at teh bath. Friends are not food. Mew love to play with owner's hair tie brown cats with pink ears wake up human for food at 4am. Sit in window and stare ooo, a bird! &lt;/p&gt;
+      &lt;button type="button" class="odo-dialog__close" data-odo-dialog-close aria-label="Close this dialog window"&gt;&amp;times;&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+    <pre><code class="language-javascript" data-language="javascript">const defaultDialog = new OdoDialog(document.getElementById('default'));</code></pre><br/>
+
+    <h3>Public Events</h3>
+    <p>The opened event is triggered when the content has finished its transition in, while the closed event triggers once the dialog has completely transitioned out.</p>
+    <pre><code class="language-javascript">defaultDialog.on(OdoDialog.EventType.OPENED, function () {
+  console.log('default dialog opened');
+});
+
+defaultDialog.on(OdoDialog.EventType.CLOSED, function () {
+  console.log('default dialog closed');
+});</code></pre>
+
+    <br/>
+
+    <h3>Public Methods</h3>
+    <pre><code class="language-javascript">defaultDialog.open();
+defaultDialog.close();
+defaultDialog.dispose();
+defaultDialog.getByClass(className);</code></pre>
+
+    <h2>Changing Transitions</h2>
+    <p>In addition to the default fade/scale transition, <code>OdoDialog</code> comes with two other transitions: <code>odo-dialog--fade</code> and <code>odo-dialog--zoom-in</code>. The other options in the <code>&lt;select&gt;</code> below are custom transitions added to this page. See the next section for details.</p>
+    <div class="example">
+      <button data-odo-dialog-open="animation-changer">Open Dialog</button>
+
+      <!-- Could be included elsewhere on your page-->
+      <div class="odo-dialog" id="animation-changer" aria-hidden="true" role="dialog" aria-labelledby="animation-changer-title">
+        <div class="odo-dialog__content container" role="document">
+          <div class="odo-dialog__inner">
+            <h2 class="no-margin-top" id="animation-changer-title">Cat Ipsum</h2>
+            <p>Generate some placeholder text with <a href="http://www.catipsum.com/" target="_blank" rel="noopener">Cat Ipsum</a>!</p>
+            <p>Hunt by meowing loudly at 5am next to human slave food dispenser scream at teh bath. Friends are not food. Mew love to play with owner's hair tie brown cats with pink ears wake up human for food at 4am. Sit in window and stare ooo, a bird! </p>
+            <button type="button" class="odo-dialog__close" data-odo-dialog-close aria-label="Close this dialog window">&times;</button>
+          </div>
+        </div>
+      </div>
+
+      <select id="animation-select">
+        <option value="odo-dialog--fade">Fade</option>
+        <option value="odo-dialog--zoom-in">Zoom in</option>
+        <option value="odo-dialog--fall">Fall</option>
+        <option value="odo-dialog--fall-through">Fall through</option>
+      </select>
+    </div>
+
+    <br/>
+
+    <h2>Add Custom Transitions</h2>
+    <p>You can add your own transitions too.</p>
+    <p><code>OdoDialog</code> follows a similar transition sequence to <a href="https://vuejs.org/v2/guide/transitions.html">Vue.js transition effects</a>.</p>
+    <ol>
+      <li><code>.odo-dialog</code> element is <code>display: none</code></li>
+      <li>Something calls <code>open()</code> (either programatically or clicking a trigger)</li>
+      <li>The <code>odo-dialog--open</code> class is added to remove <code>display: none</code> and the <code>odo-dialog--enter</code> class is added.</li>
+      <li>On the next frame, <code>odo-dialog--enter</code> is removed and <code>odo-dialog--enter-active</code> is added.</li>
+      <li>When the transition on the dialog finishes, <code>odo-dialog--enter-active</code> is removed.</li>
+    </ol>
+    <p>When the dialog closes, these steps are performed [mostly] in reverse order.</p>
+
+    <pre><code class="language-css">.odo-dialog--fall-through {
+  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.odo-dialog--fall-through.odo-dialog--enter,
+.odo-dialog--fall-through.odo-dialog--leave-active {
+  opacity: 0;
+}
+
+.odo-dialog--fall-through.odo-dialog--enter {
+  transform: translateY(-30vh);
+}
+
+.odo-dialog--fall-through.odo-dialog--leave-active {
+  transform: translateY(30vh);
+}</code></pre>
+
+    <h2>Modals</h2>
+    <p>You can create a dialog which is not dismissable with the <code>dismissable: false</code> option. When the user presses the <kbd>ESC</kbd> key, nothing will happen. You should also remove <code>data-odo-dialog-close</code> attribute from the backdrop and don't add a close button.</p>
+
+    <div class="example">
+
+      <button data-odo-dialog-open="modal-dialog">Open the modal dialog</button>
+
+      <div class="odo-dialog" id="modal-dialog" aria-hidden="true" role="dialog" aria-labelledby="modal-dialog-title">
+        <div class="odo-dialog__content" role="document">
+          <div class="odo-dialog__inner">
+            <h2 class="no-margin-top" id="modal-dialog-title">Please confirm you are old enough</h2>
+            <button>Don't worry, I am.</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <pre><code class="language-javascript">const modal = new OdoDialog(document.getElementById('modal-dialog'), {
+  dismissable: false,
+});
+
+const button = modal.element.querySelector('button');
+button.addEventListener('click', () => {
+  modal.close();
+});</code></pre>
+
+    <h2>Using a different scrollable section</h2>
+    <p><code>OdoDialog</code> internally uses a component called <code>ScrollFix</code>. This component prevents mobile browsers from scrolling the page behind the dialog when the scrollable region is at the top or bottom of the scrollable area. In order to make a different element scrollable, the <code>ScrollFix</code> must be applied to that new region instead of the original main element.</p>
+    <p>You can choose a different region to be scrollable with the <code>scrollableElement</code> option. Give it a selector, like: <code>scrollableElement: '.my-list'</code>. Setting <code>scrollableElement</code> to <code>null</code> will disable <code>ScrollFix</code> completely.</p>
+
+    <div class="example">
+
+      <button data-odo-dialog-open="scrollable-region">Open dialog with scrollable list</button>
+
+      <div class="odo-dialog" id="scrollable-region" aria-hidden="true" role="dialog" aria-labelledby="scrollable-region-title">
+        <div class="odo-dialog__content container" role="document">
+          <div class="odo-dialog__inner">
+            <h2 class="no-margin-top" id="scrollable-region-title">Scrollable region inside OdoDialog</h2>
+            <ul class="my-list clearfix">
+              <li class="my-list__item">
+                <img src="https://images.unsplash.com/photo-1447969025943-8219c41ea47a?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=300&fit=crop&s=e981ef81041e60efbd3fbf6d416413f7" alt="Cat photo by Dariusz Sankowski on unsplash.com">
+                <div class="">
+                  <h3>Inspect anything brought into the house attack feet Gate keepers of hell</h3>
+                  <p>Mark territory lick the plastic bag, always hungry for sit on human need to chase tail lick arm hair brown cats with pink ears.</p>
+                </div>
+              </li>
+              <li class="my-list__item">
+                <img src="https://images.unsplash.com/photo-1456796148441-485386946471?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=300&fit=crop&s=358a432ebc5ff1e8965e090999c0f987" alt="Cat photo by Asique Alam on unsplash.com">
+                <div class="">
+                  <h3>Cats go for world domination wake up wander around the house making large amounts of noise</h3>
+                  <p>You call this cat food? has closed eyes but still sees you but purr and where is my slave? I'm getting hungry missing until dinner time, so walk on car leaving trail of paw prints on hood and windshield.</p>
+                </div>
+              </li>
+              <li class="my-list__item">
+                <img src="https://images.unsplash.com/photo-1444005233317-7fb24f0da789?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=300&fit=crop&s=f901497a3326b5bc362e9d0258bc32d1" alt="Cat photo by Octavio Fossatti on unsplash.com">
+                <div class="">
+                  <h3>Get video posted to internet for chasing red dot</h3>
+                  <p>Spend all night ensuring people don't sleep sleep all day. I am the best chase after silly colored fish toys around the house but slap owner's face at 5am until human fills food dish. Human give me attention meow.</p>
+                </div>
+              </li>
+              <li class="my-list__item">
+                <img src="https://images.unsplash.com/photo-1455525928928-837c99714248?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=300&fit=crop&s=9a5c739c306e4de43e561b0f8b2b3960" alt="Cat photo by kitsanoo on unsplash.com">
+                <div class="">
+                  <h3>Swat at dog missing until dinner time</h3>
+                  <p>Sit on human. If it smells like fish eat as much as you wish. Rub face on everything chew on cable but sun bathe, so with tail in the air. Meow. Lick arm hair kitty! kitty!</p>
+                </div>
+              </li>
+              <li class="my-list__item">
+                <img src="https://images.unsplash.com/photo-1487300001871-12053913095d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=300&fit=crop&s=13b4653de1571fb111ac24dbd99da9db" alt="Cat photo by Alexander Possingham on unsplash.com">
+                <div class="">
+                  <h3>Kitty scratches couch bad kitty</h3>
+                  <p>This human feeds me, i should be a god going to catch the red dot today going to catch the red dot today going to catch the red dot today going to catch the red dot today mark territory kitty power!</p>
+                </div>
+              </li>
+              <li class="my-list__item">
+                <img src="https://images.unsplash.com/photo-1488015795646-7e22a773d72a?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=300&fit=crop&s=ad16922e40ee9ab5355426afc2ab7a2f" alt="Cat photo by Sabri Tuzcu on unsplash.com">
+                <div class="">
+                  <h3>Scream at teh bath chew foot</h3>
+                  <p>Swat at dog chase mice, and play riveting piece on synthesizer keyboard pee in human's bed until he cleans the litter box yet missing until dinner time, yet eat a plant, kill a hand put butt in owner's face.</p>
+                </div>
+              </li>
+              <li class="my-list__item">
+                <img src="https://images.unsplash.com/photo-1465077135029-626d853c33dc?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=300&fit=crop&s=450d80f20059789dd31247c7ecc05d3a" alt="Cat photo by Daria Nepriakhina on unsplash.com">
+                <div class="">
+                  <h3>Kick up litter leave hair everywhere lick sellotape</h3>
+                  <p>Curl up and sleep on the freshly laundered towels scratch the postman wake up lick paw wake up owner meow meow.</p>
+                </div>
+              </li>
+            </ul>
+            <button type="button" class="odo-dialog__close" data-odo-dialog-close aria-label="Close this dialog window">&times;</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <h2>Fullscreen</h2>
+    <p>Add the <code>.odo-dialog--full</code> class to the main element to make it take up the whole screen. It sets the <code>width</code> and <code>height</code> of <code>.odo-dialog__content</code> and <code>.odo-dialog__inner</code> elements to <code>inherit</code>.</p>
+    <div class="example">
+      <button data-odo-dialog-open="fullscreen">Open Fullscreen Dialog</button>
+
+      <div class="odo-dialog odo-dialog--full odo-dialog--fade" id="fullscreen" role="dialog" aria-hidden="true">
+        <div class="odo-dialog__content" role="document">
+          <div class="odo-dialog__inner">
+            <div class="aspect aspect--16x9">
+              <div class="aspect__inner">
+                <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1600&h=900&fit=crop&s=6367eb61d0e9bb735f3b572a996d9c4e"
+                  alt="a turtle in the ocean"
+                  srcset="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&h=450&fit=crop&s=9cfe98f68ff63e2fe7636266ccc52ada 800w,
+                    https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1600&h=900&fit=crop&s=6367eb61d0e9bb735f3b572a996d9c4e 1600w,
+                    https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=2400&h=1350&fit=crop&s=34fe177b63c74ed49b82ee2d3c49f3f6 2400w">
+              </div>
+            </div>
+            <button type="button" class="odo-dialog__close" data-odo-dialog-close aria-label="Close this dialog window">&times;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <pre><code class="language-markup">&lt;div class="odo-dialog odo-dialog--full odo-dialog--fade" id="fullscreen" aria-hidden="true"&gt;&hellip;&lt;/div&gt;</code></pre>
+
+    <h2>Global Dialog Instantiation</h2>
+    <p>On a project, you may have different dialogs, but they are all of the same type. Instead of initializing each one individually, you can run the <code>initializeAll()</code> method, which accepts the same options as instantiating a dialog individually, but applies them to all dialogs. It will return an array of <code>OdoDialog</code> instances.</p>
+
+    <pre><code class="language-javascript">OdoDialog.initializeAll(options);</code></pre>
+
+    <h2>Dialog Positioning</h2>
+    <p>The dialog element is <code>display: flex</code> and the content element has <code>margin: auto</code>. This centers the content element within the viewport.</p>
+    <p>Unfortunately, the auto margin does not work in IE11 and below because the content element does have an explicit height set on it. In this case, a class of <code>odo-dialog--no-auto-margin</code> is added to the main element and <code>OdoDialog.SUPPORTS_AUTO_MARGINS</code> will be <code>false</code>. If you need to provide a fallback for centering in IE11, you can use either of those hooks.</p>
+    <p><a href="https://gist.github.com/Vestride/62ef9779bb504c4dcd04ba7db30f9eec">This gist</a> could provide you with a starting point.</p>
+
+    <h2>Extending OdoDialog</h2>
+    <p>OdoDialog is built to be extended. Let's create a dialog which closes after scrolling it mostly out of view. Check the <a href="scripts/demo.js">demo.js</a> for the compiled code or GitHub for the <a href="https://github.com/odopod/code-library/blob/master/packages/odo-dialog/demos/scripts/_demo.js#L53">original ES6 version</a>.</p>
+
+    <div class="example">
+
+      <button data-odo-dialog-open="scroll-to-close">Open subclassed dialog</button>
+
+      <div class="scroll-to-close-dialog odo-dialog" id="scroll-to-close" aria-hidden="true" role="dialog" aria-labelledby="scroll-to-close-title">
+        <div class="odo-dialog__content container" role="document">
+          <div class="odo-dialog__inner">
+            <div class="ie11-padding-wrapper">
+              <h2 class="no-margin-top" id="scroll-to-close-title">A subclass of OdoDialog</h2>
+              <ul class="cat-list clearfix">
+                <li class="cat-list__item">
+                  <img src="https://images.unsplash.com/photo-1447969025943-8219c41ea47a?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=300&fit=crop&s=e981ef81041e60efbd3fbf6d416413f7" alt="Cat photo by Dariusz Sankowski on unsplash.com">
+                  <div class="">
+                    <h3>Inspect anything brought into the house attack feet Gate keepers of hell</h3>
+                    <p>Mark territory lick the plastic bag, always hungry for sit on human need to chase tail lick arm hair brown cats with pink ears.</p>
+                  </div>
+                </li>
+                <li class="cat-list__item">
+                  <img src="https://images.unsplash.com/photo-1456796148441-485386946471?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=300&fit=crop&s=358a432ebc5ff1e8965e090999c0f987" alt="Cat photo by Asique Alam on unsplash.com">
+                  <div class="">
+                    <h3>Cats go for world domination wake up wander around the house making large amounts of noise</h3>
+                    <p>You call this cat food? has closed eyes but still sees you but purr and where is my slave? I'm getting hungry missing until dinner time, so walk on car leaving trail of paw prints on hood and windshield.</p>
+                  </div>
+                </li>
+                <li class="cat-list__item">
+                  <img src="https://images.unsplash.com/photo-1444005233317-7fb24f0da789?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=300&fit=crop&s=f901497a3326b5bc362e9d0258bc32d1" alt="Cat photo by Octavio Fossatti on unsplash.com">
+                  <div class="">
+                    <h3>Get video posted to internet for chasing red dot</h3>
+                    <p>Spend all night ensuring people don't sleep sleep all day. I am the best chase after silly colored fish toys around the house but slap owner's face at 5am until human fills food dish. Human give me attention meow.</p>
+                  </div>
+                </li>
+                <li class="cat-list__item">
+                  <img src="https://images.unsplash.com/photo-1455525928928-837c99714248?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=300&fit=crop&s=9a5c739c306e4de43e561b0f8b2b3960" alt="Cat photo by kitsanoo on unsplash.com">
+                  <div class="">
+                    <h3>Swat at dog missing until dinner time</h3>
+                    <p>Sit on human. If it smells like fish eat as much as you wish. Rub face on everything chew on cable but sun bathe, so with tail in the air. Meow. Lick arm hair kitty! kitty!</p>
+                  </div>
+                </li>
+                <li class="cat-list__item">
+                  <img src="https://images.unsplash.com/photo-1487300001871-12053913095d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=300&fit=crop&s=13b4653de1571fb111ac24dbd99da9db" alt="Cat photo by Alexander Possingham on unsplash.com">
+                  <div class="">
+                    <h3>Kitty scratches couch bad kitty</h3>
+                    <p>This human feeds me, i should be a god going to catch the red dot today going to catch the red dot today going to catch the red dot today going to catch the red dot today mark territory kitty power!</p>
+                  </div>
+                </li>
+                <li class="cat-list__item">
+                  <img src="https://images.unsplash.com/photo-1488015795646-7e22a773d72a?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=300&fit=crop&s=ad16922e40ee9ab5355426afc2ab7a2f" alt="Cat photo by Sabri Tuzcu on unsplash.com">
+                  <div class="">
+                    <h3>Scream at teh bath chew foot</h3>
+                    <p>Swat at dog chase mice, and play riveting piece on synthesizer keyboard pee in human's bed until he cleans the litter box yet missing until dinner time, yet eat a plant, kill a hand put butt in owner's face.</p>
+                  </div>
+                </li>
+                <li class="cat-list__item">
+                  <img src="https://images.unsplash.com/photo-1465077135029-626d853c33dc?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&h=300&fit=crop&s=450d80f20059789dd31247c7ecc05d3a" alt="Cat photo by Daria Nepriakhina on unsplash.com">
+                  <div class="">
+                    <h3>Kick up litter leave hair everywhere lick sellotape</h3>
+                    <p>Curl up and sleep on the freshly laundered towels scratch the postman wake up lick paw wake up owner meow meow.</p>
+                  </div>
+                </li>
+              </ul>
+              <div class="cat-footer">Scroll to close ↓</div>
+            </div>
+            <button type="button" class="odo-dialog__close" data-odo-dialog-close aria-label="Close this dialog window">&times;</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- Polyfills -->
+<script src="../../../node_modules/classlist.js/classList.min.js"></script>
+<script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+<!-- Dependencies. -->
+<script src="../node_modules/tiny-emitter/dist/tinyemitter.min.js"></script>
+<script src="../node_modules/@odopod/odo-device/dist/odo-device.min.js"></script>
+<script src="../node_modules/@odopod/odo-helpers/dist/odo-helpers.min.js"></script>
+
+<!-- Source. -->
+<script src="../dist/odo-dialog.js"></script>
+
+<!-- Demo Code. -->
+<script src="scripts/demo.js"></script>
+
+<!-- Syntax Highlighter -->
+<script src="https://cdn.jsdelivr.net/prism/1.5.1/prism.js"></script>
+
+</body>
+</html>

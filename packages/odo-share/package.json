@@ -1,0 +1,43 @@
+{
+  "name": "@odopod/odo-share",
+  "description": "Share links to social media.",
+  "version": "1.0.0",
+  "main": "dist/odo-share.js",
+  "odoModule": "src/share.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Nathan Buchar",
+      "email": "nathan.buchar@odopod.com"
+    },
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
+    }
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-share",
+  "files": [
+    "css",
+    "dist",
+    "src",
+    "index.js"
+  ],
+  "odoKeywords": [
+    "utilities"
+  ],
+  "keywords": [
+    "odo",
+    "odo-component",
+    "odopod",
+    "share",
+    "social"
+  ],
+  "license": "MIT",
+  "repository": "odopod/odo",
+  "scripts": {
+    "link-local": "node ../../scripts/link-local-packages.js",
+    "test": "gulp code-quality test"
+  }
+}

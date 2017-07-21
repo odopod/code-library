@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odo Tap Demo</title>
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.5.1/themes/prism.css">
+
+  <link rel="stylesheet" href="../../../docs/demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Odo Tap</h1>
+    <p>A service to interpret taps on elements.</p>
+    <h3>Support</h3>
+    <p>IE9+</p>
+    <h3>Dependencies</h3>
+    <p>Odo Helpers, Odo Pointer, ES6 <code>Map</code>.</p>
+
+    <div class="clearfix space-bottom">
+      <div class="space-bottom"></div>
+
+      <div class="half">
+        <h3>Tap</h3>
+        <div class="space-bottom">
+          <button id="the-tap-button" class="outline-button"><code>&lt;button&gt;</code></button>
+        </div>
+
+        <div class="space-bottom">
+          <div id="the-tap-div" class="outline-element">
+            Tap me, I'm a <code>&lt;div&gt;</code>
+          </div>
+        </div>
+
+        <div class="space-bottom">
+          <a id="the-tap-link" class="outline-link" href="#YOU_SHOULDNT_SEE_THIS">
+            Tap me, I'm a <code>&lt;a&gt;</code>
+          </a>
+        </div>
+      </div>
+
+      <div class="half">
+        <h3>Click</h3>
+        <div class="space-bottom">
+          <button id="the-click-button" class="outline-button"><code>&lt;button&gt;</code></button>
+        </div>
+
+        <div class="space-bottom">
+          <div id="the-click-div" class="outline-element">
+            Click me, I'm a <code>&lt;div&gt;</code>
+          </div>
+        </div>
+
+        <div class="space-bottom">
+          <a id="the-click-link" class="outline-link" href="#YOU_SHOULDNT_SEE_THIS">
+            Click me, I'm a <code>&lt;a&gt;</code>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <h3>Adding a tap listener</h3>
+    <pre><code class="language-javascript">var tapId = OdoTap.addListener(document.getElementById('the-div'), handleTap);</code></pre>
+
+    <h3>Remove a tap listener</h3>
+    <pre><code class="language-javascript">OdoTap.remove(tapId);</code></pre>
+  </div>
+
+  <!-- Polyfills. -->
+  <script src="../../../node_modules/classlist.js/classList.min.js"></script>
+  <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Dependencies. -->
+  <script src="../node_modules/tiny-emitter/dist/tinyemitter.min.js"></script>
+  <script src="../node_modules/@odopod/odo-device/dist/odo-device.min.js"></script>
+  <script src="../node_modules/@odopod/odo-helpers/dist/odo-helpers.min.js"></script>
+  <script src="../node_modules/@odopod/odo-pointer/dist/odo-pointer.min.js"></script>
+
+  <!-- Source. -->
+  <script src="../dist/odo-tap.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.5.1/prism.js"></script>
+
+</body>
+
+</html>

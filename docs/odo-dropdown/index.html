@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en" class="no-js">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Odo Dropdown Demo</title>
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.5.0/themes/prism.css">
+
+  <link rel="stylesheet" href="../demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+  <link rel="stylesheet" href="css/odo-dropdown.css" />
+
+  <script>
+    document.documentElement.classList.remove('no-js');
+    document.documentElement.classList.add('js');
+  </script>
+</head>
+
+<body>
+
+<main role="main">
+  <div class="container">
+
+    <h1>Odo Dropdown</h1>
+    <p>Custom dropdown component that defaults to native select elements on touch devices.</p>
+    <h3>Support</h3>
+    <p>IE9+</p>
+    <h3>Dependencies</h3>
+    <p>Odo Base Component, Odo Helpers.</p>
+  </div>
+
+  <section class="container">
+    <h2>Basic Odo Dropdown</h2>
+    <p>On non-touch devices, this component acts similarly to native select elements. All keyboard events that interact with native select elements may be used with the custom markup.</p>
+
+    <ul>
+      <li> When component is in closed state:
+        <ul>
+          <li>Can tab over component to focus</li>
+          <li>Can use <code>SPACE</code>, <code>ENTER</code>, <code>UP</code>, or <code>DOWN</code> keys to open the custom markup options
+        </ul>
+      </li>
+      <li> When component is in open state:
+        <ul>
+          <li>Can use <code>UP</code> or <code>DOWN</code> keys to highlight options</li>
+          <li>Can use <code>SPACE</code> or <code>ENTER</code> keys to select a highlighted option</li>
+          <li>Can use <code>ESC</code> or <code>TAB</code> keys to close the options, and return to closed state</li>
+        </ul>
+      </li>
+    </ul>
+
+    <form class="space-bottom" method="get">
+
+      <div id="demo-1" class="odo-dropdown">
+        <select class="odo-dropdown__select" name="example1">
+          <option value="0">Sunday</option>
+          <option value="1">Monday</option>
+          <option value="2">Tuesday</option>
+          <option value="3">Wednesday</option>
+          <option value="4">Thursday</option>
+          <option value="5">Friday</option>
+          <option value="6">Saturday</option>
+        </select>
+        <button type="button" class="odo-dropdown__button">
+          <div class="odo-dropdown__button-inner">
+            <span class="odo-dropdown__default">Sunday</span>
+            <span class="odo-dropdown__value"></span>
+            <svg class="odo-dropdown__button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+              <path d="M8,12c-0.3,0-0.5-0.1-0.7-0.3l-5-5c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0L8,9.6l4.3-4.3c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-5,5  C8.5,11.9,8.3,12,8,12z"/>
+            </svg>
+          </div>
+        </button>
+      </div>
+
+    </form>
+
+    <div class="setup-wrap">
+
+      <h3>Markup</h3>
+      <pre><code class="language-markup">&lt;div id="demo-1" class="odo-dropdown"&gt;
+  &lt;select class="odo-dropdown__select"&gt;
+    &lt;option value="0"&gt;Sunday&lt;/option&gt;
+    &lt;option value="1"&gt;Monday&lt;/option&gt;
+    &lt;option value="2"&gt;Tuesday&lt;/option&gt;
+    &lt;option value="3"&gt;Wednesday&lt;/option&gt;
+    &lt;option value="4"&gt;Thursday&lt;/option&gt;
+    &lt;option value="5"&gt;Friday&lt;/option&gt;
+    &lt;option value="6"&gt;Saturday&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;button type="button" class="odo-dropdown__button"&gt;
+    &lt;div class="odo-dropdown__button-inner"&gt;
+      &lt;span class="odo-dropdown__default"&gt;Sunday&lt;/span&gt;
+      &lt;span class="odo-dropdown__value"&gt;&lt;/span&gt;
+      &lt;svg class="odo-dropdown__button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"&gt;
+        &lt;path d="M8,12c-0.3,0-0.5-0.1-0.7-0.3l-5-5c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0L8,9.6l4.3-4.3c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-5,5  C8.5,11.9,8.3,12,8,12z"/&gt;
+      &lt;/svg&gt;
+    &lt;/div&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+      <h3>Setup</h3>
+      <pre><code class="language-javascript">var dropdown = new OdoDropdown(document.getElementById('demo-1'));</code></pre>
+
+      <h3>Options Height</h3>
+      <p>The options list has a static <code>max-height</code> applied to it. Feel free to change this, or subclass the dropdown and calculate the height based on the available viewport.</p>
+
+      <h3>Public Event</h3>
+      <p>The selected day value above is: <code><span class="watcher"></span></code></p>
+      <p>The <code>CHANGE</code> event is emitted when a user has selected a value in the dropdown. Use <code>on</code> to listen for the event. OdoDropdown is an event emitter, so you can also use <code>once</code> and <code>off</code>.</p>
+      <pre><code class="language-javascript">dropdown.on(OdoDropdown.EventType.CHANGE, (data) => {
+  console.log(data.value);
+});</code></pre>
+
+      <h3>Public Properties</h3>
+      <pre><code class="language-javascript">dropdown.value // get or set the value of the select.
+dropdown.selectedText // get the selected option's text content.
+dropdown.select // get the &lt;select&gt; element.
+dropdown.button // get the &lt;button&gt; element.
+dropdown.selectedIndex // get or set the value of the &lt;select&gt; by index.
+dropdown.disabled // get or set the disabled state of the component.</code></pre>
+
+      <h3>Public Methods</h3>
+      <pre><code class="language-javascript">dropdown.toggleOptionByValue(value, isDisabled)
+dropdown.disableOptionByValue('bar')
+dropdown.enableOptionByValue('today')
+dropdown.getCustomOptions()
+dropdown.getNativeOptions()
+dropdown.dispose()</code></pre>
+    </div>
+
+  </section>
+
+  <section class="container">
+    <h2>Options Placement</h2>
+    <p>Additionally, you can modify the position of the drop down to display the custom options where you would like. In this example, the options are placed below the button.</p>
+    <p>This example also shows how you can use a <code>&lt;label&gt;</code> with the dropdown. You <em>need</em> the <code>for</code> attribute! You could also put the <code>&lt;label&gt;</code> inside the <code>&lt;button&gt;</code> if you wanted.</p>
+
+    <label for="month-chooser" class="some-label">Choose a month</label>
+    <div id="demo-2" class="odo-dropdown odo-dropdown--options-below">
+      <select class="odo-dropdown__select" id="month-chooser">
+        <option value="january">January</option>
+        <option value="february">February</option>
+        <option value="march">March</option>
+        <option value="april">April</option>
+        <option value="may">May</option>
+      </select>
+      <button type="button" class="odo-dropdown__button">
+        <div class="odo-dropdown__button-inner">
+          <span class="odo-dropdown__default">January</span>
+          <span class="odo-dropdown__value"></span>
+          <svg class="odo-dropdown__button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+          <path d="M8,12c-0.3,0-0.5-0.1-0.7-0.3l-5-5c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0L8,9.6l4.3-4.3c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-5,5  C8.5,11.9,8.3,12,8,12z"/>
+          </svg>
+        </div>
+      </button>
+    </div>
+
+    <div class="setup-wrap">
+      <h3>CSS</h3>
+      <p>Add a style which moves the options container, then add the class to the main element.</p>
+      <pre><code class="language-css">.odo-dropdown--options-below .odo-dropdown__options {
+  transform: translate(0, 45px);
+}</code></pre>
+
+      <h3>JavaScript</h3>
+      <pre><code class="language-javascript">var dropdown = new OdoDropdown(document.getElementById('demo-2'));</code></pre>
+    </div>
+  </section>
+
+  <section class="container">
+    <h2>Selected Option</h2>
+    <p>It can be initialized with an option already selected via the <code>selected</code> attribute on an <code>&lt;option&gt;</code>.</p>
+
+    <div id="demo-3" class="odo-dropdown">
+      <select class="odo-dropdown__select">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option selected value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+      <button type="button" class="odo-dropdown__button">
+        <div class="odo-dropdown__button-inner">
+          <span class="odo-dropdown__default">4</span>
+          <span class="odo-dropdown__value"></span>
+          <svg class="odo-dropdown__button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+          <path d="M8,12c-0.3,0-0.5-0.1-0.7-0.3l-5-5c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0L8,9.6l4.3-4.3c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-5,5  C8.5,11.9,8.3,12,8,12z"/>
+          </svg>
+        </div>
+      </button>
+    </div>
+  </section>
+
+  <section class="container">
+    <h2>Disabled Option(s)</h2>
+    <p>It can be initialized with an option disabled via the <code>disabled</code> attribute on an <code>&lt;option&gt;</code>.</p>
+
+    <div id="demo-4" class="odo-dropdown">
+      <select class="odo-dropdown__select">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option disabled value="4">4</option>
+        <option disabled value="5">5</option>
+        <option disabled value="6">6</option>
+      </select>
+      <button type="button" class="odo-dropdown__button">
+        <div class="odo-dropdown__button-inner">
+          <span class="odo-dropdown__default">Choose a number</span>
+          <span class="odo-dropdown__value"></span>
+          <svg class="odo-dropdown__button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+          <path d="M8,12c-0.3,0-0.5-0.1-0.7-0.3l-5-5c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0L8,9.6l4.3-4.3c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-5,5  C8.5,11.9,8.3,12,8,12z"/>
+          </svg>
+        </div>
+      </button>
+    </div>
+  </section>
+
+  <section class="container">
+    <h2>Custom Styling</h2>
+    <p>Instead of importing the css file for the dropdown and overriding what you need, it is recommended to copy the styles to your own stylesheet and modify them there.</p>
+  </section>
+
+  <section class="container">
+    <h2>Accessibility with WAI-ARIA</h2>
+    <p>This component manages <code>aria-*</code> attributes to provide screen readers with the appropriate information to control and choose options.</p>
+    <p>If your <code>odo-dropdown__button</code> is not a <code>&lt;button&gt;</code> element, you need to add the <code>role="button"</code> attribute to it.</p>
+  </section>
+
+  <section class="container">
+    <h2>Usage with React</h2>
+    <p>Use the <code>insertMarkup</code> option and set it to <code>false</code>.</p> This allows you to create the markup yourself (don't forget aria attributes and roles!) and have options update when your data changes.
+    <p>You will still need to use the lifecycle methods like <code>componentDidMount</code> to initialize the dropdown instance and <code>componentWillUnmount</code> to dispose of it.</p>
+    <p>Here's an example <code>render</code> method to give you an idea from a component called <code>LabelledDropdown</code>.</p>
+    <pre><code class="language-javascript">render() {
+  const selectedOption = this.props.options.find(option => option.selected) || {};
+
+  return (
+    &lt;div className="labelled-dropdown"&gt;
+      &lt;label htmlFor={this.props.id}&gt;{this.props.label}&lt;/label&gt;
+      &lt;div className="odo-dropdown" ref={element =&gt; this.element = element}&gt;
+        &lt;div className={OdoDropdown.Classes.OPTIONS_CONTAINER} role="menu" aria-hidden="true"&gt;
+          {this.props.options.map((option) =&gt; {
+            const selected = option.selected ? ' ' + OdoDropdown.Classes.OPTION_SELECTED : '';
+            const disabled = option.disabled ? ' ' + OdoDropdown.Classes.OPTION_DISABLED : '';
+            const className = OdoDropdown.Classes.OPTION + selected + disabled;
+            return &lt;div key={option.value} className={className} data-value={option.value} tabIndex="-1" role="menuitem"&gt;{option.label}&lt;/div&gt;
+          })}
+        &lt;/div&gt;
+        &lt;select className="odo-dropdown__select" name={this.props.name} id={this.props.id} defaultValue={selectedOption.value}&gt;
+          {this.props.options.map((option) =&gt; (
+            &lt;option key={option.value} value={option.value}&gt;{option.label}&lt;/option&gt;
+          ))}
+        &lt;/select&gt;
+        &lt;button type="button" className="odo-dropdown__button"&gt;
+          &lt;div className="odo-dropdown__button-inner"&gt;
+            &lt;span className="odo-dropdown__default"&gt;{selectedOption.label}&lt;/span&gt;
+            &lt;span className="odo-dropdown__value"&gt;&lt;/span&gt;
+            &lt;svg className="odo-dropdown__button-icon" viewBox="0 0 12.021 6.717"&gt;
+              &lt;polygon points="6.01 6.717 0 0.707 0.707 0 6.01 5.303 11.313 0 12.021 0.707 6.01 6.717"/&gt;
+            &lt;/svg&gt;
+          &lt;/div&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+
+    <p>The <code>LabelledDropdown</code> component could then be used like this:</p>
+    <pre><code class="language-markup">&lt;LabelledDropdown options={[{ selected: false, value: 'first_name', label: 'First Name' }, { selected: true, value: 'last_name', label: 'Last Name' }]}
+  name="sorter" id="sorter-dropdown" label="Sort" /&gt;</code></pre>
+  </section>
+</main>
+
+  <!-- Polyfills -->
+  <script src="../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+  <script src="../node_modules/classlist.js/classList.min.js"></script>
+
+  <!-- Dependencies. -->
+  <script src="../node_modules/tiny-emitter/dist/tinyemitter.min.js"></script>
+  <script src="../odo-device/dist/odo-device.js"></script>
+  <script src="../odo-base-component/dist/odo-base-component.js"></script>
+  <script src="../odo-helpers/dist/odo-helpers.js"></script>
+
+  <!-- Minified Source. -->
+  <script src="dist/odo-dropdown.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.5.0/prism.js"></script>
+
+</body>
+
+</html>

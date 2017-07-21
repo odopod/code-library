@@ -1,0 +1,47 @@
+{
+  "name": "@odopod/odo-dropdown",
+  "description": "Custom dropdown component that defaults to native select elements on touch devices.",
+  "version": "1.0.0",
+  "main": "dist/odo-dropdown.js",
+  "style": "css/odo-dropdown.css",
+  "odoModule": "src/dropdown.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
+    },
+    {
+      "name": "Evan Vaughn"
+    }
+  ],
+  "dependencies": {
+    "@odopod/odo-base-component": "../odo-base-component",
+    "@odopod/odo-device": "../odo-device",
+    "@odopod/odo-helpers": "../odo-helpers"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-dropdown",
+  "files": [
+    "css",
+    "dist",
+    "src",
+    "index.js"
+  ],
+  "odoKeywords": [
+    "ui"
+  ],
+  "keywords": [
+    "odo",
+    "odo-component",
+    "odopod",
+    "dropdown",
+    "menu"
+  ],
+  "license": "MIT",
+  "repository": "odopod/odo",
+  "scripts": {
+    "link-local": "node ../../scripts/link-local-packages.js",
+    "test": "gulp code-quality test"
+  }
+}

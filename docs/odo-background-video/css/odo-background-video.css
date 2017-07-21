@@ -1,0 +1,17 @@
+.odo-background-video video,
+.odo-background-video__fallback-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.odo-background-video .odo-background-video__fallback-img,
+.odo-background-video .odo-video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

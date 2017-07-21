@@ -1,0 +1,51 @@
+
+.dual-viewer__help {
+  position: absolute;
+  z-index: 4;
+  top: 54%;
+  left: 52%;
+  max-width: 20%;
+  margin: 0;
+
+  /* Click through */
+  pointer-events: none;
+
+  /* Transition */
+  opacity: 0;
+  -webkit-transition: .2s ease-out;
+  transition: .2s ease-out;
+}
+
+.odo-dual-viewer__scrubber-handle {
+  width: 44px;
+  height: 44px;
+  background-color: #9b59b6;
+}
+
+.is-centered .dual-viewer__help {
+  opacity: 1;
+}
+
+
+.odo-dual-viewer {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.controls {
+  margin-top: 10px;
+}
+
+@media (min-width: 1200px) {
+  .odo-dual-viewer {
+    height: 600px;
+  }
+}
+
+@media (max-width: 767px) {
+  #regular .odo-dual-viewer__scrubber ~ .container {
+    width: 80%;
+  }
+}

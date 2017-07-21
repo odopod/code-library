@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odo Tabs Demo</title>
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.5.1/themes/prism.css">
+  <link rel="stylesheet" href="../demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+  <link rel="stylesheet" href="css/odo-tabs.css" />
+  <link rel="stylesheet" href="css/odo-tabs-theme.css" />
+</head>
+
+<body>
+
+  <div id="main" role="main">
+
+    <div class="container">
+      <h1>Odo Tabs</h1>
+      <p>A component for switching between panes of content.</p>
+      <h3>Support</h3>
+      <p>IE9+</p>
+      <h3>Dependencies</h3>
+      <p>Odo Window Events, Odo Helpers, TinyEmitter</p>
+      <h3>Styles</h3>
+      <p>This component has required css - <a href="css/odo-tabs.css">css/odo-tabs.css</a>. The theme (<a href="css/odo-tabs-theme.css">css/odo-tabs-theme.css</a>) should also be included and customized to your design.</p>
+    </div>
+
+    <section class="container">
+      <h2>Default Tabs</h2>
+      <p>By default, the tabs component provides keyboard navigation, aria roles &amp; states, and tab functionality.</p>
+
+      <div class="demo-wrapper">
+        <ul id="tabs-demo" class="tabs-list clearfix">
+          <li class="odo-tabs__tab"><a href="#demo1_pane1" class="demo-tab">Tab 1</a></li>
+          <li class="odo-tabs__tab"><a href="#demo1_pane2" class="demo-tab">Tab 2</a></li>
+          <li class="odo-tabs__tab"><a href="#demo1_pane3" class="demo-tab">Tab 3</a></li>
+          <li class="odo-tabs__tab"><a href="#demo1_pane4" class="demo-tab">Tab 4</a></li>
+        </ul>
+
+        <div class="odo-tabs__panes">
+          <!-- Add the `is-selected` class to the first pane if you don't want to see the animation on init. -->
+          <div id="demo1_pane1" class="odo-tabs__pane is-selected">
+            <h4>Pane 1</h4>
+            <p><a href="#link1">A link</a></p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div id="demo1_pane2" class="odo-tabs__pane">
+            <h4>Pane 2</h4>
+            <p><a href="#link2">A link</a></p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div id="demo1_pane3" class="odo-tabs__pane">
+            <h4>Pane 3</h4>
+            <p><a href="#link3">A link</a></p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div id="demo1_pane4" class="odo-tabs__pane">
+            <h4>Pane 4</h4>
+            <p><a href="#link4">A link</a></p>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          </div>
+        </div>
+
+        <div class="animations-wrap">
+          <label for=animations>Try out some different animations.</label>
+          <br>
+          <br>
+          <select id=animations>
+            <option value="fade" selected>Fade</option>
+            <option value="zoom-out">Zoom Out</option>
+            <option value="slide">Slide Down</option>
+            <option value="zoom-in">Zoom In</option>
+          </select>
+        </div>
+      </div>
+
+      <h3>Markup</h3>
+      <p>The <code>odo-tabs__tab</code> class, <code>href</code> attribute on the anchor, and <code>id</code> attribute on the tab pane are required. The <code>odo-tabs__pane</code> elements must also have a common parent. The component will add aria roles to the existing elements and id attributes to the anchors if they do not have one.</p>
+      <p>If there are <strong>images</strong> inside the tab panes, either set their width and height, or wrap it in an aspect ratio box so that once it loads, it does not create extra height. If you cannot do either of these things, listen for the <code>load</code> event of the image and call the <code>update</code> method on tabs.</p>
+      <pre><code class="language-markup">&lt;ul id="tabs-demo" class="tabs-list"&gt;
+  &lt;li class="odo-tabs__tab"&gt;&lt;a href="#demo1_pane1" class="demo-tab"&gt;Tab 1&lt;/a&gt;&lt;/li&gt;
+  &lt;li class="odo-tabs__tab"&gt;&lt;a href="#demo1_pane2" class="demo-tab"&gt;Tab 2&lt;/a&gt;&lt;/li&gt;
+  &lt;li class="odo-tabs__tab"&gt;&lt;a href="#demo1_pane3" class="demo-tab"&gt;Tab 3&lt;/a&gt;&lt;/li&gt;
+  &lt;li class="odo-tabs__tab"&gt;&lt;a href="#demo1_pane4" class="demo-tab"&gt;Tab 4&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class="odo-tabs__panes"&gt;
+  &lt;div id="demo1_pane1" class="odo-tabs__pane"&gt;&lt;h4&gt;Pane 1&lt;/h4&gt;&lt;/div&gt;
+  &lt;div id="demo1_pane2" class="odo-tabs__pane"&gt;&lt;h4&gt;Pane 2&lt;/h4&gt;&lt;/div&gt;
+  &lt;div id="demo1_pane3" class="odo-tabs__pane"&gt;&lt;h4&gt;Pane 3&lt;/h4&gt;&lt;/div&gt;
+  &lt;div id="demo1_pane4" class="odo-tabs__pane"&gt;&lt;h4&gt;Pane 4&lt;/h4&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+      <h3>JavaScript</h3>
+      <pre><code class="language-javascript">var tabs = new OdoTabs(document.getElementById('tabs-demo'));</code></pre>
+    </section>
+
+    <section class="container">
+      <h2>Deep Linking</h2>
+      <p>By adding the <code>data-hash</code> attribute to the anchor, the tabs component will change the URL's hash when a tab changes. It also listens for the <code>hashchange</code> event and navigates to the correct tab if it finds a match.</p>
+
+      <div class="demo-wrapper">
+        <ul id="hash-demo" class="tabs-list clearfix">
+          <li class="odo-tabs__tab"><a data-hash="dolphin" href="#demo2_pane1" class="demo-tab">Dolphin</a></li>
+          <li class="odo-tabs__tab"><a data-hash="lemming" href="#demo2_pane2" class="demo-tab">Lemming</a></li>
+          <li class="odo-tabs__tab"><a data-hash="tyrannosaurus" href="#demo2_pane3" class="demo-tab">Tyrannosaurus</a></li>
+          <li class="odo-tabs__tab"><a data-hash="shark" href="#demo2_pane4" class="demo-tab">Shark</a></li>
+        </ul>
+
+        <div class="odo-tabs__panes">
+          <div id="demo2_pane1" class="odo-tabs__pane">
+            <h4>Dolphin</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div id="demo2_pane2" class="odo-tabs__pane">
+            <h4>Lemming</h4>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div id="demo2_pane3" class="odo-tabs__pane">
+            <h4>Tyrannosaurus</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div id="demo2_pane4" class="odo-tabs__pane">
+            <h4>Shark</h4>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Markup</h3>
+      <p>The markup is similar to the first demo. Only the <code>id</code>s have changed and <code>data-hash</code> has been added.</p>
+      <pre><code class="language-markup">&lt;li class="odo-tabs__tab"&gt;&lt;a data-hash="dolphin" href="#demo2_pane1" class="demo-tab"&gt;Dolphin&lt;/a&gt;&lt;/li&gt;
+&lt;li class="odo-tabs__tab"&gt;&lt;a data-hash="lemming" href="#demo2_pane2" class="demo-tab"&gt;Lemming&lt;/a&gt;&lt;/li&gt;
+&lt;li class="odo-tabs__tab"&gt;&lt;a data-hash="tyrannosaurus" href="#demo2_pane3" class="demo-tab"&gt;Tyrannosaurus&lt;/a&gt;&lt;/li&gt;
+&lt;li class="odo-tabs__tab"&gt;&lt;a data-hash="shark" href="#demo2_pane4" class="demo-tab"&gt;Shark&lt;/a&gt;&lt;/li&gt;</code></pre>
+    </section>
+
+    <section class="container">
+      <h2>Events</h2>
+      <p>Each instance is an event emitter which inherits from <code>TinyEmitter</code> and emits two events: <code>OdoTabs.EventType.WILL_SHOW</code> and <code>OdoTabs.EventType.DID_SHOW</code>. If you call <code>preventDefault()</code> on the <code>WILL_SHOW</code> event, the new tab will not be shown.</p>
+      <pre><code class="language-javascript">tabs.on(OdoTabs.EventType.WILL_SHOW, (evt) => {
+  evt.preventDefault();
+});</code></pre>
+    </section>
+  </div>
+
+  <!-- Polyfills -->
+  <script src="../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Dependencies. -->
+  <script src="../node_modules/tiny-emitter/dist/tinyemitter.min.js"></script>
+  <script src="../odo-device/dist/odo-device.min.js"></script>
+  <script src="../odo-helpers/dist/odo-helpers.min.js"></script>
+  <script src="../odo-window-events/dist/odo-window-events.min.js"></script>
+
+  <!-- Source. -->
+  <script src="dist/odo-tabs.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.5.1/prism.js"></script>
+
+</body>
+
+</html>

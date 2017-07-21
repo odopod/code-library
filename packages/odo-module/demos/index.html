@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Odo Module Demo</title>
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.5.1/themes/prism.css">
+
+  <link rel="stylesheet" href="../../../docs/demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+</head>
+
+<body>
+
+<main role="main">
+  <div class="container">
+
+    <h1>Odo Module</h1>
+    <p>Augment a class' static methods with helpers.</p>
+    <p>We think of a module as a section of the page which is made up of components. When they appear on the page, we want to initialize them. One pattern is to add a static <code>initialize</code> method to every module class created. This component simplifies this by moving the static methods out of the module.</p>
+    <p>OdoModule is similar to a <a href="http://justinfagnani.com/2015/12/21/real-mixins-with-javascript-classes/">mixin</a>, but it needs to know about the class it's augmenting.</p>
+    <h3>Support</h3>
+    <p>IE9+</p>
+    <h3>Dependencies</h3>
+    <p>None</p>
+
+    <h2>API</h2>
+    <h3>register(Module[, selector])</h3>
+    <p>Adds the static methods (listed below) to <code>Module</code>. <code>selector</code> is the base selector for the module, representing its main element.</p>
+    <p>If selector isn't defined, the component will look for enumerations with the selector: <code>Module.Selectors.BASE</code>, <code>Module.ClassName.BASE</code>, and <code>Module.Classes.BASE</code>.</p>
+    <pre><code class="language-javascript">OdoModule.register(CoolModule);</code></pre>
+
+    <h3>unregister(Module[, selector])</h3>
+    <p>Forgets about <code>Module</code>. Currently leaves the added methods and instances as-is in case they're needed.</p>
+    <pre><code class="language-javascript">OdoModule.unregister(CoolModule);</code></pre>
+
+    <h2>Class Methods</h2>
+    <h3>initializeAll(context = document, options = {})</h3>
+    <p>Initialize all elements within <code>context</code>. This method returns a Map of the instances which were creatd. It also adds the new instances to the static <code>Instances</code> property on the class.</p>
+    <pre><code class="language-javascript">CoolModule.initializeAll(containingElement)</code></pre>
+
+    <h3>disposeAll(context = document)</h3>
+    <p>Dispose of all instances from within a context.</p>
+    <pre><code class="language-javascript">CoolModule.disposeAll(containingElement)</code></pre>
+
+    <h3>getInstance(element)</h3>
+    <p>Retrieve the instance by its main element.</p>
+    <pre><code class="language-javascript">CoolModule.getInstance(element)</code></pre>
+
+    <h3>deleteInstance(element)</h3>
+    <p>Removes the instance from the <code>Instances</code> map and calls its <code>dispose</code> method if it has one.</p>
+    <pre><code class="language-javascript">CoolModule.deleteInstance(element)</code></pre>
+
+    <h2>Full Example</h2>
+    <p>Let's say you have a base component which does this:</p>
+    <pre><code class="language-javascript">class BaseComponent {
+  constructor(element) {
+    this.element = element;
+  }
+
+  getAllByClass(className) {
+    return Array.from(this.element.getElementsByClassName(className));
+  }
+}</code></pre>
+
+    <p>And your module wants to <code>console.log</code> all classes matching <code>'child'</code>.</p>
+    <pre><code class="language-javascript">class CoolModule extends BaseComponent {
+  constructor(element) {
+    super(element);
+    console.log(this.getChildren());
+  }
+
+  getChildren() {
+    return this.getAllByClass(CoolModule.Classes.CHILD);
+  }
+}
+
+CoolModule.Classes = {
+  BASE: 'cool-module',
+  CHILD: 'cool-module__child',
+};
+
+// Register with OdoModule.
+OdoModule.register(CoolModule);
+
+// Find all occurances of '.cool-module' and initialize them.
+CoolModule.initializeAll();</code></pre>
+
+    <p><code>initializeAll</code> also returns a map of the instances which were created if you need them.</p>
+
+    <div class="cool-module">
+      <span class="cool-module__child"></span>
+      <span class="cool-module__child"></span>
+    </div>
+
+  </div>
+</main>
+
+  <!-- Polyfills. -->
+  <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Dependencies -->
+
+  <!-- Source. -->
+  <script src="../dist/odo-module.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.5.1/prism.js"></script>
+
+</body>
+
+</html>

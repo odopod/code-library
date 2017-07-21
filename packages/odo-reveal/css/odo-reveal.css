@@ -1,0 +1,42 @@
+.odo-reveal__target {
+  opacity: 0;
+  -webkit-transform: translate(0, 20px);
+          transform: translate(0, 20px);
+  -webkit-transition:
+    opacity 400ms cubic-bezier(0.165, 0.84, 0.44, 1) 0ms,
+    -webkit-transform 700ms cubic-bezier(0.165, 0.84, 0.44, 1) 0ms;
+          transition:
+    opacity 400ms cubic-bezier(0.165, 0.84, 0.44, 1) 0ms,
+    transform 700ms cubic-bezier(0.165, 0.84, 0.44, 1) 0ms;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.odo-reveal--2 { -webkit-transition-delay: 160ms; transition-delay: 160ms; }
+.odo-reveal--3 { -webkit-transition-delay: 320ms; transition-delay: 320ms; }
+.odo-reveal--4 { -webkit-transition-delay: 480ms; transition-delay: 480ms; }
+.odo-reveal--5 { -webkit-transition-delay: 640ms; transition-delay: 640ms; }
+.odo-reveal--6 { -webkit-transition-delay: 800ms; transition-delay: 800ms; }
+.odo-reveal--7 { -webkit-transition-delay: 960ms; transition-delay: 960ms; }
+.odo-reveal--8 { -webkit-transition-delay: 1120ms; transition-delay: 1120ms; }
+.odo-reveal--9 { -webkit-transition-delay: 1280ms; transition-delay: 1280ms; }
+.odo-reveal--10 { -webkit-transition-delay: 1440ms; transition-delay: 1440ms; }
+
+.odo-reveal--shown .odo-reveal__target {
+  opacity: 1;
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+
+.odo-reveal__target.odo-reveal--done {
+  -webkit-transform: none;
+          transform: none;
+  -webkit-backface-visibility: visible;
+          backface-visibility: visible;
+}
+
+.odo-reveal .odo-responsive-img:not(.odo-reveal__target):not(.odo-reveal__ignore) {
+  opacity: 1;
+  -webkit-transition: none;
+          transition: none;
+}

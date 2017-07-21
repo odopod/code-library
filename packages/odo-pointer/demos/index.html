@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Odo Pointer Demo</title>
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.4.1/themes/prism.css">
+
+  <link rel="stylesheet" href="../../../docs/demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+</head>
+
+<body>
+
+<main role="main">
+  <div class="container">
+
+    <h1>Odo Pointer</h1>
+    <p>An abstraction for pointer, mouse, and touch events.</p>
+    <h3>Support</h3>
+    <p>IE9+</p>
+    <h3>Dependencies</h3>
+    <p>Odo Device, Odo Helpers, Tiny Emitter</p>
+    <p>Odo Pointer also expects <code>Object.assign</code> from ES6 to be available.</p>
+
+    <h3>X Axis</h3>
+    <p>The pointer class normalizes [single] pointer, mouse, and touch events to a single event with augmented data.</p>
+    <pre rel="JavaScript"><code class="language-javascript">let horizontal = new OdoPointer(document.getElementById('field-x'), {
+  axis: OdoPointer.Axis.X,
+});</code></pre>
+    <p>There are 3 different events which you can listen for, <code>START</code>, <code>MOVE</code>, and <code>END</code>. OdoPointer inherits from <code>TinyEmitter</code> which adds the following methods: <code>on</code>, <code>once</code>,<code>off</code>, and <code>emit</code>.</p>
+    <pre rel="JavaScript"><code class="language-javascript">horizontal.on(OdoPointer.EventType.END, function (evt) {
+  console.log(evt); // PointerEvent...
+});</code></pre>
+    <p>You can also call <code>evt.preventDefault()</code> on the <code>START</code> event to prevent Odo Pointer from adding drag handlers (basically ignoring the event). Calling <code>preventDefault</code> in the <code>END</code> event will tell Odo Pointer to call <code>preventDefault</code> on the native touch/mouse/pointer end event.</p>
+    <div class="clearfix">
+      <div class="half full@xs">
+        <h4>Touch the area below</h4>
+      </div>
+      <div class="half full@xs hidden@xs">
+        <h4>Event data:</h4>
+      </div>
+    </div>
+    <div class="flex">
+      <div id="field-x" class="half full@xs demo-field"><div class="demo-field__inner">Inner element</div></div>
+      <pre id="field-x-event" class="half full@xs demo-field-event" rel="JavaScript"><code class="language-javascript"></code></pre>
+    </div>
+
+    <h3>Y Axis</h3>
+    <p>Using the Y axis will block scrolling on touch devices. Use wisely!</p>
+    <pre rel="JavaScript"><code class="language-javascript">let vertical = new OdoPointer(document.getElementById('field-y'), {
+  axis: OdoPointer.Axis.Y,
+});</code></pre>
+    <div class="clearfix">
+      <div class="half full@xs">
+        <h4>Touch the area below</h4>
+      </div>
+      <div class="half full@xs hidden@xs">
+        <h4>Event data:</h4>
+      </div>
+    </div>
+    <div class="flex">
+      <div id="field-y" class="half full@xs demo-field"></div>
+      <pre id="field-y-event" class="half full@xs demo-field-event" rel="JavaScript"><code class="language-javascript"></code></pre>
+    </div>
+
+    <h3>Both Axis</h3>
+    <p>Using both axis in the pointer will block scrolling on touch devices. Be careful!</p>
+    <p>The default axis is both.</p>
+    <pre rel="JavaScript"><code class="language-javascript">let both = new OdoPointer(document.getElementById('field-xy'));</code></pre>
+    <div class="clearfix">
+      <div class="half full@xs">
+        <h4>Touch the area below</h4>
+      </div>
+      <div class="half full@xs hidden@xs">
+        <h4>Event data:</h4>
+      </div>
+    </div>
+    <div class="flex">
+      <div id="field-xy" class="half full@xs demo-field"></div>
+      <pre id="field-xy-event" class="half full@xs demo-field-event" rel="JavaScript"><code class="language-javascript"></code></pre>
+    </div>
+
+  </div>
+
+</main>
+  <!-- Polyfills -->
+  <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Dependencies. -->
+  <script src="../node_modules/tiny-emitter/dist/tinyemitter.min.js"></script>
+  <script src="../node_modules/@odopod/odo-device/dist/odo-device.js"></script>
+  <script src="../node_modules/@odopod/odo-helpers/dist/odo-helpers.js"></script>
+
+  <!-- Minified Source. -->
+  <script src="../dist/odo-pointer.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.4.1/prism.js"></script>
+
+</body>
+
+</html>

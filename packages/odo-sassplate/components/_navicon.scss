@@ -1,0 +1,99 @@
+$navicon-bar-width: 20px !default;
+$navicon-bar-height: 2px !default;
+$navicon-bar-space: 6px !default;
+$navicon-bar-color: #9957a8 !default;
+$navicon-duration: 150ms !default;
+
+.navicon {
+  position: relative;
+  width: $navicon-bar-width;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: $navicon-bar-color;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  // @include augment-hit-area(100%);
+}
+
+.navicon__inner {
+  position: relative;
+  display: block;
+  height: 100%;
+}
+
+.navicon__lines {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 100%;
+
+  // Avoid transforming by 50% because of half pixels.
+  margin-left: round($navicon-bar-width / -2);
+  margin-top: round($navicon-bar-height / -2);
+
+  height: $navicon-bar-height;
+  background-color: $navicon-bar-color;
+  backface-visibility: hidden;
+  transition: background-color $navicon-duration ease;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    height: $navicon-bar-height;
+    background-color: $navicon-bar-color;
+    transition: $navicon-duration ease;
+  }
+
+  &::before {
+    transform: translate(0, -($navicon-bar-height + $navicon-bar-space));
+  }
+
+  &::after {
+    transform: translate(0, $navicon-bar-height + $navicon-bar-space);
+  }
+}
+
+// X icon
+.navicon--close .navicon__lines {
+  background-color: rgba($navicon-bar-color, 0);
+}
+
+.navicon--close .navicon__lines::before,
+.navicon--close .navicon__lines::after {
+  transform-origin: 50% 50%;
+  width: 100%;
+}
+
+.navicon--close .navicon__lines::before {
+  transform: translate(0, 0) rotate(45deg);
+}
+
+.navicon--close .navicon__lines::after {
+  transform: translate(0, 0) rotate(-45deg);
+}
+
+// <- back arrow icon
+.navicon--arrow .navicon__lines::before,
+.navicon--arrow .navicon__lines::after {
+  transform-origin: 0 50%;
+  width: 65%;
+}
+
+.navicon--arrow .navicon__lines::before {
+  transform: translate(-1px, 1px) rotate(-45deg);
+}
+
+.navicon--arrow .navicon__lines::after {
+  transform: translate(-1px, -1px) rotate(45deg);
+}

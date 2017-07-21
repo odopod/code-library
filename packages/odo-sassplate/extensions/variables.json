@@ -1,0 +1,75 @@
+{
+  "colors": {
+    "blue-dk": "#005992",
+    "blue": "#1b9ec6",
+    "purple-dk": "#711471",
+    "purple": "#a14fa8",
+    "teal": "#00a38a",
+    "lime": "#b2bb21",
+    "white": "#ffffff",
+    "gray90": "#edf0f1",
+    "gray80": "#dfe4e6",
+    "gray70": "#bec5c7",
+    "gray60": "#919698",
+    "gray40": "#61686a",
+    "gray30": "#30373d",
+    "gray20": "#242a2f",
+    "black": "#000000",
+    "grayblue40": "#526675",
+    "grayblue30": "#3e4d5a",
+    "grayblue20": "#2b343c"
+  },
+
+  "font-families": {
+    "sans-serif": "'\"Helvetica Neue\", Helvetica, Arial, sans-serif'",
+    "code": "'Consolas, Menlo, Monaco, \"Lucida Console\", monospace'"
+  },
+
+  "gradients": {
+    "blue--purple": {
+      "from": "#389dd3",
+      "to": "#6645ae"
+    },
+    "teal--blue": {
+      "from": "#00a38a",
+      "to": "#389dd3"
+    },
+    "white--gray90": {
+      "from": "#ffffff",
+      "to": "#edf0f1"
+    },
+    "red--orange": {
+      "from": "#d9122e",
+      "to": "#f6543a"
+    }
+  },
+
+  "vertical-spacers": {
+    "xs": {
+      "none": 0,
+      "small": 24,
+      "medium": 36,
+      "large": 48
+    },
+    "sm": {
+      "none": 0,
+      "medium": 40,
+      "large": 64
+    },
+    "md": {
+      "none": 0,
+      "small": 32,
+      "medium": 48,
+      "large": 80
+    }
+  },
+  "aspect-boxes": [
+    "(16, 9)",
+    "(4, 3)",
+    "(3, 2)",
+    "(3, 1)",
+    "(2, 3)",
+    "(2, 1)",
+    "(1, 1)"
+  ]
+}

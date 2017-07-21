@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Odo Reveal Demo</title>
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.4.1/themes/prism.css">
+  <link rel="stylesheet" href="../demo.css" />
+  <link rel="stylesheet" href="../odo-responsive-images/css/odo-responsive-images.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+  <link rel="stylesheet" href="css/odo-reveal.css" />
+
+  <!--[if IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/2014.01.31/classList.min.js"></script><![endif]-->
+</head>
+
+<body>
+
+<main role="main">
+  <div class="container">
+
+    <h1>Odo Reveal</h1>
+    <p>Reveal elements on the page as they come into view. It will also wait for images inside the main element to load before reveal any content.</p>
+    <h3>Support</h3>
+    <p>IE9+.</p>
+    <p>Native Android browsers will fade the text in immediately. Browsers without transitions will see the text appear abruptly. You may modify <code>OdoTypeAnimation.HAS_SCROLL_ANIMATION</code> to choose whether the text fades in upon viewport enter or immediately.</p>
+    <h3>Dependencies</h3>
+    <p>OdoDevice, OdoHelpers, OdoViewport</p>
+    <h3>Styles</h3>
+    <p>This component has required css - <a href="css/odo-reveal.css">css/odo-reveal.css</a>.</p>
+
+    <div class="odo-reveal">
+      <h2 class="odo-reveal__target">Markup</h2>
+      <p class="odo-reveal__target odo-reveal--2">Place the <code>odo-reveal</code> class on the top level element of the module. This is used by the component to determine how far you have scrolled into the module.</p>
+      <p class="odo-reveal__target odo-reveal--3">Then add the <code>odo-reveal__target</code> class to any element which needs to be faded in.</p>
+      <p class="odo-reveal__target odo-reveal--4">Finally, add <code>odo-reveal--2</code>, <code>odo-reveal--3</code>, .etc. (up to 10) to add a delay to other elements.</p>
+
+      <pre class="odo-reveal__target odo-reveal--5"><code class="language-markup">&lt;section class="odo-reveal"&gt;
+  &lt;h2 class="odo-reveal__target">Markup&lt;/h2&gt;
+  &lt;p class="odo-reveal__target odo-reveal--2"&gt;&hellip;&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+
+      <p class="odo-reveal__target odo-reveal--6">Odo Reveal will look for a <code>data-threshold</code> attribute on the main element (<code>&lt;section class="odo-reveal"&gt;</code> above) and pass that along to OdoViewport as the threshold value. The threshold is <code>25%</code> by default.</p>
+      <pre class="odo-reveal__target odo-reveal--7"><code class="language-markup">&lt;section class="odo-reveal" data-threshold="50%"&gt;&hellip;&lt;/section&gt;</code></pre>
+    </div>
+
+    <h2>JavaScript Setup</h2>
+    <p>You can instantiate all the odo reveal elements currently on the page with <code>initializeAll</code> which will return an array of <code>OdoReveal</code> instances. They can also be created with <code>new OdoReveal(element)</code>.</p>
+    <pre><code class="language-javascript">var instances = OdoReveal.initializeAll();</code></pre>
+
+    <h2>Images</h2>
+    <p>Odo Reveal waits for images inside the main element to load before revealing the content. <strong>Warning</strong> if you&rsquo;re using deferred image loading (like Odo Responsive Images), images won&rsquo;t start loading until they&rsquo;re in the viewport, which can cause unexpected results with Odo Reveal.</p>
+
+    <hr class="space-around">
+
+    <div class="example cool-layout odo-reveal clearfix space-bottom-large has-background background--light">
+      <div class="half cool-layout__left">
+        <h3 class="odo-reveal__target">High Life 8-bit swag</h3>
+        <p class="odo-reveal__target odo-reveal--2">Neutra salvia chambray wayfarers ugh lap. Vice lumbersexual Intelligentsia try-hard shabby chic roof party fingerstache. Street art chia fingerstache, Blue Bottle pop-up +1 hella synth banjo tofu cronut put a bird on it messenger bag stumptown. Blue Bottle yr shabby chic biodiesel</p>
+        <figure class="cool-layout__figure odo-reveal__target odo-reveal--4">
+          <div class="odo-responsive-img">
+            <img data-srcset="
+              https://placehold.it/100x56/fa113d/ffffff 100w,
+              https://placehold.it/200x112/fa113d/ffffff 200w,
+              https://placehold.it/280x157/fa113d/ffffff 280w" sizes="(min-width:1291px) 280px, (max-width:767px) 42vw, 21vw" alt="hello world">
+          </div>
+          <p>All I ever really wanted in this short life was chocolate.</p>
+        </figure>
+      </div>
+      <div class="half cool-layout__right">
+        <div class="aspect aspect--16x9">
+          <div class="odo-responsive-img odo-reveal__target odo-reveal--3">
+            <img data-srcset="
+              https://placehold.it/350x196 350w,
+              https://placehold.it/560x315 560w" sizes="(min-width:1291px) 560px, (max-width:767px) 93vw, 46.5vw" alt="hello world">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="example demo-box odo-reveal has-background background--light space-bottom-large">
+      <div class="positioned">
+        <h2 class="odo-reveal__target">Meet REDACTED, a new type of computer</h2>
+        <p class="odo-reveal__target odo-reveal--2">A bigger screen with power to match.</p>
+        <p class="odo-reveal__target odo-reveal--3">Explore It</p>
+      </div>
+    </section>
+
+    <section class="example demo-box odo-reveal has-background space-bottom-large">
+      <div class="positioned">
+        <h2 class="odo-reveal__target">To break the rules, you must first master them.</h2>
+        <p class="odo-reveal__target odo-reveal--2">The New Millenary breaks the rules of watch design, with a distinctly feminine aesthetic.</p>
+        <p class="odo-reveal__target odo-reveal--3">Explore It</p>
+      </div>
+    </section>
+
+    <section class="example demo-box odo-reveal has-background background--light space-bottom-large">
+      <div class="positioned positioned--right">
+        <h2 class="odo-reveal__target">Williamsburg listicle chia, plaid pour-over meh hashtag</h2>
+        <p class="odo-reveal__target odo-reveal--2">Ethical fanny pack iPhone food truck. Carles pug sustainable, flexitarian Etsy selvage scenester iPhone Portland raw denim sartorial artisan polaroid Pitchfork.</p>
+        <p class="odo-reveal__target odo-reveal--3">Do the thing</p>
+      </div>
+    </section>
+
+    <h2>Ignoring Images</h2>
+    <p>Sometimes you really don&rsquo;t want to wait for an image to load when using Odo Reveal. In this case, you can add the <code>.odo-reveal__ignore</code> class to the parent of the image and it will not be waited on. For Odo Responsive Images, the class should be added directly to the placeholder:</p>
+    <pre><code class="language-markup">&lt;div class="odo-responsive-img odo-reveal__ignore"&gt;</code></pre>
+
+    <section class="example demo-box odo-reveal has-background space-bottom-large" data-threshold="50%">
+      <div class="odo-responsive-img odo-responsive-img--cover odo-reveal__ignore" data-type="background">
+        <img data-srcset="
+          https://placehold.it/350x450/f6524c/ffffff 350w,
+          https://placehold.it/700x450/f6524c/ffffff 700w,
+          https://placehold.it/1200x450/f6524c/ffffff 1200w" sizes="(min-width:1291px) 1200px, 93vw" alt="hello world">
+      </div>
+      <div class="positioned positioned--bottom">
+        <h2 class="odo-reveal__target">Portland drinking vinegar craft beer</h2>
+        <p class="odo-reveal__target odo-reveal--2">Biodiesel art party kitsch, sustainable dreamcatcher +1 gentrify gastropub squid Portland semiotics.</p>
+        <p class="odo-reveal__target odo-reveal--3">Explore It</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+  <!-- Polyfills -->
+  <script src="../node_modules/classlist.js/classList.min.js"></script>
+  <script src="../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Dependencies. -->
+  <script src="../odo-device/dist/odo-device.min.js"></script>
+  <script src="../odo-helpers/dist/odo-helpers.min.js"></script>
+  <script src="../odo-window-events/dist/odo-window-events.min.js"></script>
+  <script src="../odo-viewport/dist/odo-viewport.min.js"></script>
+
+  <!-- Only for demos -->
+  <script src="../node_modules/picturefill/dist/picturefill.min.js"></script>
+  <script src="../odo-responsive-images/dist/odo-responsive-images.min.js"></script>
+
+  <!-- Source. -->
+  <script src="dist/odo-reveal.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+   <script src="https://cdn.jsdelivr.net/prism/1.4.1/prism.js"></script>
+
+</body>
+
+</html>

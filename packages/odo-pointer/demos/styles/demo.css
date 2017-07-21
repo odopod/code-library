@@ -1,0 +1,54 @@
+.demo-field {
+  position: relative;
+  height: 392px;
+  background-color: #2196f3;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.demo-field-event.demo-field-event {
+  min-height: 350px;
+  margin: 0;
+}
+
+.demo-field__inner {
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  width: 150px;
+  height: 150px;
+  padding: 4px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media (max-width: 767px) {
+  .flex {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+
+  .demo-field {
+    height: 175px;
+  }
+
+  .hidden\@xs {
+    display: none !important;
+  }
+
+  .full\@xs {
+    width: 100%;
+  }
+}

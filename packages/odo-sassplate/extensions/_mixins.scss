@@ -1,0 +1,208 @@
+
+// @param {string} bp Breakpoint value. One of `xs, sm, md, lg`.
+// @param {boolean} isMaxWidth By default, the media queries are mobile first,
+//     so they use `min-width: __px`. By passing `true`, the mixin will subtract
+//     one pixel from the breakpoint value and make it `max-width: __px`.
+// @param {boolean} isScreenOnly Whether to hide this media query from print styles.
+//
+// Note: For print media, we want the default styles and the xs breakpoint to take effect.
+@mixin breakpoint($bp, $isMaxWidth: false, $isScreenOnly: true) {
+  // Avoid media queries like (min-width: 0px) and (max-width: -1px).
+  @if $bp == xs {
+    @content;
+  } @else {
+    $query: get-breakpoint-query($bp, $isMaxWidth);
+
+    @media #{get-media-query($query, $isScreenOnly)} {
+      @content;
+    }
+  }
+}
+
+@mixin breakpoints($min, $max) {
+  $start: map-get($breakpoints, $min);
+  $end: map-get($breakpoints, $max);
+
+  @if map-has-key($breakpoints, $min) and map-has-key($breakpoints, $max) {
+    $end: $end - 1px;
+    @if $start > $end {
+      @warn "Unreachable media query: #{$start} <--> #{$end}";
+      @content;
+    } @else {
+
+      $media-query-min: "(min-width: #{$start})";
+      $media-query-max: "(max-width: #{$end})";
+
+      // There should be no lower bound when the extra small breakpoint is used.
+      // e.g. `@include breakpoints(xs, sm)` should be from 0 <--> 768.
+      @if $min == xs {
+        @media screen and #{$media-query-max} {
+          @content;
+        }
+      } @else {
+        @media screen and #{$media-query-min} and #{$media-query-max} {
+          @content;
+        }
+      }
+    }
+  } @else {
+    @warn "#{$min} or #{$max} breakpoint not recognized. Valid breakpoints: #{map-keys($breakpoints)}";
+    @content;
+  }
+}
+
+@mixin augment-hit-area($byPercent: 100%, $pseudo: 'after') {
+  $isPercent: str-slice(inspect($byPercent), -1) == "%";
+  $size: if($isPercent, 100% + $byPercent, $byPercent);
+  $offset: if($isPercent, $byPercent / -2, $byPercent / -4);
+
+  // Increase the hit area by 100% by placing a pseudo element behind the handle
+  &::#{$pseudo} {
+    content: '';
+    position: absolute;
+    // Having the hit area on top of the handle seemed to help Android a little. Was below it (-1)
+    z-index: 1;
+    top: $offset;
+    left: $offset;
+    display: block;
+    width: $size;
+    height: $size;
+
+    // Uncomment to see the hit area
+    // background-color: rgba(255, 255, 0, 0.3);
+  }
+}
+
+@mixin keep-aspect() {
+  position: relative;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  padding-bottom: 100%;
+}
+
+@mixin aspect($width, $height) {
+  padding-bottom: percentage($height / $width);
+}
+
+@mixin no-aspect() {
+  height: auto;
+  padding-bottom: 0;
+  overflow: visible;
+}
+
+// Fill the parent using absolute positioning
+@mixin fill-parent() {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+// For when you need fill-parent on one breakpoint, but not a bigger one.
+@mixin reset-fill-parent() {
+  position: static;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+}
+
+// A ghost element used to vertically center something
+// http://css-tricks.com/centering-in-the-unknown/
+@mixin ghost($child: 'ghost-center') {
+  font-size: 0;
+  height: 100%;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 100%;
+  }
+
+  .#{$child} {
+    display: inline-block;
+
+    // For Firefox...
+    max-width: 100%;
+    max-height: 100%;
+
+    // Yeya!
+    vertical-align: middle;
+
+    // Because the parent has a font-size of 0.
+    font-size: 1rem;
+  }
+}
+
+
+// Clearfix
+// --------
+// For clearing floats like a boss h5bp.com/q
+@mixin clearfix() {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+// Text overflow
+// -------------------------
+// Requires inline-block or block for proper styling
+@mixin text-overflow($nowrap: true) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @if ($nowrap) {
+    white-space: nowrap;
+  }
+}
+
+
+@mixin font-smooth($smooth: true) {
+  @if $smooth {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+}
+
+// Promoting layers can alleviate many animation issues, but also be
+// aware that having too many layers will cause performance issues.
+// http://jankfree.org/
+//
+// Prefer `will-change`
+// https://developer.mozilla.org/en-US/docs/Web/CSS/will-change
+// http://aerotwist.com/blog/bye-bye-layer-hacks/
+@mixin layer-promote() {
+  transform: translateZ(0);
+}
+
+@mixin background-cover() {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin table-center-wrap() {
+  display: table;
+  table-layout: fixed;
+  height: 100%;
+  width: 100%;
+}
+
+@mixin table-center() {
+  display: table-cell;
+  vertical-align: middle;
+}

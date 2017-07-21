@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Animation Demo</title>
+
+  <link rel="stylesheet" href="../demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.5.1/themes/prism.css">
+</head>
+
+<body>
+
+  <main role="main" id="main">
+    <div class="bar">
+      <div class="container" style="height:inherit;">
+        <div class="table-center-wrap" style="height:inherit;">
+          <div class="table-center">
+            <span>Body scroll top:</span>
+            <span id="scroll-top-target">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div id="space"></div>
+
+      <h1>Scroll Animation Demos</h1>
+      <p>The scroll animation service provides an easy way to listen for scroll events on the page or an element. It throttles the events to once per frame using <code>requestAnimationFrame</code>. It is a solution built for scrolling effects which need high fidelity, like parallaxing or sticky navigation. It only binds one <code>scroll</code> event to each target.</p>
+      <h3>Support</h3>
+      <p>IE9+</p>
+      <h3>Dependencies</h3>
+      <p>This component expects <code>window.requestAnimationFrame</code> and <code>window.cancelAnimationFrame</code> to exist. A <a href="scripts/raf.js">polyfill is included</a> on the page for demo and testing purposes, but it&rsquo;s likely you already have this in your project.</p>
+      <p>ES6 <code>Map</code>.</p>
+
+      <section>
+        <h2>Listen for page scroll</h2>
+        <p>The default target for the scroll listener is the document. If the first parameter is a function, the component will assume the target is the document.</p>
+        <pre><code class="language-javascript">function update(scrollTop) {
+  console.log('window scroll top:', scrollTop);
+}
+
+var scrollId = OdoScrollAnimation.add(update);</code></pre>
+      </section>
+
+      <section>
+        <h2>Listen for scrolls on an element</h2>
+        <p>By specifying an element as the first parameter, the scroll animation component will register the scroll event on that element.</p>
+
+        <h3>Scroller thing top: <span id="scroller-thing-target">0</span></h3>
+        <div id="scroller-thing">
+          <div class="scroller-inner"></div>
+        </div>
+        <pre><code class="language-javascript">var scrollElement = document.getElementById('scroller-thing');
+var id = OdoScrollAnimation.add(scrollElement, function update(scrollTop) {
+  console.log('scroller-thing scrolled');
+});</code></pre>
+
+      </section>
+
+      <section>
+        <h2>Remove scroll animation</h2>
+        <p>To dispose of the scroll animation listener, use the <code>remove</code> method with the return value from <code>add</code>.</p>
+        <pre><code class="language-javascript">var id = OdoScrollAnimation.add(myCallback);
+OdoScrollAnimation.remove(id);</code></pre>
+      </section>
+    </div>
+  </main>
+
+  <!-- Polyfills -->
+  <script src="scripts/raf.js"></script>
+  <script src="../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Minified Source. -->
+  <script src="dist/odo-scroll-animation.min.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.5.1/prism.js"></script>
+
+</body>
+
+</html>

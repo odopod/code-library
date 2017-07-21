@@ -1,0 +1,304 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odo Video Demo</title>
+  <link rel="stylesheet" href="../../../docs/demo.css" />
+  <link rel="stylesheet" href="styles/demo.css" />
+  <link rel="stylesheet" href="../css/odo-video.css" />
+
+  <!-- Syntax Highlighter -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/prism/1.5.1/themes/prism.css">
+
+    <!--[if IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/2014.01.31/classList.min.js"></script><![endif]-->
+</head>
+
+<body>
+
+<main role="main">
+  <div class="container">
+
+    <h1>Odo Video</h1>
+    <p>A lightweight html5 video wrapper.</p>
+    <h3>Support</h3>
+    <p>IE9. No flash fallback. IE9 will need a <a href="https://github.com/eligrey/classList.js/"><code>classList</code> polyfill</a>.</p>
+    <h3>Dependencies</h3>
+    <p><a href="https://github.com/sindresorhus/screenfull.js/">screenfull.js</a>. Assumes ES2015 <code>Promise</code> and <code>Object.assign</code> are available.</p>
+
+    <div class="odo-video" id="video-wrapper">
+      <video>
+        <source src="https://giant.gfycat.com/CandidImmaterialDromedary.webm" type="video/webm">
+        <source src="https://giant.gfycat.com/CandidImmaterialDromedary.mp4" type="video/mp4">
+        <div>
+          Your browser does not support the <code>video</code> element. <a href="https://gfycat.com/CandidImmaterialDromedary">Source.</a>
+        </div>
+      </video>
+    </div>
+
+    <div class="controls">
+      <h4>Styles</h4>
+      <label for="styles">Try a different style for the controls.</label>
+      <select id="styles">
+        <option value="" selected>Below</option>
+        <option value="overlay">Overlay</option>
+        <option value="overlay,on-top">Overlay &amp; on top</option>
+      </select>
+    </div>
+
+    <h3>Features</h3>
+    <ul>
+      <li>Autoplay support callbacks</li>
+      <li>Skinnable UI controls</li>
+      <li>Fullscreen mode</li>
+      <li>Click-to-seek</li>
+      <!-- <li>Preload video</li> -->
+      <li>Dynamically update source</li>
+      <li>Hide controls &amp; mouse in fullscreen when idle</li>
+      <li>Spacebar pauses video in fullscreen mode</li>
+      <li>Function to define control structure</li>
+      <li>Callback for updating controls on video progress</li>
+      <li>Callback for video data events</li>
+    </ul>
+
+    <h3>Markup</h3>
+    <p>You may also add any attributes you normally would to the <code>&lt;video&gt;</code> element.</p>
+    <pre><code class="language-markup">&lt;div class="odo-video" id="video-wrapper"&gt;
+  &lt;video&gt;
+    &lt;source src="https://giant.gfycat.com/CandidImmaterialDromedary.webm" type="video/webm"&gt;
+    &lt;source src="https://giant.gfycat.com/CandidImmaterialDromedary.mp4" type="video/mp4"&gt;
+    &lt;div&gt;
+      Your browser does not support the &lt;code&gt;video&lt;/code&gt; element. &lt;a href="https://gfycat.com/CandidImmaterialDromedary"&gt;Source.&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/video&gt;
+&lt;/div&gt;</code></pre>
+
+    <h3>Setup</h3>
+    <pre><code class="language-javascript">var player = new OdoVideo(document.querySelector('#video-wrapper'));</code></pre>
+  </div>
+
+  <section class="container">
+    <h2>Control Styles</h2>
+    <p>OdoVideo comes with three built-in styles: <em>below</em> (default), <em>overlay</em>, and <em>on top</em>. All you need to do is add a class (or multiple) to the main <code>.odo-video</code> element.</p>
+    <pre><code class="language-markup">&lt;div class="odo-video odo-video--overlay"&gt;
+  &lt;video&gt;&hellip;&lt;/video&gt;
+&lt;/div&gt;
+&lt;!-- or --&gt;
+&lt;div class="odo-video odo-video--overlay odo-video--on-top"&gt;
+  &lt;video&gt;&hellip;&lt;/video&gt;
+&lt;/div&gt;</code></pre>
+  </section>
+
+  <section class="container" id="control-layouts">
+    <h2>Control Layouts</h2>
+    <p>OdoVideo comes with three built-in styles: <em>none</em>, <em>inline progress</em> (default), and <em>stacked progress</em>. There is also a fourth option: <em>custom</em>, which lets you define the structure of the controls.</p>
+
+    <div class="odo-video odo-video--overlay" id="stacked">
+      <video loop>
+        <source src="https://giant.gfycat.com/DarkPersonalAfricanjacana.webm" type="video/webm">
+        <source src="https://giant.gfycat.com/DarkPersonalAfricanjacana.mp4" type="video/mp4">
+        <div>
+          Your browser does not support the <code>video</code> element. <a href="https://gfycat.com/DarkPersonalAfricanjacana">Source.</a>
+        </div>
+      </video>
+    </div>
+
+    <pre><code class="language-javascript">// Stacked progress (the one above)
+var instance = new OdoVideo(document.querySelector('#stacked'), {
+  controls: OdoVideo.Controls.STACKED_PROGRESS
+});
+
+// No controls
+var instance = new OdoVideo(document.querySelector('#video-wrapper'), {
+  controls: OdoVideo.Controls.NONE
+});
+
+// Custom
+var instance = new OdoVideo(document.querySelector('#video-wrapper'), {
+  controls: OdoVideo.Controls.CUSTOM,
+  layoutControls: function(elements) {
+    // Create your layout here.
+  },
+  updateControls: function(seconds) {
+    // Update any controls here.
+    console.log(seconds, instance.getPrettyTime(seconds)); // 2, '0:02'
+  }
+});</code></pre>
+
+    <h3>Custom Layout - layoutControls(elements)</h3>
+    <p>When using a custom controls layout, you <em>must</em> specify the <code>layoutControls</code> option. The <code>elements</code> has all the default controls. This is what OdoVideo does internally with the default layout:</p>
+    <pre><code class="language-javascript">Controls.prototype._createInline = function(elements) {
+  elements.controls.appendChild(elements.playToggle);
+  elements.controls.appendChild(elements.progressContainer);
+  elements.controls.appendChild(elements.currentTime);
+  elements.controls.appendChild(elements.volumeToggle);
+  elements.controls.appendChild(elements.fullScreenToggle);
+};</code></pre>
+    <p>The <code>elements.controls</code> element is then appended to the OdoVideo element.</p>
+
+    <h3>Custom Layout - updateControls(seconds)</h3>
+    <p>When using a custom layout, you might need to update your controls display as the video progresses. This is a hook to do exactly that and nothing more. The function receives a float with the <code>currentTime</code> value of the video.</p>
+  </section>
+
+  <section class="container">
+    <h2>Autoplay</h2>
+    <p>This component tests the browser to see if it can autoplay videos. It does this on page load by inserting a base64-encoded video into the page with the autoplay attribute set and then checks to see if it started. This test can occasionally give false negatives (mostly in IE) due to page load speed. OdoVideo will save the result of the autoplay test in the browser's localStorage as <code>videoautoplay</code>. To mitigate false negatives, if the test fails, OdoVideo will run the test again on the next page load - up to 3 times.</p>
+    <p>To provide a different fallback for browsers which cannot autoplay videos, use the <code>autoplay</code> <a href="http://www.html5rocks.com/en/tutorials/es6/promises/">promise</a> of the instance or the static <code>autoplay</code> promise of the class.</p>
+    <p>In order to autoplay videos on iOS, there are some <a href="https://webkit.org/blog/6784/new-video-policies-for-ios/">stipulations you must follow</a>. Setting the <code>muted</code> and <code>playsinline</code> attributes should usually be all you need.</p>
+    <pre><code class="language-javascript">function handleAutoplay(canAutoplay) {
+  if (canAutoplay) {
+    console.log('Can autoplay');
+  } else {
+    console.log('Cannot autoplay');
+  }
+}
+
+player.autoplay.then(handleAutoplay);
+
+// Or
+
+OdoVideo.autoplay.then(handleAutoplay);
+</code></pre>
+  </section>
+
+  <section class="container">
+    <h2>API</h2>
+    <p>Public methods of <code>OdoVideo</code> instances.</p>
+
+    <h4>play()</h4>
+    <p>Play the video.</p>
+
+    <h4>pause()</h4>
+    <p>Pause the video.</p>
+
+    <h4>togglePlayback()</h4>
+    <p>If the video is playing, pause it. If the video is paused, play it.</p>
+
+    <h4>getElement()</h4>
+    <p>Returns the main element of the OdoVideo component.</p>
+
+    <h4>getVideoElement()</h4>
+    <p>Returns the <code>&lt;video&gt;</code> element.</p>
+
+    <h4>listenOnData(event, cb)</h4>
+    <p>Fires a callback function when the video <code>readyState</code> is greater than 1, or the video event passed as the <code>event</code> parameter.
+
+    <h4>getCurrentTime()</h4>
+    <p>Returns the video element&rsquo;s <code>currentTime</code> property.</p>
+
+    <h4>mute()</h4>
+    <p>Mute the video.</p>
+
+    <h4>unmute()</h4>
+    <p>Unmute the video.</p>
+
+    <h4>toggleVolume()</h4>
+    <p>If the volume is muted, unmute it. If the volume is unmuted, mute it.</p>
+
+    <h4>isMuted()</h4>
+    <p>Returns whether the video is currently muted.</p>
+
+    <h4>updateSource(src)</h4>
+    <p>Update the current video source. This method changes the appropriate &lt;source&gt; <code>src</code> property because IE9 does not work when the &lt;video&gt;s <code>src</code> property or attribute is updated. The parameter is an absolute or relative path to the video, without the extension. .e.g. <code>"/videos/cool-feature"</code>. OdoVideo will pick the correct extension/type based on its support.</p>
+
+    <h4>getPrettyTime()</h4>
+    <p>Converts a time value to MMSS, so 91 seconds is "1:31".</p>
+
+    <h4>toggleFullscreen()</h4>
+    <p>Request or exit from fullscreen.</p>
+
+    <h4>dispose()</h4>
+    <p>Remove all event listeners, references to DOM elements, and generated elements.</p>
+  </section>
+
+  <section class="container">
+    <h2>DOM Video Events</h2>
+    <p>These exist within the <code>OdoVideo.VideoEvent</code> object.</p>
+
+    <h4>LOADED_METADATA</h4>
+    <code class="language-javascript">
+      {
+        name: 'loadedmetadata',
+        readyState: 1
+      }
+    </code>
+    <p>Corresponds to the <code>loadedmetadata</code> event. Video metadata, such as dimensions and track, have been loaded.</p>
+
+    <h4>LOADED_DATA</h4>
+    <code class="language-javascript">
+      {
+        name: 'loadeddata',
+        readyState: 2
+      }
+    </code>
+    <p>Corresponds to the <code>loadeddata</code> event. Video data for the current frame has been loaded, but not enough to play the next frame.</p>
+
+    <h4>CAN_PLAY</h4>
+    <code class="language-javascript">
+      {
+        name: 'canplay',
+        readyState: 3
+      }
+    </code>
+    <p>Corresponds to the <code>canplay</code> event. The browser has downloaded enough of the video to play, but may still need buffering during playback.</p>
+
+    <h4>CAN_PLAYTHROUGH</h4>
+    <code class="language-javascript">
+      {
+        name: 'canplaythrough',
+        readyState: 4
+      }
+    </code>
+    <p>Corresponds to the <code>canplaythrough</code> event. The browser has downloaded enough of the video to play without buffering.</p>
+  </section>
+
+  <section class="container">
+    <h2>Removing focus box.</h2>
+    <p>Although not recommended, you may remove the focus state from the buttons.</p>
+    <pre><code class="language-css">.odo-video__play-toggle:focus,
+.odo-video__volume:focus,
+.odo-video__fullscreen:focus {
+  box-shadow: none;
+}</code></pre>
+  </section>
+
+  <section class="container">
+    <h2>Options</h2>
+    <h4>pauseOnClick: <code>true</code></h4>
+    <p>When the video element is clicked, pause the video.</p>
+
+    <h4>controls, layoutControls, updateControls</h4>
+    <p>All described <a href="#control-layouts">above</a>.</p>
+  </section>
+
+  <section class="container">
+    <h2>Resources</h2>
+    <ul>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement">MDN HTML Media Element</a></li>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Media_events">MDN Media Events</a></li>
+      <li><a href="http://www.sitepoint.com/use-html5-full-screen-api/">Fullscreen API</a></li>
+      <li><a href="https://developer.apple.com/library/iad/documentation/AudioVideo/Conceptual/Using_HTML5_Audio_Video/ControllingMediaWithJavaScript/ControllingMediaWithJavaScript.html#//apple_ref/doc/uid/TP40009523-CH3-SW13">Controlling media with JavaScript on iOS</a></li>
+    </ul>
+  </section>
+</main>
+
+  <!-- Polyfills -->
+  <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+
+  <!-- Dependencies. -->
+  <script src="../node_modules/screenfull/dist/screenfull.js"></script>
+
+  <!-- Minified Source. -->
+  <script src="../dist/odo-video.js"></script>
+
+  <!-- Demo Code. -->
+  <script src="scripts/demo.js"></script>
+
+  <!-- Syntax Highlighter -->
+  <script src="https://cdn.jsdelivr.net/prism/1.5.1/prism.js"></script>
+
+</body>
+
+</html>

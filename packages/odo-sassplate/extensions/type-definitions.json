@@ -1,0 +1,205 @@
+{
+  "type-definitions": {
+    "Titles": {
+      "type-title-1": {
+        "docs-demo": {
+          "demo-text": "'Vehicula Vestibulum Dolor Ipsum Euismod'"
+        },
+        "font-family": "sans-serif",
+        "font-weight": "normal",
+        "color": "gray30",
+        "text-transform": "uppercase",
+        "letter-spacing": "0.025em",
+        "margin-top": "flat",
+
+        "font-size": 28,
+        "line-height": 1.2,
+
+        "breakpoints": {
+          "sm": {
+            "font-size": 40
+          }
+        },
+
+        "modifiers": {
+          "small": {
+            "font-size": 24,
+            "breakpoints": {
+              "sm": {
+                "font-size": 32
+              }
+            }
+          },
+          "bold": {
+            "font-weight": "bold",
+            "breakpoints": {
+              "sm": {
+                "font-size": 44
+              }
+            }
+          }
+        },
+
+        "qualifiers": {
+          "en": {
+            "line-height": 1.5,
+            "breakpoints": {
+              "md": {
+                "color": "mediumseagreen"
+              }
+            }
+          },
+          "zh": {
+            "color": "slategray"
+          }
+        }
+      },
+      "type-title-2": {
+        "docs-demo": {
+          "demo-text": "'Please stop looking at your phone and pet me'"
+        },
+        "font-family": "sans-serif",
+        "font-weight": "normal",
+        "color": "gray30",
+        "text-transform": "uppercase",
+        "letter-spacing": "0.025em",
+        "margin-top": "-0.1em",
+
+        "font-size": 20,
+        "line-height": 1,
+
+        "breakpoints": {
+          "sm": {
+            "font-size": 28
+          },
+          "md": {
+            "font-size": 36
+          }
+        }
+      }
+    },
+    "Headers" : {
+      "type-header-1": {
+        "docs-demo": {
+          "demo-text": "'Hiss at vacuum cleaner. Kitty loves pigs jump launch to pounce upon little yarn mouse, bare fangs at toy run hide in litter box until treats are fed'"
+        },
+        "font-family": "sans-serif",
+        "font-weight": "normal",
+        "color": "gray30",
+        "margin-top": "flat",
+
+        "font-size": 20,
+        "line-height": 1.2,
+
+        "breakpoints": {
+          "sm": {
+            "font-size": 30
+          }
+        }
+      },
+      "type-header-2": {
+        "docs-demo": {
+          "demo-text": "'Claw drapes step on your keyboard while you are gaming and then turn in a circle.'"
+        },
+        "font-family": "sans-serif",
+        "font-weight": "normal",
+        "color": "gray30",
+        "margin-top": "flat",
+
+        "font-size": 18,
+        "line-height": 1.2,
+
+        "breakpoints": {
+          "sm": {
+            "font-size": 20
+          },
+          "lg": {
+            "font-size": 24
+          }
+        }
+      },
+      "type-header-3": {
+        "docs-demo": {
+          "demo-text": "'Lay on arms while you are using the keyboard'"
+        },
+        "font-family": "sans-serif",
+        "font-weight": "normal",
+        "color": "gray30",
+        "margin-top": "flat",
+
+        "font-size": 14,
+        "line-height": 1.4,
+
+        "breakpoints": {
+          "sm": {
+            "font-size": 16
+          },
+          "md": {
+            "font-size": 18
+          }
+        }
+      }
+    },
+    "Body-Copy": {
+      "type-body-1": {
+        "docs-demo": {
+          "demo-text": "'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel leo consectetur, sollicitudin erat dapibus, elementum ipsum.'",
+          "demo-text2": "'Nullam tincidunt felis a dignissim imperdiet. Donec sodales id risus vitae fermentum.'"
+        },
+        "font-family": "sans-serif",
+        "font-weight": "normal",
+        "color": "gray40",
+        "margin-top": "flat",
+        "margin-bottom": 20,
+        "font-size": 18,
+        "line-height": 1.4,
+
+        "breakpoints": {
+          "sm": {
+            "margin-bottom": 32,
+            "font-size": 24
+          }
+        }
+      },
+      "type-body-2": {
+        "docs-demo": {
+          "demo-text": "'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel leo consectetur, sollicitudin erat dapibus, elementum ipsum.'",
+          "demo-text2": "'Nullam tincidunt felis a dignissim imperdiet. Donec sodales id risus vitae fermentum.'"
+        },
+        "font-family": "sans-serif",
+        "font-weight": "normal",
+        "color": "gray40",
+        "margin-top": "flat",
+        "margin-bottom": 20,
+        "font-size": 14,
+        "line-height": 1.4,
+
+        "breakpoints": {
+          "sm": {
+            "margin-bottom": 32,
+            "font-size": 18
+          }
+        }
+      },
+      "type-body-3": {
+        "docs-demo": {
+          "demo-text": "'Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper.'",
+          "demo-text2": "'Nullam tincidunt felis a dignissim imperdiet.'"
+        },
+        "font-family": "sans-serif",
+        "font-weight": "normal",
+        "color": "gray40",
+        "margin-top": "flat",
+
+        "font-size": 14,
+        "line-height": 1.4,
+
+        "breakpoints": {
+          "sm": {
+            "font-size": 16
+          }
+        }
+      }
+    }
+  }
+}

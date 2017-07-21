@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs-extra');
-const getOdoDirectories = require('./get-package-directories');
+const getPackageDirectories = require('./get-package-directories');
 
 const root = path.resolve(__dirname, '../');
 
@@ -82,7 +82,7 @@ class Component {
 
   static getAll() {
     return new Promise((resolve) => {
-      getOdoDirectories.then((packages) => {
+      getPackageDirectories.then((packages) => {
         const components = packages.map((dirname) => {
           const dirpath = path.join(root, 'packages', dirname);
           const pkg = fs.readJsonSync(path.join(dirpath, 'package.json'));

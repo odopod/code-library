@@ -1,6 +1,6 @@
-# Odo
+# Odopod Code Library (Odo)
 
-> A collection of JavaScript components used in Odopod projects.
+> A collection of vanilla JavaScript components used in Odopod projects.
 
 ## Want to contribute to Odo?
 
@@ -26,7 +26,6 @@ The Odo repo is managed as a [monorepo](https://github.com/babel/babel/blob/mast
 | [`@odopod/odo-module`](/packages/odo-module) | [![npm](https://img.shields.io/npm/v/@odopod/odo-module.svg)](https://www.npmjs.com/package/@odopod/odo-module) |
 | [`@odopod/odo-object-fit`](/packages/odo-object-fit) | [![npm](https://img.shields.io/npm/v/@odopod/odo-object-fit.svg)](https://www.npmjs.com/package/@odopod/odo-object-fit) |
 | [`@odopod/odo-on-swipe`](/packages/odo-on-swipe) | [![npm](https://img.shields.io/npm/v/@odopod/odo-on-swipe.svg)](https://www.npmjs.com/package/@odopod/odo-on-swipe) |
-| [`@odopod/odo-parallax`](/packages/odo-parallax) | [![npm](https://img.shields.io/npm/v/@odopod/odo-parallax.svg)](https://www.npmjs.com/package/@odopod/odo-parallax) |
 | [`@odopod/odo-pointer`](/packages/odo-pointer) | [![npm](https://img.shields.io/npm/v/@odopod/odo-pointer.svg)](https://www.npmjs.com/package/@odopod/odo-pointer) |
 | [`@odopod/odo-responsive-attributes`](/packages/odo-responsive-attributes) | [![npm](https://img.shields.io/npm/v/@odopod/odo-responsive-attributes.svg)](https://www.npmjs.com/package/@odopod/odo-responsive-attributes) |
 | [`@odopod/odo-responsive-classes`](/packages/odo-responsive-classes) | [![npm](https://img.shields.io/npm/v/@odopod/odo-responsive-classes.svg)](https://www.npmjs.com/package/@odopod/odo-responsive-classes) |

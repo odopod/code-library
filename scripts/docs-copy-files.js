@@ -3,7 +3,7 @@
 
 const path = require('path');
 const fs = require('fs-extra');
-const getOdoDirectories = require('./get-package-directories');
+const getPackageDirectories = require('./get-package-directories');
 const rewritePaths = require('./docs-rewrite-paths');
 
 const root = path.resolve(__dirname, '../');
@@ -28,7 +28,7 @@ function copyNpmDependencies(src) {
 
 function copyPackageDependencies() {
   return new Promise((resolve) => {
-    getOdoDirectories.then((dirnames) => {
+    getPackageDirectories.then((dirnames) => {
       const copies = dirnames.map(dirname => new Promise((resolve) => {
         const src = path.join(root, 'packages', dirname);
         const docs = path.join(root, 'docs', dirname);

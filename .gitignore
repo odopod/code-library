@@ -3,7 +3,7 @@
 packages/**/node_modules
 npm-debug.log
 yarn-error.log
-coverage/
+coverage
 *.instrumented.js
 **/tests/specs.js
 **/demos/scripts/demo.js

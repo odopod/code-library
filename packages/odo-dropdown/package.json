@@ -16,9 +16,9 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-base-component": "../odo-base-component",
-    "@odopod/odo-device": "../odo-device",
-    "@odopod/odo-helpers": "../odo-helpers"
+    "@odopod/odo-base-component": "^1.0.0",
+    "@odopod/odo-device": "^1.0.0",
+    "@odopod/odo-helpers": "^1.0.0"
   },
   "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-dropdown",

@@ -13,8 +13,8 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-helpers": "../odo-helpers",
-    "@odopod/odo-window-events": "../odo-window-events",
+    "@odopod/odo-helpers": "^1.0.0",
+    "@odopod/odo-window-events": "^1.0.0",
     "tiny-emitter": "^2.0.1"
   },
   "devDependencies": {},

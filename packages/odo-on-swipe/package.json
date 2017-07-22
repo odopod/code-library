@@ -12,7 +12,7 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-pointer": "../odo-pointer"
+    "@odopod/odo-pointer": "^1.0.0"
   },
   "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-on-swipe",

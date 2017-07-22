@@ -12,8 +12,8 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-base-component": "../odo-base-component",
-    "@odopod/odo-responsive-attributes": "../odo-responsive-attributes"
+    "@odopod/odo-base-component": "^1.0.0",
+    "@odopod/odo-responsive-attributes": "^1.0.0"
   },
   "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-responsive-classes",

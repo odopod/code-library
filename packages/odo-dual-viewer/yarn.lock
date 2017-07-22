@@ -2,34 +2,40 @@
 # yarn lockfile v1
 
 
-"@odopod/odo-device@../odo-device":
+"@odopod/odo-device@^1.0.0":
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-device/-/odo-device-1.0.0.tgz#0f555f8c8ade65c7e4f7e7ebe6e9d249d85d73a7"
 
-"@odopod/odo-draggable@../odo-draggable":
+"@odopod/odo-draggable@^1.0.0":
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-draggable/-/odo-draggable-1.0.0.tgz#f7bdfdce7fcf20b5a4fe0dbbddfa6e9c92765266"
   dependencies:
-    "@odopod/odo-device" "../odo-device"
-    "@odopod/odo-helpers" "../odo-helpers"
-    "@odopod/odo-pointer" "../odo-pointer"
+    "@odopod/odo-device" "^1.0.0"
+    "@odopod/odo-helpers" "^1.0.0"
+    "@odopod/odo-pointer" "^1.0.0"
     tiny-emitter "^2.0.1"
 
-"@odopod/odo-helpers@../odo-helpers":
+"@odopod/odo-helpers@^1.0.0":
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-helpers/-/odo-helpers-1.0.0.tgz#113905133aff5ddbc9f82ad5243cb78ed67ae7a4"
   dependencies:
-    "@odopod/odo-device" "../odo-device"
+    "@odopod/odo-device" "^1.0.0"
 
-"@odopod/odo-object-fit@../odo-object-fit":
+"@odopod/odo-object-fit@^1.0.0":
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-object-fit/-/odo-object-fit-1.0.0.tgz#f1d9b35825ef1039fb0f1dc92cfaf6f362f546b9"
 
-"@odopod/odo-pointer@../odo-pointer":
+"@odopod/odo-pointer@^1.0.0":
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-pointer/-/odo-pointer-1.0.0.tgz#7ebddfe9754965a49aa3407489027d25fb90888f"
   dependencies:
-    "@odopod/odo-device" "../odo-device"
-    "@odopod/odo-helpers" "../odo-helpers"
+    "@odopod/odo-device" "^1.0.0"
+    "@odopod/odo-helpers" "^1.0.0"
     tiny-emitter "^2.0.1"
 
-"@odopod/odo-window-events@../odo-window-events":
+"@odopod/odo-window-events@^1.0.0":
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-window-events/-/odo-window-events-1.0.0.tgz#14e61abc375981a21c9f3955b5820ea848ed155a"
   dependencies:
     debounce "^1.0.0"
     throttleit "^1.0.0"

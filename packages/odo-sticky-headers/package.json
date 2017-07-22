@@ -12,8 +12,8 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-scroll-animation": "../odo-scroll-animation",
-    "@odopod/odo-window-events": "../odo-window-events"
+    "@odopod/odo-scroll-animation": "^1.0.0",
+    "@odopod/odo-window-events": "^1.0.0"
   },
   "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-sticky-headers",

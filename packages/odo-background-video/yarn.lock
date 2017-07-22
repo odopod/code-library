@@ -2,28 +2,33 @@
 # yarn lockfile v1
 
 
-"@odopod/odo-object-fit@../odo-object-fit":
+"@odopod/odo-object-fit@^1.0.0":
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-object-fit/-/odo-object-fit-1.0.0.tgz#f1d9b35825ef1039fb0f1dc92cfaf6f362f546b9"
 
-"@odopod/odo-responsive-images@../odo-responsive-images":
+"@odopod/odo-responsive-images@^1.0.0":
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-responsive-images/-/odo-responsive-images-1.0.0.tgz#6d57a17b0eb22706b5dd2e68dc4891a363604472"
   dependencies:
-    "@odopod/odo-viewport" "../odo-viewport"
+    "@odopod/odo-viewport" "^1.0.0"
     debounce "^1.0.0"
     picturefill "^3.0.2"
 
-"@odopod/odo-video@../odo-video":
+"@odopod/odo-video@^1.0.0":
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-video/-/odo-video-1.0.0.tgz#009fa9a5c9a6086c354d98bfd660fb0b69ed968f"
   dependencies:
     screenfull "^3.0.2"
 
-"@odopod/odo-viewport@../odo-viewport":
+"@odopod/odo-viewport@^1.0.0":
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-viewport/-/odo-viewport-1.0.0.tgz#0565342bfce8877a89298f735adb099badd96d6a"
   dependencies:
-    "@odopod/odo-window-events" "../odo-window-events"
+    "@odopod/odo-window-events" "^1.0.0"
 
-"@odopod/odo-window-events@../odo-window-events":
+"@odopod/odo-window-events@^1.0.0":
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-window-events/-/odo-window-events-1.0.0.tgz#14e61abc375981a21c9f3955b5820ea848ed155a"
   dependencies:
     debounce "^1.0.0"
     throttleit "^1.0.0"

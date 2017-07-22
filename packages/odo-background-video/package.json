@@ -13,11 +13,11 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-object-fit": "../odo-object-fit",
-    "@odopod/odo-responsive-images": "../odo-responsive-images",
-    "@odopod/odo-video": "../odo-video",
-    "@odopod/odo-viewport": "../odo-viewport",
-    "@odopod/odo-window-events": "../odo-window-events"
+    "@odopod/odo-object-fit": "^1.0.0",
+    "@odopod/odo-responsive-images": "^1.0.0",
+    "@odopod/odo-video": "^1.0.0",
+    "@odopod/odo-viewport": "^1.0.0",
+    "@odopod/odo-window-events": "^1.0.0"
   },
   "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-background-video",

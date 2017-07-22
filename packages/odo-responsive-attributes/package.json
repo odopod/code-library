@@ -12,7 +12,7 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-base-component": "../odo-base-component"
+    "@odopod/odo-base-component": "^1.0.0"
   },
   "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-responsive-attributes",

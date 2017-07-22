@@ -12,7 +12,7 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-window-events": "../odo-window-events"
+    "@odopod/odo-window-events": "^1.0.0"
   },
   "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-viewport",

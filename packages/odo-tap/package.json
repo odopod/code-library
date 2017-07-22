@@ -12,8 +12,8 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-helpers": "../odo-helpers",
-    "@odopod/odo-pointer": "../odo-pointer"
+    "@odopod/odo-helpers": "^1.0.0",
+    "@odopod/odo-pointer": "^1.0.0"
   },
   "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-tap",

@@ -13,10 +13,10 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-device": "../odo-device",
-    "@odopod/odo-draggable": "../odo-draggable",
-    "@odopod/odo-helpers": "../odo-helpers",
-    "@odopod/odo-pointer": "../odo-pointer",
+    "@odopod/odo-device": "^1.0.0",
+    "@odopod/odo-draggable": "^1.0.0",
+    "@odopod/odo-helpers": "^1.0.0",
+    "@odopod/odo-pointer": "^1.0.0",
     "tiny-emitter": "^2.0.1"
   },
   "devDependencies": {},

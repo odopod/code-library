@@ -13,7 +13,7 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-viewport": "../odo-viewport",
+    "@odopod/odo-viewport": "^1.0.0",
     "debounce": "^1.0.0",
     "picturefill": "^3.0.2"
   },

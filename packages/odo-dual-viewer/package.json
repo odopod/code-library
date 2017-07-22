@@ -13,10 +13,10 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-draggable": "../odo-draggable",
-    "@odopod/odo-helpers": "../odo-helpers",
-    "@odopod/odo-object-fit": "../odo-object-fit",
-    "@odopod/odo-window-events": "../odo-window-events",
+    "@odopod/odo-draggable": "^1.0.0",
+    "@odopod/odo-helpers": "^1.0.0",
+    "@odopod/odo-object-fit": "^1.0.0",
+    "@odopod/odo-window-events": "^1.0.0",
     "tiny-emitter": "^2.0.1"
   },
   "devDependencies": {

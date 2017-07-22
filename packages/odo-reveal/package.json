@@ -13,12 +13,12 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-device": "../odo-device",
-    "@odopod/odo-helpers": "../odo-helpers",
-    "@odopod/odo-viewport": "../odo-viewport"
+    "@odopod/odo-device": "^1.0.0",
+    "@odopod/odo-helpers": "^1.0.0",
+    "@odopod/odo-viewport": "^1.0.0"
   },
   "devDependencies": {
-    "@odopod/odo-responsive-images": "../odo-responsive-images"
+    "@odopod/odo-responsive-images": "^1.0.0"
   },
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-reveal",
   "files": [

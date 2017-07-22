@@ -1,0 +1,19 @@
+{
+  "name": "Odopod Code Library",
+  "short_name": "odo",
+  "display": "browser",
+  "theme_color": "#ff4843",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

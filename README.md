@@ -1,4 +1,4 @@
-# Odopod Code Library (Odo)
+# Odopod Code Library (Odo) [![Build Status](https://travis-ci.org/odopod/code-library.svg?branch=master)](https://travis-ci.org/odopod/code-library)
 
 > A collection of vanilla JavaScript components used in Odopod projects.
 

@@ -22,4 +22,4 @@ OdoWindowEvents.onScroll(function (scrollTop, scrollLeft) {
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://odopod.github.io/odo/odo-window-events/
+[permalink]: https://code.odopod.com/odo-window-events/

@@ -29,4 +29,4 @@ const carousel = new OdoCarousel(document.getElementById('my-carousel'));
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://odopod.github.io/odo/odo-carousel/
+[permalink]: https://code.odopod.com/odo-carousel/

@@ -37,4 +37,4 @@ scrollFeedback.on(OdoScrollFeedback.Events.NAVIGATE, function(data) {
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://odopod.github.io/odo/odo-scroll-feedback/
+[permalink]: https://code.odopod.com/odo-scroll-feedback/

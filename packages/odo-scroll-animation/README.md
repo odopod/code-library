@@ -23,4 +23,4 @@ const id = OdoScrollAnimation.add(scrollElement, function (scrollTop) {
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://odopod.github.io/odo/odo-scroll-animation/
+[permalink]: https://code.odopod.com/odo-scroll-animation/

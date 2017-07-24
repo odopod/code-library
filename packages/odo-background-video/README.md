@@ -20,4 +20,4 @@ const backgroundOne = new OdoBackgroundVideo(document.querySelector('#background
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://odopod.github.io/odo/odo-background-video/
+[permalink]: https://code.odopod.com/odo-background-video/

@@ -28,4 +28,4 @@ OdoViewport.add({
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://odopod.github.io/odo/odo-viewport/
+[permalink]: https://code.odopod.com/odo-viewport/

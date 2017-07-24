@@ -20,4 +20,4 @@ const hotspots = new OdoHotspots(document.getElementById('basic-hotspots'));
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://odopod.github.io/odo/odo-hotspots/
+[permalink]: https://code.odopod.com/odo-hotspots/

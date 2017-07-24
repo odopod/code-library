@@ -20,4 +20,4 @@ const affix = new OdoAffix(document.querySelector('.js-my-sidebar'));
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://odopod.github.io/odo/odo-affix/
+[permalink]: https://code.odopod.com/odo-affix/

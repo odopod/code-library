@@ -20,4 +20,4 @@ const dialog = new OdoDialog(document.getElementById('my-dialog-element'));
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://odopod.github.io/odo/odo-dialog/
+[permalink]: https://code.odopod.com/odo-dialog/

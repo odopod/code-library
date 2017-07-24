@@ -26,4 +26,4 @@ OdoModule.register(CoolModule);
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://odopod.github.io/odo/odo-module/
+[permalink]: https://code.odopod.com/odo-module/

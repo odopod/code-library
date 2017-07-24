@@ -22,4 +22,4 @@ console.log(clamper.currentValue); // Value based on the current breakpoint.
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://odopod.github.io/odo/odo-responsive/
+[permalink]: https://code.odopod.com/odo-responsive/

@@ -20,4 +20,4 @@ const player = new OdoVideo(document.getElementById('video-wrapper'));
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://odopod.github.io/odo/odo-video/
+[permalink]: https://code.odopod.com/odo-video/

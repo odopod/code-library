@@ -20,4 +20,4 @@ const pointer = new OdoPointer(document.querySelector('.js-my-sidebar'));
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://odopod.github.io/odo/odo-pointer/
+[permalink]: https://code.odopod.com/odo-pointer/

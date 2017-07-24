@@ -1,7 +1,6 @@
 import settings from './settings';
 
 class Controls {
-
   createElement(type, options) {
     const el = document.createElement(type);
     Object.keys(options).forEach((k) => {

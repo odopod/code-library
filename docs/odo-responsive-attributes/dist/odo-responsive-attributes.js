@@ -19,7 +19,6 @@ var classCallCheck = function (instance, Constructor) {
  */
 
 var ResponsiveAttributes = function () {
-
   /**
    * Create a new instance of the attribute parser.
    * @param {Element} element Element to read attributes from.

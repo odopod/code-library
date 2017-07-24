@@ -8,7 +8,6 @@ function inRange(value, min, max) {
 }
 
 class Viewport {
-
   /**
    * Viewport singleton.
    * @constructor

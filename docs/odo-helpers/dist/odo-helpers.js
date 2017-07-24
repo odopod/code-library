@@ -1026,7 +1026,6 @@ var browser = {
 };
 
 var Coordinate = function () {
-
   /**
    * Class for representing coordinates and positions.
    * @param {number} [x=0] Left, defaults to 0.

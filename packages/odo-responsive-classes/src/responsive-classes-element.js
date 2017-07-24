@@ -1,7 +1,6 @@
 import OdoResponsiveAttributes from '@odopod/odo-responsive-attributes';
 
 class ResponsiveClassesElement {
-
   constructor(element) {
     /**
      * Main element.

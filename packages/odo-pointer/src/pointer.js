@@ -11,7 +11,6 @@ import settings from './settings';
 import PointerEvent from './pointer-event';
 
 class Pointer extends TinyEmitter {
-
   /**
    * An abstraction layer for adding pointer events and calculating drag values.
    * @param {Element} element Element to watch.

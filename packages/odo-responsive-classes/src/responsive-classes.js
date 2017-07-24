@@ -2,7 +2,6 @@ import OdoBaseComponent from '@odopod/odo-base-component';
 import ResponsiveClassesElement from './responsive-classes-element';
 
 class ResponsiveClasses extends OdoBaseComponent {
-
   constructor() {
     super(document.body, true);
     this.items = [];

@@ -6,7 +6,6 @@ import TinyEmitter from 'tiny-emitter';
  * @extends {TinyEmitter}
  */
 class BaseComponent extends TinyEmitter {
-
   /**
    * Create a new base component.
    * @param {Element} element Main element which represents this class.

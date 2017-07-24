@@ -280,7 +280,6 @@ var WINDOW_NAME = 'ShareWindow';
 var noop = function noop() {};
 
 var Share = function () {
-
   /**
    * Prepares share components within the DOM.
    *

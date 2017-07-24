@@ -21,7 +21,6 @@ function uniqueId() {
 }
 
 class Tabs extends TinyEmitter {
-
   /**
    * A tabs component.
    * @param {Element} element The tabs list element.
@@ -97,7 +96,7 @@ class Tabs extends TinyEmitter {
     }
 
     const startIndex = this.panes.findIndex(
-        pane => pane.matches('.' + Tabs.ClassName.IS_SELECTED));
+      pane => pane.matches('.' + Tabs.ClassName.IS_SELECTED));
 
     if (startIndex > -1) {
       return startIndex;

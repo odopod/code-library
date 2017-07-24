@@ -123,7 +123,7 @@ var ObjectFit = function () {
         elementWidth = containerWidth;
         elementHeight = containerWidth / this._mediaRatio;
       }
-    } else /* if (this.style === ObjectFit.Style.CONTAIN)*/if (this._mediaRatio > containerRatio) {
+    } else /* if this.style === ObjectFit.Style.CONTAIN */if (this._mediaRatio > containerRatio) {
         elementWidth = containerWidth;
         elementHeight = containerWidth / this._mediaRatio;
       } else {

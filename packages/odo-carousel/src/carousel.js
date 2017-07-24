@@ -25,7 +25,6 @@ import templateEngine from './template-engine';
 import { getTranslate, toggleFocusability, uniqueId } from './utils';
 
 class Carousel extends TinyEmitter {
-
   /**
    * @param {Element} element The outermost carousel element.
    * @param {Object} [options] An options object.
@@ -1310,8 +1309,7 @@ class Carousel extends TinyEmitter {
     // Will go the the give slide.
     if (canNavigate) {
       // If the event's default action was prevented, return false.
-      if (this._emitEvent(new CarouselEvent(
-          Carousel.EventType.WILL_NAVIGATE, this))) {
+      if (this._emitEvent(new CarouselEvent(Carousel.EventType.WILL_NAVIGATE, this))) {
         return false;
       }
 

@@ -1,5 +1,4 @@
 class Coordinate {
-
   /**
    * Class for representing coordinates and positions.
    * @param {number} [x=0] Left, defaults to 0.

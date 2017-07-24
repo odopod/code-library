@@ -15,17 +15,17 @@ const device = {
     return null;
   },
 
-   /**
-    * Returns a normalized transition end event name.
-    *
-    * Issue with Modernizr prefixing related to stock Android 4.1.2
-    * That version of Android has both unprefixed and prefixed transitions
-    * built in, but will only listen to the prefixed on in certain cases
-    * https://github.com/Modernizr/Modernizr/issues/897
-    *
-    * @param {string} transitionend The current transition end event name.
-    * @return {string} A patched transition end event name.
-    */
+  /**
+   * Returns a normalized transition end event name.
+   *
+   * Issue with Modernizr prefixing related to stock Android 4.1.2
+   * That version of Android has both unprefixed and prefixed transitions
+   * built in, but will only listen to the prefixed on in certain cases
+   * https://github.com/Modernizr/Modernizr/issues/897
+   *
+   * @param {string} transitionend The current transition end event name.
+   * @return {string} A patched transition end event name.
+   */
   getTransitionEndEvent() {
     const div = document.createElement('div');
     div.style.transition = 'width 2s';

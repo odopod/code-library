@@ -5,7 +5,7 @@ const sinon = window.sinon;
 const OdoResponsiveImages = window.OdoResponsiveImages;
 OdoResponsiveImages.initialize();
 
-describe('Odo Responsive Images', function d() {
+describe('Odo Responsive Images', () => {
   let el;
 
   function getLastResponsiveImage() {

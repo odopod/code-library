@@ -196,7 +196,6 @@ class ScrollFeedback extends TinyEmitter {
     let direction = null;
 
     switch (evt.which) {
-
       // Up and page up.
       // Falls through
       case KeyCodes.UP:

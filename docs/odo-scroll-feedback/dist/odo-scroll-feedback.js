@@ -275,7 +275,6 @@ var ScrollFeedback = function (_TinyEmitter) {
     var direction = null;
 
     switch (evt.which) {
-
       // Up and page up.
       // Falls through
       case KeyCodes.UP:

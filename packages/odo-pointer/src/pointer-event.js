@@ -59,7 +59,7 @@ function getDirection(coord1, coord2) {
   }
 
   return getTheDirection(coord1.y, coord2.y, settings.Direction.UP,
-      settings.Direction.DOWN, settings.Direction.NONE);
+    settings.Direction.DOWN, settings.Direction.NONE);
 }
 
 function isOnAxis(axis, direction) {
@@ -103,7 +103,6 @@ function getAxisDirection(axis, start, end) {
 }
 
 class PointerEvent {
-
   /**
    * Object representing a drag event.
    * @param {Object} options Options object.

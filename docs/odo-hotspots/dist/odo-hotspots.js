@@ -142,7 +142,6 @@ var possibleConstructorReturn = function (self, call) {
 };
 
 var Hotspot = function () {
-
   /**
    * The hotspot class represents a single hotspot.
    * @param {Element} element Main wrapper element for the hotspot.

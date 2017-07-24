@@ -7,7 +7,6 @@
 import OdoBaseComponent from '@odopod/odo-base-component';
 
 class ResponsiveAttributes {
-
   /**
    * Create a new instance of the attribute parser.
    * @param {Element} element Element to read attributes from.

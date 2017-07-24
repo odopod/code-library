@@ -11,7 +11,6 @@ function applyCss(element, css) {
 }
 
 class StickyItem {
-
   /**
    * Create a new sticky item.
    * @param {Element} element Element to stick.

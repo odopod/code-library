@@ -13,7 +13,6 @@ var classCallCheck = function (instance, Constructor) {
 };
 
 var OnSwipe = function () {
-
   /**
    * Provides a callback for swipe events.
    * @param {Element} element Element to watch for swipes.

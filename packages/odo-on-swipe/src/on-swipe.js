@@ -1,7 +1,6 @@
 import OdoPointer from '@odopod/odo-pointer';
 
 class OnSwipe {
-
   /**
    * Provides a callback for swipe events.
    * @param {Element} element Element to watch for swipes.

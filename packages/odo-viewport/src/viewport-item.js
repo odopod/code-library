@@ -1,5 +1,4 @@
 class ViewportItem {
-
   /**
    * A viewport item represents an element being watched by the Viewport component.
    * @param {Object} options Viewport item options.

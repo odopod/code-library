@@ -2,7 +2,6 @@ import settings from './settings';
 import setUniqueId from './unique-id';
 
 class Hotspot {
-
   /**
    * The hotspot class represents a single hotspot.
    * @param {Element} element Main wrapper element for the hotspot.

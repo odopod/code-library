@@ -44,7 +44,6 @@ function applyCss(element, css) {
 }
 
 var StickyItem = function () {
-
   /**
    * Create a new sticky item.
    * @param {Element} element Element to stick.
@@ -261,7 +260,6 @@ function withinRange(value, min, max, threshold) {
 }
 
 var StickyHeaders = function () {
-
   /**
    * Create a new Sticky instance.
    * @constructor

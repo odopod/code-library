@@ -13,7 +13,6 @@ const WINDOW_NAME = 'ShareWindow';
 const noop = () => {};
 
 class Share {
-
   /**
    * Prepares share components within the DOM.
    *

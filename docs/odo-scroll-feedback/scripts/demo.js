@@ -21,7 +21,7 @@ var scrollToIndex = function scrollToIndex(index) {
     return -0.5 * (Math.cos(Math.PI * k) - 1);
   };
 
-  var step = function step(value, percent) {
+  var step = function step(value /* , percent*/) {
     window.scrollTo(0, value);
   };
 

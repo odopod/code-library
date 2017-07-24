@@ -16,7 +16,6 @@ function withinRange(value, min, max, threshold) {
 }
 
 class StickyHeaders {
-
   /**
    * Create a new Sticky instance.
    * @constructor

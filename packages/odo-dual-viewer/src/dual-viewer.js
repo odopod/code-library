@@ -6,7 +6,6 @@ import OdoObjectFit from '@odopod/odo-object-fit';
 import settings from './settings';
 
 class DualViewer extends TinyEmitter {
-
   /**
    * Component which has a draggable element in the middle which reveals one or
    * the other sides as the user drags.

@@ -243,7 +243,6 @@ function getAxisDirection(axis, start, end) {
 }
 
 var PointerEvent = function () {
-
   /**
    * Object representing a drag event.
    * @param {Object} options Options object.

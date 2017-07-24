@@ -31,7 +31,6 @@ var createClass = function () {
 }();
 
 var ViewportItem = function () {
-
   /**
    * A viewport item represents an element being watched by the Viewport component.
    * @param {Object} options Viewport item options.
@@ -126,7 +125,6 @@ function inRange(value, min, max) {
 }
 
 var Viewport = function () {
-
   /**
    * Viewport singleton.
    * @constructor

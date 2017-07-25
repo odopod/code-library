@@ -1,6 +1,6 @@
 {
   "name": "@odopod/odo",
-  "description": "A collection of vanilla JavaScript components used in Odopod projects.",
+  "description": "A collection of vanilla JavaScript components used in Odopod web projects.",
   "private": true,
   "scripts": {
     "build-test-all": "./scripts/run-in-each-package.sh \"gulp\"",

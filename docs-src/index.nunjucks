@@ -4,6 +4,13 @@
     <meta charset="utf-8">
     <title>Odo &middot; A collection of JavaScript components by Odopod</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A collection of vanilla JavaScript components used in Odopod web projects.">
+    <meta name="og:description" content="A collection of vanilla JavaScript components used in Odopod web projects.">
+    <meta name="og:url" content="http://code.odopod.com">
+    <meta name="og:image" content="http://code.odopod.com/assets/preview.png">
+    <meta name="og:image:type" content="image/png">
+    <meta name="og:image:width" content="1260">
+    <meta name="og:image:height" content="1260">
     <link rel="manifest" href="manifest.json">
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -27,7 +34,7 @@
           <div class="col-9@sm">
             <p class="type-display-subhead">A collection of vanilla JavaScript components used in <a href="http://www.odopod.com">
               <svg viewBox="0 0 136 39.207" enable-background="new 0 0 136 39.207"><title>odopod</title><g><path d="M37.982 0v11.113c-1.442-.834-3.116-1.312-4.901-1.312-5.413 0-9.802 4.388-9.802 9.802s4.388 9.802 9.802 9.802 9.802-4.388 9.802-9.802v-19.603h-4.901zm-4.901 24.505c-2.707 0-4.901-2.194-4.901-4.901s2.194-4.901 4.901-4.901 4.901 2.194 4.901 4.901c0 2.706-2.194 4.901-4.901 4.901zM9.802 9.802c-5.414 0-9.802 4.388-9.802 9.802s4.388 9.802 9.802 9.802 9.802-4.388 9.802-9.802-4.389-9.802-9.802-9.802zm0 14.703c-2.707 0-4.901-2.194-4.901-4.901s2.194-4.901 4.901-4.901 4.901 2.194 4.901 4.901-2.195 4.901-4.901 4.901zM131.099 0v11.113c-1.442-.834-3.116-1.312-4.901-1.312-5.413 0-9.802 4.388-9.802 9.802s4.388 9.802 9.802 9.802c5.413 0 9.802-4.388 9.802-9.802v-19.603h-4.901zm-4.901 24.505c-2.707 0-4.901-2.194-4.901-4.901s2.194-4.901 4.901-4.901 4.901 2.194 4.901 4.901c0 2.706-2.194 4.901-4.901 4.901zM102.919 9.802c-5.413 0-9.802 4.388-9.802 9.802s4.388 9.802 9.802 9.802c5.413 0 9.802-4.388 9.802-9.802s-4.389-9.802-9.802-9.802zm0 14.703c-2.707 0-4.901-2.194-4.901-4.901s2.194-4.901 4.901-4.901 4.901 2.194 4.901 4.901-2.194 4.901-4.901 4.901zM56.36 9.802c-5.413 0-9.802 4.388-9.802 9.802s4.388 9.802 9.802 9.802 9.802-4.388 9.802-9.802-4.388-9.802-9.802-9.802zm0 14.703c-2.707 0-4.901-2.194-4.901-4.901s2.194-4.901 4.901-4.901 4.901 2.194 4.901 4.901-2.194 4.901-4.901 4.901zM74.739 39.207v-11.113c1.442.834 3.116 1.312 4.901 1.312 5.413 0 9.802-4.388 9.802-9.802s-4.388-9.802-9.802-9.802-9.802 4.388-9.802 9.802v19.604h4.901zm4.901-24.504c2.707 0 4.901 2.194 4.901 4.901s-2.194 4.901-4.901 4.901-4.901-2.194-4.901-4.901 2.194-4.901 4.901-4.901z"/></g></svg>
-            </a> projects.</p>
+            </a> web projects.</p>
           </div>
         </div>
       </div>

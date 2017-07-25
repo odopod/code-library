@@ -121,3 +121,14 @@ from the main (upstream) repository:
     ```shell
     git pull --ff upstream master
     ```
+## Publishing a new release
+
+* Make sure the build is still passing.
+  * If you're working locally, make sure you run the tests from within your component `yarn test`. To be extra sure you didn't break anything, you can run all the tests from the root directory with `yarn test`.
+  * When reviewing pull requests, Travis CI will run all the tests. Wait for it to complete then you can merge.
+* Make sure the documentation is up to date. Make any updates to code examples or copy.
+* Update the `version` field in the `package.json` for the component you're publishing.
+* `yarn run docs` from the root.
+* Commit these changes and tag the commit `odo-{component-name}-v{version}`.
+* Push the commit and tag.
+* `npm publish` from within the component directory you're publishing.

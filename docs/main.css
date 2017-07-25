@@ -216,7 +216,7 @@ a.odo-component__inner:hover {
 }
 
 .odo-component__content {
-  padding: 32px 16px 34px;
+  padding: 28px 16px 34px;
   background: #ffffff;
   border: 2px solid rgba(0,0,0,.25);
 }

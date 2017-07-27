@@ -1011,54 +1011,52 @@ code:not([class*="language"])::after {
   content: "\00a0";
   letter-spacing: -.2em; }
 
-.type-title-1 {
+.type-display-1 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   color: #30373d;
-  text-transform: uppercase;
   letter-spacing: 0.025em;
   margin-top: -0.2em;
   font-size: 28px;
   line-height: 1.2; }
   @media screen and (min-width: 768px) {
-    .type-title-1 {
+    .type-display-1 {
       font-size: 40px; } }
 
-.type-title-1--small {
+.type-display-1--small {
   font-size: 24px; }
   @media screen and (min-width: 768px) {
-    .type-title-1--small {
+    .type-display-1--small {
       font-size: 32px; } }
 
-.type-title-1--bold {
+.type-display-1--bold {
   font-weight: bold; }
   @media screen and (min-width: 768px) {
-    .type-title-1--bold {
+    .type-display-1--bold {
       font-size: 44px; } }
 
-.en .type-title-1 {
+.en .type-display-1 {
   line-height: 1.5; }
   @media screen and (min-width: 1024px) {
-    .en .type-title-1 {
+    .en .type-display-1 {
       color: mediumseagreen; } }
 
-.zh .type-title-1 {
+.zh .type-display-1 {
   color: slategray; }
 
-.type-title-2 {
+.type-display-2 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
   color: #30373d;
-  text-transform: uppercase;
   letter-spacing: 0.025em;
   margin-top: -0.1em;
   font-size: 20px;
   line-height: 1; }
   @media screen and (min-width: 768px) {
-    .type-title-2 {
+    .type-display-2 {
       font-size: 28px; } }
   @media screen and (min-width: 1024px) {
-    .type-title-2 {
+    .type-display-2 {
       font-size: 36px; } }
 
 .type-header-1 {
@@ -1230,6 +1228,7 @@ code:not([class*="language"])::after {
   padding: 0;
   background-color: transparent;
   text-decoration: none;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #1b9ec6; }
   .text-link:hover {
     text-decoration: underline;
@@ -1249,6 +1248,9 @@ code:not([class*="language"])::after {
 
 .text-link--icon-right .icon {
   margin-left: 6px; }
+
+.input {
+  -webkit-appearance: none; }
 
 .icon {
   position: relative;
@@ -1369,16 +1371,16 @@ button svg.icon use {
 .spacer-top-none\:first:first-child {
   padding-top: 0; }
 
-.type--blue-dk {
+.type--blue-dark {
   color: #005992; }
 
-.fill--blue-dk {
+.fill--blue-dark {
   fill: #005992 !important; }
 
-.stroke--blue-dk {
+.stroke--blue-dark {
   stroke: #005992; }
 
-.background--blue-dk {
+.background--blue-dark {
   background-color: #005992; }
 
 .type--blue {
@@ -1393,16 +1395,16 @@ button svg.icon use {
 .background--blue {
   background-color: #1b9ec6; }
 
-.type--purple-dk {
+.type--purple-dark {
   color: #711471; }
 
-.fill--purple-dk {
+.fill--purple-dark {
   fill: #711471 !important; }
 
-.stroke--purple-dk {
+.stroke--purple-dark {
   stroke: #711471; }
 
-.background--purple-dk {
+.background--purple-dark {
   background-color: #711471; }
 
 .type--purple {

@@ -144,35 +144,8 @@
         "docs-demo": {
           "demo-markup": "'<input class=\"input\" type=\"text\" placeholder=\"Username\" required />'"
         },
-        "-webkit-appearance": "none",
-        "padding": 8,
-
-        "valid": {
-          "border": "1px solid green"
-        },
-
-        "':invalid'": {
-          "border": "1px solid #e21"
-        },
-
-        "hover": {
-          "color": "blue"
-        },
-
-        "color": "gray20",
-
-        "'::after'": {
-          "position": "absolute"
-        },
-
-        "breakpoints": {
-          "sm": {
-            "padding": 12
-          },
-          "md": {
-            "padding": 14
-          }
-        }
+        "__comment__": "'Remove rounded corners for iOS'",
+        "-webkit-appearance": "none"
       },
       "checkbox": {
         "docs-demo": {

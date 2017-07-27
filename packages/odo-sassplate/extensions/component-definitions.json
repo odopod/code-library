@@ -82,7 +82,7 @@
     "Text-Links": {
       "text-link": {
         "docs-demo": {
-          "demo-markup": "'<a href=\"javascript:void(0)\" class=\"text-link\">Gene.com</a>'"
+          "demo-markup": "'<a href=\"javascript:void(0)\" class=\"text-link\">code.odopod.com</a>'"
         },
 
         "border": 0,
@@ -141,7 +141,36 @@
     "Inputs": {
       "input": {
         "docs-demo": {
-          "demo-markup": "'<input class=\"input\" type=\"text\" placeholder=\"Username\" />'"
+          "demo-markup": "'<input class=\"input\" type=\"text\" placeholder=\"Username\" required />'"
+        },
+        "-webkit-appearance": "none",
+        "padding": 8,
+
+        "valid": {
+          "border": "1px solid green"
+        },
+
+        "':invalid'": {
+          "border": "1px solid #e21"
+        },
+
+        "hover": {
+          "color": "blue"
+        },
+
+        "color": "gray20",
+
+        "'::after'": {
+          "position": "absolute"
+        },
+
+        "breakpoints": {
+          "sm": {
+            "padding": 12
+          },
+          "md": {
+            "padding": 14
+          }
         }
       },
       "checkbox": {

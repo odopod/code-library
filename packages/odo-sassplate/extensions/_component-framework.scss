@@ -27,9 +27,49 @@ $color-properties: (
   "color",
   "background-color",
   "border-color",
+  "border-top-color",
+  "border-right-color",
+  "border-bottom-color",
+  "border-left-color",
   "outline-color",
   "fill",
-  "stroke"
+  "stroke",
+);
+
+$pseudo-classes: (
+  "active",
+  "any-link",
+  "checked",
+  "default",
+  "disabled",
+  "empty",
+  "enabled",
+  "first",
+  "first-child",
+  "first-of-type",
+  "fullscreen",
+  "focus",
+  "focus-within",
+  "hover",
+  "indeterminate",
+  "in-range",
+  "invalid",
+  "last-child",
+  "last-of-type",
+  "link",
+  "only-child",
+  "only-of-type",
+  "optional",
+  "out-of-range",
+  "placeholder-shown",
+  "read-only",
+  "read-write",
+  "required",
+  "root",
+  "scope",
+  "target",
+  "valid",
+  "visited",
 );
 
 $special-properties: (
@@ -42,14 +82,9 @@ $special-properties: (
   "children",
   "raw",
 
-  "visited",
-  "hover",
-  "active",
-  "focus",
-
   "size",
   "font-family",
-  "line-height"
+  "line-height",
 );
 
 // Compiles all supplied properties in a map to css. ui elements (buttons, etc)
@@ -69,6 +104,18 @@ $special-properties: (
     } @else if sassplate-list-contains-value($color-properties, $property) {
       // Look for colors specified in variables first.
       #{$property}: get-color($value);
+
+    } @else if sassplate-list-contains-value($pseudo-classes, $property) {
+      // Specify each state as a group. Use this mixin to populate the state's property:value pairs.
+      &:#{$property} {
+        @include sassplate-output-properties($value, $bp, $properties);
+      }
+
+    } @else if str_slice($property, 1, 1) == ':' {
+      // Allow :hover and ::after to "just work".
+      &#{$property} {
+        @include sassplate-output-properties($value, $bp, $properties);
+      }
 
       // Is a "special" property which is treated differently than a regular declaration.
     } @else if sassplate-list-contains-value($special-properties, $property) {
@@ -93,12 +140,6 @@ $special-properties: (
           line-height: $line-height;
         } @else {
           @include set-value-with-units("line-height", $line-height);
-        }
-
-      } @else if $property == "hover" or $property == "active" or $property == "focus" or $property == "visited" {
-        // Specify each state as a group. Use this mixin to populate the state's property:value pairs.
-        &:#{$property} {
-          @include sassplate-output-properties($value, $bp, $properties);
         }
 
       } @else if $property == "children" {
@@ -170,11 +211,11 @@ $special-properties: (
   @if map-has-key($properties, breakpoints) {
     $sizes: map-get($properties, breakpoints);
 
-    @each $breakpoint, $bpProperties in $sizes {
+    @each $breakpoint-name, $breakpoint-props in $sizes {
       // Creates a min-width breakpoint for each defined size.
-      @include breakpoint($breakpoint) {
+      @include breakpoint($breakpoint-name) {
         // Same as before, but nested in a mq this time.
-        @include sassplate-output-properties($bpProperties, $breakpoint, $properties);
+        @include sassplate-output-properties($breakpoint-props, $breakpoint-name, $properties);
       }
     }
   }
@@ -185,43 +226,47 @@ $special-properties: (
 
   // Loop through each component in this section.
   @each $selector, $properties in $definitions {
-    $selector: sassplate-sanitize-selector($selector);
+    @include sassplate-process-component($selector, $properties);
+  }
+}
 
-    .#{$selector} {
-      @include sassplate-make-component($properties);
-    }
+@mixin sassplate-process-component($selector, $properties) {
+  $selector: sassplate-sanitize-selector($selector);
 
-    // Allow any selector to be appended to the main selector.
-    @if map-has-key($properties, "raw") {
-      @each $sel, $rawProperties in map-get($properties, "raw") {
-        $sel: sassplate-sanitize-selector($sel);
+  .#{$selector} {
+    @include sassplate-make-component($properties);
+  }
 
-        .#{$selector}#{$sel} {
-          @include sassplate-make-component($rawProperties);
-        }
+  // Allow any selector to be appended to the main selector.
+  @if map-has-key($properties, "raw") {
+    @each $sel, $rawProperties in map-get($properties, "raw") {
+      $sel: sassplate-sanitize-selector($sel);
+
+      .#{$selector}#{$sel} {
+        @include sassplate-make-component($rawProperties);
       }
     }
+  }
 
-    // Modifiers are variants of a class, with only a few attributes that are different.
-    @if map-has-key($properties, "modifiers") {
-      @each $modifierName, $modifierProperties in map-get($properties, "modifiers") {
-        $modifierName: sassplate-sanitize-selector($modifierName);
+  // Modifiers are variants of a class, with only a few attributes that are different.
+  @if map-has-key($properties, "modifiers") {
+    @each $modifierName, $modifierProperties in map-get($properties, "modifiers") {
+      $modifierName: sassplate-sanitize-selector($modifierName);
 
-        .#{$selector}--#{$modifierName} {
-          @include sassplate-make-component($modifierProperties);
-        }
+      .#{$selector}--#{$modifierName} {
+        @include sassplate-make-component($modifierProperties);
       }
     }
+  }
 
-    // Qualifiers are for overriding properties based on a class on the <html> element.
-    // If the component has a qualifiers object, create the qualifier selector classnames and populate them with whatever override properties
-    // are in the type-definition qualifiers.
-    // ex: .cn type-header-1
-    @if map-has-key($properties, "qualifiers") {
-      @each $qualifierName, $qualifierProperties in map-get($properties, "qualifiers") {
-        .#{$qualifierName} .#{$selector} {
-          @include sassplate-make-component($qualifierProperties);
-        }
+  // Qualifiers are for overriding properties based on a class on the <html> element.
+  // If the component has a qualifiers object, create the qualifier selector classnames and populate them with whatever override properties
+  // are in the type-definition qualifiers.
+  // ex: .cn type-header-1
+  @if map-has-key($properties, "qualifiers") {
+    @each $qualifierName, $qualifierProperties in map-get($properties, "qualifiers") {
+      .#{$qualifierName} .#{$selector} {
+        @include sassplate-make-component($qualifierProperties);
       }
     }
   }

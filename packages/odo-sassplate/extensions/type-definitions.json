@@ -1,14 +1,13 @@
 {
   "type-definitions": {
-    "Titles": {
-      "type-title-1": {
+    "'Display Text'": {
+      "type-display-1": {
         "docs-demo": {
-          "demo-text": "'Vehicula Vestibulum Dolor Ipsum Euismod'"
+          "demo-text": "'Welcome to Odopod'"
         },
         "font-family": "sans-serif",
         "font-weight": "normal",
         "color": "gray30",
-        "text-transform": "uppercase",
         "letter-spacing": "0.025em",
         "margin-top": "flat",
 
@@ -42,6 +41,9 @@
 
         "qualifiers": {
           "en": {
+            "docs-demo": {
+              "demo-markup": "'<div class=\"en\"><h2 class=\"type-display-1\">Welcome to Odopod</h2></div>'"
+            },
             "line-height": 1.5,
             "breakpoints": {
               "md": {
@@ -54,14 +56,13 @@
           }
         }
       },
-      "type-title-2": {
+      "type-display-2": {
         "docs-demo": {
           "demo-text": "'Please stop looking at your phone and pet me'"
         },
         "font-family": "sans-serif",
         "font-weight": "normal",
         "color": "gray30",
-        "text-transform": "uppercase",
         "letter-spacing": "0.025em",
         "margin-top": "-0.1em",
 

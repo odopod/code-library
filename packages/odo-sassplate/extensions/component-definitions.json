@@ -89,6 +89,7 @@
         "padding": 0,
         "background-color": "transparent",
         "text-decoration": "none",
+        "font-family": "sans-serif",
         "color": "blue",
 
         "hover": {

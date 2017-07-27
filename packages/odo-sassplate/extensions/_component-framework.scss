@@ -239,12 +239,10 @@ $special-properties: (
 
   // Allow any selector to be appended to the main selector.
   @if map-has-key($properties, "raw") {
-    @each $sel, $rawProperties in map-get($properties, "raw") {
-      $sel: sassplate-sanitize-selector($sel);
-
-      .#{$selector}#{$sel} {
-        @include sassplate-make-component($rawProperties);
-      }
+    @each $rawSelector, $rawProperties in map-get($properties, "raw") {
+      $rawSelector: sassplate-sanitize-selector($rawSelector);
+      $sel: "#{$selector}#{$rawSelector}";
+      @include sassplate-process-component($sel, $rawProperties);
     }
   }
 
@@ -252,22 +250,20 @@ $special-properties: (
   @if map-has-key($properties, "modifiers") {
     @each $modifierName, $modifierProperties in map-get($properties, "modifiers") {
       $modifierName: sassplate-sanitize-selector($modifierName);
-
-      .#{$selector}--#{$modifierName} {
-        @include sassplate-make-component($modifierProperties);
-      }
+      $sel: "#{$selector}--#{$modifierName}";
+      @include sassplate-process-component($sel, $modifierProperties);
     }
   }
 
   // Qualifiers are for overriding properties based on a class on the <html> element.
-  // If the component has a qualifiers object, create the qualifier selector classnames and populate them with whatever override properties
-  // are in the type-definition qualifiers.
-  // ex: .cn type-header-1
+  // If the component has a qualifiers object, create the qualifier selector classnames
+  // and populate them with whatever override properties are in the type-definition qualifiers.
+  // ex: .zh type-header-1
   @if map-has-key($properties, "qualifiers") {
     @each $qualifierName, $qualifierProperties in map-get($properties, "qualifiers") {
-      .#{$qualifierName} .#{$selector} {
-        @include sassplate-make-component($qualifierProperties);
-      }
+      $qualifierName: sassplate-sanitize-selector($qualifierName);
+      $sel: "#{$qualifierName} .#{$selector}";
+      @include sassplate-process-component($sel, $qualifierProperties);
     }
   }
 }

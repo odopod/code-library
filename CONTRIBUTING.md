@@ -132,3 +132,4 @@ from the main (upstream) repository:
 * Commit these changes and tag the commit `odo-{component-name}-v{version}`.
 * Push the commit and tag.
 * `npm publish` from within the component directory you're publishing.
+* Add release notes on GitHub for your new tag.

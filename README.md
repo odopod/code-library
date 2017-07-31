@@ -31,6 +31,7 @@ The Odo repo is managed as a [monorepo](https://github.com/babel/babel/blob/mast
 | [`@odopod/odo-responsive-classes`](/packages/odo-responsive-classes) | [![npm](https://img.shields.io/npm/v/@odopod/odo-responsive-classes.svg)](https://www.npmjs.com/package/@odopod/odo-responsive-classes) |
 | [`@odopod/odo-responsive-images`](/packages/odo-responsive-images) | [![npm](https://img.shields.io/npm/v/@odopod/odo-responsive-images.svg)](https://www.npmjs.com/package/@odopod/odo-responsive-images) |
 | [`@odopod/odo-reveal`](/packages/odo-reveal) | [![npm](https://img.shields.io/npm/v/@odopod/odo-reveal.svg)](https://www.npmjs.com/package/@odopod/odo-reveal) |
+| [`@odopod/odo-sassplate`](/packages/odo-sassplate) | [![npm](https://img.shields.io/npm/v/@odopod/odo-sassplate.svg)](https://www.npmjs.com/package/@odopod/odo-sassplate) |
 | [`@odopod/odo-scroll-animation`](/packages/odo-scroll-animation) | [![npm](https://img.shields.io/npm/v/@odopod/odo-scroll-animation.svg)](https://www.npmjs.com/package/@odopod/odo-scroll-animation) |
 | [`@odopod/odo-scroll-feedback`](/packages/odo-scroll-feedback) | [![npm](https://img.shields.io/npm/v/@odopod/odo-scroll-feedback.svg)](https://www.npmjs.com/package/@odopod/odo-scroll-feedback) |
 | [`@odopod/odo-share`](/packages/odo-share) | [![npm](https://img.shields.io/npm/v/@odopod/odo-share.svg)](https://www.npmjs.com/package/@odopod/odo-share) |

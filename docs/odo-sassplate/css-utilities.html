@@ -418,8 +418,14 @@
   vertical-align: middle;
 }
 
-.flex--align-center { align-items: center; }
-.flex--justify-center { justify-content: center; }
+.flex-center {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.align-items-center { align-items: center; }
+.justify-content-center { justify-content: center; }
 
 .clearfix { @include clearfix(); }
 .fill-parent { @include fill-parent(); }
@@ -440,6 +446,8 @@
   height: 100%;
 }
 
+// Overflow hidden because polyfills will resize the image within.
+.odo-responsive-img--cover { overflow: hidden; }
 .odo-responsive-img--cover img {
   width: 100%;
   max-width: none;

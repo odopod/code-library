@@ -1,0 +1,13 @@
+.fade {
+  -webkit-transition: opacity 150ms ease-out;
+          transition: opacity 150ms ease-out;
+  opacity: 0;
+}
+
+.fade.in {
+  opacity: 1;
+}
+
+.invisible {
+  visibility: hidden;
+}

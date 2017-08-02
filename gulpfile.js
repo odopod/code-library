@@ -5,7 +5,6 @@ const gulp = require('gulp');
 const sequence = require('gulp-sequence').use(gulp);
 
 gulp.task('compile', require('./gulp-tasks/compile'));
-gulp.task('compile-specs', require('./gulp-tasks/compile-specs'));
 gulp.task('compile-demo', require('./gulp-tasks/compile-demo'));
 
 // Execute the test runner with PhantomJS and capture the coverage in coverage.json

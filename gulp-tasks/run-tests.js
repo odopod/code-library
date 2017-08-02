@@ -1,20 +1,15 @@
 const path = require('path');
-const mochaPhantomJS = require('gulp-mocha-phantomjs');
+const execa = require('execa');
 const config = require('../utils/config');
 
-module.exports = gulp => () => gulp.src(path.join(config.pkgdir, 'tests/runner.html'), { read: false })
-  .pipe(mochaPhantomJS({
-    phantomjs: {
-      useColors: true,
-      hooks: 'mocha-phantomjs-istanbul',
-      coverageFile: path.join(config.pkgdir, 'coverage/coverage.json'),
-    },
-  }))
+// Run karma in a new process because running it via `new Server()` stalls for
+// ~30 seconds after the test suite has finished.
+// https://github.com/karma-runner/karma/issues/1788
 
-  // https://github.com/gulpjs/gulp/issues/259#issuecomment-61976830
-  .on('error', function onerror(err) {
-    if (config.watch) {
-      console.error(err.message);
-      this.emit('end');
-    }
-  });
+module.exports = () => execa('karma', [
+  'start',
+  path.join(config.pkgdir, 'test/karma.conf.js'),
+  config.watch ? '--no-single-run' : '',
+  '--package',
+  config.componentName,
+], { stdio: 'inherit' });

@@ -1,11 +1,15 @@
-/* global describe, it, expect, beforeEach, afterEach */
+/* global describe, it, beforeEach, afterEach */
 /* eslint-disable no-unused-expressions */
 
+const expect = window.chai.expect;
 const sinon = window.sinon;
+const fixture = window.fixture;
 const OdoBackgroundVideo = window.OdoBackgroundVideo;
 const OdoObjectFit = window.OdoObjectFit;
 
 const OdoVideo = window.OdoVideo;
+
+fixture.setBase('fixtures');
 
 const noop = () => {};
 
@@ -62,8 +66,8 @@ describe('The OdoBackgroundVideo Component', function bgVideo() {
 
   // Clone the fixture and append it to the body. Then create a new instance.
   function createFixture(id) {
-    el = document.getElementById(id).cloneNode(true).firstElementChild;
-    document.body.appendChild(el);
+    fixture.load(`${id}.html`);
+    el = fixture.el.firstElementChild;
 
     if (!OdoVideo.support) {
       const sources = el.getElementsByTagName('source');
@@ -80,9 +84,9 @@ describe('The OdoBackgroundVideo Component', function bgVideo() {
       instance.dispose();
     }
 
-    document.body.removeChild(el);
     el = null;
     instance = null;
+    fixture.cleanup();
   }
 
   describe('basic fixture - no video element', () => {
@@ -93,7 +97,7 @@ describe('The OdoBackgroundVideo Component', function bgVideo() {
         then() {},
       };
 
-      createFixture('no-video-fixture');
+      createFixture('no-video');
     });
 
     afterEach(() => {
@@ -122,7 +126,7 @@ describe('The OdoBackgroundVideo Component', function bgVideo() {
 
     beforeEach(() => {
       OdoVideo.autoplay = Promise.resolve(false);
-      createFixture('fixture');
+      createFixture('base');
     });
 
     afterEach(() => {
@@ -141,7 +145,7 @@ describe('The OdoBackgroundVideo Component', function bgVideo() {
 
   describe('basic fixture - with video element', () => {
     beforeEach((done) => {
-      createFixture('fixture');
+      createFixture('base');
       setTimeout(done, 0);
     });
 

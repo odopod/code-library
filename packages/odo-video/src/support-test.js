@@ -8,7 +8,7 @@ export default () => {
 
   // IE9 Running on Windows Server 2008 can cause an exception to be thrown, bug #224
   // End of life for 'mainstream' WS2008 was 2015-1-13.
-  /* istanbul ignore if */
+  /* istanbul ignore next */
   if (bool) {
     bool = new Boolean(bool); // eslint-disable-line no-new-wrappers
     bool.ogg = elem.canPlayType('video/ogg; codecs="theora"');

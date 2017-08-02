@@ -1,8 +1,13 @@
-/* global describe, it, expect, beforeEach, afterEach */
+/* global describe, it, beforeEach, afterEach */
 /* eslint-disable no-unused-expressions */
 
+const expect = window.chai.expect;
 const sinon = window.sinon;
+const fixture = window.fixture;
+
 const OdoVideo = window.OdoVideo;
+
+fixture.setBase('fixtures');
 
 function noop() {}
 
@@ -13,8 +18,8 @@ let instance;
 
 // Clone the fixture and append it to the body. Then create a new instance.
 function createFixture(id, options, theReadyState, webkit) {
-  element = document.getElementById(id).cloneNode(true).firstElementChild;
-  document.body.appendChild(element);
+  fixture.load(`${id}.html`);
+  element = fixture.el.firstElementChild;
 
   if (!OdoVideo.support) {
     const sources = element.getElementsByTagName('source');
@@ -37,9 +42,9 @@ function removeFixture() {
     instance.dispose();
   }
 
-  document.body.removeChild(element);
   element = null;
   instance = null;
+  fixture.cleanup();
 }
 
 // Return fake video element to OdoVideo.
@@ -114,7 +119,7 @@ describe('The OdoVideo Component', () => {
 
   describe('default controls', () => {
     beforeEach(() => {
-      createFixture('fixture');
+      createFixture('base');
     });
 
     afterEach(removeFixture);
@@ -426,7 +431,7 @@ describe('The OdoVideo Component', () => {
 
   describe('a video which is already loaded', () => {
     beforeEach(() => {
-      createFixture('fixture', {
+      createFixture('base', {
         pauseOnClick: false,
       }, 4);
     });
@@ -443,7 +448,7 @@ describe('The OdoVideo Component', () => {
 
     beforeEach(() => {
       OdoVideo.screenfull = false;
-      createFixture('fixture');
+      createFixture('base');
     });
 
     afterEach(() => {
@@ -491,7 +496,7 @@ describe('The OdoVideo Component', () => {
         exit: noop,
         toggle: noop,
       };
-      createFixture('fixture');
+      createFixture('base');
     });
 
     afterEach(() => {
@@ -518,7 +523,7 @@ describe('The OdoVideo Component', () => {
 
     beforeEach(() => {
       OdoVideo.screenfull = false;
-      createFixture('fixture', {}, null, true);
+      createFixture('base', {}, null, true);
     });
 
     afterEach(() => {
@@ -541,7 +546,7 @@ describe('The OdoVideo Component', () => {
 
   describe('stacked progress controls', () => {
     beforeEach(() => {
-      createFixture('fixture', {
+      createFixture('base', {
         controls: OdoVideo.Controls.STACKED_PROGRESS,
       });
     });
@@ -556,7 +561,7 @@ describe('The OdoVideo Component', () => {
 
   describe('no controls', () => {
     beforeEach(() => {
-      createFixture('fixture', {
+      createFixture('base', {
         controls: OdoVideo.Controls.NONE,
       });
     });
@@ -572,7 +577,7 @@ describe('The OdoVideo Component', () => {
 
   describe('custom controls', () => {
     beforeEach(() => {
-      createFixture('fixture', {
+      createFixture('base', {
         controls: OdoVideo.Controls.CUSTOM,
         layoutControls(elements) {
           elements.controls.appendChild(elements.currentTime);

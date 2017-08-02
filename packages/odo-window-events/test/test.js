@@ -1,6 +1,7 @@
-/* global describe, it, expect, beforeEach, afterEach */
+/* global describe, it, beforeEach, afterEach */
 /* eslint-disable no-unused-expressions */
 
+const expect = window.chai.expect;
 const sinon = window.sinon;
 const OdoWindowEvents = window.OdoWindowEvents;
 
@@ -18,22 +19,22 @@ describe('The Odo Window Events service', function d() {
 
   it('can cache a callback function for the scroll event', () => {
     const bindingID = OdoWindowEvents.onScroll(noop);
-    expect(OdoWindowEvents._scrollCallbacks[bindingID]).to.be.defined;
+    expect(OdoWindowEvents._scrollCallbacks[bindingID]).to.exist;
   });
 
   it('can cache a fast callback function for the scroll event', () => {
-    const bindingID = OdoWindowEvents.onScroll(noop);
-    expect(OdoWindowEvents._fastScrollCallbacks[bindingID]).to.be.defined;
+    const bindingID = OdoWindowEvents.onFastScroll(noop);
+    expect(OdoWindowEvents._fastScrollCallbacks[bindingID]).to.exist;
   });
 
   it('can cache a callback function for the resize event', () => {
     const bindingID = OdoWindowEvents.onResize(noop);
-    expect(OdoWindowEvents._resizeCallbacks[bindingID]).to.be.defined;
+    expect(OdoWindowEvents._resizeCallbacks[bindingID]).to.exist;
   });
 
   it('can cache a callback function for the leading resize event', () => {
-    const bindingID = OdoWindowEvents.onResize(noop);
-    expect(OdoWindowEvents._leadingResizeCallbacks[bindingID]).to.be.defined;
+    const bindingID = OdoWindowEvents.onLeadingResize(noop);
+    expect(OdoWindowEvents._leadingResizeCallbacks[bindingID]).to.exist;
   });
 
   it('can remove a callback for either the scroll or resize event', () => {

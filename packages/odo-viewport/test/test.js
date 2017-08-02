@@ -1,6 +1,7 @@
-/* global describe, it, expect, beforeEach, afterEach */
+/* global describe, it, beforeEach, afterEach */
 /* eslint-disable no-unused-expressions */
 
+const expect = window.chai.expect;
 const sinon = window.sinon;
 const OdoViewport = window.OdoViewport;
 

@@ -15,7 +15,7 @@ module.exports = () => {
 
   // Gulp changes the current working directory to the one with the gulpfile.js
   // in it, then executes tasks.
-  if (process.env.INIT_CWD.includes(`packages${path.sep}`)) {
+  if (process.env.INIT_CWD && process.env.INIT_CWD.includes(`packages${path.sep}`)) {
     packageName = path.basename(process.env.INIT_CWD);
   } else if (options.package || options.p) {
     packageName = options.package || options.p;

@@ -1,9 +1,20 @@
-/* global describe, it, expect, beforeEach, afterEach */
+/* global describe, it, beforeEach, afterEach, fixture */
 /* eslint-disable no-unused-expressions */
 
+const expect = window.chai.expect;
 const sinon = window.sinon;
+const fixture = window.fixture;
 
 const OdoAffix = window.OdoAffix;
+
+fixture.setBase('fixtures');
+
+const div = document.createElement('div');
+const img = '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=" alt="an image">';
+div.innerHTML = img;
+document.body.appendChild(div);
+OdoAffix._addImageLoadHandlers();
+document.body.removeChild(div);
 
 describe('The OdoAffix Component', function affix() {
   this.timeout(4000);
@@ -15,12 +26,8 @@ describe('The OdoAffix Component', function affix() {
 
   // Clone the fixture and append it to the body. Then create a new instance.
   function createFixture(id) {
-    fixtureWrapper = document.getElementById(id).cloneNode(true).firstElementChild;
-    document.body.appendChild(fixtureWrapper);
-
-    const anchor = fixtureWrapper.querySelector('[data-id]');
-    anchor.id = anchor.getAttribute('data-id');
-    anchor.removeAttribute('data-id');
+    fixture.load(`${id}.html`);
+    fixtureWrapper = fixture.el.firstElementChild;
     instance = new OdoAffix(fixtureWrapper.querySelector('.js-element-to-affix'));
   }
 
@@ -29,9 +36,9 @@ describe('The OdoAffix Component', function affix() {
       instance.dispose();
     }
 
-    document.body.removeChild(fixtureWrapper);
     fixtureWrapper = null;
     instance = null;
+    fixture.cleanup();
   }
 
   beforeEach(() => {
@@ -56,7 +63,7 @@ describe('The OdoAffix Component', function affix() {
 
   describe('basic fixture', () => {
     beforeEach(() => {
-      createFixture('fixture');
+      createFixture('default');
     });
 
     afterEach(removeFixture);
@@ -187,7 +194,7 @@ describe('The OdoAffix Component', function affix() {
 
   describe('fixture with margins', () => {
     beforeEach(() => {
-      createFixture('margin-fixture');
+      createFixture('margins');
     });
 
     afterEach(removeFixture);

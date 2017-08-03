@@ -143,10 +143,10 @@ class Share {
 
       if (service === this.services.email) {
         // Prevent opening empty window if sharing via email.
-        window.location.assign(parsedOptions.url);
+        this._navigate(parsedOptions.url);
       } else {
         // Open the share window.
-        windowObject = Share._open(parsedOptions.url, parsedOptions.name, service.Features);
+        windowObject = this._open(parsedOptions.url, parsedOptions.name, service.Features);
       }
 
       // Call the `after` functionality.
@@ -272,6 +272,7 @@ class Share {
     return `${base}?${pairs.join('&')}`;
   }
 
+  /* istanbul ignore next */
   /**
    * Opens a new browser window.
    *
@@ -286,8 +287,18 @@ class Share {
    *   security requirements.
    * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Window/open}
    */
-  static _open(url, windowName, windowFeatures = '') {
+  _open(url, windowName, windowFeatures = '') {
     return window.open(url, windowName, windowFeatures);
+  }
+
+  /* istanbul ignore next */
+  /**
+   * Navigate to a new location within the same tab. This is used to open the
+   * user's default email app.
+   * @param {string} url mailto url.
+   */
+  _navigate(url) {
+    window.location.assign(url);
   }
 
   /**

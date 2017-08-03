@@ -351,11 +351,11 @@ var Affix = function () {
 
     // Cancel a previous update if it exists.
     if (Affix._updateId) {
-      cancelAnimationFrame(Affix._updateId);
+      window.cancelAnimationFrame(Affix._updateId);
     }
 
     // Throttle updates to once per frame.
-    Affix._updateId = requestAnimationFrame(Affix._handleImageLoad);
+    Affix._updateId = window.requestAnimationFrame(Affix._handleImageLoad);
   };
 
   /**

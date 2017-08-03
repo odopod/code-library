@@ -430,10 +430,10 @@ var Share = function () {
 
       if (service === _this2.services.email) {
         // Prevent opening empty window if sharing via email.
-        window.location.assign(parsedOptions.url);
+        _this2._navigate(parsedOptions.url);
       } else {
         // Open the share window.
-        windowObject = Share._open(parsedOptions.url, parsedOptions.name, service.Features);
+        windowObject = _this2._open(parsedOptions.url, parsedOptions.name, service.Features);
       }
 
       // Call the `after` functionality.
@@ -569,6 +569,7 @@ var Share = function () {
     return base + '?' + pairs.join('&');
   };
 
+  /* istanbul ignore next */
   /**
    * Opens a new browser window.
    *
@@ -585,10 +586,22 @@ var Share = function () {
    */
 
 
-  Share._open = function _open(url, windowName) {
+  Share.prototype._open = function _open(url, windowName) {
     var windowFeatures = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
 
     return window.open(url, windowName, windowFeatures);
+  };
+
+  /* istanbul ignore next */
+  /**
+   * Navigate to a new location within the same tab. This is used to open the
+   * user's default email app.
+   * @param {string} url mailto url.
+   */
+
+
+  Share.prototype._navigate = function _navigate(url) {
+    window.location.assign(url);
   };
 
   /**

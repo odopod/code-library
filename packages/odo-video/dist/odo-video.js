@@ -90,7 +90,7 @@ var supportTest = (function () {
 
   // IE9 Running on Windows Server 2008 can cause an exception to be thrown, bug #224
   // End of life for 'mainstream' WS2008 was 2015-1-13.
-  /* istanbul ignore if */
+  /* istanbul ignore next */
   if (bool) {
     bool = new Boolean(bool); // eslint-disable-line no-new-wrappers
     bool.ogg = elem.canPlayType('video/ogg; codecs="theora"');
@@ -107,12 +107,12 @@ var supportTest = (function () {
 
 function test$1(support) {
   // If the test has already passed, return a resolved promise.
-  if (test$1.HAS_LOCAL_STORAGE && localStorage.getItem('odovideoautoplay') === 'true') {
+  if (test$1.HAS_LOCAL_STORAGE && window.localStorage.getItem('odovideoautoplay') === 'true') {
     return Promise.resolve(true);
   }
 
   // Retrieve the number of autoplay test attempts. Max is 3.
-  var tries = test$1.HAS_LOCAL_STORAGE && parseInt(localStorage.getItem('odovideoautoplaytries'), 10) || 0;
+  var tries = test$1.HAS_LOCAL_STORAGE && parseInt(window.localStorage.getItem('odovideoautoplaytries'), 10) || 0;
   if (tries > 2) {
     return Promise.resolve(false);
   }
@@ -128,8 +128,8 @@ function test$1(support) {
 
     var complete = function complete(bool) {
       if (test$1.HAS_LOCAL_STORAGE) {
-        localStorage.setItem('odovideoautoplay', bool);
-        localStorage.setItem('odovideoautoplaytries', tries + 1);
+        window.localStorage.setItem('odovideoautoplay', bool);
+        window.localStorage.setItem('odovideoautoplaytries', tries + 1);
       }
 
       resolve(bool);
@@ -172,8 +172,8 @@ function test$1(support) {
 test$1.HAS_LOCAL_STORAGE = function () {
   try {
     var testKey = 'test';
-    localStorage.setItem(testKey, '1');
-    localStorage.removeItem(testKey);
+    window.localStorage.setItem(testKey, '1');
+    window.localStorage.removeItem(testKey);
     return true;
   } catch (error) /* istanbul ignore next */{
     return false;

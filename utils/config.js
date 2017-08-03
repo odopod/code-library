@@ -16,7 +16,6 @@ const COMPONENT_NAME = pkg.name.replace(`${brand.npmUser}/`, '');
 const SOURCE = path.join(PACKAGE_DIRECTORY, pkg.odoModule);
 const DIST_FILE = path.join(DIST_DIR, COMPONENT_NAME + '.js');
 const DIST_FILE_MIN = path.join(DIST_DIR, COMPONENT_NAME + '.min.js');
-const DIST_FILE_INSTRUMENTED = path.join(DIST_DIR, COMPONENT_NAME + '.instrumented.js');
 const { external, globals } = getExternalDeps(PACKAGE_DIRECTORY);
 const CLASS_NAME = getClassName(COMPONENT_NAME);
 
@@ -55,7 +54,7 @@ const UGLIFY_CONFIG = {
 
 const config = {
   pkgdir: PACKAGE_DIRECTORY,
-
+  componentName: COMPONENT_NAME,
   isProduction: false,
 
   watch: false,
@@ -94,15 +93,13 @@ const config = {
   },
 
   instrumented: {
-    entry: SOURCE,
     cache: undefined,
     plugins: [
       resolve(),
       commonjs(COMMONJS_CONFIG),
       babel(BABEL_CONFIG_INSTRUMENTED),
     ],
-    dest: DIST_FILE_INSTRUMENTED,
-    sourceMap: false,
+    sourceMap: 'inline',
     moduleName: CLASS_NAME,
     format: 'umd',
     globals,

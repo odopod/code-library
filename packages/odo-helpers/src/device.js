@@ -28,12 +28,12 @@ const device = {
    */
   getTransitionEndEvent() {
     const div = document.createElement('div');
-    div.style.transition = 'width 2s';
+    div.style.transitionProperty = 'width';
 
     // Test the value which was just set. If it wasn't able to be set,
     // then it shouldn't use unprefixed transitions.
     /* istanbul ignore next */
-    if (div.style.transition !== 'width 2s' && 'webkitTransition' in div.style) {
+    if (div.style.transitionProperty !== 'width' && 'webkitTransition' in div.style) {
       return 'webkitTransitionEnd';
     }
 

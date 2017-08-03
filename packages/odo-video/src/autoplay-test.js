@@ -1,11 +1,11 @@
 function test(support) {
   // If the test has already passed, return a resolved promise.
-  if (test.HAS_LOCAL_STORAGE && localStorage.getItem('odovideoautoplay') === 'true') {
+  if (test.HAS_LOCAL_STORAGE && window.localStorage.getItem('odovideoautoplay') === 'true') {
     return Promise.resolve(true);
   }
 
   // Retrieve the number of autoplay test attempts. Max is 3.
-  const tries = test.HAS_LOCAL_STORAGE && parseInt(localStorage.getItem('odovideoautoplaytries'), 10) || 0;
+  const tries = test.HAS_LOCAL_STORAGE && parseInt(window.localStorage.getItem('odovideoautoplaytries'), 10) || 0;
   if (tries > 2) {
     return Promise.resolve(false);
   }
@@ -21,8 +21,8 @@ function test(support) {
 
     const complete = (bool) => {
       if (test.HAS_LOCAL_STORAGE) {
-        localStorage.setItem('odovideoautoplay', bool);
-        localStorage.setItem('odovideoautoplaytries', tries + 1);
+        window.localStorage.setItem('odovideoautoplay', bool);
+        window.localStorage.setItem('odovideoautoplaytries', tries + 1);
       }
 
       resolve(bool);
@@ -65,8 +65,8 @@ function test(support) {
 test.HAS_LOCAL_STORAGE = (() => {
   try {
     const testKey = 'test';
-    localStorage.setItem(testKey, '1');
-    localStorage.removeItem(testKey);
+    window.localStorage.setItem(testKey, '1');
+    window.localStorage.removeItem(testKey);
     return true;
   } catch (error) /* istanbul ignore next */ {
     return false;

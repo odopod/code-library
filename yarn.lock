@@ -2436,6 +2436,10 @@ karma-coverage@^1.1.1:
     minimatch "^3.0.0"
     source-map "^0.5.1"
 
+karma-firefox-launcher@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/karma-firefox-launcher/-/karma-firefox-launcher-1.0.1.tgz#ce58f47c2013a88156d55a5d61337c099cf5bb51"
+
 karma-fixture@^0.2.6:
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/karma-fixture/-/karma-fixture-0.2.6.tgz#971cea8c216d73f07043964cb73f10e0830018ef"

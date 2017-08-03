@@ -5,9 +5,7 @@ const expect = window.chai.expect;
 const sinon = window.sinon;
 const OdoViewport = window.OdoViewport;
 
-describe('The viewport factory', function d() {
-  this.timeout(5000);
-
+describe('The viewport factory', () => {
   let element;
   let element2;
 
@@ -443,8 +441,10 @@ describe('The viewport factory', function d() {
     // Make it think the element has been scrolled out of view.
     instance.viewportTop = 5000;
     instance.process();
+    expect(exit.callCount).to.equal(1);
     expect(instance.items.get(id).triggered).to.equal(false);
 
+    instance.process();
     expect(exit.callCount).to.equal(1);
   });
 

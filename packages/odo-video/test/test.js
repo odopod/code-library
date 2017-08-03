@@ -638,25 +638,22 @@ describe('The OdoVideo Component', () => {
     });
 
     it('will check localStorage to see if autoplay is already tested', () => {
-      const spy = sinon.spy(window.localStorage, 'getItem');
       localStorage.setItem('odovideoautoplay', true);
+      expect(localStorage.getItem('odovideoautoplay')).to.equal('true');
 
       return OdoVideo._autoplayTest(false).then((can) => {
         expect(can).to.equal(true);
-        expect(spy.calledWith('odovideoautoplay')).to.be.true;
-        window.localStorage.getItem.restore();
       });
     });
 
     it('will try up to 3 times for a result', () => {
-      const spy = sinon.spy(window.localStorage, 'getItem');
       localStorage.setItem('odovideoautoplay', false);
       localStorage.setItem('odovideoautoplaytries', 3);
+      expect(localStorage.getItem('odovideoautoplay')).to.equal('false');
+      expect(localStorage.getItem('odovideoautoplaytries')).to.equal('3');
 
-      return OdoVideo._autoplayTest(false).then((can) => {
+      return OdoVideo._autoplayTest(true).then((can) => {
         expect(can).to.equal(false);
-        expect(spy.callCount).to.equal(2);
-        window.localStorage.getItem.restore();
       });
     });
   });

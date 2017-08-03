@@ -73,10 +73,7 @@ describe('The Base Component', function baseComponent() {
 
     it('can have a context for DOM queries', () => {
       expect(instance.getElementsBySelector('.context-test')).to.have.lengthOf(2);
-      expect(instance.getElementsBySelector(
-        '.context-test',
-        instance.getElementByClass('the-context'),
-      )).to.have.lengthOf(1);
+      expect(instance.getElementsBySelector('.context-test', instance.getElementByClass('the-context'))).to.have.lengthOf(1);
     });
 
     it('will remove custom events', () => {

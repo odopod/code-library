@@ -3,7 +3,7 @@
     "Buttons": {
       "btn": {
         "docs-demo": {
-          "demo-markup": "'<a href=\"javascript:void(0)\" class=\"btn\">Sign In</a>'"
+          "demo-file": "'demos/btn.html'"
         },
         "position": "relative",
         "display": "inline-block",

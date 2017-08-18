@@ -12,6 +12,7 @@ styleguide.configure({
   name: 'Odo Sassplate',
   client: 'Odopod',
   jsonSource: 'extensions',
+  templatePath: path.resolve('style-guide-templates'),
   themeColor: '#ff4843',
   stylesheets: [
     'styles.css',

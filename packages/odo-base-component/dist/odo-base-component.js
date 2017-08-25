@@ -196,7 +196,7 @@ var BaseComponent = function (_TinyEmitter) {
    * Retrieve elements by class name within the main element for this class.
    * @param {string} klass Name of the class to search for.
    * @param {Element} [context] Element to search within. Defaults to main element.
-   * @return {Array.<Element>} An array of elements matching the class name.
+   * @return {Element[]} An array of elements matching the class name.
    */
 
 
@@ -208,7 +208,7 @@ var BaseComponent = function (_TinyEmitter) {
    * Retrieve elements by selector within the main element for this class.
    * @param {string} selector Selector to search for.
    * @param {Element} [context] Element to search within. Defaults to main element.
-   * @return {Array.<Element>} An array of elements matching the selector.
+   * @return {Element[]} An array of elements matching the selector.
    */
 
 
@@ -296,7 +296,7 @@ var BaseComponent = function (_TinyEmitter) {
 
   /**
    * Create a new media queries object with keys for each breakpoint.
-   * @param {Array.<number>} bps Array of breakpoints.
+   * @param {number[]} bps Array of breakpoints.
    * @return {!Object}
    * @private
    * @static
@@ -316,7 +316,7 @@ var BaseComponent = function (_TinyEmitter) {
    * Allows you to redefine the default breakpoints. If you want to redefine
    * breakpoints, make sure you call this method before initializing classes
    * which inherit from BaseComponent.
-   * @param {Array.<number>} breakpoints An array of 3 numbers.
+   * @param {number[]} breakpoints An array of 3 numbers.
    * @static
    */
 
@@ -352,7 +352,7 @@ BaseComponent.defineBreakpoints([768, 1024, 1392]);
 
 /**
  * Array of breakpoint key names.
- * @type {Array.<string>}
+ * @type {string[]}
  */
 BaseComponent.BREAKPOINT_NAMES = Object.keys(BaseComponent.queries);
 

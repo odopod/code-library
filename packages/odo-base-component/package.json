@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-base-component",
   "description": "Base component for odo components. Includes media query listeners and exports base globals",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "dist/odo-base-component.js",
   "odoModule": "src/base-component.js",
   "author": "Odopod",
@@ -24,7 +24,8 @@
     "css",
     "dist",
     "src",
-    "index.js"
+    "index.js",
+    "index.d.ts"
   ],
   "odoKeywords": [
     "utilities"

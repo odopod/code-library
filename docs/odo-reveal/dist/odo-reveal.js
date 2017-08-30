@@ -2,16 +2,28 @@
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@odopod/odo-device'), require('@odopod/odo-viewport'), require('@odopod/odo-helpers')) :
 	typeof define === 'function' && define.amd ? define(['@odopod/odo-device', '@odopod/odo-viewport', '@odopod/odo-helpers'], factory) :
 	(global.OdoReveal = factory(global.OdoDevice,global.OdoViewport,global.OdoHelpers));
-}(this, (function (OdoDevice,OdoViewport,_odopod_odoHelpers) { 'use strict';
+}(this, (function (OdoDevice,OdoViewport,odoHelpers) { 'use strict';
 
 OdoDevice = OdoDevice && OdoDevice.hasOwnProperty('default') ? OdoDevice['default'] : OdoDevice;
 OdoViewport = OdoViewport && OdoViewport.hasOwnProperty('default') ? OdoViewport['default'] : OdoViewport;
+
+var babelHelpers = {};
 
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 };
+
+
+
+
+
+
+
+
+
+babelHelpers;
 
 /**
  * @fileoverview Fade elements in and up when they come into view. Waits for
@@ -57,7 +69,7 @@ var Reveal = function () {
     if (Reveal.HAS_SCROLL_ANIMATION) {
       this.id = OdoViewport.add({
         element: element,
-        threshold: _odopod_odoHelpers.utilities.getPercentageOption(element.getAttribute('data-threshold'), '25%'),
+        threshold: odoHelpers.utilities.getPercentageOption(element.getAttribute('data-threshold'), '25%'),
         enter: this._enteredView.bind(this)
       });
     } else {
@@ -108,7 +120,7 @@ var Reveal = function () {
     // Listen transition end on each target and add a class which removes
     // the transform and layer promotion from it.
     targets.forEach(function (el) {
-      _odopod_odoHelpers.animation.onTransitionEnd(el, _this2._handleShown, null, OdoDevice.Dom.TRANSFORM);
+      odoHelpers.animation.onTransitionEnd(el, _this2._handleShown, null, OdoDevice.Dom.TRANSFORM);
     });
 
     this.dispose();
@@ -184,7 +196,7 @@ var Reveal = function () {
  */
 
 
-Reveal.HAS_SCROLL_ANIMATION = !_odopod_odoHelpers.browser.isNativeAndroid(navigator.userAgent);
+Reveal.HAS_SCROLL_ANIMATION = !odoHelpers.browser.isNativeAndroid(navigator.userAgent);
 
 /** @enum {string} */
 Reveal.ClassName = {

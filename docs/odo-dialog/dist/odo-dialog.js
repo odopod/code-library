@@ -2,24 +2,18 @@
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('tiny-emitter'), require('@odopod/odo-helpers'), require('@odopod/odo-device')) :
 	typeof define === 'function' && define.amd ? define(['tiny-emitter', '@odopod/odo-helpers', '@odopod/odo-device'], factory) :
 	(global.OdoDialog = factory(global.TinyEmitter,global.OdoHelpers,global.OdoDevice));
-}(this, (function (TinyEmitter,_odopod_odoHelpers,OdoDevice) { 'use strict';
+}(this, (function (TinyEmitter,odoHelpers,OdoDevice) { 'use strict';
 
 TinyEmitter = TinyEmitter && TinyEmitter.hasOwnProperty('default') ? TinyEmitter['default'] : TinyEmitter;
 OdoDevice = OdoDevice && OdoDevice.hasOwnProperty('default') ? OdoDevice['default'] : OdoDevice;
+
+var babelHelpers = {};
 
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 };
-
-
-
-
-
-
-
-
 
 
 
@@ -39,16 +33,6 @@ var inherits = function (subClass, superClass) {
   if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 };
 
-
-
-
-
-
-
-
-
-
-
 var possibleConstructorReturn = function (self, call) {
   if (!self) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -56,6 +40,10 @@ var possibleConstructorReturn = function (self, call) {
 
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
+
+
+
+babelHelpers;
 
 /**
  * @fileoverview Makes an overflowing element scrollable and handles preventing
@@ -184,7 +172,7 @@ var ScrollFix$1 = {
    */
   add: function add(element) {
     if (OdoDevice.HAS_TOUCH_EVENTS) {
-      var id = _odopod_odoHelpers.string.random();
+      var id = odoHelpers.string.random();
       this._fixes.set(id, new ScrollFix(element, id));
       return id;
     }
@@ -506,7 +494,7 @@ var Dialog = function (_TinyEmitter) {
     } else {
       Dialog._nextFrame(function () {
         _this2._openNext();
-        _odopod_odoHelpers.animation.onTransitionEnd(_this2.element, _this2._opened, _this2, null, 1000);
+        odoHelpers.animation.onTransitionEnd(_this2.element, _this2._opened, _this2, null, 1000);
       });
     }
   };
@@ -591,7 +579,7 @@ var Dialog = function (_TinyEmitter) {
     } else {
       Dialog._nextFrame(function () {
         _this3._closeNext();
-        _odopod_odoHelpers.animation.onTransitionEnd(_this3.element, _this3._closed, _this3, null, 1000);
+        odoHelpers.animation.onTransitionEnd(_this3.element, _this3._closed, _this3, null, 1000);
       });
     }
   };
@@ -640,7 +628,7 @@ var Dialog = function (_TinyEmitter) {
     this.backdrop = null;
     this._closers.length = 0;
 
-    _odopod_odoHelpers.array.remove(Dialog.Instances, this);
+    odoHelpers.array.remove(Dialog.Instances, this);
 
     // If this is the last dialog (being disposed), remove the body listener.
     if (Dialog.Instances.length === 0) {

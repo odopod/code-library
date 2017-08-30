@@ -6,6 +6,8 @@
 
 OdoWindowEvents = OdoWindowEvents && OdoWindowEvents.hasOwnProperty('default') ? OdoWindowEvents['default'] : OdoWindowEvents;
 
+var babelHelpers = {};
+
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -29,6 +31,14 @@ var createClass = function () {
     return Constructor;
   };
 }();
+
+
+
+
+
+
+
+babelHelpers;
 
 var ViewportItem = function () {
   /**
@@ -111,7 +121,7 @@ var ViewportItem = function () {
 
   createClass(ViewportItem, [{
     key: 'offset',
-    get: function get$$1() {
+    get: function get() {
       return this.isThresholdPercentage ? this.threshold * this.parent.viewportHeight : this.threshold;
     }
   }]);
@@ -508,7 +518,7 @@ var Viewport = function () {
 
   createClass(Viewport, [{
     key: 'viewportBottom',
-    get: function get$$1() {
+    get: function get() {
       return this.viewportTop + this.viewportHeight;
     }
   }]);

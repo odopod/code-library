@@ -2,7 +2,7 @@
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('tiny-emitter'), require('@odopod/odo-device'), require('@odopod/odo-helpers')) :
 	typeof define === 'function' && define.amd ? define(['tiny-emitter', '@odopod/odo-device', '@odopod/odo-helpers'], factory) :
 	(global.OdoPointer = factory(global.TinyEmitter,global.OdoDevice,global.OdoHelpers));
-}(this, (function (TinyEmitter,OdoDevice,_odopod_odoHelpers) { 'use strict';
+}(this, (function (TinyEmitter,OdoDevice,odoHelpers) { 'use strict';
 
 TinyEmitter = TinyEmitter && TinyEmitter.hasOwnProperty('default') ? TinyEmitter['default'] : TinyEmitter;
 OdoDevice = OdoDevice && OdoDevice.hasOwnProperty('default') ? OdoDevice['default'] : OdoDevice;
@@ -83,6 +83,8 @@ var settings = {
   DRAG_THRESHOLD: 5
 };
 
+var babelHelpers = {};
+
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -107,14 +109,6 @@ var createClass = function () {
   };
 }();
 
-
-
-
-
-
-
-
-
 var inherits = function (subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
@@ -131,16 +125,6 @@ var inherits = function (subClass, superClass) {
   if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 };
 
-
-
-
-
-
-
-
-
-
-
 var possibleConstructorReturn = function (self, call) {
   if (!self) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -148,6 +132,10 @@ var possibleConstructorReturn = function (self, call) {
 
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
+
+
+
+babelHelpers;
 
 function isXAxis(axis) {
   return axis === settings.Axis.X;
@@ -179,7 +167,7 @@ function finiteOrZero(velocity) {
  */
 
 function getVelocity(deltaTime, deltaX, deltaY) {
-  return new _odopod_odoHelpers.Coordinate(finiteOrZero(deltaX / deltaTime), finiteOrZero(deltaY / deltaTime));
+  return new odoHelpers.Coordinate(finiteOrZero(deltaX / deltaTime), finiteOrZero(deltaY / deltaTime));
 }
 
 function getTheDirection(value1, value2, isGreater, isLess, isEqual) {
@@ -308,7 +296,7 @@ var PointerEvent = function () {
      * Distance dragged.
      * @type {number}
      */
-    this.distance = _odopod_odoHelpers.Coordinate.distance(options.start, options.end);
+    this.distance = odoHelpers.Coordinate.distance(options.start, options.end);
 
     /**
      * Direction of drag.
@@ -392,26 +380,26 @@ var Pointer = function (_TinyEmitter) {
      * Starting location of the drag.
      * @type {Coordinate}
      */
-    _this.pageStart = new _odopod_odoHelpers.Coordinate();
+    _this.pageStart = new odoHelpers.Coordinate();
 
     /**
      * Current position of mouse or touch relative to the document.
      * @type {Coordinate}
      */
-    _this.page = new _odopod_odoHelpers.Coordinate();
+    _this.page = new odoHelpers.Coordinate();
 
     /**
      * Current position of drag relative to target's parent.
      * @type {Coordinate}
      */
-    _this.delta = new _odopod_odoHelpers.Coordinate();
+    _this.delta = new odoHelpers.Coordinate();
 
     /**
      * Used to track the current velocity. It is updated when the velocity is.
      * @type {Coordinate}
      * @private
      */
-    _this._lastPosition = new _odopod_odoHelpers.Coordinate();
+    _this._lastPosition = new odoHelpers.Coordinate();
 
     /**
      * Friction to apply to dragging. A value of zero would result in no dragging,
@@ -490,7 +478,7 @@ var Pointer = function (_TinyEmitter) {
      * The current velocity of the drag.
      * @type {Coordinate}
      */
-    _this.velocity = new _odopod_odoHelpers.Coordinate();
+    _this.velocity = new odoHelpers.Coordinate();
 
     /**
      * Whether the velocity has been tracked at least once during the drag.
@@ -519,7 +507,7 @@ var Pointer = function (_TinyEmitter) {
     if (_this._shouldPreventDefault && _this._isTouchActionSupported) {
       _this.element.style[touchAction] = Pointer.TouchAction[_this.axis];
     } else if (_this._shouldPreventDefault && OdoDevice.HAS_TOUCH_EVENTS) {
-      window.addEventListener(_odopod_odoHelpers.events.TOUCHMOVE, _odopod_odoHelpers.utilities.noop);
+      window.addEventListener(odoHelpers.events.TOUCHMOVE, odoHelpers.utilities.noop);
     }
 
     _this.listen();
@@ -530,18 +518,18 @@ var Pointer = function (_TinyEmitter) {
     this._onStart = this._handleDragStart.bind(this);
 
     if (OdoDevice.HAS_POINTER_EVENTS) {
-      this._el.addEventListener(_odopod_odoHelpers.events.POINTERDOWN, this._onStart);
+      this._el.addEventListener(odoHelpers.events.POINTERDOWN, this._onStart);
     } else {
-      this._el.addEventListener(_odopod_odoHelpers.events.MOUSEDOWN, this._onStart);
+      this._el.addEventListener(odoHelpers.events.MOUSEDOWN, this._onStart);
 
       if (OdoDevice.HAS_TOUCH_EVENTS) {
-        this._el.addEventListener(_odopod_odoHelpers.events.TOUCHSTART, this._onStart);
+        this._el.addEventListener(odoHelpers.events.TOUCHSTART, this._onStart);
       }
     }
 
     // Prevent images, links, etc from being dragged around.
     // http://www.html5rocks.com/en/tutorials/dnd/basics/
-    this._el.addEventListener(_odopod_odoHelpers.events.DRAGSTART, Pointer._preventDefault);
+    this._el.addEventListener(odoHelpers.events.DRAGSTART, Pointer._preventDefault);
   };
 
   /**
@@ -738,8 +726,8 @@ var Pointer = function (_TinyEmitter) {
     this.pageStart = pagePosition;
     this.page = pagePosition;
     this._lastPosition = pagePosition;
-    this.delta = new _odopod_odoHelpers.Coordinate();
-    this.velocity = new _odopod_odoHelpers.Coordinate();
+    this.delta = new odoHelpers.Coordinate();
+    this.velocity = new odoHelpers.Coordinate();
     this._hasTrackedVelocity = false;
 
     this.startTime = Date.now();
@@ -756,7 +744,7 @@ var Pointer = function (_TinyEmitter) {
 
   Pointer.prototype._setDragMoveValues = function _setDragMoveValues(pagePosition) {
     // Get the distance since the last move.
-    var lastDelta = _odopod_odoHelpers.Coordinate.difference(pagePosition, this.page);
+    var lastDelta = odoHelpers.Coordinate.difference(pagePosition, this.page);
 
     // Apply friction to the distance since last move.
     this.applyFriction(lastDelta);
@@ -862,19 +850,19 @@ var Pointer = function (_TinyEmitter) {
     this._onEnd = this._handleDragEnd.bind(this);
 
     switch (startType) {
-      case _odopod_odoHelpers.events.POINTERDOWN:
-        target.addEventListener(_odopod_odoHelpers.events.POINTERMOVE, this._onMove);
-        target.addEventListener(_odopod_odoHelpers.events.POINTERUP, this._onEnd);
-        target.addEventListener(_odopod_odoHelpers.events.POINTERCANCEL, this._onEnd);
+      case odoHelpers.events.POINTERDOWN:
+        target.addEventListener(odoHelpers.events.POINTERMOVE, this._onMove);
+        target.addEventListener(odoHelpers.events.POINTERUP, this._onEnd);
+        target.addEventListener(odoHelpers.events.POINTERCANCEL, this._onEnd);
         break;
-      case _odopod_odoHelpers.events.MOUSEDOWN:
-        target.addEventListener(_odopod_odoHelpers.events.MOUSEMOVE, this._onMove);
-        target.addEventListener(_odopod_odoHelpers.events.MOUSEUP, this._onEnd);
+      case odoHelpers.events.MOUSEDOWN:
+        target.addEventListener(odoHelpers.events.MOUSEMOVE, this._onMove);
+        target.addEventListener(odoHelpers.events.MOUSEUP, this._onEnd);
         break;
-      case _odopod_odoHelpers.events.TOUCHSTART:
-        target.addEventListener(_odopod_odoHelpers.events.TOUCHMOVE, this._onMove);
-        target.addEventListener(_odopod_odoHelpers.events.TOUCHEND, this._onEnd);
-        target.addEventListener(_odopod_odoHelpers.events.TOUCHCANCEL, this._onEnd);
+      case odoHelpers.events.TOUCHSTART:
+        target.addEventListener(odoHelpers.events.TOUCHMOVE, this._onMove);
+        target.addEventListener(odoHelpers.events.TOUCHEND, this._onEnd);
+        target.addEventListener(odoHelpers.events.TOUCHCANCEL, this._onEnd);
         break;
       // no default
     }
@@ -889,14 +877,14 @@ var Pointer = function (_TinyEmitter) {
 
   Pointer.prototype._removeDragHandlers = function _removeDragHandlers() {
     var target = this.dragEventTarget;
-    target.removeEventListener(_odopod_odoHelpers.events.POINTERMOVE, this._onMove);
-    target.removeEventListener(_odopod_odoHelpers.events.POINTERUP, this._onEnd);
-    target.removeEventListener(_odopod_odoHelpers.events.POINTERCANCEL, this._onEnd);
-    target.removeEventListener(_odopod_odoHelpers.events.MOUSEMOVE, this._onMove);
-    target.removeEventListener(_odopod_odoHelpers.events.MOUSEUP, this._onEnd);
-    target.removeEventListener(_odopod_odoHelpers.events.TOUCHMOVE, this._onMove);
-    target.removeEventListener(_odopod_odoHelpers.events.TOUCHEND, this._onEnd);
-    target.removeEventListener(_odopod_odoHelpers.events.TOUCHCANCEL, this._onEnd);
+    target.removeEventListener(odoHelpers.events.POINTERMOVE, this._onMove);
+    target.removeEventListener(odoHelpers.events.POINTERUP, this._onEnd);
+    target.removeEventListener(odoHelpers.events.POINTERCANCEL, this._onEnd);
+    target.removeEventListener(odoHelpers.events.MOUSEMOVE, this._onMove);
+    target.removeEventListener(odoHelpers.events.MOUSEUP, this._onEnd);
+    target.removeEventListener(odoHelpers.events.TOUCHMOVE, this._onMove);
+    target.removeEventListener(odoHelpers.events.TOUCHEND, this._onEnd);
+    target.removeEventListener(odoHelpers.events.TOUCHCANCEL, this._onEnd);
   };
 
   /**
@@ -909,7 +897,7 @@ var Pointer = function (_TinyEmitter) {
   Pointer.prototype._trackVelocity = function _trackVelocity() {
     var now = Date.now();
     var elapsed = now - this._lastTime;
-    var delta = _odopod_odoHelpers.Coordinate.difference(this.page, this._lastPosition);
+    var delta = odoHelpers.Coordinate.difference(this.page, this._lastPosition);
     this.applyFriction(delta);
     this._lastTime = now;
     this._lastPosition = this.page;
@@ -917,8 +905,8 @@ var Pointer = function (_TinyEmitter) {
     // velocity = delta / time.
     // Clamp the velocity to avoid outliers.
     var maxVelocity = Pointer.MAX_VELOCITY;
-    this.velocity.x = _odopod_odoHelpers.math.clamp(delta.x / elapsed, -maxVelocity, maxVelocity);
-    this.velocity.y = _odopod_odoHelpers.math.clamp(delta.y / elapsed, -maxVelocity, maxVelocity);
+    this.velocity.x = odoHelpers.math.clamp(delta.x / elapsed, -maxVelocity, maxVelocity);
+    this.velocity.y = odoHelpers.math.clamp(delta.y / elapsed, -maxVelocity, maxVelocity);
 
     this._hasTrackedVelocity = true;
   };
@@ -970,14 +958,14 @@ var Pointer = function (_TinyEmitter) {
     this._removeDragHandlers();
 
     // Remove pointer/mouse/touch events.
-    this._el.removeEventListener(_odopod_odoHelpers.events.POINTERDOWN, this._onStart);
-    this._el.removeEventListener(_odopod_odoHelpers.events.MOUSEDOWN, this._onStart);
-    this._el.removeEventListener(_odopod_odoHelpers.events.TOUCHSTART, this._onStart);
+    this._el.removeEventListener(odoHelpers.events.POINTERDOWN, this._onStart);
+    this._el.removeEventListener(odoHelpers.events.MOUSEDOWN, this._onStart);
+    this._el.removeEventListener(odoHelpers.events.TOUCHSTART, this._onStart);
 
     if (this._isTouchActionSupported) {
       this._el.style[Pointer.TouchActionSupport[this.axis]] = '';
     } else if (this._shouldPreventDefault && OdoDevice.HAS_TOUCH_EVENTS) {
-      window.removeEventListener(_odopod_odoHelpers.events.TOUCHMOVE, _odopod_odoHelpers.utilities.noop);
+      window.removeEventListener(odoHelpers.events.TOUCHMOVE, odoHelpers.utilities.noop);
     }
 
     this._el = null;
@@ -1004,7 +992,7 @@ var Pointer = function (_TinyEmitter) {
 
 
   Pointer._isCancelEvent = function _isCancelEvent(evt) {
-    return evt.type === _odopod_odoHelpers.events.POINTERCANCEL || evt.type === _odopod_odoHelpers.events.TOUCHCANCEL;
+    return evt.type === odoHelpers.events.POINTERCANCEL || evt.type === odoHelpers.events.TOUCHCANCEL;
   };
 
   /**
@@ -1026,7 +1014,7 @@ var Pointer = function (_TinyEmitter) {
       pagePoints = evt;
     }
 
-    return new _odopod_odoHelpers.Coordinate(pagePoints.pageX, pagePoints.pageY);
+    return new odoHelpers.Coordinate(pagePoints.pageX, pagePoints.pageY);
   };
 
   Pointer._preventDefault = function _preventDefault(evt) {
@@ -1035,7 +1023,7 @@ var Pointer = function (_TinyEmitter) {
 
   createClass(Pointer, [{
     key: 'element',
-    get: function get$$1() {
+    get: function get() {
       return this._el;
     }
 
@@ -1046,7 +1034,7 @@ var Pointer = function (_TinyEmitter) {
 
   }, {
     key: 'isEnabled',
-    get: function get$$1() {
+    get: function get() {
       return this._enabled;
     }
 
@@ -1055,12 +1043,12 @@ var Pointer = function (_TinyEmitter) {
      * @param {boolean} enabled Whether dragger is enabled.
      */
     ,
-    set: function set$$1(enabled) {
+    set: function set(enabled) {
       this._enabled = enabled;
     }
   }, {
     key: 'friction',
-    get: function get$$1() {
+    get: function get() {
       return this._friction;
     }
 
@@ -1069,7 +1057,7 @@ var Pointer = function (_TinyEmitter) {
      * @param {number} friction A number between [1, 0].
      */
     ,
-    set: function set$$1(friction) {
+    set: function set(friction) {
       this._friction = friction;
     }
   }]);

@@ -47,6 +47,10 @@ class Dialog extends TinyEmitter {
      */
     this.element = element;
 
+    /**
+     * Options object.
+     * @type {object}
+     */
     this.options = Object.assign({}, Dialog.Defaults, opts);
 
     /**
@@ -137,6 +141,7 @@ class Dialog extends TinyEmitter {
     this.element.classList.toggle(Dialog.Classes.NO_AUTO_MARGIN, !Dialog.SUPPORTS_AUTO_MARGINS);
 
     this._bindContexts();
+    this.onResize();
     this._addA11yAttributes();
     this._ensureBodyChild();
   }
@@ -157,6 +162,9 @@ class Dialog extends TinyEmitter {
     this.onKeyPress = this.onKeyPress.bind(this);
     this.onClick = this.onClick.bind(this);
     this.close = this.close.bind(this);
+    // Bind undefined as the first parameter so that the event object will be
+    // the second parameter and the optional viewportHeight parameter will work.
+    this.onWindowResize = this.onResize.bind(this, undefined);
   }
 
   /**
@@ -235,6 +243,19 @@ class Dialog extends TinyEmitter {
   }
 
   /**
+   * The dialog has a height of 100vh, which, in mobile safari, is incorrect
+   * when the toolbars are visible, not allowing the user to scroll the full
+   * height of the content within it.
+   * The viewportHeight parameter is optional so that it can be read in the open()
+   * method with all the other DOM reads. This avoids read->write->read #perfmatters.
+   * @param {number} [viewportHeight=window.innerHeight] Height of the viewport.
+   * @protected
+   */
+  onResize(viewportHeight = window.innerHeight) {
+    this.element.style.height = viewportHeight + 'px';
+  }
+
+  /**
    * Checks to see if a dialog is already open or animating If not, opens dialog.
    * @param {boolean} [sync=false] Whether to open with transitions or not.
    */
@@ -243,6 +264,7 @@ class Dialog extends TinyEmitter {
       return;
     }
 
+    const viewportHeight = window.innerHeight;
     Dialog.focusedBeforeDialog = document.activeElement;
     this._hasBodyScrollbar = document.body.clientWidth < window.innerWidth;
     this._isFullscreen = this.element.classList.contains(Dialog.Classes.FULLSCREEN);
@@ -258,6 +280,7 @@ class Dialog extends TinyEmitter {
     });
 
     this.isOpen = true;
+    this.onResize(viewportHeight);
     this.element.removeAttribute('aria-hidden');
     this.element.classList.add(Dialog.Classes.OPEN);
     this.element.classList.add(Dialog.Classes.ENTER);
@@ -273,6 +296,7 @@ class Dialog extends TinyEmitter {
     this.element.focus();
 
     document.addEventListener('keydown', this.onKeyPress);
+    window.addEventListener('resize', this.onWindowResize);
     this.element.addEventListener('click', this.onClick);
     this._closers.forEach((element) => {
       element.addEventListener('click', this.close);
@@ -341,11 +365,15 @@ class Dialog extends TinyEmitter {
 
     ScrollFix.remove(this._scrollFixId);
 
-    if (Dialog.focusedBeforeDialog) {
+    // Support: IE11
+    // Clicking on an SVG element inside an <a> will set the `focusedBeforeDialog`
+    // to the SVG, but SVG doesn't have a `focus()` method in IE.
+    if (Dialog.focusedBeforeDialog && typeof Dialog.focusedBeforeDialog.focus === 'function') {
       Dialog.focusedBeforeDialog.focus();
     }
 
     document.removeEventListener('keydown', this.onKeyPress);
+    window.removeEventListener('resize', this.onWindowResize);
     this.element.removeEventListener('click', this.onClick);
     this._closers.forEach((element) => {
       element.removeEventListener('click', this.close);
@@ -387,8 +415,7 @@ class Dialog extends TinyEmitter {
   }
 
   /**
-   * Disposes of global Dialog variables
-   * @public
+   * Close the dialog, remove event listeners and element references.
    */
   dispose() {
     if (this.isOpen) {
@@ -424,12 +451,14 @@ class Dialog extends TinyEmitter {
    * @param {Event} evt Event object.
    */
   static _handleTriggerClick(evt) {
-    const elem = evt.target.closest('[data-odo-dialog-open]');
+    const trigger = evt.target.closest('[data-odo-dialog-open]');
 
-    if (elem !== null) {
+    if (trigger !== null) {
       evt.preventDefault();
-      const id = elem.getAttribute('data-odo-dialog-open');
-      Dialog.getDialogById(id).open();
+      const id = trigger.getAttribute('data-odo-dialog-open');
+      const instance = Dialog.getDialogById(id);
+      instance.emit(Dialog.EventType.TRIGGER_CLICKED, trigger);
+      instance.open();
     }
   }
 
@@ -535,8 +564,7 @@ class Dialog extends TinyEmitter {
   /**
    * Instantiates all instances of dialogs with the same settings
    * @param {Object} options Object of all dialog options. Is optional.
-   * @return {Array.<Dialog>}
-   * @public
+   * @return {Dialog[]}
    */
   static initializeAll(options) {
     Dialog.disposeAll();
@@ -549,7 +577,6 @@ class Dialog extends TinyEmitter {
   /**
    * Clear all references to dialogs so there are no duplicates
    * @param {Object} options Object of all dialog options. Is optional.
-   * @public
    */
   static disposeAll() {
     const clone = Dialog.Instances.slice();
@@ -588,6 +615,7 @@ Dialog.Classes = {
 Dialog.EventType = {
   OPENED: 'ododialog:open',
   CLOSED: 'ododialog:closed',
+  TRIGGER_CLICKED: 'ododialog:triggerclicked',
 };
 
 /** @enum {number} */
@@ -602,7 +630,7 @@ Dialog.Defaults = {
   scrollableElement: '.odo-dialog',
 };
 
-/** @enum {Array} */
+/** @enum {Dialog[]} */
 Dialog.Instances = [];
 
 Dialog.ScrollFix = ScrollFix;

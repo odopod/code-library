@@ -203,6 +203,25 @@ describe('The OdoDialog Component', () => {
       expect(spy2.callCount).to.equal(1);
     });
 
+    it('will emit an event when the trigger is pressed', () => {
+      sinon.stub(instance, 'open');
+      let called = false;
+      const button = document.body.querySelector('.odo-trigger');
+
+      instance.once(OdoDialog.EventType.TRIGGER_CLICKED, (triggerElement) => {
+        called = true;
+        expect(triggerElement.getAttribute('data-odo-dialog-open')).to.equal('dialog-basic-fixture');
+        expect(triggerElement.nodeName).to.equal('BUTTON');
+      });
+
+      OdoDialog._handleTriggerClick({
+        target: button,
+        preventDefault: sinon.spy(),
+      });
+
+      expect(called).to.equal(true);
+    });
+
     it('will open a dialog when trigger is pressed', () => {
       const open = sinon.stub(instance, 'open');
       const spy = sinon.spy();
@@ -278,6 +297,12 @@ describe('The OdoDialog Component', () => {
       instance.options.dismissable = false;
       instance.onClick({ target: instance.element });
       expect(close.callCount).to.equal(1);
+    });
+
+    it('will set a pixel height on the main element on viewport size change', () => {
+      expect(instance.element.style.height).to.equal(window.innerHeight + 'px');
+      instance.onResize(100);
+      expect(instance.element.style.height).to.equal('100px');
     });
 
     describe('scrollbar offsets', () => {

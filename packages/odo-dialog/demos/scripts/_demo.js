@@ -12,6 +12,9 @@ defaultDialog.on(OdoDialog.EventType.CLOSED, () => {
   console.log('default dialog closed');
 });
 
+defaultDialog.on(OdoDialog.EventType.TRIGGER_CLICKED, (triggerElement) => {
+  console.log('dialog about to open because you clicked:', triggerElement);
+});
 
 const styledDialog = new OdoDialog(document.getElementById('styled'));
 

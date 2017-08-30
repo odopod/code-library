@@ -63,7 +63,7 @@ export default (Module, selector) => ({
     arrayify(elements).forEach((element) => {
       // Verify that the element is in fact an HTML Element.
       if (!isHTMLElement(element)) {
-        throw new TypeError(`Expected HTML Element. Got "${typeof element}".`);
+        throw new TypeError(`Expected HTML Element. Got "${Object.prototype.toString.call(element)}".`);
       }
 
       // Verify that an instance has not already been initialized for this element.

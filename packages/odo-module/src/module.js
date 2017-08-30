@@ -55,7 +55,7 @@ function validate(Module, selector) {
   const isObject = type === '[object Object]';
   const isFunction = type === '[object Function]';
   if (!(isObject || isFunction)) {
-    throw new TypeError(`Module must be an Function (class) or Object. Got "${typeof Module}".`);
+    throw new TypeError(`Module must be an Function (class) or Object. Got "${Object.prototype.toString.call(Module)}".`);
   }
 
   // Verify that the module has not yet been registered.

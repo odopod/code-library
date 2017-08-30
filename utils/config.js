@@ -35,6 +35,16 @@ const BABEL_CONFIG = {
     ['babel-plugin-transform-es2015-classes', { loose: true }],
     ['babel-plugin-transform-proto-to-assign'],
   ],
+  // https://github.com/rollup/rollup-plugin-babel/issues/100
+  // https://stackoverflow.com/a/13405933/373422
+  externalHelpersWhitelist: [
+    'createClass',
+    'classCallCheck',
+    'inherits',
+    'possibleConstructorReturn',
+    'toConsumableArray',
+    '_typeof',
+  ],
 };
 
 // Deep clone to break reference to the plugins array.
@@ -60,23 +70,32 @@ const config = {
   watch: false,
 
   main: {
-    entry: SOURCE,
+    input: SOURCE,
+    output: {
+      name: CLASS_NAME,
+      file: DIST_FILE,
+      format: 'umd',
+      sourcemap: true,
+      globals,
+    },
     cache: undefined,
     plugins: [
       resolve(),
       commonjs(COMMONJS_CONFIG),
       babel(BABEL_CONFIG),
     ],
-    dest: DIST_FILE,
-    sourceMap: true,
-    moduleName: CLASS_NAME,
-    format: 'umd',
-    globals,
     external,
   },
 
   min: {
-    entry: SOURCE,
+    input: SOURCE,
+    output: {
+      name: CLASS_NAME,
+      file: DIST_FILE_MIN,
+      format: 'umd',
+      sourcemap: true,
+      globals,
+    },
     cache: undefined,
     plugins: [
       resolve(),
@@ -84,11 +103,6 @@ const config = {
       babel(BABEL_CONFIG),
       uglify(UGLIFY_CONFIG),
     ],
-    dest: DIST_FILE_MIN,
-    sourceMap: true,
-    moduleName: CLASS_NAME,
-    format: 'umd',
-    globals,
     external,
   },
 
@@ -99,8 +113,8 @@ const config = {
       commonjs(COMMONJS_CONFIG),
       babel(BABEL_CONFIG_INSTRUMENTED),
     ],
-    sourceMap: 'inline',
-    moduleName: CLASS_NAME,
+    sourcemap: 'inline',
+    name: CLASS_NAME,
     format: 'umd',
     globals,
     external,

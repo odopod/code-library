@@ -7,6 +7,8 @@
 OdoWindowEvents = OdoWindowEvents && OdoWindowEvents.hasOwnProperty('default') ? OdoWindowEvents['default'] : OdoWindowEvents;
 OdoScrollAnimation = OdoScrollAnimation && OdoScrollAnimation.hasOwnProperty('default') ? OdoScrollAnimation['default'] : OdoScrollAnimation;
 
+var babelHelpers = {};
+
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -30,6 +32,14 @@ var createClass = function () {
     return Constructor;
   };
 }();
+
+
+
+
+
+
+
+babelHelpers;
 
 /**
  * @fileoverview Emulates `position:sticky` to make an element fixed position
@@ -422,7 +432,7 @@ var Affix = function () {
 
   createClass(Affix, [{
     key: 'uiOverlap',
-    get: function get$$1() {
+    get: function get() {
       if (this._customOverlap) {
         return this._customOverlap();
       }
@@ -435,7 +445,7 @@ var Affix = function () {
     * @param {function():number} fn
     */
     ,
-    set: function set$$1(fn) {
+    set: function set(fn) {
       this._customOverlap = fn;
       this.update();
     }
@@ -447,7 +457,7 @@ var Affix = function () {
 
   }, {
     key: 'top',
-    get: function get$$1() {
+    get: function get() {
       return this._top - this._overlap;
     }
 
@@ -458,7 +468,7 @@ var Affix = function () {
 
   }, {
     key: 'bottom',
-    get: function get$$1() {
+    get: function get() {
       return this._bottom - this._marginBottom;
     }
   }]);

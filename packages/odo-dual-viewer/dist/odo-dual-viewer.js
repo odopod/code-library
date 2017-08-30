@@ -2,7 +2,7 @@
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('tiny-emitter'), require('@odopod/odo-helpers'), require('@odopod/odo-draggable'), require('@odopod/odo-window-events'), require('@odopod/odo-object-fit')) :
 	typeof define === 'function' && define.amd ? define(['tiny-emitter', '@odopod/odo-helpers', '@odopod/odo-draggable', '@odopod/odo-window-events', '@odopod/odo-object-fit'], factory) :
 	(global.OdoDualViewer = factory(global.TinyEmitter,global.OdoHelpers,global.OdoDraggable,global.OdoWindowEvents,global.OdoObjectFit));
-}(this, (function (TinyEmitter,_odopod_odoHelpers,OdoDraggable,OdoWindowEvents,OdoObjectFit) { 'use strict';
+}(this, (function (TinyEmitter,odoHelpers,OdoDraggable,OdoWindowEvents,OdoObjectFit) { 'use strict';
 
 TinyEmitter = TinyEmitter && TinyEmitter.hasOwnProperty('default') ? TinyEmitter['default'] : TinyEmitter;
 OdoDraggable = OdoDraggable && OdoDraggable.hasOwnProperty('default') ? OdoDraggable['default'] : OdoDraggable;
@@ -47,19 +47,13 @@ var settings = {
   }
 };
 
+var babelHelpers = {};
+
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 };
-
-
-
-
-
-
-
-
 
 
 
@@ -79,16 +73,6 @@ var inherits = function (subClass, superClass) {
   if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 };
 
-
-
-
-
-
-
-
-
-
-
 var possibleConstructorReturn = function (self, call) {
   if (!self) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -96,6 +80,10 @@ var possibleConstructorReturn = function (self, call) {
 
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
+
+
+
+babelHelpers;
 
 var DualViewer = function (_TinyEmitter) {
   inherits(DualViewer, _TinyEmitter);
@@ -249,13 +237,13 @@ var DualViewer = function (_TinyEmitter) {
     if (this._isVertical) {
       var top = this._containerHeight * this.options.verticalSafeZone;
       var height = this._containerHeight * (1 - this.options.verticalSafeZone * 2);
-      limits = new _odopod_odoHelpers.math.Rect(0, top, this._containerWidth, height);
+      limits = new odoHelpers.math.Rect(0, top, this._containerWidth, height);
     } else {
       var containingEl = this.getElementByClass(DualViewer.ClassName.SCRUBBER_CONTAINER);
       var mainRect = this.element.getBoundingClientRect();
       var containingRect = containingEl.getBoundingClientRect();
 
-      limits = new _odopod_odoHelpers.math.Rect(Math.round(containingRect.left - mainRect.left), containingEl.offsetTop, containingEl.offsetWidth, this._containerHeight);
+      limits = new odoHelpers.math.Rect(Math.round(containingRect.left - mainRect.left), containingEl.offsetTop, containingEl.offsetWidth, this._containerHeight);
     }
 
     this._scrubberLimits = limits;
@@ -307,7 +295,7 @@ var DualViewer = function (_TinyEmitter) {
       max = (rect.left + rect.width) / this._containerWidth;
     }
 
-    return _odopod_odoHelpers.math.clamp(percent, min, max);
+    return odoHelpers.math.clamp(percent, min, max);
   };
 
   /**
@@ -474,7 +462,7 @@ var DualViewer = function (_TinyEmitter) {
 
     this._removeStateClasses();
 
-    var stepper = new _odopod_odoHelpers.animation.Stepper({
+    var stepper = new odoHelpers.animation.Stepper({
       start: this._previousPercent,
       end: percent,
       duration: this.options.animationDuration,

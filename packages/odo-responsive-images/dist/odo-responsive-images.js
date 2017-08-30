@@ -22,7 +22,7 @@ Viewport = Viewport && Viewport.hasOwnProperty('default') ? Viewport['default'] 
  * @api public
  */
 
-var index = function debounce(func, wait, immediate) {
+var debounce = function debounce(func, wait, immediate) {
   var timeout, args, context, timestamp, result;
   if (null == wait) wait = 100;
 
@@ -64,11 +64,23 @@ var index = function debounce(func, wait, immediate) {
   return debounced;
 };
 
+var babelHelpers = {};
+
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 };
+
+
+
+
+
+
+
+
+
+babelHelpers;
 
 /**
  * If the first parameter is not an array, return an array containing the first
@@ -147,7 +159,7 @@ var ResponsiveImages = function () {
      * Debounce calls to `_update`.
      * @type {function}
      */
-    this.updateOffsets = index(this._update, ResponsiveImages.DEBOUNCE_TIME);
+    this.updateOffsets = debounce(this._update, ResponsiveImages.DEBOUNCE_TIME);
   }
 
   ResponsiveImages.prototype.initialize = function initialize() {
@@ -275,16 +287,16 @@ var ResponsiveImages = function () {
 
 
   ResponsiveImages.prototype._getImageIndexByPlaceholder = function _getImageIndexByPlaceholder(placeholder) {
-    var index$$1 = null;
+    var index = null;
 
     for (var i = 0, len = this.images.length; i < len; i++) {
       if (this.images[i].element === placeholder) {
-        index$$1 = i;
+        index = i;
         break;
       }
     }
 
-    return index$$1;
+    return index;
   };
 
   /**
@@ -296,16 +308,16 @@ var ResponsiveImages = function () {
 
 
   ResponsiveImages.prototype._removeImageEntry = function _removeImageEntry(placeholder) {
-    var index$$1 = this._getImageIndexByPlaceholder(placeholder);
+    var index = this._getImageIndexByPlaceholder(placeholder);
 
     // Unable to find the index of the placeholder image. It is either already
     // loaded, or the "placeholder" was the replacement?
-    if (index$$1 === null) {
+    if (index === null) {
       return;
     }
 
-    Viewport.remove(this.images[index$$1].id);
-    this.images.splice(index$$1, 1);
+    Viewport.remove(this.images[index].id);
+    this.images.splice(index, 1);
   };
 
   /**

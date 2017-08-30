@@ -6,9 +6,11 @@ module.exports = function getSimpleRollupOptions(filepath) {
   const outputName = path.basename(filepath).replace('_', '');
 
   return {
-    entry: path.join(config.pkgdir, filepath),
-    dest: path.join(config.pkgdir, path.dirname(filepath), outputName),
+    input: path.join(config.pkgdir, filepath),
+    output: {
+      file: path.join(config.pkgdir, path.dirname(filepath), outputName),
+      format: 'iife',
+    },
     plugins: config.main.plugins,
-    format: 'iife',
   };
 };

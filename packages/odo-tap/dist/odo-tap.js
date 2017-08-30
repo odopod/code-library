@@ -2,15 +2,27 @@
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@odopod/odo-helpers'), require('@odopod/odo-pointer')) :
 	typeof define === 'function' && define.amd ? define(['@odopod/odo-helpers', '@odopod/odo-pointer'], factory) :
 	(global.OdoTap = factory(global.OdoHelpers,global.OdoPointer));
-}(this, (function (_odopod_odoHelpers,OdoPointer) { 'use strict';
+}(this, (function (odoHelpers,OdoPointer) { 'use strict';
 
 OdoPointer = OdoPointer && OdoPointer.hasOwnProperty('default') ? OdoPointer['default'] : OdoPointer;
+
+var babelHelpers = {};
 
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 };
+
+
+
+
+
+
+
+
+
+babelHelpers;
 
 var count = 0;
 function uniqueId() {
@@ -64,11 +76,11 @@ var Tap = function () {
     this.pointer.on(OdoPointer.EventType.START, this._onDragStart);
     this.pointer.on(OdoPointer.EventType.MOVE, this._onDragMove);
     this.pointer.on(OdoPointer.EventType.END, this._onDragEnd);
-    this.element.addEventListener(_odopod_odoHelpers.events.KEYUP, this._onKeyUp);
+    this.element.addEventListener(odoHelpers.events.KEYUP, this._onKeyUp);
 
     // Prevent clicks from triggering things.
     if (this.preventEventDefault) {
-      this.element.addEventListener(_odopod_odoHelpers.events.CLICK, preventDefaultEventAction);
+      this.element.addEventListener(odoHelpers.events.CLICK, preventDefaultEventAction);
     }
   };
 
@@ -80,7 +92,7 @@ var Tap = function () {
 
 
   Tap.prototype._isPastThreshold = function _isPastThreshold() {
-    return _odopod_odoHelpers.Coordinate.distance(this.pointer.pageStart, this.pointer.page) > Tap.MAX_MOVEMENT;
+    return odoHelpers.Coordinate.distance(this.pointer.pageStart, this.pointer.page) > Tap.MAX_MOVEMENT;
   };
 
   /**
@@ -141,8 +153,8 @@ var Tap = function () {
 
 
   Tap.prototype.dispose = function dispose() {
-    this.element.removeEventListener(_odopod_odoHelpers.events.CLICK, preventDefaultEventAction);
-    this.element.removeEventListener(_odopod_odoHelpers.events.KEYUP, this._onKeyUp);
+    this.element.removeEventListener(odoHelpers.events.CLICK, preventDefaultEventAction);
+    this.element.removeEventListener(odoHelpers.events.KEYUP, this._onKeyUp);
     this.pointer.on(OdoPointer.EventType.START, this._onDragStart);
     this.pointer.on(OdoPointer.EventType.MOVE, this._onDragMove);
     this.pointer.on(OdoPointer.EventType.END, this._onDragEnd);

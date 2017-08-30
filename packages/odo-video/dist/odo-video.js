@@ -180,11 +180,23 @@ test$1.HAS_LOCAL_STORAGE = function () {
   }
 }();
 
+var babelHelpers = {};
+
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 };
+
+
+
+
+
+
+
+
+
+babelHelpers;
 
 var Controls = function () {
   function Controls() {

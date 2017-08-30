@@ -2,12 +2,14 @@
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('tiny-emitter'), require('@odopod/odo-device'), require('@odopod/odo-pointer'), require('@odopod/odo-draggable'), require('@odopod/odo-helpers')) :
 	typeof define === 'function' && define.amd ? define(['tiny-emitter', '@odopod/odo-device', '@odopod/odo-pointer', '@odopod/odo-draggable', '@odopod/odo-helpers'], factory) :
 	(global.OdoCarousel = factory(global.TinyEmitter,global.OdoDevice,global.OdoPointer,global.OdoDraggable,global.OdoHelpers));
-}(this, (function (TinyEmitter,OdoDevice,OdoPointer,OdoDraggable,_odopod_odoHelpers) { 'use strict';
+}(this, (function (TinyEmitter,OdoDevice,OdoPointer,OdoDraggable,odoHelpers) { 'use strict';
 
 TinyEmitter = TinyEmitter && TinyEmitter.hasOwnProperty('default') ? TinyEmitter['default'] : TinyEmitter;
 OdoDevice = OdoDevice && OdoDevice.hasOwnProperty('default') ? OdoDevice['default'] : OdoDevice;
 OdoPointer = OdoPointer && OdoPointer.hasOwnProperty('default') ? OdoPointer['default'] : OdoPointer;
 OdoDraggable = OdoDraggable && OdoDraggable.hasOwnProperty('default') ? OdoDraggable['default'] : OdoDraggable;
+
+var babelHelpers = {};
 
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -33,14 +35,6 @@ var createClass = function () {
   };
 }();
 
-
-
-
-
-
-
-
-
 var inherits = function (subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
@@ -57,16 +51,6 @@ var inherits = function (subClass, superClass) {
   if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 };
 
-
-
-
-
-
-
-
-
-
-
 var possibleConstructorReturn = function (self, call) {
   if (!self) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -74,6 +58,10 @@ var possibleConstructorReturn = function (self, call) {
 
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
+
+
+
+babelHelpers;
 
 var CarouselEvent = function () {
   /**
@@ -413,7 +401,7 @@ var Carousel = function (_TinyEmitter) {
      * @type {string}
      * @private
      */
-    _this._offsetPosition = 'offset' + _odopod_odoHelpers.string.capitalize(_this._posAttr);
+    _this._offsetPosition = 'offset' + odoHelpers.string.capitalize(_this._posAttr);
 
     /**
      * Height or width.
@@ -675,7 +663,7 @@ var Carousel = function (_TinyEmitter) {
     this.getWrapper().setAttribute('aria-live', 'polite');
     this.getCarouselElement().setAttribute('role', 'list');
     this.getSlides().forEach(function (slide) {
-      _odopod_odoHelpers.dom.giveId(slide, uniqueId);
+      odoHelpers.dom.giveId(slide, uniqueId);
       slide.setAttribute('role', 'listitem');
     });
   };
@@ -1057,7 +1045,7 @@ var Carousel = function (_TinyEmitter) {
 
 
   Carousel.prototype._getRelativeIndex = function _getRelativeIndex(index, displacment) {
-    return _odopod_odoHelpers.math.wrapAroundList(index, displacment, this._slides.length);
+    return odoHelpers.math.wrapAroundList(index, displacment, this._slides.length);
   };
 
   /**
@@ -1070,7 +1058,7 @@ var Carousel = function (_TinyEmitter) {
   };
 
   Carousel.prototype.clampIndexToSlides = function clampIndexToSlides(index) {
-    return _odopod_odoHelpers.math.clamp(index, 0, this._slides.length - 1);
+    return odoHelpers.math.clamp(index, 0, this._slides.length - 1);
   };
 
   /**
@@ -1221,11 +1209,11 @@ var Carousel = function (_TinyEmitter) {
     var destinationPosition = destinationSlide[this._offsetPosition];
 
     // Width or height of the carousel element.
-    var carouselSize = _odopod_odoHelpers.style.getSize(this.getCarouselElement())[this._dimensionAttr];
+    var carouselSize = odoHelpers.style.getSize(this.getCarouselElement())[this._dimensionAttr];
 
     if (this.options.isCentered) {
-      var destinationSize = _odopod_odoHelpers.style.getSize(destinationSlide)[this._dimensionAttr];
-      var wrapperSize = _odopod_odoHelpers.style.getSize(this.getWrapper())[this._dimensionAttr];
+      var destinationSize = odoHelpers.style.getSize(destinationSlide)[this._dimensionAttr];
+      var wrapperSize = odoHelpers.style.getSize(this.getWrapper())[this._dimensionAttr];
       this._startEdge = (wrapperSize - destinationSize) / 2;
       destinationPosition -= this._startEdge;
     }
@@ -1253,10 +1241,10 @@ var Carousel = function (_TinyEmitter) {
   Carousel.prototype._getPositionForSlideChildren = function _getPositionForSlideChildren(destinationSlide, destinationPosition, carouselSize) {
     // Size of the combined width/height + margins of the slide children
     // within the destination slide.
-    var childrenSum = _odopod_odoHelpers.style.getElementsSize(this._getSlideChildren(destinationSlide), this._dimensionAttr);
+    var childrenSum = odoHelpers.style.getElementsSize(this._getSlideChildren(destinationSlide), this._dimensionAttr);
 
     // width|height of the carousel slide.
-    var slideSize = _odopod_odoHelpers.style.getSize(destinationSlide)[this._dimensionAttr];
+    var slideSize = odoHelpers.style.getSize(destinationSlide)[this._dimensionAttr];
 
     // The destination position minus the empty space in the next slide in px.
     var newPosition = destinationPosition - (slideSize - childrenSum);
@@ -1329,7 +1317,7 @@ var Carousel = function (_TinyEmitter) {
 
   Carousel.prototype._swapSlides = function _swapSlides(index1, index2) {
     this._swapIndexes(index1, index2);
-    _odopod_odoHelpers.dom.swapElements(this.getSlide(index1), this.getSlide(index2));
+    odoHelpers.dom.swapElements(this.getSlide(index1), this.getSlide(index2));
   };
 
   /**
@@ -1342,7 +1330,7 @@ var Carousel = function (_TinyEmitter) {
   Carousel.prototype.startSlideshow = function startSlideshow() {
     // Create the timer if it doesn't already exist.
     if (!this._timer) {
-      this._timer = new _odopod_odoHelpers.Timer(this._slideshowTimerExpired.bind(this), this.options.slideshowSpeed, true);
+      this._timer = new odoHelpers.Timer(this._slideshowTimerExpired.bind(this), this.options.slideshowSpeed, true);
     }
 
     this._timer.start();
@@ -1379,7 +1367,7 @@ var Carousel = function (_TinyEmitter) {
 
   Carousel.prototype.getInnocentNeighbor = function getInnocentNeighbor(iterator, isNext) {
     var currentSlideEl = this.getSlide(this.getSelectedIndex());
-    return isNext ? _odopod_odoHelpers.dom.getNthSibling(currentSlideEl, iterator + 1) : _odopod_odoHelpers.dom.getNthSibling(currentSlideEl, iterator, false) || _odopod_odoHelpers.dom.getFirstElementChild(this._carouselEl);
+    return isNext ? odoHelpers.dom.getNthSibling(currentSlideEl, iterator + 1) : odoHelpers.dom.getNthSibling(currentSlideEl, iterator, false) || odoHelpers.dom.getFirstElementChild(this._carouselEl);
   };
 
   // eslint-disable-next-line class-methods-use-this
@@ -1527,7 +1515,7 @@ var Carousel = function (_TinyEmitter) {
       // doesn't fire on iOS 7 Safari when the carousel has only been dragged a
       // few pixels. It's set to go off ~2 frames after the transition end event
       // should have occurred.
-      this._transitionId = _odopod_odoHelpers.animation.onTransitionEnd(this._carouselEl, this._transitionDone, this, OdoDevice.Dom.TRANSFORM, this.options.animationSpeed + Carousel.TRANSITION_END_WAIT);
+      this._transitionId = odoHelpers.animation.onTransitionEnd(this._carouselEl, this._transitionDone, this, OdoDevice.Dom.TRANSFORM, this.options.animationSpeed + Carousel.TRANSITION_END_WAIT);
 
       this._toNewSlide();
     }
@@ -1570,7 +1558,7 @@ var Carousel = function (_TinyEmitter) {
     }
 
     this.isTransitioning = false;
-    _odopod_odoHelpers.animation.cancelTransitionEnd(this._transitionId);
+    odoHelpers.animation.cancelTransitionEnd(this._transitionId);
 
     // Fading carousels do not need to reposition themselves.
     if (this.options.isFade) {
@@ -1578,7 +1566,7 @@ var Carousel = function (_TinyEmitter) {
     }
 
     // Save the offset relative to the current slide before slides are moved.
-    var carouselSize = _odopod_odoHelpers.style.getSize(this.getCarouselElement())[this._dimensionAttr];
+    var carouselSize = odoHelpers.style.getSize(this.getCarouselElement())[this._dimensionAttr];
     var offset = this._getCarouselOffset();
 
     if (this._isJumped) {
@@ -1617,7 +1605,7 @@ var Carousel = function (_TinyEmitter) {
     // Listen for transitionend if it will animate.
     if (!optNoAnimation) {
       // Going to a new slide, wait for callback.
-      this._transitionId = _odopod_odoHelpers.animation.onTransitionEnd(nextSlide, this._transitionDone, this);
+      this._transitionId = odoHelpers.animation.onTransitionEnd(nextSlide, this._transitionDone, this);
     }
 
     // Show next slide. Put the previous behind the next.
@@ -1735,7 +1723,7 @@ var Carousel = function (_TinyEmitter) {
     // Current position (the left side of the carousel wrapper)
     // Gets the closest value in the array to the given value.
     // Index of the closest value.
-    var logicalIndex = positions.indexOf(_odopod_odoHelpers.array.closest(positions, this._startEdge));
+    var logicalIndex = positions.indexOf(odoHelpers.array.closest(positions, this._startEdge));
 
     // When going to a next or previous slide, the closest index could
     // still be the one that's currently selected, but the carousel should
@@ -2138,7 +2126,7 @@ var Carousel = function (_TinyEmitter) {
 
   createClass(Carousel, [{
     key: 'isEnabled',
-    get: function get$$1() {
+    get: function get() {
       return this._isEnabled;
     }
 
@@ -2148,7 +2136,7 @@ var Carousel = function (_TinyEmitter) {
      * @param {boolean} enabled Whether to enable or disable.
      */
     ,
-    set: function set$$1(enabled) {
+    set: function set(enabled) {
       this._isEnabled = enabled;
       this._setDraggableEnabled(enabled);
     }

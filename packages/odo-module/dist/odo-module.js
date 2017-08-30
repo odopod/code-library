@@ -41,12 +41,6 @@ function isHTMLElement(thing) {
   return thing instanceof Element;
 }
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-};
-
 /**
  * Any method defined here will be automatically applied to all OdoModules.
  *
@@ -115,7 +109,7 @@ var OdoModuleMethods = (function (Module, selector) {
       arrayify(elements).forEach(function (element) {
         // Verify that the element is in fact an HTML Element.
         if (!isHTMLElement(element)) {
-          throw new TypeError('Expected HTML Element. Got "' + (typeof element === 'undefined' ? 'undefined' : _typeof(element)) + '".');
+          throw new TypeError('Expected HTML Element. Got "' + Object.prototype.toString.call(element) + '".');
         }
 
         // Verify that an instance has not already been initialized for this element.
@@ -218,7 +212,7 @@ function validate(Module, selector) {
   var isObject = type === '[object Object]';
   var isFunction = type === '[object Function]';
   if (!(isObject || isFunction)) {
-    throw new TypeError('Module must be an Function (class) or Object. Got "' + (typeof Module === 'undefined' ? 'undefined' : _typeof(Module)) + '".');
+    throw new TypeError('Module must be an Function (class) or Object. Got "' + Object.prototype.toString.call(Module) + '".');
   }
 
   // Verify that the module has not yet been registered.

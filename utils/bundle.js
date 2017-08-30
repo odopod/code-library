@@ -6,7 +6,7 @@ module.exports = function bundle(options) {
   // Create a bundle for each config.
   const bundles = configs.map(config => rollup(config).then((bundle) => {
     config.cache = bundle;
-    return bundle.write(config);
+    return bundle.write(config.output);
   }));
 
   return Promise.all(bundles);

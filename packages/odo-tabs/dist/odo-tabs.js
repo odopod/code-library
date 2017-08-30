@@ -2,24 +2,18 @@
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('tiny-emitter'), require('@odopod/odo-helpers'), require('@odopod/odo-window-events')) :
 	typeof define === 'function' && define.amd ? define(['tiny-emitter', '@odopod/odo-helpers', '@odopod/odo-window-events'], factory) :
 	(global.OdoTabs = factory(global.TinyEmitter,global.OdoHelpers,global.OdoWindowEvents));
-}(this, (function (TinyEmitter,_odopod_odoHelpers,OdoWindowEvents) { 'use strict';
+}(this, (function (TinyEmitter,odoHelpers,OdoWindowEvents) { 'use strict';
 
 TinyEmitter = TinyEmitter && TinyEmitter.hasOwnProperty('default') ? TinyEmitter['default'] : TinyEmitter;
 OdoWindowEvents = OdoWindowEvents && OdoWindowEvents.hasOwnProperty('default') ? OdoWindowEvents['default'] : OdoWindowEvents;
+
+var babelHelpers = {};
 
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 };
-
-
-
-
-
-
-
-
 
 
 
@@ -39,16 +33,6 @@ var inherits = function (subClass, superClass) {
   if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 };
 
-
-
-
-
-
-
-
-
-
-
 var possibleConstructorReturn = function (self, call) {
   if (!self) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -56,6 +40,10 @@ var possibleConstructorReturn = function (self, call) {
 
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
+
+
+
+babelHelpers;
 
 var TabsEvent = function () {
   /**
@@ -221,7 +209,7 @@ var Tabs = function (_TinyEmitter) {
       anchor.setAttribute('tabIndex', -1);
       anchor.setAttribute('aria-selected', false);
 
-      _odopod_odoHelpers.dom.giveId(anchor, uniqueId);
+      odoHelpers.dom.giveId(anchor, uniqueId);
 
       var pane = _this2.panes[i];
       anchor.setAttribute('aria-controls', pane.id);
@@ -303,7 +291,7 @@ var Tabs = function (_TinyEmitter) {
     }
 
     evt.preventDefault();
-    this._focusTab(_odopod_odoHelpers.math.clamp(focusedIndex, 0, this.tabs.length - 1));
+    this._focusTab(odoHelpers.math.clamp(focusedIndex, 0, this.tabs.length - 1));
   };
 
   /**
@@ -404,7 +392,7 @@ var Tabs = function (_TinyEmitter) {
     this._selectedIndex = index;
 
     if (!skipHash && this.hashes[index]) {
-      _odopod_odoHelpers.browser.setHash(this.hashes[index]);
+      odoHelpers.browser.setHash(this.hashes[index]);
     }
 
     var didShowEvent = new TabsEvent(Tabs.EventType.DID_SHOW, index);

@@ -2,7 +2,7 @@
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('tiny-emitter'), require('@odopod/odo-device'), require('@odopod/odo-pointer'), require('@odopod/odo-helpers')) :
 	typeof define === 'function' && define.amd ? define(['tiny-emitter', '@odopod/odo-device', '@odopod/odo-pointer', '@odopod/odo-helpers'], factory) :
 	(global.OdoDraggable = factory(global.TinyEmitter,global.OdoDevice,global.OdoPointer,global.OdoHelpers));
-}(this, (function (TinyEmitter,OdoDevice,OdoPointer,_odopod_odoHelpers) { 'use strict';
+}(this, (function (TinyEmitter,OdoDevice,OdoPointer,odoHelpers) { 'use strict';
 
 TinyEmitter = TinyEmitter && TinyEmitter.hasOwnProperty('default') ? TinyEmitter['default'] : TinyEmitter;
 OdoDevice = OdoDevice && OdoDevice.hasOwnProperty('default') ? OdoDevice['default'] : OdoDevice;
@@ -42,6 +42,8 @@ var settings = {
   }
 };
 
+var babelHelpers = {};
+
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -66,14 +68,6 @@ var createClass = function () {
   };
 }();
 
-
-
-
-
-
-
-
-
 var inherits = function (subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
@@ -90,16 +84,6 @@ var inherits = function (subClass, superClass) {
   if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 };
 
-
-
-
-
-
-
-
-
-
-
 var possibleConstructorReturn = function (self, call) {
   if (!self) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -107,6 +91,10 @@ var possibleConstructorReturn = function (self, call) {
 
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
+
+
+
+babelHelpers;
 
 /**
  * Throws an error if `condition` is falsy.
@@ -164,14 +152,14 @@ var Draggable = function (_TinyEmitter) {
      * @type {Coordinate}
      * @private
      */
-    _this._currentPosition = new _odopod_odoHelpers.Coordinate();
+    _this._currentPosition = new odoHelpers.Coordinate();
 
     /**
      * Starting location of the drag.
      * @type {Coordinate}
      * @private
      */
-    _this._relativeZero = new _odopod_odoHelpers.Coordinate();
+    _this._relativeZero = new odoHelpers.Coordinate();
 
     /**
      * Velocity at which the draggable was thrown. This value decays over time
@@ -179,14 +167,14 @@ var Draggable = function (_TinyEmitter) {
      * @private
      * @type {Coordinate}
      */
-    _this._throwVelocity = new _odopod_odoHelpers.Coordinate();
+    _this._throwVelocity = new odoHelpers.Coordinate();
 
     /**
      * The change in position from the start of the drag.
      * @private
      * @type {Coordinate}
      */
-    _this._delta = new _odopod_odoHelpers.Coordinate();
+    _this._delta = new odoHelpers.Coordinate();
 
     /**
      * Animation frame id.
@@ -206,7 +194,7 @@ var Draggable = function (_TinyEmitter) {
      * Limits of how far the draggable element can be dragged.
      * @type {math.Rect}
      */
-    _this.limits = new _odopod_odoHelpers.math.Rect(NaN, NaN, NaN, NaN);
+    _this.limits = new odoHelpers.math.Rect(NaN, NaN, NaN, NaN);
 
     _this.pointer = new OdoPointer(element, {
       axis: _this.options.axis
@@ -236,7 +224,7 @@ var Draggable = function (_TinyEmitter) {
 
 
   Draggable.prototype._saveDimensions = function _saveDimensions() {
-    this._container = _odopod_odoHelpers.style.getSize(this.element);
+    this._container = odoHelpers.style.getSize(this.element);
     ensureObjectHasSize(this._container);
     this._relativeZero = this._getRelativeZero();
   };
@@ -251,12 +239,12 @@ var Draggable = function (_TinyEmitter) {
 
 
   Draggable.prototype._getRelativeZero = function _getRelativeZero() {
-    return _odopod_odoHelpers.Coordinate.difference(this._getDraggablePosition(), this._getOffsetCorrection());
+    return odoHelpers.Coordinate.difference(this._getDraggablePosition(), this._getOffsetCorrection());
   };
 
   Draggable.prototype._getDraggablePosition = function _getDraggablePosition() {
     var elRect = this.element.getBoundingClientRect();
-    return new _odopod_odoHelpers.Coordinate(elRect.left, elRect.top);
+    return new odoHelpers.Coordinate(elRect.left, elRect.top);
   };
 
   /**
@@ -273,11 +261,11 @@ var Draggable = function (_TinyEmitter) {
   Draggable.prototype._getOffsetCorrection = function _getOffsetCorrection() {
     // getBoundingClientRect does not include margins. They must be accounted for.
     var containmentRect = this._parentEl.getBoundingClientRect();
-    var paddings = _odopod_odoHelpers.style.getPaddingBox(this._parentEl);
-    var margins = _odopod_odoHelpers.style.getMarginBox(this.element);
+    var paddings = odoHelpers.style.getPaddingBox(this._parentEl);
+    var margins = odoHelpers.style.getMarginBox(this.element);
     var offsetCorrectionX = margins.left + paddings.left + containmentRect.left;
     var offsetCorrectionY = margins.top + paddings.top + containmentRect.top;
-    return new _odopod_odoHelpers.Coordinate(offsetCorrectionX, offsetCorrectionY);
+    return new odoHelpers.Coordinate(offsetCorrectionX, offsetCorrectionY);
   };
 
   /**
@@ -304,11 +292,11 @@ var Draggable = function (_TinyEmitter) {
 
 
   Draggable._limitValue = function _limitValue(value, rectPosition, rectSize) {
-    var side = _odopod_odoHelpers.utilities.defaultsTo(rectPosition, null, !isNaN(rectPosition));
-    var dimension = _odopod_odoHelpers.utilities.defaultsTo(rectSize, 0, !isNaN(rectSize));
-    var max = _odopod_odoHelpers.utilities.defaultsTo(side + dimension, Infinity, side !== null);
-    var min = _odopod_odoHelpers.utilities.defaultsTo(side, -Infinity, side !== null);
-    return _odopod_odoHelpers.math.clamp(value, min, max);
+    var side = odoHelpers.utilities.defaultsTo(rectPosition, null, !isNaN(rectPosition));
+    var dimension = odoHelpers.utilities.defaultsTo(rectSize, 0, !isNaN(rectSize));
+    var max = odoHelpers.utilities.defaultsTo(side + dimension, Infinity, side !== null);
+    var min = odoHelpers.utilities.defaultsTo(side, -Infinity, side !== null);
+    return odoHelpers.math.clamp(value, min, max);
   };
 
   /**
@@ -368,16 +356,16 @@ var Draggable = function (_TinyEmitter) {
   Draggable.prototype._getAxisCoordinate = function _getAxisCoordinate(newX, newY) {
     // Drag horizontal only.
     if (this.pointer.isXAxis()) {
-      return new _odopod_odoHelpers.Coordinate(newX, 0);
+      return new odoHelpers.Coordinate(newX, 0);
     }
 
     // Drag vertical only.
     if (this.pointer.isYAxis()) {
-      return new _odopod_odoHelpers.Coordinate(0, newY);
+      return new odoHelpers.Coordinate(0, newY);
     }
 
     // Drag both directions.
-    return new _odopod_odoHelpers.Coordinate(newX, newY);
+    return new odoHelpers.Coordinate(newX, newY);
   };
 
   /**
@@ -389,8 +377,8 @@ var Draggable = function (_TinyEmitter) {
 
 
   Draggable.prototype._getNewLimitedPosition = function _getNewLimitedPosition(deltaFromStart) {
-    var sum = _odopod_odoHelpers.Coordinate.sum(this._relativeZero, deltaFromStart);
-    return new _odopod_odoHelpers.Coordinate(this._limitX(sum.x), this._limitY(sum.y));
+    var sum = odoHelpers.Coordinate.sum(this._relativeZero, deltaFromStart);
+    return new odoHelpers.Coordinate(this._limitX(sum.x), this._limitY(sum.y));
   };
 
   /**
@@ -450,7 +438,7 @@ var Draggable = function (_TinyEmitter) {
 
   Draggable.prototype._throw = function _throw(velocity, delta) {
     this._delta = delta;
-    this._throwVelocity = _odopod_odoHelpers.Coordinate.scale(velocity, this.options.amplifier);
+    this._throwVelocity = odoHelpers.Coordinate.scale(velocity, this.options.amplifier);
     this._animateThrow();
   };
 
@@ -487,8 +475,8 @@ var Draggable = function (_TinyEmitter) {
 
 
   Draggable.prototype._stopThrow = function _stopThrow() {
-    this._delta = new _odopod_odoHelpers.Coordinate();
-    this._throwVelocity = new _odopod_odoHelpers.Coordinate();
+    this._delta = new odoHelpers.Coordinate();
+    this._throwVelocity = new odoHelpers.Coordinate();
     cancelAnimationFrame(this._requestId);
   };
 
@@ -505,7 +493,7 @@ var Draggable = function (_TinyEmitter) {
       target: this.element,
       axis: this.pointer.axis,
       deltaTime: Date.now() - this.pointer.startTime,
-      delta: _odopod_odoHelpers.Coordinate.difference(this._relativeZero, this._currentPosition),
+      delta: odoHelpers.Coordinate.difference(this._relativeZero, this._currentPosition),
       start: this._relativeZero,
       end: this._currentPosition,
       currentVelocity: this._throwVelocity,
@@ -532,7 +520,7 @@ var Draggable = function (_TinyEmitter) {
       currentTarget: this.element,
       axis: this.pointer.axis,
       deltaTime: this.pointer.deltaTime,
-      delta: _odopod_odoHelpers.Coordinate.difference(this._currentPosition, this._relativeZero),
+      delta: odoHelpers.Coordinate.difference(this._currentPosition, this._relativeZero),
       start: this._relativeZero,
       end: this._currentPosition,
       currentVelocity: this.pointer.velocity,
@@ -567,7 +555,7 @@ var Draggable = function (_TinyEmitter) {
 
   Draggable.prototype.getPosition = function getPosition(optAsPercent) {
     if (optAsPercent) {
-      return new _odopod_odoHelpers.Coordinate(this._currentPosition.x / this._parentEl.offsetWidth * 100, this._currentPosition.y / this._parentEl.offsetHeight * 100);
+      return new odoHelpers.Coordinate(this._currentPosition.x / this._parentEl.offsetWidth * 100, this._currentPosition.y / this._parentEl.offsetHeight * 100);
     }
     return this._currentPosition;
   };
@@ -584,7 +572,7 @@ var Draggable = function (_TinyEmitter) {
     // setPosition can be called before any dragging, this would cause
     // the containment width and containment height to be undefined.
     this.update();
-    return this._applyPosition(new _odopod_odoHelpers.Coordinate(x, y));
+    return this._applyPosition(new odoHelpers.Coordinate(x, y));
   };
 
   /**
@@ -639,7 +627,7 @@ var Draggable = function (_TinyEmitter) {
 
   createClass(Draggable, [{
     key: 'friction',
-    get: function get$$1() {
+    get: function get() {
       return this.pointer.friction;
     }
 
@@ -648,7 +636,7 @@ var Draggable = function (_TinyEmitter) {
      * @param {number} friction A number between [1, 0].
      */
     ,
-    set: function set$$1(friction) {
+    set: function set(friction) {
       this.pointer.friction = friction;
     }
 
@@ -659,7 +647,7 @@ var Draggable = function (_TinyEmitter) {
 
   }, {
     key: 'isEnabled',
-    get: function get$$1() {
+    get: function get() {
       return this.pointer.isEnabled;
     }
 
@@ -668,7 +656,7 @@ var Draggable = function (_TinyEmitter) {
      * @param {boolean} enabled Whether dragger is enabled.
      */
     ,
-    set: function set$$1(enabled) {
+    set: function set(enabled) {
       this.pointer.isEnabled = enabled;
     }
   }]);

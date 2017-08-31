@@ -27,13 +27,13 @@ const FOCUSABLE_ELEMENTS = [
   '[tabindex]:not([tabindex^="-"])',
 ].join(',');
 
-/**
- * Dialog that can contain static images, carousels, or videos
- * @param {Element} element Main element.
- *
- * @constructor
- */
 class Dialog extends TinyEmitter {
+  /**
+   * Dialog that can contain static images, carousels, or videos
+   * @param {Element} element Main element.
+   * @param {object} [opts] Instance options.
+   * @constructor
+   */
   constructor(element, opts) {
     super();
 
@@ -575,8 +575,7 @@ class Dialog extends TinyEmitter {
   }
 
   /**
-   * Clear all references to dialogs so there are no duplicates
-   * @param {Object} options Object of all dialog options. Is optional.
+   * Clear all references to dialogs so there are no duplicates.
    */
   static disposeAll() {
     const clone = Dialog.Instances.slice();

@@ -209,16 +209,15 @@ var ScrollFix$1 = {
 
 var FOCUSABLE_ELEMENTS = ['a[href]', 'area[href]', 'input:not([disabled])', 'select:not([disabled])', 'textarea:not([disabled])', 'button:not([disabled])', 'iframe', 'object', 'embed', '[contenteditable]', '[tabindex]:not([tabindex^="-"])'].join(',');
 
-/**
- * Dialog that can contain static images, carousels, or videos
- * @param {Element} element Main element.
- *
- * @constructor
- */
-
 var Dialog = function (_TinyEmitter) {
   inherits(Dialog, _TinyEmitter);
 
+  /**
+   * Dialog that can contain static images, carousels, or videos
+   * @param {Element} element Main element.
+   * @param {object} [opts] Instance options.
+   * @constructor
+   */
   function Dialog(element, opts) {
     classCallCheck(this, Dialog);
 
@@ -825,8 +824,7 @@ var Dialog = function (_TinyEmitter) {
   };
 
   /**
-   * Clear all references to dialogs so there are no duplicates
-   * @param {Object} options Object of all dialog options. Is optional.
+   * Clear all references to dialogs so there are no duplicates.
    */
 
 

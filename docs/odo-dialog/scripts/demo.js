@@ -61,6 +61,10 @@ defaultDialog.on(OdoDialog.EventType.CLOSED, function () {
   console.log('default dialog closed');
 });
 
+defaultDialog.on(OdoDialog.EventType.TRIGGER_CLICKED, function (triggerElement) {
+  console.log('dialog about to open because you clicked:', triggerElement);
+});
+
 var styledDialog = new OdoDialog(document.getElementById('styled'));
 
 var animationChanger = new OdoDialog(document.getElementById('animation-changer'));
@@ -110,39 +114,55 @@ var ScrollToCloseDialog = function (_OdoDialog) {
 
     var _this = possibleConstructorReturn(this, _OdoDialog.call(this, element, options));
 
-    _this.onScroll = _this.onScroll.bind(_this);
-    _this.on(OdoDialog.EventType.OPENED, _this._onOpened.bind(_this));
-    _this.on(OdoDialog.EventType.CLOSED, _this._onClosed.bind(_this));
+    _this._onScroll = _this._onScroll.bind(_this);
+    _this._onOpened = _this._onOpened.bind(_this);
+    _this._onClosed = _this._onClosed.bind(_this);
+    _this._saveCloseOffset = _this._saveCloseOffset.bind(_this);
+    _this.on(OdoDialog.EventType.OPENED, _this._onOpened);
+    _this.on(OdoDialog.EventType.CLOSED, _this._onClosed);
     return _this;
   }
 
-  ScrollToCloseDialog.prototype._onOpened = function _onOpened() {
+  ScrollToCloseDialog.prototype._saveCloseOffset = function _saveCloseOffset() {
     var viewportHeight = window.innerHeight;
 
     // The extra margin is on the inner element, so it's included in the height
     // of the content element.
     var contentHeight = this.element.scrollHeight - viewportHeight;
 
-    // Require the user to scroll the content + 7/8 of the extra space.
-    this.closeOffset = contentHeight - Math.round(viewportHeight / 8);
+    this.closeOffset = contentHeight - Math.round(viewportHeight / ScrollToCloseDialog.VIEWPORT_DIVISOR);
+  };
 
-    // Listen for scrolls.
-    this.element.addEventListener('scroll', this.onScroll);
+  ScrollToCloseDialog.prototype._onOpened = function _onOpened() {
+    this._saveCloseOffset();
+    this.element.addEventListener('scroll', this._onScroll);
+    window.addEventListener('resize', this._saveCloseOffset);
   };
 
   ScrollToCloseDialog.prototype._onClosed = function _onClosed() {
-    this.element.removeEventListener('scroll', this.onScroll);
+    this.element.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('resize', this._saveCloseOffset);
   };
 
-  ScrollToCloseDialog.prototype.onScroll = function onScroll() {
-    var scrollTop = this.element.scrollTop;
-    if (scrollTop > this.closeOffset) {
+  ScrollToCloseDialog.prototype._onScroll = function _onScroll() {
+    if (this.element.scrollTop > this.closeOffset) {
       this.close();
     }
   };
 
+  ScrollToCloseDialog.prototype.dispose = function dispose() {
+    this.off(OdoDialog.EventType.OPENED, this._onOpened);
+    this.off(OdoDialog.EventType.CLOSED, this._onClosed);
+    _OdoDialog.prototype.dispose.call(this);
+  };
+
   return ScrollToCloseDialog;
 }(OdoDialog);
+
+// Require the user to scroll the content + x-1/x of the extra space.
+
+
+ScrollToCloseDialog.VIEWPORT_DIVISOR = 6;
 
 var scrollToClose = new ScrollToCloseDialog(document.getElementById('scroll-to-close'));
 

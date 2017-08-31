@@ -89,8 +89,6 @@
 
     </div>
 
-    <br/>
-
     <pre><code class="language-markup">&lt;button data-odo-dialog-open="default"&gt;Open the default dialog&lt;/button&gt;
 
 &lt;!-- Could be elsewhere in your markup -->
@@ -105,25 +103,45 @@
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
 
-    <pre><code class="language-javascript" data-language="javascript">const defaultDialog = new OdoDialog(document.getElementById('default'));</code></pre><br/>
+    <pre><code class="language-javascript" data-language="javascript">const defaultDialog = new OdoDialog(document.getElementById('default'));</code></pre>
 
     <h3>Public Events</h3>
-    <p>The opened event is triggered when the content has finished its transition in, while the closed event triggers once the dialog has completely transitioned out.</p>
+    <p>The opened event is triggered when the content has finished its transition in, while the closed event triggers once the dialog has completely transitioned out. In case you need to retrieve some information from the button which triggered the dialog to open, you can subscribe to the <code>TRIGGER_CLICKED</code> event.</p>
     <pre><code class="language-javascript">defaultDialog.on(OdoDialog.EventType.OPENED, function () {
   console.log('default dialog opened');
 });
 
 defaultDialog.on(OdoDialog.EventType.CLOSED, function () {
   console.log('default dialog closed');
+});
+
+defaultDialog.on(OdoDialog.EventType.TRIGGER_CLICKED, function (triggerElement) {
+  console.log('dialog about to open because you clicked:', triggerElement);
 });</code></pre>
 
-    <br/>
-
     <h3>Public Methods</h3>
-    <pre><code class="language-javascript">defaultDialog.open();
-defaultDialog.close();
-defaultDialog.dispose();
-defaultDialog.getByClass(className);</code></pre>
+    <pre><code class="language-javascript">defaultDialog.open() // Open the dialog
+defaultDialog.close() // Close the dialog
+defaultDialog.dispose() // Close the dialog, remove event listeners and element references
+defaultDialog.getByClass(className) // Find a single element by class inside the dialog</code></pre>
+
+    <h3>Public Properties</h3>
+    <pre><code class="language-javascript">defaultDialog.element // Base element
+defaultDialog.options // options object
+defaultDialog.id // Unique id for the dialog. Same as the id attribute of the base element
+defaultDialog.isOpen // Whether the dialog is currently open</code></pre>
+
+    <h3>Protected Methods &amp; Properties</h3>
+    <p>If you create a subclass of OdoDialog, you will have access to these as well<sup>*</sup>.</p>
+
+    <pre><code class="language-javascript">defaultDialog.onClick(evt) // Delegated click handler on the dialog.
+defaultDialog.onKeyPress(evt) // Listens for the ESC key and traps the TAB key.
+defaultDialog.onResize(viewportHeight) // Sets the height of the dialog on viewport resize.
+defaultDialog.content // Dialog content (role=document)
+defaultDialog.backdrop // The background behind the dialog
+defaultDialog.isAnimating // Whether the dialog is currently animating (opening/closing)
+</code></pre>
+    <p><sup>*</sup><small>Because this is JavaScript, you have access to them already.</small></p>
 
     <h2>Changing Transitions</h2>
     <p>In addition to the default fade/scale transition, <code>OdoDialog</code> comes with two other transitions: <code>odo-dialog--fade</code> and <code>odo-dialog--zoom-in</code>. The other options in the <code>&lt;select&gt;</code> below are custom transitions added to this page. See the next section for details.</p>
@@ -149,8 +167,6 @@ defaultDialog.getByClass(className);</code></pre>
         <option value="odo-dialog--fall-through">Fall through</option>
       </select>
     </div>
-
-    <br/>
 
     <h2>Add Custom Transitions</h2>
     <p>You can add your own transitions too.</p>

@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-dialog",
   "description": "Responsive window dialog component focused on a11y and extendibility",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "dist/odo-dialog.js",
   "style": "css/odo-dialog.css",
   "odoModule": "src/dialog.js",
@@ -23,7 +23,7 @@
     "css",
     "dist",
     "src",
-    "index.js"
+    "index.d.ts"
   ],
   "odoKeywords": [
     "ui"

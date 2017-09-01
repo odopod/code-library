@@ -37,7 +37,6 @@
   "license": "MIT",
   "repository": "odopod/odo",
   "scripts": {
-    "link-local": "node ../../scripts/link-local-packages.js",
     "test": "gulp code-quality test"
   }
 }

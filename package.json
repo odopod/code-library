@@ -5,7 +5,7 @@
   "scripts": {
     "build-test-all": "lerna exec -- gulp",
     "docs": "node ./scripts/docs-generate.js",
-    "install-all": "lerna bootstrap",
+    "install-all": "yarn install && lerna bootstrap",
     "setup": "yarn run install-all && yarn run build-test-all",
     "test": "lerna run test"
   },

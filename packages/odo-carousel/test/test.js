@@ -635,6 +635,22 @@ describe('The carousel component', function d() {
       instance._selectedIndex = 1;
       expect(instance._getCarouselOffset()).to.equal(1900);
     });
+
+    it('can parse a 2d transform matrix for translate values', () => {
+      expect(OdoCarousel._getTranslate('none')).to.deep.equal({ x: 0, y: 0 });
+      expect(OdoCarousel._getTranslate('matrix(1, 0, 0, 1, -500, 0)')).to.deep.equal({
+        x: -500,
+        y: 0,
+      });
+      expect(OdoCarousel._getTranslate('matrix(1, 0, 0, 1, 500, 10)')).to.deep.equal({
+        x: 500,
+        y: 10,
+      });
+      expect(OdoCarousel._getTranslate('matrix(0.996195, 0.0871557, -0.0349474, 1.00076, 0, -10)')).to.deep.equal({
+        x: 0,
+        y: -10,
+      });
+    });
   });
 
   describe('looped carousel with 3 slides', () => {

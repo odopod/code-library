@@ -1,5 +1,12 @@
-
 export function getTranslate(str) {
+  // If no transform is set, the computed transform will be "none".
+  if (str === 'none') {
+    return {
+      x: 0,
+      y: 0,
+    };
+  }
+
   const array = str.match(/(-?[\d.]+)/g);
   return {
     x: parseFloat(array[4]),

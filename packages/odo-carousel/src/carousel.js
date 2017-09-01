@@ -1752,4 +1752,7 @@ Object.assign(Carousel, settings);
 
 Carousel.template = templateEngine;
 
+// Export for testing.
+Carousel._getTranslate = getTranslate;
+
 export default Carousel;

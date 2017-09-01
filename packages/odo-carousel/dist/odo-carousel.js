@@ -240,6 +240,14 @@ function template(str, data) {
 }
 
 function getTranslate(str) {
+  // If no transform is set, the computed transform will be "none".
+  if (str === 'none') {
+    return {
+      x: 0,
+      y: 0
+    };
+  }
+
   var array$$1 = str.match(/(-?[\d.]+)/g);
   return {
     x: parseFloat(array$$1[4]),
@@ -2147,6 +2155,9 @@ var Carousel = function (_TinyEmitter) {
 Object.assign(Carousel, settings);
 
 Carousel.template = template;
+
+// Export for testing.
+Carousel._getTranslate = getTranslate;
 
 return Carousel;
 

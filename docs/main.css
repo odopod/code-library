@@ -444,6 +444,10 @@ a.odo-component__inner:hover .odo-component__content {
   .filter__label {
     display: inline-block;
   }
+
+  .type--right\@sm {
+    text-align: right;
+  }
 }
 
 footer {

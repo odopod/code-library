@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-scroll-feedback",
   "description": "Based user input from mouse, keyboard, and touch, the `ScrollFeedback` instance will emit navigation events.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/odo-scroll-feedback.js",
   "odoModule": "src/scroll-feedback.js",
   "author": "Odopod",

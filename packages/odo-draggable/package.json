@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-draggable",
   "description": "A class for versatile, performant draggability.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/odo-draggable.js",
   "odoModule": "src/draggable.js",
   "author": "Odopod",
@@ -12,12 +12,11 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-device": "^1.0.0",
-    "@odopod/odo-helpers": "^1.0.0",
-    "@odopod/odo-pointer": "^1.0.0",
+    "@odopod/odo-device": "^1.0.1",
+    "@odopod/odo-helpers": "^1.0.1",
+    "@odopod/odo-pointer": "^1.0.1",
     "tiny-emitter": "^2.0.1"
   },
-  "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-draggable",
   "files": [
     "css",

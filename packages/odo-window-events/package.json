@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-window-events",
   "description": "Reusable, throttled events on the window object.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/odo-window-events.js",
   "odoModule": "src/window-events.js",
   "author": "Odopod",
@@ -19,7 +19,6 @@
     "debounce": "^1.0.0",
     "throttleit": "^1.0.0"
   },
-  "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-window-events",
   "files": [
     "css",

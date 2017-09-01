@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-hotspots",
   "description": "A component which positions and opens hotspots.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/odo-hotspots.js",
   "style": "css/odo-hotspots.css",
   "odoModule": "src/hotspots.js",
@@ -16,7 +16,6 @@
     "debounce": "^1.0.0",
     "tiny-emitter": "^2.0.1"
   },
-  "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-hotspots",
   "odoKeywords": [
     "ui"

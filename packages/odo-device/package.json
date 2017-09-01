@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-device",
   "description": "Device-specific settings for JS and CSS",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/odo-device.js",
   "odoModule": "src/device.js",
   "author": "Odopod",
@@ -11,7 +11,6 @@
       "email": "glen@odopod.com"
     }
   ],
-  "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-device",
   "files": [
     "css",

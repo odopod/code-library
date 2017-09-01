@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-video",
   "description": "A lightweight html5 video wrapper.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/odo-video.js",
   "odoModule": "src/video.js",
   "author": "Odopod",
@@ -14,7 +14,6 @@
   "dependencies": {
     "screenfull": "^3.0.2"
   },
-  "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-video",
   "files": [
     "css",

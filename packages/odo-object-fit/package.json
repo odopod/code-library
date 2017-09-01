@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-object-fit",
   "description": "Fits media elements (img, video). It polyfills CSS' object-fit: cover; If the browser supports object-fit, it will not run.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/odo-object-fit.js",
   "odoModule": "src/object-fit.js",
   "author": "Odopod",
@@ -11,7 +11,6 @@
       "email": "glen@odopod.com"
     }
   ],
-  "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-object-fit",
   "files": [
     "css",

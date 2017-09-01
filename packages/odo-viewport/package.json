@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-viewport",
   "description": "Viewport enter and exit monitoring for elements.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/odo-viewport.js",
   "odoModule": "src/viewport.js",
   "author": "Odopod",
@@ -12,9 +12,8 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-window-events": "^1.0.0"
+    "@odopod/odo-window-events": "^1.0.1"
   },
-  "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-viewport",
   "files": [
     "css",

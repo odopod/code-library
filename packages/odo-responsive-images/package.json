@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-responsive-images",
   "description": "Native responsive images with deferred loading.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/odo-responsive-images.js",
   "style": "css/odo-responsive-images.css",
   "odoModule": "src/responsive-images.js",
@@ -13,11 +13,10 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-viewport": "^1.0.0",
+    "@odopod/odo-viewport": "^1.0.1",
     "debounce": "^1.0.0",
     "picturefill": "^3.0.2"
   },
-  "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-responsive-images",
   "files": [
     "css",

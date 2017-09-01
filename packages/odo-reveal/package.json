@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-reveal",
   "description": "Reveal elements on the page as they come into view.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/odo-reveal.js",
   "style": "css/odo-reveal.css",
   "odoModule": "src/reveal.js",
@@ -13,12 +13,12 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-device": "^1.0.0",
-    "@odopod/odo-helpers": "^1.0.0",
-    "@odopod/odo-viewport": "^1.0.0"
+    "@odopod/odo-device": "^1.0.1",
+    "@odopod/odo-helpers": "^1.0.1",
+    "@odopod/odo-viewport": "^1.0.1"
   },
   "devDependencies": {
-    "@odopod/odo-responsive-images": "^1.0.0"
+    "@odopod/odo-responsive-images": "^1.0.1"
   },
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-reveal",
   "files": [

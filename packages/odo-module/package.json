@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-module",
   "description": "Augment a class' static methods with helpers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/odo-module.js",
   "odoModule": "src/module.js",
   "author": "Odopod",
@@ -11,7 +11,6 @@
       "email": "nathan@odopod.com"
     }
   ],
-  "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-module",
   "files": [
     "css",

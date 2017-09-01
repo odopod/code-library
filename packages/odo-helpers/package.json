@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-helpers",
   "description": "A collection of helper methods for Odo projects.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/odo-helpers.js",
   "odoModule": "index.js",
   "author": "Odopod",
@@ -12,9 +12,8 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-device": "^1.0.0"
+    "@odopod/odo-device": "^1.0.1"
   },
-  "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-helpers",
   "files": [
     "css",

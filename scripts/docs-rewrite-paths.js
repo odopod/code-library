@@ -1,18 +1,31 @@
+/**
+ * @fileoverview Rewrite resource paths for each demo file.
+ */
+
 const path = require('path');
 const pify = require('pify');
 const glob = pify(require('glob'));
 const fs = require('fs-extra');
 
-function getMultipleMatches(re, str) {
-  const matches = [];
-  let match = re.exec(str);
-  while (match !== null) {
-    matches.push(match[1]);
-    match = re.exec(str);
-  }
-
-  return matches;
-}
+// Now that the demos directory is one level up from where it usually is,
+// remove the "../".
+const HREF_DOT_DOT_SLASH = /href="\.\.\//g;
+const SRC_DOT_DOT_SLASH = /src="\.\.\//g;
+// Match
+// <link rel="stylesheet" href="../../../docs/demo.css" />
+const ROOT_FILE = /\.\.\/\.\.\/docs\/(.+)/g;
+// Match:
+// <script src="../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
+const ROOT_NODE_MODULE = /src="\.\.\/\.\.\/(node_modules\/.+)"/g;
+// Match:
+// <script src="../odo-responsive-images/node_modules/picturefill/dist/picturefill.min.js"></script>
+// capture "odo-responsive-images/node_modules/picturefill/dist/picturefill.min.js"
+// to find the right file to copy.
+// capture "picturefill/dist/picturefill.min.js" to rewrite the correct path.
+const NESTED_NODE_MODULE = /src="\.\.\/([\w-]+\/(node_modules\/.+))"/g;
+// Match:
+// <script src="node_modules/tiny-emitter/dist/tinyemitter.min.js"></script>
+const LOCAL_NODE_MODULE = /src="(node_modules\/.+)"/g;
 
 /**
  * Rewrite html files' resource paths.
@@ -29,21 +42,25 @@ module.exports = (pattern, dest) => new Promise((resolve) => {
       const basename = path.basename(filename);
 
       fs.readFile(filename, 'utf-8').then((str) => {
-        // Now that demos are one level up from where they usually are, remove the ../.
-        // Use the dist files from local odo components instead of their node modules.
-        let contents = str
-          .replace(/href="\.\.\/(?!node_modules)/g, 'href="')
-          .replace(/src="\.\.\/(?!node_modules)/g, 'src="')
-          .replace(/\.\.\/node_modules\/@odopod\//g, '../');
-
-        // Find ../node_modules.
-        const matches = getMultipleMatches(/src="\.\.\/(node_modules\/.+)"/g, contents);
-        matches.forEach(match => externalDependencies.add(match));
-
-        // Replace common dependencies after the package-specific ones have been discovered.
-        contents = contents
-          .replace(/\.\.\/\.\.\/docs\/demo\.css/, '../demo.css')
-          .replace(/\.\.\/\.\.\//g, '../');
+        const contents = str
+          .replace(HREF_DOT_DOT_SLASH, 'href="')
+          .replace(SRC_DOT_DOT_SLASH, 'src="')
+          .replace(ROOT_FILE, '../$1')
+          .replace(NESTED_NODE_MODULE, (match, p1, p2) => {
+            externalDependencies.add({
+              sourceLocation: p1,
+              sourcePath: p2,
+            });
+            return `src="../${p2}"`;
+          })
+          .replace(LOCAL_NODE_MODULE, (match, p1) => {
+            externalDependencies.add({
+              sourceLocation: path.resolve(filename, '../../', p1),
+              sourcePath: p1,
+            });
+            return `src="../${p1}"`;
+          })
+          .replace(ROOT_NODE_MODULE, 'src="../$1"');
 
         fs.writeFile(path.join(dest, basename), contents).then(resolve);
       });

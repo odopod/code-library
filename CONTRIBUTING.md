@@ -24,7 +24,7 @@ If your issue does not contain sufficient information, it may be closed.
 ```sh
 $ git clone https://github.com/odopod/code-library.git odo
 $ cd odo
-$ yarn run setup # Grab a coffee
+$ yarn run setup
 ```
 
 Running the `setup` script will `yarn link` _explicit_ local dependencies for each package. It then will install the dependencies for each package and run the `test` script which compiles the package and runs its tests.

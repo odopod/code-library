@@ -11,19 +11,20 @@ const noop = () => {};
 
 const cache = new Set();
 
-function copyNpmDependencies(src) {
-  return (dependencies) => {
-    // Ignore files that have already been copied before.
-    const arr = Array.from(dependencies).filter(dep => !cache.has(dep));
+function copyNpmDependencies(dependencies) {
+  // Ignore files that have already been copied before.
+  const arr = Array.from(dependencies).filter(({ sourcePath }) => !cache.has(sourcePath));
 
-    // Create an array of promises.
-    const copiers = arr.map((dep) => {
-      cache.add(dep);
-      return fs.copy(path.join(src, dep), path.join(root, 'docs', dep));
-    });
+  // Create an array of promises.
+  const copiers = arr.map(({ sourceLocation, sourcePath }) => {
+    cache.add(sourcePath);
+    // Allow sourceLocation to be absolute or relative to packages dir.
+    const fileLocation = sourceLocation.includes('packages') ?
+      sourceLocation : path.join(root, 'packages', sourceLocation);
+    return fs.copy(fileLocation, path.join(root, 'docs', sourcePath));
+  });
 
-    return Promise.all(copiers);
-  };
+  return Promise.all(copiers);
 }
 
 function copyPackageDependencies() {
@@ -56,7 +57,7 @@ function copyPackageDependencies() {
         }).catch(noop);
 
         const html = rewritePaths(path.join(src, 'demos/*.html'), docs)
-          .then(copyNpmDependencies(src));
+          .then(copyNpmDependencies);
 
         // Bundled js files, but not the instrumented file.
         const dist = fs.copy(path.join(src, 'dist'), path.join(docs, 'dist'), {

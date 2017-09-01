@@ -3,28 +3,26 @@
   "description": "A collection of vanilla JavaScript components used in Odopod web projects.",
   "private": true,
   "scripts": {
-    "build-test-all": "./scripts/run-in-each-package.sh \"gulp\"",
+    "build-test-all": "lerna exec -- gulp",
     "docs": "node ./scripts/docs-generate.js",
-    "install-all": "yarn install && ./scripts/run-in-each-package.sh \"yarn install\"",
-    "link": "yarn run link:prep && yarn run link:local",
-    "link:local": "node ./scripts/link-all-local.js",
-    "link:prep": "./scripts/run-in-each-package.sh \"yarn link\"",
-    "link:unlink-local": "node ./scripts/unlink-all-local.js",
-    "link-install": "yarn run link && yarn run install-all",
-    "setup": "yarn run link-install && yarn run build-test-all",
-    "test": "./scripts/run-in-each-package.sh \"yarn test\""
+    "install-all": "yarn install && lerna bootstrap",
+    "setup": "yarn run install-all && yarn run build-test-all",
+    "test": "lerna run test"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "classlist.js": "github:allannienhuis/classList.js",
+    "shufflejs": "^5.0.0"
+  },
+  "devDependencies": {
     "@odopod/eslint-config": "^1.1.0",
     "babel-core": "^6.26.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-istanbul": "^4.0.0",
     "babel-plugin-transform-es2015-classes": "^6.23.0",
     "babel-plugin-transform-proto-to-assign": "^6.26.0",
-    "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.22.0",
     "chai": "^4.1.1",
-    "classlist.js": "github:allannienhuis/classList.js",
     "eslint": "^4.5.0",
     "execa": "^0.8.0",
     "fs-extra": "^4.0.1",
@@ -39,6 +37,7 @@
     "karma-html2js-preprocessor": "^1.1.0",
     "karma-mocha": "^1.3.0",
     "karma-rollup-preprocessor": "^5.0.1",
+    "lerna": "^2.1.2",
     "minimist": "^1.2.0",
     "mocha": "^3.5.0",
     "nunjucks": "^3.0.0",
@@ -48,7 +47,6 @@
     "rollup-plugin-commonjs": "^8.2.0",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-uglify": "^2.0.1",
-    "shufflejs": "^5.0.0",
     "sinon": "^3.2.1"
   }
 }

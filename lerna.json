@@ -1,6 +1,14 @@
 {
   "lerna": "2.1.2",
   "npmClient": "yarn",
+  "commands": {
+    "publish": {
+      "ignore": [
+        "demos/",
+        "*.md"
+      ]
+    }
+  },
   "packages": [
     "packages/*"
   ],

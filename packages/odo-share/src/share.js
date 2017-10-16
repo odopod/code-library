@@ -222,13 +222,13 @@ class Share {
    */
   static _parseParamsFromInput(input, service) {
     const elementData = input.element ? input.element.dataset : {};
-    const data = input.data;
+    const { data } = input;
     const obj = {};
 
     // Iterate through each valid paramater for the given service.
     Object.keys(service.params).forEach((param) => {
       const config = service.params[param];
-      const friendly = config.friendly;
+      const { friendly } = config;
       let value = null;
 
       // Check if the parameter was defined when `share` was called.

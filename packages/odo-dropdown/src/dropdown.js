@@ -119,7 +119,7 @@ class Dropdown extends OdoBaseComponent {
   _initializeCustomDropdown() {
     if (this._label) {
       dom.giveId(this._label, this.id + '-label');
-      const id = this._label.id;
+      const { id } = this._label;
       this._optionsContainer.setAttribute('aria-labelledby', id);
     }
 
@@ -303,8 +303,10 @@ class Dropdown extends OdoBaseComponent {
     this._button.tabIndex = -1;
     style.causeLayout(this._optionsContainer);
     this._optionsContainer.classList.add(Dropdown.Classes.OPTIONS_CONTAINER_OPEN);
-    this._transitionId = animation.onTransitionEnd(this._optionsContainer,
-      this._handleOptionsShown, this);
+    this._transitionId = animation.onTransitionEnd(
+      this._optionsContainer,
+      this._handleOptionsShown, this,
+    );
   }
 
   /**
@@ -333,8 +335,10 @@ class Dropdown extends OdoBaseComponent {
     this._button.tabIndex = 0;
     this._button.setAttribute('aria-expanded', false);
     this._optionsContainer.classList.remove(Dropdown.Classes.OPTIONS_CONTAINER_OPEN);
-    this._transitionId = animation.onTransitionEnd(this._optionsContainer,
-      this._handleOptionsHidden, this);
+    this._transitionId = animation.onTransitionEnd(
+      this._optionsContainer,
+      this._handleOptionsHidden, this,
+    );
   }
 
   /**

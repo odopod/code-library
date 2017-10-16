@@ -516,8 +516,8 @@ class Dialog extends TinyEmitter {
   static _getSiblings(element) {
     const children = Array.from(element.parentNode.children);
     const ignore = ['script', 'link', 'meta'];
-    return children.filter(
-      node => node !== element && !ignore.includes(node.nodeName.toLowerCase()));
+    return children.filter(node =>
+      node !== element && !ignore.includes(node.nodeName.toLowerCase()));
   }
 
   /**
@@ -569,9 +569,7 @@ class Dialog extends TinyEmitter {
   static initializeAll(options) {
     Dialog.disposeAll();
 
-    return Array.from(
-      document.querySelectorAll('.' + Dialog.Classes.BASE),
-    ).map(dialog => new Dialog(dialog, options));
+    return Array.from(document.querySelectorAll('.' + Dialog.Classes.BASE)).map(dialog => new Dialog(dialog, options));
   }
 
   /**

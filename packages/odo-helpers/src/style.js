@@ -28,7 +28,8 @@ const style = {
       style.getFloat(props[property + 'Top']),
       style.getFloat(props[property + 'Right']),
       style.getFloat(props[property + 'Bottom']),
-      style.getFloat(props[property + 'Left']));
+      style.getFloat(props[property + 'Left']),
+    );
   },
 
   getMarginBox(element) {

@@ -10,8 +10,6 @@ OdoViewport = OdoViewport && OdoViewport.hasOwnProperty('default') ? OdoViewport
 OdoObjectFit = OdoObjectFit && OdoObjectFit.hasOwnProperty('default') ? OdoObjectFit['default'] : OdoObjectFit;
 OdoResponsiveImages = OdoResponsiveImages && OdoResponsiveImages.hasOwnProperty('default') ? OdoResponsiveImages['default'] : OdoResponsiveImages;
 
-var babelHelpers = {};
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -35,14 +33,6 @@ var createClass = function () {
     return Constructor;
   };
 }();
-
-
-
-
-
-
-
-babelHelpers;
 
 /**
  * @fileoverview Add a odo video component which plays in the background when
@@ -234,17 +224,17 @@ var BackgroundVideo = function () {
 
   createClass(BackgroundVideo, [{
     key: 'videoElement',
-    get: function get() {
+    get: function get$$1() {
       return this._odoVideoElement;
     }
   }, {
     key: 'imageElement',
-    get: function get() {
+    get: function get$$1() {
       return this._odoImageElement;
     }
   }, {
     key: 'mediaElement',
-    get: function get() {
+    get: function get$$1() {
       if (this.isVideo) {
         return this._video.getVideoElement();
       }

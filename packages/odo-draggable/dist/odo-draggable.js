@@ -42,8 +42,6 @@ var settings = {
   }
 };
 
-var babelHelpers = {};
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -68,6 +66,14 @@ var createClass = function () {
   };
 }();
 
+
+
+
+
+
+
+
+
 var inherits = function (subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
@@ -84,6 +90,16 @@ var inherits = function (subClass, superClass) {
   if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 };
 
+
+
+
+
+
+
+
+
+
+
 var possibleConstructorReturn = function (self, call) {
   if (!self) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -91,10 +107,6 @@ var possibleConstructorReturn = function (self, call) {
 
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
-
-
-
-babelHelpers;
 
 /**
  * Throws an error if `condition` is falsy.
@@ -292,8 +304,8 @@ var Draggable = function (_TinyEmitter) {
 
 
   Draggable._limitValue = function _limitValue(value, rectPosition, rectSize) {
-    var side = odoHelpers.utilities.defaultsTo(rectPosition, null, !isNaN(rectPosition));
-    var dimension = odoHelpers.utilities.defaultsTo(rectSize, 0, !isNaN(rectSize));
+    var side = odoHelpers.utilities.defaultsTo(rectPosition, null, !Number.isNaN(rectPosition));
+    var dimension = odoHelpers.utilities.defaultsTo(rectSize, 0, !Number.isNaN(rectSize));
     var max = odoHelpers.utilities.defaultsTo(side + dimension, Infinity, side !== null);
     var min = odoHelpers.utilities.defaultsTo(side, -Infinity, side !== null);
     return odoHelpers.math.clamp(value, min, max);
@@ -627,7 +639,7 @@ var Draggable = function (_TinyEmitter) {
 
   createClass(Draggable, [{
     key: 'friction',
-    get: function get() {
+    get: function get$$1() {
       return this.pointer.friction;
     }
 
@@ -636,7 +648,7 @@ var Draggable = function (_TinyEmitter) {
      * @param {number} friction A number between [1, 0].
      */
     ,
-    set: function set(friction) {
+    set: function set$$1(friction) {
       this.pointer.friction = friction;
     }
 
@@ -647,7 +659,7 @@ var Draggable = function (_TinyEmitter) {
 
   }, {
     key: 'isEnabled',
-    get: function get() {
+    get: function get$$1() {
       return this.pointer.isEnabled;
     }
 
@@ -656,7 +668,7 @@ var Draggable = function (_TinyEmitter) {
      * @param {boolean} enabled Whether dragger is enabled.
      */
     ,
-    set: function set(enabled) {
+    set: function set$$1(enabled) {
       this.pointer.isEnabled = enabled;
     }
   }]);

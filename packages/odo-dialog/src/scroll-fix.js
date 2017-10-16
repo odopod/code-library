@@ -9,8 +9,6 @@
 import { string } from '@odopod/odo-helpers';
 import OdoDevice from '@odopod/odo-device';
 
-const body = document.body;
-
 /**
  * Makes the element scrollable with some smart listeners because iOS
  * behaves unsatisfactory.
@@ -39,8 +37,8 @@ class ScrollFix {
    * @private
    */
   _registerEvents() {
-    body.addEventListener('touchstart', this._touchStartBound);
-    body.addEventListener('touchmove', this._touchMoveBound);
+    document.body.addEventListener('touchstart', this._touchStartBound);
+    document.body.addEventListener('touchmove', this._touchMoveBound);
     document.addEventListener('touchmove', this._preventDefaultBound);
   }
 
@@ -90,8 +88,8 @@ class ScrollFix {
    * Dispose of this instance by removing handlers and DOM references.
    */
   dispose() {
-    body.removeEventListener('touchstart', this._touchStartBound);
-    body.removeEventListener('touchmove', this._touchMoveBound);
+    document.body.removeEventListener('touchstart', this._touchStartBound);
+    document.body.removeEventListener('touchmove', this._touchMoveBound);
     document.removeEventListener('touchmove', this._preventDefaultBound);
 
     this.element = null;

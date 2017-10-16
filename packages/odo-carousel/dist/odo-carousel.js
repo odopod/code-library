@@ -9,8 +9,6 @@ OdoDevice = OdoDevice && OdoDevice.hasOwnProperty('default') ? OdoDevice['defaul
 OdoPointer = OdoPointer && OdoPointer.hasOwnProperty('default') ? OdoPointer['default'] : OdoPointer;
 OdoDraggable = OdoDraggable && OdoDraggable.hasOwnProperty('default') ? OdoDraggable['default'] : OdoDraggable;
 
-var babelHelpers = {};
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -35,6 +33,14 @@ var createClass = function () {
   };
 }();
 
+
+
+
+
+
+
+
+
 var inherits = function (subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
@@ -51,6 +57,16 @@ var inherits = function (subClass, superClass) {
   if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 };
 
+
+
+
+
+
+
+
+
+
+
 var possibleConstructorReturn = function (self, call) {
   if (!self) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -58,10 +74,6 @@ var possibleConstructorReturn = function (self, call) {
 
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
-
-
-
-babelHelpers;
 
 var CarouselEvent = function () {
   /**
@@ -1909,6 +1921,7 @@ var Carousel = function (_TinyEmitter) {
 
   Carousel.prototype._handleClick = function _handleClick(evt) {
     var target = evt.target;
+
     var willNavigate = false;
 
     // Determine what was clicked.
@@ -2134,7 +2147,7 @@ var Carousel = function (_TinyEmitter) {
 
   createClass(Carousel, [{
     key: 'isEnabled',
-    get: function get() {
+    get: function get$$1() {
       return this._isEnabled;
     }
 
@@ -2144,7 +2157,7 @@ var Carousel = function (_TinyEmitter) {
      * @param {boolean} enabled Whether to enable or disable.
      */
     ,
-    set: function set(enabled) {
+    set: function set$$1(enabled) {
       this._isEnabled = enabled;
       this._setDraggableEnabled(enabled);
     }

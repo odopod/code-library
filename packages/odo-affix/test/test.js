@@ -1,4 +1,4 @@
-/* global describe, it, beforeEach, afterEach, fixture */
+/* global describe, it, beforeEach, afterEach */
 /* eslint-disable no-unused-expressions */
 
 const expect = window.chai.expect;

@@ -90,7 +90,7 @@ describe('The OdoBackgroundVideo Component', function bgVideo() {
   }
 
   describe('basic fixture - no video element', () => {
-    const autoplay = OdoVideo.autoplay;
+    const { autoplay } = OdoVideo;
 
     beforeEach(() => {
       OdoVideo.autoplay = {
@@ -122,7 +122,7 @@ describe('The OdoBackgroundVideo Component', function bgVideo() {
   });
 
   describe('basic fixture - no autoplay', () => {
-    const autoplay = OdoVideo.autoplay;
+    const { autoplay } = OdoVideo;
 
     beforeEach(() => {
       OdoVideo.autoplay = Promise.resolve(false);

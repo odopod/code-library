@@ -63,23 +63,11 @@ if (!window.cancelAnimationFrame) {
   };
 }
 
-var babelHelpers = {};
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 };
-
-
-
-
-
-
-
-
-
-babelHelpers;
 
 /**
  * @fileoverview A simple class for providing a stepping function for each
@@ -249,7 +237,7 @@ var utilities = {
    */
   getNumberOption: function getNumberOption(value, defaultValue) {
     var number = parseFloat(value);
-    return utilities.defaultsTo(number, defaultValue, !isNaN(number));
+    return utilities.defaultsTo(number, defaultValue, !Number.isNaN(number));
   },
 
 

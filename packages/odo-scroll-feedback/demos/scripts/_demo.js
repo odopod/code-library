@@ -16,7 +16,7 @@ const scrollToIndex = (index) => {
 
   const easing = k => (-0.5 * (Math.cos(Math.PI * k) - 1));
 
-  const step = (value/* , percent*/) => {
+  const step = (value/* , percent */) => {
     window.scrollTo(0, value);
   };
 

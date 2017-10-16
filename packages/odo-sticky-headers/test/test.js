@@ -215,8 +215,7 @@ describe('The OdoStickyHeaders Component', () => {
         expect(demote.callCount).to.equal(0);
 
         // Out of range by 1 pixel (bottom).
-        instance._itemPositionCouldChange(
-          item, item.bottom + OdoStickyHeaders.PROMOTION_RANGE + 1);
+        instance._itemPositionCouldChange(item, item.bottom + OdoStickyHeaders.PROMOTION_RANGE + 1);
         expect(item.isPromoted).to.be.false;
         expect(promote.callCount).to.equal(1);
         expect(demote.callCount).to.equal(1);

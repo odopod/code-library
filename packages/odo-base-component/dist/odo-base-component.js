@@ -63,8 +63,6 @@ var debounce = function debounce(func, wait, immediate) {
   return debounced;
 };
 
-var babelHelpers = {};
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -89,6 +87,14 @@ var createClass = function () {
   };
 }();
 
+
+
+
+
+
+
+
+
 var inherits = function (subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
@@ -105,6 +111,16 @@ var inherits = function (subClass, superClass) {
   if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 };
 
+
+
+
+
+
+
+
+
+
+
 var possibleConstructorReturn = function (self, call) {
   if (!self) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -112,10 +128,6 @@ var possibleConstructorReturn = function (self, call) {
 
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
-
-
-
-babelHelpers;
 
 /**
  * A class to be inherited from for components which interact with the DOM.
@@ -316,12 +328,12 @@ var BaseComponent = function (_TinyEmitter) {
 
   createClass(BaseComponent, [{
     key: 'breakpoint',
-    get: function get() {
+    get: function get$$1() {
       return BaseComponent.breakpoint;
     }
   }], [{
     key: 'breakpoint',
-    get: function get() {
+    get: function get$$1() {
       return {
         matches: BaseComponent.matches,
         get current() {

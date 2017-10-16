@@ -161,8 +161,7 @@ describe('Odo Responsive Images', () => {
       expect(spy.callCount).to.equal(2);
 
       requestAnimationFrame(() => {
-        expect(image.parentNode.classList.contains(
-          OdoResponsiveImages.ClassName.LOADED)).to.be.true;
+        expect(image.parentNode.classList.contains(OdoResponsiveImages.ClassName.LOADED)).to.be.true;
         spy.restore();
 
         // Cover _update

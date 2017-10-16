@@ -56,6 +56,7 @@ function prefixed(property, value) {
   var props = (property + ' ' + prefixes.join(ucProp + ' ') + ucProp).split(' ');
   var style = element.style;
 
+
   for (var i = 0; i < props.length; i++) {
     var prop = props[i];
     var before = style[prop];

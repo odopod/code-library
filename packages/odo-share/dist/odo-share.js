@@ -261,23 +261,11 @@ var services = Object.freeze({
 	email: email
 });
 
-var babelHelpers = {};
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 };
-
-
-
-
-
-
-
-
-
-babelHelpers;
 
 /**
  * Share component.
@@ -528,12 +516,14 @@ var Share = function () {
   Share._parseParamsFromInput = function _parseParamsFromInput(input, service) {
     var elementData = input.element ? input.element.dataset : {};
     var data = input.data;
+
     var obj = {};
 
     // Iterate through each valid paramater for the given service.
     Object.keys(service.params).forEach(function (param) {
       var config = service.params[param];
       var friendly = config.friendly;
+
       var value = null;
 
       // Check if the parameter was defined when `share` was called.

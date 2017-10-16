@@ -10,8 +10,10 @@ const EventType = window.OdoHelpers.events;
 const OdoDevice = window.OdoDevice;
 const Pointer = window.OdoPointer;
 
-function getFakeMouseEvent(x, y, type = EventType.MOUSEMOVE,
-  target = document.body, currentTarget = 'foo') {
+function getFakeMouseEvent(
+  x, y, type = EventType.MOUSEMOVE,
+  target = document.body, currentTarget = 'foo',
+) {
   return {
     type,
     target,
@@ -23,8 +25,10 @@ function getFakeMouseEvent(x, y, type = EventType.MOUSEMOVE,
   };
 }
 
-function getFakeTouchEvent(x, y, type = EventType.TOUCHMOVE,
-  target = document.body, currentTarget = 'foo') {
+function getFakeTouchEvent(
+  x, y, type = EventType.TOUCHMOVE,
+  target = document.body, currentTarget = 'foo',
+) {
   return {
     type,
     target,
@@ -42,8 +46,10 @@ function getFakeTouchEvent(x, y, type = EventType.TOUCHMOVE,
   };
 }
 
-function getFakePointerEvent(x, y, type = EventType.POINTERMOVE,
-  target = document.body, currentTarget = 'foo') {
+function getFakePointerEvent(
+  x, y, type = EventType.POINTERMOVE,
+  target = document.body, currentTarget = 'foo',
+) {
   return {
     type,
     target,
@@ -675,8 +681,7 @@ describe('The pointer component', function d() {
       expect(event.delta.y).to.equal(8);
       expect(event.deltaTime).to.equal(380);
       expect(event.velocity).to.deep.equal(new Coordinate(-118 / 380, 8 / 380));
-      expect(event.distance).to.equal(
-        Coordinate.distance(new Coordinate(), new Coordinate(-118, 8)));
+      expect(event.distance).to.equal(Coordinate.distance(new Coordinate(), new Coordinate(-118, 8)));
       expect(event.direction).to.equal(Pointer.Direction.LEFT);
       expect(event.isDirectionOnAxis).to.be.true;
       expect(event.didMoveOnAxis).to.be.true;

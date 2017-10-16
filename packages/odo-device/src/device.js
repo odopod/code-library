@@ -53,7 +53,7 @@ function prefixed(property, value) {
 
   // Create an array of prefixed properties. ['transform', 'WebkitTransform'].
   const props = (`${property} ${prefixes.join(ucProp + ' ')}${ucProp}`).split(' ');
-  const style = element.style;
+  const { style } = element;
 
   for (let i = 0; i < props.length; i++) {
     const prop = props[i];

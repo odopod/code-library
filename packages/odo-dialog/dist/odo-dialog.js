@@ -7,13 +7,19 @@
 TinyEmitter = TinyEmitter && TinyEmitter.hasOwnProperty('default') ? TinyEmitter['default'] : TinyEmitter;
 OdoDevice = OdoDevice && OdoDevice.hasOwnProperty('default') ? OdoDevice['default'] : OdoDevice;
 
-var babelHelpers = {};
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 };
+
+
+
+
+
+
+
+
 
 
 
@@ -33,6 +39,16 @@ var inherits = function (subClass, superClass) {
   if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 };
 
+
+
+
+
+
+
+
+
+
+
 var possibleConstructorReturn = function (self, call) {
   if (!self) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -41,10 +57,6 @@ var possibleConstructorReturn = function (self, call) {
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
 
-
-
-babelHelpers;
-
 /**
  * @fileoverview Makes an overflowing element scrollable and handles preventing
  * default events and stopping event propagation when the scrollable element is
@@ -52,8 +64,6 @@ babelHelpers;
  *
  * @author Glen Cheney
  */
-
-var body = document.body;
 
 /**
  * Makes the element scrollable with some smart listeners because iOS
@@ -88,8 +98,8 @@ var ScrollFix = function () {
 
 
   ScrollFix.prototype._registerEvents = function _registerEvents() {
-    body.addEventListener('touchstart', this._touchStartBound);
-    body.addEventListener('touchmove', this._touchMoveBound);
+    document.body.addEventListener('touchstart', this._touchStartBound);
+    document.body.addEventListener('touchmove', this._touchMoveBound);
     document.addEventListener('touchmove', this._preventDefaultBound);
   };
 
@@ -146,8 +156,8 @@ var ScrollFix = function () {
 
 
   ScrollFix.prototype.dispose = function dispose() {
-    body.removeEventListener('touchstart', this._touchStartBound);
-    body.removeEventListener('touchmove', this._touchMoveBound);
+    document.body.removeEventListener('touchstart', this._touchStartBound);
+    document.body.removeEventListener('touchmove', this._touchMoveBound);
     document.removeEventListener('touchmove', this._preventDefaultBound);
 
     this.element = null;

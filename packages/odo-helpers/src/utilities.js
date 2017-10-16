@@ -36,7 +36,7 @@ const utilities = {
    */
   getNumberOption(value, defaultValue) {
     const number = parseFloat(value);
-    return utilities.defaultsTo(number, defaultValue, !isNaN(number));
+    return utilities.defaultsTo(number, defaultValue, !Number.isNaN(number));
   },
 
   /**

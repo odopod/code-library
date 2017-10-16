@@ -195,7 +195,7 @@ class ObjectFit {
     }
 
     if (elements.length) {
-      for (let i = 0, length = elements.length; i < length; i++) {
+      for (let i = 0; i < elements.length; i++) {
         new ObjectFit(elements[i], type); // eslint-disable-line no-new
       }
     } else {

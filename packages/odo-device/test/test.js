@@ -24,9 +24,7 @@ describe('The OdoDevice Component', function device() {
   });
 
   it('can hyphenate camel cased strings', () => {
-    expect(
-      OdoDevice.hyphenate('WebkitTapHighlightColor'),
-    ).to.equal('-webkit-tap-highlight-color');
+    expect(OdoDevice.hyphenate('WebkitTapHighlightColor')).to.equal('-webkit-tap-highlight-color');
 
     expect(OdoDevice.hyphenate('msTransform')).to.equal('-ms-transform');
   });

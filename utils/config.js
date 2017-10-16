@@ -36,15 +36,7 @@ const BABEL_CONFIG = {
     ['babel-plugin-transform-proto-to-assign'],
   ],
   // https://github.com/rollup/rollup-plugin-babel/issues/100
-  // https://stackoverflow.com/a/13405933/373422
-  externalHelpersWhitelist: [
-    'createClass',
-    'classCallCheck',
-    'inherits',
-    'possibleConstructorReturn',
-    'toConsumableArray',
-    '_typeof',
-  ],
+  // https://github.com/rollup/rollup/issues/1595
 };
 
 // Deep clone to break reference to the plugins array.

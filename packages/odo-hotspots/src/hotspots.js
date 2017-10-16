@@ -48,7 +48,7 @@ class Hotspots extends TinyEmitter {
    *     main element in this class.
    */
   _getFirstBodyDescendant() {
-    let element = this.element;
+    let { element } = this;
     while (element) {
       const parent = element.parentElement;
       if (parent === document.body) {

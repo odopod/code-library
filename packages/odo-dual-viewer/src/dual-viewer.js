@@ -156,7 +156,8 @@ class DualViewer extends TinyEmitter {
         Math.round(containingRect.left - mainRect.left),
         containingEl.offsetTop,
         containingEl.offsetWidth,
-        this._containerHeight);
+        this._containerHeight,
+      );
     }
 
     this._scrubberLimits = limits;
@@ -391,12 +392,18 @@ class DualViewer extends TinyEmitter {
     this._previousPercent = this._draggable.getPosition(true)[this._dragAxis] / 100;
     this._isResting = true;
 
-    this.element.classList.toggle(DualViewer.ClassName.START,
-      this._position === DualViewer.Position.START);
-    this.element.classList.toggle(DualViewer.ClassName.END,
-      this._position === DualViewer.Position.END);
-    this.element.classList.toggle(DualViewer.ClassName.CENTERED,
-      this._position === DualViewer.Position.CENTER);
+    this.element.classList.toggle(
+      DualViewer.ClassName.START,
+      this._position === DualViewer.Position.START,
+    );
+    this.element.classList.toggle(
+      DualViewer.ClassName.END,
+      this._position === DualViewer.Position.END,
+    );
+    this.element.classList.toggle(
+      DualViewer.ClassName.CENTERED,
+      this._position === DualViewer.Position.CENTER,
+    );
 
     // Emit event.
     this.emit(DualViewer.EventType.CAME_TO_REST, {

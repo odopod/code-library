@@ -82,8 +82,10 @@ class Stepper {
     this._requestId = requestAnimationFrame(this._handler);
 
     // Tick.
-    this.options.step.call(this.options.context,
-      this.options.start + (this._animationAmount * percent), percent);
+    this.options.step.call(
+      this.options.context,
+      this.options.start + (this._animationAmount * percent), percent,
+    );
   }
 
   /**

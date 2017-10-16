@@ -139,7 +139,8 @@ class Draggable extends TinyEmitter {
   _getRelativeZero() {
     return Coordinate.difference(
       this._getDraggablePosition(),
-      this._getOffsetCorrection());
+      this._getOffsetCorrection(),
+    );
   }
 
   _getDraggablePosition() {
@@ -186,8 +187,8 @@ class Draggable extends TinyEmitter {
    * @return {number} The clamped number.
    */
   static _limitValue(value, rectPosition, rectSize) {
-    const side = utilities.defaultsTo(rectPosition, null, !isNaN(rectPosition));
-    const dimension = utilities.defaultsTo(rectSize, 0, !isNaN(rectSize));
+    const side = utilities.defaultsTo(rectPosition, null, !Number.isNaN(rectPosition));
+    const dimension = utilities.defaultsTo(rectSize, 0, !Number.isNaN(rectSize));
     const max = utilities.defaultsTo(side + dimension, Infinity, side !== null);
     const min = utilities.defaultsTo(side, -Infinity, side !== null);
     return math.clamp(value, min, max);
@@ -421,7 +422,8 @@ class Draggable extends TinyEmitter {
     if (optAsPercent) {
       return new Coordinate(
         (this._currentPosition.x / this._parentEl.offsetWidth) * 100,
-        (this._currentPosition.y / this._parentEl.offsetHeight) * 100);
+        (this._currentPosition.y / this._parentEl.offsetHeight) * 100,
+      );
     }
     return this._currentPosition;
   }

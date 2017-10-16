@@ -21,7 +21,7 @@ import TinyEmitter from 'tiny-emitter';
 let supportsPassiveOption = false;
 try {
   window.addEventListener('test', null, {
-    get passive/* istanbul ignore next */() {
+    get passive/* istanbul ignore next */() { // eslint-disable-line getter-return
       supportsPassiveOption = true;
     },
   });
@@ -108,8 +108,10 @@ class ScrollFeedback extends TinyEmitter {
 
     if (this.canScroll) {
       clearTimeout(this.scrollTimeout);
-      this.scrollTimeout = setTimeout(this._handleScrollTimerExpired,
-        this.options.scrollTimerDelay);
+      this.scrollTimeout = setTimeout(
+        this._handleScrollTimerExpired,
+        this.options.scrollTimerDelay,
+      );
 
       if (this._intentToNavigate(this.wheelAmount)) {
         this._triggerNavigation(this.wheelAmount);

@@ -51,8 +51,7 @@ class Tabs extends TinyEmitter {
      * Tab pane elements.
      * @type {Array.<Element>}
      */
-    this.panes = this.anchors.map(
-      anchor => document.getElementById(anchor.getAttribute('href').substring(1)));
+    this.panes = this.anchors.map(anchor => document.getElementById(anchor.getAttribute('href').substring(1)));
 
     /**
      * Wrapper for the panes.
@@ -95,8 +94,7 @@ class Tabs extends TinyEmitter {
       return hashIndex;
     }
 
-    const startIndex = this.panes.findIndex(
-      pane => pane.matches('.' + Tabs.ClassName.IS_SELECTED));
+    const startIndex = this.panes.findIndex(pane => pane.matches('.' + Tabs.ClassName.IS_SELECTED));
 
     if (startIndex > -1) {
       return startIndex;

@@ -64,23 +64,11 @@ var debounce = function debounce(func, wait, immediate) {
   return debounced;
 };
 
-var babelHelpers = {};
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 };
-
-
-
-
-
-
-
-
-
-babelHelpers;
 
 /**
  * If the first parameter is not an array, return an array containing the first
@@ -111,10 +99,8 @@ function transferChildren(fromElement, toElement) {
   // and will be updated when an element is removed from it.
   var frag = document.createDocumentFragment();
   var children = Array.from(fromElement.childNodes);
-  var length = children.length;
-  var i = 0;
 
-  for (; i < length; i++) {
+  for (var i = 0; i < children.length; i++) {
     if (children[i].nodeName !== 'NOSCRIPT') {
       frag.appendChild(children[i]);
     }

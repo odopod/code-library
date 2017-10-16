@@ -277,7 +277,7 @@ class Affix {
    * Reset everything, cache offsets, and recalculate.
    */
   update() {
-    const scrollTop = this.element.scrollTop;
+    const { scrollTop } = this.element;
     this.unstick();
     this.reset();
     this.read();

@@ -870,8 +870,10 @@ class Carousel extends TinyEmitter {
 
     if (this._hasSlideChildren && this.isLastSlide()) {
       // Adjust the position again if there are slide children in the last slide.
-      position = this._getPositionForSlideChildren(destinationSlide,
-        destinationPosition, carouselSize);
+      position = this._getPositionForSlideChildren(
+        destinationSlide,
+        destinationPosition, carouselSize,
+      );
     }
 
     return position;
@@ -889,7 +891,9 @@ class Carousel extends TinyEmitter {
     // Size of the combined width/height + margins of the slide children
     // within the destination slide.
     const childrenSum = style.getElementsSize(
-      this._getSlideChildren(destinationSlide), this._dimensionAttr);
+      this._getSlideChildren(destinationSlide),
+      this._dimensionAttr,
+    );
 
     // width|height of the carousel slide.
     const slideSize = style.getSize(destinationSlide)[this._dimensionAttr];
@@ -970,8 +974,10 @@ class Carousel extends TinyEmitter {
   startSlideshow() {
     // Create the timer if it doesn't already exist.
     if (!this._timer) {
-      this._timer = new Timer(this._slideshowTimerExpired.bind(this),
-        this.options.slideshowSpeed, true);
+      this._timer = new Timer(
+        this._slideshowTimerExpired.bind(this),
+        this.options.slideshowSpeed, true,
+      );
     }
 
     this._timer.start();
@@ -1122,7 +1128,8 @@ class Carousel extends TinyEmitter {
       Carousel.EventType.SLIDE_START,
       this,
       this._getLogicalIndex(this.lastDomIndex),
-      this._getLogicalIndex(this.domIndex)));
+      this._getLogicalIndex(this.domIndex),
+    ));
   }
 
   /**
@@ -1149,11 +1156,13 @@ class Carousel extends TinyEmitter {
       // doesn't fire on iOS 7 Safari when the carousel has only been dragged a
       // few pixels. It's set to go off ~2 frames after the transition end event
       // should have occurred.
-      this._transitionId = animation.onTransitionEnd(this._carouselEl,
+      this._transitionId = animation.onTransitionEnd(
+        this._carouselEl,
         this._transitionDone,
         this,
         OdoDevice.Dom.TRANSFORM,
-        this.options.animationSpeed + Carousel.TRANSITION_END_WAIT);
+        this.options.animationSpeed + Carousel.TRANSITION_END_WAIT,
+      );
 
       this._toNewSlide();
     }
@@ -1167,9 +1176,7 @@ class Carousel extends TinyEmitter {
     const matrix = getComputedStyle(this._carouselEl)[OdoDevice.Dom.TRANSFORM];
 
     // Round to 1 decimal place because the `_startEdge` can be a decimal.
-    const translate = Math.round(
-      getTranslate(matrix)[this._translateAxis.toLowerCase()] * 10,
-    ) / 10;
+    const translate = Math.round(getTranslate(matrix)[this._translateAxis.toLowerCase()] * 10) / 10;
 
     const slideOffset = this.getSlide(this.getSelectedIndex())[this._offsetPosition];
     return slideOffset + translate;
@@ -1409,22 +1416,26 @@ class Carousel extends TinyEmitter {
       // Previous previous slide.
       slide.classList.toggle(
         Carousel.Classes.PAST_SLIDE,
-        i === past && selectedIndex !== past && previous !== past);
+        i === past && selectedIndex !== past && previous !== past,
+      );
 
       // Previous slide.
       slide.classList.toggle(
         Carousel.Classes.PREVIOUS_SLIDE,
-        i === previous && selectedIndex !== previous);
+        i === previous && selectedIndex !== previous,
+      );
 
       // Next slide.
       slide.classList.toggle(
         Carousel.Classes.NEXT_SLIDE,
-        i === next && selectedIndex !== next);
+        i === next && selectedIndex !== next,
+      );
 
       // Next next slide.
       slide.classList.toggle(
         Carousel.Classes.FUTURE_SLIDE,
-        i === future && selectedIndex !== future && next !== future);
+        i === future && selectedIndex !== future && next !== future,
+      );
     });
   }
 
@@ -1520,7 +1531,7 @@ class Carousel extends TinyEmitter {
    * @private
    */
   _handleClick(evt) {
-    const target = evt.target;
+    const { target } = evt;
     let willNavigate = false;
 
     // Determine what was clicked.

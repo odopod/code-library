@@ -263,8 +263,7 @@ describe('the OdoDropdown Component', function dropdown() {
         instance.disableOptionByValue('2011', true);
         instance._showOptions();
         instance._selectOption(disabledOption);
-        expect(disabledOption.classList.contains(
-          OdoDropdown.Classes.OPTION_DISABLED)).to.be.true;
+        expect(disabledOption.classList.contains(OdoDropdown.Classes.OPTION_DISABLED)).to.be.true;
         expect(hideSpy.called).to.be.false;
       });
 

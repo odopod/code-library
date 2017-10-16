@@ -308,8 +308,10 @@ class Pointer extends TinyEmitter {
       this._addDragHandlers(evt.type);
 
       // Every interval, calculate the current velocity of the drag.
-      this._velocityTrackerId = setInterval(this._trackVelocity.bind(this),
-        Pointer.VELOCITY_INTERVAL);
+      this._velocityTrackerId = setInterval(
+        this._trackVelocity.bind(this),
+        Pointer.VELOCITY_INTERVAL,
+      );
     }
   }
 
@@ -650,7 +652,7 @@ class Pointer extends TinyEmitter {
 
     // Use the first touch for the pageX and pageY.
     if (Pointer.isTouchEvent(evt)) {
-      pagePoints = evt.changedTouches[0];
+      pagePoints = evt.changedTouches[0]; // eslint-disable-line prefer-destructuring
     } else {
       pagePoints = evt;
     }

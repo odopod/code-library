@@ -110,10 +110,14 @@ class Video {
       .addEventListener('click', this._onFullscreenToggle);
 
     if (Video.screenfull.enabled) {
-      document.addEventListener(Video.screenfull.raw.fullscreenchange,
-        this._onFullscreenChange);
-      document.addEventListener(Video.screenfull.raw.fullscreenerror,
-        this._onFullscreenChange);
+      document.addEventListener(
+        Video.screenfull.raw.fullscreenchange,
+        this._onFullscreenChange,
+      );
+      document.addEventListener(
+        Video.screenfull.raw.fullscreenerror,
+        this._onFullscreenChange,
+      );
 
       // iOS handles full screen differently.
     } else if (this.videoEl.webkitSupportsFullscreen) {

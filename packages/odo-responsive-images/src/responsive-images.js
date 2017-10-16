@@ -31,10 +31,8 @@ function transferChildren(fromElement, toElement) {
   // and will be updated when an element is removed from it.
   const frag = document.createDocumentFragment();
   const children = Array.from(fromElement.childNodes);
-  const length = children.length;
-  let i = 0;
 
-  for (; i < length; i++) {
+  for (let i = 0; i < children.length; i++) {
     if (children[i].nodeName !== 'NOSCRIPT') {
       frag.appendChild(children[i]);
     }

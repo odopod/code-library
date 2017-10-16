@@ -126,14 +126,22 @@ const WindowEvents = {
   },
 };
 
-const resize = debounce(WindowEvents._callbacks.resize,
-  WindowEvents.Timing.DEBOUNCE_TIME);
-const leadingResize = debounce(WindowEvents._callbacks.leadingResize,
-  WindowEvents.Timing.DEBOUNCE_TIME, true);
-const scrolled = throttle(WindowEvents._callbacks.scroll,
-  WindowEvents.Timing.THROTTLE_TIME_DEFAULT);
-const fastScroll = throttle(WindowEvents._callbacks.fastScroll,
-  WindowEvents.Timing.THROTTLE_TIME_FAST);
+const resize = debounce(
+  WindowEvents._callbacks.resize,
+  WindowEvents.Timing.DEBOUNCE_TIME,
+);
+const leadingResize = debounce(
+  WindowEvents._callbacks.leadingResize,
+  WindowEvents.Timing.DEBOUNCE_TIME, true,
+);
+const scrolled = throttle(
+  WindowEvents._callbacks.scroll,
+  WindowEvents.Timing.THROTTLE_TIME_DEFAULT,
+);
+const fastScroll = throttle(
+  WindowEvents._callbacks.fastScroll,
+  WindowEvents.Timing.THROTTLE_TIME_FAST,
+);
 
 WindowEvents._resizeCallback = () => {
   leadingResize();

@@ -18,7 +18,7 @@ function hasDirection(direction) {
 }
 
 function finiteOrZero(velocity) {
-  return isFinite(velocity) ? velocity : 0;
+  return Number.isFinite(velocity) ? velocity : 0;
 }
 
 /**
@@ -33,7 +33,8 @@ function finiteOrZero(velocity) {
 function getVelocity(deltaTime, deltaX, deltaY) {
   return new Coordinate(
     finiteOrZero(deltaX / deltaTime),
-    finiteOrZero(deltaY / deltaTime));
+    finiteOrZero(deltaY / deltaTime),
+  );
 }
 
 function getTheDirection(value1, value2, isGreater, isLess, isEqual) {
@@ -54,12 +55,16 @@ function getTheDirection(value1, value2, isGreater, isLess, isEqual) {
  */
 function getDirection(coord1, coord2) {
   if (Math.abs(coord1.x - coord2.x) >= Math.abs(coord1.y - coord2.y)) {
-    return getTheDirection(coord1.x, coord2.x, settings.Direction.LEFT,
-      settings.Direction.RIGHT, settings.Direction.NONE);
+    return getTheDirection(
+      coord1.x, coord2.x, settings.Direction.LEFT,
+      settings.Direction.RIGHT, settings.Direction.NONE,
+    );
   }
 
-  return getTheDirection(coord1.y, coord2.y, settings.Direction.UP,
-    settings.Direction.DOWN, settings.Direction.NONE);
+  return getTheDirection(
+    coord1.y, coord2.y, settings.Direction.UP,
+    settings.Direction.DOWN, settings.Direction.NONE,
+  );
 }
 
 function isOnAxis(axis, direction) {
@@ -184,8 +189,10 @@ class PointerEvent {
      * Whether the draggable element moved along the dragging axis at all.
      * @type {boolean}
      */
-    this.didMoveOnAxis = didMoveOnAxis(options.axis, this.direction,
-      this.delta.x, this.delta.y);
+    this.didMoveOnAxis = didMoveOnAxis(
+      options.axis, this.direction,
+      this.delta.x, this.delta.y,
+    );
 
     /**
      * Direction of drag which excludes directions not on its axis.

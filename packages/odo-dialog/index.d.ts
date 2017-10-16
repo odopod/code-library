@@ -124,19 +124,19 @@ declare namespace OdoDialog {
    * @param {OdoDialog.Options} [options] Object of all dialog options. Is optional.
    * @return {OdoDialog[]}
    */
-  static function initializeAll(options?: OdoDialog.Options): OdoDialog[];
+  function initializeAll(options?: OdoDialog.Options): OdoDialog[];
 
   /**
    * Clear all references to dialogs so there are no duplicates.
    */
-  static function disposeAll(): void;
+  function disposeAll(): void;
 
   /**
    * Retrieve a dialog instance by its id.
    * @param {string} id Id of the dialog.
    * @return {OdoDialog} The dialog or undefined if there is no dialog with the given id.
    */
-  static function getDialogById(id: string): OdoDialog | undefined;
+  function getDialogById(id: string): OdoDialog | undefined;
 
   /**
    * Array of dialog instances.

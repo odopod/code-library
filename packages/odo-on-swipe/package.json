@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-on-swipe",
   "description": "Provide event hook for swipes on an element.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/odo-on-swipe.js",
   "odoModule": "src/on-swipe.js",
   "author": "Odopod",
@@ -12,7 +12,7 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-pointer": "^1.0.1"
+    "@odopod/odo-pointer": "^1.0.2"
   },
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-on-swipe",
   "files": [

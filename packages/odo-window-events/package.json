@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-window-events",
   "description": "Reusable, throttled events on the window object.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/odo-window-events.js",
   "odoModule": "src/window-events.js",
   "author": "Odopod",

@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-dual-viewer",
   "description": "A draggable UI component which reveals two panes.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/odo-dual-viewer.js",
   "style": "css/odo-dual-viewer.css",
   "odoModule": "src/dual-viewer.js",
@@ -13,10 +13,10 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-draggable": "^1.0.1",
-    "@odopod/odo-helpers": "^1.0.1",
-    "@odopod/odo-object-fit": "^1.0.1",
-    "@odopod/odo-window-events": "^1.0.1",
+    "@odopod/odo-draggable": "^1.0.2",
+    "@odopod/odo-helpers": "^1.0.2",
+    "@odopod/odo-object-fit": "^1.0.2",
+    "@odopod/odo-window-events": "^1.0.2",
     "tiny-emitter": "^2.0.1"
   },
   "devDependencies": {

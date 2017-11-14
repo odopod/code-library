@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-hotspots",
   "description": "A component which positions and opens hotspots.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/odo-hotspots.js",
   "style": "css/odo-hotspots.css",
   "odoModule": "src/hotspots.js",

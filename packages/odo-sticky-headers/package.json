@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-sticky-headers",
   "description": "A mananger for sticky things",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/odo-sticky-headers.js",
   "odoModule": "src/sticky-headers.js",
   "author": "Odopod",
@@ -13,7 +13,7 @@
   ],
   "dependencies": {
     "@odopod/odo-scroll-animation": "^1.0.1",
-    "@odopod/odo-window-events": "^1.0.1"
+    "@odopod/odo-window-events": "^1.0.2"
   },
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-sticky-headers",
   "files": [

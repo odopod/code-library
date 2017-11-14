@@ -158,7 +158,7 @@ var ScrollFeedback = function (_TinyEmitter) {
     document.removeEventListener('keydown', this._handleKeydown, this._listenerOptions);
 
     document.body.removeEventListener('touchstart', this._handleTouchStart, this._listenerOptions);
-    document.body.removeEventListener('touchmove', this._touchmoveHandler, this._listenerOptions);
+    document.body.removeEventListener('touchmove', this._handleTouchMove, this._listenerOptions);
     document.body.removeEventListener('touchend', this._resume, this._listenerOptions);
   };
 

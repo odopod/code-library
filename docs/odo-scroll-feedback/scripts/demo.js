@@ -3,7 +3,7 @@
 
 var OdoScrollFeedback = window.OdoScrollFeedback;
 
-var scrollFeedback = new OdoScrollFeedback(document.body, {
+window.scrollFeedback = new OdoScrollFeedback(document.body, {
   ignore: '.js-free-scroll'
 });
 
@@ -21,7 +21,7 @@ var scrollToIndex = function scrollToIndex(index) {
     return -0.5 * (Math.cos(Math.PI * k) - 1);
   };
 
-  var step = function step(value /* , percent*/) {
+  var step = function step(value /* , percent */) {
     window.scrollTo(0, value);
   };
 
@@ -56,7 +56,7 @@ var scrollToIndex = function scrollToIndex(index) {
   requestAnimationFrame(looper);
 };
 
-scrollFeedback.on(OdoScrollFeedback.Events.NAVIGATE, function (data) {
+window.scrollFeedback.on(OdoScrollFeedback.Events.NAVIGATE, function (data) {
   if (isScrolling) {
     return;
   }
@@ -140,10 +140,10 @@ var isPaused = false;
 document.getElementById('pause-toggle').addEventListener('click', function () {
   if (isPaused) {
     document.getElementById('pause-toggle').textContent = 'Pause';
-    scrollFeedback.resume();
+    window.scrollFeedback.resume();
   } else {
     document.getElementById('pause-toggle').textContent = 'Resume';
-    scrollFeedback.pause();
+    window.scrollFeedback.pause();
   }
 
   isPaused = !isPaused;

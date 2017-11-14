@@ -1,6 +1,6 @@
 const OdoScrollFeedback = window.OdoScrollFeedback;
 
-const scrollFeedback = new OdoScrollFeedback(document.body, {
+window.scrollFeedback = new OdoScrollFeedback(document.body, {
   ignore: '.js-free-scroll',
 });
 
@@ -51,7 +51,7 @@ const scrollToIndex = (index) => {
   requestAnimationFrame(looper);
 };
 
-scrollFeedback.on(OdoScrollFeedback.Events.NAVIGATE, (data) => {
+window.scrollFeedback.on(OdoScrollFeedback.Events.NAVIGATE, (data) => {
   if (isScrolling) {
     return;
   }
@@ -133,10 +133,10 @@ let isPaused = false;
 document.getElementById('pause-toggle').addEventListener('click', () => {
   if (isPaused) {
     document.getElementById('pause-toggle').textContent = 'Pause';
-    scrollFeedback.resume();
+    window.scrollFeedback.resume();
   } else {
     document.getElementById('pause-toggle').textContent = 'Resume';
-    scrollFeedback.pause();
+    window.scrollFeedback.pause();
   }
 
   isPaused = !isPaused;

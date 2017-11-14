@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Video [1.1.0] - 2017-11-13
+### Added
+* Add title attributes to play toggle, volume toggle, and fullscreen toggle buttons. You can change the titles by overriding `OdoVideo.ControlsCreator.LABEL`.
+
+## Scroll Feedback [1.0.2] - 2017-11-13
+### Fixed
+* Fix `disable()` not removing a `touchmove` event listener, preventing touch devices from scrolling the page when they should have been able to.
+
+## Dialog [1.1.2] - 2017-11-13
+### Fixed
+* Fix type defintions for static methods.
+
 ## Carousel [1.0.1] - 2017-09-01
 ### Fixed
 * Handle a case where `getComputedStyle` returns `"none"` when a transform has not yet been applied to the element.

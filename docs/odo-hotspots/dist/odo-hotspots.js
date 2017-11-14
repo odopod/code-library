@@ -91,13 +91,19 @@ function setUniqueId(element) {
   }
 }
 
-var babelHelpers = {};
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 };
+
+
+
+
+
+
+
+
 
 
 
@@ -117,6 +123,16 @@ var inherits = function (subClass, superClass) {
   if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 };
 
+
+
+
+
+
+
+
+
+
+
 var possibleConstructorReturn = function (self, call) {
   if (!self) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -124,10 +140,6 @@ var possibleConstructorReturn = function (self, call) {
 
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
-
-
-
-babelHelpers;
 
 var Hotspot = function () {
   /**
@@ -479,6 +491,7 @@ var Hotspots = function (_TinyEmitter) {
 
   Hotspots.prototype._getFirstBodyDescendant = function _getFirstBodyDescendant() {
     var element = this.element;
+
     while (element) {
       var parent = element.parentElement;
       if (parent === document.body) {

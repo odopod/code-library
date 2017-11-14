@@ -7,8 +7,6 @@
 OdoWindowEvents = OdoWindowEvents && OdoWindowEvents.hasOwnProperty('default') ? OdoWindowEvents['default'] : OdoWindowEvents;
 OdoScrollAnimation = OdoScrollAnimation && OdoScrollAnimation.hasOwnProperty('default') ? OdoScrollAnimation['default'] : OdoScrollAnimation;
 
-var babelHelpers = {};
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -32,14 +30,6 @@ var createClass = function () {
     return Constructor;
   };
 }();
-
-
-
-
-
-
-
-babelHelpers;
 
 /**
  * @fileoverview This class describes a sticky header element. It caches the
@@ -593,7 +583,7 @@ var StickyHeaders = function () {
 
   createClass(StickyHeaders, [{
     key: 'uiOverlap',
-    get: function get() {
+    get: function get$$1() {
       if (this._customOverlap) {
         return this._customOverlap();
       }
@@ -606,7 +596,7 @@ var StickyHeaders = function () {
     * @param {function():number} fn
     */
     ,
-    set: function set(fn) {
+    set: function set$$1(fn) {
       this._customOverlap = fn;
       this.update();
     }
@@ -619,7 +609,7 @@ var StickyHeaders = function () {
 
   }, {
     key: 'uiOffset',
-    get: function get() {
+    get: function get$$1() {
       if (this._customOffset) {
         return this._customOffset();
       }
@@ -632,7 +622,7 @@ var StickyHeaders = function () {
      * @param {function():number} fn
      */
     ,
-    set: function set(fn) {
+    set: function set$$1(fn) {
       this._customOffset = fn;
     }
 
@@ -643,7 +633,7 @@ var StickyHeaders = function () {
 
   }, {
     key: 'stickyHolder',
-    get: function get() {
+    get: function get$$1() {
       return this._holder;
     }
 
@@ -652,7 +642,7 @@ var StickyHeaders = function () {
      * @param {?Element} element Element which sticky items will be appended to.
      */
     ,
-    set: function set(element) {
+    set: function set$$1(element) {
       this._holder = isElement(element) ? element : null;
     }
 
@@ -663,7 +653,7 @@ var StickyHeaders = function () {
 
   }, {
     key: 'mode',
-    get: function get() {
+    get: function get$$1() {
       return this._mode;
     }
 
@@ -672,7 +662,7 @@ var StickyHeaders = function () {
      * @param {StickyHeaders.Mode} mode A mode.
      */
     ,
-    set: function set(mode) {
+    set: function set$$1(mode) {
       this._mode = mode;
     }
   }]);

@@ -7,23 +7,11 @@
 OdoDevice = OdoDevice && OdoDevice.hasOwnProperty('default') ? OdoDevice['default'] : OdoDevice;
 OdoViewport = OdoViewport && OdoViewport.hasOwnProperty('default') ? OdoViewport['default'] : OdoViewport;
 
-var babelHelpers = {};
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 };
-
-
-
-
-
-
-
-
-
-babelHelpers;
 
 /**
  * @fileoverview Fade elements in and up when they come into view. Waits for

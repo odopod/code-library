@@ -7,8 +7,6 @@
 OdoDevice = OdoDevice && OdoDevice.hasOwnProperty('default') ? OdoDevice['default'] : OdoDevice;
 OdoBaseComponent = OdoBaseComponent && OdoBaseComponent.hasOwnProperty('default') ? OdoBaseComponent['default'] : OdoBaseComponent;
 
-var babelHelpers = {};
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -33,6 +31,14 @@ var createClass = function () {
   };
 }();
 
+
+
+
+
+
+
+
+
 var inherits = function (subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
@@ -49,6 +55,16 @@ var inherits = function (subClass, superClass) {
   if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 };
 
+
+
+
+
+
+
+
+
+
+
 var possibleConstructorReturn = function (self, call) {
   if (!self) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -56,10 +72,6 @@ var possibleConstructorReturn = function (self, call) {
 
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
-
-
-
-babelHelpers;
 
 var id = 0;
 function uniqueId() {
@@ -195,6 +207,7 @@ var Dropdown = function (_OdoBaseComponent) {
     if (this._label) {
       odoHelpers.dom.giveId(this._label, this.id + '-label');
       var _id = this._label.id;
+
       this._optionsContainer.setAttribute('aria-labelledby', _id);
     }
 
@@ -594,7 +607,7 @@ var Dropdown = function (_OdoBaseComponent) {
 
   createClass(Dropdown, [{
     key: 'selectedIndex',
-    get: function get() {
+    get: function get$$1() {
       return this._select.selectedIndex;
     }
 
@@ -603,7 +616,7 @@ var Dropdown = function (_OdoBaseComponent) {
      * @param {number} index Index to select.
      */
     ,
-    set: function set(index) {
+    set: function set$$1(index) {
       this.value = this._select.options[index].value;
     }
 
@@ -614,7 +627,7 @@ var Dropdown = function (_OdoBaseComponent) {
 
   }, {
     key: 'select',
-    get: function get() {
+    get: function get$$1() {
       return this._select;
     }
 
@@ -625,7 +638,7 @@ var Dropdown = function (_OdoBaseComponent) {
 
   }, {
     key: 'button',
-    get: function get() {
+    get: function get$$1() {
       return this._button;
     }
 
@@ -636,7 +649,7 @@ var Dropdown = function (_OdoBaseComponent) {
 
   }, {
     key: 'selectedText',
-    get: function get() {
+    get: function get$$1() {
       return this._select.options[this._select.selectedIndex].text;
     }
 
@@ -647,7 +660,7 @@ var Dropdown = function (_OdoBaseComponent) {
 
   }, {
     key: 'value',
-    get: function get() {
+    get: function get$$1() {
       return this._select.value;
     }
 
@@ -656,7 +669,7 @@ var Dropdown = function (_OdoBaseComponent) {
      * @param {string} value Value which matches one of the options.
      */
     ,
-    set: function set(value) {
+    set: function set$$1(value) {
       // Remove the old selected class.
       if (this._selectedOption) {
         this._selectedOption.classList.remove(Dropdown.Classes.OPTION_SELECTED);
@@ -694,7 +707,7 @@ var Dropdown = function (_OdoBaseComponent) {
 
   }, {
     key: 'disabled',
-    get: function get() {
+    get: function get$$1() {
       return this.select.disabled;
     }
 
@@ -703,7 +716,7 @@ var Dropdown = function (_OdoBaseComponent) {
      * @param {boolean} isDisabled Whether it's disabled or not.
      */
     ,
-    set: function set(isDisabled) {
+    set: function set$$1(isDisabled) {
       this.select.disabled = isDisabled;
       this.button.disabled = isDisabled;
     }

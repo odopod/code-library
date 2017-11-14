@@ -83,8 +83,6 @@ var settings = {
   DRAG_THRESHOLD: 5
 };
 
-var babelHelpers = {};
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -109,6 +107,14 @@ var createClass = function () {
   };
 }();
 
+
+
+
+
+
+
+
+
 var inherits = function (subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
@@ -125,6 +131,16 @@ var inherits = function (subClass, superClass) {
   if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 };
 
+
+
+
+
+
+
+
+
+
+
 var possibleConstructorReturn = function (self, call) {
   if (!self) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
@@ -132,10 +148,6 @@ var possibleConstructorReturn = function (self, call) {
 
   return call && (typeof call === "object" || typeof call === "function") ? call : self;
 };
-
-
-
-babelHelpers;
 
 function isXAxis(axis) {
   return axis === settings.Axis.X;
@@ -154,7 +166,7 @@ function hasDirection(direction) {
 }
 
 function finiteOrZero(velocity) {
-  return isFinite(velocity) ? velocity : 0;
+  return Number.isFinite(velocity) ? velocity : 0;
 }
 
 /**
@@ -1009,7 +1021,7 @@ var Pointer = function (_TinyEmitter) {
 
     // Use the first touch for the pageX and pageY.
     if (Pointer.isTouchEvent(evt)) {
-      pagePoints = evt.changedTouches[0];
+      pagePoints = evt.changedTouches[0]; // eslint-disable-line prefer-destructuring
     } else {
       pagePoints = evt;
     }
@@ -1023,7 +1035,7 @@ var Pointer = function (_TinyEmitter) {
 
   createClass(Pointer, [{
     key: 'element',
-    get: function get() {
+    get: function get$$1() {
       return this._el;
     }
 
@@ -1034,7 +1046,7 @@ var Pointer = function (_TinyEmitter) {
 
   }, {
     key: 'isEnabled',
-    get: function get() {
+    get: function get$$1() {
       return this._enabled;
     }
 
@@ -1043,12 +1055,12 @@ var Pointer = function (_TinyEmitter) {
      * @param {boolean} enabled Whether dragger is enabled.
      */
     ,
-    set: function set(enabled) {
+    set: function set$$1(enabled) {
       this._enabled = enabled;
     }
   }, {
     key: 'friction',
-    get: function get() {
+    get: function get$$1() {
       return this._friction;
     }
 
@@ -1057,7 +1069,7 @@ var Pointer = function (_TinyEmitter) {
      * @param {number} friction A number between [1, 0].
      */
     ,
-    set: function set(friction) {
+    set: function set$$1(friction) {
       this._friction = friction;
     }
   }]);

@@ -4,8 +4,6 @@
 	(global.OdoObjectFit = factory());
 }(this, (function () { 'use strict';
 
-var babelHelpers = {};
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -29,14 +27,6 @@ var createClass = function () {
     return Constructor;
   };
 }();
-
-
-
-
-
-
-
-babelHelpers;
 
 /**
  * @fileoverview A helper which fits media elements (img, video). It polyfills
@@ -255,7 +245,7 @@ var ObjectFit = function () {
     }
 
     if (elements.length) {
-      for (var i = 0, length = elements.length; i < length; i++) {
+      for (var i = 0; i < elements.length; i++) {
         new ObjectFit(elements[i], type); // eslint-disable-line no-new
       }
     } else {
@@ -265,7 +255,7 @@ var ObjectFit = function () {
 
   createClass(ObjectFit, [{
     key: '_loadEventName',
-    get: function get() {
+    get: function get$$1() {
       return this._isVideo ? 'loadedmetadata' : 'load';
     }
   }]);

@@ -17,6 +17,7 @@ class Controls {
       }),
       playToggle: this.createElement('button', {
         className: settings.Classes.PLAY_TOGGLE,
+        title: Controls.LABEL.PLAY_TOGGLE,
       }),
       playControl: this.createElement('span', {
         className: settings.Classes.PLAY_CONTROL,
@@ -41,6 +42,7 @@ class Controls {
       }),
       volumeToggle: this.createElement('button', {
         className: settings.Classes.VOLUME,
+        title: Controls.LABEL.VOLUME,
       }),
       muteControl: this.createElement('span', {
         className: settings.Classes.MUTE_CONTROL,
@@ -52,6 +54,7 @@ class Controls {
       }),
       fullScreenToggle: this.createElement('button', {
         className: settings.Classes.FULLSCREEN,
+        title: Controls.LABEL.FULLSCREEN,
       }),
       enterFullscreen: this.createElement('span', {
         className: settings.Classes.FULLSCREEN_CONTROL,
@@ -125,5 +128,11 @@ class Controls {
     elements.controls.classList.add(settings.Classes.CONTROLS_STACKED);
   }
 }
+
+Controls.LABEL = {
+  PLAY_TOGGLE: 'toggle video playback.',
+  VOLUME: 'toggle mute for video.',
+  FULLSCREEN: 'toggle video fullscreen mode.',
+};
 
 export default Controls;

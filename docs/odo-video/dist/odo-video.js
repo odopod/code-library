@@ -180,23 +180,11 @@ test$1.HAS_LOCAL_STORAGE = function () {
   }
 }();
 
-var babelHelpers = {};
-
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
   }
 };
-
-
-
-
-
-
-
-
-
-babelHelpers;
 
 var Controls = function () {
   function Controls() {
@@ -218,7 +206,8 @@ var Controls = function () {
         className: settings.Classes.CONTROLS
       }),
       playToggle: this.createElement('button', {
-        className: settings.Classes.PLAY_TOGGLE
+        className: settings.Classes.PLAY_TOGGLE,
+        title: Controls.LABEL.PLAY_TOGGLE
       }),
       playControl: this.createElement('span', {
         className: settings.Classes.PLAY_CONTROL
@@ -242,7 +231,8 @@ var Controls = function () {
         className: settings.Classes.CURRENT_TIME
       }),
       volumeToggle: this.createElement('button', {
-        className: settings.Classes.VOLUME
+        className: settings.Classes.VOLUME,
+        title: Controls.LABEL.VOLUME
       }),
       muteControl: this.createElement('span', {
         className: settings.Classes.MUTE_CONTROL,
@@ -253,7 +243,8 @@ var Controls = function () {
         innerHTML: settings.Icons.AUDIO_OFF
       }),
       fullScreenToggle: this.createElement('button', {
-        className: settings.Classes.FULLSCREEN
+        className: settings.Classes.FULLSCREEN,
+        title: Controls.LABEL.FULLSCREEN
       }),
       enterFullscreen: this.createElement('span', {
         className: settings.Classes.FULLSCREEN_CONTROL,
@@ -329,6 +320,12 @@ var Controls = function () {
 
   return Controls;
 }();
+
+Controls.LABEL = {
+  PLAY_TOGGLE: 'toggle video playback.',
+  VOLUME: 'toggle mute for video.',
+  FULLSCREEN: 'toggle video fullscreen mode.'
+};
 
 /**
  * Features:

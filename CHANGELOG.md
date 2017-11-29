@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Hotspots [1.1.1] - 2017-11-29
+### Fixed
+* Call `setPosition()` on the hotspot now that the cached position has been updated.
+
 ## Hotspots [1.1.0] - 2017-11-29
 ### Added
 * Allow floats in hotspot positions. e.g. `data-position="10.5,62.2"`.

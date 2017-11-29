@@ -239,7 +239,7 @@ var Hotspot = function () {
     // causing layout thrashing.
     this.refreshId = requestAnimationFrame(function () {
       _this._removeContentPosition();
-      _this._setContentPosition();
+      _this.setPosition();
     });
   };
 

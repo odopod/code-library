@@ -85,7 +85,7 @@ class Hotspot {
     // causing layout thrashing.
     this.refreshId = requestAnimationFrame(() => {
       this._removeContentPosition();
-      this._setContentPosition();
+      this.setPosition();
     });
   }
 

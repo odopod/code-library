@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Hotspots [1.1.0] - 2017-11-29
+### Added
+* Allow floats in hotspot positions. e.g. `data-position="10.5,62.2"`.
+* Update the parsed hotspot position on `refresh()`.
+
 ## Video [1.1.0] - 2017-11-13
 ### Added
 * Add title attributes to play toggle, volume toggle, and fullscreen toggle buttons. You can change the titles by overriding `OdoVideo.ControlsCreator.LABEL`.

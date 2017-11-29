@@ -28,8 +28,8 @@ class Hotspot {
   parseWrapperPosition() {
     const positions = this.wrapper.getAttribute('data-position').split(',');
     return {
-      x: parseInt(positions[0], 10),
-      y: parseInt(positions[1], 10),
+      x: parseFloat(positions[0]),
+      y: parseFloat(positions[1]),
     };
   }
 
@@ -77,6 +77,7 @@ class Hotspot {
    */
   refresh() {
     // Read
+    this.percentPosition = this.parseWrapperPosition();
     this.size = this.getContentSize();
     this.position = this.getWrapperPosition();
 

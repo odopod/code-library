@@ -172,8 +172,8 @@ var Hotspot = function () {
   Hotspot.prototype.parseWrapperPosition = function parseWrapperPosition() {
     var positions = this.wrapper.getAttribute('data-position').split(',');
     return {
-      x: parseInt(positions[0], 10),
-      y: parseInt(positions[1], 10)
+      x: parseFloat(positions[0]),
+      y: parseFloat(positions[1])
     };
   };
 
@@ -231,6 +231,7 @@ var Hotspot = function () {
     var _this = this;
 
     // Read
+    this.percentPosition = this.parseWrapperPosition();
     this.size = this.getContentSize();
     this.position = this.getWrapperPosition();
 

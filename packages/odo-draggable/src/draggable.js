@@ -476,6 +476,7 @@ class Draggable extends TinyEmitter {
    */
   set isEnabled(enabled) {
     this.pointer.isEnabled = enabled;
+    this.element.classList.toggle(settings.Classes.GRABBABLE, enabled);
   }
 
   /**

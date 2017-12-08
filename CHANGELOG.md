@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Draggable [1.0.3], Carousel [1.0.3], Dual Viewer [1.0.3] - 2017-12-08
+### Fixed
+* Toggle `grabbable` class when the draggable instance is enabled/disabled.
+
 ## Hotspots [1.1.1] - 2017-11-29
 ### Fixed
 * Call `setPosition()` on the hotspot now that the cached position has been updated.

@@ -670,6 +670,7 @@ var Draggable = function (_TinyEmitter) {
     ,
     set: function set$$1(enabled) {
       this.pointer.isEnabled = enabled;
+      this.element.classList.toggle(settings.Classes.GRABBABLE, enabled);
     }
   }]);
   return Draggable;

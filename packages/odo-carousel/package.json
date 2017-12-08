@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-carousel",
   "description": "Performant, awesome carousels.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "dist/odo-carousel.js",
   "style": "css/odo-carousel.css",
   "odoModule": "src/carousel.js",
@@ -14,7 +14,7 @@
   ],
   "dependencies": {
     "@odopod/odo-device": "^1.0.2",
-    "@odopod/odo-draggable": "^1.0.2",
+    "@odopod/odo-draggable": "^1.0.3",
     "@odopod/odo-helpers": "^1.0.2",
     "@odopod/odo-pointer": "^1.0.2",
     "tiny-emitter": "^2.0.1"

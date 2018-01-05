@@ -4,7 +4,7 @@
 	(global.OdoWindowEvents = factory());
 }(this, (function () { 'use strict';
 
-var throttleit$1 = throttle;
+var throttleit = throttle;
 
 /**
  * Returns a new function that, when invoked, invokes `func` at most once per `wait` milliseconds.
@@ -220,8 +220,8 @@ var WindowEvents = {
 
 var resize = debounce(WindowEvents._callbacks.resize, WindowEvents.Timing.DEBOUNCE_TIME);
 var leadingResize = debounce(WindowEvents._callbacks.leadingResize, WindowEvents.Timing.DEBOUNCE_TIME, true);
-var scrolled = throttleit$1(WindowEvents._callbacks.scroll, WindowEvents.Timing.THROTTLE_TIME_DEFAULT);
-var fastScroll = throttleit$1(WindowEvents._callbacks.fastScroll, WindowEvents.Timing.THROTTLE_TIME_FAST);
+var scrolled = throttleit(WindowEvents._callbacks.scroll, WindowEvents.Timing.THROTTLE_TIME_DEFAULT);
+var fastScroll = throttleit(WindowEvents._callbacks.fastScroll, WindowEvents.Timing.THROTTLE_TIME_FAST);
 
 WindowEvents._resizeCallback = function () {
   leadingResize();

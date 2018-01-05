@@ -105,14 +105,14 @@ var supportTest = (function () {
   return bool;
 });
 
-function test$1(support) {
+function test(support) {
   // If the test has already passed, return a resolved promise.
-  if (test$1.HAS_LOCAL_STORAGE && window.localStorage.getItem('odovideoautoplay') === 'true') {
+  if (test.HAS_LOCAL_STORAGE && window.localStorage.getItem('odovideoautoplay') === 'true') {
     return Promise.resolve(true);
   }
 
   // Retrieve the number of autoplay test attempts. Max is 3.
-  var tries = test$1.HAS_LOCAL_STORAGE && parseInt(window.localStorage.getItem('odovideoautoplaytries'), 10) || 0;
+  var tries = test.HAS_LOCAL_STORAGE && parseInt(window.localStorage.getItem('odovideoautoplaytries'), 10) || 0;
   if (tries > 2) {
     return Promise.resolve(false);
   }
@@ -127,7 +127,7 @@ function test$1(support) {
     var elemStyle = elem.style;
 
     var complete = function complete(bool) {
-      if (test$1.HAS_LOCAL_STORAGE) {
+      if (test.HAS_LOCAL_STORAGE) {
         window.localStorage.setItem('odovideoautoplay', bool);
         window.localStorage.setItem('odovideoautoplaytries', tries + 1);
       }
@@ -169,7 +169,7 @@ function test$1(support) {
 }
 
 // Support: Safari private browsing.
-test$1.HAS_LOCAL_STORAGE = function () {
+test.HAS_LOCAL_STORAGE = function () {
   try {
     var testKey = 'test';
     window.localStorage.setItem(testKey, '1');
@@ -1166,8 +1166,8 @@ Video.support = supportTest();
  * An async test for autoplay feature.
  * @type {Promise}
  */
-Video.autoplay = test$1(Video.support);
-Video._autoplayTest = test$1;
+Video.autoplay = test(Video.support);
+Video._autoplayTest = test;
 
 /** @type {Controls} */
 Video.ControlsCreator = Controls;

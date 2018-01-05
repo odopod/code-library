@@ -33,8 +33,8 @@ gulp.task('watch', gulp.series(
 // Watch all files and re-run tests.
 gulp.task('watch-test', gulp.series(
   'set-watching',
-  'watcher',
   'all',
+  'watcher',
 ));
 
 gulp.task('default', gulp.series('all'));

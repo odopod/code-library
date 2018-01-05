@@ -14,7 +14,7 @@
     "normalize.css": "^7.0.0"
   },
   "devDependencies": {
-    "@odopod/style-guide": "^1.0.0",
+    "@odopod/style-guide": "^2.0.0",
     "mkdirp": "^0.5.1",
     "node-sass": "^4.3.0",
     "node-sass-json-importer": "^3.0.0",

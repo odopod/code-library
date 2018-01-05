@@ -19,9 +19,9 @@
     normalize-path "^2.0.1"
     through2 "^2.0.3"
 
-"@odopod/style-guide@^1.0.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@odopod/style-guide/-/style-guide-1.4.0.tgz#62edc65c74cd0b376b64a11d924d2467947c9267"
+"@odopod/style-guide@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@odopod/style-guide/-/style-guide-2.0.0.tgz#419afff3a3f4de1b11d5595f95d460dee601d717"
   dependencies:
     del "^3.0.0"
     glob "^7.0.5"

@@ -57,14 +57,16 @@ function compile(done) {
   });
 }
 
-gulp.task('compile', compile);
-gulp.task('default', ['compile', 'style-guide']);
-
-gulp.task('watch', ['compile'], () => {
+function watcher() {
   gulp.watch([
     'styles.scss',
     'components/*.scss',
     'global-rules/*.scss',
     'extensions/*.{scss,json}',
-  ], ['compile']);
-});
+  ], compile);
+}
+
+gulp.task('compile', compile);
+gulp.task('watch', gulp.series(compile, watcher));
+
+gulp.task('default', gulp.parallel(compile, 'style-guide'));

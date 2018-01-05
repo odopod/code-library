@@ -100,15 +100,17 @@ const config = {
 
   instrumented: {
     cache: undefined,
+    output: {
+      name: CLASS_NAME,
+      format: 'umd',
+      sourcemap: 'inline',
+      globals,
+    },
     plugins: [
       resolve(),
       commonjs(COMMONJS_CONFIG),
       babel(BABEL_CONFIG_INSTRUMENTED),
     ],
-    sourcemap: 'inline',
-    name: CLASS_NAME,
-    format: 'umd',
-    globals,
     external,
   },
 };

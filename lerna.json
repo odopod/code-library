@@ -5,6 +5,7 @@
     "publish": {
       "ignore": [
         "demos/",
+        "dist/",
         "*.md"
       ]
     }

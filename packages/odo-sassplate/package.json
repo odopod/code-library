@@ -28,7 +28,7 @@
     "styles.scss"
   ],
   "license": "MIT",
-  "repository": "odopod/odo",
+  "repository": "odopod/code-library",
   "scripts": {
     "test": "../../node_modules/.bin/mocha tests/test.js"
   }

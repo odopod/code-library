@@ -32,7 +32,7 @@
     "attribute"
   ],
   "license": "MIT",
-  "repository": "odopod/odo",
+  "repository": "odopod/code-library",
   "scripts": {
     "test": "gulp code-quality test"
   }

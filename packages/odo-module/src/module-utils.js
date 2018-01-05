@@ -17,7 +17,7 @@ export function arrayify(thing) {
     return thing;
   }
 
-  if (typeof thing.length === 'number') {
+  if (thing && typeof thing.length === 'number') {
     return Array.from(thing);
   }
 

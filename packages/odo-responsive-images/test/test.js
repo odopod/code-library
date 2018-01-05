@@ -66,10 +66,20 @@ describe('Odo Responsive Images', () => {
       expect(OdoResponsiveImages.images[numImages - 2].element).to.equal(image1);
       expect(OdoResponsiveImages.images[numImages - 1].element).to.equal(image2);
       OdoResponsiveImages.remove(el);
-      OdoResponsiveImages.remove(image1);
-      OdoResponsiveImages.remove(image2);
+      OdoResponsiveImages.remove([image1, image2]);
       document.body.removeChild(image1);
       document.body.removeChild(image2);
+    });
+
+    it('can add a `null` without throwing in arrayify', () => {
+      const badFn = () => {
+        OdoResponsiveImages.add(null);
+      };
+
+      // It will throw, but from the custom TypeError about `null` not being an element.
+      // What we're avoiding is checking `null.length` inside `arrayify`.
+      // Check to make sure that it's the error we expect.
+      expect(badFn).to.throw(TypeError, 'Odo Responsive Images requires an element');
     });
 
     it('can clear all current images', () => {

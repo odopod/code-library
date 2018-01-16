@@ -241,6 +241,19 @@ describe('The OdoModule Component', () => {
     });
   });
 
+  describe('initializeWhenIdle', () => {
+    it('should initialize modules when the browser has a moment', () => {
+      const element = createElement();
+      return Module.initializeWhenIdle().then((instances) => {
+        expect(instances.size).to.equal(1);
+        expect(instances.has(element)).to.be.true;
+
+        Module.disposeAll();
+        removeElement(element);
+      });
+    });
+  });
+
   describe('disposeAll', () => {
     it('calls deleteInstance for each element', () => {
       const stub = sinon.stub(Module, 'deleteInstance');

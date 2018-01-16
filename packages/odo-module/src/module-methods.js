@@ -4,6 +4,7 @@
  * @author Nathan Buchar <nathan@odopod.com>
  */
 
+import { requestIdleCallback } from 'request-idle-callback';
 import { arrayify, isHTMLElement } from './module-utils';
 
 export default (Module, selector) => ({
@@ -49,7 +50,7 @@ export default (Module, selector) => ({
    * elements. Returns a Map of all instances created, keyed by their
    * respective base elements.
    *
-   * @param {arrayLike<HTLMElement>|HTMLElement} elements
+   * @param {HTMLElement|HTMLElement[]|NodeList} elements
    * @param {Object} [options={}]
    * @returns {Map} instances
    */
@@ -84,7 +85,7 @@ export default (Module, selector) => ({
 
   /**
    * Initializes all Module within the given context.
-   * @param {Object} [context=document]
+   * @param {HTMLElement|HTMLDocument} [context=document]
    * @param {Object} [options={}]
    * @returns {Map}
    */
@@ -93,8 +94,24 @@ export default (Module, selector) => ({
   },
 
   /**
+   * Initialize all modules within a context when the browser has a moment of
+   * idle time.
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback
+   * @param {HTMLElement|HTMLDocument} [context]
+   * @param {Object} [options]
+   * @return {Promise.<Map>} A promise which resolves when the modules have been initialized.
+   */
+  initializeWhenIdle(context, options) {
+    return new Promise((resolve) => {
+      requestIdleCallback(() => {
+        resolve(Module.initializeAll(context, options));
+      });
+    });
+  },
+
+  /**
    * Initializes all Module within the given context.
-   * @param {Object} [context=document]
+   * @param {HTMLElement|HTMLDocument} [context=document]
    */
   disposeAll(context = document) {
     arrayify(context.querySelectorAll(selector)).forEach((element) => {

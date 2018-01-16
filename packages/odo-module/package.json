@@ -32,5 +32,8 @@
   "repository": "odopod/code-library",
   "scripts": {
     "test": "gulp code-quality test"
+  },
+  "dependencies": {
+    "request-idle-callback": "^1.0.2"
   }
 }

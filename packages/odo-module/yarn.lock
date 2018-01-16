@@ -2,3 +2,6 @@
 # yarn lockfile v1
 
 
+request-idle-callback@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/request-idle-callback/-/request-idle-callback-1.0.2.tgz#9bb41771b746209de8be0b1c3cde2161e420edd2"

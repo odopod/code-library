@@ -44,6 +44,10 @@
     <p>Initialize all elements within <code>context</code>. This method returns a Map of the instances which were creatd. It also adds the new instances to the static <code>Instances</code> property on the class.</p>
     <pre><code class="language-javascript">CoolModule.initializeAll(containingElement)</code></pre>
 
+    <h3>initializeWhenIdle(context, options)</h3>
+    <p>Initialize all elements within <code>context</code> when the browser has a moment of idle time. This method returns a Promise which resolves when the module(s) have been initialized. This method just calls <code>initializeAll</code> within a <code>requestIdleCallback</code> which uses the <a href="https://www.npmjs.com/package/request-idle-callback">request-idle-callback</a> package.</a> This method is useful for deferring the initialization of modules which are not above-the-fold on page load.</p>
+    <pre><code class="language-javascript">CoolModule.initializeWhenIdle(containingElement)</code></pre>
+
     <h3>disposeAll(context = document)</h3>
     <p>Dispose of all instances from within a context.</p>
     <pre><code class="language-javascript">CoolModule.disposeAll(containingElement)</code></pre>

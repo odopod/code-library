@@ -20,4 +20,4 @@ const dualViewer = new OdoDualViewer(document.getElementById('.my-dual-viewer'))
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://code.odopod.com/odo-dual-viewer/
+[permalink]: http://code.odopod.com/odo-dual-viewer/

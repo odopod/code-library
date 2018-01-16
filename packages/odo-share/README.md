@@ -28,4 +28,4 @@ OdoShare.share({
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://code.odopod.com/odo-share/
+[permalink]: http://code.odopod.com/odo-share/

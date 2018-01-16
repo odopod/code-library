@@ -19,3 +19,9 @@ console.log('Has touch events:', OdoDevice.HAS_TOUCH_EVENTS);
 console.log('Touch action:', OdoDevice.prefixed('touchAction', 'pan-y'));
 console.log('Has local storage:', OdoDevice.HAS_LOCAL_STORAGE);
 ```
+
+## [Documentation][permalink]
+
+Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
+
+[permalink]: http://code.odopod.com/odo-device/

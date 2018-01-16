@@ -23,4 +23,4 @@ const instance = new OdoOnSwipe(element, swiped(event) {
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://code.odopod.com/odo-on-swipe/
+[permalink]: http://code.odopod.com/odo-on-swipe/

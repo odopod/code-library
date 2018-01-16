@@ -22,4 +22,4 @@ stickyMananger.add(stickies);
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://code.odopod.com/odo-sticky-headers/
+[permalink]: http://code.odopod.com/odo-sticky-headers/

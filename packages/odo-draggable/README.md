@@ -20,4 +20,4 @@ const draggable = new OdoAffix(document.querySelector('.js-my-sidebar'));
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://code.odopod.com/odo-draggable/
+[permalink]: http://code.odopod.com/odo-draggable/

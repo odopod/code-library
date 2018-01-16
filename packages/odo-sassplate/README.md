@@ -283,3 +283,9 @@ Allow any selector to be appended to the main selector.
   content: "Sassplate";
 }
 ```
+
+## [Documentation][permalink]
+
+Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
+
+[permalink]: http://code.odopod.com/odo-sassplate/

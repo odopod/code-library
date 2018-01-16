@@ -32,4 +32,4 @@ OdoObjectFit.cover([myElement, thatOtherElement]);
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://code.odopod.com/odo-object-fit/
+[permalink]: http://code.odopod.com/odo-object-fit/

@@ -28,4 +28,4 @@ npm install @odopod/odo-responsive-images --save
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://code.odopod.com/odo-responsive-images/
+[permalink]: http://code.odopod.com/odo-responsive-images/

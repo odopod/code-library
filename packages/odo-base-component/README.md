@@ -43,4 +43,4 @@ class CoolModule extends OdoBaseComponent {
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://code.odopod.com/odo-base-component/
+[permalink]: http://code.odopod.com/odo-base-component/

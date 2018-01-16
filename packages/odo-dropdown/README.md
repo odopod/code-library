@@ -20,4 +20,4 @@ const dropdown = new OdoDropdown(document.getElementById('my-dropdown'));
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://code.odopod.com/odo-dropdown/
+[permalink]: http://code.odopod.com/odo-dropdown/

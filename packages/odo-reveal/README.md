@@ -27,4 +27,4 @@ const instances = OdoReveal.initializeAll();
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://code.odopod.com/odo-reveal/
+[permalink]: http://code.odopod.com/odo-reveal/

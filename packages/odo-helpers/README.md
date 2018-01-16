@@ -22,4 +22,4 @@ animation.onTransitionEnd(myElement, function () {
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://code.odopod.com/odo-helpers/
+[permalink]: http://code.odopod.com/odo-helpers/

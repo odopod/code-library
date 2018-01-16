@@ -22,4 +22,4 @@ const tapId = OdoTap.addListener(document.getElementById('thing-to-tap'), functi
 
 Visit the [Odo component directory][permalink] for demos, code examples, and documentation.
 
-[permalink]: https://code.odopod.com/odo-tap/
+[permalink]: http://code.odopod.com/odo-tap/

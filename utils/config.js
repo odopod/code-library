@@ -26,7 +26,7 @@ const COMMONJS_CONFIG = {
 const BABEL_CONFIG = {
   exclude: 'node_modules/**',
   presets: [
-    ['babel-preset-es2015', { modules: false }],
+    ['babel-preset-env', { modules: false }],
   ],
   plugins: [
     ['babel-plugin-external-helpers'],
@@ -35,8 +35,6 @@ const BABEL_CONFIG = {
     ['babel-plugin-transform-es2015-classes', { loose: true }],
     ['babel-plugin-transform-proto-to-assign'],
   ],
-  // https://github.com/rollup/rollup-plugin-babel/issues/100
-  // https://github.com/rollup/rollup/issues/1595
 };
 
 // Deep clone to break reference to the plugins array.

@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-device",
   "description": "Device-specific settings for JS and CSS",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "dist/odo-device.js",
   "odoModule": "src/device.js",
   "author": "Odopod",

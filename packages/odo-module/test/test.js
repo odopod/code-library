@@ -155,6 +155,8 @@ describe('The OdoModule Component', () => {
       expect(instances.has(element)).to.be.true;
       expect(instance).to.be.an.instanceof(Module);
       expect(Module.Instances.has(element)).to.be.true;
+      Module.deleteInstance(element);
+      removeElement(element);
     });
 
     it('should initialize a module instance from a given element with custom options', () => {
@@ -165,6 +167,9 @@ describe('The OdoModule Component', () => {
 
       expect(instance.options).to.be.an('object');
       expect(instance.options).to.have.property('foo').and.equal(options.foo);
+
+      Module.disposeAll();
+      removeElement(element);
     });
 
     it('should initialize an array of elements', () => {
@@ -173,15 +178,23 @@ describe('The OdoModule Component', () => {
       const instances = Module.initialize([elementOne, elementTwo]);
 
       expect(instances.size).to.equal(2);
+
+      Module.disposeAll();
+      removeElement(elementOne);
+      removeElement(elementTwo);
     });
 
     it('should initialize a NodeList of elements', () => {
-      createElement('test1');
-      createElement('test1');
+      const elementOne = createElement('test1');
+      const elementTwo = createElement('test1');
 
       const instances = Module.initialize(document.querySelectorAll('.test1'));
 
       expect(instances.size).to.equal(2);
+
+      Module.disposeAll();
+      removeElement(elementOne);
+      removeElement(elementTwo);
     });
 
     it('should throw if attempting to initialize a non-element', () => {
@@ -195,6 +208,9 @@ describe('The OdoModule Component', () => {
       const instances = Module.initialize([element, element]);
 
       expect(instances.size).to.equal(1);
+
+      Module.disposeAll();
+      removeElement(element);
     });
   });
 

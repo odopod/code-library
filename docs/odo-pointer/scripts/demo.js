@@ -22,7 +22,7 @@ var requests = {
 function roundTo(value) {
   var decimals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-  var multiplier = 10 ** decimals;
+  var multiplier = Math.pow(10, decimals);
   return Math.round(value * multiplier) / multiplier;
 }
 

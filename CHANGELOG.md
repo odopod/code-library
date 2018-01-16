@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Module [1.1.0] - 2018-01-16
+### Added
+* Add `initializeWhenIdle` method to initialize modules in a `requestIdleCallback`.
+
+## All - 2018-01-16
+### Fixed
+* Fix incorrect repository name in `package.json`.
+* Replace `https` links to code.odopod.com in README.md files with `http`. We don't have that set up yet.
+
 ## Draggable [1.0.3], Carousel [1.0.3], Dual Viewer [1.0.3] - 2017-12-08
 ### Fixed
 * Toggle `grabbable` class when the draggable instance is enabled/disabled.

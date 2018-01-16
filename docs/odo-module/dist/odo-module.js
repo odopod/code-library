@@ -4,6 +4,23 @@
 	(global.OdoModule = factory());
 }(this, (function () { 'use strict';
 
+var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+var requestIdleCallback = function requestIdleCallback(cb) {
+  if (commonjsGlobal.requestIdleCallback) return commonjsGlobal.requestIdleCallback(cb);
+  var start = Date.now();
+  return setTimeout(function () {
+    cb({
+      didTimeout: false,
+      timeRemaining: function timeRemaining() {
+        return Math.max(0, 50 - (Date.now() - start));
+      }
+    });
+  }, 1);
+};
+
+var requestIdleCallback_2 = requestIdleCallback;
+
 /**
  * Utilities for the Odo Module component.
  *
@@ -23,7 +40,7 @@ function arrayify(thing) {
     return thing;
   }
 
-  if (typeof thing.length === 'number') {
+  if (thing && typeof thing.length === 'number') {
     return Array.from(thing);
   }
 
@@ -93,7 +110,7 @@ var OdoModuleMethods = (function (Module, selector) {
      * elements. Returns a Map of all instances created, keyed by their
      * respective base elements.
      *
-     * @param {arrayLike<HTLMElement>|HTMLElement} elements
+     * @param {HTMLElement|HTMLElement[]|NodeList} elements
      * @param {Object} [options={}]
      * @returns {Map} instances
      */
@@ -131,7 +148,7 @@ var OdoModuleMethods = (function (Module, selector) {
 
     /**
      * Initializes all Module within the given context.
-     * @param {Object} [context=document]
+     * @param {HTMLElement|HTMLDocument} [context=document]
      * @param {Object} [options={}]
      * @returns {Map}
      */
@@ -144,8 +161,25 @@ var OdoModuleMethods = (function (Module, selector) {
 
 
     /**
+     * Initialize all modules within a context when the browser has a moment of
+     * idle time.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Window/requestIdleCallback
+     * @param {HTMLElement|HTMLDocument} [context]
+     * @param {Object} [options]
+     * @return {Promise.<Map>} A promise which resolves when the modules have been initialized.
+     */
+    initializeWhenIdle: function initializeWhenIdle(context, options) {
+      return new Promise(function (resolve) {
+        requestIdleCallback_2(function () {
+          resolve(Module.initializeAll(context, options));
+        });
+      });
+    },
+
+
+    /**
      * Initializes all Module within the given context.
-     * @param {Object} [context=document]
+     * @param {HTMLElement|HTMLDocument} [context=document]
      */
     disposeAll: function disposeAll() {
       var context = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;

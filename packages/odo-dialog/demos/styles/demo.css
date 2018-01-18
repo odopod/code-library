@@ -203,3 +203,7 @@
 .scroll-to-close-dialog .ie11-padding-wrapper {
   background: white;
 }
+
+#inception .odo-dialog__inner {
+  padding: 40px;
+}

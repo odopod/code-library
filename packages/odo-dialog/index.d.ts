@@ -47,6 +47,12 @@ declare class OdoDialog {
   isOpen: boolean;
 
   /**
+   * z-index of the main dialog element. This only changes when multiple dialogs
+   * are open at the same time.
+   */
+  z: number;
+
+  /**
    * Whether the dialog is currently animating.
    * @protected
    * @type {boolean}
@@ -108,6 +114,22 @@ declare class OdoDialog {
   close(sync?: false): void;
 
   /**
+   * Modify dialog z-indices and more because there are about to be multiple
+   * dialogs open at the same time.
+   */
+  protected handleOtherOpenDialogs(): void;
+
+  /**
+   * Dialog went into the background and has another dialog open above it.
+   */
+  protected didEnterBackground(): void;
+
+  /**
+   * Dialog came back into the foreground after being in the background.
+   */
+  protected didEnterForeground(): void;
+
+  /**
    * Close the dialog, remove event listeners and element references.
    */
   dispose(): void;
@@ -137,6 +159,18 @@ declare namespace OdoDialog {
    * @return {OdoDialog} The dialog or undefined if there is no dialog with the given id.
    */
   function getDialogById(id: string): OdoDialog | undefined;
+
+  /**
+   * Count how many dialogs are currently open.
+   * @return {number}
+   */
+  function getOpenDialogCount(): number;
+
+  /**
+   * Find the z index of the top-most dialog instance.
+   * @return {number}
+   */
+  function getTopLayer(): number;
 
   /**
    * Array of dialog instances.

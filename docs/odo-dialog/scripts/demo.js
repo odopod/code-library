@@ -115,6 +115,7 @@ var scrollable = new OdoDialog(document.getElementById('scrollable-region'), {
 });
 
 var fullscreen = new OdoDialog(document.getElementById('fullscreen'));
+var inception = new OdoDialog(document.getElementById('inception'));
 
 window.defaultDialog = defaultDialog;
 window.styledDialog = styledDialog;
@@ -122,6 +123,7 @@ window.animationChanger = animationChanger;
 window.modal = modal;
 window.scrollable = scrollable;
 window.fullscreen = fullscreen;
+window.inception = inception;
 
 // Change the class applied to the animation-changer dialog.
 var select = document.querySelector('#animation-select');

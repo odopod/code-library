@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Dialog [1.2.0] - 2018-01-18
+### Added
+* Allow dialogs to open other dialogs. Dialog inception! You were able to do this before, but it didn't work well.
+
 ## Module [1.1.0] - 2018-01-16
 ### Added
 * Add `initializeWhenIdle` method to initialize modules in a `requestIdleCallback`.

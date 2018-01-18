@@ -81,6 +81,7 @@
               <p>Run outside as soon as door open run in circles, yet jump launch to pounce upon little yarn mouse, bare fangs at toy run hide in litter box until treats are fed then cats take over the world curl up and sleep on the freshly laundered towels for wack the mini furry mouse. Make meme, make cute face kitten is playing with dead mouse a nice warm laptop for me to sit on spot something, big eyes, big eyes, crouch, shake butt, prepare to pounce but bleghbleghvomit my furball really tie the room together. Meowing non stop for food. Lounge in doorway licks paws ignore the squirrels, you'll never catch them anyway or stick butt in face always hungry, if it smells like fish eat as much as you wish or rub face on everything. Spend all night ensuring people don't sleep sleep all day attack the dog then pretend like nothing happened so stare at ceiling light spill litter box, scratch at owner, destroy all furniture, especially couch for why must they do that intently sniff hand. <a href="http://www.catipsum.com/" target="_blank" rel="noopener">Cat Ipsum</a></p>
               <p>Step on your keyboard while you're gaming and then turn in a circle my left donut is missing, as is my right for unwrap toilet paper hide head under blanket so no one can see but pee in the shoe for howl uncontrollably for no reason. Cat snacks where is my slave? I'm getting hungry cats making all the muffins my left donut is missing, as is my right hola te quiero kitty scratches couch bad kitty. Sit and stare kitty loves pigs meowing non stop for food, yet kitty loves pigs yet leave dead animals as gifts, so jump launch to pounce upon little yarn mouse, bare fangs at toy run hide in litter box until treats are fed milk the cow. </p>
               <p>Scream for no reason at 4 am nap all day, for plays league of legends or put butt in owner's face i could pee on this if i had the energy. Meowzer! always hungry chase red laser dot howl uncontrollably for no reason for chew foot. Damn that dog climb a tree, wait for a fireman jump to fireman then scratch his face, friends are not food. Sit by the fire go into a room to decide you didn't want to be in there anyway, chew on cable, lie in the sink all day yet bleghbleghvomit my furball really tie the room together. My left donut is missing, as is my right purr while eating chirp at birds. Have secret plans eat all the power cords, rub face on everything chase the pig around the house human is washing you why halp oh the horror flee scratch hiss bite claws in your leg. Knock over christmas tree. Climb leg spit up on light gray carpet instead of adjacent linoleum with tail in the air.</p>
+              <button data-odo-dialog-open="scroll-to-close">Open scroll to close dialog</button>
             </div>
             <button type="button" class="odo-dialog__close" data-odo-dialog-close aria-label="Close this dialog window">&times;</button>
           </div>
@@ -399,6 +400,22 @@ button.addEventListener('click', () => {
         </div>
       </div>
 
+    </div>
+
+    <h2>Dialogs inside dialogs</h2>
+    <p>Dialogs can have buttons inside them which open another dialog without closing the current one.</p>
+    <div class="example">
+      <button data-odo-dialog-open="inception">Open dialog with dialog trigger</button>
+
+      <div class="odo-dialog" id="inception" aria-hidden="true" role="dialog" aria-labelledby="inception-title">
+        <div class="odo-dialog__content" role="document">
+          <div class="odo-dialog__inner">
+            <p class="no-margin-top" id="inception-title">What happens when you open a dialog from within a dialog?</p>
+            <button type="button" class="odo-dialog__close" data-odo-dialog-close aria-label="Close this dialog window">&times;</button>
+            <button data-odo-dialog-open="styled">Open styled dialog</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

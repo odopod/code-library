@@ -326,6 +326,8 @@ var Dialog = function (_TinyEmitter) {
      */
     _this._isFullscreen = null;
 
+    _this.z = Dialog.Z_BASE;
+
     Dialog.Instances.push(_this);
 
     if (Dialog.Instances.length === 1) {
@@ -441,15 +443,18 @@ var Dialog = function (_TinyEmitter) {
 
 
   Dialog.prototype.onKeyPress = function onKeyPress(evt) {
-    // If 'ESC' is pressed, close the dialog
-    if (this.options.dismissable && evt.which === Dialog.Keys.ESC) {
-      this.close();
-    }
+    // Only react to keys when this dialog is the top-most one.
+    if (this.z === Dialog.getTopLayer()) {
+      // If 'ESC' is pressed, close the dialog
+      if (this.options.dismissable && evt.which === Dialog.Keys.ESC) {
+        this.close();
+      }
 
-    // If the TAB key is being pressed, make sure the focus stays trapped within
-    // the dialog element.
-    if (evt.which === Dialog.Keys.TAB) {
-      Dialog._trapTabKey(this.element, evt);
+      // If the TAB key is being pressed, make sure the focus stays trapped within
+      // the dialog element.
+      if (evt.which === Dialog.Keys.TAB) {
+        Dialog._trapTabKey(this.element, evt);
+      }
     }
   };
 
@@ -501,6 +506,12 @@ var Dialog = function (_TinyEmitter) {
       }
       element.setAttribute('aria-hidden', true);
     });
+
+    // If there is already an open dialog, increase the z-index of this dialog's
+    // main element and backdrop above the open one.
+    if (Dialog.getOpenDialogCount() > 0) {
+      this.handleOtherOpenDialogs();
+    }
 
     this.isOpen = true;
     this.onResize(viewportHeight);
@@ -647,10 +658,70 @@ var Dialog = function (_TinyEmitter) {
     this.element.setAttribute('aria-hidden', true);
     this.element.classList.remove(Dialog.Classes.OPEN);
     this.element.classList.remove(Dialog.Classes.LEAVING);
-    document.body.style.paddingRight = '';
-    document.body.classList.remove(Dialog.Classes.BODY_OPEN);
+    if (Dialog.getOpenDialogCount() === 0) {
+      document.body.style.paddingRight = '';
+      document.body.classList.remove(Dialog.Classes.BODY_OPEN);
+    }
     document.body.removeChild(this.backdrop);
     this.emit(Dialog.EventType.CLOSED);
+  };
+
+  /**
+   * Modify dialog z-indices and more because there are about to be multiple
+   * dialogs open at the same time.
+   * @protected
+   */
+
+
+  Dialog.prototype.handleOtherOpenDialogs = function handleOtherOpenDialogs() {
+    var _this4 = this;
+
+    this.z = Dialog.getTopLayer() + 20;
+    this.element.style.zIndex = this.z;
+    this.backdrop.style.zIndex = this.z - 5;
+
+    // When this dialog is closed, revert the z-index back to its original value.
+    this.once(Dialog.EventType.CLOSED, function () {
+      _this4.z = Dialog.Z_BASE;
+      _this4.element.style.zIndex = '';
+      _this4.backdrop.style.zIndex = '';
+
+      // Find new top dialog.
+      var zTop = Dialog.getTopLayer();
+
+      Dialog.Instances.forEach(function (instance) {
+        if (instance.isOpen && instance.z === zTop) {
+          instance.didEnterForeground();
+        }
+      });
+    });
+
+    // Tell other dialogs they're going into the background.
+    Dialog.Instances.forEach(function (instance) {
+      if (instance.isOpen && instance.id !== _this4.id) {
+        instance.didEnterBackground();
+      }
+    });
+  };
+
+  /**
+   * Dialog went into the background and has another dialog open above it.
+   * @protected
+   */
+
+
+  Dialog.prototype.didEnterBackground = function didEnterBackground() {
+    ScrollFix$1.remove(this._scrollFixId);
+  };
+
+  /**
+   * Dialog came back into the foreground after being in the background.
+   * @protected
+   */
+
+
+  Dialog.prototype.didEnterForeground = function didEnterForeground() {
+    this._applyScrollFix();
   };
 
   /**
@@ -858,6 +929,31 @@ var Dialog = function (_TinyEmitter) {
     });
   };
 
+  /**
+   * Count how many dialogs are currently open.
+   * @return {number}
+   */
+
+
+  Dialog.getOpenDialogCount = function getOpenDialogCount() {
+    return Dialog.Instances.filter(function (instance) {
+      return instance.isOpen;
+    }).length;
+  };
+
+  /**
+   * Find the z index of the top-most dialog instance.
+   * @return {number}
+   */
+
+
+  Dialog.getTopLayer = function getTopLayer() {
+    // eslint-disable-next-line prefer-spread
+    return Math.max.apply(Math, Dialog.Instances.map(function (instance) {
+      return instance.z;
+    }));
+  };
+
   return Dialog;
 }(TinyEmitter);
 
@@ -898,8 +994,10 @@ Dialog.Defaults = {
   scrollableElement: '.odo-dialog'
 };
 
-/** @enum {Dialog[]} */
+/** @type {Dialog[]} */
 Dialog.Instances = [];
+
+Dialog.Z_BASE = 1050;
 
 Dialog.ScrollFix = ScrollFix$1;
 

@@ -51,6 +51,7 @@ describe('The OdoDialog Component', () => {
     fixture.load(`${id}.html`);
     fixtureElement = fixture.el.querySelector('.odo-dialog');
     instance = new OdoDialog(fixtureElement, options);
+    return instance;
   }
 
   function removeFixture() {
@@ -404,6 +405,54 @@ describe('The OdoDialog Component', () => {
       instance._applyScrollFix();
       expect(spy.callCount).to.equal(0);
       spy.restore();
+    });
+  });
+
+  describe('multiple dialogs', () => {
+    let dialog1;
+    let dialog2;
+
+    beforeEach(() => {
+      dialog1 = createFixture('basic');
+      dialog2 = createFixture('modal');
+    });
+
+    afterEach(() => {
+      dialog1.dispose();
+      dialog2.dispose();
+      removeFixture();
+    });
+
+    it('will increment the z-index of the next dialog when there is already an open dialog and clear it when closed', () => {
+      dialog1.open(true);
+      expect(OdoDialog.getOpenDialogCount()).to.equal(1);
+
+      dialog2.open(true);
+      expect(OdoDialog.getOpenDialogCount()).to.equal(2);
+
+      expect(dialog1.z).to.equal(OdoDialog.Z_BASE);
+      expect(dialog2.z).to.equal(OdoDialog.Z_BASE + 20);
+
+      dialog2.close(true);
+      expect(OdoDialog.getOpenDialogCount()).to.equal(1);
+      expect(dialog2.z).to.equal(OdoDialog.Z_BASE);
+    });
+
+    it('will ignore keyboard events when not the top dialog', () => {
+      const close1 = sinon.stub(dialog1, 'close');
+      const close2 = sinon.stub(dialog2, 'close');
+      dialog1.open(true);
+      dialog2.open(true);
+
+      dialog1.onKeyPress({ which: 27 });
+      expect(close1.calledOnce).to.be.false;
+
+      dialog2.open(true);
+      dialog2.onKeyPress({ which: 27 });
+      expect(close2.calledOnce).to.be.true;
+
+      close1.restore();
+      close2.restore();
     });
   });
 });

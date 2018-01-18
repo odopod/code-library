@@ -130,6 +130,8 @@ class Dialog extends TinyEmitter {
      */
     this._isFullscreen = null;
 
+    this.z = Dialog.Z_BASE;
+
     Dialog.Instances.push(this);
 
     if (Dialog.Instances.length === 1) {
@@ -230,15 +232,18 @@ class Dialog extends TinyEmitter {
    * @protected
    */
   onKeyPress(evt) {
-    // If 'ESC' is pressed, close the dialog
-    if (this.options.dismissable && evt.which === Dialog.Keys.ESC) {
-      this.close();
-    }
+    // Only react to keys when this dialog is the top-most one.
+    if (this.z === Dialog.getTopLayer()) {
+      // If 'ESC' is pressed, close the dialog
+      if (this.options.dismissable && evt.which === Dialog.Keys.ESC) {
+        this.close();
+      }
 
-    // If the TAB key is being pressed, make sure the focus stays trapped within
-    // the dialog element.
-    if (evt.which === Dialog.Keys.TAB) {
-      Dialog._trapTabKey(this.element, evt);
+      // If the TAB key is being pressed, make sure the focus stays trapped within
+      // the dialog element.
+      if (evt.which === Dialog.Keys.TAB) {
+        Dialog._trapTabKey(this.element, evt);
+      }
     }
   }
 
@@ -278,6 +283,12 @@ class Dialog extends TinyEmitter {
       }
       element.setAttribute('aria-hidden', true);
     });
+
+    // If there is already an open dialog, increase the z-index of this dialog's
+    // main element and backdrop above the open one.
+    if (Dialog.getOpenDialogCount() > 0) {
+      this.handleOtherOpenDialogs();
+    }
 
     this.isOpen = true;
     this.onResize(viewportHeight);
@@ -408,10 +419,62 @@ class Dialog extends TinyEmitter {
     this.element.setAttribute('aria-hidden', true);
     this.element.classList.remove(Dialog.Classes.OPEN);
     this.element.classList.remove(Dialog.Classes.LEAVING);
-    document.body.style.paddingRight = '';
-    document.body.classList.remove(Dialog.Classes.BODY_OPEN);
+    if (Dialog.getOpenDialogCount() === 0) {
+      document.body.style.paddingRight = '';
+      document.body.classList.remove(Dialog.Classes.BODY_OPEN);
+    }
     document.body.removeChild(this.backdrop);
     this.emit(Dialog.EventType.CLOSED);
+  }
+
+  /**
+   * Modify dialog z-indices and more because there are about to be multiple
+   * dialogs open at the same time.
+   * @protected
+   */
+  handleOtherOpenDialogs() {
+    this.z = Dialog.getTopLayer() + 20;
+    this.element.style.zIndex = this.z;
+    this.backdrop.style.zIndex = this.z - 5;
+
+    // When this dialog is closed, revert the z-index back to its original value.
+    this.once(Dialog.EventType.CLOSED, () => {
+      this.z = Dialog.Z_BASE;
+      this.element.style.zIndex = '';
+      this.backdrop.style.zIndex = '';
+
+      // Find new top dialog.
+      const zTop = Dialog.getTopLayer();
+
+      Dialog.Instances.forEach((instance) => {
+        if (instance.isOpen && instance.z === zTop) {
+          instance.didEnterForeground();
+        }
+      });
+    });
+
+    // Tell other dialogs they're going into the background.
+    Dialog.Instances.forEach((instance) => {
+      if (instance.isOpen && instance.id !== this.id) {
+        instance.didEnterBackground();
+      }
+    });
+  }
+
+  /**
+   * Dialog went into the background and has another dialog open above it.
+   * @protected
+   */
+  didEnterBackground() {
+    ScrollFix.remove(this._scrollFixId);
+  }
+
+  /**
+   * Dialog came back into the foreground after being in the background.
+   * @protected
+   */
+  didEnterForeground() {
+    this._applyScrollFix();
   }
 
   /**
@@ -590,6 +653,23 @@ class Dialog extends TinyEmitter {
   static getDialogById(id) {
     return Dialog.Instances.find(instance => instance.id === id);
   }
+
+  /**
+   * Count how many dialogs are currently open.
+   * @return {number}
+   */
+  static getOpenDialogCount() {
+    return Dialog.Instances.filter(instance => instance.isOpen).length;
+  }
+
+  /**
+   * Find the z index of the top-most dialog instance.
+   * @return {number}
+   */
+  static getTopLayer() {
+    // eslint-disable-next-line prefer-spread
+    return Math.max.apply(Math, Dialog.Instances.map(instance => instance.z));
+  }
 }
 
 /** @enum {string} */
@@ -627,8 +707,10 @@ Dialog.Defaults = {
   scrollableElement: '.odo-dialog',
 };
 
-/** @enum {Dialog[]} */
+/** @type {Dialog[]} */
 Dialog.Instances = [];
+
+Dialog.Z_BASE = 1050;
 
 Dialog.ScrollFix = ScrollFix;
 

@@ -41,7 +41,7 @@ Once the dependencies are installed, `cd` into the component directory you want 
 | `test`       | Compile tests, run them, and gather code coverage |
 | `all`        | Compile everything and test |
 
-You can also run these gulp tasks from the root directory if you supply an argument. For example, to build the carousel, you can `gulp build --project odo-carousel` or even `gulp build -p carousel`.
+You can also run these gulp tasks from the root directory if you supply an argument. For example, to build the carousel, you can `gulp build --package odo-carousel` or even `gulp build -p carousel`.
 
 ### Project Tasks
 

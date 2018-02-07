@@ -70,7 +70,16 @@ module.exports = (config) => {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['ChromeHeadless'],
+    browsers: ['ChromeHeadlessNoSandbox'],
+    // Add --no-sandbox flag.
+    // https://github.com/karma-runner/karma-chrome-launcher/issues/158
+    // https://github.com/travis-ci/travis-ci/issues/8836
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox'],
+      },
+    },
 
 
     // Continuous Integration mode

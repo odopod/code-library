@@ -24,8 +24,8 @@
     <h1>Odo Carousel</h1>
     <p>Performant, awesome carousels.</p>
     <h3>Support</h3>
-    <p>IE9+ with polyfill</p>
-    <p>To support IE&lt;=11, you will also need to add <code>classList</code> polyfill.</p>
+    <p>IE9+ with polyfills.</p>
+    <p>To support IE&lt;=11, you will need to add <code>classList</code> and <a href="https://www.npmjs.com/package/element-closest"><code>Element#closest</code></a> polyfills.</p>
     <h3>Dependencies</h3>
     <p>Odo Device, Odo Helpers, Odo Draggable, Tiny Emitter.</p>
     <p>Odo Pointer, Draggable, and Carousel also expect <code>Object.assign</code> from ES6 to be available.</p>
@@ -686,6 +686,7 @@ OdoCarousel.template("Today is {{ day }}", {
 </main>
   <!-- Polyfills -->
   <script src="../node_modules/classlist.js/classList.min.js"></script>
+  <script src="../node_modules/element-closest/element-closest.js"></script>
   <script src="../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
 
   <!-- Dependencies. -->

@@ -85,6 +85,10 @@ function copyCommonDependencies() {
       path.join(root, 'docs/node_modules/classlist.js/classList.min.js')
     ),
     fs.copy(
+      path.join(root, 'node_modules/element-closest/element-closest.js'),
+      path.join(root, 'docs/node_modules/element-closest/element-closest.js')
+    ),
+    fs.copy(
       path.join(root, 'node_modules/babel-polyfill/dist/polyfill.min.js'),
       path.join(root, 'docs/node_modules/babel-polyfill/dist/polyfill.min.js')
     ),

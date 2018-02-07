@@ -26,7 +26,8 @@
         <h1>Odo Scroll Feedback</h1>
         <p>The Scroll Feedback class is an event emitter. It listens for input from the user: mouse, keyboard, or touch. Based on the input, the <code>OdoScrollFeedback</code> instance will emit navigation events with a <code>direction</code> property signifying which way the user should be taken. It's up to the implementer to decide what to do with these events.</p>
         <h3>Support</h3>
-        <p>IE9+</p>
+        <p>IE9+ with polyfills.</p>
+        <p>To support IE&lt;=11, you will need to add a <a href="https://www.npmjs.com/package/element-closest"><code>Element#closest</code></a> polyfill.</p>
         <h3>Dependencies</h3>
         <p><a href="https://github.com/scottcorgan/tiny-emitter">TinyEmitter</a>. Assumes <code>Object.assign</code> and <code>Element.prototype.closest</code> exist. You may need to polyfill these.</p>
         <h2>Basic Usage</h2>

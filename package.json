@@ -23,6 +23,7 @@
     "babel-plugin-transform-proto-to-assign": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "chai": "^4.1.1",
+    "element-closest": "^2.0.2",
     "eslint": "^4.5.0",
     "execa": "^0.9.0",
     "fs-extra": "^5.0.0",

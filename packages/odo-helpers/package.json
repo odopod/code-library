@@ -4,6 +4,7 @@
   "version": "1.0.3",
   "main": "dist/odo-helpers.js",
   "odoModule": "index.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

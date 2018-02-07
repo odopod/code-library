@@ -1,5 +1,3 @@
-import './src/polyfills';
-
 export { default as animation } from './src/animation';
 export { default as array } from './src/array';
 export { default as browser } from './src/browser';

@@ -7,6 +7,7 @@ module.exports = (config) => {
       'fixtures/*',
       '../css/odo-dropdown.css',
       '../../../node_modules/classlist.js/classList.min.js',
+      '../../../node_modules/element-closest/element-closest.js',
       '../../../node_modules/babel-polyfill/dist/polyfill.min.js',
       '../../../node_modules/chai/chai.js',
       '../../../node_modules/sinon/pkg/sinon.js',

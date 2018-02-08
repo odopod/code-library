@@ -3,7 +3,7 @@
   "description": "A collection of helper methods for Odo projects.",
   "version": "1.0.3",
   "main": "dist/odo-helpers.js",
-  "odoModule": "index.js",
+  "odoModule": "src/helpers.js",
   "sideEffects": false,
   "author": "Odopod",
   "contributors": [
@@ -19,8 +19,7 @@
   "files": [
     "css",
     "dist",
-    "src",
-    "index.js"
+    "src"
   ],
   "odoKeywords": [
     "utilities"

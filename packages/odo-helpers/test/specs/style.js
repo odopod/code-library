@@ -2,9 +2,8 @@
 /* eslint-disable no-unused-expressions */
 
 describe('The style utility', () => {
-  const expect = window.chai.expect;
-  const style = window.OdoHelpers.style;
-  const sinon = window.sinon;
+  const { expect } = window.chai;
+  const { OdoHelpers, sinon } = window;
 
   let element;
 
@@ -26,7 +25,7 @@ describe('The style utility', () => {
 
   describe('the getSize method', () => {
     it('should have a width and height', () => {
-      expect(style.getSize(element)).to.deep.equal({
+      expect(OdoHelpers.getSize(element)).to.deep.equal({
         width: 300,
         height: 150,
       });
@@ -34,7 +33,7 @@ describe('The style utility', () => {
 
     it('should return zeros when the element is display none', () => {
       element.style.display = 'none';
-      expect(style.getSize(element)).to.deep.equal({
+      expect(OdoHelpers.getSize(element)).to.deep.equal({
         width: 0,
         height: 0,
       });
@@ -43,7 +42,7 @@ describe('The style utility', () => {
 
   describe('the getMarginBox method', () => {
     it('should return a box with margins', () => {
-      expect(style.getMarginBox(element)).to.deep.equal({
+      expect(OdoHelpers.getMarginBox(element)).to.deep.equal({
         top: 10,
         right: 20,
         bottom: 30,
@@ -75,7 +74,7 @@ describe('The style utility', () => {
         marginBottom: '0px',
       });
 
-      expect(style.getMarginBox(element)).to.deep.equal({
+      expect(OdoHelpers.getMarginBox(element)).to.deep.equal({
         top: 0,
         right: centered,
         bottom: 0,
@@ -89,7 +88,7 @@ describe('The style utility', () => {
 
   describe('the getPaddingBox method', () => {
     it('should return a box with paddings', () => {
-      expect(style.getPaddingBox(element)).to.deep.equal({
+      expect(OdoHelpers.getPaddingBox(element)).to.deep.equal({
         top: 5,
         right: 2,
         bottom: 5,
@@ -128,7 +127,7 @@ describe('The style utility', () => {
       const width = totalElements * 300;
       const margins = (20 * totalElements) + (40 * totalElements);
       const total = width + margins;
-      expect(style.getElementsSize([element, element2, element3], 'width')).to.equal(total);
+      expect(OdoHelpers.getElementsSize([element, element2, element3], 'width')).to.equal(total);
     });
 
     it('can get the total height', () => {
@@ -136,25 +135,19 @@ describe('The style utility', () => {
       const height = totalElements * 150;
       const margins = (10 * totalElements) + (30 * totalElements);
       const total = height + margins;
-      expect(style.getElementsSize([element, element2, element3], 'height')).to.equal(total);
-    });
-  });
-
-  describe('the getWindowHeight method', () => {
-    it('should return the correct window size', () => {
-      expect(style.getWindowHeight()).to.equal(window.innerHeight);
+      expect(OdoHelpers.getElementsSize([element, element2, element3], 'height')).to.equal(total);
     });
   });
 
   describe('the forceRedraw method', () => {
     it('can be called', () => {
-      expect(style.forceRedraw()).to.equal(undefined);
+      expect(OdoHelpers.forceRedraw()).to.equal(undefined);
     });
   });
 
   describe('the causeLayout method', () => {
     it('can be called', () => {
-      expect(style.causeLayout(element)).to.equal(element.offsetWidth);
+      expect(OdoHelpers.causeLayout(element)).to.equal(element.offsetWidth);
     });
   });
 
@@ -224,7 +217,7 @@ describe('The style utility', () => {
 
     it('can even out the heights of a node list', () => {
       const nodeList = document.querySelectorAll('.group1');
-      expect(style.evenHeights(nodeList)).to.equal(300);
+      expect(OdoHelpers.evenHeights(nodeList)).to.equal(300);
       for (let i = 0; i < nodeList.length; i++) {
         expect(nodeList[i].offsetHeight).to.equal(300);
       }
@@ -237,7 +230,7 @@ describe('The style utility', () => {
         element.querySelectorAll('.group3'),
       ];
 
-      expect(style.evenHeights(groups)).to.deep.equal([300, 20, 50]);
+      expect(OdoHelpers.evenHeights(groups)).to.deep.equal([300, 20, 50]);
 
       const group1 = Array.from(element.querySelectorAll('.group1'));
       const group2 = Array.from(element.querySelectorAll('.group2'));
@@ -259,11 +252,11 @@ describe('The style utility', () => {
     it('should fail silently with an empty collection', () => {
       const groups = document.querySelectorAll('.theisnotonthepage');
       const fn = () => {
-        style.evenHeights(groups);
+        OdoHelpers.evenHeights(groups);
       };
 
       expect(fn).not.to.throw(Error);
-      expect(style.evenHeights(groups)).to.deep.equal([]);
+      expect(OdoHelpers.evenHeights(groups)).to.deep.equal([]);
     });
   });
 });

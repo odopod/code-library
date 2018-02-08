@@ -9,7 +9,7 @@
  * @author glen@odopod.com (Glen Cheney)
  */
 
-function noop() {}
+import noop from './noop';
 
 class Stepper {
   /**

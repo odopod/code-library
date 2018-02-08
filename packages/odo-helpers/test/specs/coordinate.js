@@ -1,9 +1,9 @@
-/* global describe, it, beforeEach, afterEach */
+/* global describe, it */
 /* eslint-disable no-unused-expressions */
 
 describe('The Coordinate class', () => {
-  const Coordinate = window.OdoHelpers.Coordinate;
-  const expect = window.chai.expect;
+  const { expect } = window.chai;
+  const { Coordinate } = window.OdoHelpers;
 
   it('can initialize', () => {
     let c = new Coordinate();

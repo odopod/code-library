@@ -2,9 +2,9 @@
 /* eslint-disable no-unused-expressions */
 
 describe('The Timer class', () => {
-  const expect = window.chai.expect;
-  const sinon = window.sinon;
-  const Timer = window.OdoHelpers.Timer;
+  const { expect } = window.chai;
+  const { OdoHelpers, sinon } = window;
+  const { Timer } = OdoHelpers;
 
   let clock;
   let timer;
@@ -36,7 +36,7 @@ describe('The Timer class', () => {
     expect(remaining).to.equal(500);
 
     // Calling start while it's already running will return false.
-    const startTime = timer.startTime;
+    const { startTime } = timer;
     const ret = timer.start();
     expect(startTime).to.equal(timer.startTime);
     expect(ret).to.be.false;

@@ -10,7 +10,7 @@ module.exports = (config) => {
       '../../../node_modules/chai/chai.js',
       '../../../node_modules/sinon/pkg/sinon.js',
       '../../odo-device/dist/odo-device.min.js',
-      '../index.js',
+      '../src/helpers.js',
       { pattern: '../src/*.js', included: false },
       'specs/*.js',
     ],

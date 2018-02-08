@@ -22,10 +22,8 @@ function insertKeyframeAnimation(name, rules) {
 }
 
 describe('The animation helpers', () => {
-  const expect = window.chai.expect;
-  const OdoDevice = window.OdoDevice;
-  const animation = window.OdoHelpers.animation;
-  const sinon = window.sinon;
+  const { expect } = window.chai;
+  const { OdoDevice, OdoHelpers, sinon } = window;
 
   describe('#onTransitionEnd', () => {
     let element;
@@ -52,7 +50,7 @@ describe('The animation helpers', () => {
         tacos: 'delicious',
       };
 
-      animation.onTransitionEnd(element, function callback() {
+      OdoHelpers.onTransitionEnd(element, function callback() {
         expect(this.tacos).to.equal('delicious');
         done();
       }, context);
@@ -65,7 +63,7 @@ describe('The animation helpers', () => {
       element.style.top = '50px';
       element.style.left = '200px';
 
-      animation.onTransitionEnd(element, (evt) => {
+      OdoHelpers.onTransitionEnd(element, (evt) => {
         expect(evt.propertyName).to.equal('top');
         done();
       }, null, 'top');
@@ -74,7 +72,7 @@ describe('The animation helpers', () => {
     it('should use the transition end event when it happens with a timeout provided', (done) => {
       element.style.left = '200px';
 
-      animation.onTransitionEnd(element, (evt) => {
+      OdoHelpers.onTransitionEnd(element, (evt) => {
         expect(evt.fake).not.to.be.true;
         expect(evt.propertyName).to.equal('left');
         done();
@@ -82,7 +80,7 @@ describe('The animation helpers', () => {
     });
 
     it('will set a fallback timer if a timeout is provided', (done) => {
-      animation.onTransitionEnd(element, (evt) => {
+      OdoHelpers.onTransitionEnd(element, (evt) => {
         expect(evt.fake).to.be.true;
         done();
       }, null, null, 200);
@@ -104,7 +102,7 @@ describe('The animation helpers', () => {
       it('should happen async but immediately', (done) => {
         element.style.left = '200px';
 
-        animation.onTransitionEnd(element, () => {
+        OdoHelpers.onTransitionEnd(element, () => {
           expect(window.getComputedStyle(element).left).to.equal('200px');
           done();
         });
@@ -121,7 +119,7 @@ describe('The animation helpers', () => {
 
       element.style.left = '50px';
 
-      animation.onTransitionEnd($element, () => {
+      OdoHelpers.onTransitionEnd($element, () => {
         done();
       });
     });
@@ -136,7 +134,7 @@ describe('The animation helpers', () => {
         jquery: '2.2.2',
       };
 
-      const fn = animation.onTransitionEnd.bind(null, $collection);
+      const fn = OdoHelpers.onTransitionEnd.bind(null, $collection);
 
       expect(fn).to.throw(TypeError);
     });
@@ -165,15 +163,15 @@ describe('The animation helpers', () => {
 
       const callback = sinon.spy();
 
-      const id = animation.onTransitionEnd(element, callback);
-      expect(Object.keys(animation._transitions)).to.have.length(1);
+      const id = OdoHelpers.onTransitionEnd(element, callback);
+      expect(Object.keys(OdoHelpers.getTransitions())).to.have.length(1);
 
-      animation.cancelTransitionEnd(id);
-      expect(Object.keys(animation._transitions)).to.have.length(0);
+      OdoHelpers.cancelTransitionEnd(id);
+      expect(Object.keys(OdoHelpers.getTransitions())).to.have.length(0);
 
       // Cancel one which doesn't exist.
       expect(() => {
-        animation.cancelTransitionEnd('foo');
+        OdoHelpers.cancelTransitionEnd('foo');
       }).not.to.throw(Error);
 
       setTimeout(() => {
@@ -189,15 +187,15 @@ describe('The animation helpers', () => {
       const callback2 = sinon.spy();
       const callback3 = sinon.spy();
 
-      const id1 = animation.onTransitionEnd(element, callback1);
-      const id2 = animation.onTransitionEnd(element, callback2);
-      const id3 = animation.onTransitionEnd(element, callback3);
-      expect(Object.keys(animation._transitions)).to.have.length(3);
+      const id1 = OdoHelpers.onTransitionEnd(element, callback1);
+      const id2 = OdoHelpers.onTransitionEnd(element, callback2);
+      const id3 = OdoHelpers.onTransitionEnd(element, callback3);
+      expect(Object.keys(OdoHelpers.getTransitions())).to.have.length(3);
 
-      animation.cancelTransitionEnd(id1);
-      animation.cancelTransitionEnd(id2);
-      animation.cancelTransitionEnd(id3);
-      expect(Object.keys(animation._transitions)).to.have.length(0);
+      OdoHelpers.cancelTransitionEnd(id1);
+      OdoHelpers.cancelTransitionEnd(id2);
+      OdoHelpers.cancelTransitionEnd(id3);
+      expect(Object.keys(OdoHelpers.getTransitions())).to.have.length(0);
 
       expect(callback1.callCount).to.equal(0);
       expect(callback2.callCount).to.equal(0);
@@ -222,11 +220,11 @@ describe('The animation helpers', () => {
 
         const callback = sinon.spy();
 
-        const id = animation.onTransitionEnd(element, callback);
-        expect(Object.keys(animation._transitions)).to.have.length(1);
+        const id = OdoHelpers.onTransitionEnd(element, callback);
+        expect(Object.keys(OdoHelpers.getTransitions())).to.have.length(1);
 
-        animation.cancelTransitionEnd(id);
-        expect(Object.keys(animation._transitions)).to.have.length(0);
+        OdoHelpers.cancelTransitionEnd(id);
+        expect(Object.keys(OdoHelpers.getTransitions())).to.have.length(0);
 
         setTimeout(() => {
           expect(callback.callCount).to.equal(0);
@@ -238,124 +236,96 @@ describe('The animation helpers', () => {
 
   describe('#fadeElement', () => {
     let element;
-    let clock;
 
     beforeEach(() => {
       element = document.createElement('div');
       element.style.cssText = 'position:relative;left:2px;top:0;width:200px;height:200px;';
-      element.style[OdoDevice.Dom.TRANSITION] = 'all 100ms ease';
+      element.style[OdoDevice.Dom.TRANSITION] = 'all 20ms ease';
 
       document.body.appendChild(element);
 
       // Relayout.
       element.offsetWidth;
-
-      clock = sinon.useFakeTimers();
-
-      // Stub ontransitionend to execute the callback on a zero timeout.
-      sinon.stub(animation, 'onTransitionEnd').callsFake((el, fn, context) => {
-        setTimeout(() => {
-          fn.call(context, {
-            target: el,
-            currentTarget: el,
-          });
-        }, 0);
-
-        return 'foo';
-      });
     });
 
     afterEach(() => {
       document.body.removeChild(element);
       element = null;
-      animation.onTransitionEnd.restore();
-      clock.restore();
     });
 
-    it('will create a fake event and call the callback when a transition would not happen (1)', () => {
-      const spy = sinon.spy();
+    it('will create a fake event and call the callback when a transition would not happen (1)', (done) => {
+      const cb = () => {
+        done();
+      };
 
       // Fade in when .fade and .in classes are not on the element.
-      const ret = animation.fadeInElement(element, spy);
+      const ret = OdoHelpers.fadeInElement(element, cb);
       expect(ret).to.equal(0);
-      expect(spy.callCount).to.equal(0);
-      clock.tick(1);
-      expect(spy.callCount).to.equal(1);
     });
 
-    it('will create a fake event and call the callback when a transition would not happen (2)', () => {
-      const spy = sinon.spy();
+    it('will create a fake event and call the callback when a transition would not happen (2)', (done) => {
+      const cb = () => {
+        done();
+      };
 
       // Fade in when .fade and .in classes are already on the element.
       element.className = 'fade in';
       element.offsetWidth;
 
-      animation.fadeInElement(element, spy);
-      expect(spy.callCount).to.equal(0);
-      clock.tick(1);
-      expect(spy.callCount).to.equal(1);
+      OdoHelpers.fadeInElement(element, cb);
     });
 
-    it('will create a fake event and call the callback when a transition would not happen (3)', () => {
-      const spy = sinon.spy();
+    it('will create a fake event and call the callback when a transition would not happen (3)', (done) => {
+      const cb = () => {
+        done();
+      };
 
       // Fade out when .fade is already on the element.
       element.className = 'fade';
       element.offsetWidth;
 
-      animation.fadeOutElement(element, spy);
-      expect(spy.callCount).to.equal(0);
-      clock.tick(1);
+      OdoHelpers.fadeOutElement(element, cb);
     });
 
-    it('can be used without a callback', () => {
-      animation.fadeOutElement(element);
+    it('can be used without a callback', (done) => {
+      OdoHelpers.fadeOutElement(element);
 
       expect(element.classList.contains('in')).to.be.false;
       expect(element.classList.contains('fade')).to.be.true;
 
-      clock.tick(1);
+      setTimeout(() => {
+        done();
+      }, 30);
     });
 
-    it('can use `isOut` default value', () => {
-      animation.fadeElement(element);
-
-      expect(element.classList.contains('in')).to.be.false;
-      expect(element.classList.contains('fade')).to.be.true;
-
-      clock.tick(1);
-    });
-
-    it('will return a transition id and does not need a callback', () => {
+    it('will return a transition id and does not need a callback', (done) => {
       element.className = 'fade';
       element.offsetWidth;
 
-      const transitionId = animation.fadeInElement(element);
+      const transitionId = OdoHelpers.fadeInElement(element);
 
-      clock.tick(1);
+      expect(transitionId).to.be.a('number');
 
-      expect(transitionId).to.equal('foo');
+      setTimeout(() => {
+        done();
+      }, 30);
     });
 
-    it('can set the invisible class after the element fades out', () => {
-      let called = false;
-      animation.fadeOutElement(element, () => {
-        called = true;
+    it('can set the invisible class after the element fades out', (done) => {
+      OdoHelpers.fadeOutElement(element, () => {
         expect(element.classList.contains('invisible')).to.be.true;
+        done();
       }, null, true);
-
-      clock.tick(1);
-      expect(called).to.be.true;
     });
 
-    it('will remove the invisible class when fading in an element', () => {
+    it('will remove the invisible class when fading in an element', (done) => {
       element.className = 'fade invisible';
       element.offsetWidth;
 
-      animation.fadeInElement(element, undefined, null, true);
-      clock.tick(1);
-
-      expect(element.classList.contains('invisible')).to.be.false;
+      OdoHelpers.fadeInElement(element, () => {
+        expect(element.classList.contains('invisible')).to.be.false;
+        done();
+      }, null, true);
     });
   });
 
@@ -390,7 +360,7 @@ describe('The animation helpers', () => {
         tacos: 'delicious',
       };
 
-      animation.onAnimationEnd(element, function callback() {
+      OdoHelpers.onAnimationEnd(element, function callback() {
         expect(this.tacos).to.equal('delicious');
         done();
       }, context);
@@ -408,52 +378,35 @@ describe('The animation helpers', () => {
       });
 
       it('should finish async', (done) => {
-        animation.onAnimationEnd(element, () => {
+        OdoHelpers.onAnimationEnd(element, () => {
           done();
         });
       });
     });
   });
 
-  // Heads up! Currently, Karma/Phantomjs is unable to set the scroll position.
-  // These tests only verify the callback function is invoked.
-  // http://stackoverflow.com/q/19507878/373422
-  // https://github.com/karma-runner/karma/issues/345
   describe('#scrollTo', () => {
-    let clock;
-    beforeEach(() => {
-      clock = sinon.useFakeTimers();
-      sinon.stub(animation, 'Stepper').callsFake(function Stepper(options) {
-        this.options = options;
-        this.onfinish = () => {};
-        this.options.step(options.start);
-        this.options.step(options.end);
-        setTimeout(() => {
-          this.onfinish();
-        }, 0);
+    it('can call scrollToTop', (done) => {
+      const scrollTo = sinon.spy(window, 'scrollTo');
+      const stepper = OdoHelpers.scrollToTop();
+      stepper.options.duration = 0;
+      requestAnimationFrame(() => {
+        expect(scrollTo.callCount).to.equal(1);
+        done();
       });
     });
 
-    afterEach(() => {
-      animation.Stepper.restore();
-      clock.restore();
-    });
-
-    it('can call scrollToTop', () => {
-      const scrollTo = sinon.spy(window, 'scrollTo');
-      animation.scrollToTop();
-      clock.tick(1);
-      expect(scrollTo.callCount).to.equal(2);
-    });
-
-    it('can get a callback', () => {
+    it('can get a callback', (done) => {
       const spy = sinon.spy();
-      const dur = 50;
+      const dur = 0;
       const dest = 100;
       const easing = k => k;
-      animation.scrollTo(dest, dur, spy, easing);
-      clock.tick(1);
-      expect(spy.callCount).to.equal(1);
+      OdoHelpers.scrollTo(dest, dur, spy, easing);
+
+      requestAnimationFrame(() => {
+        expect(spy.callCount).to.equal(1);
+        done();
+      });
     });
   });
 });

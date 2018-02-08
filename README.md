@@ -62,7 +62,7 @@ Use the `alias` object to map requests for odo components to their source files 
       '@odopod/odo-carousel$': '@odopod/odo-carousel/src/carousel.js',
       '@odopod/odo-device$': '@odopod/odo-device/src/device.js',
       '@odopod/odo-draggable$': '@odopod/odo-draggable/src/draggable.js',
-      '@odopod/odo-helpers$': '@odopod/odo-helpers/index.js',
+      '@odopod/odo-helpers$': '@odopod/odo-helpers/src/helpers.js',
       '@odopod/odo-pointer$': '@odopod/odo-pointer/src/pointer.js',
     },
   },

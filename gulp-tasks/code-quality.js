@@ -11,7 +11,7 @@ module.exports = gulp => () => {
 
   // If not watching, end the stream after linting if there are errors.
   if (!config.watch) {
-    stream.pipe(eslint.failAfterError());
+    return stream.pipe(eslint.failAfterError());
   }
 
   return stream;

@@ -1,0 +1,12 @@
+.expandable__target {
+  display: none;
+}
+
+.expandable__target--open {
+  display: block;
+}
+
+.expandable__trigger {
+  width: 100%;
+}
+

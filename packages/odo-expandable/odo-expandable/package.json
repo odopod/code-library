@@ -1,0 +1,35 @@
+{
+  "name": "@odopod/odo-expandable",
+  "description": "An expandable Component",
+  "version": "0.0.1",
+  "main": "dist/odo-expandable.js",
+  "odoModule": "src/expandable.js",
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Matt Zaso",
+      "email": "matt.zaso@odopod.com"
+    }
+  ],
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-expandable",
+  "files": [
+    "css",
+    "dist",
+    "src",
+    "index.js"
+  ],
+  "odoKeywords": [
+    "utilities"
+  ],
+  "keywords": [
+    "odo",
+    "odo-component",
+    "odopod",
+    "expandable"
+  ],
+  "license": "MIT",
+  "repository": "odopod/code-library",
+  "scripts": {
+    "test": "gulp code-quality test"
+  }
+}

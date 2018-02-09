@@ -15,8 +15,23 @@
   <body>
     <main role="main">
       <div class="container">
+        <h1>Odo Expandable</h1>
+        <p>A simple, accessible combination of two elements; A trigger to handle clicks, and a target to toggle visibility.</p>
+        <p>Expandable items can be grouped to behave in an accordion type fashion.</p>
+
+        <h2>Markup</h2>
+        <p>The only two required pieces are a <code>BUTTON</code> element with a <code>data-expandable-trigger="{id}"</code> attribute and any other element with a <code>data-expandable-target="{id}"</code> attribute.</p>
+        <pre><code class="language-markup">
+  &lt;button href=&quot;#&quot; data-expandable-trigger=&quot;demo-expand-1&quot;&gt;Trigger&lt;/button&gt;
+  &lt;div data-expandable-target=&quot;demo-expand-1&quot;&gt;Target&lt;/div&gt;
+        </code></pre>
+
+        <h2>Setup</h2>
+        <p>Simply call the static method, <code>initializeAll()</code> and Expandable will instantiate all instances of itself.</p>
+        <pre><code class="language-markup">OdoExpandable.initializeAll();</code></pre>
+
         <div class="demo">
-          <h1>Single</h1>
+          <h2>Single Element</h2>
           <button class="expandable__trigger" href="#" data-expandable-trigger="demo-expand-1">Trigger 1</button>
           <div class="expandable__target" data-expandable-target="demo-expand-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
@@ -24,49 +39,67 @@
             cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
         </div>
         <div class="demo">
-          <h1>Single</h1>
-          <button class="expandable__trigger" href="#" data-expandable-trigger="demo-expand-2">Trigger 2</button>
-          <div class="expandable__target" data-expandable-target="demo-expand-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-          dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-          non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-        </div>
-        <div class="demo">
-          <h1>Group (first expanded)</h1>
-          <button class="expandable__trigger" href="#" data-expandable-trigger="demo-expand-3" data-expandable-group="demo-group-1">Trigger 3</button>
+          <h2>Group (first expanded)</h2>
+          <p>Use a second <code>data-expandable-group="{id}"</code> attribute to make all of the expandables operate in an accordion fashion on click</p>
+          <p>Add the <code>expandable__trigger--open</code> and <code>expandable__target--open</code> classes to have an element be expanded on load</p>
+          <p>Example:</p>
+          <pre><code class="language-markup">
+&lt;button class=&quot;expandable__trigger--open&quot; href=&quot;#&quot; data-expandable-trigger=&quot;demo-expand-1&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;Trigger 1&lt;/button&gt;
+&lt;div class=&quot;expandable__target--open&quot; data-expandable-target=&quot;demo-expand-1&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;First Content&lt;/div&gt;
+
+&lt;button href=&quot;#&quot; data-expandable-trigger=&quot;demo-expand-2&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;Trigger2&lt;/button&gt;
+&lt;div data-expandable-target=&quot;demo-expand-2&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;Second Content&lt;/div&gt;
+
+&lt;button href=&quot;#&quot; data-expandable-trigger=&quot;demo-expand-3&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;Trigger 3&lt;/button&gt;
+&lt;div data-expandable-target=&quot;demo-expand-3&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;Third Content&lt;/div&gt;
+          </code></pre>
+
+
+          <button class="expandable__trigger" href="#" data-expandable-trigger="demo-expand-3" data-expandable-group="demo-group-1">Trigger 1</button>
           <div class="expandable__target expandable__target--open" data-expandable-target="demo-expand-3" data-expandable-group="demo-group-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
           dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
           non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-          <button class="expandable__trigger" href="#" data-expandable-trigger="demo-expand-4" data-expandable-group="demo-group-1">Trigger 4</button>
+          <button class="expandable__trigger" href="#" data-expandable-trigger="demo-expand-4" data-expandable-group="demo-group-1">Trigger 2</button>
           <div class="expandable__target" data-expandable-target="demo-expand-4" data-expandable-group="demo-group-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
           dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
           non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-          <button class="expandable__trigger" href="#" data-expandable-trigger="demo-expand-5" data-expandable-group="demo-group-1">Trigger 5</button>
+          <button class="expandable__trigger" href="#" data-expandable-trigger="demo-expand-5" data-expandable-group="demo-group-1">Trigger 3</button>
           <div class="expandable__target" data-expandable-target="demo-expand-5" data-expandable-group="demo-group-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
           dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
           non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
         </div>
         <div class="demo">
-          <h1>Group (none expanded)</h1>
-          <button class="expandable__trigger" href="#" data-expandable-trigger="demo-expand-6" data-expandable-group="demo-group-2">Trigger 6</button>
+          <h2>Group (none expanded)</h2>
+          <p>If no "open" class is assigned to an element when instantiated, all targets will remain collapsed</p>
+          <button class="expandable__trigger" href="#" data-expandable-trigger="demo-expand-6" data-expandable-group="demo-group-2">Trigger 1</button>
           <div class="expandable__target" class="expandable__target expandable__target--open" data-expandable-target="demo-expand-6" data-expandable-group="demo-group-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
             irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
             cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-          <button class="expandable__trigger" href="#" data-expandable-trigger="demo-expand-7" data-expandable-group="demo-group-2">Trigger 7</button>
+          <button class="expandable__trigger" href="#" data-expandable-trigger="demo-expand-7" data-expandable-group="demo-group-2">Trigger 2</button>
           <div class="expandable__target" data-expandable-target="demo-expand-7" data-expandable-group="demo-group-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
             irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
             cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-          <button class="expandable__trigger" href="#" data-expandable-trigger="demo-expand-8" data-expandable-group="demo-group-2">Trigger 8</button>
+          <button class="expandable__trigger" href="#" data-expandable-trigger="demo-expand-8" data-expandable-group="demo-group-2">Trigger 3</button>
           <div class="expandable__target" data-expandable-target="demo-expand-8" data-expandable-group="demo-group-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
             irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
             cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
         </div>
+        <h2>CSS</h2>
+        <p>The only CSS needed is to style the <code>expandable__trigger--open</code> and <code>expandable__target--open</code> classes to your need.</p>
+        <pre><code class="language-markup">
+// Your rules
+.your-target-class { display: none; }
+
+// Classes Added By Expandable to target with display/height/transform/etc rules
+.expandable__trigger--open { color: blue; }
+.expandable__target--open { display: block; }
+        </code></pre>
       </div>
     </main>
 

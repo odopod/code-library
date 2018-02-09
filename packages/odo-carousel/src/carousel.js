@@ -10,13 +10,18 @@ import OdoDevice from '@odopod/odo-device';
 import OdoPointer from '@odopod/odo-pointer';
 import OdoDraggable from '@odopod/odo-draggable';
 import {
-  animation,
-  array,
-  dom,
-  math,
-  string,
-  style,
+  cancelTransitionEnd,
+  capitalize,
+  clamp,
+  closest,
+  getElementsSize,
+  getNthSibling,
+  getSize,
+  giveId,
+  onTransitionEnd,
+  swapElements,
   Timer,
+  wrapAroundList,
 } from '@odopod/odo-helpers';
 
 import CarouselEvent from './carousel-event';
@@ -131,7 +136,7 @@ class Carousel extends TinyEmitter {
      * @type {string}
      * @private
      */
-    this._offsetPosition = 'offset' + string.capitalize(this._posAttr);
+    this._offsetPosition = 'offset' + capitalize(this._posAttr);
 
     /**
      * Height or width.
@@ -156,7 +161,7 @@ class Carousel extends TinyEmitter {
     this.isTransitioning = false;
 
     /**
-     * The id returned from animation.onTransitionEnd which is used to cancel
+     * The id returned from onTransitionEnd which is used to cancel
      * the transitionend listener.
      * @type {string}
      */
@@ -374,7 +379,7 @@ class Carousel extends TinyEmitter {
     this.getWrapper().setAttribute('aria-live', 'polite');
     this.getCarouselElement().setAttribute('role', 'list');
     this.getSlides().forEach((slide) => {
-      dom.giveId(slide, uniqueId);
+      giveId(slide, uniqueId);
       slide.setAttribute('role', 'listitem');
     });
   }
@@ -707,7 +712,7 @@ class Carousel extends TinyEmitter {
    *     what's left in the list.
    */
   _getRelativeIndex(index, displacment) {
-    return math.wrapAroundList(index, displacment, this._slides.length);
+    return wrapAroundList(index, displacment, this._slides.length);
   }
 
   /**
@@ -718,7 +723,7 @@ class Carousel extends TinyEmitter {
   }
 
   clampIndexToSlides(index) {
-    return math.clamp(index, 0, this._slides.length - 1);
+    return clamp(index, 0, this._slides.length - 1);
   }
 
   /**
@@ -857,11 +862,11 @@ class Carousel extends TinyEmitter {
     let destinationPosition = destinationSlide[this._offsetPosition];
 
     // Width or height of the carousel element.
-    const carouselSize = style.getSize(this.getCarouselElement())[this._dimensionAttr];
+    const carouselSize = getSize(this.getCarouselElement())[this._dimensionAttr];
 
     if (this.options.isCentered) {
-      const destinationSize = style.getSize(destinationSlide)[this._dimensionAttr];
-      const wrapperSize = style.getSize(this.getWrapper())[this._dimensionAttr];
+      const destinationSize = getSize(destinationSlide)[this._dimensionAttr];
+      const wrapperSize = getSize(this.getWrapper())[this._dimensionAttr];
       this._startEdge = (wrapperSize - destinationSize) / 2;
       destinationPosition -= this._startEdge;
     }
@@ -890,13 +895,13 @@ class Carousel extends TinyEmitter {
   _getPositionForSlideChildren(destinationSlide, destinationPosition, carouselSize) {
     // Size of the combined width/height + margins of the slide children
     // within the destination slide.
-    const childrenSum = style.getElementsSize(
+    const childrenSum = getElementsSize(
       this._getSlideChildren(destinationSlide),
       this._dimensionAttr,
     );
 
     // width|height of the carousel slide.
-    const slideSize = style.getSize(destinationSlide)[this._dimensionAttr];
+    const slideSize = getSize(destinationSlide)[this._dimensionAttr];
 
     // The destination position minus the empty space in the next slide in px.
     const newPosition = destinationPosition - (slideSize - childrenSum);
@@ -963,7 +968,7 @@ class Carousel extends TinyEmitter {
    */
   _swapSlides(index1, index2) {
     this._swapIndexes(index1, index2);
-    dom.swapElements(this.getSlide(index1), this.getSlide(index2));
+    swapElements(this.getSlide(index1), this.getSlide(index2));
   }
 
   /**
@@ -1009,9 +1014,9 @@ class Carousel extends TinyEmitter {
   getInnocentNeighbor(iterator, isNext) {
     const currentSlideEl = this.getSlide(this.getSelectedIndex());
     return isNext ?
-      dom.getNthSibling(currentSlideEl, iterator + 1) :
-      dom.getNthSibling(currentSlideEl, iterator, false) ||
-      dom.getFirstElementChild(this._carouselEl);
+      getNthSibling(currentSlideEl, iterator + 1) :
+      getNthSibling(currentSlideEl, iterator, false) ||
+      this._carouselEl.firstElementChild;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -1156,7 +1161,7 @@ class Carousel extends TinyEmitter {
       // doesn't fire on iOS 7 Safari when the carousel has only been dragged a
       // few pixels. It's set to go off ~2 frames after the transition end event
       // should have occurred.
-      this._transitionId = animation.onTransitionEnd(
+      this._transitionId = onTransitionEnd(
         this._carouselEl,
         this._transitionDone,
         this,
@@ -1201,7 +1206,7 @@ class Carousel extends TinyEmitter {
     }
 
     this.isTransitioning = false;
-    animation.cancelTransitionEnd(this._transitionId);
+    cancelTransitionEnd(this._transitionId);
 
     // Fading carousels do not need to reposition themselves.
     if (this.options.isFade) {
@@ -1209,7 +1214,7 @@ class Carousel extends TinyEmitter {
     }
 
     // Save the offset relative to the current slide before slides are moved.
-    const carouselSize = style.getSize(this.getCarouselElement())[this._dimensionAttr];
+    const carouselSize = getSize(this.getCarouselElement())[this._dimensionAttr];
     const offset = this._getCarouselOffset();
 
     if (this._isJumped) {
@@ -1246,7 +1251,7 @@ class Carousel extends TinyEmitter {
     // Listen for transitionend if it will animate.
     if (!optNoAnimation) {
       // Going to a new slide, wait for callback.
-      this._transitionId = animation.onTransitionEnd(nextSlide, this._transitionDone, this);
+      this._transitionId = onTransitionEnd(nextSlide, this._transitionDone, this);
     }
 
     // Show next slide. Put the previous behind the next.
@@ -1358,7 +1363,7 @@ class Carousel extends TinyEmitter {
     // Current position (the left side of the carousel wrapper)
     // Gets the closest value in the array to the given value.
     // Index of the closest value.
-    let logicalIndex = positions.indexOf(array.closest(positions, this._startEdge));
+    let logicalIndex = positions.indexOf(closest(positions, this._startEdge));
 
     // When going to a next or previous slide, the closest index could
     // still be the one that's currently selected, but the carousel should

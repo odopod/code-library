@@ -221,7 +221,7 @@ var Tabs = function (_TinyEmitter) {
       anchor.setAttribute('tabIndex', -1);
       anchor.setAttribute('aria-selected', false);
 
-      odoHelpers.dom.giveId(anchor, uniqueId);
+      odoHelpers.giveId(anchor, uniqueId);
 
       var pane = _this2.panes[i];
       anchor.setAttribute('aria-controls', pane.id);
@@ -303,7 +303,7 @@ var Tabs = function (_TinyEmitter) {
     }
 
     evt.preventDefault();
-    this._focusTab(odoHelpers.math.clamp(focusedIndex, 0, this.tabs.length - 1));
+    this._focusTab(odoHelpers.clamp(focusedIndex, 0, this.tabs.length - 1));
   };
 
   /**
@@ -404,7 +404,7 @@ var Tabs = function (_TinyEmitter) {
     this._selectedIndex = index;
 
     if (!skipHash && this.hashes[index]) {
-      odoHelpers.browser.setHash(this.hashes[index]);
+      odoHelpers.setHash(this.hashes[index]);
     }
 
     var didShowEvent = new TabsEvent(Tabs.EventType.DID_SHOW, index);

@@ -6,7 +6,7 @@
  * @author Glen Cheney
  */
 
-import { string } from '@odopod/odo-helpers';
+import { randomString } from '@odopod/odo-helpers';
 import OdoDevice from '@odopod/odo-device';
 
 /**
@@ -112,7 +112,7 @@ export default {
    */
   add(element) {
     if (OdoDevice.HAS_TOUCH_EVENTS) {
-      const id = string.random();
+      const id = randomString();
       this._fixes.set(id, new ScrollFix(element, id));
       return id;
     }

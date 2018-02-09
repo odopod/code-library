@@ -7,11 +7,11 @@
 OdoDevice = OdoDevice && OdoDevice.hasOwnProperty('default') ? OdoDevice['default'] : OdoDevice;
 
 /**
- * @param {*} obj Anything.
+ * @param {*} value Anything.
  * @return {boolean}
  */
-function isDefined(obj) {
-  return obj !== undefined && obj !== null;
+function isDefined(value) {
+  return value !== undefined && value !== null;
 }
 
 var transitions = {};
@@ -1526,6 +1526,7 @@ function scrollTo() {
 
   var anim = new Stepper(options);
   anim.onfinish = callback;
+  return anim;
 }
 
 /**

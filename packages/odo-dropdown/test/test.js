@@ -1,11 +1,13 @@
 /* global describe, it, beforeEach, afterEach */
 /* eslint-disable no-unused-expressions */
 
-const expect = window.chai.expect;
-const sinon = window.sinon;
-const fixture = window.fixture;
-const animation = window.OdoHelpers.animation;
-const OdoDropdown = window.OdoDropdown;
+const { expect } = window.chai;
+const {
+  sinon,
+  fixture,
+  OdoHelpers,
+  OdoDropdown,
+} = window;
 
 fixture.setBase('fixtures');
 
@@ -44,13 +46,13 @@ describe('the OdoDropdown Component', function dropdown() {
 
   beforeEach(() => {
     // Make onTransitionEnd and onAnimationEnd a zero timeout every time.
-    sinon.stub(animation, 'onTransitionEnd').callsFake(transitionStub);
-    sinon.stub(animation, 'onAnimationEnd').callsFake(transitionStub);
+    sinon.stub(OdoHelpers, 'onTransitionEnd').callsFake(transitionStub);
+    sinon.stub(OdoHelpers, 'onAnimationEnd').callsFake(transitionStub);
   });
 
   afterEach(() => {
-    animation.onTransitionEnd.restore();
-    animation.onAnimationEnd.restore();
+    OdoHelpers.onTransitionEnd.restore();
+    OdoHelpers.onAnimationEnd.restore();
   });
 
   describe('odo Dropdown', () => {
@@ -78,7 +80,7 @@ describe('the OdoDropdown Component', function dropdown() {
 
     it('can get the selected option\'s value', () => {
       instance.value = '2013';
-      const value = instance.value;
+      const { value } = instance;
       expect(value).to.equal('2013');
     });
 
@@ -95,7 +97,7 @@ describe('the OdoDropdown Component', function dropdown() {
     });
 
     it('emits CHANGE events with name and value', () => {
-      const value = instance.value;
+      const { value } = instance;
       let called = false;
       instance.once(OdoDropdown.EventType.CHANGE, (data) => {
         called = true;

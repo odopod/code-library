@@ -249,13 +249,13 @@ var DualViewer = function (_TinyEmitter) {
     if (this._isVertical) {
       var top = this._containerHeight * this.options.verticalSafeZone;
       var height = this._containerHeight * (1 - this.options.verticalSafeZone * 2);
-      limits = new odoHelpers.math.Rect(0, top, this._containerWidth, height);
+      limits = new odoHelpers.Rect(0, top, this._containerWidth, height);
     } else {
       var containingEl = this.getElementByClass(DualViewer.ClassName.SCRUBBER_CONTAINER);
       var mainRect = this.element.getBoundingClientRect();
       var containingRect = containingEl.getBoundingClientRect();
 
-      limits = new odoHelpers.math.Rect(Math.round(containingRect.left - mainRect.left), containingEl.offsetTop, containingEl.offsetWidth, this._containerHeight);
+      limits = new odoHelpers.Rect(Math.round(containingRect.left - mainRect.left), containingEl.offsetTop, containingEl.offsetWidth, this._containerHeight);
     }
 
     this._scrubberLimits = limits;
@@ -307,7 +307,7 @@ var DualViewer = function (_TinyEmitter) {
       max = (rect.left + rect.width) / this._containerWidth;
     }
 
-    return odoHelpers.math.clamp(percent, min, max);
+    return odoHelpers.clamp(percent, min, max);
   };
 
   /**
@@ -474,7 +474,7 @@ var DualViewer = function (_TinyEmitter) {
 
     this._removeStateClasses();
 
-    var stepper = new odoHelpers.animation.Stepper({
+    var stepper = new odoHelpers.Stepper({
       start: this._previousPercent,
       end: percent,
       duration: this.options.animationDuration,

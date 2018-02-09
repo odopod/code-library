@@ -10,7 +10,7 @@
  */
 
 import TinyEmitter from 'tiny-emitter';
-import { browser, dom, math } from '@odopod/odo-helpers';
+import { giveId, clamp, setHash } from '@odopod/odo-helpers';
 import OdoWindowEvents from '@odopod/odo-window-events';
 import TabsEvent from './tabs-event';
 
@@ -122,7 +122,7 @@ class Tabs extends TinyEmitter {
       anchor.setAttribute('tabIndex', -1);
       anchor.setAttribute('aria-selected', false);
 
-      dom.giveId(anchor, uniqueId);
+      giveId(anchor, uniqueId);
 
       const pane = this.panes[i];
       anchor.setAttribute('aria-controls', pane.id);
@@ -198,7 +198,7 @@ class Tabs extends TinyEmitter {
     }
 
     evt.preventDefault();
-    this._focusTab(math.clamp(focusedIndex, 0, this.tabs.length - 1));
+    this._focusTab(clamp(focusedIndex, 0, this.tabs.length - 1));
   }
 
   /**
@@ -285,7 +285,7 @@ class Tabs extends TinyEmitter {
     this._selectedIndex = index;
 
     if (!skipHash && this.hashes[index]) {
-      browser.setHash(this.hashes[index]);
+      setHash(this.hashes[index]);
     }
 
     const didShowEvent = new TabsEvent(Tabs.EventType.DID_SHOW, index);

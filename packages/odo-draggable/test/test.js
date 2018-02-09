@@ -1,13 +1,11 @@
 /* global describe, it, beforeEach, afterEach */
 /* eslint-disable no-unused-expressions */
 
-const expect = window.chai.expect;
-const sinon = window.sinon;
-const fixture = window.fixture;
+const { expect } = window.chai;
 
-const OdoDraggable = window.OdoDraggable;
-const Coordinate = window.OdoHelpers.Coordinate;
-const math = window.OdoHelpers.math;
+const {
+  sinon, fixture, OdoDraggable, OdoHelpers,
+} = window;
 
 fixture.setBase('fixtures');
 
@@ -44,7 +42,7 @@ describe('The Draggable component', () => {
 
     it('should be at zero zero', () => {
       instance.update();
-      expect(instance._relativeZero).to.deep.equal(new Coordinate(0, 0));
+      expect(instance._relativeZero).to.deep.equal(new OdoHelpers.Coordinate(0, 0));
     });
 
     it('defaults to the x axis', () => {
@@ -133,8 +131,8 @@ describe('The Draggable component', () => {
       const spy = sinon.spy(instance, '_createEvent');
       instance._handleDragEnd({
         target: instance.element,
-        currentVelocity: new Coordinate(),
-        delta: new Coordinate(),
+        currentVelocity: new OdoHelpers.Coordinate(),
+        delta: new OdoHelpers.Coordinate(),
       });
 
       expect(spy.calledWith(OdoDraggable.EventType.END)).to.be.true;
@@ -145,22 +143,22 @@ describe('The Draggable component', () => {
       const top = 0;
       const width = 400;
       const height = 150;
-      const rect = new math.Rect(left, top, width, height);
+      const rect = new OdoHelpers.Rect(left, top, width, height);
       instance.setLimits(rect);
 
       instance.setPosition(-200, 0);
-      expect(instance.getPosition()).to.deep.equal(new Coordinate(-50, 0));
+      expect(instance.getPosition()).to.deep.equal(new OdoHelpers.Coordinate(-50, 0));
 
       instance.setPosition(200, 0);
-      expect(instance.getPosition()).to.deep.equal(new Coordinate(350, 0));
+      expect(instance.getPosition()).to.deep.equal(new OdoHelpers.Coordinate(350, 0));
     });
 
     it('can get new limited positions from realtive zero and the delta', () => {
       instance.update();
-      instance.setLimits(new math.Rect(0, 0, 15, 150));
-      instance.pointer.delta = new Coordinate(20, 0);
+      instance.setLimits(new OdoHelpers.Rect(0, 0, 15, 150));
+      instance.pointer.delta = new OdoHelpers.Coordinate(20, 0);
       const currentPosition = instance._getNewLimitedPosition(instance.pointer.delta);
-      expect(currentPosition).to.deep.equal(new Coordinate(15, 0));
+      expect(currentPosition).to.deep.equal(new OdoHelpers.Coordinate(15, 0));
     });
 
     it('events it emits will have the correct target and currentTarget', () => {
@@ -246,16 +244,16 @@ describe('The Draggable component', () => {
       const _throw = sinon.stub(instance, '_throw');
       instance._handleDragEnd({
         target: instance.element,
-        currentVelocity: new Coordinate(),
-        delta: new Coordinate(),
+        currentVelocity: new OdoHelpers.Coordinate(),
+        delta: new OdoHelpers.Coordinate(),
       });
 
       expect(_throw.callCount).to.equal(0);
 
       instance._handleDragEnd({
         target: instance.element,
-        currentVelocity: new Coordinate(-1, 1),
-        delta: new Coordinate(),
+        currentVelocity: new OdoHelpers.Coordinate(-1, 1),
+        delta: new OdoHelpers.Coordinate(),
       });
 
       expect(_throw.callCount).to.equal(1);
@@ -264,13 +262,16 @@ describe('The Draggable component', () => {
     it('can start a throw', (done) => {
       // Start at 0,0
       expect(instance._requestId).to.equal(0);
-      expect(Coordinate.equals(new Coordinate(), instance._currentPosition)).to.be.true;
+      expect(OdoHelpers.Coordinate.equals(
+        new OdoHelpers.Coordinate(),
+        instance._currentPosition,
+      )).to.be.true;
 
       // Throw with velocity and the whole drag took 10px in x and y.
-      instance._throw(new Coordinate(0.5, 0.11), new Coordinate(10, 10));
+      instance._throw(new OdoHelpers.Coordinate(0.5, 0.11), new OdoHelpers.Coordinate(10, 10));
 
-      expect(Coordinate.equals(
-        new Coordinate(10, 10),
+      expect(OdoHelpers.Coordinate.equals(
+        new OdoHelpers.Coordinate(10, 10),
         instance._currentPosition,
       )).to.be.true;
 

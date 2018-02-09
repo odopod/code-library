@@ -74,7 +74,7 @@ var left = (containerWidth - draggableWidth) / -2;
 var top = 0;
 var width = containerWidth - draggableWidth;
 var height = 0;
-var rect = new math.Rect(left, top, width, height);
+var rect = new OdoHelpers.Rect(left, top, width, height);
 x.setLimits(rect);</code></pre>
       </section>
 
@@ -154,7 +154,7 @@ var left = 0;
 var top = 0;
 var width = containerWidth - draggableWidth;
 var height = containerHeight - draggableHeight;
-var rect = new OdoHelpers.math.Rect(left, top, width, height);
+var rect = new OdoHelpers.Rect(left, top, width, height);
 
 // Set a boundary for the draggable so that it won't be thrown outside of its parent.
 throwable.setLimits(rect);</code></pre>
@@ -242,7 +242,7 @@ var left = -draggableWidth + containerWidth;
 var top = 0;
 var width = -left;
 var height = 0;
-var rect = new OdoHelpers.math.Rect(left, top, width, height);
+var rect = new OdoHelpers.Rect(left, top, width, height);
 
 freescroll.setLimits(rect);</code></pre>
       </section>

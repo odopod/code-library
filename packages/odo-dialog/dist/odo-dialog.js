@@ -182,7 +182,7 @@ var ScrollFix$1 = {
    */
   add: function add(element) {
     if (OdoDevice.HAS_TOUCH_EVENTS) {
-      var id = odoHelpers.string.random();
+      var id = odoHelpers.randomString();
       this._fixes.set(id, new ScrollFix(element, id));
       return id;
     }
@@ -542,7 +542,7 @@ var Dialog = function (_TinyEmitter) {
     } else {
       Dialog._nextFrame(function () {
         _this2._openNext();
-        odoHelpers.animation.onTransitionEnd(_this2.element, _this2._opened, _this2, null, 1000);
+        odoHelpers.onTransitionEnd(_this2.element, _this2._opened, _this2, null, 1000);
       });
     }
   };
@@ -631,7 +631,7 @@ var Dialog = function (_TinyEmitter) {
     } else {
       Dialog._nextFrame(function () {
         _this3._closeNext();
-        odoHelpers.animation.onTransitionEnd(_this3.element, _this3._closed, _this3, null, 1000);
+        odoHelpers.onTransitionEnd(_this3.element, _this3._closed, _this3, null, 1000);
       });
     }
   };
@@ -739,7 +739,7 @@ var Dialog = function (_TinyEmitter) {
     this.backdrop = null;
     this._closers.length = 0;
 
-    odoHelpers.array.remove(Dialog.Instances, this);
+    odoHelpers.pull(Dialog.Instances, this);
 
     // If this is the last dialog (being disposed), remove the body listener.
     if (Dialog.Instances.length === 0) {

@@ -66,15 +66,14 @@ x.getPosition(true);// Coordinate {x: 50, y: 0}</code></pre>
         <h3>Limits</h3>
         <p>You can also sets <code>limits</code> on the draggable instance, which restricts it to given boundaries. The only parameter is a <code>Rect</code>. <code>Rect</code>s have a <code>left</code>, <code>top</code>, <code>width</code>, and <code>height</code> and can be accessed from the <code>math</code> property of <code>OdoHelpers</code>.</p>
         <p>In this example, the draggable stops at the edges of the <code>.container</code> element. Since the draggable is centered within the container and the draggable starts at <code>0, 0</code>, the <code>left</code> limit needs to be negative half the leftover space. The minimum x position is the <code>left</code> value. The maximum x is the <code>left + width</code>. The width in this case, is the leftover space (20% because draggable is 80%). The y axis works the same way, but in this example, the <code>top</code> and <code>height</code> parameters don't matter because this draggable is restricted to the <code>x</code> axis.</p>
-        <pre><code class="language-javascript">var math = OdoHelpers.math;
-var draggableWidth = x.element.offsetWidth;
+        <pre><code class="language-javascript">var draggableWidth = x.element.offsetWidth;
 var containerWidth = container.offsetWidth;
 
 var left = (containerWidth - draggableWidth) / -2;
 var top = 0;
 var width = containerWidth - draggableWidth;
 var height = 0;
-var rect = new math.Rect(left, top, width, height);
+var rect = new OdoHelpers.Rect(left, top, width, height);
 x.setLimits(rect);</code></pre>
       </section>
 
@@ -154,7 +153,7 @@ var left = 0;
 var top = 0;
 var width = containerWidth - draggableWidth;
 var height = containerHeight - draggableHeight;
-var rect = new OdoHelpers.math.Rect(left, top, width, height);
+var rect = new OdoHelpers.Rect(left, top, width, height);
 
 // Set a boundary for the draggable so that it won't be thrown outside of its parent.
 throwable.setLimits(rect);</code></pre>
@@ -242,7 +241,7 @@ var left = -draggableWidth + containerWidth;
 var top = 0;
 var width = -left;
 var height = 0;
-var rect = new OdoHelpers.math.Rect(left, top, width, height);
+var rect = new OdoHelpers.Rect(left, top, width, height);
 
 freescroll.setLimits(rect);</code></pre>
       </section>

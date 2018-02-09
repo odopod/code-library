@@ -1,14 +1,16 @@
 /* global describe, it, beforeEach, afterEach */
 /* eslint-disable no-unused-expressions, no-use-before-define */
 
-const sinon = window.sinon;
-const expect = window.chai.expect;
-const fixture = window.fixture;
+const { expect } = window.chai;
 
-const OdoDevice = window.OdoDevice;
-const OdoCarousel = window.OdoCarousel;
-const OdoPointer = window.OdoPointer;
-const AnimationHelpers = window.OdoHelpers.animation;
+const {
+  OdoDevice,
+  OdoCarousel,
+  OdoPointer,
+  OdoHelpers,
+  fixture,
+  sinon,
+} = window;
 
 fixture.setBase('fixtures');
 
@@ -84,7 +86,7 @@ describe('The carousel component', function d() {
 
   beforeEach(() => {
     // Make onTransitionEnd a zero timeout every time.
-    sinon.stub(AnimationHelpers, 'onTransitionEnd').callsFake((elem, fn, context) => {
+    sinon.stub(OdoHelpers, 'onTransitionEnd').callsFake((elem, fn, context) => {
       setTimeout(() => {
         fn.call(context, {
           target: elem,
@@ -95,7 +97,7 @@ describe('The carousel component', function d() {
   });
 
   afterEach(() => {
-    AnimationHelpers.onTransitionEnd.restore();
+    OdoHelpers.onTransitionEnd.restore();
   });
 
   let element;

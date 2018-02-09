@@ -1,7 +1,15 @@
 import TinyEmitter from 'tiny-emitter';
 import OdoDevice from '@odopod/odo-device';
 import OdoPointer from '@odopod/odo-pointer';
-import { Coordinate, utilities, math, style } from '@odopod/odo-helpers';
+import {
+  clamp,
+  Coordinate,
+  defaultsTo,
+  getMarginBox,
+  getPaddingBox,
+  getSize,
+  Rect,
+} from '@odopod/odo-helpers';
 import settings from './settings';
 
 /**
@@ -95,9 +103,9 @@ class Draggable extends TinyEmitter {
 
     /**
      * Limits of how far the draggable element can be dragged.
-     * @type {math.Rect}
+     * @type {Rect}
      */
-    this.limits = new math.Rect(NaN, NaN, NaN, NaN);
+    this.limits = new Rect(NaN, NaN, NaN, NaN);
 
     this.pointer = new OdoPointer(element, {
       axis: this.options.axis,
@@ -124,7 +132,7 @@ class Draggable extends TinyEmitter {
    * @private
    */
   _saveDimensions() {
-    this._container = style.getSize(this.element);
+    this._container = getSize(this.element);
     ensureObjectHasSize(this._container);
     this._relativeZero = this._getRelativeZero();
   }
@@ -160,8 +168,8 @@ class Draggable extends TinyEmitter {
   _getOffsetCorrection() {
     // getBoundingClientRect does not include margins. They must be accounted for.
     const containmentRect = this._parentEl.getBoundingClientRect();
-    const paddings = style.getPaddingBox(this._parentEl);
-    const margins = style.getMarginBox(this.element);
+    const paddings = getPaddingBox(this._parentEl);
+    const margins = getMarginBox(this.element);
     const offsetCorrectionX = margins.left + paddings.left + containmentRect.left;
     const offsetCorrectionY = margins.top + paddings.top + containmentRect.top;
     return new Coordinate(offsetCorrectionX, offsetCorrectionY);
@@ -187,11 +195,11 @@ class Draggable extends TinyEmitter {
    * @return {number} The clamped number.
    */
   static _limitValue(value, rectPosition, rectSize) {
-    const side = utilities.defaultsTo(rectPosition, null, !Number.isNaN(rectPosition));
-    const dimension = utilities.defaultsTo(rectSize, 0, !Number.isNaN(rectSize));
-    const max = utilities.defaultsTo(side + dimension, Infinity, side !== null);
-    const min = utilities.defaultsTo(side, -Infinity, side !== null);
-    return math.clamp(value, min, max);
+    const side = defaultsTo(rectPosition, null, !Number.isNaN(rectPosition));
+    const dimension = defaultsTo(rectSize, 0, !Number.isNaN(rectSize));
+    const max = defaultsTo(side + dimension, Infinity, side !== null);
+    const min = defaultsTo(side, -Infinity, side !== null);
+    return clamp(value, min, max);
   }
 
   /**
@@ -443,7 +451,7 @@ class Draggable extends TinyEmitter {
 
   /**
    * Sets (or reset) the Drag limits after a Dragger is created.
-   * @param {math.Rect} limits Object containing left, top, width,
+   * @param {Rect} limits Object containing left, top, width,
    *     height for new Dragger limits.
    */
   setLimits(limits) {

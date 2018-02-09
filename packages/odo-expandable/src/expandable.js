@@ -19,10 +19,10 @@ class Expandable {
     this.options = Object.assign({}, Settings.Defaults, options);
 
     /** @type {Element} */
-    this._trigger = document.body.querySelector(`[${Settings.Attribute.TRIGGER}][${Settings.Attribute.ID}="${id}"]`);
+    this._trigger = document.body.querySelector(`[${Settings.Attribute.TRIGGER}="${id}"]`);
 
     /** @type {Element} */
-    this._target = document.body.querySelector(`[${Settings.Attribute.TARGET}][${Settings.Attribute.ID}="${id}"]`);
+    this._target = document.body.querySelector(`[${Settings.Attribute.TARGET}="${id}"]`);
 
     this._setARIAAttributes();
 
@@ -146,7 +146,7 @@ class Expandable {
       }
     });
 
-    const singleInstances = single.map(trigger => new Expandable(trigger.getAttribute(Settings.Attribute.ID)));
+    const singleInstances = single.map(trigger => new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER)));
     const groupInstances = groups.map(grouping => new ExpandableGroup(grouping));
 
     return singleInstances.concat(groupInstances);

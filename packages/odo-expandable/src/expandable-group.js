@@ -11,7 +11,7 @@ class ExpandableGroup {
     this._elements = elements;
 
     this._expandables = elements.map((trigger) => {
-      return new Expandable(trigger.getAttribute(Settings.Attribute.ID), { groupedItem: true });
+      return new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER), { groupedItem: true });
     });
 
     this._bindListeners();
@@ -36,7 +36,7 @@ class ExpandableGroup {
     const closest = evt.target.closest(`[${Settings.Attribute.TRIGGER}]`);
 
     if (closest !== null && this._elements.includes(closest)) {
-      this._toggleGroupVisibility(closest.getAttribute(Settings.Attribute.ID));
+      this._toggleGroupVisibility(closest.getAttribute(Settings.Attribute.TRIGGER));
     }
   }
 

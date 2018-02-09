@@ -12,7 +12,6 @@ var Settings = {
   Attribute: {
     TRIGGER: 'data-expandable-trigger',
     TARGET: 'data-expandable-target',
-    ID: 'data-expandable-id',
     GROUP: 'data-expandable-group'
   },
   Defaults: {
@@ -56,7 +55,7 @@ var ExpandableGroup = function () {
     this._elements = elements;
 
     this._expandables = elements.map(function (trigger) {
-      return new Expandable(trigger.getAttribute(Settings.Attribute.ID), { groupedItem: true });
+      return new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER), { groupedItem: true });
     });
 
     this._bindListeners();
@@ -85,7 +84,7 @@ var ExpandableGroup = function () {
     var closest = evt.target.closest('[' + Settings.Attribute.TRIGGER + ']');
 
     if (closest !== null && this._elements.includes(closest)) {
-      this._toggleGroupVisibility(closest.getAttribute(Settings.Attribute.ID));
+      this._toggleGroupVisibility(closest.getAttribute(Settings.Attribute.TRIGGER));
     }
   };
 
@@ -135,10 +134,10 @@ var Expandable = function () {
     this.options = Object.assign({}, Settings.Defaults, options);
 
     /** @type {Element} */
-    this._trigger = document.body.querySelector('[' + Settings.Attribute.TRIGGER + '][' + Settings.Attribute.ID + '="' + id + '"]');
+    this._trigger = document.body.querySelector('[' + Settings.Attribute.TRIGGER + '="' + id + '"]');
 
     /** @type {Element} */
-    this._target = document.body.querySelector('[' + Settings.Attribute.TARGET + '][' + Settings.Attribute.ID + '="' + id + '"]');
+    this._target = document.body.querySelector('[' + Settings.Attribute.TARGET + '="' + id + '"]');
 
     this._setARIAAttributes();
 
@@ -175,22 +174,6 @@ var Expandable = function () {
   };
 
   /**
-   * Handler for key up events.
-   * @param {Event} evt Event object.
-   * @private
-   */
-
-
-  Expandable.prototype._onKeyUpHandler = function _onKeyUpHandler(evt) {
-    evt.preventDefault();
-    var closest = evt.target.closest('[' + Settings.Attribute.TRIGGER + ']');
-
-    if (closest !== null && closest === this._trigger && evt.keyCode === 32) {
-      this.toggle();
-    }
-  };
-
-  /**
    * Sets the appropriate ARIA attributes for a11y.
    * @private
    */
@@ -204,6 +187,19 @@ var Expandable = function () {
     this._target.setAttribute('id', elementId);
     this._target.setAttribute('role', 'region');
     this._target.setAttribute('aria-expanded', 'true');
+  };
+
+  /**
+   * Removes the ARIA attributes assigned on instantiation.
+   * @private
+   */
+
+
+  Expandable.prototype._removeARIAAttributes = function _removeARIAAttributes() {
+    this._trigger.removeAttribute('aria-describedby');
+    this._target.removeAttribute('id');
+    this._target.removeAttribute('role');
+    this._target.removeAttribute('aria-expanded');
   };
 
   /**
@@ -227,7 +223,7 @@ var Expandable = function () {
   Expandable.prototype.open = function open() {
     this._target.classList.add(Settings.ClassName.TARGET_OPEN);
     this._trigger.classList.add(Settings.ClassName.TRIGGER_OPEN);
-    this._target.setAttribute('aria-expanded', 'false');
+    this._target.setAttribute('aria-expanded', 'true');
   };
 
   /**
@@ -238,7 +234,7 @@ var Expandable = function () {
   Expandable.prototype.close = function close() {
     this._target.classList.remove(Settings.ClassName.TARGET_OPEN);
     this._trigger.classList.remove(Settings.ClassName.TRIGGER_OPEN);
-    this._target.setAttribute('aria-expanded', 'true');
+    this._target.setAttribute('aria-expanded', 'false');
   };
 
   /**
@@ -248,6 +244,8 @@ var Expandable = function () {
     if (!this.options.groupedItem) {
       document.body.removeEventListener('click', this._onTriggerClick);
     }
+
+    this._removeARIAAttributes();
   };
 
   /**
@@ -278,7 +276,7 @@ var Expandable = function () {
     });
 
     var singleInstances = single.map(function (trigger) {
-      return new Expandable(trigger.getAttribute(Settings.Attribute.ID));
+      return new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER));
     });
     var groupInstances = groups.map(function (grouping) {
       return new ExpandableGroup(grouping);
@@ -295,6 +293,8 @@ var Expandable = function () {
   }]);
   return Expandable;
 }();
+
+Object.assign(Expandable, Settings);
 
 return Expandable;
 

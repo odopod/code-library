@@ -6,7 +6,6 @@ export default {
   Attribute: {
     TRIGGER: 'data-expandable-trigger',
     TARGET: 'data-expandable-target',
-    ID: 'data-expandable-id',
     GROUP: 'data-expandable-group',
   },
   Defaults: {

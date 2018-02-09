@@ -1,6 +1,6 @@
 {
   "name": "@odopod/odo-expandable",
-  "description": "An expandable Component",
+  "description": "A simple, accessible combination of two elements; A trigger to handle clicks, and a target to toggle visibility.",
   "version": "0.0.1",
   "main": "dist/odo-expandable.js",
   "odoModule": "src/expandable.js",
@@ -13,19 +13,19 @@
   ],
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-expandable",
   "files": [
-    "css",
     "dist",
     "src",
     "index.js"
   ],
   "odoKeywords": [
-    "utilities"
+    "ui"
   ],
   "keywords": [
     "odo",
     "odo-component",
     "odopod",
-    "expandable"
+    "expandable",
+    "accordion"
   ],
   "license": "MIT",
   "repository": "odopod/code-library",

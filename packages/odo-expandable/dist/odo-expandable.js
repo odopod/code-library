@@ -44,7 +44,8 @@ var createClass = function () {
 }();
 
 /**
- * @fileoverview
+ * @fileoverview A wrapper for multiple Expandable elements that will
+ * allow them to operate coherently in an accordion type fashion.
  *
  * @author Matt Zaso
  */
@@ -52,10 +53,14 @@ var ExpandableGroup = function () {
   function ExpandableGroup(elements) {
     classCallCheck(this, ExpandableGroup);
 
+    /** @type {Array.<!Element>} */
     this._elements = elements;
 
+    /** @type {Array.<!Expandable>} */
     this._expandables = elements.map(function (trigger) {
-      return new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER), { groupedItem: true });
+      // Create new expandable instances and keep them in an array.
+      var options = { groupedItem: true };
+      return new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER), options);
     });
 
     this._bindListeners();
@@ -88,6 +93,13 @@ var ExpandableGroup = function () {
     }
   };
 
+  /**
+   * Will iterate over all grouped items and toggle the selected one while collapsing all others.
+   * @param {int} selectedId The ID of the selected target to expand.
+   * @private
+   */
+
+
   ExpandableGroup.prototype._toggleGroupVisibility = function _toggleGroupVisibility(selectedId) {
     this._expandables.forEach(function (expandable) {
       if (expandable.id === selectedId) {
@@ -99,7 +111,9 @@ var ExpandableGroup = function () {
   };
 
   /**
-   * Dispose this instance and its handlers.
+   * Dispose this instance and its handlers. Will also dispose all child
+   * instances.
+   * @public
    */
 
 
@@ -249,7 +263,11 @@ var Expandable = function () {
   };
 
   /**
-   * Instantiates all instances of the expandable.
+   * Instantiates all instances of the expandable. Groups are instantiated separate from
+   * Expandables and require different parameters. This helper chunks out and groups the
+   * grouped expandables before instantiating all of them.
+   *
+   * @return {Array.<Expandable, ExpandableGroup>} all instances of both types.
    * @public
    */
 

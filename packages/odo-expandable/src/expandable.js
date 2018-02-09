@@ -142,7 +142,7 @@ class Expandable {
       if (item.getAttribute(Settings.Attribute.GROUP)) {
         const groupId = item.getAttribute(Settings.Attribute.GROUP);
         if (groupIds.indexOf(groupId) < 0) {
-          groups.push(elements.filter((el => el.getAttribute(Settings.Attribute.GROUP) === groupId)));
+          groups.push(elements.filter(el => el.getAttribute(Settings.Attribute.GROUP) === groupId));
           groupIds.push(groupId);
         }
       } else {
@@ -150,7 +150,8 @@ class Expandable {
       }
     });
 
-    const singleInstances = single.map(trigger => new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER)));
+    const singleInstances =
+      single.map(trigger => new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER)));
     const groupInstances = groups.map(grouping => new ExpandableGroup(grouping));
 
     return singleInstances.concat(groupInstances);

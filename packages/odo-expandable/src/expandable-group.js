@@ -14,7 +14,9 @@ class ExpandableGroup {
 
     /** @type {Array.<!Expandable>} */
     this._expandables = elements.map((trigger) => {
-      return new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER), { groupedItem: true });
+      // Create new expandable instances and keep them in an array.
+      const options = { groupedItem: true };
+      return new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER), options);
     });
 
     this._bindListeners();

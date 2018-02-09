@@ -1,5 +1,6 @@
 /**
- * @fileoverview
+ * @fileoverview A wrapper for multiple Expandable elements that will
+ * allow them to operate coherently in an accordion type fashion.
  *
  * @author Matt Zaso
  */
@@ -8,8 +9,10 @@ import Expandable from './expandable';
 
 class ExpandableGroup {
   constructor(elements) {
+    /** @type {Array.<!Element>} */
     this._elements = elements;
 
+    /** @type {Array.<!Expandable>} */
     this._expandables = elements.map((trigger) => {
       return new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER), { groupedItem: true });
     });
@@ -40,6 +43,11 @@ class ExpandableGroup {
     }
   }
 
+  /**
+   * Will iterate over all grouped items and toggle the selected one while collapsing all others.
+   * @param {int} selectedId The ID of the selected target to expand.
+   * @private
+   */
   _toggleGroupVisibility(selectedId) {
     this._expandables.forEach((expandable) => {
       if (expandable.id === selectedId) {
@@ -51,7 +59,9 @@ class ExpandableGroup {
   }
 
   /**
-   * Dispose this instance and its handlers.
+   * Dispose this instance and its handlers. Will also dispose all child
+   * instances.
+   * @public
    */
   dispose() {
     document.body.removeEventListener('click', this._onTriggerClick);

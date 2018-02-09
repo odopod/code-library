@@ -124,7 +124,11 @@ class Expandable {
   }
 
   /**
-   * Instantiates all instances of the expandable.
+   * Instantiates all instances of the expandable. Groups are instantiated separate from
+   * Expandables and require different parameters. This helper chunks out and groups the
+   * grouped expandables before instantiating all of them.
+   *
+   * @return {Array.<Expandable, ExpandableGroup>} all instances of both types.
    * @public
    */
   static initializeAll() {

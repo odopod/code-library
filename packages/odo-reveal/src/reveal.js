@@ -9,7 +9,7 @@
 
 import OdoDevice from '@odopod/odo-device';
 import OdoViewport from '@odopod/odo-viewport';
-import { animation, browser, utilities } from '@odopod/odo-helpers';
+import { getPercentageOption, isNativeAndroid, onTransitionEnd } from '@odopod/odo-helpers';
 
 /**
  * @param {Element} element Main element for the module.
@@ -41,7 +41,7 @@ class Reveal {
     if (Reveal.HAS_SCROLL_ANIMATION) {
       this.id = OdoViewport.add({
         element,
-        threshold: utilities.getPercentageOption(element.getAttribute('data-threshold'), '25%'),
+        threshold: getPercentageOption(element.getAttribute('data-threshold'), '25%'),
         enter: this._enteredView.bind(this),
       });
     } else {
@@ -82,7 +82,7 @@ class Reveal {
     // Listen transition end on each target and add a class which removes
     // the transform and layer promotion from it.
     targets.forEach((el) => {
-      animation.onTransitionEnd(el, this._handleShown, null, OdoDevice.Dom.TRANSFORM);
+      onTransitionEnd(el, this._handleShown, null, OdoDevice.Dom.TRANSFORM);
     });
 
     this.dispose();
@@ -141,7 +141,7 @@ class Reveal {
  * no native Android browsers are registered. The type will fade in immediately.
  * @type {boolean}
  */
-Reveal.HAS_SCROLL_ANIMATION = !browser.isNativeAndroid(navigator.userAgent);
+Reveal.HAS_SCROLL_ANIMATION = !isNativeAndroid(navigator.userAgent);
 
 /** @enum {string} */
 Reveal.ClassName = {

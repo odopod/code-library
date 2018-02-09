@@ -3,8 +3,8 @@
 
 
 describe('The dom utility', () => {
-  const expect = window.chai.expect;
-  const dom = window.OdoHelpers.dom;
+  const { expect } = window.chai;
+  const { OdoHelpers } = window;
 
   describe('handles children', () => {
     let parent;
@@ -27,21 +27,8 @@ describe('The dom utility', () => {
       child3 = null;
     });
 
-    it('can get the first element child', () => {
-      expect(dom.getFirstElementChild(parent).nodeType).to.equal(1);
-    });
-
-    it('should return null if there is not a first element child', () => {
-      expect(dom.getFirstElementChild(child3)).to.be.null;
-    });
-
-    it('can retrieve children', () => {
-      expect(dom.getChildren(parent)).to.have.length(2);
-      expect(dom.getChildren(parent)).to.be.instanceof(Array);
-    });
-
     it('can remove all children', () => {
-      dom.removeChildren(parent);
+      OdoHelpers.removeChildren(parent);
       expect(parent.children).to.have.length(0);
     });
   });
@@ -77,24 +64,24 @@ describe('The dom utility', () => {
     });
 
     it('can swap element locations', () => {
-      dom.swapElements(sibling3, sibling1);
+      OdoHelpers.swapElements(sibling3, sibling1);
 
-      expect(dom.getChildren(container)[0].className).to.equal('three');
-      expect(dom.getChildren(container)[2].className).to.equal('one');
+      expect(container.children[0].className).to.equal('three');
+      expect(container.children[2].className).to.equal('one');
 
-      dom.swapElements(sibling3, sibling2);
+      OdoHelpers.swapElements(sibling3, sibling2);
 
-      expect(dom.getChildren(container)[0].className).to.equal('two');
-      expect(dom.getChildren(container)[1].className).to.equal('three');
+      expect(container.children[0].className).to.equal('two');
+      expect(container.children[1].className).to.equal('three');
 
-      dom.swapElements(sibling1, sibling2);
+      OdoHelpers.swapElements(sibling1, sibling2);
 
-      expect(dom.getChildren(container)[0].className).to.equal('one');
-      expect(dom.getChildren(container)[2].className).to.equal('two');
+      expect(container.children[0].className).to.equal('one');
+      expect(container.children[2].className).to.equal('two');
     });
 
     it('exits if one of the values if falsy', () => {
-      expect(dom.swapElements('foo', null)).to.equal(undefined);
+      expect(OdoHelpers.swapElements('foo', null)).to.equal(undefined);
     });
   });
 
@@ -132,30 +119,30 @@ describe('The dom utility', () => {
 
     it('should return the depth of the element compared to another element', () => {
       // 1 depth.
-      expect(dom.getRelativeDepth(sibling1, container)).to.equal(1);
-      expect(dom.getRelativeDepth(sibling2, container)).to.equal(1);
-      expect(dom.getRelativeDepth(child1, sibling1)).to.equal(1);
-      expect(dom.getRelativeDepth(child2, sibling2)).to.equal(1);
-      expect(dom.getRelativeDepth(grandchild1, child1)).to.equal(1);
-      expect(dom.getRelativeDepth(grandchild2, child2)).to.equal(1);
+      expect(OdoHelpers.getRelativeDepth(sibling1, container)).to.equal(1);
+      expect(OdoHelpers.getRelativeDepth(sibling2, container)).to.equal(1);
+      expect(OdoHelpers.getRelativeDepth(child1, sibling1)).to.equal(1);
+      expect(OdoHelpers.getRelativeDepth(child2, sibling2)).to.equal(1);
+      expect(OdoHelpers.getRelativeDepth(grandchild1, child1)).to.equal(1);
+      expect(OdoHelpers.getRelativeDepth(grandchild2, child2)).to.equal(1);
 
       // 2 depth.
-      expect(dom.getRelativeDepth(child1, container)).to.equal(2);
-      expect(dom.getRelativeDepth(child2, container)).to.equal(2);
+      expect(OdoHelpers.getRelativeDepth(child1, container)).to.equal(2);
+      expect(OdoHelpers.getRelativeDepth(child2, container)).to.equal(2);
 
       // 3 depth.
-      expect(dom.getRelativeDepth(grandchild1, container)).to.equal(3);
-      expect(dom.getRelativeDepth(grandchild2, container)).to.equal(3);
+      expect(OdoHelpers.getRelativeDepth(grandchild1, container)).to.equal(3);
+      expect(OdoHelpers.getRelativeDepth(grandchild2, container)).to.equal(3);
     });
 
     // Same element.
     it('should return zero if its the same element', () => {
-      expect(dom.getRelativeDepth(container, container)).to.equal(0);
+      expect(OdoHelpers.getRelativeDepth(container, container)).to.equal(0);
     });
 
     // Not contained within the element.
     it('should return negative one if the given node is not a descendant of the given parent node', () => {
-      expect(dom.getRelativeDepth(document.body, container)).to.equal(-1);
+      expect(OdoHelpers.getRelativeDepth(document.body, container)).to.equal(-1);
     });
   });
 
@@ -193,25 +180,25 @@ describe('The dom utility', () => {
 
     it('can get a sibling at a provided offset', () => {
       // Passing zero still results in the nextSibling getting called.
-      expect(dom.getNthSibling(sibling1, 0).className).to.equal('two');
-      expect(dom.getNthSibling(sibling1, 1).className).to.equal('two');
+      expect(OdoHelpers.getNthSibling(sibling1, 0).className).to.equal('two');
+      expect(OdoHelpers.getNthSibling(sibling1, 1).className).to.equal('two');
 
-      expect(dom.getNthSibling(sibling1, 2).className).to.equal('three');
-      expect(dom.getNthSibling(sibling1, 3).className).to.equal('four');
+      expect(OdoHelpers.getNthSibling(sibling1, 2).className).to.equal('three');
+      expect(OdoHelpers.getNthSibling(sibling1, 3).className).to.equal('four');
     });
 
     it('can search previous siblings with an offset', () => {
-      expect(dom.getNthSibling(sibling2, 1, false).className).to.equal('one');
-      expect(dom.getNthSibling(sibling3, 2, false).className).to.equal('one');
-      expect(dom.getNthSibling(sibling4, 3, false).className).to.equal('one');
+      expect(OdoHelpers.getNthSibling(sibling2, 1, false).className).to.equal('one');
+      expect(OdoHelpers.getNthSibling(sibling3, 2, false).className).to.equal('one');
+      expect(OdoHelpers.getNthSibling(sibling4, 3, false).className).to.equal('one');
     });
 
     it('returns null if sibling does not exist at the offset', () => {
-      expect(dom.getNthSibling(sibling1, 4)).to.be.null;
-      expect(dom.getNthSibling(sibling1, 5)).to.be.null;
+      expect(OdoHelpers.getNthSibling(sibling1, 4)).to.be.null;
+      expect(OdoHelpers.getNthSibling(sibling1, 5)).to.be.null;
 
-      expect(dom.getNthSibling(sibling2, 5, false)).to.be.null;
-      expect(dom.getNthSibling(sibling4, 4, false)).to.be.null;
+      expect(OdoHelpers.getNthSibling(sibling2, 5, false)).to.be.null;
+      expect(OdoHelpers.getNthSibling(sibling4, 4, false)).to.be.null;
     });
   });
 
@@ -226,7 +213,7 @@ describe('The dom utility', () => {
        */
       let testVal = false;
 
-      dom.ready.then(() => {
+      OdoHelpers.domReady.then(() => {
         testVal = !testVal;
         expect(testVal).to.be.true;
         done();
@@ -247,7 +234,7 @@ describe('The dom utility', () => {
        */
       let b = 1;
 
-      return dom.loaded.then(() => {
+      return OdoHelpers.domLoaded.then(() => {
         b += 1;
         expect(b).to.equal(2);
       });
@@ -258,14 +245,14 @@ describe('The dom utility', () => {
     it('will add an id to an element if it does not have one with a function', () => {
       const element = document.createElement('div');
       expect(element.id).to.equal('');
-      dom.giveId(element, () => 'foo');
+      OdoHelpers.giveId(element, () => 'foo');
       expect(element.id).to.equal('foo');
     });
 
     it('will add an id to an element if it does not have one with a string', () => {
       const element = document.createElement('div');
       expect(element.id).to.equal('');
-      dom.giveId(element, 'odo');
+      OdoHelpers.giveId(element, 'odo');
       expect(element.id).to.equal('odo');
     });
 
@@ -273,7 +260,7 @@ describe('The dom utility', () => {
       const element = document.createElement('div');
       element.id = 'foo';
       expect(element.id).to.equal('foo');
-      dom.giveId(element, () => 'bar');
+      OdoHelpers.giveId(element, () => 'bar');
       expect(element.id).to.equal('foo');
     });
   });

@@ -25,7 +25,8 @@
     <h1>Odo Reveal</h1>
     <p>Reveal elements on the page as they come into view. It will also wait for images inside the main element to load before reveal any content.</p>
     <h3>Support</h3>
-    <p>IE9+.</p>
+    <p>IE9+ with polyfills.</p>
+    <p>To support IE&lt;=11, you will need to add <code>classList</code> and <a href="https://www.npmjs.com/package/element-closest"><code>Element#closest</code></a> polyfills.</p>
     <p>Native Android browsers will fade the text in immediately. Browsers without transitions will see the text appear abruptly. You may modify <code>OdoTypeAnimation.HAS_SCROLL_ANIMATION</code> to choose whether the text fades in upon viewport enter or immediately.</p>
     <h3>Dependencies</h3>
     <p>OdoDevice, OdoHelpers, OdoViewport</p>
@@ -127,6 +128,7 @@
 
   <!-- Polyfills -->
   <script src="../../../node_modules/classlist.js/classList.min.js"></script>
+  <script src="../../../node_modules/element-closest/element-closest.js"></script>
   <script src="../../../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
 
   <!-- Dependencies. -->

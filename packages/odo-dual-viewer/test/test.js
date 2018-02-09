@@ -1,10 +1,13 @@
 /* global describe, it, beforeEach, afterEach */
 /* eslint-disable no-unused-expressions */
 
-const expect = window.chai.expect;
-const fixture = window.fixture;
-const sinon = window.sinon;
-const OdoDualViewer = window.OdoDualViewer;
+const { expect } = window.chai;
+const {
+  fixture,
+  sinon,
+  OdoDualViewer,
+  OdoHelpers,
+} = window;
 
 fixture.setBase('fixtures');
 
@@ -176,7 +179,7 @@ describe('The dual viewer component', function dualViewer() {
 
     it('can animate to a position', () => {
       const _getZone = sinon.spy(instance, '_getZone');
-      const Stepper = sinon.stub(window.OdoHelpers.animation, 'Stepper').callsFake(function Stepper() {
+      const Stepper = sinon.stub(OdoHelpers, 'Stepper').callsFake(function Stepper() {
         this.onfinish = 'foo';
       });
 

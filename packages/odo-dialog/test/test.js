@@ -1,13 +1,10 @@
 /* global describe, it, beforeEach, afterEach */
 /* eslint-disable no-unused-expressions */
 
-const sinon = window.sinon;
-const expect = window.chai.expect;
-const fixture = window.fixture;
-
-const OdoDialog = window.OdoDialog;
-const animation = window.OdoHelpers.animation;
-const OdoDevice = window.OdoDevice;
+const { expect } = window.chai;
+const {
+  sinon, fixture, OdoDialog, OdoDevice, OdoHelpers,
+} = window;
 
 fixture.setBase('fixtures');
 
@@ -27,8 +24,8 @@ beforeEach(() => {
   }
 
   // Make onTransitionEnd and onAnimationEnd a zero timeout every time.
-  sinon.stub(animation, 'onTransitionEnd').callsFake(fake);
-  sinon.stub(animation, 'onAnimationEnd').callsFake(fake);
+  sinon.stub(OdoHelpers, 'onTransitionEnd').callsFake(fake);
+  sinon.stub(OdoHelpers, 'onAnimationEnd').callsFake(fake);
 
   sinon.stub(window, 'requestAnimationFrame').callsFake((fn) => {
     fn();
@@ -36,8 +33,8 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  animation.onTransitionEnd.restore();
-  animation.onAnimationEnd.restore();
+  OdoHelpers.onTransitionEnd.restore();
+  OdoHelpers.onAnimationEnd.restore();
   window.requestAnimationFrame.restore();
   clock.restore();
 });
@@ -319,7 +316,7 @@ describe('The OdoDialog Component', () => {
       });
 
       it('zero when the body and dialog have scrollbars', () => {
-        const element = instance.element;
+        const { element } = instance;
         OdoDialog.SCROLLBAR_WIDTH = 20;
         instance._hasBodyScrollbar = true;
         instance.element = { scrollHeight: Infinity };
@@ -329,7 +326,7 @@ describe('The OdoDialog Component', () => {
       });
 
       it('SCROLLBAR_WIDTH when the body has a scrollbar, but the dialog does not', () => {
-        const element = instance.element;
+        const { element } = instance;
 
         OdoDialog.SCROLLBAR_WIDTH = 20;
         instance._hasBodyScrollbar = true;

@@ -10,7 +10,7 @@
  */
 
 import TinyEmitter from 'tiny-emitter';
-import { animation, array } from '@odopod/odo-helpers';
+import { pull, onTransitionEnd } from '@odopod/odo-helpers';
 import ScrollFix from './scroll-fix';
 
 const FOCUSABLE_ELEMENTS = [
@@ -319,7 +319,7 @@ class Dialog extends TinyEmitter {
     } else {
       Dialog._nextFrame(() => {
         this._openNext();
-        animation.onTransitionEnd(this.element, this._opened, this, null, 1000);
+        onTransitionEnd(this.element, this._opened, this, null, 1000);
       });
     }
   }
@@ -396,7 +396,7 @@ class Dialog extends TinyEmitter {
     } else {
       Dialog._nextFrame(() => {
         this._closeNext();
-        animation.onTransitionEnd(this.element, this._closed, this, null, 1000);
+        onTransitionEnd(this.element, this._closed, this, null, 1000);
       });
     }
   }
@@ -490,7 +490,7 @@ class Dialog extends TinyEmitter {
     this.backdrop = null;
     this._closers.length = 0;
 
-    array.remove(Dialog.Instances, this);
+    pull(Dialog.Instances, this);
 
     // If this is the last dialog (being disposed), remove the body listener.
     if (Dialog.Instances.length === 0) {

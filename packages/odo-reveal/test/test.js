@@ -1,15 +1,12 @@
 /* global describe, it, beforeEach, afterEach */
 /* eslint-disable no-unused-expressions */
 
-const expect = window.chai.expect;
-const sinon = window.sinon;
-const fixture = window.fixture;
-
-const OdoReveal = window.OdoReveal;
+const { expect } = window.chai;
+const { sinon, fixture, OdoReveal } = window;
 
 sinon.stub(window.OdoViewport, 'add').callsFake(() => 'foo');
 
-sinon.stub(window.OdoHelpers.animation, 'onTransitionEnd').callsFake((element, callback, context) => {
+sinon.stub(window.OdoHelpers, 'onTransitionEnd').callsFake((element, callback, context) => {
   setTimeout(() => {
     callback.call(context, {
       target: element,

@@ -2,9 +2,8 @@
 /* eslint-disable no-unused-expressions */
 
 describe('Animation Stepper', () => {
-  const expect = window.chai.expect;
-  const animation = window.OdoHelpers.animation;
-  const sinon = window.sinon;
+  const { expect } = window.chai;
+  const { OdoHelpers, sinon } = window;
   let el;
   let instance;
 
@@ -33,7 +32,7 @@ describe('Animation Stepper', () => {
       div.style.left = `${position}px`;
     };
 
-    instance = new animation.Stepper({
+    instance = new OdoHelpers.Stepper({
       start: 0,
       end: 500,
       duration: 50,
@@ -50,7 +49,7 @@ describe('Animation Stepper', () => {
   it('will work without a step method', (done) => {
     createFixture('stepper');
 
-    instance = new animation.Stepper({
+    instance = new OdoHelpers.Stepper({
       start: 0,
       end: 10,
       duration: 30,
@@ -64,7 +63,7 @@ describe('Animation Stepper', () => {
 
     const spy = sinon.spy();
 
-    instance = new animation.Stepper({
+    instance = new OdoHelpers.Stepper({
       start: 0,
       end: 10,
       step: spy,
@@ -87,7 +86,7 @@ describe('Animation Stepper', () => {
       expect(this.foo).to.equal('bar');
     };
 
-    instance = new animation.Stepper({
+    instance = new OdoHelpers.Stepper({
       start: 0,
       end: 450,
       duration: 50,
@@ -114,7 +113,7 @@ describe('Animation Stepper', () => {
       div.style.width = `${percent * 100}%`;
     };
 
-    instance = new animation.Stepper({
+    instance = new OdoHelpers.Stepper({
       start: 5,
       end: 100,
       step,
@@ -132,7 +131,7 @@ describe('Animation Stepper', () => {
     div.style.backgroundColor = 'transparent';
     const spy = sinon.spy();
 
-    instance = new animation.Stepper({
+    instance = new OdoHelpers.Stepper({
       start: 0,
       end: 100,
       duration: 50,

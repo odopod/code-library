@@ -1,12 +1,6 @@
 /* eslint-disable no-console */
 
-const OdoDevice = window.OdoDevice;
-const OdoHelpers = window.OdoHelpers;
-const animation = OdoHelpers.animation;
-const dom = OdoHelpers.dom;
-const style = OdoHelpers.style;
-const Timer = OdoHelpers.Timer;
-const browser = OdoHelpers.browser;
+const { OdoDevice, OdoHelpers } = window;
 
 // Transition end.
 let transitionEndCount = 0;
@@ -15,11 +9,11 @@ const block = document.getElementById('animate-my-left');
 const output = document.getElementById('left-output');
 
 document.getElementById('left-animator').addEventListener('click', () => {
-  animation.cancelTransitionEnd(transitionId);
+  OdoHelpers.cancelTransitionEnd(transitionId);
   output.textContent = 'waiting for transition: ' + transitionEndCount;
   block.classList.toggle('active');
 
-  transitionId = animation.onTransitionEnd(block, () => {
+  transitionId = OdoHelpers.onTransitionEnd(block, () => {
     transitionEndCount += 1;
     output.textContent = 'transition ended: ' + transitionEndCount;
   });
@@ -29,7 +23,7 @@ document.getElementById('left-animator').addEventListener('click', () => {
 document.getElementById('spin-it').addEventListener('click', () => {
   const block = document.querySelector('.my-keyframes');
   block.classList.add('spinning', 'spun');
-  animation.onAnimationEnd(block, () => {
+  OdoHelpers.onAnimationEnd(block, () => {
     block.classList.remove('spinning');
   });
 });
@@ -37,15 +31,15 @@ document.getElementById('spin-it').addEventListener('click', () => {
 // Fade in/out element
 let fadeId = null;
 document.getElementById('fade-it').addEventListener('click', () => {
-  animation.cancelTransitionEnd(fadeId);
-  fadeId = animation.fadeOutElement(document.getElementById('darth-fader'), function x() {
+  OdoHelpers.cancelTransitionEnd(fadeId);
+  fadeId = OdoHelpers.fadeOutElement(document.getElementById('darth-fader'), function x() {
     console.log('Faded out.', this.hello);
   }, { hello: 'world' }, true);
 });
 
 document.getElementById('show-it').addEventListener('click', () => {
-  animation.cancelTransitionEnd(fadeId);
-  fadeId = animation.fadeInElement(document.getElementById('darth-fader'), function x() {
+  OdoHelpers.cancelTransitionEnd(fadeId);
+  fadeId = OdoHelpers.fadeInElement(document.getElementById('darth-fader'), function x() {
     console.log('Faded In.', this.hello);
   }, { hello: 'universe' }, true);
 });
@@ -56,13 +50,13 @@ document.getElementById('started-from-the-bottom').addEventListener('click', () 
   const duration = 600;
   const easing = k => -k * (k - 2);
 
-  animation.scrollTo(bottom, duration, () => {
+  OdoHelpers.scrollTo(bottom, duration, () => {
     console.log('done!');
   }, easing);
 });
 
 document.getElementById('take-me-to-the-top').addEventListener('click', () => {
-  animation.scrollToTop();
+  OdoHelpers.scrollToTop();
 });
 
 // Stepper
@@ -103,7 +97,7 @@ document.getElementById('take-me-to-the-top').addEventListener('click', () => {
       stepper.cancel();
     }
 
-    stepper = new animation.Stepper({
+    stepper = new OdoHelpers.Stepper({
       start: 0,
       end: 180,
       duration: 500,
@@ -129,15 +123,15 @@ document.getElementById('take-me-to-the-top').addEventListener('click', () => {
   };
 
   document.getElementById('get-margins').addEventListener('click', () => {
-    echo(style.getMarginBox(element));
+    echo(OdoHelpers.getMarginBox(element));
   });
 
   document.getElementById('get-paddings').addEventListener('click', () => {
-    echo(style.getPaddingBox(element));
+    echo(OdoHelpers.getPaddingBox(element));
   });
 
   document.getElementById('get-size').addEventListener('click', () => {
-    echo(style.getSize(element));
+    echo(OdoHelpers.getSize(element));
   });
 }());
 
@@ -146,13 +140,13 @@ document.getElementById('take-me-to-the-top').addEventListener('click', () => {
   const output = document.getElementById('output-elements-size');
 
   document.getElementById('get-elements-size').addEventListener('click', () => {
-    const width = style.getElementsSize(dom.getChildren(wrapper), 'width');
+    const width = OdoHelpers.getElementsSize(Array.from(wrapper.children), 'width');
     output.textContent = width + ' pixels';
   });
 }());
 
 (function a() {
-  document.getElementById('force-redraw').addEventListener('click', style.forceRedraw);
+  document.getElementById('force-redraw').addEventListener('click', OdoHelpers.forceRedraw);
 }());
 
 (function a() {
@@ -163,7 +157,7 @@ document.getElementById('take-me-to-the-top').addEventListener('click', () => {
     block.classList.add('faded');
 
     if (checkbox.checked) {
-      style.causeLayout(block);
+      OdoHelpers.causeLayout(block);
     }
 
     block.classList.add('active');
@@ -176,7 +170,7 @@ document.getElementById('take-me-to-the-top').addEventListener('click', () => {
 
 (function a() {
   document.getElementById('even-the-heights').addEventListener('click', () => {
-    const tallest = style.evenHeights(document.querySelectorAll('#first-row .product__title'));
+    const tallest = OdoHelpers.evenHeights(document.querySelectorAll('#first-row .product__title'));
     console.log(tallest); // 34 ish
   });
 
@@ -185,13 +179,13 @@ document.getElementById('take-me-to-the-top').addEventListener('click', () => {
       document.querySelectorAll('#second-row .product__title'),
       document.querySelectorAll('#second-row .product'),
     ];
-    const tallestArray = style.evenHeights(groups);
+    const tallestArray = OdoHelpers.evenHeights(groups);
     console.log(tallestArray); // [34, 140] ish
   });
 }());
 
 (function a() {
-  const timer = new Timer(() => {
+  const timer = new OdoHelpers.Timer(() => {
     document.getElementById('timer-block').style.backgroundColor = 'hsl(' + Math.round(Math.random() * 360) + ',58%,50%)';
 
     if (!timer.isContinuous) {
@@ -221,13 +215,13 @@ document.getElementById('take-me-to-the-top').addEventListener('click', () => {
   const date = new Date().getTime();
   let end;
 
-  dom.ready.then(() => {
+  OdoHelpers.domReady.then(() => {
     end = new Date().getTime() - date;
     document.getElementById('dom-ready-text').textContent = end + ' ms';
     document.getElementById('dom-ready').classList.add('block--fired');
   });
 
-  dom.loaded.then(() => {
+  OdoHelpers.domLoaded.then(() => {
     end = new Date().getTime() - date;
     document.getElementById('dom-loaded-text').textContent = end + ' ms';
     document.getElementById('dom-loaded').classList.add('block--fired');
@@ -235,10 +229,9 @@ document.getElementById('take-me-to-the-top').addEventListener('click', () => {
 }());
 
 (function a() {
-  const Events = window.OdoHelpers.events;
-  console.log('transition end event name: ' + Events.TRANSITIONEND);
-  console.log('animation end event name : ' + Events.ANIMATIONEND);
-  console.log('pointer move event name  : ' + Events.POINTERMOVE);
+  console.log('transition end event name: ' + OdoHelpers.events.TRANSITIONEND);
+  console.log('animation end event name : ' + OdoHelpers.events.ANIMATIONEND);
+  console.log('pointer move event name  : ' + OdoHelpers.events.POINTERMOVE);
 }());
 
 (function a() {
@@ -259,34 +252,34 @@ document.getElementById('take-me-to-the-top').addEventListener('click', () => {
 
   const update = function x() {
     const ua = input.value;
-    isAndroidOS.classList.toggle('true', browser.isAndroidOS(ua));
-    isAndroidOS.classList.toggle('false', !browser.isAndroidOS(ua));
-    isIOS.classList.toggle('true', browser.isIOS(ua));
-    isIOS.classList.toggle('false', !browser.isIOS(ua));
-    hasScrollEvents.classList.toggle('true', browser.hasScrollEvents(ua));
-    hasScrollEvents.classList.toggle('false', !browser.hasScrollEvents(ua));
-    isChrome.classList.toggle('true', browser.isChrome(ua));
-    isChrome.classList.toggle('false', !browser.isChrome(ua));
-    isEdge.classList.toggle('true', browser.isEdge(ua));
-    isEdge.classList.toggle('false', !browser.isEdge(ua));
-    isIE.classList.toggle('true', browser.isIE(ua));
-    isIE.classList.toggle('false', !browser.isIE(ua));
-    isNativeAndroid.classList.toggle('true', browser.isNativeAndroid(ua));
-    isNativeAndroid.classList.toggle('false', !browser.isNativeAndroid(ua));
+    isAndroidOS.classList.toggle('true', OdoHelpers.isAndroidOS(ua));
+    isAndroidOS.classList.toggle('false', !OdoHelpers.isAndroidOS(ua));
+    isIOS.classList.toggle('true', OdoHelpers.isIOS(ua));
+    isIOS.classList.toggle('false', !OdoHelpers.isIOS(ua));
+    hasScrollEvents.classList.toggle('true', OdoHelpers.hasScrollEvents(ua));
+    hasScrollEvents.classList.toggle('false', !OdoHelpers.hasScrollEvents(ua));
+    isChrome.classList.toggle('true', OdoHelpers.isChrome(ua));
+    isChrome.classList.toggle('false', !OdoHelpers.isChrome(ua));
+    isEdge.classList.toggle('true', OdoHelpers.isEdge(ua));
+    isEdge.classList.toggle('false', !OdoHelpers.isEdge(ua));
+    isIE.classList.toggle('true', OdoHelpers.isIE(ua));
+    isIE.classList.toggle('false', !OdoHelpers.isIE(ua));
+    isNativeAndroid.classList.toggle('true', OdoHelpers.isNativeAndroid(ua));
+    isNativeAndroid.classList.toggle('false', !OdoHelpers.isNativeAndroid(ua));
 
-    if (browser.isIOS(ua)) {
-      getIOSVersion.textContent = browser.getIOSVersion(ua);
+    if (OdoHelpers.isIOS(ua)) {
+      getIOSVersion.textContent = OdoHelpers.getIOSVersion(ua);
     } else {
       getIOSVersion.textContent = 'N/A';
     }
   };
 
   hash.addEventListener('click', () => {
-    browser.setHash('#awwyiss');
+    OdoHelpers.setHash('#awwyiss');
   });
 
   replace.addEventListener('click', () => {
-    browser.replaceWithHash('#awwyissssss');
+    OdoHelpers.replaceWithHash('#awwyissssss');
   });
 
   input.addEventListener('change keydown', () => {

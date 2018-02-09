@@ -24,9 +24,8 @@
       <h1>Odo Helpers</h1>
       <p>All the little things.</p>
       <h3>Support</h3>
-      <p>IE9+ with polyfill</p>
-      <p>To support IE&lt;=11, you will also need to add a `classList` polyfill.</p>
-      <p>This component polyfills <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/matches"><code>Element.prototype.matches</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/closest"><code>Element.prototype.closest</code></a> by bundling the <a href="https://www.npmjs.com/package/element-closest">element-closest</a> package.</p>
+      <p>IE9+ with polyfill.</p>
+      <p>To support IE&lt;=11, you will need to add <code>classList</code> polyfill.</p>
       <h3>Dependencies</h3>
       <p>Odo Device, <code>Object.assign</code>, <code>String.prototype.includes</code></p>
     </div>
@@ -932,6 +931,7 @@ console.log('pointer move event name: ' + events.POINTERMOVE);</code></pre>
 
   <!-- Polyfills -->
   <script src="../node_modules/classlist.js/classList.min.js"></script>
+  <script src="../node_modules/element-closest/element-closest.js"></script>
   <script src="../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
 
   <!-- Dependencies. -->

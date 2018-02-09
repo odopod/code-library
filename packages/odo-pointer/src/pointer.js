@@ -6,7 +6,12 @@
 
 import TinyEmitter from 'tiny-emitter';
 import OdoDevice from '@odopod/odo-device';
-import { Coordinate, events, math, utilities } from '@odopod/odo-helpers';
+import {
+  clamp,
+  Coordinate,
+  events,
+  noop,
+} from '@odopod/odo-helpers';
 import settings from './settings';
 import PointerEvent from './pointer-event';
 
@@ -170,7 +175,7 @@ class Pointer extends TinyEmitter {
     if (this._shouldPreventDefault && this._isTouchActionSupported) {
       this.element.style[touchAction] = Pointer.TouchAction[this.axis];
     } else if (this._shouldPreventDefault && OdoDevice.HAS_TOUCH_EVENTS) {
-      window.addEventListener(events.TOUCHMOVE, utilities.noop);
+      window.addEventListener(events.TOUCHMOVE, noop);
     }
 
     this.listen();
@@ -562,8 +567,8 @@ class Pointer extends TinyEmitter {
     // velocity = delta / time.
     // Clamp the velocity to avoid outliers.
     const maxVelocity = Pointer.MAX_VELOCITY;
-    this.velocity.x = math.clamp(delta.x / elapsed, -maxVelocity, maxVelocity);
-    this.velocity.y = math.clamp(delta.y / elapsed, -maxVelocity, maxVelocity);
+    this.velocity.x = clamp(delta.x / elapsed, -maxVelocity, maxVelocity);
+    this.velocity.y = clamp(delta.y / elapsed, -maxVelocity, maxVelocity);
 
     this._hasTrackedVelocity = true;
   }
@@ -614,7 +619,7 @@ class Pointer extends TinyEmitter {
     if (this._isTouchActionSupported) {
       this._el.style[Pointer.TouchActionSupport[this.axis]] = '';
     } else if (this._shouldPreventDefault && OdoDevice.HAS_TOUCH_EVENTS) {
-      window.removeEventListener(events.TOUCHMOVE, utilities.noop);
+      window.removeEventListener(events.TOUCHMOVE, noop);
     }
 
     this._el = null;

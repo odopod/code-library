@@ -2,6 +2,6 @@
 # yarn lockfile v1
 
 
-"@odopod/odo-device@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-device/-/odo-device-1.0.1.tgz#794aec9dc09914848e95eac611149c7cfb809664"
+"@odopod/odo-device@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-device/-/odo-device-1.0.3.tgz#cb2b86dfa61df3a37211e91da21702ec0feafaf1"

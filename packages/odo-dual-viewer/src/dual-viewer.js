@@ -1,5 +1,5 @@
 import TinyEmitter from 'tiny-emitter';
-import { animation, math } from '@odopod/odo-helpers';
+import { clamp, Rect, Stepper } from '@odopod/odo-helpers';
 import OdoDraggable from '@odopod/odo-draggable';
 import OdoWindowEvents from '@odopod/odo-window-events';
 import OdoObjectFit from '@odopod/odo-object-fit';
@@ -146,13 +146,13 @@ class DualViewer extends TinyEmitter {
     if (this._isVertical) {
       const top = this._containerHeight * this.options.verticalSafeZone;
       const height = this._containerHeight * (1 - (this.options.verticalSafeZone * 2));
-      limits = new math.Rect(0, top, this._containerWidth, height);
+      limits = new Rect(0, top, this._containerWidth, height);
     } else {
       const containingEl = this.getElementByClass(DualViewer.ClassName.SCRUBBER_CONTAINER);
       const mainRect = this.element.getBoundingClientRect();
       const containingRect = containingEl.getBoundingClientRect();
 
-      limits = new math.Rect(
+      limits = new Rect(
         Math.round(containingRect.left - mainRect.left),
         containingEl.offsetTop,
         containingEl.offsetWidth,
@@ -203,7 +203,7 @@ class DualViewer extends TinyEmitter {
       max = (rect.left + rect.width) / this._containerWidth;
     }
 
-    return math.clamp(percent, min, max);
+    return clamp(percent, min, max);
   }
 
   /**
@@ -360,7 +360,7 @@ class DualViewer extends TinyEmitter {
 
     this._removeStateClasses();
 
-    const stepper = new animation.Stepper({
+    const stepper = new Stepper({
       start: this._previousPercent,
       end: percent,
       duration: this.options.animationDuration,

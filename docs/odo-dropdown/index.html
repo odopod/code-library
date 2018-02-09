@@ -29,7 +29,8 @@
     <h1>Odo Dropdown</h1>
     <p>Custom dropdown component that defaults to native select elements on touch devices.</p>
     <h3>Support</h3>
-    <p>IE9+</p>
+    <p>IE9+ with polyfills.</p>
+    <p>To support IE&lt;=11, you will need to add <code>classList</code> and <a href="https://www.npmjs.com/package/element-closest"><code>Element#closest</code></a> polyfills.</p>
     <h3>Dependencies</h3>
     <p>Odo Base Component, Odo Helpers.</p>
   </div>
@@ -280,8 +281,9 @@ dropdown.dispose()</code></pre>
 </main>
 
   <!-- Polyfills -->
-  <script src="../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
   <script src="../node_modules/classlist.js/classList.min.js"></script>
+  <script src="../node_modules/element-closest/element-closest.js"></script>
+  <script src="../node_modules/babel-polyfill/dist/polyfill.min.js"></script>
 
   <!-- Dependencies. -->
   <script src="../node_modules/tiny-emitter/dist/tinyemitter.min.js"></script>

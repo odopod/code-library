@@ -1,5 +1,10 @@
 import OdoDevice from '@odopod/odo-device';
-import { animation, dom, style } from '@odopod/odo-helpers';
+import {
+  cancelTransitionEnd,
+  causeLayout,
+  giveId,
+  onTransitionEnd,
+} from '@odopod/odo-helpers';
 import OdoBaseComponent from '@odopod/odo-base-component';
 
 let id = 0;
@@ -37,7 +42,7 @@ class Dropdown extends OdoBaseComponent {
     this._select = this.getElementByClass(Dropdown.Classes.SELECT);
 
     // Give the select an id if it doesn't have one.
-    dom.giveId(this._select, this.id);
+    giveId(this._select, this.id);
 
     /**
      * The <label> for the <select>.
@@ -118,7 +123,7 @@ class Dropdown extends OdoBaseComponent {
    */
   _initializeCustomDropdown() {
     if (this._label) {
-      dom.giveId(this._label, this.id + '-label');
+      giveId(this._label, this.id + '-label');
       const { id } = this._label;
       this._optionsContainer.setAttribute('aria-labelledby', id);
     }
@@ -292,7 +297,7 @@ class Dropdown extends OdoBaseComponent {
     this._isOpen = true;
 
     // Clear any pending transition ends.
-    animation.cancelTransitionEnd(this._transitionId);
+    cancelTransitionEnd(this._transitionId);
 
     // Remove click listener on button.
     this._toggleButtonListener(false);
@@ -301,9 +306,9 @@ class Dropdown extends OdoBaseComponent {
     this._optionsContainer.setAttribute('aria-hidden', false);
     this._button.setAttribute('aria-expanded', true);
     this._button.tabIndex = -1;
-    style.causeLayout(this._optionsContainer);
+    causeLayout(this._optionsContainer);
     this._optionsContainer.classList.add(Dropdown.Classes.OPTIONS_CONTAINER_OPEN);
-    this._transitionId = animation.onTransitionEnd(
+    this._transitionId = onTransitionEnd(
       this._optionsContainer,
       this._handleOptionsShown, this,
     );
@@ -328,14 +333,14 @@ class Dropdown extends OdoBaseComponent {
     this._isOpen = false;
 
     // Clear any pending transition ends.
-    animation.cancelTransitionEnd(this._transitionId);
+    cancelTransitionEnd(this._transitionId);
 
     document.body.removeEventListener('click', this._onPageClick);
     this._optionsContainer.setAttribute('aria-hidden', true);
     this._button.tabIndex = 0;
     this._button.setAttribute('aria-expanded', false);
     this._optionsContainer.classList.remove(Dropdown.Classes.OPTIONS_CONTAINER_OPEN);
-    this._transitionId = animation.onTransitionEnd(
+    this._transitionId = onTransitionEnd(
       this._optionsContainer,
       this._handleOptionsHidden, this,
     );

@@ -2,9 +2,8 @@
 /* eslint-disable no-unused-expressions */
 
 describe('The browser class', () => {
-  const expect = window.chai.expect;
-  const sinon = window.sinon;
-  const browser = window.OdoHelpers.browser;
+  const { expect } = window.chai;
+  const { OdoHelpers, sinon } = window;
 
   const androidString = 'Mozilla/5.0 (Linux; U; Android 4.0.3; ko-kr; LG-L160L Build/IML74K) AppleWebkit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30';
   const galaxyExhibit = 'Mozilla/5.0 (Linux; U; Android 2.3.6; en-us; SGH-T679 Build/GINGERBREAD) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1';
@@ -28,119 +27,119 @@ describe('The browser class', () => {
   const edge14 = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393';
 
   it('can detect Android OS.', () => {
-    expect(browser.isAndroidOS(androidString)).to.equal(true);
-    expect(browser.isAndroidOS(galaxyExhibit)).to.equal(true);
-    expect(browser.isAndroidOS(chromeAndroid)).to.equal(true);
-    expect(browser.isAndroidOS(ipadString)).to.equal(false);
-    expect(browser.isAndroidOS(win8ie11)).to.equal(false);
-    expect(browser.isAndroidOS(edge12)).to.equal(false);
-    expect(browser.isAndroidOS(edge14)).to.equal(false);
-    expect(browser.isAndroidOS(safari9)).to.equal(false);
+    expect(OdoHelpers.isAndroidOS(androidString)).to.equal(true);
+    expect(OdoHelpers.isAndroidOS(galaxyExhibit)).to.equal(true);
+    expect(OdoHelpers.isAndroidOS(chromeAndroid)).to.equal(true);
+    expect(OdoHelpers.isAndroidOS(ipadString)).to.equal(false);
+    expect(OdoHelpers.isAndroidOS(win8ie11)).to.equal(false);
+    expect(OdoHelpers.isAndroidOS(edge12)).to.equal(false);
+    expect(OdoHelpers.isAndroidOS(edge14)).to.equal(false);
+    expect(OdoHelpers.isAndroidOS(safari9)).to.equal(false);
   });
 
   it('can detect stock Android browser', () => {
-    expect(browser.isNativeAndroid(galaxyExhibit)).to.equal(true);
-    expect(browser.isNativeAndroid(chromeAndroid)).to.equal(false);
-    expect(browser.isNativeAndroid(chromeDesktop)).to.equal(false);
-    expect(browser.isNativeAndroid(iphoneString)).to.equal(false);
-    expect(browser.isNativeAndroid(edge12)).to.equal(false);
-    expect(browser.isNativeAndroid(edge14)).to.equal(false);
-    expect(browser.isNativeAndroid(safari9)).to.equal(false);
+    expect(OdoHelpers.isNativeAndroid(galaxyExhibit)).to.equal(true);
+    expect(OdoHelpers.isNativeAndroid(chromeAndroid)).to.equal(false);
+    expect(OdoHelpers.isNativeAndroid(chromeDesktop)).to.equal(false);
+    expect(OdoHelpers.isNativeAndroid(iphoneString)).to.equal(false);
+    expect(OdoHelpers.isNativeAndroid(edge12)).to.equal(false);
+    expect(OdoHelpers.isNativeAndroid(edge14)).to.equal(false);
+    expect(OdoHelpers.isNativeAndroid(safari9)).to.equal(false);
   });
 
   it('can detect iOS.', () => {
-    expect(browser.isIOS(ipadString)).to.equal(true);
-    expect(browser.isIOS(iphoneString)).to.equal(true);
-    expect(browser.isIOS(ipodString)).to.equal(true);
-    expect(browser.isIOS(ios8String)).to.equal(true);
-    expect(browser.isIOS(chromeIOS)).to.equal(true);
-    expect(browser.isIOS(androidString)).to.equal(false);
-    expect(browser.isIOS(galaxyExhibit)).to.equal(false);
-    expect(browser.isIOS(win8ie11)).to.equal(false);
-    expect(browser.isIOS(edge12)).to.equal(false);
-    expect(browser.isIOS(edge14)).to.equal(false);
-    expect(browser.isIOS(safari9)).to.equal(false);
+    expect(OdoHelpers.isIOS(ipadString)).to.equal(true);
+    expect(OdoHelpers.isIOS(iphoneString)).to.equal(true);
+    expect(OdoHelpers.isIOS(ipodString)).to.equal(true);
+    expect(OdoHelpers.isIOS(ios8String)).to.equal(true);
+    expect(OdoHelpers.isIOS(chromeIOS)).to.equal(true);
+    expect(OdoHelpers.isIOS(androidString)).to.equal(false);
+    expect(OdoHelpers.isIOS(galaxyExhibit)).to.equal(false);
+    expect(OdoHelpers.isIOS(win8ie11)).to.equal(false);
+    expect(OdoHelpers.isIOS(edge12)).to.equal(false);
+    expect(OdoHelpers.isIOS(edge14)).to.equal(false);
+    expect(OdoHelpers.isIOS(safari9)).to.equal(false);
   });
 
   it('can retrieve the iOS version number', () => {
-    expect(browser.getIOSVersion(ipodString)).to.equal(433);
-    expect(browser.getIOSVersion(iphoneString)).to.equal(500);
-    expect(browser.getIOSVersion(ios8String)).to.equal(800);
-    expect(browser.getIOSVersion(ios812String)).to.equal(812);
-    expect(browser.getIOSVersion(chromeIOS)).to.equal(840);
+    expect(OdoHelpers.getIOSVersion(ipodString)).to.equal(433);
+    expect(OdoHelpers.getIOSVersion(iphoneString)).to.equal(500);
+    expect(OdoHelpers.getIOSVersion(ios8String)).to.equal(800);
+    expect(OdoHelpers.getIOSVersion(ios812String)).to.equal(812);
+    expect(OdoHelpers.getIOSVersion(chromeIOS)).to.equal(840);
   });
 
   it('can sniff which browsers have scroll events.', () => {
-    expect(browser.hasScrollEvents(ios8String)).to.equal(true);
+    expect(OdoHelpers.hasScrollEvents(ios8String)).to.equal(true);
 
     // As of July 2015, Chrome on iOS 8 still doesn't support scroll events,
     // but we don't have a test for it.
-    expect(browser.hasScrollEvents(chromeIOS)).to.equal(true);
+    expect(OdoHelpers.hasScrollEvents(chromeIOS)).to.equal(true);
 
-    expect(browser.hasScrollEvents(chromeDesktop)).to.equal(true);
-    expect(browser.hasScrollEvents(safari9)).to.equal(true);
-    expect(browser.hasScrollEvents(chromeAndroid)).to.equal(true);
-    expect(browser.hasScrollEvents(win8ie11)).to.equal(true);
-    expect(browser.hasScrollEvents(edge12)).to.equal(true);
-    expect(browser.hasScrollEvents(ipadString)).to.equal(false);
-    expect(browser.hasScrollEvents(iphoneString)).to.equal(false);
-    expect(browser.hasScrollEvents(ipodString)).to.equal(false);
-    expect(browser.hasScrollEvents(androidString)).to.equal(false);
+    expect(OdoHelpers.hasScrollEvents(chromeDesktop)).to.equal(true);
+    expect(OdoHelpers.hasScrollEvents(safari9)).to.equal(true);
+    expect(OdoHelpers.hasScrollEvents(chromeAndroid)).to.equal(true);
+    expect(OdoHelpers.hasScrollEvents(win8ie11)).to.equal(true);
+    expect(OdoHelpers.hasScrollEvents(edge12)).to.equal(true);
+    expect(OdoHelpers.hasScrollEvents(ipadString)).to.equal(false);
+    expect(OdoHelpers.hasScrollEvents(iphoneString)).to.equal(false);
+    expect(OdoHelpers.hasScrollEvents(ipodString)).to.equal(false);
+    expect(OdoHelpers.hasScrollEvents(androidString)).to.equal(false);
   });
 
-  it('can detect the Google Chrome browser.', () => {
-    expect(browser.isChrome(chromeAndroid)).to.equal(true);
-    expect(browser.isChrome(chromeDesktop)).to.equal(true);
-    expect(browser.isChrome(operaDesktop)).to.equal(true);
-    expect(browser.isChrome(edge12)).to.equal(false);
-    expect(browser.isChrome(edge14)).to.equal(false);
-    expect(browser.isChrome(win8ie11)).to.equal(false);
-    expect(browser.isChrome(ipadString)).to.equal(false);
-    expect(browser.isChrome(androidString)).to.equal(false);
-    expect(browser.isChrome(galaxyExhibit)).to.equal(false);
-    expect(browser.isChrome(safari9)).to.equal(false);
+  it('can detect the Google Chrome OdoHelpers.', () => {
+    expect(OdoHelpers.isChrome(chromeAndroid)).to.equal(true);
+    expect(OdoHelpers.isChrome(chromeDesktop)).to.equal(true);
+    expect(OdoHelpers.isChrome(operaDesktop)).to.equal(true);
+    expect(OdoHelpers.isChrome(edge12)).to.equal(false);
+    expect(OdoHelpers.isChrome(edge14)).to.equal(false);
+    expect(OdoHelpers.isChrome(win8ie11)).to.equal(false);
+    expect(OdoHelpers.isChrome(ipadString)).to.equal(false);
+    expect(OdoHelpers.isChrome(androidString)).to.equal(false);
+    expect(OdoHelpers.isChrome(galaxyExhibit)).to.equal(false);
+    expect(OdoHelpers.isChrome(safari9)).to.equal(false);
   });
 
   it('can detect edge', () => {
-    expect(browser.isEdge(edge12)).to.equal(true);
-    expect(browser.isEdge(edge14)).to.equal(true);
-    expect(browser.isEdge(chromeAndroid)).to.equal(false);
-    expect(browser.isEdge(chromeDesktop)).to.equal(false);
-    expect(browser.isEdge(ie9)).to.equal(false);
-    expect(browser.isEdge(ie10)).to.equal(false);
-    expect(browser.isEdge(win8ie11)).to.equal(false);
-    expect(browser.isEdge(win10ie11)).to.equal(false);
-    expect(browser.isEdge(ios8String)).to.equal(false);
-    expect(browser.isEdge(safari9)).to.equal(false);
+    expect(OdoHelpers.isEdge(edge12)).to.equal(true);
+    expect(OdoHelpers.isEdge(edge14)).to.equal(true);
+    expect(OdoHelpers.isEdge(chromeAndroid)).to.equal(false);
+    expect(OdoHelpers.isEdge(chromeDesktop)).to.equal(false);
+    expect(OdoHelpers.isEdge(ie9)).to.equal(false);
+    expect(OdoHelpers.isEdge(ie10)).to.equal(false);
+    expect(OdoHelpers.isEdge(win8ie11)).to.equal(false);
+    expect(OdoHelpers.isEdge(win10ie11)).to.equal(false);
+    expect(OdoHelpers.isEdge(ios8String)).to.equal(false);
+    expect(OdoHelpers.isEdge(safari9)).to.equal(false);
   });
 
   it('can detect internet explorer', () => {
-    expect(browser.isIE(ie9)).to.equal(true);
-    expect(browser.isIE(ie10)).to.equal(true);
-    expect(browser.isIE(win8ie11)).to.equal(true);
-    expect(browser.isIE(win10ie11)).to.equal(true);
-    expect(browser.isIE(edge12)).to.equal(false);
-    expect(browser.isIE(edge14)).to.equal(false);
-    expect(browser.isIE(chromeAndroid)).to.equal(false);
-    expect(browser.isIE(chromeDesktop)).to.equal(false);
-    expect(browser.isIE(ios8String)).to.equal(false);
-    expect(browser.isIE(safari9)).to.equal(false);
+    expect(OdoHelpers.isIE(ie9)).to.equal(true);
+    expect(OdoHelpers.isIE(ie10)).to.equal(true);
+    expect(OdoHelpers.isIE(win8ie11)).to.equal(true);
+    expect(OdoHelpers.isIE(win10ie11)).to.equal(true);
+    expect(OdoHelpers.isIE(edge12)).to.equal(false);
+    expect(OdoHelpers.isIE(edge14)).to.equal(false);
+    expect(OdoHelpers.isIE(chromeAndroid)).to.equal(false);
+    expect(OdoHelpers.isIE(chromeDesktop)).to.equal(false);
+    expect(OdoHelpers.isIE(ios8String)).to.equal(false);
+    expect(OdoHelpers.isIE(safari9)).to.equal(false);
   });
 
   describe('Browser hash', () => {
     it('can set the hash in window.location', () => {
       const dummyHash = '#weeeee';
-      browser.setHash(dummyHash);
+      OdoHelpers.setHash(dummyHash);
       expect(window.location.hash).to.equal(dummyHash);
 
       // testing that an error will be thrown if hash is not a string
-      const throwError = () => browser.setHash(5);
+      const throwError = () => OdoHelpers.setHash(5);
 
       expect(throwError).to.throw(Error);
 
       // testing if the window will scroll when element exist in DOM
       const reset = '';
-      browser.setHash(reset);
+      OdoHelpers.setHash(reset);
     });
   });
 
@@ -156,28 +155,27 @@ describe('The browser class', () => {
       Object.setPrototypeOf(window.history, history);
     });
 
-    it('browser.replaceWithHash() will fallback to browser.setHash()', () => {
-      const historySpy = sinon.spy(browser, 'setHash');
-      browser.replaceWithHash('whopps');
-      expect(historySpy.calledOnce).to.be.true;
+    it('OdoHelpers.replaceWithHash() will fallback to OdoHelpers.setHash()', () => {
+      OdoHelpers.replaceWithHash('some-state');
+      expect(window.location.hash).to.equal('#some-state');
     });
   });
 
   describe('Browser history - with replaceState', () => {
     it('will replace state in history', () => {
       // testing that an error will be thrown if hash is not a string
-      const throwError = () => browser.setHash(5);
+      const throwError = () => OdoHelpers.setHash(5);
 
       expect(throwError).to.throw(Error);
 
       // testing successful entry into replaceState
       const testHashOne = '#this';
-      browser.replaceWithHash(testHashOne);
+      OdoHelpers.replaceWithHash(testHashOne);
       expect(window.location.hash).to.equal(testHashOne);
 
       // testing resetting hash
       const testHashTwo = '';
-      browser.replaceWithHash(testHashTwo);
+      OdoHelpers.replaceWithHash(testHashTwo);
       expect(window.location.hash).to.equal(testHashTwo);
     });
   });

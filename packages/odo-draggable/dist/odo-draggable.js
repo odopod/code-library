@@ -204,9 +204,9 @@ var Draggable = function (_TinyEmitter) {
 
     /**
      * Limits of how far the draggable element can be dragged.
-     * @type {math.Rect}
+     * @type {Rect}
      */
-    _this.limits = new odoHelpers.math.Rect(NaN, NaN, NaN, NaN);
+    _this.limits = new odoHelpers.Rect(NaN, NaN, NaN, NaN);
 
     _this.pointer = new OdoPointer(element, {
       axis: _this.options.axis
@@ -236,7 +236,7 @@ var Draggable = function (_TinyEmitter) {
 
 
   Draggable.prototype._saveDimensions = function _saveDimensions() {
-    this._container = odoHelpers.style.getSize(this.element);
+    this._container = odoHelpers.getSize(this.element);
     ensureObjectHasSize(this._container);
     this._relativeZero = this._getRelativeZero();
   };
@@ -273,8 +273,8 @@ var Draggable = function (_TinyEmitter) {
   Draggable.prototype._getOffsetCorrection = function _getOffsetCorrection() {
     // getBoundingClientRect does not include margins. They must be accounted for.
     var containmentRect = this._parentEl.getBoundingClientRect();
-    var paddings = odoHelpers.style.getPaddingBox(this._parentEl);
-    var margins = odoHelpers.style.getMarginBox(this.element);
+    var paddings = odoHelpers.getPaddingBox(this._parentEl);
+    var margins = odoHelpers.getMarginBox(this.element);
     var offsetCorrectionX = margins.left + paddings.left + containmentRect.left;
     var offsetCorrectionY = margins.top + paddings.top + containmentRect.top;
     return new odoHelpers.Coordinate(offsetCorrectionX, offsetCorrectionY);
@@ -304,11 +304,11 @@ var Draggable = function (_TinyEmitter) {
 
 
   Draggable._limitValue = function _limitValue(value, rectPosition, rectSize) {
-    var side = odoHelpers.utilities.defaultsTo(rectPosition, null, !Number.isNaN(rectPosition));
-    var dimension = odoHelpers.utilities.defaultsTo(rectSize, 0, !Number.isNaN(rectSize));
-    var max = odoHelpers.utilities.defaultsTo(side + dimension, Infinity, side !== null);
-    var min = odoHelpers.utilities.defaultsTo(side, -Infinity, side !== null);
-    return odoHelpers.math.clamp(value, min, max);
+    var side = odoHelpers.defaultsTo(rectPosition, null, !Number.isNaN(rectPosition));
+    var dimension = odoHelpers.defaultsTo(rectSize, 0, !Number.isNaN(rectSize));
+    var max = odoHelpers.defaultsTo(side + dimension, Infinity, side !== null);
+    var min = odoHelpers.defaultsTo(side, -Infinity, side !== null);
+    return odoHelpers.clamp(value, min, max);
   };
 
   /**
@@ -589,7 +589,7 @@ var Draggable = function (_TinyEmitter) {
 
   /**
    * Sets (or reset) the Drag limits after a Dragger is created.
-   * @param {math.Rect} limits Object containing left, top, width,
+   * @param {Rect} limits Object containing left, top, width,
    *     height for new Dragger limits.
    */
 

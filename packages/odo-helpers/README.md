@@ -11,11 +11,11 @@ npm install @odopod/odo-helpers --save
 ## Quick Start
 
 ```js
-import { animation } from '@odopod/odo-helpers';
+import { onTransitionEnd } from '@odopod/odo-helpers';
 
-animation.onTransitionEnd(myElement, function () {
+onTransitionEnd(myElement, () => {
   console.log('`transitionend` event emitted from "myElement"');
-})
+});
 ```
 
 ## [Documentation][permalink]

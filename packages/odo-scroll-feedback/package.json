@@ -14,9 +14,7 @@
   "dependencies": {
     "tiny-emitter": "^2.0.1"
   },
-  "devDependencies": {
-    "element-closest": "^2.0.1"
-  },
+  "devDependencies": {},
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-scroll-feedback",
   "files": [
     "css",

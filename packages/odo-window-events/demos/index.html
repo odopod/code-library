@@ -55,13 +55,13 @@
         <h2>Register a Callback</h2>
         <p>To listen for scroll events, register your callback with the <code>onScroll</code> method or the <code>onFastScroll</code> method. They are throttled to <code>500</code> and <code>150</code> milliseconds, respectively.</p>
         <pre><code class="language-javascript">let scrolls = 0;
-OdoWindowEvents.onScroll(() => {
+OdoWindowEvents.onScroll((scrollTop, scrollLeft) => {
   scrolls += 1;
   output1.innerHTML = scrolls;
 });</code></pre>
         <p>To listen for resize events, register your callback with the <code>onResize</code> method or the <code>onLeadingResize</code> method. They are debounced to <code>500</code> milliseconds.</p>
         <pre><code class="language-javascript">let resizes = 0;
-OdoWindowEvents.onResize(() => {
+OdoWindowEvents.onResize((viewportWidth, viewportHeight) => {
   resizes += 1;
   output3.innerHTML = resizes;
 });</code></pre>

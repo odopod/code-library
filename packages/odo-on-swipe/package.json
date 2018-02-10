@@ -3,6 +3,7 @@
   "description": "Provide event hook for swipes on an element.",
   "version": "1.0.3",
   "main": "dist/odo-on-swipe.js",
+  "module": "dist/odo-on-swipe.esm.js",
   "odoModule": "src/on-swipe.js",
   "author": "Odopod",
   "contributors": [
@@ -18,8 +19,7 @@
   "files": [
     "css",
     "dist",
-    "src",
-    "index.js"
+    "src"
   ],
   "odoKeywords": [
     "events"

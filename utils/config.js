@@ -16,6 +16,7 @@ const COMPONENT_NAME = pkg.name.replace(`${brand.npmUser}/`, '');
 const SOURCE = path.join(PACKAGE_DIRECTORY, pkg.odoModule);
 const DIST_FILE = path.join(DIST_DIR, COMPONENT_NAME + '.js');
 const DIST_FILE_MIN = path.join(DIST_DIR, COMPONENT_NAME + '.min.js');
+const DIST_FILE_ESM = path.join(DIST_DIR, COMPONENT_NAME + '.esm.js');
 const { external, globals } = getExternalDeps(PACKAGE_DIRECTORY);
 const CLASS_NAME = getClassName(COMPONENT_NAME);
 
@@ -60,7 +61,16 @@ const config = {
   watch: false,
 
   main: {
-    input: SOURCE,
+    input: {
+      input: SOURCE,
+      external,
+      cache: undefined,
+      plugins: [
+        resolve(),
+        commonjs(COMMONJS_CONFIG),
+        babel(BABEL_CONFIG),
+      ],
+    },
     output: {
       name: CLASS_NAME,
       file: DIST_FILE,
@@ -68,17 +78,20 @@ const config = {
       sourcemap: true,
       globals,
     },
-    cache: undefined,
-    plugins: [
-      resolve(),
-      commonjs(COMMONJS_CONFIG),
-      babel(BABEL_CONFIG),
-    ],
-    external,
   },
 
   min: {
-    input: SOURCE,
+    input: {
+      input: SOURCE,
+      external,
+      cache: undefined,
+      plugins: [
+        resolve(),
+        commonjs(COMMONJS_CONFIG),
+        babel(BABEL_CONFIG),
+        uglify(UGLIFY_CONFIG),
+      ],
+    },
     output: {
       name: CLASS_NAME,
       file: DIST_FILE_MIN,
@@ -86,14 +99,26 @@ const config = {
       sourcemap: true,
       globals,
     },
-    cache: undefined,
-    plugins: [
-      resolve(),
-      commonjs(COMMONJS_CONFIG),
-      babel(BABEL_CONFIG),
-      uglify(UGLIFY_CONFIG),
-    ],
-    external,
+  },
+
+  esm: {
+    input: {
+      input: SOURCE,
+      external,
+      cache: undefined,
+      plugins: [
+        resolve(),
+        commonjs(COMMONJS_CONFIG),
+        babel(BABEL_CONFIG),
+      ],
+    },
+    output: {
+      name: CLASS_NAME,
+      file: DIST_FILE_ESM,
+      format: 'es',
+      sourcemap: true,
+      globals,
+    },
   },
 
   instrumented: {

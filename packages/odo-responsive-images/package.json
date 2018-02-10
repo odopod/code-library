@@ -3,6 +3,7 @@
   "description": "Native responsive images with deferred loading.",
   "version": "1.0.3",
   "main": "dist/odo-responsive-images.js",
+  "module": "dist/odo-responsive-images.esm.js",
   "style": "css/odo-responsive-images.css",
   "odoModule": "src/responsive-images.js",
   "author": "Odopod",
@@ -21,8 +22,7 @@
   "files": [
     "css",
     "dist",
-    "src",
-    "index.js"
+    "src"
   ],
   "odoKeywords": [
     "ui"

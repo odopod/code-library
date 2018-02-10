@@ -3,6 +3,7 @@
   "description": "Responsive window dialog component focused on a11y and extendibility",
   "version": "1.2.0",
   "main": "dist/odo-dialog.js",
+  "module": "dist/odo-dialog.esm.js",
   "style": "css/odo-dialog.css",
   "odoModule": "src/dialog.js",
   "author": "Odopod",

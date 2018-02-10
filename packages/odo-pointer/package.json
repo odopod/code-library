@@ -3,6 +3,7 @@
   "description": "An abstraction for pointer, mouse, and touch events.",
   "version": "1.0.3",
   "main": "dist/odo-pointer.js",
+  "module": "dist/odo-pointer.esm.js",
   "odoModule": "src/pointer.js",
   "author": "Odopod",
   "contributors": [
@@ -20,8 +21,7 @@
   "files": [
     "css",
     "dist",
-    "src",
-    "index.js"
+    "src"
   ],
   "odoKeywords": [
     "events"

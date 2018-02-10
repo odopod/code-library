@@ -3,6 +3,7 @@
   "description": "A service to interpret taps on elements.",
   "version": "1.0.3",
   "main": "dist/odo-tap.js",
+  "module": "dist/odo-tap.esm.js",
   "odoModule": "src/tap.js",
   "author": "Odopod",
   "contributors": [
@@ -19,8 +20,7 @@
   "files": [
     "css",
     "dist",
-    "src",
-    "index.js"
+    "src"
   ],
   "odoKeywords": [
     "events"

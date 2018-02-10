@@ -3,6 +3,7 @@
   "description": "A collection of helper methods for Odo projects.",
   "version": "1.0.3",
   "main": "dist/odo-helpers.js",
+  "module": "dist/odo-helpers.esm.js",
   "odoModule": "src/helpers.js",
   "sideEffects": false,
   "author": "Odopod",

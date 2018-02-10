@@ -3,6 +3,7 @@
   "description": "Share links to social media.",
   "version": "1.0.3",
   "main": "dist/odo-share.js",
+  "module": "dist/odo-share.esm.js",
   "odoModule": "src/share.js",
   "author": "Odopod",
   "contributors": [
@@ -19,8 +20,7 @@
   "files": [
     "css",
     "dist",
-    "src",
-    "index.js"
+    "src"
   ],
   "odoKeywords": [
     "utilities"

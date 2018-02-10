@@ -3,6 +3,7 @@
   "description": "Performant, awesome carousels.",
   "version": "1.0.4",
   "main": "dist/odo-carousel.js",
+  "module": "dist/odo-carousel.esm.js",
   "style": "css/odo-carousel.css",
   "odoModule": "src/carousel.js",
   "author": "Odopod",
@@ -23,8 +24,7 @@
   "files": [
     "css",
     "dist",
-    "src",
-    "index.js"
+    "src"
   ],
   "odoKeywords": [
     "ui"

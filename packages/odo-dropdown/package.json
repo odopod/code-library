@@ -3,6 +3,7 @@
   "description": "Custom dropdown component that defaults to native select elements on touch devices.",
   "version": "1.0.3",
   "main": "dist/odo-dropdown.js",
+  "module": "dist/odo-dropdown.esm.js",
   "style": "css/odo-dropdown.css",
   "odoModule": "src/dropdown.js",
   "author": "Odopod",
@@ -24,8 +25,7 @@
   "files": [
     "css",
     "dist",
-    "src",
-    "index.js"
+    "src"
   ],
   "odoKeywords": [
     "ui"

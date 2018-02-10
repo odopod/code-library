@@ -3,6 +3,7 @@
   "description": "Viewport enter and exit monitoring for elements.",
   "version": "1.0.3",
   "main": "dist/odo-viewport.js",
+  "module": "dist/odo-viewport.esm.js",
   "odoModule": "src/viewport.js",
   "author": "Odopod",
   "contributors": [
@@ -18,8 +19,7 @@
   "files": [
     "css",
     "dist",
-    "src",
-    "index.js"
+    "src"
   ],
   "odoKeywords": [
     "events"

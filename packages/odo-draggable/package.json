@@ -3,6 +3,7 @@
   "description": "A class for versatile, performant draggability.",
   "version": "1.0.4",
   "main": "dist/odo-draggable.js",
+  "module": "dist/odo-draggable.esm.js",
   "odoModule": "src/draggable.js",
   "author": "Odopod",
   "contributors": [
@@ -21,8 +22,7 @@
   "files": [
     "css",
     "dist",
-    "src",
-    "index.js"
+    "src"
   ],
   "odoKeywords": [
     "ui"

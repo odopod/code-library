@@ -6,3 +6,5 @@ yarn-error.log
 lerna-debug.log
 coverage
 **/demos/scripts/demo.js
+**/dist/*.esm.js
+**/dist/*.esm.js.map

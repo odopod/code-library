@@ -3,6 +3,7 @@
   "description": "Reveal elements on the page as they come into view.",
   "version": "1.0.3",
   "main": "dist/odo-reveal.js",
+  "module": "dist/odo-reveal.esm.js",
   "style": "css/odo-reveal.css",
   "odoModule": "src/reveal.js",
   "author": "Odopod",
@@ -24,8 +25,7 @@
   "files": [
     "css",
     "dist",
-    "src",
-    "index.js"
+    "src"
   ],
   "odoKeywords": [
     "ui"

@@ -3,6 +3,7 @@
   "description": "A draggable UI component which reveals two panes.",
   "version": "1.0.4",
   "main": "dist/odo-dual-viewer.js",
+  "module": "dist/odo-dual-viewer.esm.js",
   "style": "css/odo-dual-viewer.css",
   "odoModule": "src/dual-viewer.js",
   "author": "Odopod",
@@ -26,8 +27,7 @@
   "files": [
     "css",
     "dist",
-    "src",
-    "index.js"
+    "src"
   ],
   "odoKeywords": [
     "ui"

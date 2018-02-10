@@ -3,6 +3,7 @@
   "description": "Fits media elements (img, video). It polyfills CSS' object-fit: cover; If the browser supports object-fit, it will not run.",
   "version": "1.0.3",
   "main": "dist/odo-object-fit.js",
+  "module": "dist/odo-object-fit.esm.js",
   "odoModule": "src/object-fit.js",
   "author": "Odopod",
   "contributors": [
@@ -15,8 +16,7 @@
   "files": [
     "css",
     "dist",
-    "src",
-    "index.js"
+    "src"
   ],
   "odoKeywords": [
     "utilities"

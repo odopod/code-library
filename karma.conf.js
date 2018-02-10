@@ -29,7 +29,6 @@ module.exports = (config) => {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       '**/*.html': ['html2js'],
-      [path.join(odoConfig.pkgdir, 'index.js')]: ['rollup'],
       [path.join(odoConfig.pkgdir, 'src/**/*.js')]: ['rollup'],
     },
 

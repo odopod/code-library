@@ -3,6 +3,7 @@
   "description": "Parse data attributes with respect to their breakpoints.",
   "version": "1.0.3",
   "main": "dist/odo-responsive-attributes.js",
+  "module": "dist/odo-responsive-attributes.esm.js",
   "odoModule": "src/responsive-attributes.js",
   "author": "Odopod",
   "contributors": [
@@ -18,8 +19,7 @@
   "files": [
     "css",
     "dist",
-    "src",
-    "index.js"
+    "src"
   ],
   "odoKeywords": [
     "utilities"

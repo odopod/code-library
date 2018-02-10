@@ -3,6 +3,7 @@
   "description": "Reusable, throttled events on the window object.",
   "version": "1.0.3",
   "main": "dist/odo-window-events.js",
+  "module": "dist/odo-window-events.esm.js",
   "odoModule": "src/window-events.js",
   "author": "Odopod",
   "contributors": [
@@ -23,8 +24,7 @@
   "files": [
     "css",
     "dist",
-    "src",
-    "index.js"
+    "src"
   ],
   "odoKeywords": [
     "events"

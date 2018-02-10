@@ -3,6 +3,7 @@
   "description": "A mananger for sticky things",
   "version": "1.0.3",
   "main": "dist/odo-sticky-headers.js",
+  "module": "dist/odo-sticky-headers.esm.js",
   "odoModule": "src/sticky-headers.js",
   "author": "Odopod",
   "contributors": [
@@ -19,8 +20,7 @@
   "files": [
     "css",
     "dist",
-    "src",
-    "index.js"
+    "src"
   ],
   "odoKeywords": [
     "ui"

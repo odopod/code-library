@@ -1,11 +1,11 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@odopod/odo-base-component'), require('@odopod/odo-responsive-attributes')) :
-	typeof define === 'function' && define.amd ? define(['@odopod/odo-base-component', '@odopod/odo-responsive-attributes'], factory) :
-	(global.OdoResponsiveClasses = factory(global.OdoBaseComponent,global.OdoResponsiveAttributes));
-}(this, (function (OdoBaseComponent,OdoResponsiveAttributes) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@odopod/odo-responsive-attributes'), require('@odopod/odo-base-component')) :
+	typeof define === 'function' && define.amd ? define(['@odopod/odo-responsive-attributes', '@odopod/odo-base-component'], factory) :
+	(global.OdoResponsiveClasses = factory(global.OdoResponsiveAttributes,global.OdoBaseComponent));
+}(this, (function (OdoResponsiveAttributes,OdoBaseComponent) { 'use strict';
 
-OdoBaseComponent = OdoBaseComponent && OdoBaseComponent.hasOwnProperty('default') ? OdoBaseComponent['default'] : OdoBaseComponent;
 OdoResponsiveAttributes = OdoResponsiveAttributes && OdoResponsiveAttributes.hasOwnProperty('default') ? OdoResponsiveAttributes['default'] : OdoResponsiveAttributes;
+OdoBaseComponent = OdoBaseComponent && OdoBaseComponent.hasOwnProperty('default') ? OdoBaseComponent['default'] : OdoBaseComponent;
 
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {

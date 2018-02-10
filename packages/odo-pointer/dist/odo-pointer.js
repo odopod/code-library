@@ -1,11 +1,11 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('tiny-emitter'), require('@odopod/odo-device'), require('@odopod/odo-helpers')) :
-	typeof define === 'function' && define.amd ? define(['tiny-emitter', '@odopod/odo-device', '@odopod/odo-helpers'], factory) :
-	(global.OdoPointer = factory(global.TinyEmitter,global.OdoDevice,global.OdoHelpers));
-}(this, (function (TinyEmitter,OdoDevice,odoHelpers) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@odopod/odo-device'), require('@odopod/odo-helpers'), require('tiny-emitter')) :
+	typeof define === 'function' && define.amd ? define(['@odopod/odo-device', '@odopod/odo-helpers', 'tiny-emitter'], factory) :
+	(global.OdoPointer = factory(global.OdoDevice,global.OdoHelpers,global.TinyEmitter));
+}(this, (function (OdoDevice,odoHelpers,TinyEmitter) { 'use strict';
 
-TinyEmitter = TinyEmitter && TinyEmitter.hasOwnProperty('default') ? TinyEmitter['default'] : TinyEmitter;
 OdoDevice = OdoDevice && OdoDevice.hasOwnProperty('default') ? OdoDevice['default'] : OdoDevice;
+TinyEmitter = TinyEmitter && TinyEmitter.hasOwnProperty('default') ? TinyEmitter['default'] : TinyEmitter;
 
 var settings = {
   /** @enum {string} */

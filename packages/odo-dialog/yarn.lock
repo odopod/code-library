@@ -2,16 +2,16 @@
 # yarn lockfile v1
 
 
-"@odopod/odo-device@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-device/-/odo-device-1.0.0.tgz#0f555f8c8ade65c7e4f7e7ebe6e9d249d85d73a7"
+"@odopod/odo-device@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-device/-/odo-device-1.0.3.tgz#cb2b86dfa61df3a37211e91da21702ec0feafaf1"
 
-"@odopod/odo-helpers@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-helpers/-/odo-helpers-1.0.0.tgz#113905133aff5ddbc9f82ad5243cb78ed67ae7a4"
+"@odopod/odo-helpers@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-helpers/-/odo-helpers-1.0.3.tgz#5d410e36c740bf4bf1877195f72d785997ca9980"
   dependencies:
-    "@odopod/odo-device" "^1.0.0"
+    "@odopod/odo-device" "^1.0.3"
 
 tiny-emitter@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-2.0.1.tgz#e65919d91e488e2a78f7ebe827a56c6b188d51af"
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-2.0.2.tgz#82d27468aca5ade8e5fd1e6d22b57dd43ebdfb7c"

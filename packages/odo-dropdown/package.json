@@ -6,6 +6,7 @@
   "module": "dist/odo-dropdown.esm.js",
   "style": "css/odo-dropdown.css",
   "odoModule": "src/dropdown.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

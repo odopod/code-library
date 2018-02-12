@@ -6,6 +6,7 @@
   "module": "dist/odo-tabs.esm.js",
   "style": "css/odo-tabs.css",
   "odoModule": "src/tabs.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

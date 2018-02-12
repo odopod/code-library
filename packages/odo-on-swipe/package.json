@@ -5,6 +5,7 @@
   "main": "dist/odo-on-swipe.js",
   "module": "dist/odo-on-swipe.esm.js",
   "odoModule": "src/on-swipe.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

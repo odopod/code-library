@@ -5,6 +5,7 @@
   "main": "dist/odo-window-events.js",
   "module": "dist/odo-window-events.esm.js",
   "odoModule": "src/window-events.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

@@ -5,6 +5,7 @@
   "main": "dist/odo-affix.js",
   "module": "dist/odo-affix.esm.js",
   "odoModule": "src/affix.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

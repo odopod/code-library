@@ -5,6 +5,7 @@
   "main": "dist/odo-object-fit.js",
   "module": "dist/odo-object-fit.esm.js",
   "odoModule": "src/object-fit.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

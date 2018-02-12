@@ -6,6 +6,7 @@
   "module": "dist/odo-background-video.esm.js",
   "style": "css/odo-background-video.css",
   "odoModule": "src/background-video.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

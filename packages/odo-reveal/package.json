@@ -6,6 +6,7 @@
   "module": "dist/odo-reveal.esm.js",
   "style": "css/odo-reveal.css",
   "odoModule": "src/reveal.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

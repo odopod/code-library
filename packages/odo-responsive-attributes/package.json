@@ -5,6 +5,7 @@
   "main": "dist/odo-responsive-attributes.js",
   "module": "dist/odo-responsive-attributes.esm.js",
   "odoModule": "src/responsive-attributes.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

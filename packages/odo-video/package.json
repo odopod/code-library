@@ -5,6 +5,7 @@
   "main": "dist/odo-video.js",
   "module": "dist/odo-video.esm.js",
   "odoModule": "src/video.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

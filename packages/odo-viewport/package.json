@@ -5,6 +5,7 @@
   "main": "dist/odo-viewport.js",
   "module": "dist/odo-viewport.esm.js",
   "odoModule": "src/viewport.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

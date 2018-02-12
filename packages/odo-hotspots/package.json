@@ -6,6 +6,7 @@
   "module": "dist/odo-hotspots.esm.js",
   "style": "css/odo-hotspots.css",
   "odoModule": "src/hotspots.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

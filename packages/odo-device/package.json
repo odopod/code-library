@@ -5,6 +5,7 @@
   "main": "dist/odo-device.js",
   "module": "dist/odo-device.esm.js",
   "odoModule": "src/device.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

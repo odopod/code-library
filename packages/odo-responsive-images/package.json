@@ -6,6 +6,7 @@
   "module": "dist/odo-responsive-images.esm.js",
   "style": "css/odo-responsive-images.css",
   "odoModule": "src/responsive-images.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

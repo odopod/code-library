@@ -5,6 +5,7 @@
   "main": "dist/odo-responsive-classes.js",
   "module": "dist/odo-responsive-classes.esm.js",
   "odoModule": "src/responsive-classes.js",
+  "sideEffects": true,
   "author": "Odopod",
   "contributors": [
     {

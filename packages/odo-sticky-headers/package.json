@@ -5,6 +5,7 @@
   "main": "dist/odo-sticky-headers.js",
   "module": "dist/odo-sticky-headers.esm.js",
   "odoModule": "src/sticky-headers.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

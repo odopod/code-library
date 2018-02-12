@@ -5,6 +5,7 @@
   "main": "dist/odo-tap.js",
   "module": "dist/odo-tap.esm.js",
   "odoModule": "src/tap.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

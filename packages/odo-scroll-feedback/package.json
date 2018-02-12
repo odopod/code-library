@@ -5,6 +5,7 @@
   "main": "dist/odo-scroll-feedback.js",
   "module": "dist/odo-scroll-feedback.esm.js",
   "odoModule": "src/scroll-feedback.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

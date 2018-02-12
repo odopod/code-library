@@ -5,6 +5,7 @@
   "main": "dist/odo-share.js",
   "module": "dist/odo-share.esm.js",
   "odoModule": "src/share.js",
+  "sideEffects": true,
   "author": "Odopod",
   "contributors": [
     {

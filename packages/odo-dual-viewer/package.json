@@ -6,6 +6,7 @@
   "module": "dist/odo-dual-viewer.esm.js",
   "style": "css/odo-dual-viewer.css",
   "odoModule": "src/dual-viewer.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

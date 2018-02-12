@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "main": "dist/odo-expandable.js",
   "odoModule": "src/expandable.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

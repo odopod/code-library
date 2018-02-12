@@ -67,7 +67,6 @@ describe('the OdoExpandable Component', function expandable() {
       const elementId = `expandable-${instance.id}`;
       expect(instance._trigger.getAttribute('aria-describedby')).to.equal(elementId);
       expect(instance._target.getAttribute('id')).to.equal(elementId);
-      expect(instance._target.getAttribute('role')).to.equal('region');
       expect(instance._trigger.getAttribute('aria-expanded')).to.equal('false');
       expect(instance._trigger.getAttribute('aria-controls')).to.equal(elementId);
       expect(instance._target.getAttribute('aria-labelledby')).to.equal(elementId);
@@ -124,7 +123,6 @@ describe('the OdoExpandable Component', function expandable() {
       instance.dispose();
       expect(instance._trigger.getAttribute('aria-describedby')).to.equal(null);
       expect(instance._target.getAttribute('id')).to.equal(null);
-      expect(instance._target.getAttribute('role')).to.equal(null);
       expect(instance._trigger.getAttribute('expanded')).to.equal(null);
       expect(instance._target.getAttribute('aria-hidden')).to.equal(null);
       expect(instance._target.getAttribute('aria-labelledby')).to.equal(null);

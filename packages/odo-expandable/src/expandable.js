@@ -54,9 +54,7 @@ class Expandable {
     const elementId = `expandable-${this.id}`;
 
     this._trigger.setAttribute('aria-describedby', elementId);
-
     this._target.setAttribute('id', elementId);
-    this._target.setAttribute('role', 'region');
     this._trigger.setAttribute('aria-expanded', this.isOpen.toString());
     this._trigger.setAttribute('aria-controls', elementId);
     this._target.setAttribute('aria-labelledby', elementId);
@@ -70,7 +68,6 @@ class Expandable {
   _removeA11yAttributes() {
     this._trigger.removeAttribute('aria-describedby');
     this._target.removeAttribute('id');
-    this._target.removeAttribute('role');
     this._trigger.removeAttribute('aria-expanded');
     this._target.removeAttribute('aria-labelledby');
     this._target.removeAttribute('aria-hidden');

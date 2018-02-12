@@ -6,8 +6,8 @@
 
 var Settings = {
   ClassName: {
-    TRIGGER_OPEN: 'expandable__trigger--open',
-    TARGET_OPEN: 'expandable__target--open'
+    TRIGGER_OPEN: 'odo-expandable__trigger--open',
+    TARGET_OPEN: 'odo-expandable__target--open'
   },
   Attribute: {
     TRIGGER: 'data-expandable-trigger',
@@ -58,28 +58,16 @@ var ExpandableGroup = function () {
 
     /** @type {Array.<!Expandable>} */
     this._expandables = elements.map(function (trigger) {
-      // Create new expandable instances and keep them in an array.
-      var options = { groupedItem: true };
-      return new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER), options);
+      return new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER), { groupedItem: true });
     });
 
-    this._bindListeners();
+    this._onClick = this._onClickHandler.bind(this);
+    document.body.addEventListener('click', this._onClick);
   }
 
   /**
-   * Binds the listeners to the body to handle click events.
-   * @private
-   */
-
-
-  ExpandableGroup.prototype._bindListeners = function _bindListeners() {
-    this._onClick = this._onClickHandler.bind(this);
-    document.body.addEventListener('click', this._onClick);
-  };
-
-  /**
    * Handler for clicks on the trigger.
-   * @param {Event} evt Event object.
+   * @param {MouseEvent} evt Event object.
    * @private
    */
 
@@ -88,14 +76,14 @@ var ExpandableGroup = function () {
     evt.preventDefault();
     var closest = evt.target.closest('[' + Settings.Attribute.TRIGGER + ']');
 
-    if (closest !== null && this._elements.includes(closest)) {
+    if (this._elements.includes(closest)) {
       this._toggleGroupVisibility(closest.getAttribute(Settings.Attribute.TRIGGER));
     }
   };
 
   /**
    * Will iterate over all grouped items and toggle the selected one while collapsing all others.
-   * @param {int} selectedId The ID of the selected target to expand.
+   * @param {number} selectedId The ID of the selected target to expand.
    * @private
    */
 
@@ -153,23 +141,13 @@ var Expandable = function () {
     /** @type {Element} */
     this._target = document.body.querySelector('[' + Settings.Attribute.TARGET + '="' + id + '"]');
 
-    this._setARIAAttributes();
+    this._setA11yAttributes();
 
-    this._bindListeners();
-  }
-
-  /**
-   * Binds the listeners to the body to handle click events.
-   * @private
-   */
-
-
-  Expandable.prototype._bindListeners = function _bindListeners() {
     if (!this.options.groupedItem) {
       this._onTriggerClick = this._triggerClickHandler.bind(this);
       document.body.addEventListener('click', this._onTriggerClick);
     }
-  };
+  }
 
   /**
    * Handler for clicks on the trigger.
@@ -182,7 +160,7 @@ var Expandable = function () {
     evt.preventDefault();
     var closest = evt.target.closest('[' + Settings.Attribute.TRIGGER + ']');
 
-    if (closest !== null && closest === this._trigger) {
+    if (closest === this._trigger) {
       this.toggle();
     }
   };
@@ -193,7 +171,7 @@ var Expandable = function () {
    */
 
 
-  Expandable.prototype._setARIAAttributes = function _setARIAAttributes() {
+  Expandable.prototype._setA11yAttributes = function _setA11yAttributes() {
     var elementId = 'expandable-' + this.id;
 
     this._trigger.setAttribute('aria-describedby', elementId);
@@ -209,7 +187,7 @@ var Expandable = function () {
    */
 
 
-  Expandable.prototype._removeARIAAttributes = function _removeARIAAttributes() {
+  Expandable.prototype._removeA11yAttributes = function _removeA11yAttributes() {
     this._trigger.removeAttribute('aria-describedby');
     this._target.removeAttribute('id');
     this._target.removeAttribute('role');
@@ -259,7 +237,7 @@ var Expandable = function () {
       document.body.removeEventListener('click', this._onTriggerClick);
     }
 
-    this._removeARIAAttributes();
+    this._removeA11yAttributes();
   };
 
   /**
@@ -280,8 +258,8 @@ var Expandable = function () {
     var groupIds = [];
 
     elements.forEach(function (item) {
-      if (item.getAttribute(Settings.Attribute.GROUP)) {
-        var groupId = item.getAttribute(Settings.Attribute.GROUP);
+      var groupId = item.getAttribute(Settings.Attribute.GROUP);
+      if (groupId) {
         if (groupIds.indexOf(groupId) < 0) {
           groups.push(elements.filter(function (el) {
             return el.getAttribute(Settings.Attribute.GROUP) === groupId;

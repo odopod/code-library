@@ -80,9 +80,10 @@ describe('the OdoExpandable Component', function expandable() {
     it('will properly show and hide the expandable on click', () => {
       expect(instance.isOpen).to.equal(false);
 
-      let evt = {};
-      evt.target = instance._trigger;
-      evt.preventDefault = function() { return false; }
+      const evt = {
+        target: instance._trigger,
+        preventDefault() { return false; },
+      };
       instance._triggerClickHandler(evt);
 
       expect(instance.isOpen).to.equal(true);
@@ -91,9 +92,10 @@ describe('the OdoExpandable Component', function expandable() {
     it('clicks on non triggers won\'t open anything', () => {
       expect(instance.isOpen).to.equal(false);
 
-      let evt = {};
-      evt.target = instance._target;
-      evt.preventDefault = function() { return false; }
+      const evt = {
+        target: instance._target,
+        preventDefault() { return false; },
+      };
       instance._triggerClickHandler(evt);
 
       expect(instance.isOpen).to.equal(false);
@@ -147,9 +149,10 @@ describe('the OdoExpandable Component', function expandable() {
       expect(instance._expandables[1].isOpen).to.equal(false);
       expect(instance._expandables[2].isOpen).to.equal(false);
 
-      let evt = {};
-      evt.target = document.querySelector('#open-target');
-      evt.preventDefault = function() { return false; }
+      const evt = {
+        target: document.querySelector('#open-target'),
+        preventDefault() { return false; },
+      };
       instance._onClickHandler(evt);
 
       expect(instance._expandables[0].isOpen).to.equal(false);
@@ -162,9 +165,10 @@ describe('the OdoExpandable Component', function expandable() {
       expect(instance._expandables[1].isOpen).to.equal(false);
       expect(instance._expandables[2].isOpen).to.equal(false);
 
-      let evt = {};
-      evt.target = document.querySelector('body');
-      evt.preventDefault = function() { return false; }
+      const evt = {
+        target: document.querySelector('body'),
+        preventDefault() { return false; },
+      };
       instance._onClickHandler(evt);
 
       expect(instance._expandables[0].isOpen).to.equal(true);
@@ -177,9 +181,10 @@ describe('the OdoExpandable Component', function expandable() {
       expect(instance._expandables[1].isOpen).to.equal(false);
       expect(instance._expandables[2].isOpen).to.equal(false);
 
-      let evt = {};
-      evt.target = document.querySelector('#closed-target');
-      evt.preventDefault = function() { return false; }
+      const evt = {
+        target: document.querySelector('#closed-target'),
+        preventDefault() { return false; },
+      };
       instance._onClickHandler(evt);
 
       expect(instance._expandables[0].isOpen).to.equal(false);

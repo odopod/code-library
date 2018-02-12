@@ -131,8 +131,8 @@ class Expandable {
     const groupIds = [];
 
     elements.forEach((item) => {
-      if (item.getAttribute(Settings.Attribute.GROUP)) {
-        const groupId = item.getAttribute(Settings.Attribute.GROUP);
+      const groupId = item.getAttribute(Settings.Attribute.GROUP);
+      if (groupId) {
         if (groupIds.indexOf(groupId) < 0) {
           groups.push(elements.filter(el => el.getAttribute(Settings.Attribute.GROUP) === groupId));
           groupIds.push(groupId);

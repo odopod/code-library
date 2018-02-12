@@ -1,4 +1,4 @@
-# Odo Dropdown
+# Odo Expandable
 
 > A simple, accessible combination of two elements; A trigger to handle clicks, and a target to toggle visibility.
 

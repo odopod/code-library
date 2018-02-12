@@ -1,7 +1,7 @@
 export default {
   ClassName: {
-    TRIGGER_OPEN: 'expandable__trigger--open',
-    TARGET_OPEN: 'expandable__target--open',
+    TRIGGER_OPEN: 'odo-expandable__trigger--open',
+    TARGET_OPEN: 'odo-expandable__target--open',
   },
   Attribute: {
     TRIGGER: 'data-expandable-trigger',

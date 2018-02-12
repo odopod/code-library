@@ -4,7 +4,7 @@
  *
  * @author Matt Zaso
  */
-import Settings from './expandable-settings';
+import Settings from './settings';
 import ExpandableGroup from './expandable-group';
 
 class Expandable {
@@ -24,16 +24,8 @@ class Expandable {
     /** @type {Element} */
     this._target = document.body.querySelector(`[${Settings.Attribute.TARGET}="${id}"]`);
 
-    this._setARIAAttributes();
+    this._setA11yAttributes();
 
-    this._bindListeners();
-  }
-
-  /**
-   * Binds the listeners to the body to handle click events.
-   * @private
-   */
-  _bindListeners() {
     if (!this.options.groupedItem) {
       this._onTriggerClick = this._triggerClickHandler.bind(this);
       document.body.addEventListener('click', this._onTriggerClick);
@@ -49,7 +41,7 @@ class Expandable {
     evt.preventDefault();
     const closest = evt.target.closest(`[${Settings.Attribute.TRIGGER}]`);
 
-    if (closest !== null && closest === this._trigger) {
+    if (closest === this._trigger) {
       this.toggle();
     }
   }
@@ -58,7 +50,7 @@ class Expandable {
    * Sets the appropriate ARIA attributes for a11y.
    * @private
    */
-  _setARIAAttributes() {
+  _setA11yAttributes() {
     const elementId = `expandable-${this.id}`;
 
     this._trigger.setAttribute('aria-describedby', elementId);
@@ -72,7 +64,7 @@ class Expandable {
    * Removes the ARIA attributes assigned on instantiation.
    * @private
    */
-  _removeARIAAttributes() {
+  _removeA11yAttributes() {
     this._trigger.removeAttribute('aria-describedby');
     this._target.removeAttribute('id');
     this._target.removeAttribute('role');
@@ -120,7 +112,7 @@ class Expandable {
       document.body.removeEventListener('click', this._onTriggerClick);
     }
 
-    this._removeARIAAttributes();
+    this._removeA11yAttributes();
   }
 
   /**

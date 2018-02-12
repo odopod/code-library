@@ -4,7 +4,7 @@
  *
  * @author Matt Zaso
  */
-import Settings from './expandable-settings';
+import Settings from './settings';
 import Expandable from './expandable';
 
 class ExpandableGroup {
@@ -40,7 +40,7 @@ class ExpandableGroup {
     evt.preventDefault();
     const closest = evt.target.closest(`[${Settings.Attribute.TRIGGER}]`);
 
-    if (closest !== null && this._elements.includes(closest)) {
+    if (this._elements.includes(closest)) {
       this._toggleGroupVisibility(closest.getAttribute(Settings.Attribute.TRIGGER));
     }
   }

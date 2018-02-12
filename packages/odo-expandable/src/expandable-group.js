@@ -60,6 +60,17 @@ class ExpandableGroup {
     document.body.removeEventListener('click', this._onTriggerClick);
     this._expandables.forEach(item => item.dispose());
   }
+
+  /**
+   * Instantiates a single instance of the Expandable Group.
+   *
+   * @param {Array.<Element>} elements An array of the elements in the group.
+   * @return {ExpandableItem} the instance of the Expandable Item.
+   * @public
+   */
+  static initialize(elements) {
+    return new ExpandableGroup(elements);
+  }
 }
 
 Object.assign(ExpandableGroup, Settings);

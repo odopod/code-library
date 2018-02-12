@@ -6,7 +6,7 @@
  */
 import Settings from './settings';
 
-class Expandable {
+class ExpandableItem {
   constructor(id, options = {}) {
     /** @type {string} */
     this.id = id;
@@ -121,14 +121,19 @@ class Expandable {
   /**
    * Instantiates a single instance of the Expandable Item.
    *
-   * @return {Array.<Expandable>} the instance of the Expandable Item.
+   * @param {Element} element Either a trigger or target.
+   * @return {ExpandableItem} the instance of the Expandable Item.
    * @public
    */
-  static initialize() {
+  static initialize(element) {
+    const triggerId = element.getAttribute(Settings.Attribute.TRIGGER);
+    const targetId = element.getAttribute(Settings.Attribute.TARGET);
+    const id = targetId || triggerId;
 
+    return new ExpandableItem(id);
   }
 }
 
-Object.assign(Expandable, Settings);
+Object.assign(ExpandableItem, Settings);
 
-export default Expandable;
+export default ExpandableItem;

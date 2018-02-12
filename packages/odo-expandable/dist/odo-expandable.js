@@ -49,10 +49,10 @@ var createClass = function () {
  *
  * @author Matt Zaso
  */
-var Expandable = function () {
-  function Expandable(id) {
+var ExpandableItem = function () {
+  function ExpandableItem(id) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    classCallCheck(this, Expandable);
+    classCallCheck(this, ExpandableItem);
 
     /** @type {string} */
     this.id = id;
@@ -84,7 +84,7 @@ var Expandable = function () {
    */
 
 
-  Expandable.prototype._triggerClickHandler = function _triggerClickHandler(evt) {
+  ExpandableItem.prototype._triggerClickHandler = function _triggerClickHandler(evt) {
     evt.preventDefault();
     var closest = evt.target.closest('[' + Settings.Attribute.TRIGGER + ']');
 
@@ -99,7 +99,7 @@ var Expandable = function () {
    */
 
 
-  Expandable.prototype._setA11yAttributes = function _setA11yAttributes() {
+  ExpandableItem.prototype._setA11yAttributes = function _setA11yAttributes() {
     var elementId = 'expandable-' + this.id;
 
     this._trigger.setAttribute('aria-describedby', elementId);
@@ -116,7 +116,7 @@ var Expandable = function () {
    */
 
 
-  Expandable.prototype._removeA11yAttributes = function _removeA11yAttributes() {
+  ExpandableItem.prototype._removeA11yAttributes = function _removeA11yAttributes() {
     this._trigger.removeAttribute('aria-describedby');
     this._target.removeAttribute('id');
     this._trigger.removeAttribute('aria-expanded');
@@ -129,7 +129,7 @@ var Expandable = function () {
    */
 
 
-  Expandable.prototype.toggle = function toggle() {
+  ExpandableItem.prototype.toggle = function toggle() {
     if (this.isOpen) {
       this.close();
     } else {
@@ -142,7 +142,7 @@ var Expandable = function () {
    */
 
 
-  Expandable.prototype.open = function open() {
+  ExpandableItem.prototype.open = function open() {
     this._target.classList.add(Settings.ClassName.TARGET_OPEN);
     this._trigger.classList.add(Settings.ClassName.TRIGGER_OPEN);
     this._trigger.setAttribute('aria-expanded', 'true');
@@ -154,7 +154,7 @@ var Expandable = function () {
    */
 
 
-  Expandable.prototype.close = function close() {
+  ExpandableItem.prototype.close = function close() {
     this._target.classList.remove(Settings.ClassName.TARGET_OPEN);
     this._trigger.classList.remove(Settings.ClassName.TRIGGER_OPEN);
     this._trigger.setAttribute('aria-expanded', 'false');
@@ -164,7 +164,7 @@ var Expandable = function () {
   /**
    * Dispose this instance and its handlers.
    */
-  Expandable.prototype.dispose = function dispose() {
+  ExpandableItem.prototype.dispose = function dispose() {
     if (!this.options.groupedItem) {
       document.body.removeEventListener('click', this._onTriggerClick);
     }
@@ -175,23 +175,30 @@ var Expandable = function () {
   /**
    * Instantiates a single instance of the Expandable Item.
    *
-   * @return {Array.<Expandable>} the instance of the Expandable Item.
+   * @param {Element} element Either a trigger or target.
+   * @return {ExpandableItem} the instance of the Expandable Item.
    * @public
    */
 
 
-  Expandable.initialize = function initialize() {};
+  ExpandableItem.initialize = function initialize(element) {
+    var triggerId = element.getAttribute(Settings.Attribute.TRIGGER);
+    var targetId = element.getAttribute(Settings.Attribute.TARGET);
+    var id = targetId || triggerId;
 
-  createClass(Expandable, [{
+    return new ExpandableItem(id);
+  };
+
+  createClass(ExpandableItem, [{
     key: 'isOpen',
     get: function get$$1() {
       return this._target.classList.contains(Settings.ClassName.TARGET_OPEN);
     }
   }]);
-  return Expandable;
+  return ExpandableItem;
 }();
 
-Object.assign(Expandable, Settings);
+Object.assign(ExpandableItem, Settings);
 
 /**
  * @fileoverview A wrapper for multiple Expandable elements that will
@@ -208,7 +215,7 @@ var ExpandableGroup = function () {
 
     /** @type {Array.<!ExpandableItem>} */
     this._expandables = elements.map(function (trigger) {
-      return new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER), { groupedItem: true });
+      return new ExpandableItem(trigger.getAttribute(Settings.Attribute.TRIGGER), { groupedItem: true });
     });
 
     this._onClick = this._onClickHandler.bind(this);
@@ -262,19 +269,24 @@ var ExpandableGroup = function () {
     });
   };
 
+  /**
+   * Instantiates a single instance of the Expandable Group.
+   *
+   * @param {Array.<Element>} elements An array of the elements in the group.
+   * @return {ExpandableItem} the instance of the Expandable Item.
+   * @public
+   */
+
+
+  ExpandableGroup.initialize = function initialize(elements) {
+    return new ExpandableGroup(elements);
+  };
+
   return ExpandableGroup;
 }();
 
 Object.assign(ExpandableGroup, Settings);
 
-/**
- * Instantiates all instances of the expandable. Groups are instantiated separate from
- * Expandables and require different parameters. This helper chunks out and groups the
- * grouped expandables before instantiating all of them.
- *
- * @return {Array.<Expandable, ExpandableGroup>} all instances of both types.
- * @public
- */
 function initializeAll() {
   var elements = Array.from(document.querySelectorAll('[' + Settings.Attribute.TRIGGER + ']'));
 
@@ -297,7 +309,7 @@ function initializeAll() {
   });
 
   var singleInstances = single.map(function (trigger) {
-    return new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER));
+    return new ExpandableItem(trigger.getAttribute(Settings.Attribute.TRIGGER));
   });
   var groupInstances = groups.map(function (grouping) {
     return new ExpandableGroup(grouping);
@@ -307,7 +319,7 @@ function initializeAll() {
 }
 
 exports.initializeAll = initializeAll;
-exports.ExpandableItem = Expandable;
+exports.ExpandableItem = ExpandableItem;
 exports.ExpandableGroup = ExpandableGroup;
 
 Object.defineProperty(exports, '__esModule', { value: true });

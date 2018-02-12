@@ -48,7 +48,7 @@ window.inception = inception;
 const select = document.querySelector('#animation-select');
 animationChanger.element.classList.add(select.value);
 select.addEventListener('change', () => {
-  const classes = Array.from(select.options).map(opt => opt.value);
+  const classes = Array.from(select.options, opt => opt.value);
   animationChanger.element.classList.remove(...classes);
   animationChanger.element.classList.add(select.value);
 });

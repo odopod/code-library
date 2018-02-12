@@ -131,8 +131,10 @@ class Reveal {
    * @return {Array.<Reveal>}
    */
   static initializeAll(context = document) {
-    return Array.from(context.querySelectorAll('.odo-reveal'))
-      .map(element => new Reveal(element));
+    return Array.from(
+      context.querySelectorAll('.odo-reveal'),
+      element => new Reveal(element),
+    );
   }
 }
 

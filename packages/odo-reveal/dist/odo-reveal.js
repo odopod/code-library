@@ -169,7 +169,7 @@ var Reveal = function () {
   Reveal.initializeAll = function initializeAll() {
     var context = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
 
-    return Array.from(context.querySelectorAll('.odo-reveal')).map(function (element) {
+    return Array.from(context.querySelectorAll('.odo-reveal'), function (element) {
       return new Reveal(element);
     });
   };

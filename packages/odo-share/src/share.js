@@ -41,12 +41,12 @@ class Share {
    * @see _.add
    */
   _registerShareButtons() {
-    const selector = '.' + this.ClassName.BASE;
-    const shareElements = Array.from(document.querySelectorAll(selector));
-
     // Pass an array of objects to the `add` method. These objects simply contain
     // an `element` key that references the DOM element.
-    this.add(shareElements.map(element => ({ element })));
+    this.add(Array.from(
+      document.querySelectorAll('.' + this.ClassName.BASE),
+      element => ({ element }),
+    ));
   }
 
   /**

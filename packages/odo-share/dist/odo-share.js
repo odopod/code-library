@@ -312,12 +312,9 @@ var Share = function () {
 
 
   Share.prototype._registerShareButtons = function _registerShareButtons() {
-    var selector = '.' + this.ClassName.BASE;
-    var shareElements = Array.from(document.querySelectorAll(selector));
-
     // Pass an array of objects to the `add` method. These objects simply contain
     // an `element` key that references the DOM element.
-    this.add(shareElements.map(function (element) {
+    this.add(Array.from(document.querySelectorAll('.' + this.ClassName.BASE), function (element) {
       return { element: element };
     }));
   };

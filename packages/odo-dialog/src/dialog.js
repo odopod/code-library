@@ -632,7 +632,10 @@ class Dialog extends TinyEmitter {
   static initializeAll(options) {
     Dialog.disposeAll();
 
-    return Array.from(document.querySelectorAll('.' + Dialog.Classes.BASE)).map(dialog => new Dialog(dialog, options));
+    return Array.from(
+      document.querySelectorAll('.' + Dialog.Classes.BASE),
+      dialog => new Dialog(dialog, options),
+    );
   }
 
   /**

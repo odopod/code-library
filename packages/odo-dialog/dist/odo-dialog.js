@@ -899,7 +899,7 @@ var Dialog = function (_TinyEmitter) {
   Dialog.initializeAll = function initializeAll(options) {
     Dialog.disposeAll();
 
-    return Array.from(document.querySelectorAll('.' + Dialog.Classes.BASE)).map(function (dialog) {
+    return Array.from(document.querySelectorAll('.' + Dialog.Classes.BASE), function (dialog) {
       return new Dialog(dialog, options);
     });
   };

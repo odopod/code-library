@@ -5,15 +5,15 @@
  * @author Matt Zaso
  */
 import Settings from './settings';
-import Expandable from './expandable';
+import ExpandableItem from './expandable-item';
 
 class ExpandableGroup {
   constructor(elements) {
     /** @type {Array.<!Element>} */
     this._elements = elements;
 
-    /** @type {Array.<!Expandable>} */
-    this._expandables = elements.map(trigger => new Expandable(
+    /** @type {Array.<!ExpandableItem>} */
+    this._expandables = elements.map(trigger => new ExpandableItem(
       trigger.getAttribute(Settings.Attribute.TRIGGER),
       { groupedItem: true },
     ));
@@ -61,5 +61,7 @@ class ExpandableGroup {
     this._expandables.forEach(item => item.dispose());
   }
 }
+
+Object.assign(ExpandableGroup, Settings);
 
 export default ExpandableGroup;

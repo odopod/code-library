@@ -1,8 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global.OdoExpandable = factory());
-}(this, (function () { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+	typeof define === 'function' && define.amd ? define(['exports'], factory) :
+	(factory((global.OdoExpandable = {})));
+}(this, (function (exports) { 'use strict';
 
 var Settings = {
   ClassName: {
@@ -41,78 +41,6 @@ var createClass = function () {
     if (staticProps) defineProperties(Constructor, staticProps);
     return Constructor;
   };
-}();
-
-/**
- * @fileoverview A wrapper for multiple Expandable elements that will
- * allow them to operate coherently in an accordion type fashion.
- *
- * @author Matt Zaso
- */
-var ExpandableGroup = function () {
-  function ExpandableGroup(elements) {
-    classCallCheck(this, ExpandableGroup);
-
-    /** @type {Array.<!Element>} */
-    this._elements = elements;
-
-    /** @type {Array.<!Expandable>} */
-    this._expandables = elements.map(function (trigger) {
-      return new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER), { groupedItem: true });
-    });
-
-    this._onClick = this._onClickHandler.bind(this);
-    document.body.addEventListener('click', this._onClick);
-  }
-
-  /**
-   * Handler for clicks on the trigger.
-   * @param {MouseEvent} evt Event object.
-   * @private
-   */
-
-
-  ExpandableGroup.prototype._onClickHandler = function _onClickHandler(evt) {
-    evt.preventDefault();
-    var closest = evt.target.closest('[' + Settings.Attribute.TRIGGER + ']');
-
-    if (this._elements.includes(closest)) {
-      this._toggleGroupVisibility(closest.getAttribute(Settings.Attribute.TRIGGER));
-    }
-  };
-
-  /**
-   * Will iterate over all grouped items and toggle the selected one while collapsing all others.
-   * @param {number} selectedId The ID of the selected target to expand.
-   * @private
-   */
-
-
-  ExpandableGroup.prototype._toggleGroupVisibility = function _toggleGroupVisibility(selectedId) {
-    this._expandables.forEach(function (expandable) {
-      if (expandable.id === selectedId) {
-        expandable.toggle();
-      } else {
-        expandable.close();
-      }
-    });
-  };
-
-  /**
-   * Dispose this instance and its handlers. Will also dispose all child
-   * instances.
-   * @public
-   */
-
-
-  ExpandableGroup.prototype.dispose = function dispose() {
-    document.body.removeEventListener('click', this._onTriggerClick);
-    this._expandables.forEach(function (item) {
-      return item.dispose();
-    });
-  };
-
-  return ExpandableGroup;
 }();
 
 /**
@@ -245,45 +173,14 @@ var Expandable = function () {
   };
 
   /**
-   * Instantiates all instances of the expandable. Groups are instantiated separate from
-   * Expandables and require different parameters. This helper chunks out and groups the
-   * grouped expandables before instantiating all of them.
+   * Instantiates a single instance of the Expandable Item.
    *
-   * @return {Array.<Expandable, ExpandableGroup>} all instances of both types.
+   * @return {Array.<Expandable>} the instance of the Expandable Item.
    * @public
    */
 
 
-  Expandable.initializeAll = function initializeAll() {
-    var elements = Array.from(document.querySelectorAll('[' + Settings.Attribute.TRIGGER + ']'));
-
-    var single = [];
-    var groups = [];
-    var groupIds = [];
-
-    elements.forEach(function (item) {
-      var groupId = item.getAttribute(Settings.Attribute.GROUP);
-      if (groupId) {
-        if (groupIds.indexOf(groupId) < 0) {
-          groups.push(elements.filter(function (el) {
-            return el.getAttribute(Settings.Attribute.GROUP) === groupId;
-          }));
-          groupIds.push(groupId);
-        }
-      } else {
-        single.push(item);
-      }
-    });
-
-    var singleInstances = single.map(function (trigger) {
-      return new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER));
-    });
-    var groupInstances = groups.map(function (grouping) {
-      return new ExpandableGroup(grouping);
-    });
-
-    return singleInstances.concat(groupInstances);
-  };
+  Expandable.initialize = function initialize() {};
 
   createClass(Expandable, [{
     key: 'isOpen',
@@ -296,7 +193,124 @@ var Expandable = function () {
 
 Object.assign(Expandable, Settings);
 
-return Expandable;
+/**
+ * @fileoverview A wrapper for multiple Expandable elements that will
+ * allow them to operate coherently in an accordion type fashion.
+ *
+ * @author Matt Zaso
+ */
+var ExpandableGroup = function () {
+  function ExpandableGroup(elements) {
+    classCallCheck(this, ExpandableGroup);
+
+    /** @type {Array.<!Element>} */
+    this._elements = elements;
+
+    /** @type {Array.<!ExpandableItem>} */
+    this._expandables = elements.map(function (trigger) {
+      return new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER), { groupedItem: true });
+    });
+
+    this._onClick = this._onClickHandler.bind(this);
+    document.body.addEventListener('click', this._onClick);
+  }
+
+  /**
+   * Handler for clicks on the trigger.
+   * @param {MouseEvent} evt Event object.
+   * @private
+   */
+
+
+  ExpandableGroup.prototype._onClickHandler = function _onClickHandler(evt) {
+    evt.preventDefault();
+    var closest = evt.target.closest('[' + Settings.Attribute.TRIGGER + ']');
+
+    if (this._elements.includes(closest)) {
+      this._toggleGroupVisibility(closest.getAttribute(Settings.Attribute.TRIGGER));
+    }
+  };
+
+  /**
+   * Will iterate over all grouped items and toggle the selected one while collapsing all others.
+   * @param {number} selectedId The ID of the selected target to expand.
+   * @private
+   */
+
+
+  ExpandableGroup.prototype._toggleGroupVisibility = function _toggleGroupVisibility(selectedId) {
+    this._expandables.forEach(function (expandable) {
+      if (expandable.id === selectedId) {
+        expandable.toggle();
+      } else {
+        expandable.close();
+      }
+    });
+  };
+
+  /**
+   * Dispose this instance and its handlers. Will also dispose all child
+   * instances.
+   * @public
+   */
+
+
+  ExpandableGroup.prototype.dispose = function dispose() {
+    document.body.removeEventListener('click', this._onTriggerClick);
+    this._expandables.forEach(function (item) {
+      return item.dispose();
+    });
+  };
+
+  return ExpandableGroup;
+}();
+
+Object.assign(ExpandableGroup, Settings);
+
+/**
+ * Instantiates all instances of the expandable. Groups are instantiated separate from
+ * Expandables and require different parameters. This helper chunks out and groups the
+ * grouped expandables before instantiating all of them.
+ *
+ * @return {Array.<Expandable, ExpandableGroup>} all instances of both types.
+ * @public
+ */
+function initializeAll() {
+  var elements = Array.from(document.querySelectorAll('[' + Settings.Attribute.TRIGGER + ']'));
+
+  var single = [];
+  var groups = [];
+  var groupIds = [];
+
+  elements.forEach(function (item) {
+    var groupId = item.getAttribute(Settings.Attribute.GROUP);
+    if (groupId) {
+      if (groupIds.includes(groupId)) {
+        groups.push(elements.filter(function (el) {
+          return el.getAttribute(Settings.Attribute.GROUP) === groupId;
+        }));
+        groupIds.push(groupId);
+      }
+    } else {
+      single.push(item);
+    }
+  });
+
+  var singleInstances = single.map(function (trigger) {
+    return new Expandable(trigger.getAttribute(Settings.Attribute.TRIGGER));
+  });
+  var groupInstances = groups.map(function (grouping) {
+    return new ExpandableGroup(grouping);
+  });
+
+  return singleInstances.concat(groupInstances);
+}
+
+exports.initializeAll = initializeAll;
+exports.ExpandableItem = Expandable;
+exports.ExpandableGroup = ExpandableGroup;
+
+Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 //# sourceMappingURL=odo-expandable.js.map

@@ -68,13 +68,17 @@ describe('the OdoExpandable Component', function expandable() {
       expect(instance._trigger.getAttribute('aria-describedby')).to.equal(elementId);
       expect(instance._target.getAttribute('id')).to.equal(elementId);
       expect(instance._target.getAttribute('role')).to.equal('region');
+      expect(instance._trigger.getAttribute('aria-expanded')).to.equal('false');
+      expect(instance._trigger.getAttribute('aria-controls')).to.equal(elementId);
+      expect(instance._target.getAttribute('aria-labelledby')).to.equal(elementId);
+      expect(instance._target.getAttribute('aria-hidden')).to.equal('true');
     });
 
     it('will properly change the ARIA attribute on open/close', () => {
       instance.open();
-      expect(instance._target.getAttribute('aria-expanded')).to.equal('true');
+      expect(instance._trigger.getAttribute('aria-expanded')).to.equal('true');
       instance.close();
-      expect(instance._target.getAttribute('aria-expanded')).to.equal('false');
+      expect(instance._trigger.getAttribute('aria-expanded')).to.equal('false');
     });
 
     it('will properly show and hide the expandable on click', () => {
@@ -121,7 +125,9 @@ describe('the OdoExpandable Component', function expandable() {
       expect(instance._trigger.getAttribute('aria-describedby')).to.equal(null);
       expect(instance._target.getAttribute('id')).to.equal(null);
       expect(instance._target.getAttribute('role')).to.equal(null);
-      expect(instance._target.getAttribute('expanded')).to.equal(null);
+      expect(instance._trigger.getAttribute('expanded')).to.equal(null);
+      expect(instance._target.getAttribute('aria-hidden')).to.equal(null);
+      expect(instance._target.getAttribute('aria-labelledby')).to.equal(null);
     });
   });
 

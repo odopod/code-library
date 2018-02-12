@@ -178,7 +178,10 @@ var Expandable = function () {
 
     this._target.setAttribute('id', elementId);
     this._target.setAttribute('role', 'region');
-    this._target.setAttribute('aria-expanded', 'true');
+    this._trigger.setAttribute('aria-expanded', this.isOpen.toString());
+    this._trigger.setAttribute('aria-controls', elementId);
+    this._target.setAttribute('aria-labelledby', elementId);
+    this._target.setAttribute('aria-hidden', (!this.isOpen).toString());
   };
 
   /**
@@ -191,7 +194,9 @@ var Expandable = function () {
     this._trigger.removeAttribute('aria-describedby');
     this._target.removeAttribute('id');
     this._target.removeAttribute('role');
-    this._target.removeAttribute('aria-expanded');
+    this._trigger.removeAttribute('aria-expanded');
+    this._target.removeAttribute('aria-labelledby');
+    this._target.removeAttribute('aria-hidden');
   };
 
   /**
@@ -215,7 +220,8 @@ var Expandable = function () {
   Expandable.prototype.open = function open() {
     this._target.classList.add(Settings.ClassName.TARGET_OPEN);
     this._trigger.classList.add(Settings.ClassName.TRIGGER_OPEN);
-    this._target.setAttribute('aria-expanded', 'true');
+    this._trigger.setAttribute('aria-expanded', 'true');
+    this._target.setAttribute('aria-hidden', 'false');
   };
 
   /**
@@ -226,7 +232,8 @@ var Expandable = function () {
   Expandable.prototype.close = function close() {
     this._target.classList.remove(Settings.ClassName.TARGET_OPEN);
     this._trigger.classList.remove(Settings.ClassName.TRIGGER_OPEN);
-    this._target.setAttribute('aria-expanded', 'false');
+    this._trigger.setAttribute('aria-expanded', 'false');
+    this._target.setAttribute('aria-hidden', 'true');
   };
 
   /**

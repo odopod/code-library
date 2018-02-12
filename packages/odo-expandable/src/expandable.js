@@ -137,7 +137,7 @@ class Expandable {
     elements.forEach((item) => {
       const groupId = item.getAttribute(Settings.Attribute.GROUP);
       if (groupId) {
-        if (groupIds.indexOf(groupId) < 0) {
+        if (groupIds.includes(groupId)) {
           groups.push(elements.filter(el => el.getAttribute(Settings.Attribute.GROUP) === groupId));
           groupIds.push(groupId);
         }

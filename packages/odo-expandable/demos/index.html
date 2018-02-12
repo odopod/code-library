@@ -23,11 +23,12 @@
         <p>IE9+ with polyfills.</p>
         <p>To support IE&lt;=11, you will need to add a <code>classList</code> and the <a href="https://www.npmjs.com/package/element-closest"> <code>Element#closest</code></a> polyfills.</p>
         <h3>Dependencies</h3>
+        <p>None</p>
 
         <h2>Markup</h2>
         <p>The only two required pieces are a <code>button</code> element with a <code>data-expandable-trigger="{id}"</code> attribute and any other element with a <code>data-expandable-target="{id}"</code> attribute.</p>
-        <pre><code class="language-markup">&lt;button data-expandable-trigger=&quot;demo-expand-1&quot;&gt;Trigger&lt;/button&gt;
-  &lt;div data-expandable-target=&quot;demo-expand-1&quot;&gt;Target&lt;/div&gt;</code></pre>
+<pre><code class="language-markup">&lt;button data-expandable-trigger=&quot;demo-expand-1&quot;&gt;Trigger&lt;/button&gt;
+&lt;div data-expandable-target=&quot;demo-expand-1&quot;&gt;Target&lt;/div&gt;</code></pre>
 
         <h2>Setup</h2>
         <p>Simply call the static method, <code>initializeAll()</code> and Expandable will instantiate all instances of itself.</p>
@@ -46,7 +47,7 @@
           <p>Use a second <code>data-expandable-group="{id}"</code> attribute to make all of the expandables operate in an accordion fashion on click</p>
           <p>Add the <code>odo-expandable__trigger--open</code> and <code>odo-expandable__target--open</code> classes to have an element be expanded on load</p>
           <p>Example:</p>
-          <pre><code class="language-markup">&lt;button class=&quot;odo-expandable__trigger--open&quot; data-expandable-trigger=&quot;demo-expand-1&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;Trigger 1&lt;/button&gt;
+<pre><code class="language-markup">&lt;button class=&quot;odo-expandable__trigger--open&quot; data-expandable-trigger=&quot;demo-expand-1&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;Trigger 1&lt;/button&gt;
 &lt;div class=&quot;odo-expandable__target--open&quot; data-expandable-target=&quot;demo-expand-1&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;First Content&lt;/div&gt;
 
 &lt;button data-expandable-trigger=&quot;demo-expand-2&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;Trigger2&lt;/button&gt;
@@ -93,10 +94,10 @@
         </div>
         <h2>CSS</h2>
         <p>The only CSS needed is to style the <code>odo-expandable__trigger--open</code> and <code>odo-expandable__target--open</code> classes to your need.</p>
-        <pre><code class="language-css">// Your rules
+<pre><code class="language-css">/* Your rules */
 .your-target-class { display: none; }
 
-// Classes Added By Expandable to target with display/height/transform/etc rules
+/* Classes Added By Expandable to target with display/height/transform/etc rules */
 .odo-expandable__trigger--open { color: blue; }
 .odo-expandable__target--open { display: block; }</code></pre>
       </div>

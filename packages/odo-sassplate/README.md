@@ -46,7 +46,6 @@ Sassplate adds mixins as well. For details and method signatures, check out [`_m
 * no-aspect
 * fill-parent
 * reset-fill-parent
-* ghost
 * clearfix
 * text-overflow
 * font-smooth

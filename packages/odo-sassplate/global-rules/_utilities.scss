@@ -29,32 +29,8 @@
   cursor: grabbing;
 }
 
-// -ms-user-select in IE 10. IE9 needs the attribute on _every_ child.
-// http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
-// https://developer.mozilla.org/en-US/docs/Web/CSS/user-select
-[unselectable="on"],
 .unselectable {
   user-select: none;
-}
-
-// Heads up! This method sets font-size: 0 on .ghost-center-wrap and resets it to font-size: 16px
-// on .ghost-center. You may have to set the font-size yourself on children of .ghost-center.
-// ems and %s don't work because the parent has font-size:0
-.ghost-center-wrap {
-  @include ghost();
-}
-
-// table-layout fixed is needed for FF and Opera
-// @see http://stackoverflow.com/questions/2923710/why-do-firefox-and-opera-ignore-max-width-inside-of-display-table-cell
-// @see https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout
-.table-center-wrap {
-  display: table;
-  table-layout: fixed;
-}
-
-.table-center {
-  display: table-cell;
-  vertical-align: middle;
 }
 
 .flex-center {
@@ -78,7 +54,7 @@
   }
 }
 
-.responsive-image-cover {
+.background-image-cover {
   @include fill-parent();
   @include background-cover();
   width: 100%;
@@ -86,8 +62,8 @@
 }
 
 // Overflow hidden because polyfills will resize the image within.
-.odo-responsive-img--cover { overflow: hidden; }
-.odo-responsive-img--cover img {
+.image-cover { overflow: hidden; }
+.image-cover img {
   width: 100%;
   max-width: none;
   height: 100%;
@@ -139,10 +115,4 @@
   padding: 0;
   background: none;
   border: 0;
-
-  // Remove focus outline for nested button elements. Button must be nested in
-  // Firefox for display inline-flex to work.
-  &:focus {
-    outline: 0;
-  }
 }

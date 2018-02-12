@@ -11,14 +11,14 @@
     }
   ],
   "dependencies": {
-    "normalize.css": "^7.0.0"
+    "normalize.css": "^8.0.0"
   },
   "devDependencies": {
     "@odopod/style-guide": "^2.0.0",
     "mkdirp": "^0.5.1",
     "node-sass": "^4.3.0",
     "node-sass-json-importer": "^3.0.0",
-    "sass-true": "^2.1.4"
+    "sass-true": "^3.0.2"
   },
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-sassplate",
   "files": [

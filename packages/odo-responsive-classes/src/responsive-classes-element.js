@@ -51,7 +51,9 @@ class ResponsiveClassesElement {
    */
   write() {
     this._removeAllClasses(this._attributes.values);
-    this._addAllClasses(this._attributes.currentValue.split(' '));
+    this._addAllClasses(this._attributes.currentValue === null ?
+      [] :
+      this._attributes.currentValue.split(' '));
   }
 
   /**

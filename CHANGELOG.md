@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Polyfills (`Element#closest` `Element#matches`, `requestAnimationFrame`).
 * `animation.fadeElement` is now private.
 * `array.getLongestString`. Not used in anything we (odopod) do.
+* `device.getTranslate`.
 * `dom.getFirstElementChild`. Use `element.firstElementChild` instead.
 * `dom.getChildren`. Use `Array.from(element.children)` instead.
 * `math.getAugmentedRect`. The `Rect` class now includes `right` and `bottom` (getter) properties.

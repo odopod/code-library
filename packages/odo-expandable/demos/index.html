@@ -37,14 +37,19 @@
         <pre><code class="language-javascript">import { ExpandableItem } from '@odopod/odo-expandable';
 
 new ExpandableItem(triggerEl);</code></pre>
-        <p>...or you can initialize individual Expandable Items with <code>new ExpandableGroup(Elements);</code></p>
+        <p>...or you can initialize individual Expandable Items with <code>new ExpandableGroup(Elements);</code>...</p>
         <pre><code class="language-javascript">import { ExpandableGroup } from '@odopod/odo-expandable';
 
 new ExpandableGroup(Elements);</code></pre>
+        <p>...or you can initialize an animated accordion with <code>new ExpandableAccordion(Elements);</code></p>
+        <pre><code class="language-javascript">import { ExpandableAccordion } from '@odopod/odo-expandable';
+
+new ExpandableAccordion(Elements);</code></pre>
 
         <div class="demo">
           <h2>Single Element</h2>
-          <button class="expandable__trigger" data-expandable-trigger="demo-expand-1">Trigger 1</button>
+          <button style="font-size: 16px;" class="" data-expandable-trigger="demo-expand-1">Show/Hide Content</button>
+          <p>Since the expandable doesn't require a container element you can use it to toggle a class on another element anywhere in the DOM.</p>
           <div class="expandable__target" data-expandable-target="demo-expand-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
             irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
@@ -101,8 +106,18 @@ new ExpandableGroup(Elements);</code></pre>
             cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
         </div>
         <div class="demo">
-          <h2>Animated Accordion</h2>
-          <p></p>
+          <h2>Animated Accordion (ExpandableAccordion)</h2>
+          <p>The Animated Accordion includes animations for expanding/contracting as well as viewport scrolling right out of the box without any additional configuration.</p>
+          <p>To include animations just include the <code>data-expandable-animated</code> attribute on each trigger in your markup.</p>
+          <p>Example</p>
+<pre><code class="language-markup">&lt;button data-expandable-animated data-expandable-trigger=&quot;demo-expand-9&quot; data-expandable-group=&quot;demo-group-3&quot;&gt;Trigger&lt;/button&gt;
+&lt;div data-expandable-target=&quot;demo-expand-9&quot; data-expandable-group=&quot;demo-group-3&quot;&gt;&lt;div&gt;Target&lt;/div&gt;&lt;/div&gt;
+
+&lt;button data-expandable-animated data-expandable-trigger=&quot;demo-expand-10&quot; data-expandable-group=&quot;demo-group-3&quot;&gt;Trigger&lt;/button&gt;
+&lt;div data-expandable-target=&quot;demo-expand-10&quot; data-expandable-group=&quot;demo-group-3&quot;&gt;&lt;div&gt;Target&lt;/div&gt;&lt;/div&gt;</code></pre>
+
+          <p><em>Note:</em> Animated Accordions require a second, nested element inside of the <code>target</code> element to read the height of when its parent is collapsed.</p>
+
           <button class="expandable__trigger--animated odo-expandable__trigger--open" data-expandable-animated data-expandable-trigger="demo-expand-9" data-expandable-group="demo-group-3">Trigger 1</button>
           <div class="expandable__target--animated odo-expandable__target--open" data-expandable-target="demo-expand-9"
             data-expandable-group="demo-group-3"><div class="expandable-target__inner">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

@@ -3,7 +3,9 @@
   "description": "A simple, accessible combination of two elements; A trigger to handle clicks, and a target to toggle visibility.",
   "version": "0.1.0",
   "main": "dist/odo-expandable.js",
+  "module": "dist/odo-expandable.esm.js",
   "odoModule": "src/expandable.js",
+  "sideEffects": false,
   "author": "Odopod",
   "contributors": [
     {

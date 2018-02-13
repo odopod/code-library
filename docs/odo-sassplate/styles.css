@@ -1702,33 +1702,8 @@ button svg.icon use {
 .grabbing .grab {
   cursor: grabbing; }
 
-[unselectable="on"],
 .unselectable {
   user-select: none; }
-
-.ghost-center-wrap {
-  font-size: 0;
-  height: 100%; }
-  .ghost-center-wrap:before {
-    content: '';
-    display: inline-block;
-    vertical-align: middle;
-    width: 0;
-    height: 100%; }
-  .ghost-center-wrap .ghost-center {
-    display: inline-block;
-    max-width: 100%;
-    max-height: 100%;
-    vertical-align: middle;
-    font-size: 1rem; }
-
-.table-center-wrap {
-  display: table;
-  table-layout: fixed; }
-
-.table-center {
-  display: table-cell;
-  vertical-align: middle; }
 
 .flex-center {
   display: flex;
@@ -1760,7 +1735,7 @@ button svg.icon use {
   .fade.in {
     opacity: 1; }
 
-.responsive-image-cover {
+.background-image-cover {
   position: absolute;
   top: 0;
   right: 0;
@@ -1772,10 +1747,10 @@ button svg.icon use {
   width: 100%;
   height: 100%; }
 
-.odo-responsive-img--cover {
+.image-cover {
   overflow: hidden; }
 
-.odo-responsive-img--cover img {
+.image-cover img {
   width: 100%;
   max-width: none;
   height: 100%;
@@ -1815,8 +1790,6 @@ button svg.icon use {
   padding: 0;
   background: none;
   border: 0; }
-  .unstyled-button:focus {
-    outline: 0; }
 
 @media print {
   .hidden\@print {

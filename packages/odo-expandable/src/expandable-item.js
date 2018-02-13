@@ -117,21 +117,6 @@ class ExpandableItem {
 
     this._removeA11yAttributes();
   }
-
-  /**
-   * Instantiates a single instance of the Expandable Item.
-   *
-   * @param {Element} element Either a trigger or target.
-   * @return {ExpandableItem} the instance of the Expandable Item.
-   * @public
-   */
-  static initialize(element) {
-    const triggerId = element.getAttribute(Settings.Attribute.TRIGGER);
-    const targetId = element.getAttribute(Settings.Attribute.TARGET);
-    const id = targetId || triggerId;
-
-    return new ExpandableItem(id);
-  }
 }
 
 Object.assign(ExpandableItem, Settings);

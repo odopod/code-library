@@ -20,7 +20,7 @@ export function initializeAll() {
   elements.forEach((item) => {
     const groupId = item.getAttribute(Settings.Attribute.GROUP);
     if (groupId) {
-      if (groupIds.includes(groupId)) {
+      if (!groupIds.includes(groupId)) {
         groups.push(elements.filter(el => el.getAttribute(Settings.Attribute.GROUP) === groupId));
         groupIds.push(groupId);
       }
@@ -36,5 +36,6 @@ export function initializeAll() {
   return singleInstances.concat(groupInstances);
 }
 
+export { default as Settings } from './settings';
 export { default as ExpandableItem } from './expandable-item';
 export { default as ExpandableGroup } from './expandable-group';

@@ -19,7 +19,7 @@ describe('the OdoExpandable Component', function expandable() {
   function createFixture(id, options) {
     fixture.load(`${id}.html`);
 
-    const instances = new OdoExpandable.initializeAll();
+    const instances = OdoExpandable.initializeAll();
     [instance] = instances;
   }
 
@@ -53,14 +53,14 @@ describe('the OdoExpandable Component', function expandable() {
 
     it('can open the target and apply the right class to it', () => {
       instance.open();
-      expect(instance._target.classList.contains(OdoExpandable.ClassName.TARGET_OPEN)).to.equal(true);
-      expect(instance._trigger.classList.contains(OdoExpandable.ClassName.TRIGGER_OPEN)).to.equal(true);
+      expect(instance._target.classList.contains(OdoExpandable.Settings.ClassName.TARGET_OPEN)).to.equal(true);
+      expect(instance._trigger.classList.contains(OdoExpandable.Settings.ClassName.TRIGGER_OPEN)).to.equal(true);
     });
 
     it('can close the target and apply the right class to it', () => {
       instance.close();
-      expect(instance._target.classList.contains(OdoExpandable.ClassName.TARGET_OPEN)).to.equal(false);
-      expect(instance._trigger.classList.contains(OdoExpandable.ClassName.TRIGGER_OPEN)).to.equal(false);
+      expect(instance._target.classList.contains(OdoExpandable.Settings.ClassName.TARGET_OPEN)).to.equal(false);
+      expect(instance._trigger.classList.contains(OdoExpandable.Settings.ClassName.TRIGGER_OPEN)).to.equal(false);
     });
 
     it('will set the proper ARIA attributes on the elements', () => {
@@ -106,16 +106,16 @@ describe('the OdoExpandable Component', function expandable() {
 
     it('can toggle itself to the inverse state properly', () => {
       instance.open();
-      expect(instance._target.classList.contains(OdoExpandable.ClassName.TARGET_OPEN)).to.equal(true);
+      expect(instance._target.classList.contains(OdoExpandable.Settings.ClassName.TARGET_OPEN)).to.equal(true);
       expect(instance.isOpen).to.equal(true);
 
       instance.toggle();
-      expect(instance._target.classList.contains(OdoExpandable.ClassName.TARGET_OPEN)).to.equal(false);
+      expect(instance._target.classList.contains(OdoExpandable.Settings.ClassName.TARGET_OPEN)).to.equal(false);
       expect(instance.isOpen).to.equal(false);
 
       instance.close();
       instance.toggle();
-      expect(instance._target.classList.contains(OdoExpandable.ClassName.TARGET_OPEN)).to.equal(true);
+      expect(instance._target.classList.contains(OdoExpandable.Settings.ClassName.TARGET_OPEN)).to.equal(true);
       expect(instance.isOpen).to.equal(true);
     });
 

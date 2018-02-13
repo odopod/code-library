@@ -33,6 +33,14 @@
         <h2>Setup</h2>
         <p>Simply call the static method, <code>initializeAll()</code> and Expandable will instantiate all instances of itself.</p>
         <pre><code class="language-javascript">OdoExpandable.initializeAll();</code></pre>
+        <p>You can initialize individual Expandable Items with <code>new ExpandableItem(triggerEl);</code>...</p>
+        <pre><code class="language-javascript">import { ExpandableItem } from '@odopod/odo-expandable';
+
+new ExpandableItem(triggerEl);</code></pre>
+        <p>...or you can initialize individual Expandable Items with <code>new ExpandableGroup(Elements);</code></p>
+        <pre><code class="language-javascript">import { ExpandableGroup } from '@odopod/odo-expandable';
+
+new ExpandableGroup(Elements);</code></pre>
 
         <div class="demo">
           <h2>Single Element</h2>
@@ -100,6 +108,18 @@
 /* Classes Added By Expandable to target with display/height/transform/etc rules */
 .odo-expandable__trigger--open { color: blue; }
 .odo-expandable__target--open { display: block; }</code></pre>
+
+        <h3>Public Properties</h3>
+        <pre><code class="language-javascript">expandableItem.isOpen // gets the state of the expandable item.
+expandable.id // returns the id of the expandable item.</code></pre>
+
+        <h3>Public Methods</h3>
+        <pre><code class="language-javascript">expandableItem.toggle() // toggles the state of a single, expandable item.
+expandableItem.open() // opens an expandable item (if it is closed).
+expandableItem.close() // opens an expandable item (if it is open).
+expandableGroup.toggleVisibility(id) // toggles the visibility of the selected item and collapses the others.
+expandableItem.dispose()
+expandableGroup.dispose()</code></pre>
       </div>
     </main>
 

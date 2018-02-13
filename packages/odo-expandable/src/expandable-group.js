@@ -32,7 +32,7 @@ class ExpandableGroup {
     const closest = evt.target.closest(`[${Settings.Attribute.TRIGGER}]`);
 
     if (this._elements.includes(closest)) {
-      this._toggleGroupVisibility(closest.getAttribute(Settings.Attribute.TRIGGER));
+      this.toggleVisibility(closest.getAttribute(Settings.Attribute.TRIGGER));
     }
   }
 
@@ -41,7 +41,7 @@ class ExpandableGroup {
    * @param {number} selectedId The ID of the selected target to expand.
    * @private
    */
-  _toggleGroupVisibility(selectedId) {
+  toggleVisibility(selectedId) {
     this._expandables.forEach((expandable) => {
       if (expandable.id === selectedId) {
         expandable.toggle();
@@ -59,17 +59,6 @@ class ExpandableGroup {
   dispose() {
     document.body.removeEventListener('click', this._onTriggerClick);
     this._expandables.forEach(item => item.dispose());
-  }
-
-  /**
-   * Instantiates a single instance of the Expandable Group.
-   *
-   * @param {Array.<Element>} elements An array of the elements in the group.
-   * @return {ExpandableItem} the instance of the Expandable Item.
-   * @public
-   */
-  static initialize(elements) {
-    return new ExpandableGroup(elements);
   }
 }
 

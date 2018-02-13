@@ -172,23 +172,6 @@ var ExpandableItem = function () {
     this._removeA11yAttributes();
   };
 
-  /**
-   * Instantiates a single instance of the Expandable Item.
-   *
-   * @param {Element} element Either a trigger or target.
-   * @return {ExpandableItem} the instance of the Expandable Item.
-   * @public
-   */
-
-
-  ExpandableItem.initialize = function initialize(element) {
-    var triggerId = element.getAttribute(Settings.Attribute.TRIGGER);
-    var targetId = element.getAttribute(Settings.Attribute.TARGET);
-    var id = targetId || triggerId;
-
-    return new ExpandableItem(id);
-  };
-
   createClass(ExpandableItem, [{
     key: 'isOpen',
     get: function get$$1() {
@@ -234,7 +217,7 @@ var ExpandableGroup = function () {
     var closest = evt.target.closest('[' + Settings.Attribute.TRIGGER + ']');
 
     if (this._elements.includes(closest)) {
-      this._toggleGroupVisibility(closest.getAttribute(Settings.Attribute.TRIGGER));
+      this.toggleVisibility(closest.getAttribute(Settings.Attribute.TRIGGER));
     }
   };
 
@@ -245,7 +228,7 @@ var ExpandableGroup = function () {
    */
 
 
-  ExpandableGroup.prototype._toggleGroupVisibility = function _toggleGroupVisibility(selectedId) {
+  ExpandableGroup.prototype.toggleVisibility = function toggleVisibility(selectedId) {
     this._expandables.forEach(function (expandable) {
       if (expandable.id === selectedId) {
         expandable.toggle();
@@ -269,24 +252,19 @@ var ExpandableGroup = function () {
     });
   };
 
-  /**
-   * Instantiates a single instance of the Expandable Group.
-   *
-   * @param {Array.<Element>} elements An array of the elements in the group.
-   * @return {ExpandableItem} the instance of the Expandable Item.
-   * @public
-   */
-
-
-  ExpandableGroup.initialize = function initialize(elements) {
-    return new ExpandableGroup(elements);
-  };
-
   return ExpandableGroup;
 }();
 
 Object.assign(ExpandableGroup, Settings);
 
+/**
+ * Instantiates all instances of the expandable. Groups are instantiated separate from
+ * Expandables and require different parameters. This helper chunks out and groups the
+ * grouped expandables before instantiating all of them.
+ *
+ * @return {Array.<Expandable, ExpandableGroup>} all instances of both types.
+ * @public
+ */
 function initializeAll() {
   var elements = Array.from(document.querySelectorAll('[' + Settings.Attribute.TRIGGER + ']'));
 
@@ -297,7 +275,7 @@ function initializeAll() {
   elements.forEach(function (item) {
     var groupId = item.getAttribute(Settings.Attribute.GROUP);
     if (groupId) {
-      if (groupIds.includes(groupId)) {
+      if (!groupIds.includes(groupId)) {
         groups.push(elements.filter(function (el) {
           return el.getAttribute(Settings.Attribute.GROUP) === groupId;
         }));
@@ -319,6 +297,7 @@ function initializeAll() {
 }
 
 exports.initializeAll = initializeAll;
+exports.Settings = Settings;
 exports.ExpandableItem = ExpandableItem;
 exports.ExpandableGroup = ExpandableGroup;
 

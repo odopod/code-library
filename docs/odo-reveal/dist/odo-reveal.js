@@ -57,7 +57,7 @@ var Reveal = function () {
     if (Reveal.HAS_SCROLL_ANIMATION) {
       this.id = OdoViewport.add({
         element: element,
-        threshold: odoHelpers.utilities.getPercentageOption(element.getAttribute('data-threshold'), '25%'),
+        threshold: odoHelpers.getPercentageOption(element.getAttribute('data-threshold'), '25%'),
         enter: this._enteredView.bind(this)
       });
     } else {
@@ -108,7 +108,7 @@ var Reveal = function () {
     // Listen transition end on each target and add a class which removes
     // the transform and layer promotion from it.
     targets.forEach(function (el) {
-      odoHelpers.animation.onTransitionEnd(el, _this2._handleShown, null, OdoDevice.Dom.TRANSFORM);
+      odoHelpers.onTransitionEnd(el, _this2._handleShown, null, OdoDevice.Dom.TRANSFORM);
     });
 
     this.dispose();
@@ -169,7 +169,7 @@ var Reveal = function () {
   Reveal.initializeAll = function initializeAll() {
     var context = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
 
-    return Array.from(context.querySelectorAll('.odo-reveal')).map(function (element) {
+    return Array.from(context.querySelectorAll('.odo-reveal'), function (element) {
       return new Reveal(element);
     });
   };
@@ -184,7 +184,7 @@ var Reveal = function () {
  */
 
 
-Reveal.HAS_SCROLL_ANIMATION = !odoHelpers.browser.isNativeAndroid(navigator.userAgent);
+Reveal.HAS_SCROLL_ANIMATION = !odoHelpers.isNativeAndroid(navigator.userAgent);
 
 /** @enum {string} */
 Reveal.ClassName = {

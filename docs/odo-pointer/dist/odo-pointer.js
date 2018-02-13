@@ -1,11 +1,11 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('tiny-emitter'), require('@odopod/odo-device'), require('@odopod/odo-helpers')) :
-	typeof define === 'function' && define.amd ? define(['tiny-emitter', '@odopod/odo-device', '@odopod/odo-helpers'], factory) :
-	(global.OdoPointer = factory(global.TinyEmitter,global.OdoDevice,global.OdoHelpers));
-}(this, (function (TinyEmitter,OdoDevice,odoHelpers) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@odopod/odo-device'), require('@odopod/odo-helpers'), require('tiny-emitter')) :
+	typeof define === 'function' && define.amd ? define(['@odopod/odo-device', '@odopod/odo-helpers', 'tiny-emitter'], factory) :
+	(global.OdoPointer = factory(global.OdoDevice,global.OdoHelpers,global.TinyEmitter));
+}(this, (function (OdoDevice,odoHelpers,TinyEmitter) { 'use strict';
 
-TinyEmitter = TinyEmitter && TinyEmitter.hasOwnProperty('default') ? TinyEmitter['default'] : TinyEmitter;
 OdoDevice = OdoDevice && OdoDevice.hasOwnProperty('default') ? OdoDevice['default'] : OdoDevice;
+TinyEmitter = TinyEmitter && TinyEmitter.hasOwnProperty('default') ? TinyEmitter['default'] : TinyEmitter;
 
 var settings = {
   /** @enum {string} */
@@ -519,7 +519,7 @@ var Pointer = function (_TinyEmitter) {
     if (_this._shouldPreventDefault && _this._isTouchActionSupported) {
       _this.element.style[touchAction] = Pointer.TouchAction[_this.axis];
     } else if (_this._shouldPreventDefault && OdoDevice.HAS_TOUCH_EVENTS) {
-      window.addEventListener(odoHelpers.events.TOUCHMOVE, odoHelpers.utilities.noop);
+      window.addEventListener(odoHelpers.events.TOUCHMOVE, odoHelpers.noop);
     }
 
     _this.listen();
@@ -917,8 +917,8 @@ var Pointer = function (_TinyEmitter) {
     // velocity = delta / time.
     // Clamp the velocity to avoid outliers.
     var maxVelocity = Pointer.MAX_VELOCITY;
-    this.velocity.x = odoHelpers.math.clamp(delta.x / elapsed, -maxVelocity, maxVelocity);
-    this.velocity.y = odoHelpers.math.clamp(delta.y / elapsed, -maxVelocity, maxVelocity);
+    this.velocity.x = odoHelpers.clamp(delta.x / elapsed, -maxVelocity, maxVelocity);
+    this.velocity.y = odoHelpers.clamp(delta.y / elapsed, -maxVelocity, maxVelocity);
 
     this._hasTrackedVelocity = true;
   };
@@ -977,7 +977,7 @@ var Pointer = function (_TinyEmitter) {
     if (this._isTouchActionSupported) {
       this._el.style[Pointer.TouchActionSupport[this.axis]] = '';
     } else if (this._shouldPreventDefault && OdoDevice.HAS_TOUCH_EVENTS) {
-      window.removeEventListener(odoHelpers.events.TOUCHMOVE, odoHelpers.utilities.noop);
+      window.removeEventListener(odoHelpers.events.TOUCHMOVE, odoHelpers.noop);
     }
 
     this._el = null;

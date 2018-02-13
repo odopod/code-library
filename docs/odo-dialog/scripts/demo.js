@@ -131,7 +131,7 @@ animationChanger.element.classList.add(select.value);
 select.addEventListener('change', function () {
   var _animationChanger$ele;
 
-  var classes = Array.from(select.options).map(function (opt) {
+  var classes = Array.from(select.options, function (opt) {
     return opt.value;
   });
   (_animationChanger$ele = animationChanger.element.classList).remove.apply(_animationChanger$ele, toConsumableArray(classes));

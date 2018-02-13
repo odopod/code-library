@@ -66,7 +66,8 @@ x.getPosition(true);// Coordinate {x: 50, y: 0}</code></pre>
         <h3>Limits</h3>
         <p>You can also sets <code>limits</code> on the draggable instance, which restricts it to given boundaries. The only parameter is a <code>Rect</code>. <code>Rect</code>s have a <code>left</code>, <code>top</code>, <code>width</code>, and <code>height</code> and can be accessed from the <code>math</code> property of <code>OdoHelpers</code>.</p>
         <p>In this example, the draggable stops at the edges of the <code>.container</code> element. Since the draggable is centered within the container and the draggable starts at <code>0, 0</code>, the <code>left</code> limit needs to be negative half the leftover space. The minimum x position is the <code>left</code> value. The maximum x is the <code>left + width</code>. The width in this case, is the leftover space (20% because draggable is 80%). The y axis works the same way, but in this example, the <code>top</code> and <code>height</code> parameters don't matter because this draggable is restricted to the <code>x</code> axis.</p>
-        <pre><code class="language-javascript">var draggableWidth = x.element.offsetWidth;
+        <pre><code class="language-javascript">var math = OdoHelpers.math;
+var draggableWidth = x.element.offsetWidth;
 var containerWidth = container.offsetWidth;
 
 var left = (containerWidth - draggableWidth) / -2;

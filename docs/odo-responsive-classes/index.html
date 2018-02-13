@@ -37,6 +37,15 @@
       This text will be green at the <code>xs</code> breakpoint and blue otherwise.
     </div>
 
+    <p>Add a class which centers text only at the <code>sm</code> breakpoint.</p>
+    <div class="odo-responsive-classes" data-class.sm="text-center" style="background-color:ghostwhite">
+      I'm a <code>.text-center</code> at <code>sm</code>.
+    </div>
+
+    <pre><code class="language-markup">&lt;div class="odo-responsive-classes" data-class.sm="text-center"&gt;
+  I'm a &lt;code&gt;.text-center&lt;/code&gt; at &lt;code&gt;sm&lt;/code&gt;.
+&lt;/div&gt;</code></pre>
+
     <h2>API</h2>
     <h3>initializeAll(context = document.body)</h3>
     <p>Add more responsive classes after page load from a parent element.</p>

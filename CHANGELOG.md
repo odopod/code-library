@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## All - 2018-02-12
+### Added
+* New ES builds. Every package now has a `"module"` field in its `package.json` and a `dist/odo-{component}.esm.js` file which includes the original `import` and `export` to allow tree shaking in bundlers.
+* `"sideEffects": false` to `package.json`. `responsive-classes` and `share` have `"sideEffects": true`.
+
+## Helpers [2.0.0] - 2018-02-12
 ### Removed
 * Polyfills (`Element#closest` `Element#matches`, `requestAnimationFrame`).
 * `animation.fadeElement` is now private.
@@ -15,12 +21,50 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * `math.getAugmentedRect`. The `Rect` class now includes `right` and `bottom` (getter) properties.
 * `style.getWindowHeight`. Was only an alias for `window.innerHeight`.
 
-### Renamed
-* `array.remove` => `pull`
-* `string.random` => `randomString`
+### Changed
+* Helpers are no longer prefixed to a category object. Every helper is exported from the main entry point. This is a huge win for bundlers which can determine which exports are unused and remove them. To use `onTransitionEnd`, for example, you now need to import it like this:
+  ```js
+  import { onTransitionEnd } from '@odopod/odo-helpers';
+  ```
+* All function names remain the same except:
+  * `animation.Stepper` => `Stepper`
+  * `animation.Classes` => `animationClasses`
+  * `array.remove` => `pull`
+  * `string.random` => `randomString`
 
-### Added
-* `sideEffects: false` to `package.json`.
+## Sassplate [2.0.0] - 2018-02-12
+### Changed
+* `.odo-responsive-img--cover` => `.cover-image`
+* `.responsive-image-cover` => `.background-image-cover`
+
+### Removed
+* `.ghost-center-wrap`, `.ghost-center`. Use flexbox.
+* `.table-center-wrap`, `.table-center`. Use flexbox.
+* `outline:0` on `.unstyled-button:focus`.
+
+## Responsive classes [1.1.0] - 2018-02-12
+### Fixed
+* Error when `data-class.xs` was not defined. `data-class.xs` is now optional.
+
+## Carousel [2.0.0] - 2018-02-12
+### Removed
+* No longer includes `Element#closest` polyfill.
+
+## Dialog [2.0.0] - 2018-02-12
+### Removed
+* No longer includes `Element#closest` polyfill.
+
+## Dropdown [2.0.0] - 2018-02-12
+### Removed
+* No longer includes `Element#closest` polyfill.
+
+## Reveal [2.0.0] - 2018-02-12
+### Removed
+* No longer includes `Element#closest` polyfill.
+
+## Tabs [2.0.0] - 2018-02-12
+### Removed
+* No longer includes `Element#closest` polyfill.
 
 ## Dialog [1.2.0] - 2018-01-18
 ### Added

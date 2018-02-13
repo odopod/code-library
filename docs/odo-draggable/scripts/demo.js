@@ -1,8 +1,10 @@
 (function () {
 'use strict';
 
-var OdoHelpers = window.OdoHelpers;
-var OdoDraggable = window.OdoDraggable;
+var _window = window;
+var OdoDraggable = _window.OdoDraggable;
+var OdoHelpers = _window.OdoHelpers;
+
 
 var x = new OdoDraggable(document.getElementById('draggable-x'), {
   axis: 'x'
@@ -32,6 +34,7 @@ var select = function select(selector) {
 
 function setThrowableLimits() {
   var element = throwable.element;
+
   var parent = element.parentNode;
   var draggableWidth = element.offsetWidth;
   var draggableHeight = element.offsetHeight;
@@ -42,7 +45,7 @@ function setThrowableLimits() {
   var top = 0;
   var width = containerWidth - draggableWidth;
   var height = containerHeight - draggableHeight;
-  var rect = new OdoHelpers.math.Rect(left, top, width, height);
+  var rect = new OdoHelpers.Rect(left, top, width, height);
 
   // Set a boundary for the draggable so that it won't be thrown outside of its parent.
   throwable.setLimits(rect);
@@ -62,6 +65,7 @@ freescroll.on(OdoDraggable.EventType.SETTLE, function () {
 
 function setFreescrollLimits() {
   var element = freescroll.element;
+
   var parent = element.parentNode;
   var draggableWidth = element.offsetWidth;
   var containerWidth = parent.offsetWidth;
@@ -70,7 +74,7 @@ function setFreescrollLimits() {
   var top = 0;
   var width = -left;
   var height = 0;
-  var rect = new OdoHelpers.math.Rect(left, top, width, height);
+  var rect = new OdoHelpers.Rect(left, top, width, height);
 
   // Set a boundary for the draggable so that it won't be thrown outside of its parent.
   freescroll.setLimits(rect);
@@ -82,13 +86,8 @@ x.on(OdoDraggable.EventType.END, function (pointerEvent) {
   console.log('Finished drag:', pointerEvent);
 });
 
-(function () {
-  var math = OdoHelpers.math;
-  var limitToggle = select('#limit-toggle');
-  var container = select('.container');
-  var hasLimits = false;
-
-  function addLimits() {
+{
+  var addLimits = function addLimits() {
     var draggableWidth = x.element.offsetWidth;
     var containerWidth = container.offsetWidth;
 
@@ -96,18 +95,22 @@ x.on(OdoDraggable.EventType.END, function (pointerEvent) {
     var top = 0;
     var width = containerWidth - draggableWidth;
     var height = 0;
-    var rect = new math.Rect(left, top, width, height);
+    var rect = new OdoHelpers.Rect(left, top, width, height);
     x.setLimits(rect);
     limitToggle.classList.remove('limitless');
     hasLimits = true;
-  }
+  };
 
-  function removeLimits() {
-    var rect = new math.Rect(NaN, NaN, NaN, NaN);
+  var removeLimits = function removeLimits() {
+    var rect = new OdoHelpers.Rect(NaN, NaN, NaN, NaN);
     x.setLimits(rect);
     limitToggle.classList.add('limitless');
     hasLimits = false;
-  }
+  };
+
+  var limitToggle = select('#limit-toggle');
+  var container = select('.container');
+  var hasLimits = false;
 
   limitToggle.addEventListener('click', function () {
     if (hasLimits) {
@@ -126,42 +129,41 @@ x.on(OdoDraggable.EventType.END, function (pointerEvent) {
     setThrowableLimits();
     setFreescrollLimits();
   });
-})();
+}
 
-(function () {
-  var Defaults = OdoDraggable.Defaults;
-  var current = Object.assign({}, freescroll.options);
-
-  function update() {
+{
+  var update = function update() {
     freescroll.options = current;
-  }
+  };
 
-  function toDefaults() {
-    current.throwFriction = Defaults.throwFriction;
-    current.amplifier = Defaults.amplifier;
-    current.velocityStop = Defaults.velocityStop;
+  var toDefaults = function toDefaults() {
+    current.throwFriction = OdoDraggable.Defaults.throwFriction;
+    current.amplifier = OdoDraggable.Defaults.amplifier;
+    current.velocityStop = OdoDraggable.Defaults.velocityStop;
     select('#throw-friction').value = current.throwFriction;
     select('#amplifier').value = current.amplifier;
     select('#velocity-stop').value = current.velocityStop;
     update();
-  }
+  };
 
-  select('#throw-friction').addEventListener('change', function () {
+  var current = Object.assign({}, freescroll.options);
+
+  select('#throw-friction').addEventListener('change', function listener() {
     current.throwFriction = this.value;
     update();
   });
 
-  select('#amplifier').addEventListener('change', function () {
+  select('#amplifier').addEventListener('change', function listener() {
     current.amplifier = this.value;
     update();
   });
 
-  select('#velocity-stop').addEventListener('change', function () {
+  select('#velocity-stop').addEventListener('change', function listener() {
     current.velocityStop = this.value;
     update();
   });
 
   select('#back-to-defaults').addEventListener('click', toDefaults);
-})();
+}
 
 }());

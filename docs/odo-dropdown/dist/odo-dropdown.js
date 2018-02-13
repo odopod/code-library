@@ -113,7 +113,7 @@ var Dropdown = function (_OdoBaseComponent) {
     _this._select = _this.getElementByClass(Dropdown.Classes.SELECT);
 
     // Give the select an id if it doesn't have one.
-    odoHelpers.dom.giveId(_this._select, _this.id);
+    odoHelpers.giveId(_this._select, _this.id);
 
     /**
      * The <label> for the <select>.
@@ -205,7 +205,7 @@ var Dropdown = function (_OdoBaseComponent) {
 
   Dropdown.prototype._initializeCustomDropdown = function _initializeCustomDropdown() {
     if (this._label) {
-      odoHelpers.dom.giveId(this._label, this.id + '-label');
+      odoHelpers.giveId(this._label, this.id + '-label');
       var _id = this._label.id;
 
       this._optionsContainer.setAttribute('aria-labelledby', _id);
@@ -397,7 +397,7 @@ var Dropdown = function (_OdoBaseComponent) {
     this._isOpen = true;
 
     // Clear any pending transition ends.
-    odoHelpers.animation.cancelTransitionEnd(this._transitionId);
+    odoHelpers.cancelTransitionEnd(this._transitionId);
 
     // Remove click listener on button.
     this._toggleButtonListener(false);
@@ -406,9 +406,9 @@ var Dropdown = function (_OdoBaseComponent) {
     this._optionsContainer.setAttribute('aria-hidden', false);
     this._button.setAttribute('aria-expanded', true);
     this._button.tabIndex = -1;
-    odoHelpers.style.causeLayout(this._optionsContainer);
+    odoHelpers.causeLayout(this._optionsContainer);
     this._optionsContainer.classList.add(Dropdown.Classes.OPTIONS_CONTAINER_OPEN);
-    this._transitionId = odoHelpers.animation.onTransitionEnd(this._optionsContainer, this._handleOptionsShown, this);
+    this._transitionId = odoHelpers.onTransitionEnd(this._optionsContainer, this._handleOptionsShown, this);
   };
 
   /**
@@ -434,14 +434,14 @@ var Dropdown = function (_OdoBaseComponent) {
     this._isOpen = false;
 
     // Clear any pending transition ends.
-    odoHelpers.animation.cancelTransitionEnd(this._transitionId);
+    odoHelpers.cancelTransitionEnd(this._transitionId);
 
     document.body.removeEventListener('click', this._onPageClick);
     this._optionsContainer.setAttribute('aria-hidden', true);
     this._button.tabIndex = 0;
     this._button.setAttribute('aria-expanded', false);
     this._optionsContainer.classList.remove(Dropdown.Classes.OPTIONS_CONTAINER_OPEN);
-    this._transitionId = odoHelpers.animation.onTransitionEnd(this._optionsContainer, this._handleOptionsHidden, this);
+    this._transitionId = odoHelpers.onTransitionEnd(this._optionsContainer, this._handleOptionsHidden, this);
   };
 
   /**

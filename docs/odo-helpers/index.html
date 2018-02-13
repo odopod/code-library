@@ -56,25 +56,25 @@ var $block = $('#animate-my-left');
 var $output = $('#left-output');
 
 $('#left-animator').on('click', function() {
-  animation.cancelTransitionEnd(transitionId);
+  OdoHelpers.cancelTransitionEnd(transitionId);
   $output.text('waiting for transition: ' + transitionEndCount);
   $block.toggleClass('active');
 
-  transitionId = animation.onTransitionEnd($block, function() {
+  transitionId = OdoHelpers.onTransitionEnd($block, function() {
     $output.text('transition ended: ' + transitionEndCount++);
   });
 });</code></pre>
           <h4>Method Signature</h4>
           <p>This method can take an optional context to <code>call</code> the callback function with, a specific property to wait for the transition event on, and an optional timeout (in milliseconds) before the transition is considered complete and the callback will be invoked.</p>
           <p><code>elem</code> can be either a regular <code>Element</code> or <code>jQuery</code> instance.</p>
-          <pre><code class="language-javascript">var transitionId = animation.onTransitionEnd(elem, fn, context, optProperty, optTimeout);
-animation.cancelTransitionEnd(transitionId);</code></pre>
+          <pre><code class="language-javascript">var transitionId = OdoHelpers.onTransitionEnd(elem, fn, context, optProperty, optTimeout);
+OdoHelpers.cancelTransitionEnd(transitionId);</code></pre>
         </div>
 
         <div class="example">
           <h3>onAnimationEnd(elem, fn, context)</h3>
           <p>For keyframe animations that do not infinitely loop, you can get a callback when it finishes. In this example, the <code>spinning</code> class is added to the element which adds an <code>animation-name</code> property.</p>
-          <p>Side note: this is how you can restart a keyframe animation.</p>
+          <p>Side note: this is how you can restart a keyframe OdoHelpers.</p>
           <div class="my-keyframes block space-bottom"></div>
           <div>
             <button id="spin-it">Spin It</button>
@@ -103,7 +103,7 @@ animation.cancelTransitionEnd(transitionId);</code></pre>
           <pre><code class="language-javascript">$('#spin-it').on('click', function() {
   var $block = $('.my-keyframes');
   $block.addClass('spinning spun');
-  animation.onAnimationEnd($block, function() {
+  OdoHelpers.onAnimationEnd($block, function() {
     $block.removeClass('spinning');
   }, this);
 });</code></pre>
@@ -113,7 +113,6 @@ animation.cancelTransitionEnd(transitionId);</code></pre>
           <h3>Fading elements</h3>
           <h4>fadeOutElement(elem, optFn, optThis, optInvisible)</h4>
           <h4>fadeInElement(elem, optFn, optThis, optInvisible)</h4>
-          <h4>fadeElement(elem, optFn, optThis, optInvisible, optIsOut)</h4>
           <p>Fade an element in or out using classes. <code>elem</code> is the element to fade. You can also provide a callback for the second parameter, a context, and whether or not to add visibility:hidden|visible when the transition finishes.</p>
           <p class="alert alert--warning"><strong>Warning!</strong> This requires you to have 3 css classes. <code>fade</code>, <code>in</code>, and <code>invisible</code>.</p>
           <div id="darth-fader" class="block space-bottom"></div>
@@ -121,16 +120,16 @@ animation.cancelTransitionEnd(transitionId);</code></pre>
             <button id="fade-it">Fade out</button>
             <button id="show-it">Fade in</button>
           </div>
-          <pre><code class="language-javascript">animation.fadeOutElement(document.getElementById('darth-fader'));</code></pre>
+          <pre><code class="language-javascript">OdoHelpers.fadeOutElement(document.getElementById('darth-fader'));</code></pre>
           <p>Using all the parameters:</p>
-          <pre><code class="language-javascript">animation.fadeOutElement(document.getElementById('darth-fader'), function() {
+          <pre><code class="language-javascript">OdoHelpers.fadeOutElement(document.getElementById('darth-fader'), function() {
   console.log('Faded out.', this.hello);
 }, { hello: 'world' }, true);</code></pre>
 
           <h4>Remove the transition listener</h4>
           <p>The fade methods use <code>onTransitionEnd</code> internally and return the the same value <code>onTransitionEnd</code> does.</p>
-          <pre><code class="language-javascript">var fadeId = animation.fadeInElement(document.getElementById('darth-fader'));
-animation.cancelTransitionEnd(fadeId);</code></pre>
+          <pre><code class="language-javascript">var fadeId = OdoHelpers.fadeInElement(document.getElementById('darth-fader'));
+OdoHelpers.cancelTransitionEnd(fadeId);</code></pre>
 
           <h4>Required CSS</h4>
           <pre><code class="language-css">.fade {
@@ -160,13 +159,13 @@ animation.cancelTransitionEnd(fadeId);</code></pre>
   var easing = function (k) {
     return -k * (k - 2);
   };
-  OdoHelpers.animation.scrollTo(bottom, duration, function() {
+  OdoHelpers.scrollTo(bottom, duration, function() {
     console.log('done!');
   }, easing);
 });
 
 $('#take-me-to-the-top').on('click', function() {
-  OdoHelpers.animation.scrollToTop();
+  OdoHelpers.scrollToTop();
 });</code></pre>
         </div>
 
@@ -194,7 +193,7 @@ $('#step-it').on('click', function() {
     stepper.cancel();
   }
 
-  stepper = new OdoHelpers.animation.Stepper({
+  stepper = new OdoHelpers.Stepper({
     start: 0,
     end: 180,
     duration: 800,
@@ -230,39 +229,33 @@ $('#step-it').on('click', function() {
     <section>
       <div class="container">
         <h2>Array Helpers</h2>
-        <p>Array utility methods can be found on <code>OdoHelpers.array</code>.</p>
         <div class="example">
           <h3>closest(arr, num)</h3>
           <p>Given an array of numbers, find the item in the array closest to a given number.</p>
-          <pre><code class="language-javascript">array.closest([0, 100, 200, 300, 400, 500], 180) // 200</code></pre>
+          <pre><code class="language-javascript">OdoHelpers.closest([0, 100, 200, 300, 400, 500], 180) // 200</code></pre>
         </div>
         <div class="example">
           <h3>closestLessThan(arr, num)</h3>
           <p>Given an array of numbers, find the item in the array closest to a given number while also less than the given number.</p>
-          <pre><code class="language-javascript">array.closestLessThan([0, 100, 200, 300, 400, 500], 180) // 100</code></pre>
+          <pre><code class="language-javascript">OdoHelpers.closestLessThan([0, 100, 200, 300, 400, 500], 180) // 100</code></pre>
         </div>
         <div class="example">
           <h3>closestGreaterThan(arr, num)</h3>
           <p>Given an array of numbers, find the item in the array closest to a given number while also greater than the given number.</p>
-          <pre><code class="language-javascript">array.closestGreaterThan([0, 100, 200, 300, 400, 500], 200) // 300</code></pre>
+          <pre><code class="language-javascript">OdoHelpers.closestGreaterThan([0, 100, 200, 300, 400, 500], 200) // 300</code></pre>
         </div>
         <div class="example">
           <h3>chunk(array, size)</h3>
           <p>Make an array of smaller arrays from an array.</p>
           <pre><code class="language-javascript">var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-array.chunk(arr, 4) // [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10]]
-array.chunk(arr, 5) // [[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]]</code></pre>
+OdoHelpers.chunk(arr, 4) // [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10]]
+OdoHelpers.chunk(arr, 5) // [[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]]</code></pre>
         </div>
         <div class="example">
-          <h3>getLongestString(stringsArray)</h3>
-          <p>Identify the longest string in a array of strings.</p>
-          <pre><code class="language-javascript">array.getLongestString(['foo', 'bar', 'that', 'baz']) // 'that'</code></pre>
-        </div>
-        <div class="example">
-          <h3>remove(array, item)</h3>
+          <h3>pull(array, item)</h3>
           <p>Remove an item from an array.</p>
           <pre><code class="language-javascript">var letters = ['a', 'b', 'c', 'd'];
-array.remove(letters, 'c');
+OdoHelpers.pull(letters, 'c');
 console.log(letters); // ['a', 'b', 'd'];</code></pre>
         </div>
       </div>
@@ -276,7 +269,7 @@ console.log(letters); // ['a', 'b', 'd'];</code></pre>
           <p>Sets the window location hash. This will create an entry in the user's history.</p>
           <button id="hash-click" role="button">Set Hash</button>
           <pre><code class="language-javascript">$('#hash-click').on('click', function() {
-  browser.setHash('#awwyiss');
+  OdoHelpers.setHash('#awwyiss');
 })</code></pre>
         </div>
         <div class="example">
@@ -284,21 +277,21 @@ console.log(letters); // ['a', 'b', 'd'];</code></pre>
           <p>Sets the URL's hash like <code>setHash</code>, but this method does not create an entry in the user's history (unless the browser doesn't support <code>replaceState</code> (IE9)).</p>
           <button id="replace-hash-click" role="button">Replace Hash</button>
           <pre><code class="language-javascript">$('#replace-hash-click').on('click', function() {
-  browser.replaceWithHash('#awwyissssss');
+  OdoHelpers.replaceWithHash('#awwyissssss');
 })</code></pre>
         </div>
         <div class="example">
           <h3>User agent sniffing 🙃</h3>
           <p>Because sometimes you can't feature-test things.</p>
           <div class="example">
-            <pre><code class="language-javascript">browser.isAndroidOS(navigator.userAgent);
-browser.isIOS(navigator.userAgent);
-browser.isChrome(navigator.userAgent);
-browser.isIE(navigator.userAgent);
-browser.isEdge(navigator.userAgent);
-browser.getIOSVersion(navigator.userAgent);
-browser.hasScrollEvents(navigator.userAgent);
-browser.isNativeAndroid(navigator.userAgent);</code></pre>
+            <pre><code class="language-javascript">OdoHelpers.isAndroidOS(navigator.userAgent);
+OdoHelpers.isIOS(navigator.userAgent);
+OdoHelpers.isChrome(navigator.userAgent);
+OdoHelpers.isIE(navigator.userAgent);
+OdoHelpers.isEdge(navigator.userAgent);
+OdoHelpers.getIOSVersion(navigator.userAgent);
+OdoHelpers.hasScrollEvents(navigator.userAgent);
+OdoHelpers.isNativeAndroid(navigator.userAgent);</code></pre>
           </div>
 
           <div class="space-bottom">
@@ -379,7 +372,7 @@ browser.isNativeAndroid(navigator.userAgent);</code></pre>
         <div class="example">
           <h3>Coordinate(optX, optY)</h3>
           <p>If the <code>x</code> or <code>y</code> value is not specified, it will be zero.</p>
-          <pre><code class="language-javascript">var Coordinate = OdoHelpers.coordinate;
+          <pre><code class="language-javascript">var Coordinate = OdoHelpers.Coordinate;
 var start = new Coordinate(10, 50);
 console.log(start.x); // 10
 console.log(start.y); // 50</code></pre>
@@ -389,7 +382,7 @@ console.log(start.y); // 50</code></pre>
           <h3>distance(a, b)</h3>
           <p>Calculate the distance between two coordinates.</p>
           <pre><code class="language-javascript">var end = new Coordinate(50, 100);
-Coordinate.difference(start, end); // -64.03</code></pre>
+Coordinate.distance(start, end); // -64.03</code></pre>
         </div>
 
         <div class="example">
@@ -463,20 +456,6 @@ console.log(position); // { x: 100, y: 100 }</code></pre>
 
     <section>
       <div class="container">
-        <h2>Device Helpers</h2>
-        <p>Cross-device helpers.</p>
-
-        <div class="example">
-          <h3>getTranslate(x, y)</h3>
-          <p>Returns a string to be used with transforms.</p>
-          <pre><code class="language-javascript">OdoHelpers.device.getTranslate(0, '25%') // 'translate(0, 25%)</code></pre>
-        </div>
-
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
         <h2>DOM Helpers</h2>
         <p>There are more than what&rsquo;s listed here. The unlisted ones are self-explanatory.</p>
 
@@ -489,10 +468,9 @@ console.log(position); // { x: 100, y: 100 }</code></pre>
     &lt;bob&gt;&lt;/bob&gt;
   &lt;/mom&gt;
 &lt;/grandpa&gt;</code></pre>
-          <pre><code class="language-javascript">var dom = OdoHelpers.dom;
-var bob = document.querySelector('bob');
+          <pre><code class="language-javascript">var bob = document.querySelector('bob');
 var grandpa = document.querySelector('grandpa');
-dom.getRelativeDepth(bob, grandpa); // 1</code></pre>
+OdoHelpers.getRelativeDepth(bob, grandpa); // 1</code></pre>
         </div>
 
         <div class="example">
@@ -505,18 +483,18 @@ dom.getRelativeDepth(bob, grandpa); // 1</code></pre>
   &lt;slide data-find-me&gt;&lt;/slide&gt;
 &lt;/carousel&gt;</code></pre>
           <pre><code class="language-javascript">var start = document.querySelector('slide[data-start]');
-dom.getNthSibling(start, 3); // &lt;slide data-find-me&gt;&lt;/slide&gt;
-dom.getNthSibling(start, 4); // null</code></pre>
+OdoHelpers.getNthSibling(start, 3); // &lt;slide data-find-me&gt;&lt;/slide&gt;
+OdoHelpers.getNthSibling(start, 4); // null</code></pre>
         </div>
 
         <div class="example">
           <h3>DOM Ready Promise</h3>
           <p> Returns a promise that resolves once the document ready state is 'interactive'. If the <code>DOMContentLoaded</code> event has not been dispatched yet, the promise will resolve after this event is fired.</p>
 
-          <p class="inline-middle"> Dom.ready resolved</p>
+          <p class="inline-middle">OdoHelpers.domReady resolved</p>
           <div id="dom-ready" class="block block--dom block--aim inline-middle"></div>
           <span class="inline-middle time-text" id="dom-ready-text"></span>
-          <pre><code class="language-javascript">dom.ready.then(function() {
+          <pre><code class="language-javascript">OdoHelpers.domReady.then(function() {
   var end = new Date().getTime() - date;
   $('#dom-ready-text').text(end + ' ms');
   $('#dom-ready').addClass('block--fired');
@@ -527,10 +505,10 @@ dom.getNthSibling(start, 4); // null</code></pre>
           <h3>DOM Loaded Promise</h3>
           <p> Returns a promise that resolves once the document ready state is 'complete'. If the <code>load</code> event has not been dispatched yet, the promise will resolve after this event is fired.</p>
 
-          <p class="inline-middle"> Dom.loaded resolved</p>
+          <p class="inline-middle">OdoHelpers.domLoaded resolved</p>
           <div id="dom-loaded" class="block block--dom block--aim inline-middle"></div>
           <span class="inline-middle time-text" id="dom-loaded-text"></span>
-          <pre><code class="language-javascript">dom.loaded.then(function() {
+          <pre><code class="language-javascript">OdoHelpers.domLoaded.then(function() {
   var end = new Date().getTime() - date;
   $('#dom-loaded-text').text(end + ' ms');
   $('#dom-loaded').addClass('block--fired');
@@ -549,18 +527,9 @@ dom.getNthSibling(start, 4); // null</code></pre>
         <div class="example">
           <h3>clamp(value, min, max)</h3>
           <p>Takes a number and clamps it to within the provided bounds.</p>
-          <pre><code class="language-javascript">math.clamp(100, 0, 10) // 10
-math.clamp(5, 0, 10) // 5
-math.clamp(-1, 0, 10) // 0</code></pre>
-        </div>
-
-        <div class="example">
-          <h3>sign(number)</h3>
-          <p>Returns the sign of a number, indicating whether the number is positive, negative or zero.</p>
-          <pre><code class="language-javascript">math.sign(-5) // -1
-math.sign(9) // 1
-math.sign("4") // 1
-math.sign(0) // 0</code></pre>
+          <pre><code class="language-javascript">OdoHelpers.clamp(100, 0, 10) // 10
+OdoHelpers.clamp(5, 0, 10) // 5
+OdoHelpers.clamp(-1, 0, 10) // 0</code></pre>
         </div>
 
         <div class="example">
@@ -568,23 +537,23 @@ math.sign(0) // 0</code></pre>
           <p>Calculates the offset index for a circular list. For example, a looping carousel. When you're at the last slide and increment the slide to wish to go to, it should go to the first one.</p>
           <pre><code class="language-javascript">var currentIndex = 3;
 var listLength = 4;
-math.wrapAroundList(currentIndex, 1, listLength); // 0
-math.wrapAroundList(currentIndex, 2, listLength); // 1
-math.wrapAroundList(currentIndex, 3, listLength); // 2
-math.wrapAroundList(currentIndex, 4, listLength); // 3
-math.wrapAroundList(currentIndex, 5, listLength); // 0</code></pre>
+OdoHelpers.wrapAroundList(currentIndex, 1, listLength); // 0
+OdoHelpers.wrapAroundList(currentIndex, 2, listLength); // 1
+OdoHelpers.wrapAroundList(currentIndex, 3, listLength); // 2
+OdoHelpers.wrapAroundList(currentIndex, 4, listLength); // 3
+OdoHelpers.wrapAroundList(currentIndex, 5, listLength); // 0</code></pre>
         </div>
 
         <div class="example">
           <h3>Box</h3>
           <p>Class for representing a box. A box is specified as a top, right, bottom, and left. A box is useful for representing margins and padding.</p>
-          <pre><code class="language-javascript">var marginBox = new math.Box(top, right, bottom, left);</code></pre>
+          <pre><code class="language-javascript">var marginBox = new OdoHelpers.Box(top, right, bottom, left);</code></pre>
         </div>
 
         <div class="example">
           <h3>Rect</h3>
           <p>Class for representing rectangular regions.</p>
-          <pre><code class="language-javascript">var boundary = new math.Rect(left, top, width, height);</code></pre>
+          <pre><code class="language-javascript">var boundary = new OdoHelpers.Rect(left, top, width, height);</code></pre>
         </div>
 
       </div>
@@ -598,22 +567,22 @@ math.wrapAroundList(currentIndex, 5, listLength); // 0</code></pre>
         <div class="example">
           <h3>capitalize(str)</h3>
           <p>Be proper!</p>
-          <pre><code class="language-javascript">string.capitalize('foo'); // 'Foo'
-string.capitalize('foo bar'); // 'Foo bar'</code></pre>
+          <pre><code class="language-javascript">OdoHelpers.capitalize('foo'); // 'Foo'
+OdoHelpers.capitalize('foo bar'); // 'Foo bar'</code></pre>
         </div>
 
         <div class="example">
           <h3>hyphenate(str)</h3>
           <p>Hyphenates a javascript style string to a css one.</p>
-          <pre><code class="language-javascript">string.hyphenate('MozBoxSizing'); // '-moz-box-sizing.'
-string.hyphenate('boxShadow'); // 'box-shadow'</code></pre>
+          <pre><code class="language-javascript">OdoHelpers.hyphenate('MozBoxSizing'); // '-moz-box-sizing.'
+OdoHelpers.hyphenate('boxShadow'); // 'box-shadow'</code></pre>
         </div>
 
         <div class="example">
-          <h3>random(str)</h3>
+          <h3>randomString(str)</h3>
           <p>Creates a random string for IDs, etc.</p>
-          <pre><code class="language-javascript">string.random(); // 'qw7i22r19k9'
-string.random(); // '75042h5b3xr'</code></pre>
+          <pre><code class="language-javascript">OdoHelpers.randomString(); // 'qw7i22r19k9'
+OdoHelpers.randomString(); // '75042h5b3xr'</code></pre>
         </div>
 
       </div>
@@ -649,15 +618,15 @@ var echo = function(str) {
 };
 
 $('#get-margins').on('click', function() {
-  echo(style.getMarginBox(element));
+  echo(OdoHelpers.getMarginBox(element));
 });
 
 $('#get-paddings').on('click', function() {
-  echo(style.getPaddingBox(element));
+  echo(OdoHelpers.getPaddingBox(element));
 });
 
 $('#get-size').on('click', function() {
-  echo(style.getSize(element));
+  echo(OdoHelpers.getSize(element));
 });</code></pre>
         </div>
 
@@ -684,7 +653,7 @@ $('#get-size').on('click', function() {
 var output = document.getElementById('output-elements-size');
 
 $('#get-elements-size').on('click', function() {
-  var width = style.getElementsSize(dom.getChildren(wrapper), 'width');
+  var width = OdoHelpers.getElementsSize(Array.from(wrapper.children), 'width');
   output.textContent = width + ' pixels';
 });</code></pre>
         </div>
@@ -694,7 +663,7 @@ $('#get-elements-size').on('click', function() {
           <p>Force the page to be repainted in WebKit and Blink. This is often useful for native Android browsers because they do not update their state often enough, for example, after checking a checkbox.</p>
           <p>In this example, you won't see anything change.</p>
           <button id="force-redraw">Force a redraw</button>
-          <pre><code class="language-javascript">$('#force-redraw').on('click', style.forceRedraw);</code></pre>
+          <pre><code class="language-javascript">$('#force-redraw').on('click', OdoHelpers.forceRedraw);</code></pre>
         </div>
 
         <div class="example">
@@ -725,7 +694,7 @@ $('#lets-get-ready-to-rumble').on('click', function() {
   $(block).addClass('faded');
 
   if (checkbox.checked) {
-    style.causeLayout(block);
+    OdoHelpers.causeLayout(block);
   }
 
   $(block).addClass('active');
@@ -769,7 +738,7 @@ $('#lets-get-ready-to-rumble').on('click', function() {
               <button id="even-the-heights">Yeah... even the titles</button>
             </div>
             <pre><code class="language-javascript">$('#even-the-heights').on('click', function() {
-  var tallest = style.evenHeights($('#first-row .product__title').get());
+  var tallest = OdoHelpers.evenHeights($('#first-row .product__title').get());
   console.log(tallest); // 34 ish
 });</code></pre>
 
@@ -810,7 +779,7 @@ $('#lets-get-ready-to-rumble').on('click', function() {
     $('#second-row .product__title').get(),
     $('#second-row .product').get()
   ];
-  var tallestArray = style.evenHeights(groups);
+  var tallestArray = OdoHelpers.evenHeights(groups);
   console.log(tallestArray); // [34, 140] ish
 });</code></pre>
 
@@ -823,7 +792,7 @@ $('#lets-get-ready-to-rumble').on('click', function() {
     <section>
       <div class="container">
         <h2>Timer Class</h2>
-        <p>A simple timer class. The timer does not start automatically when initialized. <code>OdoHelpers.timer</code></p>
+        <p>A simple timer class. The timer does not start automatically when initialized. <code>OdoHelpers.Timer</code></p>
 
         <div class="example">
           <h3>continuous Option</h3>
@@ -851,62 +820,62 @@ var timer = new Timer(function() {
     <section>
       <div class="container">
         <h2>General Utilities</h2>
-        <p>Found in <code>OdoHelpers.utilities</code>.</p>
 
         <div class="example">
-          <h3>defaultsTo(obj, defaultValue, test)</h3>
+          <h3>defaultsTo(value, defaultValue, test)</h3>
           <p>Fall back to a specified default if an input is undefined or null. Optionally provide your own test for the value to pass.</p>
 
-          <pre><code class="language-javascript">utilities.defaultsTo('foo', 'bar') // 'foo'
-utilities.defaultsTo(5, {}) // 5
-utilities.defaultsTo(null, 'bar') // 'bar'
+          <pre><code class="language-javascript">OdoHelpers.defaultsTo('foo', 'bar') // 'foo'
+OdoHelpers.defaultsTo(5, {}) // 5
+OdoHelpers.defaultsTo(null, 'bar') // 'bar'
 var fn = function() {};
-utilities.defaultsTo(fn, 'bar', typeof fn === 'function') // fn
-utilities.defaultsTo(fn, 'bar', typeof fn === 'number') // 'bar'</code></pre>
+OdoHelpers.defaultsTo(fn, 'bar', typeof fn === 'function') // fn
+OdoHelpers.defaultsTo(fn, 'bar', typeof fn === 'number') // 'bar'</code></pre>
         </div>
 
         <div class="example">
-          <h3>isString(obj)</h3>
-          <pre><code class="language-javascript">utilities.isString(5); // false
-utilities.isString('JavaScript'); // true</code></pre>
+          <h3>isString(value)</h3>
+          <pre><code class="language-javascript">OdoHelpers.isString(5); // false
+OdoHelpers.isString('JavaScript'); // true</code></pre>
         </div>
 
         <div class="example">
-          <h3>isDefined(obj)</h3>
-          <pre><code class="language-javascript">utilities.isDefined(5); // true
-utilities.isDefined(null); // false</code></pre>
+          <h3>isDefined(value)</h3>
+          <pre><code class="language-javascript">OdoHelpers.isDefined(5); // true
+OdoHelpers.isDefined(null); // false
+OdoHelpers.isDefined(undefined); // false</code></pre>
         </div>
 
         <div class="example">
           <h3>getNumberOption(value, defaultValue)</h3>
           <p>Parse a value as a number. If it's not numeric, then the default value will be returned.</p>
 
-          <pre><code class="language-javascript">utilities.getNumberOption(5.2, 'foo'); // 5.2
-utilities.getNumberOption('5.2', 'foo'); // 5.2
-utilities.getNumberOption({}, 10); // 10</code></pre>
+          <pre><code class="language-javascript">OdoHelpers.getNumberOption(5.2, 'foo'); // 5.2
+OdoHelpers.getNumberOption('5.2', 'foo'); // 5.2
+OdoHelpers.getNumberOption({}, 10); // 10</code></pre>
         </div>
 
         <div class="example">
           <h3>getStringOption(value, defaultValue)</h3>
           <p>Parse a value as a string. If it's not a string, then the default value will be returned.</p>
 
-          <pre><code class="language-javascript">utilities.getStringOption(5.2, 'foo'); // 'foo'
-utilities.getStringOption('bar', 'foo'); // 'bar'</code></pre>
+          <pre><code class="language-javascript">OdoHelpers.getStringOption(5.2, 'foo'); // 'foo'
+OdoHelpers.getStringOption('bar', 'foo'); // 'bar'</code></pre>
         </div>
 
         <div class="example">
           <h3>getPercentageOption(value, defaultValue)</h3>
           <p>Parse a value as a percentage. If it's a string with '%' in it, it will be parsed as a string, otherwise it will be parsed as a number.</p>
 
-          <pre><code class="language-javascript">utilities.getPercentageOption('50%', '100%'); // '50%'
-utilities.getPercentageOption(50, '100%'); // 50
-utilities.getPercentageOption(null, '100%'); // '100%'</code></pre>
+          <pre><code class="language-javascript">OdoHelpers.getPercentageOption('50%', '100%'); // '50%'
+OdoHelpers.getPercentageOption(50, '100%'); // 50
+OdoHelpers.getPercentageOption(null, '100%'); // '100%'</code></pre>
         </div>
 
         <div class="example">
           <h3>noop()</h3>
           <p>A function which does nothing.</p>
-          <pre><code class="language-javascript">utilities.noop();</code></pre>
+          <pre><code class="language-javascript">OdoHelpers.noop();</code></pre>
         </div>
 
       </div>
@@ -915,14 +884,12 @@ utilities.getPercentageOption(null, '100%'); // '100%'</code></pre>
     <section>
       <div class="container">
         <h2>Events</h2>
-        <p>Can be found on <code>OdoHelpers.events</code>.</p>
 
         <div class="example">
           <p>Need a cross-browser <code>transitionend</code> event name or the correct <code>pointerdown</code> string?</p>
-          <pre><code class="language-javascript">var events = OdoHelpers.events;
-console.log('transition end event name: ' + events.TRANSITIONEND);
-console.log('animation end event name: ' + events.ANIMATIONEND);
-console.log('pointer move event name: ' + events.POINTERMOVE);</code></pre>
+          <pre><code class="language-javascript">console.log('transition end event name: ' + OdoHelpers.events.TRANSITIONEND);
+console.log('animation end event name: ' + OdoHelpers.events.ANIMATIONEND);
+console.log('pointer move event name: ' + OdoHelpers.events.POINTERMOVE);</code></pre>
         </div>
       </div>
     </section>

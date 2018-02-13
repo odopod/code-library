@@ -35,7 +35,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Sassplate [2.0.0] - 2018-02-12
 ### Changed
-* `.odo-responsive-img--cover` => `.cover-image`
+* `.odo-responsive-img--cover` => `.image-cover`
 * `.responsive-image-cover` => `.background-image-cover`
 
 ### Removed

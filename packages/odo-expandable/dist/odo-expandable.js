@@ -1,8 +1,10 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.OdoExpandable = {})));
-}(this, (function (exports) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@odopod/odo-helpers'), require('@odopod/odo-window-events')) :
+	typeof define === 'function' && define.amd ? define(['exports', '@odopod/odo-helpers', '@odopod/odo-window-events'], factory) :
+	(factory((global.OdoExpandable = {}),global.OdoHelpers,global.OdoWindowEvents));
+}(this, (function (exports,odoHelpers,OdoWindowEvents) { 'use strict';
+
+OdoWindowEvents = OdoWindowEvents && OdoWindowEvents.hasOwnProperty('default') ? OdoWindowEvents['default'] : OdoWindowEvents;
 
 var Settings = {
   ClassName: {
@@ -43,6 +45,48 @@ var createClass = function () {
   };
 }();
 
+
+
+
+
+
+
+
+
+var inherits = function (subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+};
+
+
+
+
+
+
+
+
+
+
+
+var possibleConstructorReturn = function (self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return call && (typeof call === "object" || typeof call === "function") ? call : self;
+};
+
 /**
  * @fileoverview An basic, expandable component that has both a trigger
  * and a target to open.
@@ -64,10 +108,10 @@ var ExpandableItem = function () {
     this.options = Object.assign({}, Settings.Defaults, options);
 
     /** @type {Element} */
-    this._trigger = document.body.querySelector('[' + Settings.Attribute.TRIGGER + '="' + id + '"]');
+    this.trigger = document.body.querySelector('[' + Settings.Attribute.TRIGGER + '="' + id + '"]');
 
     /** @type {Element} */
-    this._target = document.body.querySelector('[' + Settings.Attribute.TARGET + '="' + id + '"]');
+    this.target = document.body.querySelector('[' + Settings.Attribute.TARGET + '="' + id + '"]');
 
     this._setA11yAttributes();
 
@@ -88,7 +132,7 @@ var ExpandableItem = function () {
     evt.preventDefault();
     var closest = evt.target.closest('[' + Settings.Attribute.TRIGGER + ']');
 
-    if (closest === this._trigger) {
+    if (closest === this.trigger) {
       this.toggle();
     }
   };
@@ -102,12 +146,12 @@ var ExpandableItem = function () {
   ExpandableItem.prototype._setA11yAttributes = function _setA11yAttributes() {
     var elementId = 'expandable-' + this.id;
 
-    this._trigger.setAttribute('aria-describedby', elementId);
-    this._target.setAttribute('id', elementId);
-    this._trigger.setAttribute('aria-expanded', this.isOpen.toString());
-    this._trigger.setAttribute('aria-controls', elementId);
-    this._target.setAttribute('aria-labelledby', elementId);
-    this._target.setAttribute('aria-hidden', (!this.isOpen).toString());
+    this.trigger.setAttribute('aria-describedby', elementId);
+    this.target.setAttribute('id', elementId);
+    this.trigger.setAttribute('aria-expanded', this.isOpen.toString());
+    this.trigger.setAttribute('aria-controls', elementId);
+    this.target.setAttribute('aria-labelledby', elementId);
+    this.target.setAttribute('aria-hidden', (!this.isOpen).toString());
   };
 
   /**
@@ -117,11 +161,11 @@ var ExpandableItem = function () {
 
 
   ExpandableItem.prototype._removeA11yAttributes = function _removeA11yAttributes() {
-    this._trigger.removeAttribute('aria-describedby');
-    this._target.removeAttribute('id');
-    this._trigger.removeAttribute('aria-expanded');
-    this._target.removeAttribute('aria-labelledby');
-    this._target.removeAttribute('aria-hidden');
+    this.trigger.removeAttribute('aria-describedby');
+    this.target.removeAttribute('id');
+    this.trigger.removeAttribute('aria-expanded');
+    this.target.removeAttribute('aria-labelledby');
+    this.target.removeAttribute('aria-hidden');
   };
 
   /**
@@ -143,10 +187,10 @@ var ExpandableItem = function () {
 
 
   ExpandableItem.prototype.open = function open() {
-    this._target.classList.add(Settings.ClassName.TARGET_OPEN);
-    this._trigger.classList.add(Settings.ClassName.TRIGGER_OPEN);
-    this._trigger.setAttribute('aria-expanded', 'true');
-    this._target.setAttribute('aria-hidden', 'false');
+    this.target.classList.add(Settings.ClassName.TARGET_OPEN);
+    this.trigger.classList.add(Settings.ClassName.TRIGGER_OPEN);
+    this.trigger.setAttribute('aria-expanded', 'true');
+    this.target.setAttribute('aria-hidden', 'false');
   };
 
   /**
@@ -155,10 +199,10 @@ var ExpandableItem = function () {
 
 
   ExpandableItem.prototype.close = function close() {
-    this._target.classList.remove(Settings.ClassName.TARGET_OPEN);
-    this._trigger.classList.remove(Settings.ClassName.TRIGGER_OPEN);
-    this._trigger.setAttribute('aria-expanded', 'false');
-    this._target.setAttribute('aria-hidden', 'true');
+    this.target.classList.remove(Settings.ClassName.TARGET_OPEN);
+    this.trigger.classList.remove(Settings.ClassName.TRIGGER_OPEN);
+    this.trigger.setAttribute('aria-expanded', 'false');
+    this.target.setAttribute('aria-hidden', 'true');
   };
 
   /**
@@ -175,7 +219,7 @@ var ExpandableItem = function () {
   createClass(ExpandableItem, [{
     key: 'isOpen',
     get: function get$$1() {
-      return this._target.classList.contains(Settings.ClassName.TARGET_OPEN);
+      return this.target.classList.contains(Settings.ClassName.TARGET_OPEN);
     }
   }]);
   return ExpandableItem;
@@ -258,13 +302,155 @@ var ExpandableGroup = function () {
 Object.assign(ExpandableGroup, Settings);
 
 /**
- * Instantiates all instances of the expandable. Groups are instantiated separate from
- * Expandables and require different parameters. This helper chunks out and groups the
- * grouped expandables before instantiating all of them.
+ * @fileoverview A subclass of ExpandableGroup which includes some additional
+ * features like scrolling and collapsing animations.
  *
- * @return {Array.<Expandable, ExpandableGroup>} all instances of both types.
- * @public
+ * @author Matt Zaso
  */
+var ExpandableAccordion = function (_ExpandableGroup) {
+  inherits(ExpandableAccordion, _ExpandableGroup);
+
+  function ExpandableAccordion(elements) {
+    classCallCheck(this, ExpandableAccordion);
+
+    /**
+     * @param {{item: number, offset: number}} Object A map of the expandable offsets.
+     */
+    var _this = possibleConstructorReturn(this, _ExpandableGroup.call(this, elements));
+
+    _this._expandableOffsets = null;
+
+    _this._saveOffsets();
+
+    // Set the initial value of each element based on its state.
+    _this._expandables.forEach(function (item) {
+      return _this._setHeight(item, item.isOpen);
+    });
+
+    // A resize handler for when the DOM updates.
+    _this._resizeId = OdoWindowEvents.onResize(_this._handleResize.bind(_this));
+    return _this;
+  }
+
+  /**
+   * Called by OdoWindowEvents when the browser is resized. Allows us to update
+   * our saved offsets and animate to their new positions.
+   *
+   * @private
+   */
+
+
+  ExpandableAccordion.prototype._handleResize = function _handleResize() {
+    var _this2 = this;
+
+    this._saveOffsets();
+    this._expandables.forEach(function (item) {
+      return _this2._setHeight(item, item.isOpen);
+    });
+  };
+
+  /**
+   * When an item is clicked, we animate the accordion.
+   *
+   * @override
+   */
+
+
+  ExpandableAccordion.prototype.toggleVisibility = function toggleVisibility(selectedId) {
+    var _this3 = this;
+
+    this._scrollToSelected(selectedId);
+    this._expandables.forEach(function (item) {
+      return _this3._animateHeight(item, item.id === selectedId);
+    });
+    _ExpandableGroup.prototype.toggleVisibility.call(this, selectedId);
+  };
+
+  /**
+   * On load and any other time the DOM updates, this function will save the offsets
+   * of each accordion item into an object so we don't have to read the DOM every time.
+   *
+   * @private
+   */
+
+
+  ExpandableAccordion.prototype._saveOffsets = function _saveOffsets() {
+    var scrollY = window.pageYOffset;
+    var containerOffset = scrollY + this._expandables[0].trigger.getBoundingClientRect().top;
+    this._expandableOffsets = this._expandables.map(function (el, i) {
+      var offset = containerOffset + i * el.target.firstElementChild.offsetHeight;
+      return { id: el.id, offset: offset };
+    });
+  };
+
+  /**
+   * When called we will check the accordion's position in the viewport and scroll
+   * the user into view if needed.
+   *
+   * @param {number} targetId The id of the ExpandableItem that was clicked.
+   * @private
+   */
+
+
+  ExpandableAccordion.prototype._scrollToSelected = function _scrollToSelected(targetId) {
+    var viewportTop = window.pageYOffset;
+    var viewportBottom = viewportTop + window.innerHeight;
+    var item = this._expandableOffsets.find(function (item) {
+      return item.id === targetId;
+    });
+    var itemOffset = item.offset;
+    var isOutOfView = itemOffset < viewportTop || itemOffset > viewportBottom;
+    if (isOutOfView) {
+      odoHelpers.scrollTo(itemOffset, 300);
+    }
+  };
+
+  /**
+   * Sets the height of a given Expandable item.
+   *
+   * @param {Expandable} expandable The Expandable instance to modify.
+   * @param {boolean} setToOpen Whether we setting the Expandable to it's open state.
+   */
+
+
+  ExpandableAccordion.prototype._setHeight = function _setHeight(expandable, setToOpen) {
+    var contentHeight = setToOpen ? expandable.target.firstElementChild.offsetHeight : 0;
+    expandable.target.style.height = contentHeight + 'px';
+  };
+
+  /**
+   * Called if we need to alter the Expandable state. Only does so if either the same
+   * Expandable that is open is clicked or another one was clicked and this one needs
+   * to be closed.
+   *
+   * @param {Expandable} expandable The expandable to test and potentially alter.
+   * @param {boolean} isTarget Whether or not the current expandable was the one clicked.
+   */
+
+
+  ExpandableAccordion.prototype._animateHeight = function _animateHeight(expandable, isTarget) {
+    if (isTarget || expandable.isOpen) {
+      this._setHeight(expandable, !expandable.isOpen);
+    }
+  };
+
+  /**
+   * Remove the resize handler and dispose.
+   *
+   * @override
+   */
+
+
+  ExpandableAccordion.prototype.dispose = function dispose() {
+    _ExpandableGroup.prototype.dispose.call(this);
+    OdoWindowEvents.remove(this._resizeId);
+  };
+
+  return ExpandableAccordion;
+}(ExpandableGroup);
+
+Object.assign(ExpandableAccordion, Settings);
+
 function initializeAll() {
   var elements = Array.from(document.querySelectorAll('[' + Settings.Attribute.TRIGGER + ']'));
 
@@ -290,6 +476,9 @@ function initializeAll() {
     return new ExpandableItem(trigger.getAttribute(Settings.Attribute.TRIGGER));
   });
   var groupInstances = groups.map(function (grouping) {
+    if (grouping[0].hasAttribute('data-expandable-animated')) {
+      return new ExpandableAccordion(grouping);
+    }
     return new ExpandableGroup(grouping);
   });
 
@@ -300,6 +489,7 @@ exports.initializeAll = initializeAll;
 exports.Settings = Settings;
 exports.ExpandableItem = ExpandableItem;
 exports.ExpandableGroup = ExpandableGroup;
+exports.ExpandableAccordion = ExpandableAccordion;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

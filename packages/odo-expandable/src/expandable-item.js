@@ -18,10 +18,10 @@ class ExpandableItem {
     this.options = Object.assign({}, Settings.Defaults, options);
 
     /** @type {Element} */
-    this._trigger = document.body.querySelector(`[${Settings.Attribute.TRIGGER}="${id}"]`);
+    this.trigger = document.body.querySelector(`[${Settings.Attribute.TRIGGER}="${id}"]`);
 
     /** @type {Element} */
-    this._target = document.body.querySelector(`[${Settings.Attribute.TARGET}="${id}"]`);
+    this.target = document.body.querySelector(`[${Settings.Attribute.TARGET}="${id}"]`);
 
     this._setA11yAttributes();
 
@@ -40,7 +40,7 @@ class ExpandableItem {
     evt.preventDefault();
     const closest = evt.target.closest(`[${Settings.Attribute.TRIGGER}]`);
 
-    if (closest === this._trigger) {
+    if (closest === this.trigger) {
       this.toggle();
     }
   }
@@ -52,12 +52,12 @@ class ExpandableItem {
   _setA11yAttributes() {
     const elementId = `expandable-${this.id}`;
 
-    this._trigger.setAttribute('aria-describedby', elementId);
-    this._target.setAttribute('id', elementId);
-    this._trigger.setAttribute('aria-expanded', this.isOpen.toString());
-    this._trigger.setAttribute('aria-controls', elementId);
-    this._target.setAttribute('aria-labelledby', elementId);
-    this._target.setAttribute('aria-hidden', (!this.isOpen).toString());
+    this.trigger.setAttribute('aria-describedby', elementId);
+    this.target.setAttribute('id', elementId);
+    this.trigger.setAttribute('aria-expanded', this.isOpen.toString());
+    this.trigger.setAttribute('aria-controls', elementId);
+    this.target.setAttribute('aria-labelledby', elementId);
+    this.target.setAttribute('aria-hidden', (!this.isOpen).toString());
   }
 
   /**
@@ -65,11 +65,11 @@ class ExpandableItem {
    * @private
    */
   _removeA11yAttributes() {
-    this._trigger.removeAttribute('aria-describedby');
-    this._target.removeAttribute('id');
-    this._trigger.removeAttribute('aria-expanded');
-    this._target.removeAttribute('aria-labelledby');
-    this._target.removeAttribute('aria-hidden');
+    this.trigger.removeAttribute('aria-describedby');
+    this.target.removeAttribute('id');
+    this.trigger.removeAttribute('aria-expanded');
+    this.target.removeAttribute('aria-labelledby');
+    this.target.removeAttribute('aria-hidden');
   }
 
   /**
@@ -87,24 +87,24 @@ class ExpandableItem {
    * Opens the expandable.
    */
   open() {
-    this._target.classList.add(Settings.ClassName.TARGET_OPEN);
-    this._trigger.classList.add(Settings.ClassName.TRIGGER_OPEN);
-    this._trigger.setAttribute('aria-expanded', 'true');
-    this._target.setAttribute('aria-hidden', 'false');
+    this.target.classList.add(Settings.ClassName.TARGET_OPEN);
+    this.trigger.classList.add(Settings.ClassName.TRIGGER_OPEN);
+    this.trigger.setAttribute('aria-expanded', 'true');
+    this.target.setAttribute('aria-hidden', 'false');
   }
 
   /**
    * Closes the expandable.
    */
   close() {
-    this._target.classList.remove(Settings.ClassName.TARGET_OPEN);
-    this._trigger.classList.remove(Settings.ClassName.TRIGGER_OPEN);
-    this._trigger.setAttribute('aria-expanded', 'false');
-    this._target.setAttribute('aria-hidden', 'true');
+    this.target.classList.remove(Settings.ClassName.TARGET_OPEN);
+    this.trigger.classList.remove(Settings.ClassName.TRIGGER_OPEN);
+    this.trigger.setAttribute('aria-expanded', 'false');
+    this.target.setAttribute('aria-hidden', 'true');
   }
 
   get isOpen() {
-    return this._target.classList.contains(Settings.ClassName.TARGET_OPEN);
+    return this.target.classList.contains(Settings.ClassName.TARGET_OPEN);
   }
 
   /**

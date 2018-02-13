@@ -40,11 +40,11 @@ describe('the OdoExpandable Component', function expandable() {
     afterEach(removeFixture);
 
     it('has a trigger', () => {
-      expect(instance._trigger).to.not.equal(null);
+      expect(instance.trigger).to.not.equal(null);
     });
 
     it('has a target', () => {
-      expect(instance._target).to.not.equal(null);
+      expect(instance.target).to.not.equal(null);
     });
 
     it('has an id', () => {
@@ -53,38 +53,38 @@ describe('the OdoExpandable Component', function expandable() {
 
     it('can open the target and apply the right class to it', () => {
       instance.open();
-      expect(instance._target.classList.contains(OdoExpandable.Settings.ClassName.TARGET_OPEN)).to.equal(true);
-      expect(instance._trigger.classList.contains(OdoExpandable.Settings.ClassName.TRIGGER_OPEN)).to.equal(true);
+      expect(instance.target.classList.contains(OdoExpandable.Settings.ClassName.TARGET_OPEN)).to.equal(true);
+      expect(instance.trigger.classList.contains(OdoExpandable.Settings.ClassName.TRIGGER_OPEN)).to.equal(true);
     });
 
     it('can close the target and apply the right class to it', () => {
       instance.close();
-      expect(instance._target.classList.contains(OdoExpandable.Settings.ClassName.TARGET_OPEN)).to.equal(false);
-      expect(instance._trigger.classList.contains(OdoExpandable.Settings.ClassName.TRIGGER_OPEN)).to.equal(false);
+      expect(instance.target.classList.contains(OdoExpandable.Settings.ClassName.TARGET_OPEN)).to.equal(false);
+      expect(instance.trigger.classList.contains(OdoExpandable.Settings.ClassName.TRIGGER_OPEN)).to.equal(false);
     });
 
     it('will set the proper ARIA attributes on the elements', () => {
       const elementId = `expandable-${instance.id}`;
-      expect(instance._trigger.getAttribute('aria-describedby')).to.equal(elementId);
-      expect(instance._target.getAttribute('id')).to.equal(elementId);
-      expect(instance._trigger.getAttribute('aria-expanded')).to.equal('false');
-      expect(instance._trigger.getAttribute('aria-controls')).to.equal(elementId);
-      expect(instance._target.getAttribute('aria-labelledby')).to.equal(elementId);
-      expect(instance._target.getAttribute('aria-hidden')).to.equal('true');
+      expect(instance.trigger.getAttribute('aria-describedby')).to.equal(elementId);
+      expect(instance.target.getAttribute('id')).to.equal(elementId);
+      expect(instance.trigger.getAttribute('aria-expanded')).to.equal('false');
+      expect(instance.trigger.getAttribute('aria-controls')).to.equal(elementId);
+      expect(instance.target.getAttribute('aria-labelledby')).to.equal(elementId);
+      expect(instance.target.getAttribute('aria-hidden')).to.equal('true');
     });
 
     it('will properly change the ARIA attribute on open/close', () => {
       instance.open();
-      expect(instance._trigger.getAttribute('aria-expanded')).to.equal('true');
+      expect(instance.trigger.getAttribute('aria-expanded')).to.equal('true');
       instance.close();
-      expect(instance._trigger.getAttribute('aria-expanded')).to.equal('false');
+      expect(instance.trigger.getAttribute('aria-expanded')).to.equal('false');
     });
 
     it('will properly show and hide the expandable on click', () => {
       expect(instance.isOpen).to.equal(false);
 
       const evt = {
-        target: instance._trigger,
+        target: instance.trigger,
         preventDefault() { return false; },
       };
       instance._triggerClickHandler(evt);
@@ -96,7 +96,7 @@ describe('the OdoExpandable Component', function expandable() {
       expect(instance.isOpen).to.equal(false);
 
       const evt = {
-        target: instance._target,
+        target: instance.target,
         preventDefault() { return false; },
       };
       instance._triggerClickHandler(evt);
@@ -106,26 +106,26 @@ describe('the OdoExpandable Component', function expandable() {
 
     it('can toggle itself to the inverse state properly', () => {
       instance.open();
-      expect(instance._target.classList.contains(OdoExpandable.Settings.ClassName.TARGET_OPEN)).to.equal(true);
+      expect(instance.target.classList.contains(OdoExpandable.Settings.ClassName.TARGET_OPEN)).to.equal(true);
       expect(instance.isOpen).to.equal(true);
 
       instance.toggle();
-      expect(instance._target.classList.contains(OdoExpandable.Settings.ClassName.TARGET_OPEN)).to.equal(false);
+      expect(instance.target.classList.contains(OdoExpandable.Settings.ClassName.TARGET_OPEN)).to.equal(false);
       expect(instance.isOpen).to.equal(false);
 
       instance.close();
       instance.toggle();
-      expect(instance._target.classList.contains(OdoExpandable.Settings.ClassName.TARGET_OPEN)).to.equal(true);
+      expect(instance.target.classList.contains(OdoExpandable.Settings.ClassName.TARGET_OPEN)).to.equal(true);
       expect(instance.isOpen).to.equal(true);
     });
 
     it('will properly remove all ARIA attributes on dispose', () => {
       instance.dispose();
-      expect(instance._trigger.getAttribute('aria-describedby')).to.equal(null);
-      expect(instance._target.getAttribute('id')).to.equal(null);
-      expect(instance._trigger.getAttribute('expanded')).to.equal(null);
-      expect(instance._target.getAttribute('aria-hidden')).to.equal(null);
-      expect(instance._target.getAttribute('aria-labelledby')).to.equal(null);
+      expect(instance.trigger.getAttribute('aria-describedby')).to.equal(null);
+      expect(instance.target.getAttribute('id')).to.equal(null);
+      expect(instance.trigger.getAttribute('expanded')).to.equal(null);
+      expect(instance.target.getAttribute('aria-hidden')).to.equal(null);
+      expect(instance.target.getAttribute('aria-labelledby')).to.equal(null);
     });
   });
 

@@ -2,11 +2,21 @@
   display: none;
 }
 
-.odo-expandable__target--open {
+.expandable__target.odo-expandable__target--open {
   display: block;
 }
 
 .expandable__trigger {
   width: 100%;
+}
+
+.expandable__trigger--animated {
+  width: 100%;
+}
+
+.expandable__target--animated {
+  width: 100%;
+  overflow: hidden;
+  transition: height .3s ease-out;
 }
 

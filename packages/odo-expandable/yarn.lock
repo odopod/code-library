@@ -2,3 +2,27 @@
 # yarn lockfile v1
 
 
+"@odopod/odo-device@^1.0.3":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-device/-/odo-device-1.1.0.tgz#26fcae95cfbed1242e3ce89f3f10d908d467726e"
+
+"@odopod/odo-helpers@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-helpers/-/odo-helpers-1.0.3.tgz#5d410e36c740bf4bf1877195f72d785997ca9980"
+  dependencies:
+    "@odopod/odo-device" "^1.0.3"
+
+"@odopod/odo-window-events@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-window-events/-/odo-window-events-1.1.0.tgz#40308604c94648105b4b7f463896d8f252150bbe"
+  dependencies:
+    debounce "^1.0.0"
+    throttleit "^1.0.0"
+
+debounce@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/debounce/-/debounce-1.1.0.tgz#6a1a4ee2a9dc4b7c24bb012558dbcdb05b37f408"
+
+throttleit@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/throttleit/-/throttleit-1.0.0.tgz#9e785836daf46743145a5984b6268d828528ac6c"

@@ -1,6 +1,7 @@
 import Settings from './settings';
 import ExpandableGroup from './expandable-group';
 import ExpandableItem from './expandable-item';
+import ExpandableAccordion from './expandable-accordion';
 
 /**
  * Instantiates all instances of the expandable. Groups are instantiated separate from
@@ -31,7 +32,12 @@ export function initializeAll() {
 
   const singleInstances =
     single.map(trigger => new ExpandableItem(trigger.getAttribute(Settings.Attribute.TRIGGER)));
-  const groupInstances = groups.map(grouping => new ExpandableGroup(grouping));
+  const groupInstances = groups.map((grouping) => {
+    if (grouping[0].hasAttribute('data-expandable-animated')) {
+      return new ExpandableAccordion(grouping);
+    }
+    return new ExpandableGroup(grouping);
+  });
 
   return singleInstances.concat(groupInstances);
 }
@@ -39,3 +45,4 @@ export function initializeAll() {
 export { default as Settings } from './settings';
 export { default as ExpandableItem } from './expandable-item';
 export { default as ExpandableGroup } from './expandable-group';
+export { default as ExpandableAccordion } from './expandable-accordion';

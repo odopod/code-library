@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-affix",
   "description": "Makes an element fixed position while its within a container.",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "main": "dist/odo-affix.js",
   "module": "dist/odo-affix.esm.js",
   "odoModule": "src/affix.js",
@@ -14,8 +14,8 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-scroll-animation": "^1.0.2",
-    "@odopod/odo-window-events": "^1.0.3"
+    "@odopod/odo-scroll-animation": "^1.1.0",
+    "@odopod/odo-window-events": "^1.1.0"
   },
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-affix",
   "files": [

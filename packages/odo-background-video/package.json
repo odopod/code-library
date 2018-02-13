@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-background-video",
   "description": "Plays in the background when the element comes into view and falls back to an image if the browser cannot autoplay video.",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "main": "dist/odo-background-video.js",
   "module": "dist/odo-background-video.esm.js",
   "style": "css/odo-background-video.css",
@@ -15,11 +15,11 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-object-fit": "^1.0.3",
-    "@odopod/odo-responsive-images": "^1.0.3",
-    "@odopod/odo-video": "^1.1.1",
-    "@odopod/odo-viewport": "^1.0.3",
-    "@odopod/odo-window-events": "^1.0.3"
+    "@odopod/odo-object-fit": "^1.1.0",
+    "@odopod/odo-responsive-images": "^1.1.0",
+    "@odopod/odo-video": "^1.2.0",
+    "@odopod/odo-viewport": "^1.1.0",
+    "@odopod/odo-window-events": "^1.1.0"
   },
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-background-video",
   "files": [

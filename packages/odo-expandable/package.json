@@ -1,0 +1,42 @@
+{
+  "name": "@odopod/odo-expandable",
+  "description": "A simple, accessible combination of two elements; A trigger to handle clicks, and a target to toggle visibility.",
+  "version": "0.1.0",
+  "main": "dist/odo-expandable.js",
+  "style": "css/odo-expandable.css",
+  "module": "dist/odo-expandable.esm.js",
+  "odoModule": "src/expandable.js",
+  "sideEffects": false,
+  "author": "Odopod",
+  "contributors": [
+    {
+      "name": "Matt Zaso",
+      "email": "matt.zaso@odopod.com"
+    }
+  ],
+  "dependencies": {
+    "@odopod/odo-helpers": "^1.0.3",
+    "@odopod/odo-window-events": "^1.1.0"
+  },
+  "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-expandable",
+  "files": [
+    "css",
+    "dist",
+    "src"
+  ],
+  "odoKeywords": [
+    "ui"
+  ],
+  "keywords": [
+    "odo",
+    "odo-component",
+    "odopod",
+    "expandable",
+    "accordion"
+  ],
+  "license": "MIT",
+  "repository": "odopod/code-library",
+  "scripts": {
+    "test": "gulp code-quality test"
+  }
+}

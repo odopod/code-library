@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Expandable [0.1.0] - 2018-02-14
+### Added
+* New OdoExpandable (accordion) component.
+
+```html
+<button data-expandable-trigger="demo-expand-1">Trigger</button>
+<div data-expandable-target="demo-expand-1">Target</div>
+```
+
 ## All - 2018-02-12
 ### Added
 * New ES builds. Every package now has a `"module"` field in its `package.json` and a `dist/odo-{component}.esm.js` file which includes the original `import` and `export` to allow tree shaking in bundlers.

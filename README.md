@@ -21,6 +21,7 @@ The Odo repo is managed as a [monorepo](https://github.com/babel/babel/blob/mast
 | [`@odopod/odo-draggable`](/packages/odo-draggable) | [![npm](https://img.shields.io/npm/v/@odopod/odo-draggable.svg)](https://www.npmjs.com/package/@odopod/odo-draggable) |
 | [`@odopod/odo-dropdown`](/packages/odo-dropdown) | [![npm](https://img.shields.io/npm/v/@odopod/odo-dropdown.svg)](https://www.npmjs.com/package/@odopod/odo-dropdown) |
 | [`@odopod/odo-dual-viewer`](/packages/odo-dual-viewer) | [![npm](https://img.shields.io/npm/v/@odopod/odo-dual-viewer.svg)](https://www.npmjs.com/package/@odopod/odo-dual-viewer) |
+| [`@odopod/odo-expandable`](/packages/odo-expandable) | [![npm](https://img.shields.io/npm/v/@odopod/odo-expandable.svg)](https://www.npmjs.com/package/@odopod/odo-expandable) |
 | [`@odopod/odo-helpers`](/packages/odo-helpers) | [![npm](https://img.shields.io/npm/v/@odopod/odo-helpers.svg)](https://www.npmjs.com/package/@odopod/odo-helpers) |
 | [`@odopod/odo-hotspots`](/packages/odo-hotspots) | [![npm](https://img.shields.io/npm/v/@odopod/odo-hotspots.svg)](https://www.npmjs.com/package/@odopod/odo-hotspots) |
 | [`@odopod/odo-module`](/packages/odo-module) | [![npm](https://img.shields.io/npm/v/@odopod/odo-module.svg)](https://www.npmjs.com/package/@odopod/odo-module) |

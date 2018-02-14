@@ -6,6 +6,7 @@
       "ignore": [
         "demos/",
         "dist/",
+        "yarn.lock",
         "*.md"
       ]
     }

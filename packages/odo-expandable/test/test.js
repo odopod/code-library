@@ -1,10 +1,11 @@
 /* global describe, it, beforeEach, afterEach */
 /* eslint-disable no-unused-expressions */
 
+const {
+  sinon, fixture, OdoExpandable, OdoWindowEvents, OdoHelpers,
+} = window;
+
 const expect = window.chai.expect;
-const sinon = window.sinon;
-const fixture = window.fixture;
-const OdoExpandable = window.OdoExpandable;
 
 fixture.setBase('fixtures');
 
@@ -202,6 +203,68 @@ describe('the OdoExpandable Component', function expandable() {
       instance.dispose();
 
       expect(dispose.callCount).to.equal(1);
+    });
+  });
+
+  describe('Animated Odo Expandable', () => {
+    beforeEach(() => {
+      createFixture('animated');
+    });
+
+    afterEach(removeFixture);
+
+    it('can properly instantiate itself and its subcomponents', () => {
+      expect(instance._elements).to.not.equal(null);
+      expect(instance._expandables).to.not.equal(null);
+    });
+
+    it('will properly set the heights of its components', () => {
+      expect(instance._expandables[0].target.style.height).to.not.equal('0px');
+      expect(instance._expandables[1].target.style.height).to.equal('0px');
+      expect(instance._expandables[2].target.style.height).to.equal('0px');
+    });
+
+    it('will properly reset the heights when a new one is selected', () => {
+      expect(instance._expandables[0].target.style.height).to.not.equal('0px');
+      expect(instance._expandables[1].target.style.height).to.equal('0px');
+      expect(instance._expandables[2].target.style.height).to.equal('0px');
+
+      const animateHeight = sinon.spy(instance, '_animateHeight');
+
+      instance.toggleVisibility('demo-expand-10');
+
+      expect(instance._expandables[0].target.style.height).to.equal('0px');
+      expect(instance._expandables[1].target.style.height).to.not.equal('0px');
+      expect(instance._expandables[2].target.style.height).to.equal('0px');
+
+      expect(animateHeight.callCount).to.equal(3);
+    });
+
+    it('will update heights for each expandable on resize', () => {
+      const setHeight = sinon.spy(instance, '_setHeight');
+
+      instance._handleResize();
+
+      expect(setHeight.callCount).to.equal(instance._expandables.length);
+    });
+
+    it('will scroll the viewport into view if needed', () => {
+      window.pageYOffset = 0;
+      window.innerHeight = 10;
+
+      const scrollTo = sinon.spy(OdoHelpers, 'scrollTo');
+
+      instance._scrollToSelected('demo-expand-10');
+
+      expect(scrollTo.callCount).to.equal(1);
+    });
+
+    it('will properly dispose itself and remove it\'s window listener', () => {
+      const dispose = sinon.spy(instance, 'dispose');
+      const removeWindowEvents = sinon.spy(OdoWindowEvents, 'remove');
+      instance.dispose();
+      expect(dispose.callCount).to.equal(1);
+      expect(removeWindowEvents.callCount).to.equal(1);
     });
   });
 });

@@ -451,6 +451,14 @@ var ExpandableAccordion = function (_ExpandableGroup) {
 
 Object.assign(ExpandableAccordion, Settings);
 
+/**
+ * Instantiates all instances of the expandable. Groups are instantiated separate from
+ * Expandables and require different parameters. This helper chunks out and groups the
+ * grouped expandables before instantiating all of them.
+ *
+ * @return {Array.<Expandable, ExpandableGroup>} all instances of both types.
+ * @public
+ */
 function initializeAll() {
   var elements = Array.from(document.querySelectorAll('[' + Settings.Attribute.TRIGGER + ']'));
 
@@ -476,7 +484,9 @@ function initializeAll() {
     return new ExpandableItem(trigger.getAttribute(Settings.Attribute.TRIGGER));
   });
   var groupInstances = groups.map(function (grouping) {
-    if (grouping[0].hasAttribute('data-expandable-animated')) {
+    if (grouping.some(function (item) {
+      return item.hasAttribute('data-expandable-animated');
+    })) {
       return new ExpandableAccordion(grouping);
     }
     return new ExpandableGroup(grouping);

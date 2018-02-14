@@ -33,7 +33,7 @@ export function initializeAll() {
   const singleInstances =
     single.map(trigger => new ExpandableItem(trigger.getAttribute(Settings.Attribute.TRIGGER)));
   const groupInstances = groups.map((grouping) => {
-    if (grouping[0].hasAttribute('data-expandable-animated')) {
+    if (grouping.some(item => item.hasAttribute('data-expandable-animated'))) {
       return new ExpandableAccordion(grouping);
     }
     return new ExpandableGroup(grouping);

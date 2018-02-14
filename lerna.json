@@ -4,8 +4,9 @@
   "commands": {
     "publish": {
       "ignore": [
-        "demos/",
-        "dist/",
+        "demos/**/*",
+        "dist/*",
+        "coverage.json",
         "yarn.lock",
         "*.md"
       ]

@@ -61,6 +61,16 @@ var debounce = function debounce(func, wait, immediate) {
     }
   };
 
+  debounced.flush = function () {
+    if (timeout) {
+      result = func.apply(context, args);
+      context = args = null;
+
+      clearTimeout(timeout);
+      timeout = null;
+    }
+  };
+
   return debounced;
 };
 

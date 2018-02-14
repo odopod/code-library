@@ -2,33 +2,33 @@
 # yarn lockfile v1
 
 
-"@odopod/odo-object-fit@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-object-fit/-/odo-object-fit-1.0.3.tgz#5e90313e0fcbdef265d576e67754084ffb5cf4ca"
+"@odopod/odo-object-fit@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-object-fit/-/odo-object-fit-1.1.0.tgz#ea07afeddd5f78428d45edd51dfcacc847c4570b"
 
-"@odopod/odo-responsive-images@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-responsive-images/-/odo-responsive-images-1.0.3.tgz#aae0b96fbc522178631676669bc07da63f3497ff"
+"@odopod/odo-responsive-images@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-responsive-images/-/odo-responsive-images-1.1.0.tgz#0718a742b191f6ce87a58a3fc532615143649603"
   dependencies:
-    "@odopod/odo-viewport" "^1.0.3"
+    "@odopod/odo-viewport" "^1.1.0"
     debounce "^1.0.0"
     picturefill "^3.0.2"
 
-"@odopod/odo-video@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-video/-/odo-video-1.1.1.tgz#9607655e66c11aa031b1e8eec1fb18dadb6b1053"
+"@odopod/odo-video@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-video/-/odo-video-1.2.0.tgz#fbf6a860ec6ba23d65ee8da6f398f16a81f42ec9"
   dependencies:
     screenfull "^3.0.2"
 
-"@odopod/odo-viewport@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-viewport/-/odo-viewport-1.0.3.tgz#8e21d916b765ab861d9678017f945e23885827a1"
+"@odopod/odo-viewport@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-viewport/-/odo-viewport-1.1.0.tgz#f88f51044a432250ff663558c1824d2e20e254d9"
   dependencies:
-    "@odopod/odo-window-events" "^1.0.3"
+    "@odopod/odo-window-events" "^1.1.0"
 
-"@odopod/odo-window-events@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-window-events/-/odo-window-events-1.0.3.tgz#a0237cbcc88b8e0acdffda3282e4bdf53e9ba06c"
+"@odopod/odo-window-events@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-window-events/-/odo-window-events-1.1.0.tgz#40308604c94648105b4b7f463896d8f252150bbe"
   dependencies:
     debounce "^1.0.0"
     throttleit "^1.0.0"

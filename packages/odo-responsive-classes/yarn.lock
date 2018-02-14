@@ -2,18 +2,18 @@
 # yarn lockfile v1
 
 
-"@odopod/odo-base-component@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-base-component/-/odo-base-component-1.1.4.tgz#ccafeeb71d51edf5019b53246fc1ad52ca4d6d00"
+"@odopod/odo-base-component@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-base-component/-/odo-base-component-1.2.0.tgz#42dbc7bc191f63b7b5bf71c31261b44736dd6cee"
   dependencies:
     debounce "^1.0.0"
     tiny-emitter "^2.0.1"
 
-"@odopod/odo-responsive-attributes@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-responsive-attributes/-/odo-responsive-attributes-1.0.3.tgz#165aec3bbca96558d782e6f453b20c840b825deb"
+"@odopod/odo-responsive-attributes@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-responsive-attributes/-/odo-responsive-attributes-1.1.0.tgz#c212ddcddc29003b4f024ef2714a00e6fb81be68"
   dependencies:
-    "@odopod/odo-base-component" "^1.1.4"
+    "@odopod/odo-base-component" "^1.2.0"
 
 debounce@^1.0.0:
   version "1.1.0"

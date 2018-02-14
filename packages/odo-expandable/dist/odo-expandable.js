@@ -14,7 +14,8 @@ var Settings = {
   Attribute: {
     TRIGGER: 'data-expandable-trigger',
     TARGET: 'data-expandable-target',
-    GROUP: 'data-expandable-group'
+    GROUP: 'data-expandable-group',
+    ANIMATED: 'data-expandable-animated'
   },
   Defaults: {
     groupedItem: false
@@ -452,8 +453,14 @@ var ExpandableAccordion = function (_ExpandableGroup) {
   return ExpandableAccordion;
 }(ExpandableGroup);
 
-Object.assign(ExpandableAccordion, Settings);
-
+/**
+ * Instantiates all instances of the expandable. Groups are instantiated separate from
+ * Expandables and require different parameters. This helper chunks out and groups the
+ * grouped expandables before instantiating all of them.
+ *
+ * @return {Array.<Expandable, ExpandableGroup>} all instances of both types.
+ * @public
+ */
 function initializeAll() {
   var elements = Array.from(document.querySelectorAll('[' + Settings.Attribute.TRIGGER + ']'));
 
@@ -480,7 +487,7 @@ function initializeAll() {
   });
   var groupInstances = groups.map(function (grouping) {
     if (grouping.some(function (item) {
-      return item.hasAttribute('data-expandable-animated');
+      return item.hasAttribute(Settings.Attribute.ANIMATED);
     })) {
       return new ExpandableAccordion(grouping);
     }

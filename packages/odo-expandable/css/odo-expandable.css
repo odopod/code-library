@@ -1,0 +1,6 @@
+.expandable__target--animated {
+  overflow: hidden;
+  -webkit-transition: height .3s ease-out;
+  -o-transition: height .3s ease-out;
+  transition: height .3s ease-out;
+}

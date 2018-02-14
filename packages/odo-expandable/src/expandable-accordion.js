@@ -6,7 +6,6 @@
  */
 import { scrollTo } from '@odopod/odo-helpers';
 import OdoWindowEvents from '@odopod/odo-window-events';
-import Settings from './settings';
 import ExpandableGroup from './expandable-group';
 
 class ExpandableAccordion extends ExpandableGroup {
@@ -117,7 +116,5 @@ class ExpandableAccordion extends ExpandableGroup {
     OdoWindowEvents.remove(this._resizeId);
   }
 }
-
-Object.assign(ExpandableAccordion, Settings);
 
 export default ExpandableAccordion;

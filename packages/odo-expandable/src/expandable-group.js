@@ -12,8 +12,11 @@ class ExpandableGroup {
     /** @type {Array.<!Element>} */
     this._elements = elements;
 
-    /** @type {Array.<!ExpandableItem>} */
-    this._expandables = elements.map(trigger => new ExpandableItem(
+    /**
+     * @type {Array.<!ExpandableItem>}
+     * @protected
+     */
+    this.expandables = elements.map(trigger => new ExpandableItem(
       trigger.getAttribute(Settings.Attribute.TRIGGER),
       { groupedItem: true },
     ));
@@ -42,7 +45,7 @@ class ExpandableGroup {
    * @private
    */
   toggleVisibility(selectedId) {
-    this._expandables.forEach((expandable) => {
+    this.expandables.forEach((expandable) => {
       if (expandable.id === selectedId) {
         expandable.toggle();
       } else {
@@ -58,7 +61,7 @@ class ExpandableGroup {
    */
   dispose() {
     document.body.removeEventListener('click', this._onTriggerClick);
-    this._expandables.forEach(item => item.dispose());
+    this.expandables.forEach(item => item.dispose());
   }
 }
 

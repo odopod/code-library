@@ -142,17 +142,17 @@ describe('the OdoExpandable Component', function expandable() {
     });
 
     it('has the correct number of Expandables in a group', () => {
-      expect(instance._expandables.length).to.equal(3);
+      expect(instance.expandables.length).to.equal(3);
     });
 
     it('correctly instantiates the Expandables object', () => {
-      expect(typeof instance._expandables[0]).to.equal('object');
+      expect(typeof instance.expandables[0]).to.equal('object');
     });
 
     it('will collapse the open element when it is the last open', () => {
-      expect(instance._expandables[0].isOpen).to.equal(true);
-      expect(instance._expandables[1].isOpen).to.equal(false);
-      expect(instance._expandables[2].isOpen).to.equal(false);
+      expect(instance.expandables[0].isOpen).to.equal(true);
+      expect(instance.expandables[1].isOpen).to.equal(false);
+      expect(instance.expandables[2].isOpen).to.equal(false);
 
       const evt = {
         target: document.querySelector('#open-target'),
@@ -160,15 +160,15 @@ describe('the OdoExpandable Component', function expandable() {
       };
       instance._onClickHandler(evt);
 
-      expect(instance._expandables[0].isOpen).to.equal(false);
-      expect(instance._expandables[1].isOpen).to.equal(false);
-      expect(instance._expandables[2].isOpen).to.equal(false);
+      expect(instance.expandables[0].isOpen).to.equal(false);
+      expect(instance.expandables[1].isOpen).to.equal(false);
+      expect(instance.expandables[2].isOpen).to.equal(false);
     });
 
     it('will not change the group state when a non-trigger is clicked', () => {
-      expect(instance._expandables[0].isOpen).to.equal(true);
-      expect(instance._expandables[1].isOpen).to.equal(false);
-      expect(instance._expandables[2].isOpen).to.equal(false);
+      expect(instance.expandables[0].isOpen).to.equal(true);
+      expect(instance.expandables[1].isOpen).to.equal(false);
+      expect(instance.expandables[2].isOpen).to.equal(false);
 
       const evt = {
         target: document.querySelector('body'),
@@ -176,15 +176,15 @@ describe('the OdoExpandable Component', function expandable() {
       };
       instance._onClickHandler(evt);
 
-      expect(instance._expandables[0].isOpen).to.equal(true);
-      expect(instance._expandables[1].isOpen).to.equal(false);
-      expect(instance._expandables[2].isOpen).to.equal(false);
+      expect(instance.expandables[0].isOpen).to.equal(true);
+      expect(instance.expandables[1].isOpen).to.equal(false);
+      expect(instance.expandables[2].isOpen).to.equal(false);
     });
 
     it('will properly toggle the visibility when an unopened trigger is clicked', () => {
-      expect(instance._expandables[0].isOpen).to.equal(true);
-      expect(instance._expandables[1].isOpen).to.equal(false);
-      expect(instance._expandables[2].isOpen).to.equal(false);
+      expect(instance.expandables[0].isOpen).to.equal(true);
+      expect(instance.expandables[1].isOpen).to.equal(false);
+      expect(instance.expandables[2].isOpen).to.equal(false);
 
       const evt = {
         target: document.querySelector('#closed-target'),
@@ -192,13 +192,13 @@ describe('the OdoExpandable Component', function expandable() {
       };
       instance._onClickHandler(evt);
 
-      expect(instance._expandables[0].isOpen).to.equal(false);
-      expect(instance._expandables[1].isOpen).to.equal(true);
-      expect(instance._expandables[2].isOpen).to.equal(false);
+      expect(instance.expandables[0].isOpen).to.equal(false);
+      expect(instance.expandables[1].isOpen).to.equal(true);
+      expect(instance.expandables[2].isOpen).to.equal(false);
     });
 
     it('will properly dispose all children', () => {
-      const dispose = sinon.spy(instance._expandables[0], 'dispose');
+      const dispose = sinon.spy(instance.expandables[0], 'dispose');
 
       instance.dispose();
 
@@ -215,27 +215,27 @@ describe('the OdoExpandable Component', function expandable() {
 
     it('can properly instantiate itself and its subcomponents', () => {
       expect(instance._elements).to.not.equal(null);
-      expect(instance._expandables).to.not.equal(null);
+      expect(instance.expandables).to.not.equal(null);
     });
 
     it('will properly set the heights of its components', () => {
-      expect(instance._expandables[0].target.style.height).to.not.equal('0px');
-      expect(instance._expandables[1].target.style.height).to.equal('0px');
-      expect(instance._expandables[2].target.style.height).to.equal('0px');
+      expect(instance.expandables[0].target.style.height).to.not.equal('0px');
+      expect(instance.expandables[1].target.style.height).to.equal('0px');
+      expect(instance.expandables[2].target.style.height).to.equal('0px');
     });
 
     it('will properly reset the heights when a new one is selected', () => {
-      expect(instance._expandables[0].target.style.height).to.not.equal('0px');
-      expect(instance._expandables[1].target.style.height).to.equal('0px');
-      expect(instance._expandables[2].target.style.height).to.equal('0px');
+      expect(instance.expandables[0].target.style.height).to.not.equal('0px');
+      expect(instance.expandables[1].target.style.height).to.equal('0px');
+      expect(instance.expandables[2].target.style.height).to.equal('0px');
 
       const animateHeight = sinon.spy(instance, '_animateHeight');
 
       instance.toggleVisibility('demo-expand-10');
 
-      expect(instance._expandables[0].target.style.height).to.equal('0px');
-      expect(instance._expandables[1].target.style.height).to.not.equal('0px');
-      expect(instance._expandables[2].target.style.height).to.equal('0px');
+      expect(instance.expandables[0].target.style.height).to.equal('0px');
+      expect(instance.expandables[1].target.style.height).to.not.equal('0px');
+      expect(instance.expandables[2].target.style.height).to.equal('0px');
 
       expect(animateHeight.callCount).to.equal(3);
     });
@@ -245,7 +245,7 @@ describe('the OdoExpandable Component', function expandable() {
 
       instance._handleResize();
 
-      expect(setHeight.callCount).to.equal(instance._expandables.length);
+      expect(setHeight.callCount).to.equal(instance.expandables.length);
     });
 
     it('will scroll the viewport into view if needed', () => {

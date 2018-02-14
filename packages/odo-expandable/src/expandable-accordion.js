@@ -14,14 +14,14 @@ class ExpandableAccordion extends ExpandableGroup {
     super(elements);
 
     /**
-     * @param {{item: number, offset: number}} Object A map of the expandable offsets.
+     * @type {{item: number, offset: number}} Object A map of the expandable offsets.
      */
     this._expandableOffsets = null;
 
     this._saveOffsets();
 
     // Set the initial value of each element based on its state.
-    this._expandables.forEach(item => this._setHeight(item, item.isOpen));
+    this.expandables.forEach(item => this._setHeight(item, item.isOpen));
 
     // A resize handler for when the DOM updates.
     this._resizeId = OdoWindowEvents.onResize(this._handleResize.bind(this));
@@ -35,7 +35,7 @@ class ExpandableAccordion extends ExpandableGroup {
    */
   _handleResize() {
     this._saveOffsets();
-    this._expandables.forEach(item => this._setHeight(item, item.isOpen));
+    this.expandables.forEach(item => this._setHeight(item, item.isOpen));
   }
 
   /**
@@ -45,7 +45,7 @@ class ExpandableAccordion extends ExpandableGroup {
    */
   toggleVisibility(selectedId) {
     this._scrollToSelected(selectedId);
-    this._expandables.forEach(item => this._animateHeight(item, item.id === selectedId));
+    this.expandables.forEach(item => this._animateHeight(item, item.id === selectedId));
     super.toggleVisibility(selectedId);
   }
 
@@ -57,8 +57,8 @@ class ExpandableAccordion extends ExpandableGroup {
    */
   _saveOffsets() {
     const scrollY = window.pageYOffset;
-    const containerOffset = scrollY + this._expandables[0].trigger.getBoundingClientRect().top;
-    this._expandableOffsets = this._expandables.map((el, i) => {
+    const containerOffset = scrollY + this.expandables[0].trigger.getBoundingClientRect().top;
+    this._expandableOffsets = this.expandables.map((el, i) => {
       const offset = containerOffset + (i * el.target.firstElementChild.offsetHeight);
       return { id: el.id, offset };
     });

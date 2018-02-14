@@ -240,8 +240,11 @@ var ExpandableGroup = function () {
     /** @type {Array.<!Element>} */
     this._elements = elements;
 
-    /** @type {Array.<!ExpandableItem>} */
-    this._expandables = elements.map(function (trigger) {
+    /**
+     * @type {Array.<!ExpandableItem>}
+     * @protected
+     */
+    this.expandables = elements.map(function (trigger) {
       return new ExpandableItem(trigger.getAttribute(Settings.Attribute.TRIGGER), { groupedItem: true });
     });
 
@@ -273,7 +276,7 @@ var ExpandableGroup = function () {
 
 
   ExpandableGroup.prototype.toggleVisibility = function toggleVisibility(selectedId) {
-    this._expandables.forEach(function (expandable) {
+    this.expandables.forEach(function (expandable) {
       if (expandable.id === selectedId) {
         expandable.toggle();
       } else {
@@ -291,7 +294,7 @@ var ExpandableGroup = function () {
 
   ExpandableGroup.prototype.dispose = function dispose() {
     document.body.removeEventListener('click', this._onTriggerClick);
-    this._expandables.forEach(function (item) {
+    this.expandables.forEach(function (item) {
       return item.dispose();
     });
   };
@@ -314,7 +317,7 @@ var ExpandableAccordion = function (_ExpandableGroup) {
     classCallCheck(this, ExpandableAccordion);
 
     /**
-     * @param {{item: number, offset: number}} Object A map of the expandable offsets.
+     * @type {{item: number, offset: number}} Object A map of the expandable offsets.
      */
     var _this = possibleConstructorReturn(this, _ExpandableGroup.call(this, elements));
 
@@ -323,7 +326,7 @@ var ExpandableAccordion = function (_ExpandableGroup) {
     _this._saveOffsets();
 
     // Set the initial value of each element based on its state.
-    _this._expandables.forEach(function (item) {
+    _this.expandables.forEach(function (item) {
       return _this._setHeight(item, item.isOpen);
     });
 
@@ -344,7 +347,7 @@ var ExpandableAccordion = function (_ExpandableGroup) {
     var _this2 = this;
 
     this._saveOffsets();
-    this._expandables.forEach(function (item) {
+    this.expandables.forEach(function (item) {
       return _this2._setHeight(item, item.isOpen);
     });
   };
@@ -360,7 +363,7 @@ var ExpandableAccordion = function (_ExpandableGroup) {
     var _this3 = this;
 
     this._scrollToSelected(selectedId);
-    this._expandables.forEach(function (item) {
+    this.expandables.forEach(function (item) {
       return _this3._animateHeight(item, item.id === selectedId);
     });
     _ExpandableGroup.prototype.toggleVisibility.call(this, selectedId);
@@ -376,8 +379,8 @@ var ExpandableAccordion = function (_ExpandableGroup) {
 
   ExpandableAccordion.prototype._saveOffsets = function _saveOffsets() {
     var scrollY = window.pageYOffset;
-    var containerOffset = scrollY + this._expandables[0].trigger.getBoundingClientRect().top;
-    this._expandableOffsets = this._expandables.map(function (el, i) {
+    var containerOffset = scrollY + this.expandables[0].trigger.getBoundingClientRect().top;
+    this._expandableOffsets = this.expandables.map(function (el, i) {
       var offset = containerOffset + i * el.target.firstElementChild.offsetHeight;
       return { id: el.id, offset: offset };
     });
@@ -451,14 +454,6 @@ var ExpandableAccordion = function (_ExpandableGroup) {
 
 Object.assign(ExpandableAccordion, Settings);
 
-/**
- * Instantiates all instances of the expandable. Groups are instantiated separate from
- * Expandables and require different parameters. This helper chunks out and groups the
- * grouped expandables before instantiating all of them.
- *
- * @return {Array.<Expandable, ExpandableGroup>} all instances of both types.
- * @public
- */
 function initializeAll() {
   var elements = Array.from(document.querySelectorAll('[' + Settings.Attribute.TRIGGER + ']'));
 

@@ -49,7 +49,7 @@ declare class OdoAffix {
    * This method runs on every frame to update the placement of the sticky element.
    * @param {number} scrollTop Scroll top of the page.
    */
-  process(scrollTop: number = window.pageYOffset): void;
+  process(scrollTop?: number): void;
 
   /**
    * Whether the browser's scroll position is within promotion range.
@@ -70,35 +70,28 @@ declare class OdoAffix {
    * Remove styles which cause layer promotion.
    * @protected
    */
-  layerDemote(): void;
+  protected layerDemote(): void;
 
   /**
    * Reset values that are set with `write` so that they can be read again.
    * @protected
    */
-  reset(): void;
-
-  /**
-   * The amount that the ui overlaps the top of the page. A sticky navigation,
-   * for example, would cause an overlap equal to its height.
-   */
-  get uiOverlap(): number;
+  protected reset(): void;
 
   /**
    * Define a custom getter to determine overlap.
-   * @param {() => number} fn
    */
-  set uiOverlap(fn): void;
+  uiOverlap: () => number;
 
   /**
    * The offset when this component becomes sticky.
    */
-  get top(): number;
+  readonly top: number;
 
   /**
    * The offset when this component sticks to the bottom if its container.
    */
-  get bottom(): number;
+  readonly bottom: number;
 
   /**
    * Reset everything, cache offsets, and recalculate.

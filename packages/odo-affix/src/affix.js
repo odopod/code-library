@@ -45,11 +45,12 @@ class Affix {
     this.isPromoted = false;
 
     /**
-     * Custom overlap getter. Can be overridden by setting `uiOverlap`.
-     * @type {?function():number}
+     * The amount that the ui overlaps the top of the page. A sticky navigation,
+     * for example, would cause an overlap equal to its height.
+     * @type {function():number}
      * @private
      */
-    this._customOverlap = null;
+    this._getUiOverlap = () => 0;
 
     /**
      * Current UI overlap.
@@ -129,7 +130,7 @@ class Affix {
     this._marginTop = parseFloat(styles.marginTop);
     this._marginBottom = parseFloat(styles.marginBottom);
 
-    this._overlap = this.uiOverlap;
+    this._overlap = this._getUiOverlap();
     this._maxHeight = viewportHeight - this._overlap - this._marginTop - this._marginBottom;
 
     this.containerHeight = Math.round(rect.height);
@@ -239,16 +240,11 @@ class Affix {
   }
 
   /**
-   * The amount that the ui overlaps the top of the page. A sticky navigation,
-   * for example, would cause an overlap equal to its height.
-   * @return {number}
+   * TODO(glen): remove getter/setter.
+   * @return {function():number}
    */
   get uiOverlap() {
-    if (this._customOverlap) {
-      return this._customOverlap();
-    }
-
-    return 0;
+    return this._getUiOverlap;
   }
 
   /**
@@ -256,7 +252,7 @@ class Affix {
    * @param {function():number} fn
    */
   set uiOverlap(fn) {
-    this._customOverlap = fn;
+    this._getUiOverlap = fn;
     this.update();
   }
 

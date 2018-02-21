@@ -9,14 +9,14 @@ export = OdoDialog;
 declare class OdoDialog {
   /**
    * Create a new dialog.
-   * @param {Element} element Main element which represents this class.
+   * @param {HTMLElement} element Main element which represents this class.
    * @param {OdoDialog.Options} [opts] Instance options.
-   * @throws {TypeError} Throws when the element is not of type Element.
+   * @throws {TypeError} Throws when the element is not of type HTMLElement.
    */
-  constructor(element: Element, opts?: OdoDialog.Options);
+  constructor(element: HTMLElement, opts?: OdoDialog.Options);
 
   /** Main element for this class */
-  element: Element;
+  element: HTMLElement;
 
   options: OdoDialog.Options;
 
@@ -29,16 +29,16 @@ declare class OdoDialog {
   /**
    * Dialog backdrop element.
    * @protected
-   * @type {Element}
+   * @type {HTMLElement}
    */
-  protected backdrop: Element;
+  protected backdrop: HTMLElement;
 
   /**
    * Dialog content (role=document)
    * @protected
-   * @type {Element}
+   * @type {HTMLElement}
    */
-  protected content: Element;
+  protected content: HTMLElement;
 
   /**
    * Whether the dialog is open.

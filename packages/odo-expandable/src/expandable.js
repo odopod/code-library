@@ -8,7 +8,7 @@ import ExpandableAccordion from './expandable-accordion';
  * Expandables and require different parameters. This helper chunks out and groups the
  * grouped expandables before instantiating all of them.
  *
- * @return {Array.<Expandable, ExpandableGroup>} all instances of both types.
+ * @return {Array.<ExpandableItem|ExpandableGroup|ExpandableAccordion>} all instances of both types.
  * @public
  */
 export function initializeAll() {

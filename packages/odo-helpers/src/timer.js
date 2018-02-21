@@ -4,7 +4,7 @@ class Timer {
    * initialized.
    * @param {Function} fn Callback for when the timer expires.
    * @param {number} delay Timer length in milliseconds.
-   * @param {boolean=} opt_continuous If true, the timer will automatically
+   * @param {boolean} [continuous] If true, the timer will automatically
    *     restart itself when it expires.
    * @constructor
    */

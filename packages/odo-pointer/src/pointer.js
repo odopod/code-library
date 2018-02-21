@@ -1,7 +1,7 @@
 /**
  * @fileoverview An abstraction for pointer, mouse, and touch events.
  *
- * @author Glen Cheney
+ * @author Glen Cheney <glen@odopod.com>
  */
 
 import TinyEmitter from 'tiny-emitter';
@@ -273,7 +273,7 @@ class Pointer extends TinyEmitter {
   /**
    * If draggable is enabled and it's a left click with the mouse,
    * dragging can start.
-   * @param {Event} evt Event object.
+   * @param {TouchEvent|MouseEvent|PointerEvent} evt Event object.
    * @return {boolean}
    * @private
    */
@@ -628,7 +628,7 @@ class Pointer extends TinyEmitter {
 
   /**
    * Whether the event is from a touch.
-   * @param {Event} evt Event object.
+   * @param {object} evt Event object.
    * @return {boolean}
    */
   static isTouchEvent(evt) {

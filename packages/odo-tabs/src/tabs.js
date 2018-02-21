@@ -49,15 +49,15 @@ class Tabs extends TinyEmitter {
 
     /**
      * Tab pane elements.
-     * @type {Array.<Element>}
+     * @type {Array.<HTMLElement>}
      */
     this.panes = this.anchors.map(anchor => document.getElementById(anchor.getAttribute('href').substring(1)));
 
     /**
      * Wrapper for the panes.
-     * @type {Element}
+     * @type {HTMLElement}
      */
-    this.panesContainer = this.panes[0].parentNode;
+    this.panesContainer = this.panes[0].parentElement;
 
     /**
      * Get an array of [possible] hashes.
@@ -225,7 +225,7 @@ class Tabs extends TinyEmitter {
 
   /**
    * Retrieve the hash without the `#` from the url.
-   * @return {string}
+   * @return {number}
    * @private
    */
   _getWindowHashIndex() {

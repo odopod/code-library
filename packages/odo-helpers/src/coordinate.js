@@ -48,7 +48,7 @@ class Coordinate {
    * respectively.
    * @param {number|Coordinate} tx The value to translate x by or the
    *     the coordinate to translate this coordinate by.
-   * @param {number} ty The value to translate y by.
+   * @param {number} [ty] The value to translate y by.
    * @return {!Coordinate} This coordinate after translating.
    */
   translate(tx, ty) {

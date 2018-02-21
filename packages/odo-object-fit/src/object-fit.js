@@ -21,7 +21,7 @@
 
 class ObjectFit {
   constructor(element, style) {
-    /** @type {Element} */
+    /** @type {HTMLImageElement|HTMLVideoElement} */
     this.element = element;
 
     /** @type {ObjectFit.Style} */
@@ -38,7 +38,7 @@ class ObjectFit {
 
   /**
    * Calculate the dimenions of the media element and set them.
-   * @param {Element} el Element to size.
+   * @param {HTMLElement} el Element to size.
    * @private
    */
   _fit(el) {
@@ -58,8 +58,8 @@ class ObjectFit {
    */
   _getParentSize() {
     return {
-      width: this.element.parentNode.offsetWidth,
-      height: this.element.parentNode.offsetHeight,
+      width: this.element.parentElement.offsetWidth,
+      height: this.element.parentElement.offsetHeight,
     };
   }
 
@@ -134,7 +134,7 @@ class ObjectFit {
   /**
    * Videos have a readyState. Anything greater than zero means it has metadata.
    * Some browsers implement the `complete` property on images. Also test the `naturalWidth`.
-   * @param {Element} element Media element.
+   * @param {HTMLImageElement|HTMLVideoElement} element Media element.
    * @return {boolean}
    */
   _isMediaLoaded(element) {

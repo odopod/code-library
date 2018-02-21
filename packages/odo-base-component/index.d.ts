@@ -14,7 +14,7 @@ declare class OdoBaseComponent {
    *     query listeners to allow this component to react to media changes.
    * @throws {TypeError} Throws when the element is not defined.
    */
-  constructor(element: Element, addMediaListeners?: false);
+  constructor(element: Element, addMediaListeners = false);
 
   /** Main element for this class */
   element: Element;
@@ -34,9 +34,9 @@ declare class OdoBaseComponent {
    * Retrieve an element by class name within the main element for this class.
    * @param {string} klass Name of the class to search for.
    * @param {Element} [context] Element to search within. Defaults to main element.
-   * @return {?Element} The first element which matches the class name, or null.
+   * @return {Element} The first element which matches the class name, or null.
    */
-  getElementByClass(klass, context): Element|null;
+  getElementByClass(klass: string, context?: Element): Element|null;
 
   /**
    * Retrieve elements by class name within the main element for this class.
@@ -44,7 +44,7 @@ declare class OdoBaseComponent {
    * @param {Element} [context] Element to search within. Defaults to main element.
    * @return {Element[]} An array of elements matching the class name.
    */
-  getElementsByClass(klass, context): Element[];
+  getElementsByClass(klass: string, context?: Element): Element[];
 
   /**
    * Retrieve elements by selector within the main element for this class.
@@ -52,7 +52,7 @@ declare class OdoBaseComponent {
    * @param {Element} [context] Element to search within. Defaults to main element.
    * @return {Element[]} An array of elements matching the selector.
    */
-  getElementsBySelector(selector, context): Element[];
+  getElementsBySelector(selector: string, context?: Element): Element[];
 
   /**
    * Override this method to respond to media query changes.

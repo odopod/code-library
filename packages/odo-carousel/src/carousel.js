@@ -2,7 +2,7 @@
  * @fileoverview A UI Component for creating versatile carousels. They are
  * peformant, draggable, and can ininitely loop.
  *
- * @author glen@odopod.com (Glen Cheney)
+ * @author Glen Cheney <glen@odopod.com>
  */
 
 import TinyEmitter from 'tiny-emitter';
@@ -31,7 +31,7 @@ import { getTranslate, toggleFocusability, uniqueId } from './utils';
 
 class Carousel extends TinyEmitter {
   /**
-   * @param {Element} element The outermost carousel element.
+   * @param {HTMLElement} element The outermost carousel element.
    * @param {Object} [options] An options object.
    * @constructor
    * @throws {TypeError} if element isn't an element.
@@ -39,7 +39,7 @@ class Carousel extends TinyEmitter {
   constructor(element, options = {}) {
     super();
 
-    if (!(element instanceof Element)) {
+    if (!(element instanceof HTMLElement)) {
       throw new TypeError(`OdoCarousel requires an element. Got: "${element}"`);
     }
 
@@ -86,7 +86,7 @@ class Carousel extends TinyEmitter {
 
     /**
      * The slide container's parent.
-     * @type {Element}
+     * @type {HTMLElement}
      * @private
      */
     this._slideContainerParentEl = null;
@@ -94,14 +94,14 @@ class Carousel extends TinyEmitter {
     /**
      * The container for the slides and the element which is moved around with
      * transforms or absolute positioning.
-     * @type {Element}
+     * @type {HTMLElement}
      * @private
      */
     this._carouselEl = null;
 
     /**
      * An array of slides (elements) in the carousel.
-     * @type {Array.<!Element>}
+     * @type {Array.<!HTMLElement>}
      * @private
      */
     this._slides = [];
@@ -163,7 +163,7 @@ class Carousel extends TinyEmitter {
     /**
      * The id returned from onTransitionEnd which is used to cancel
      * the transitionend listener.
-     * @type {string}
+     * @type {number}
      */
     this._transitionId = null;
 
@@ -254,9 +254,9 @@ class Carousel extends TinyEmitter {
   /**
    * Finds an element within this class' main element based on a class name.
    * @param {string} className Class name to search for.
-   * @param {Element} [context] Optionally provide the context (scope)
+   * @param {HTMLElement} [context] Optionally provide the context (scope)
    *     for the query. Default is the main element of the class.
-   * @return {Array.<Element>} An array which may or may not contain the element
+   * @return {HTMLElement[]} An array which may or may not contain the element
    *     which was searched for.
    */
   getElementsByClass(className, context = this.element) {
@@ -266,8 +266,8 @@ class Carousel extends TinyEmitter {
   /**
    * Retrieve an element by its class name.
    * @param {string} className Class name to search for.
-   * @param {Element} [context] Optinal scope for search.
-   * @return {?Element} The element or null if it isn't found.
+   * @param {HTMLElement} [context] Optinal scope for search.
+   * @return {HTMLElement|null} The element or null if it isn't found.
    */
   getElementByClass(className, context) {
     return this.getElementsByClass(className, context)[0] || null;
@@ -625,7 +625,7 @@ class Carousel extends TinyEmitter {
 
   /**
    * Retreives the cached carousel wrapper element.
-   * @return {Element}
+   * @return {HTMLElement}
    */
   getWrapper() {
     return this._slideContainerParentEl;
@@ -633,7 +633,7 @@ class Carousel extends TinyEmitter {
 
   /**
    * Retreives the cached carousel element.
-   * @return {Element}
+   * @return {HTMLElement}
    */
   getCarouselElement() {
     return this._carouselEl;
@@ -641,7 +641,7 @@ class Carousel extends TinyEmitter {
 
   /**
    * Returns the array of slides in the carousel.
-   * @return {!Array.<!Element>} The slides array.
+   * @return {!Array.<!HTMLElement>} The slides array.
    */
   getSlides() {
     return this._slides;
@@ -650,7 +650,7 @@ class Carousel extends TinyEmitter {
   /**
    * Get the slide element at the given index.
    * @param {number} index The logical index of the slide you want.
-   * @return {Element} The slide element.
+   * @return {HTMLElement} The slide element.
    */
   getSlide(index) {
     return this.getSlides()[index];
@@ -706,13 +706,12 @@ class Carousel extends TinyEmitter {
    * @param {number} index Starting index.
    * @param {number} displacement Offset from the starting index. Can be negative
    *     or positive. For example, -2 or 2.
-   * @param {number} length Length of the list.
    * @return {number} The index of the relative displacement, wrapping around
    *     the end of the list to the start when the displacement is larger than
    *     what's left in the list.
    */
-  _getRelativeIndex(index, displacment) {
-    return wrapAroundList(index, displacment, this._slides.length);
+  _getRelativeIndex(index, displacement) {
+    return wrapAroundList(index, displacement, this._slides.length);
   }
 
   /**
@@ -760,8 +759,8 @@ class Carousel extends TinyEmitter {
 
   /**
    * Retrieves the slide children.
-   * @param {Element=} optSlide Slide to look within.
-   * @return {Array.<Element>} NodeList of slide children.
+   * @param {HTMLElement} [optSlide] Slide to look within.
+   * @return {HTMLElement[]} NodeList of slide children.
    * @private
    */
   _getSlideChildren(optSlide) {
@@ -802,7 +801,7 @@ class Carousel extends TinyEmitter {
 
   /**
    * Gets the slide positions (offsets from the left|top) array.
-   * @param {Array.<Element>} slideSet the slides array.
+   * @param {HTMLElement[]} slideSet the slides array.
    * @return {Array.<number>} array of slide positions.
    * @private
    */
@@ -853,7 +852,7 @@ class Carousel extends TinyEmitter {
 
   /**
    * Gets the adjusted position.
-   * @param {Element} destinationSlide The slide the carousel is headed to.
+   * @param {HTMLElement} destinationSlide The slide the carousel is headed to.
    * @return {number} The position it is.
    * @private
    */
@@ -886,7 +885,7 @@ class Carousel extends TinyEmitter {
 
   /**
    * Adjust the destination position again if there are slide children.
-   * @param {Element} destinationSlide Slide element.
+   * @param {HTMLElement} destinationSlide Slide element.
    * @param {number} destinationPosition Where the slide would initially go.
    * @param {number} carouselSize Width or height of the carousel element.
    * @return {number} New destination position.
@@ -1245,8 +1244,8 @@ class Carousel extends TinyEmitter {
    */
   fadeToSlide(domIndex, optNoAnimation) {
     // Get next and previous slides.
-    const nextSlide = this.getSlide(domIndex, true);
-    const previousSlide = this.getSlide(this.domIndex, true);
+    const nextSlide = this.getSlide(domIndex);
+    const previousSlide = this.getSlide(this.domIndex);
 
     // Listen for transitionend if it will animate.
     if (!optNoAnimation) {
@@ -1350,7 +1349,7 @@ class Carousel extends TinyEmitter {
 
   /**
    * Find the nearest slide, and move the carousel to that.
-   * @param {boolean} isNext Whether it should go to the nearest slide, but
+   * @param {boolean} [isNext] Whether it should go to the nearest slide, but
    *     only in the next direction. False means it should go previous and
    *     anything not true or false will go to the nearest slide regardless
    *     of direction.

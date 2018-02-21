@@ -2,7 +2,7 @@
  * @fileoverview A subclass of ExpandableGroup which includes some additional
  * features like scrolling and collapsing animations.
  *
- * @author Matt Zaso
+ * @author Matt Zaso <matt.zaso@odopod.com>
  */
 import { scrollTo } from '@odopod/odo-helpers';
 import OdoWindowEvents from '@odopod/odo-window-events';
@@ -13,7 +13,7 @@ class ExpandableAccordion extends ExpandableGroup {
     super(elements);
 
     /**
-     * @type {{item: number, offset: number}} Object A map of the expandable offsets.
+     * @type {Array.<{id: string, offset: number}>} Object A map of the expandable offsets.
      */
     this._expandableOffsets = null;
 
@@ -67,7 +67,7 @@ class ExpandableAccordion extends ExpandableGroup {
    * When called we will check the accordion's position in the viewport and scroll
    * the user into view if needed.
    *
-   * @param {number} targetId The id of the ExpandableItem that was clicked.
+   * @param {string} targetId The id of the ExpandableItem that was clicked.
    * @private
    */
   _scrollToSelected(targetId) {

@@ -143,7 +143,7 @@ class ResponsiveImages {
     } else {
       // Create a new picture element with the same contents and replace the
       // placeholder with it.
-      const parent = placeholder.parentNode;
+      const parent = placeholder.parentElement;
       const picture = document.createElement('picture');
       picture.className = placeholder.className;
       transferChildren(placeholder, picture);
@@ -233,7 +233,7 @@ class ResponsiveImages {
    * @return {boolean}
    */
   _isBackgroundImage(img) {
-    return img.parentNode.getAttribute('data-type') === 'background';
+    return img.parentElement.getAttribute('data-type') === 'background';
   }
 
   /**
@@ -266,10 +266,10 @@ class ResponsiveImages {
 
   /**
    * Load event handler for images.
-   * @param {Event} evt Event object.
+   * @param {UIEvent} evt Image load event object.
    */
   _handleImageLoad(evt) {
-    const img = evt.target;
+    const img = /** @type {HTMLImageElement} */ (evt.target);
 
     // Exit early if this image is longer in the DOM.
     if (!img.parentNode) {
@@ -347,7 +347,7 @@ class ResponsiveImages {
 
   /**
    * Remove watched images from this component.
-   * @param {Element|Array.<Element>} pictures An element or array of elements.
+   * @param {Element|Array.<Element>} placeholders An element or array of elements.
    *     The element should be the parent element of the <img>.
    */
   remove(placeholders) {

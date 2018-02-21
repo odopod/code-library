@@ -51,8 +51,7 @@ export default function fadeElement(
 
   /**
    * Internal callback when the element has finished its transition.
-   * @param {{target: Element, currentTarget: Element}}
-   *     evt Event object.
+   * @param {{target: Element, currentTarget: Element}} evt Event object.
    */
   function faded(evt) {
     // Element has faded out, add invisible class.

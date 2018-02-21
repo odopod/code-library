@@ -9,7 +9,7 @@ export default function getIOSVersion(userAgent) {
 
   // The iOS ua string doesn't include the patch version if it's zero.
   if (iosVersion.length === 2) {
-    iosVersion[2] = 0;
+    iosVersion[2] = '0';
   }
 
   return parseInt(iosVersion.reduce((str, number) => str + number, ''), 10);

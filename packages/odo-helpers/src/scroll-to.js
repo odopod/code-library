@@ -1,6 +1,13 @@
 import noop from './noop';
 import Stepper from './animation-stepper';
 
+/**
+ * Scroll the page to a destination.
+ * @param {number} [position] End scroll position.
+ * @param {number} [duration] Duration in milliseconds.
+ * @param {function:void} [callback] Optional callback.
+ * @param {function(number):number} [easing] Easing function.
+ */
 export default function scrollTo(
   position = 0,
   duration = 400,

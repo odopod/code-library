@@ -11,7 +11,7 @@ class Affix {
   constructor(element) {
     /**
      * Main element.
-     * @type {Element}
+     * @type {HTMLElement}
      */
     this.element = element;
 
@@ -299,7 +299,6 @@ class Affix {
     this.element.style.overflowY = '';
     this.element = null;
     this._anchor = null;
-    OdoWindowEvents.remove(this._resizeId);
     OdoScrollAnimation.remove(this._scrollId);
     Affix.arrayRemove(Affix.instances, this);
   }

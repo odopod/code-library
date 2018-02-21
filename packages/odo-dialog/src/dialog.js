@@ -30,20 +30,20 @@ const FOCUSABLE_ELEMENTS = [
 class Dialog extends TinyEmitter {
   /**
    * Dialog that can contain static images, carousels, or videos
-   * @param {Element} element Main element.
+   * @param {HTMLElement} element Main element.
    * @param {object} [opts] Instance options.
    * @constructor
    */
   constructor(element, opts) {
     super();
 
-    if (!(element instanceof Element)) {
+    if (!(element instanceof HTMLElement)) {
       throw new TypeError(`OdoDialog requires an element. Got: "${element}"`);
     }
 
     /**
      * Base Element.
-     * @type {Element}
+     * @type {HTMLElement}
      */
     this.element = element;
 
@@ -61,7 +61,7 @@ class Dialog extends TinyEmitter {
 
     /**
      * Dialog backdrop
-     * @type {Element}
+     * @type {HTMLElement}
      * @protected
      */
     this.backdrop = document.createElement('div');
@@ -69,14 +69,14 @@ class Dialog extends TinyEmitter {
 
     /**
      * Dialog content (role=document).
-     * @type {Element}
+     * @type {HTMLElement}
      * @protected
      */
     this.content = this.getByClass(Dialog.Classes.CONTENT);
 
     /**
      * Elements which, when clicked, close the dialog.
-     * @type {Element}
+     * @type {HTMLElement[]}
      * @private
      */
     this._closers = Array.from(this.element.querySelectorAll('[data-odo-dialog-close]'));
@@ -151,7 +151,7 @@ class Dialog extends TinyEmitter {
   /**
    * Find descendent element by class.
    * @param {string} name Name of the class to find.
-   * @return {?Element} The element or undefined.
+   * @return {Element|undefined} The element or undefined.
    */
   getByClass(name) {
     return this.element.getElementsByClassName(name)[0];
@@ -164,6 +164,7 @@ class Dialog extends TinyEmitter {
     this.onKeyPress = this.onKeyPress.bind(this);
     this.onClick = this.onClick.bind(this);
     this.close = this.close.bind(this);
+    this.closeWithAnimation = this.close.bind(this, false);
     // Bind undefined as the first parameter so that the event object will be
     // the second parameter and the optional viewportHeight parameter will work.
     this.onWindowResize = this.onResize.bind(this, undefined);
@@ -217,7 +218,7 @@ class Dialog extends TinyEmitter {
   /**
    * Click handler on the main element. When the dialog is dismissable and the
    * user clicked outside the content (i.e. the backdrop), close it.
-   * @param {Event} evt Event object.
+   * @param {MouseEvent} evt Event object.
    * @protected
    */
   onClick(evt) {
@@ -228,7 +229,7 @@ class Dialog extends TinyEmitter {
 
   /**
    * Keypress event handler
-   * @param {Event} evt Event object
+   * @param {KeyboardEvent} evt Event object
    * @protected
    */
   onKeyPress(evt) {
@@ -310,7 +311,7 @@ class Dialog extends TinyEmitter {
     window.addEventListener('resize', this.onWindowResize);
     this.element.addEventListener('click', this.onClick);
     this._closers.forEach((element) => {
-      element.addEventListener('click', this.close);
+      element.addEventListener('click', this.closeWithAnimation);
     });
 
     if (sync === true) {
@@ -387,7 +388,7 @@ class Dialog extends TinyEmitter {
     window.removeEventListener('resize', this.onWindowResize);
     this.element.removeEventListener('click', this.onClick);
     this._closers.forEach((element) => {
-      element.removeEventListener('click', this.close);
+      element.removeEventListener('click', this.closeWithAnimation);
     });
 
     if (sync === true) {
@@ -528,7 +529,7 @@ class Dialog extends TinyEmitter {
   /**
    * Trap the focus inside the given element.
    * @param {Element} node
-   * @param {Event} evt
+   * @param {KeyboardEvent} evt
    */
   static _trapTabKey(node, evt) {
     const focusableChildren = Dialog._getFocusableChildren(node);
@@ -552,7 +553,7 @@ class Dialog extends TinyEmitter {
   /**
    * Get the focusable children of the given element.
    * @param {Element} element
-   * @return {Array.<Element>}
+   * @return {Element[]}
    */
   static _getFocusableChildren(element) {
     return Array.from(element.querySelectorAll(FOCUSABLE_ELEMENTS))
@@ -564,7 +565,7 @@ class Dialog extends TinyEmitter {
    * `getClientRects` due to this issue:
    * https://github.com/jquery/jquery/issues/2227
    * http://jsfiddle.net/2tgw2yr3/
-   * @param {Element} el Element.
+   * @param {HTMLElement} el Element.
    * @return {boolean}
    */
   static _isVisibleElement(el) {
@@ -577,7 +578,7 @@ class Dialog extends TinyEmitter {
    * @return {Array.<Element>}
    */
   static _getSiblings(element) {
-    const children = Array.from(element.parentNode.children);
+    const children = Array.from(element.parentElement.children);
     const ignore = ['script', 'link', 'meta'];
     return children.filter(node =>
       node !== element && !ignore.includes(node.nodeName.toLowerCase()));
@@ -626,7 +627,7 @@ class Dialog extends TinyEmitter {
 
   /**
    * Instantiates all instances of dialogs with the same settings
-   * @param {Object} options Object of all dialog options. Is optional.
+   * @param {object} options Object of all dialog options. Is optional.
    * @return {Dialog[]}
    */
   static initializeAll(options) {
@@ -704,7 +705,6 @@ Dialog.Keys = {
   TAB: 9,
 };
 
-/** @type {!Object} */
 Dialog.Defaults = {
   dismissable: true,
   scrollableElement: '.odo-dialog',

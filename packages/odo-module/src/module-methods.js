@@ -1,7 +1,7 @@
 /**
  * Any method defined here will be automatically applied to all OdoModules.
  *
- * @author Nathan Buchar <nathan@odopod.com>
+ * @author Nathan Buchar
  */
 
 import { requestIdleCallback } from 'request-idle-callback';

@@ -205,7 +205,7 @@ class StickyHeaders {
    * @return {StickyItem[]} Sorted array of StickyItems.
    */
   _sortItemsByOffset() {
-    return Array.from(this.items.values()).sort((a, b) => a.top > b.top);
+    return Array.from(this.items.values()).sort((a, b) => a.top - b.top);
   }
 
   /**

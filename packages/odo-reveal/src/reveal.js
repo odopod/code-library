@@ -11,11 +11,11 @@ import OdoDevice from '@odopod/odo-device';
 import OdoViewport from '@odopod/odo-viewport';
 import { getPercentageOption, isNativeAndroid, onTransitionEnd } from '@odopod/odo-helpers';
 
-/**
- * @param {Element} element Main element for the module.
- * @constructor
- */
 class Reveal {
+  /**
+   * @param {Element} element Main element for the module.
+   * @constructor
+   */
   constructor(element) {
     this.element = element;
     this.images = this._getDependentImages();
@@ -39,6 +39,10 @@ class Reveal {
     // the type is faded in immediately and not given to the viewport
     // to track.
     if (Reveal.HAS_SCROLL_ANIMATION) {
+      /**
+       * Viewport id to remove it later.
+       * @type {string}
+       */
       this.id = OdoViewport.add({
         element,
         threshold: getPercentageOption(element.getAttribute('data-threshold'), '25%'),
@@ -127,7 +131,7 @@ class Reveal {
 
   /**
    * Auto-initialize all odo reveal elements currently on the page.
-   * @param {Element} [context] Optional context to initialize elements within.
+   * @param {Element|Document} [context] Optional context to initialize elements within.
    * @return {Array.<Reveal>}
    */
   static initializeAll(context = document) {

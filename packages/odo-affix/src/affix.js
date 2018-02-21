@@ -46,7 +46,7 @@ class Affix {
 
     /**
      * Custom overlap getter. Can be overridden by setting `uiOverlap`.
-     * @type {?function}
+     * @type {?function():number}
      * @private
      */
     this._customOverlap = null;
@@ -173,6 +173,9 @@ class Affix {
     }
   }
 
+  /**
+   * Whether the browser's scroll position is within promotion range.
+   */
   isInPromotionRange(scrollTop) {
     return scrollTop >= this.top - Affix.PROMOTION_RANGE &&
         scrollTop <= this.bottom + Affix.PROMOTION_RANGE;
@@ -249,9 +252,9 @@ class Affix {
   }
 
   /**
-  * Define a custom getter to determine overlap.
-  * @param {function():number} fn
-  */
+   * Define a custom getter to determine overlap.
+   * @param {function():number} fn
+   */
   set uiOverlap(fn) {
     this._customOverlap = fn;
     this.update();

@@ -11,7 +11,7 @@ class CarouselEvent {
   constructor(type, carousel, optFrom, optTo) {
     this.type = type;
 
-    /** @type {Element} */
+    /** @type {HTMLElement} */
     this.target = carousel.element;
 
     /** @type {number} carousel slid from this index. */

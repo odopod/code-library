@@ -2,27 +2,29 @@
  * A simple string replacement template with double curly braces. You can use
  * nested objects and functions too.
  *
- * Usage:
- *     template("Today is {{ day }}", {
- *       day: 'Friday'
- *     }); // "Today is Friday"
+ * @example
+ * // "Today is Thursday"
+ * template("Today is {{ day }}", {
+ *   day: 'Thursday',
+ * });
  *
- *     template("Today is {{ month.day }}", {
- *       month: {
- *         day: "Friday"
- *       }
- *     }); // "Today is Friday
+ * // "Today is Friday"
+ * template("Today is {{ month.day }}", {
+ *   month: {
+ *     day: 'Friday',
+ *   },
+ * });
  *
- *     template("Today is {{ day }}", {
- *       dayOfTheWeek: 'Friday',
- *       day: function() {
- *         return this.dayOfTheWeek;
- *       }
- *     }); // "Today is Friday"
- *
+ * // "Today is Saturday"
+ * template("Today is {{ day }}", {
+ *   today: 'Saturday',
+ *   day() {
+ *     return this.today;
+ *   },
+ * });
  *
  * @param {string} str Template.
- * @param {Object} data Data object with keys which match your template.
+ * @param {object} data Data object with keys which match your template.
  * @return {string}
  */
 export default function template(str, data) {

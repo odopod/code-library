@@ -228,7 +228,7 @@ class Carousel extends TinyEmitter {
 
     /**
      * Pointer attached to the main element. Used for fading carousels.
-     * @type {OdoDraggable}
+     * @type {OdoPointer}
      */
     this.pointer = null;
 
@@ -715,12 +715,18 @@ class Carousel extends TinyEmitter {
   }
 
   /**
+   * @param {number} index Index to test.
    * @return {boolean} Whether a given index is out of range of the carousel.
    */
   isIndexOutOfRange(index) {
     return index <= -1 || index >= this._slides.length;
   }
 
+  /**
+   * Constrain an index within bounds.
+   * @param {number} index Index to clamp.
+   * @return {number}
+   */
   clampIndexToSlides(index) {
     return clamp(index, 0, this._slides.length - 1);
   }
@@ -1239,16 +1245,16 @@ class Carousel extends TinyEmitter {
   /**
    * Goes to a given slide.
    * @param {!number} domIndex The slide index relative to DOM order.
-   * @param {boolean=} optNoAnimation Whether going to the slide should animate.
+   * @param {boolean} [noAnimation] Whether going to the slide should animate.
    * @protected
    */
-  fadeToSlide(domIndex, optNoAnimation) {
+  fadeToSlide(domIndex, noAnimation) {
     // Get next and previous slides.
     const nextSlide = this.getSlide(domIndex);
     const previousSlide = this.getSlide(this.domIndex);
 
     // Listen for transitionend if it will animate.
-    if (!optNoAnimation) {
+    if (!noAnimation) {
       // Going to a new slide, wait for callback.
       this._transitionId = onTransitionEnd(nextSlide, this._transitionDone, this);
     }
@@ -1273,7 +1279,7 @@ class Carousel extends TinyEmitter {
     this.domIndex = domIndex;
 
     // Emit event for slide start.
-    if (!optNoAnimation) {
+    if (!noAnimation) {
       this._toNewSlide();
     }
   }
@@ -1281,17 +1287,17 @@ class Carousel extends TinyEmitter {
   /**
    * Goes to a given slide.
    * @param {!number} domIndex The slide index relative to DOM order.
-   * @param {boolean=} optNoAnimation Whether going to the slide should animate.
+   * @param {boolean} [noAnimation] Whether going to the slide should animate.
    * @protected
    */
-  goToSlide(domIndex, optNoAnimation) {
+  goToSlide(domIndex, noAnimation) {
     // Get the destion slide element from the current DOM order.
     const destinationSlide = this.getSlide(this._getLogicalIndex(domIndex));
 
     // If the carousel skips inbetween slides, reposition them.
     // DOM index is reassinged here because if the slides are repositioned,
     // the DOM index of the carousel changes.
-    const updatedDomIndex = this._maybeSetJumpedSlides(domIndex, optNoAnimation);
+    const updatedDomIndex = this._maybeSetJumpedSlides(domIndex, noAnimation);
 
     // The position the container will go to.
     const adjustedPosition = (this._getNewPosition(destinationSlide) * -100) + '%';
@@ -1302,7 +1308,7 @@ class Carousel extends TinyEmitter {
 
     // Set the css styles to move the carousel element. This also dispatches
     // the slide start event if the carousel element will move with animation.
-    this._moveToPosition(adjustedPosition, optNoAnimation);
+    this._moveToPosition(adjustedPosition, noAnimation);
   }
 
   /**
@@ -1310,12 +1316,12 @@ class Carousel extends TinyEmitter {
    * instead of the private one to abstract the DOM order stuff.
    * @param {number} index The logical, zero based index of the slide you wish
    *     the carousel to go to.
-   * @param {boolean=} optNoAnimation Optional skip the animation in goToSlide.
+   * @param {boolean} [noAnimation] Optional skip the animation in goToSlide.
    * @return {boolean} Whether the carousel will go to the specified slide.
    */
-  setSelectedIndex(index, optNoAnimation) {
+  setSelectedIndex(index, noAnimation) {
     let domIndex = this._getDomIndex(index);
-    const canNavigate = this._canNavigate(domIndex, optNoAnimation);
+    const canNavigate = this._canNavigate(domIndex, noAnimation);
 
     // Will go the the give slide.
     if (canNavigate) {
@@ -1337,9 +1343,9 @@ class Carousel extends TinyEmitter {
       this._setPaddleState();
       this._setPaginationState();
       if (this.options.isFade) {
-        this.fadeToSlide(domIndex, optNoAnimation);
+        this.fadeToSlide(domIndex, noAnimation);
       } else {
-        this.goToSlide(domIndex, optNoAnimation);
+        this.goToSlide(domIndex, noAnimation);
       }
     }
 
@@ -1626,6 +1632,13 @@ class Carousel extends TinyEmitter {
       direction === OdoPointer.Direction.UP);
   }
 
+  /**
+   * Decide what to do after the user drags the carousel.
+   * @param {Coordinate} velocity Velocity for x and y directions.
+   * @param {OdoPointer.Direction} direction Drag direction.
+   * @param {boolean} didMoveOnAxis Whether the drag direction was on the defined axis.
+   * @protected
+   */
   navigateAfterDrag(velocity, direction, didMoveOnAxis) {
     const hasVelocity = this.hasDragged && this.draggable.pointer.hasVelocity(velocity);
 
@@ -1766,6 +1779,7 @@ class Carousel extends TinyEmitter {
 Object.assign(Carousel, settings);
 
 Carousel.template = templateEngine;
+Carousel.CarouselEvent = CarouselEvent;
 
 // Export for testing.
 Carousel._getTranslate = getTranslate;

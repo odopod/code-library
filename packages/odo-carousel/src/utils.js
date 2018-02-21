@@ -1,3 +1,8 @@
+/**
+ * Parse the transform matrix into x and y translation values.
+ * @param {string} str Transform matrix, or "none".
+ * @return {{ x: number, y: number}}
+ */
 export function getTranslate(str) {
   // If no transform is set, the computed transform will be "none".
   if (str === 'none') {

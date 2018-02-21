@@ -25,7 +25,8 @@
   "files": [
     "css",
     "dist",
-    "src"
+    "src",
+    "index.d.ts"
   ],
   "odoKeywords": [
     "ui"

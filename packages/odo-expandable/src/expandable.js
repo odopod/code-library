@@ -14,29 +14,24 @@ import ExpandableAccordion from './expandable-accordion';
 export function initializeAll() {
   const elements = Array.from(document.querySelectorAll(`[${Settings.Attribute.TRIGGER}]`));
 
-  const single = [];
-  const groups = [];
+  const singleInstances = [];
+  const groupInstances = [];
   const groupIds = [];
 
   elements.forEach((item) => {
     const groupId = item.getAttribute(Settings.Attribute.GROUP);
     if (groupId) {
       if (!groupIds.includes(groupId)) {
-        groups.push(elements.filter(el => el.getAttribute(Settings.Attribute.GROUP) === groupId));
+        const group = elements.filter(el => el.getAttribute(Settings.Attribute.GROUP) === groupId);
+        const isAnimated = group.some(el => el.hasAttribute(Settings.Attribute.ANIMATED));
+        groupInstances.push(isAnimated ?
+          new ExpandableAccordion(group) :
+          new ExpandableGroup(group));
         groupIds.push(groupId);
       }
     } else {
-      single.push(item);
+      singleInstances.push(new ExpandableItem(item.getAttribute(Settings.Attribute.TRIGGER)));
     }
-  });
-
-  const singleInstances =
-    single.map(trigger => new ExpandableItem(trigger.getAttribute(Settings.Attribute.TRIGGER)));
-  const groupInstances = groups.map((grouping) => {
-    if (grouping.some(item => item.hasAttribute(Settings.Attribute.ANIMATED))) {
-      return new ExpandableAccordion(grouping);
-    }
-    return new ExpandableGroup(grouping);
   });
 
   return singleInstances.concat(groupInstances);

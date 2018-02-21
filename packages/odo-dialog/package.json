@@ -6,6 +6,7 @@
   "module": "dist/odo-dialog.esm.js",
   "style": "css/odo-dialog.css",
   "odoModule": "src/dialog.js",
+  "types": "index.d.ts",
   "sideEffects": false,
   "author": "Odopod",
   "contributors": [

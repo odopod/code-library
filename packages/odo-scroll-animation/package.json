@@ -5,6 +5,7 @@
   "main": "dist/odo-scroll-animation.js",
   "module": "dist/odo-scroll-animation.esm.js",
   "odoModule": "src/scroll-animation.js",
+  "types": "index.d.ts",
   "sideEffects": false,
   "author": "Odopod",
   "contributors": [

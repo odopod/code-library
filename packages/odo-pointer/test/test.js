@@ -82,8 +82,8 @@ describe('The pointer component', function d() {
   it('will initialize', () => {
     instance = new Pointer(document.body);
     expect(instance.element).to.equal(document.body);
-    expect(instance.axis).to.equal(Pointer.Axis.BOTH);
-    expect(instance._shouldPreventDefault).to.equal(true);
+    expect(instance.options.axis).to.equal(Pointer.Axis.BOTH);
+    expect(instance.options.preventEventDefault).to.equal(true);
     expect(instance.friction).to.equal(1);
     expect(instance.hasDragged).to.equal(false);
     expect(instance.dragEventTarget).to.equal(document);
@@ -402,7 +402,7 @@ describe('The pointer component', function d() {
       y: 0,
     }, 6)).to.be.false;
 
-    instance.axis = Pointer.Axis.Y;
+    instance.options.axis = Pointer.Axis.Y;
 
     expect(instance.hasVelocity({
       x: 0,
@@ -414,7 +414,7 @@ describe('The pointer component', function d() {
       y: Pointer.SWIPE_VELOCITY - 0.1,
     })).to.be.false;
 
-    instance.axis = Pointer.Axis.BOTH;
+    instance.options.axis = Pointer.Axis.BOTH;
 
     expect(instance.hasVelocity({
       x: Pointer.SWIPE_VELOCITY - 0.1,
@@ -648,7 +648,7 @@ describe('The pointer component', function d() {
       const event = new Pointer.Event({
         type: Pointer.EventType.START,
         target: instance.element,
-        axis: instance.axis,
+        axis: instance.options.axis,
         deltaTime: instance.deltaTime,
         start: new Coordinate(10, 10),
         end: new Coordinate(10, 10),
@@ -669,7 +669,7 @@ describe('The pointer component', function d() {
       const event = new Pointer.Event({
         type: Pointer.EventType.END,
         target: instance.element,
-        axis: instance.axis,
+        axis: instance.options.axis,
         deltaTime: instance.deltaTime,
         start: new Coordinate(10, 10),
         end: new Coordinate(-108, 18),
@@ -692,7 +692,7 @@ describe('The pointer component', function d() {
       const event = new Pointer.Event({
         type: Pointer.EventType.END,
         target: instance.element,
-        axis: instance.axis,
+        axis: instance.options.axis,
         deltaTime: instance.deltaTime,
         start: new Coordinate(10, 10),
         end: new Coordinate(130, 10),
@@ -708,7 +708,7 @@ describe('The pointer component', function d() {
       const event = new Pointer.Event({
         type: Pointer.EventType.END,
         target: instance.element,
-        axis: instance.axis,
+        axis: instance.options.axis,
         deltaTime: instance.deltaTime,
         start: new Coordinate(10, 10),
         end: new Coordinate(30, -90),
@@ -780,7 +780,7 @@ describe('The pointer component', function d() {
         const event = new Pointer.Event({
           type: Pointer.EventType.END,
           target: instance.element,
-          axis: instance.axis,
+          axis: instance.options.axis,
           deltaTime: instance.deltaTime,
           start: new Coordinate(10, 10),
           end: new Coordinate(30, -90),
@@ -796,7 +796,7 @@ describe('The pointer component', function d() {
         const event = new Pointer.Event({
           type: Pointer.EventType.END,
           target: instance.element,
-          axis: instance.axis,
+          axis: instance.options.axis,
           deltaTime: instance.deltaTime,
           start: new Coordinate(50, 50),
           end: new Coordinate(70, 150),
@@ -812,7 +812,7 @@ describe('The pointer component', function d() {
         const event = new Pointer.Event({
           type: Pointer.EventType.END,
           target: instance.element,
-          axis: instance.axis,
+          axis: instance.options.axis,
           deltaTime: instance.deltaTime,
           start: new Coordinate(100, 100),
           end: new Coordinate(0, 120),
@@ -845,7 +845,7 @@ describe('The pointer component', function d() {
         const event = new Pointer.Event({
           type: Pointer.EventType.END,
           target: instance.element,
-          axis: instance.axis,
+          axis: instance.options.axis,
           deltaTime: instance.deltaTime,
           start: new Coordinate(10, 10),
           end: new Coordinate(60, -10),

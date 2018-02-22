@@ -2,6 +2,9 @@
 // Project: odopod-code-library
 // Definitions by: Glen Cheney <https://github.com/Vestride>
 
+import { Coordinate } from '@odopod/odo-helpers';
+import OdoDraggable from '@odopod/odo-draggable';
+
 export as namespace OdoCarousel;
 
 export = OdoCarousel;
@@ -215,7 +218,7 @@ declare class OdoCarousel {
    * @param {boolean} [noAnimation] Whether going to the slide should animate.
    * @protected
    */
-  protected fadeToSlide(domIndex: number, noAnimation = false): void;
+  protected fadeToSlide(domIndex: number, noAnimation?: boolean): void;
 
   /**
    * Goes to a given slide.
@@ -223,7 +226,7 @@ declare class OdoCarousel {
    * @param {boolean} [noAnimation] Whether going to the slide should animate.
    * @protected
    */
-  goToSlide(domIndex: number, noAnimation = false): void;
+  goToSlide(domIndex: number, noAnimation?: boolean): void;
 
   /**
    * Helper function for going to a given index. This method should be used
@@ -233,7 +236,7 @@ declare class OdoCarousel {
    * @param {boolean} [noAnimation] Optional skip the animation in goToSlide.
    * @return {boolean} Whether the carousel will go to the specified slide.
    */
-  setSelectedIndex(index: number, noAnimation = false): boolean;
+  setSelectedIndex(index: number, noAnimation?: boolean): boolean;
 
   /**
    * Find the nearest slide, and move the carousel to that.

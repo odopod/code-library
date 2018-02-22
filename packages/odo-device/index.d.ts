@@ -8,22 +8,22 @@ export = OdoDevice;
 
 declare namespace OdoDevice {
 
-  function prefixed(property: string, value?: string): string|false;
+  function prefixed(property: string, value?: string): string | false;
 
-  function hyphenate(str: string|false): string;
+  function hyphenate(str: string | false): string;
 
   /**
    * Prefixed style properties.
    */
   const Dom: {
-    ANIMATION: string|false,
-    ANIMATION_DURATION: string|false,
-    TRANSFORM: string|false,
-    TRANSITION: string|false,
-    TRANSITION_PROPERTY: string|false,
-    TRANSITION_DURATION: string|false,
-    TRANSITION_TIMING_FUNCTION: string|false,
-    TRANSITION_DELAY: string|false,
+    ANIMATION: string | false,
+    ANIMATION_DURATION: string | false,
+    TRANSFORM: string | false,
+    TRANSITION: string | false,
+    TRANSITION_PROPERTY: string | false,
+    TRANSITION_DURATION: string | false,
+    TRANSITION_TIMING_FUNCTION: string | false,
+    TRANSITION_DELAY: string | false,
   };
 
   /**

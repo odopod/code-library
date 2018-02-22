@@ -17,7 +17,7 @@ declare namespace OdoScrollAnimation {
    *     value as the first parameter.
    * @return {string} Id to unbind with.
    */
-  function add(target: Element|Window|ScrollCallback, fn?: ScrollCallback): string;
+  function add(target: Element | Window | ScrollCallback, fn?: ScrollCallback): string;
 
   /**
    * Remove a scroll listener by id.

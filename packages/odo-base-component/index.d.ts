@@ -25,10 +25,10 @@ declare class OdoBaseComponent {
    *~ From tiny emitter
    *~ https://github.com/scottcorgan/tiny-emitter/blob/master/index.d.ts
    */
-  on   (event: string, callback: Function, ctx?: any): OdoBaseComponent;
-  once (event: string, callback: Function, ctx?: any): OdoBaseComponent;
-  emit (event: string, ...args: any[]): OdoBaseComponent;
-  off  (event: string, callback?: Function): OdoBaseComponent;
+  on(event: string, callback: Function, ctx?: any): OdoBaseComponent;
+  once(event: string, callback: Function, ctx?: any): OdoBaseComponent;
+  emit(event: string, ...args: any[]): OdoBaseComponent;
+  off(event: string, callback?: Function): OdoBaseComponent;
 
   /**
    * Retrieve an element by class name within the main element for this class.
@@ -36,7 +36,7 @@ declare class OdoBaseComponent {
    * @param {Element} [context] Element to search within. Defaults to main element.
    * @return {Element} The first element which matches the class name, or null.
    */
-  getElementByClass(klass: string, context?: Element): Element|null;
+  getElementByClass(klass: string, context?: Element): Element | null;
 
   /**
    * Retrieve elements by class name within the main element for this class.
@@ -75,7 +75,7 @@ interface BreakpointChain {
    * @return {?string}
    * @static
    */
-  current: string|null;
+  current: string | null;
 }
 
 declare namespace OdoBaseComponent {
@@ -96,7 +96,7 @@ declare namespace OdoBaseComponent {
    * @return {?string}
    * @static
    */
-  static function getCurrentBreakpoint(): string|null
+  static function getCurrentBreakpoint(): string | null
 
   /**
    * Allows you to redefine the default breakpoints. If you want to redefine

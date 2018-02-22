@@ -63,10 +63,10 @@ declare class OdoDialog {
    *~ From tiny emitter
    *~ https://github.com/scottcorgan/tiny-emitter/blob/master/index.d.ts
    */
-  on   (event: string, callback: Function, ctx?: any): OdoDialog;
-  once (event: string, callback: Function, ctx?: any): OdoDialog;
-  emit (event: string, ...args: any[]): OdoDialog;
-  off  (event: string, callback?: Function): OdoDialog;
+  on(event: string, callback: Function, ctx?: any): OdoDialog;
+  once(event: string, callback: Function, ctx?: any): OdoDialog;
+  emit(event: string, ...args: any[]): OdoDialog;
+  off(event: string, callback?: Function): OdoDialog;
 
   /**
    * Find descendent element by class.

@@ -81,7 +81,7 @@ declare class OdoCarousel {
    */
   pointer: OdoPointer;
 
-   /**
+  /**
    * Finds an element within this class' main element based on a class name.
    * @param {string} className Class name to search for.
    * @param {Element} [context] Optionally provide the context (scope)
@@ -97,7 +97,7 @@ declare class OdoCarousel {
    * @param {Element} [context] Optinal scope for search.
    * @return {Element|null} The element or null if it isn't found.
    */
-  getElementByClass(className: string, context?: Element): Element|null;
+  getElementByClass(className: string, context?: Element): Element | null;
 
   /**
    * Listen for dragging events.
@@ -146,7 +146,7 @@ declare class OdoCarousel {
    * @param {number} index The logical index of the slide you want.
    * @return {HTMLElement} The slide element.
    */
-  getSlide(index: number) : HTMLElement;
+  getSlide(index: number): HTMLElement;
 
   /**
    * Get the index of the currently active slide.

@@ -4,6 +4,7 @@
 
 import { Coordinate } from '@odopod/odo-helpers';
 import OdoDraggable from '@odopod/odo-draggable';
+import OdoPointer from '@odopod/odo-pointer';
 
 export as namespace OdoCarousel;
 
@@ -357,39 +358,39 @@ declare namespace OdoCarousel {
   /**
    * HTML class names for elements of the carousel.
    */
-  const Classes: {
-    BASE: string,
-    FADE: string,
-    VERTICAL: string,
-    WRAPPER: string,
-    CAROUSEL_ELEMENT: string,
-    SLIDE: string,
-    ACTIVE_SLIDE: string,
-    PREVIOUS_SLIDE: string,
-    PAST_SLIDE: string,
-    NEXT_SLIDE: string,
-    FUTURE_SLIDE: string,
-    VISIBLE: string,
-    BEHIND: string,
-    PAGINATION: string,
-    PAGINATION_DOT: string,
-    PAGINATION_DOT_SELECTED: string,
-    PADDLES: string,
-    PADDLE: string,
-    PADDLE_NEXT: string,
-    PADDLE_PREV: string,
-    PADDLE_DISABLED: string,
-    SLIDE_CHILD: string,
-  };
+  enum Classes {
+    BASE = 'odo-carousel',
+    FADE = 'odo-carousel--fade',
+    VERTICAL = 'odo-carousel--vertical',
+    WRAPPER = 'odo-carousel__wrapper',
+    CAROUSEL_ELEMENT = 'odo-carousel__element',
+    SLIDE = 'odo-carousel__slide',
+    ACTIVE_SLIDE = 'odo-carousel__slide--active',
+    PREVIOUS_SLIDE = 'odo-carousel__slide--previous',
+    PAST_SLIDE = 'odo-carousel__slide--past',
+    NEXT_SLIDE = 'odo-carousel__slide--next',
+    FUTURE_SLIDE = 'odo-carousel__slide--future',
+    VISIBLE = 'odo-carousel__slide--visible',
+    BEHIND = 'odo-carousel__slide--behind',
+    PAGINATION = 'odo-carousel__pagination',
+    PAGINATION_DOT = 'odo-carousel__pagination-dot',
+    PAGINATION_DOT_SELECTED = 'is-selected',
+    PADDLES = 'odo-carousel__nav-paddles',
+    PADDLE = 'odo-carousel__nav-paddle',
+    PADDLE_NEXT = 'odo-carousel__nav-next',
+    PADDLE_PREV = 'odo-carousel__nav-prev',
+    PADDLE_DISABLED = 'is-disabled',
+    SLIDE_CHILD = 'odo-carousel__slide-child',
+  }
 
   /**
    * Events emitted by carousel instances.
    */
-  const EventType: {
-    WILL_NAVIGATE: string,
-    SLIDE_START: string,
-    SLIDE_END: string,
-  };
+  enum EventType {
+    WILL_NAVIGATE = 'odocarousel:willnavigate',
+    SLIDE_START = 'odocarousel:slidestart',
+    SLIDE_END = 'odocarousel:slideend',
+  }
 
   /**
    * Default options for each instance.

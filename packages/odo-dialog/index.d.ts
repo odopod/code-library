@@ -181,23 +181,34 @@ declare namespace OdoDialog {
   /**
    * HTML class names for elements of the dialog.
    */
-  const Classes: {
-    [key: string]: string;
-  };
+  enum Classes {
+    BODY_OPEN = 'odo-dialog-open',
+    BASE = 'odo-dialog',
+    OPEN = 'odo-dialog--open',
+    ENTER = 'odo-dialog--enter',
+    ENTERING = 'odo-dialog--enter-active',
+    LEAVE = 'odo-dialog--leave',
+    LEAVING = 'odo-dialog--leave-active',
+    VISIBLE = 'odo-dialog--visible',
+    FULLSCREEN = 'odo-dialog--full',
+    NO_AUTO_MARGIN = 'odo-dialog--no-auto-margin',
+    BACKDROP = 'odo-dialog-backdrop',
+    CONTENT = 'odo-dialog__content',
+  }
 
   /**
    * Events emitted by dialog instances.
    */
-  const EventType: {
-    OPENED: string,
-    CLOSED: string,
-    TRIGGER_CLICKED: string,
-  };
+  enum EventType {
+    OPENED = 'ododialog:open',
+    CLOSED = 'ododialog:closed',
+    TRIGGER_CLICKED = 'ododialog:triggerclicked',
+  }
 
-  const Keys: {
-    ESC: number,
-    TAB: number,
-  };
+  enum Keys {
+    ESC = 27,
+    TAB = 9,
+  }
 
   /**
    * Default options for each instance.

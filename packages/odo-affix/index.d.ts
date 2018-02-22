@@ -129,9 +129,11 @@ declare namespace OdoAffix {
   /**
    * HTML class names for elements of the affix.
    */
-  const Classes: {
-    [key: string]: string;
-  };
+  enum Classes {
+    BASE = 'odo-affix',
+    AT_TOP = 'odo-affix--at-top',
+    AT_BOTTOM = 'odo-affix--at-bottom',
+  }
 
   /**
    * Range in pixels before and after the affix point that the element-to-be-affixed

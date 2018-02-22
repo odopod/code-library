@@ -5,6 +5,7 @@
   "main": "dist/odo-pointer.js",
   "module": "dist/odo-pointer.esm.js",
   "odoModule": "src/pointer.js",
+  "types": "index.d.ts",
   "sideEffects": false,
   "author": "Odopod",
   "contributors": [
@@ -22,7 +23,8 @@
   "files": [
     "css",
     "dist",
-    "src"
+    "src",
+    "index.d.ts"
   ],
   "odoKeywords": [
     "events"

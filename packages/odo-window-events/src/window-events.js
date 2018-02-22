@@ -80,7 +80,7 @@ const WindowEvents = {
 
   /**
    * Bind a callback to window scroll.
-   * @param {function} fn Callback to execute on scroll.
+   * @param {function(number, number):void} fn Callback to execute on scroll.
    * @return {string} id of event, to be used with service's remove method.
    */
   onScroll(fn) {
@@ -89,7 +89,7 @@ const WindowEvents = {
 
   /**
    * Bind a callback to window scroll which executes quicker.
-   * @param {function} fn Callback to execute on scroll.
+   * @param {function(number, number):void} fn Callback to execute on scroll.
    * @return {string} id of event, to be used with service's remove method.
    */
   onFastScroll(fn) {
@@ -98,7 +98,7 @@ const WindowEvents = {
 
   /**
    * Bind a callback to window resize.
-   * @param {function} fn Callback to execute on resize.
+   * @param {function(number, number):void} fn Callback to execute on resize.
    * @return {string} id of event, to be used with service's remove method.
    */
   onResize(fn) {
@@ -107,7 +107,7 @@ const WindowEvents = {
 
   /**
    * Bind a callback to window resize.
-   * @param {function} fn Callback to execute on resize.
+   * @param {function(number, number):void} fn Callback to execute on resize.
    * @return {string} id of event, to be used with service's remove method.
    */
   onLeadingResize(fn) {

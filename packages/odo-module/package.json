@@ -9,8 +9,11 @@
   "author": "Odopod",
   "contributors": [
     {
-      "name": "Nathan Buchar",
-      "email": "nathan@odopod.com"
+      "name": "Nathan Buchar"
+    },
+    {
+      "name": "Glen Cheney",
+      "email": "glen@odopod.com"
     }
   ],
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-module",

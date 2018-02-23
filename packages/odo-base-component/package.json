@@ -5,6 +5,7 @@
   "main": "dist/odo-base-component.js",
   "module": "dist/odo-base-component.esm.js",
   "odoModule": "src/base-component.js",
+  "types": "index.d.ts",
   "sideEffects": false,
   "author": "Odopod",
   "contributors": [

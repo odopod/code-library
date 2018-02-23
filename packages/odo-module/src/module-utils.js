@@ -1,7 +1,7 @@
 /**
  * Utilities for the Odo Module component.
  *
- * @author Nathan Buchar <nathan@odopod.com>
+ * @author Nathan Buchar
  */
 
 /**

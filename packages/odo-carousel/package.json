@@ -6,6 +6,7 @@
   "module": "dist/odo-carousel.esm.js",
   "style": "css/odo-carousel.css",
   "odoModule": "src/carousel.js",
+  "types": "index.d.ts",
   "sideEffects": false,
   "author": "Odopod",
   "contributors": [
@@ -25,7 +26,8 @@
   "files": [
     "css",
     "dist",
-    "src"
+    "src",
+    "index.d.ts"
   ],
   "odoKeywords": [
     "ui"

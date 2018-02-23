@@ -68,18 +68,20 @@ class StickyHeaders {
     this._holder = null;
 
     /**
-     * Custom overlap getter. Can be overridden by setting `uiOverlap`.
-     * @type {?function}
+     * The amount that the ui overlaps the top of the page. A sticky navigation,
+     * for example, would cause an overlap equal to its height.
+     * @type {function():number}
      * @private
      */
-    this._customOverlap = null;
+    this._getUiOverlap = () => 0;
 
     /**
-     * Custom offset getter. Can be overridden by setting `uiOffset`.
-     * @type {?function}
+     * Where to start positioning new sticky items. By default it's the same as
+     * the ui overlap, but can be customized.
+     * @type {function():number}
      * @private
      */
-    this._customOffset = null;
+    this._getUiOffset = this._getUiOverlap;
 
     /**
      * Which mode to handle sticky headers.
@@ -144,7 +146,7 @@ class StickyHeaders {
 
   /**
    * On every scroll event, push or stack sticky headers, depending on the mode.
-   * @param {number} scrollTop Page scroll position.
+   * @param {number} [scrollTop=window.pageYoffset] Page scroll position.
    */
   process(scrollTop = window.pageYOffset) {
     if (this.mode === StickyHeaders.Mode.STACK) {
@@ -205,7 +207,7 @@ class StickyHeaders {
    * @return {StickyItem[]} Sorted array of StickyItems.
    */
   _sortItemsByOffset() {
-    return Array.from(this.items.values()).sort((a, b) => a.top > b.top);
+    return Array.from(this.items.values()).sort((a, b) => a.top - b.top);
   }
 
   /**
@@ -236,8 +238,8 @@ class StickyHeaders {
    * Cache values so they don't need to be queried on scroll.
    */
   _cacheStyles() {
-    this._overlap = this.uiOverlap;
-    this._startingOffset = this.uiOffset;
+    this._overlap = this._getUiOverlap();
+    this._startingOffset = this._getUiOffset();
     this._cacheItemValues();
   }
 
@@ -280,16 +282,11 @@ class StickyHeaders {
   }
 
   /**
-   * The amount that the ui overlaps the top of the page. A sticky navigation,
-   * for example, would cause an overlap equal to its height.
-   * @return {number}
+   * TODO(glen): remove getter/setter.
+   * @return {function():number}
    */
   get uiOverlap() {
-    if (this._customOverlap) {
-      return this._customOverlap();
-    }
-
-    return 0;
+    return this._getUiOverlap;
   }
 
   /**
@@ -297,21 +294,16 @@ class StickyHeaders {
   * @param {function():number} fn
   */
   set uiOverlap(fn) {
-    this._customOverlap = fn;
+    this._getUiOverlap = fn;
     this.update();
   }
 
   /**
-  * Where to start positioning new sticky items. By default it's the same as
-  * the ui overlap, but can be customized.
-  * @return {number}
+   * TODO(glen): remove getter/setter.
+  * @return {function():number}
   */
   get uiOffset() {
-    if (this._customOffset) {
-      return this._customOffset();
-    }
-
-    return this.uiOverlap;
+    return this._getUiOffset;
   }
 
   /**
@@ -319,7 +311,7 @@ class StickyHeaders {
    * @param {function():number} fn
    */
   set uiOffset(fn) {
-    this._customOffset = fn;
+    this._getUiOffset = fn;
   }
 
   /**

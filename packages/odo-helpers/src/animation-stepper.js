@@ -6,7 +6,7 @@
  * Assumes `requestAnimationFrame`, `Function.prototype.bind`, and `Object.assign`
  * are available.
  *
- * @author glen@odopod.com (Glen Cheney)
+ * @author Glen Cheney <glen@odopod.com>
  */
 
 import noop from './noop';
@@ -15,14 +15,14 @@ class Stepper {
   /**
    * Easy animation stepper.
    *
-   * @param {Object} options Options object.
-   * @param {number} options.start Starting number. Value to animate from.
-   * @param {number} options.end Ending number. Value to animate to.
-   * @param {function(number, number)} options.step Step function which will receive
-   *     the step value and the current percentage completed.
-   * @param {number} options.duration Length of the animation. Default is 250ms.
-   * @param {Object} options.context The object scope to invoke the function in.
-   * @param {Function} options.easing Easing function to apply.
+   * @param {Object} [options] Options object.
+   * @param {number} [options.start] Starting number. Value to animate from.
+   * @param {number} [options.end] Ending number. Value to animate to.
+   * @param {function(number, number):void} [options.step] Step function which
+   *     will receive the step value and the current percentage completed.
+   * @param {number} [options.duration] Length of the animation. Default is 250ms.
+   * @param {Object} [options.context] The object scope to invoke the function in.
+   * @param {function(number):number} [options.easing] Easing function to apply.
    * @constructor
    */
   constructor(options) {
@@ -46,7 +46,7 @@ class Stepper {
 
     /**
      * Called at the end of the animation with `options.context`.
-     * @type {Function}
+     * @type {function:void}
      */
     this.onfinish = noop;
 

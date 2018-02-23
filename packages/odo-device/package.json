@@ -5,6 +5,7 @@
   "main": "dist/odo-device.js",
   "module": "dist/odo-device.esm.js",
   "odoModule": "src/device.js",
+  "types": "index.d.ts",
   "sideEffects": false,
   "author": "Odopod",
   "contributors": [
@@ -17,7 +18,8 @@
   "files": [
     "css",
     "dist",
-    "src"
+    "src",
+    "index.d.ts"
   ],
   "odoKeywords": [
     "utilities"

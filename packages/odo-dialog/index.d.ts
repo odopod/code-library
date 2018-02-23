@@ -9,14 +9,14 @@ export = OdoDialog;
 declare class OdoDialog {
   /**
    * Create a new dialog.
-   * @param {Element} element Main element which represents this class.
+   * @param {HTMLElement} element Main element which represents this class.
    * @param {OdoDialog.Options} [opts] Instance options.
-   * @throws {TypeError} Throws when the element is not of type Element.
+   * @throws {TypeError} Throws when the element is not of type HTMLElement.
    */
-  constructor(element: Element, opts?: OdoDialog.Options);
+  constructor(element: HTMLElement, opts?: OdoDialog.Options);
 
   /** Main element for this class */
-  element: Element;
+  element: HTMLElement;
 
   options: OdoDialog.Options;
 
@@ -29,16 +29,16 @@ declare class OdoDialog {
   /**
    * Dialog backdrop element.
    * @protected
-   * @type {Element}
+   * @type {HTMLElement}
    */
-  protected backdrop: Element;
+  protected backdrop: HTMLElement;
 
   /**
    * Dialog content (role=document)
    * @protected
-   * @type {Element}
+   * @type {HTMLElement}
    */
-  protected content: Element;
+  protected content: HTMLElement;
 
   /**
    * Whether the dialog is open.
@@ -63,10 +63,10 @@ declare class OdoDialog {
    *~ From tiny emitter
    *~ https://github.com/scottcorgan/tiny-emitter/blob/master/index.d.ts
    */
-  on   (event: string, callback: Function, ctx?: any): OdoDialog;
-  once (event: string, callback: Function, ctx?: any): OdoDialog;
-  emit (event: string, ...args: any[]): OdoDialog;
-  off  (event: string, callback?: Function): OdoDialog;
+  on(event: string, callback: Function, ctx?: any): OdoDialog;
+  once(event: string, callback: Function, ctx?: any): OdoDialog;
+  emit(event: string, ...args: any[]): OdoDialog;
+  off(event: string, callback?: Function): OdoDialog;
 
   /**
    * Find descendent element by class.
@@ -181,23 +181,34 @@ declare namespace OdoDialog {
   /**
    * HTML class names for elements of the dialog.
    */
-  const Classes: {
-    [key: string]: string;
-  };
+  enum Classes {
+    BODY_OPEN = 'odo-dialog-open',
+    BASE = 'odo-dialog',
+    OPEN = 'odo-dialog--open',
+    ENTER = 'odo-dialog--enter',
+    ENTERING = 'odo-dialog--enter-active',
+    LEAVE = 'odo-dialog--leave',
+    LEAVING = 'odo-dialog--leave-active',
+    VISIBLE = 'odo-dialog--visible',
+    FULLSCREEN = 'odo-dialog--full',
+    NO_AUTO_MARGIN = 'odo-dialog--no-auto-margin',
+    BACKDROP = 'odo-dialog-backdrop',
+    CONTENT = 'odo-dialog__content',
+  }
 
   /**
    * Events emitted by dialog instances.
    */
-  const EventType: {
-    OPENED: string,
-    CLOSED: string,
-    TRIGGER_CLICKED: string,
-  };
+  enum EventType {
+    OPENED = 'ododialog:open',
+    CLOSED = 'ododialog:closed',
+    TRIGGER_CLICKED = 'ododialog:triggerclicked',
+  }
 
-  const Keys: {
-    ESC: number,
-    TAB: number,
-  };
+  enum Keys {
+    ESC = 27,
+    TAB = 9,
+  }
 
   /**
    * Default options for each instance.

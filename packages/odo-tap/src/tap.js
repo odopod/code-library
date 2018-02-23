@@ -15,15 +15,15 @@ const preventDefaultEventAction = (evt) => {
   evt.preventDefault();
 };
 
-/**
- * Interprets touchs on an element as taps.
- * @param {Element} element Element to watch.
- * @param {Function} fn Callback function when the element is tapped.
- * @param {boolean} preventEventDefault Whether or not to prevent the default
- *     event during drags.
- * @constructor
- */
 class Tap {
+  /**
+   * Interprets touchs on an element as taps.
+   * @param {Element} element Element to watch.
+   * @param {Function} fn Callback function when the element is tapped.
+   * @param {boolean} preventEventDefault Whether or not to prevent the default
+   *     event during drags.
+   * @constructor
+   */
   constructor(element, fn, preventEventDefault) {
     this.element = element;
     this.fn = fn;
@@ -101,7 +101,7 @@ class Tap {
   /**
    * When the user presses the spacer bar or enter/return on their keyboard, it
    * should be considered a "tap" as well.
-   * @param {Event} evt Event object.
+   * @param {KeyboardEvent} evt Event object.
    */
   _handleKeyUp(evt) {
     if (evt.which === 13 || evt.which === 32) {

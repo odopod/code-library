@@ -3,7 +3,7 @@
  * static property, which when called will register the given base selector
  * with the given module class and apply several static methods and properties.
  *
- * @author Nathan Buchar <nathan@odopod.com>
+ * @author Nathan Buchar
  */
 
 import OdoModuleMethods from './module-methods';
@@ -101,7 +101,7 @@ function unregister(Module, selector) {
   const _selector = getSelector(Module, selector);
 
   // Internally unregister the module.
-  store.delete(_selector, Module);
+  store.delete(_selector);
 }
 
 export default { register, unregister };

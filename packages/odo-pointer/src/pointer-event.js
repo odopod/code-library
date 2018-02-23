@@ -1,20 +1,20 @@
 import { Coordinate } from '@odopod/odo-helpers';
-import settings from './settings';
+import { Direction, Axis } from './settings';
 
 function isXAxis(axis) {
-  return axis === settings.Axis.X;
+  return axis === Axis.X;
 }
 
 function isYAxis(axis) {
-  return axis === settings.Axis.Y;
+  return axis === Axis.Y;
 }
 
 function isBothAxis(axis) {
-  return axis === settings.Axis.BOTH;
+  return axis === Axis.BOTH;
 }
 
 function hasDirection(direction) {
-  return direction !== settings.Direction.NONE;
+  return direction !== Direction.NONE;
 }
 
 function finiteOrZero(velocity) {
@@ -56,25 +56,25 @@ function getTheDirection(value1, value2, isGreater, isLess, isEqual) {
 function getDirection(coord1, coord2) {
   if (Math.abs(coord1.x - coord2.x) >= Math.abs(coord1.y - coord2.y)) {
     return getTheDirection(
-      coord1.x, coord2.x, settings.Direction.LEFT,
-      settings.Direction.RIGHT, settings.Direction.NONE,
+      coord1.x, coord2.x, Direction.LEFT,
+      Direction.RIGHT, Direction.NONE,
     );
   }
 
   return getTheDirection(
-    coord1.y, coord2.y, settings.Direction.UP,
-    settings.Direction.DOWN, settings.Direction.NONE,
+    coord1.y, coord2.y, Direction.UP,
+    Direction.DOWN, Direction.NONE,
   );
 }
 
 function isOnAxis(axis, direction) {
   const isXAndLeftOrRight = isXAxis(axis) && (
-    direction === settings.Direction.LEFT ||
-    direction === settings.Direction.RIGHT);
+    direction === Direction.LEFT ||
+    direction === Direction.RIGHT);
 
   const isYAndUpOrDown = isYAxis(axis) && (
-    direction === settings.Direction.UP ||
-    direction === settings.Direction.DOWN);
+    direction === Direction.UP ||
+    direction === Direction.DOWN);
 
   const isBothAndNotNone = isBothAxis(axis) && hasDirection(direction);
 
@@ -175,7 +175,7 @@ class PointerEvent {
 
     /**
      * Direction of drag.
-     * @type {settings.Direction}
+     * @type {Direction}
      */
     this.direction = getDirection(options.start, options.end);
 
@@ -196,7 +196,7 @@ class PointerEvent {
 
     /**
      * Direction of drag which excludes directions not on its axis.
-     * @type {settings.Direction}
+     * @type {Direction}
      */
     this.axisDirection = getAxisDirection(options.axis, options.start, options.end);
 

@@ -40,7 +40,7 @@ class Draggable extends TinyEmitter {
 
     /**
      * The draggable element.
-     * @type {Element}
+     * @type {HTMLElement}
      * @private
      */
     this.element = element;
@@ -53,7 +53,7 @@ class Draggable extends TinyEmitter {
 
     /**
      * The element which contains the target.
-     * @type {Element}
+     * @type {HTMLElement}
      * @private
      */
     this._parentEl = element.parentNode;
@@ -422,12 +422,12 @@ class Draggable extends TinyEmitter {
 
   /**
    * Returns the current position of the draggable element.
-   * @param {boolean} optAsPercent Optionally retrieve percentage values instead
+   * @param {boolean} [asPercent] Optionally retrieve percentage values instead
    *     of pixel values.
    * @return {Coordinate} X and Y coordinates of the draggable element.
    */
-  getPosition(optAsPercent) {
-    if (optAsPercent) {
+  getPosition(asPercent) {
+    if (asPercent) {
       return new Coordinate(
         (this._currentPosition.x / this._parentEl.offsetWidth) * 100,
         (this._currentPosition.y / this._parentEl.offsetHeight) * 100,

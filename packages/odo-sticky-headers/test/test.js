@@ -122,6 +122,11 @@ describe('The OdoStickyHeaders Component', () => {
         expect(spy.callCount).to.equal(1);
       });
 
+      it('has getters for uiOffset and uiOverlap (which should be removed in the next major release)', () => {
+        expect(typeof instance.uiOverlap).to.equal('function');
+        expect(typeof instance.uiOffset).to.equal('function');
+      });
+
       it('can have a custom starting point for items and viewport overlap', () => {
         instance.uiOffset = () => 5;
 

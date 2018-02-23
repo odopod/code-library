@@ -2,7 +2,7 @@
  * @fileoverview An basic, expandable component that has both a trigger
  * and a target to open.
  *
- * @author Matt Zaso
+ * @author Matt Zaso <matt.zaso@odopod.com>
  */
 import Settings from './settings';
 

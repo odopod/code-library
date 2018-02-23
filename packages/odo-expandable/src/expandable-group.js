@@ -2,7 +2,7 @@
  * @fileoverview A wrapper for multiple Expandable elements that will
  * allow them to operate coherently in an accordion type fashion.
  *
- * @author Matt Zaso
+ * @author Matt Zaso <matt.zaso@odopod.com>
  */
 import Settings from './settings';
 import ExpandableItem from './expandable-item';
@@ -41,7 +41,7 @@ class ExpandableGroup {
 
   /**
    * Will iterate over all grouped items and toggle the selected one while collapsing all others.
-   * @param {number} selectedId The ID of the selected target to expand.
+   * @param {string} selectedId The ID of the selected target to expand.
    * @private
    */
   toggleVisibility(selectedId) {
@@ -60,7 +60,7 @@ class ExpandableGroup {
    * @public
    */
   dispose() {
-    document.body.removeEventListener('click', this._onTriggerClick);
+    document.body.removeEventListener('click', this._onClick);
     this.expandables.forEach(item => item.dispose());
   }
 }

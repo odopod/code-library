@@ -23,7 +23,6 @@ function getPointerEvent(event) {
  * built in, but will only listen to the prefixed on in certain cases
  * https://github.com/Modernizr/Modernizr/issues/897
  *
- * @param {string} transitionend The current transition end event name.
  * @return {string} A patched transition end event name.
  */
 function getTransitionEndEvent() {

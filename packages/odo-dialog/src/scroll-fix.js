@@ -3,7 +3,7 @@
  * default events and stopping event propagation when the scrollable element is
  * at the top or bottom of the scrollable area.
  *
- * @author Glen Cheney
+ * @author Glen Cheney <glen@odopod.com>
  */
 
 import { randomString } from '@odopod/odo-helpers';

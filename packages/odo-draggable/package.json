@@ -5,6 +5,7 @@
   "main": "dist/odo-draggable.js",
   "module": "dist/odo-draggable.esm.js",
   "odoModule": "src/draggable.js",
+  "types": "index.d.ts",
   "sideEffects": false,
   "author": "Odopod",
   "contributors": [
@@ -23,7 +24,8 @@
   "files": [
     "css",
     "dist",
-    "src"
+    "src",
+    "index.d.ts"
   ],
   "odoKeywords": [
     "ui"

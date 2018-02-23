@@ -6,7 +6,7 @@
  * It will only bind one scroll event listener per target, no matter the number
  * of callbacks associated with it.
  *
- * @author Glen Cheney
+ * @author Glen Cheney <glen@odopod.com>
  */
 
 let id = 0;
@@ -34,7 +34,7 @@ const service = {
 
   /**
    * A map of request animation frame ids for each target.
-   * @type {Map.<Element, number>}
+   * @type {Map.<Element|Window, number>}
    * @private
    */
   _targets: new Map(),
@@ -110,7 +110,7 @@ const service = {
    * @private
    */
   _handleTargetScrolled(evt) {
-    const target = evt.currentTarget;
+    const target = /** @type {Element|Window} */ (evt.currentTarget);
 
     // Cancel the last request animation frame if it hasn't executed yet.
     if (this._targets.get(target)) {
@@ -124,7 +124,7 @@ const service = {
 
   /**
    * Adds a scroll listener to a target.
-   * @param {Element} target Element.
+   * @param {Element|Window} target Element.
    * @private
    */
   _register(target) {
@@ -145,8 +145,8 @@ const service = {
   /**
    * Add a new scroll listener to an optional target. Defaults to when the
    * page is scrolled.
-   * @param {Element=} target Optional element. Default = window.
-   * @param {function(number)} fn Callback method with the new scroll top
+   * @param {Element|Window|function(number):void} target Optional element. Default = window.
+   * @param {function(number):void} [fn] Callback method with the new scroll top
    *     value as the first parameter.
    * @return {string} Id to unbind with.
    */

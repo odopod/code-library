@@ -1,6 +1,6 @@
 /**
  * Determine which element in an array is the tallest.
- * @param {ArrayLike<Element>} elements Array-like of elements.
+ * @param {ArrayLike<HTMLElement>} elements Array-like of elements.
  * @return {number} Height of the tallest element.
  */
 function getTallest(elements) {
@@ -17,7 +17,7 @@ function getTallest(elements) {
 
 /**
  * Set the height of every element in an array to a value.
- * @param {ArrayLike<Element>} elements Array-like of elements.
+ * @param {ArrayLike<HTMLElement>} elements Array-like of elements.
  * @param {string} height Height value to set.
  */
 function setAllHeights(elements, height) {
@@ -29,8 +29,8 @@ function setAllHeights(elements, height) {
 /**
  * For groups of elements which should be the same height. Using this method
  * will create far less style recalculations and layouts.
- * @param {ArrayLike.<ArrayLike.<Element>>} groups An array-like collection of
- *     an array-like collection of elements.
+ * @param {ArrayLike.<HTMLElement>|ArrayLike.<ArrayLike.<HTMLElement>>} groups An
+ *     array-like collection of an array-like collection of elements.
  * @return {number|Array.<number>} An array containing the pixel value of the
  *     tallest element for each group, or just a number if it's one group.
  */

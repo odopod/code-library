@@ -7,7 +7,7 @@ class Hotspots extends TinyEmitter {
   /**
    * Component which has a draggable element in the middle which reveals one or
    * the other sides as the user drags.
-   *
+   * @param {HTMLElement} el Main element.
    * @constructor
    */
   constructor(el) {
@@ -220,7 +220,7 @@ class Hotspots extends TinyEmitter {
 
   /**
    * Listener for clicks on the button inside the hotspot and toggles the hotspot's state.
-   * @param {Event} evt Click event object.
+   * @param {MouseEvent} evt Click event object.
    */
   _handleHotspotClick(evt) {
     evt.preventDefault();
@@ -231,7 +231,7 @@ class Hotspots extends TinyEmitter {
   /**
    * When a hotspot is open, this handler is active. If the user clicks outside
    * the hotspot, it will be closed.
-   * @param {Event} evt Click event object.
+   * @param {MouseEvent} evt Click event object.
    */
   _handleOuterClick(evt) {
     if (!this.getActiveHotspot().content.contains(evt.target)) {

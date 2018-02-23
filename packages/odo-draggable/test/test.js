@@ -46,7 +46,7 @@ describe('The Draggable component', () => {
     });
 
     it('defaults to the x axis', () => {
-      expect(instance.pointer.axis).to.equal('x');
+      expect(instance.pointer.options.axis).to.equal('x');
     });
 
     it('can be enabled and disabled', () => {

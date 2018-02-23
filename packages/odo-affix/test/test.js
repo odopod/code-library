@@ -94,6 +94,10 @@ describe('The OdoAffix Component', function affix() {
       expect(OdoAffix.instances).to.have.lengthOf(0);
     });
 
+    it('has getter for uiOverlap (which should be removed in the next major release)', () => {
+      expect(typeof instance.uiOverlap).to.equal('function');
+    });
+
     it('can set a UI overlap getter', () => {
       const process = sinon.spy(instance, 'process');
       const stub = sinon.stub().returns(50);

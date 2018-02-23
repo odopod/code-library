@@ -61,10 +61,10 @@ describe('Odo On Swipe component', () => {
     });
 
     it('will destroy the pointer when it is disposed of', () => {
-      expect(instance.pointer._el).to.exist;
+      expect(instance.pointer.element).to.exist;
       expect(instance.fn).to.exist;
       instance.dispose();
-      expect(instance.pointer._el).to.not.exist;
+      expect(instance.pointer.element).to.not.exist;
       expect(instance.fn).to.not.exist;
     });
   });
@@ -75,7 +75,7 @@ describe('Odo On Swipe component', () => {
     });
 
     it('should pass along the axis to OdoPointer', () => {
-      expect(instance.pointer.axis).to.equal(OdoPointer.Axis.BOTH);
+      expect(instance.pointer.options.axis).to.equal(OdoPointer.Axis.BOTH);
     });
   });
 });

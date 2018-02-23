@@ -5,6 +5,7 @@
   "main": "dist/odo-sticky-headers.js",
   "module": "dist/odo-sticky-headers.esm.js",
   "odoModule": "src/sticky-headers.js",
+  "types": "index.d.ts",
   "sideEffects": false,
   "author": "Odopod",
   "contributors": [
@@ -21,7 +22,8 @@
   "files": [
     "css",
     "dist",
-    "src"
+    "src",
+    "index.d.ts"
   ],
   "odoKeywords": [
     "ui"

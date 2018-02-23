@@ -346,9 +346,25 @@ var Video = function () {
   function Video(element, options) {
     classCallCheck(this, Video);
 
+    /**
+     * @type {Element}
+     */
     this.element = element;
+
+    /**
+     * @type {HTMLVideoElement}
+     */
     this.videoEl = this._findVideoElement();
+
+    /**
+     * Random id for this instance.
+     */
     this.id = Math.random().toString(36).substring(7);
+
+    /**
+     * Options for this instance.
+     * @type {object}
+     */
     this.options = Object.assign({}, Video.Defaults, options);
 
     this.isPlaying = this._isPlaying();
@@ -426,7 +442,7 @@ var Video = function () {
     this.videoEl.addEventListener('playing', this._onPlay);
     this.videoEl.addEventListener('timeupdate', this._onTimeUpdate);
     this.videoEl.addEventListener('progress', this._onProgress);
-    this.videoEl.addEventListener('volumechange', this._onVolumeChange);
+    // this.videoEl.addEventListener('volumechange', this._onVolumeChange);
     this.videoEl.addEventListener('seeking', this._onSeeking);
     this.videoEl.addEventListener('seeked', this._onSeeked);
 
@@ -489,7 +505,7 @@ var Video = function () {
 
   /**
    * Separated into its own function so sinon can stub it in the tests.
-   * @return {Element}
+   * @return {HTMLVideoElement}
    * @private
    */
 
@@ -569,8 +585,8 @@ var Video = function () {
   /**
    * Play the current video.
    * https://googlechrome.github.io/samples/play-return-promise/
-   * @return {?Promise} Chrome 50+, Firefox 53+, and Safari 10+ return a promise
-   *     which is rejected if the device cannot autoplay.
+   * @return {?Promise<void>} Chrome 50+, Firefox 53+, and Safari 10+ return a
+   *     promise which is rejected if the device cannot autoplay.
    */
 
 
@@ -1069,7 +1085,7 @@ var Video = function () {
   /**
    * Handler for triggering events on readyState or video data events
    * @param {Object} event Object containing event name and readyState.
-   * @param {Function} cb Callback function for event.
+   * @param {function():void} cb Callback function for event.
    * @public
    */
 
@@ -1079,11 +1095,11 @@ var Video = function () {
 
     var _loaded = void 0;
     if (this.videoEl.readyState > event.readyState) {
-      cb.call();
+      cb();
     } else {
       this.videoEl.addEventListener(event.name, _loaded = function loaded() {
         _this3.videoEl.removeEventListener(event.name, _loaded);
-        cb.call();
+        cb();
       });
     }
   };

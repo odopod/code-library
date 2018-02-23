@@ -267,7 +267,7 @@ var ScrollFeedback = function (_TinyEmitter) {
   /**
    * Event listener for key down. If a special key is pressed, this class will
    * emit an event with the direction the page should go.
-   * @param {Event} evt Event object.
+   * @param {KeyboardEvent} evt Event object.
    * @private
    */
 
@@ -326,7 +326,7 @@ var ScrollFeedback = function (_TinyEmitter) {
 
   /**
    * Save the starting position of the user's finger on touch start.
-   * @param {Event} evt Event object.
+   * @param {TouchEvent} evt Event object.
    * @private
    */
 
@@ -340,7 +340,7 @@ var ScrollFeedback = function (_TinyEmitter) {
 
   /**
    * Emits a navigation event if the user has moved their finger far enough.
-   * @param {Event} evt Event object.
+   * @param {TouchEvent} evt Event object.
    * @private
    */
 

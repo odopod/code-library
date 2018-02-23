@@ -134,21 +134,21 @@ var createClass = function () {
  * Assumes `requestAnimationFrame`, `Function.prototype.bind`, and `Object.assign`
  * are available.
  *
- * @author glen@odopod.com (Glen Cheney)
+ * @author Glen Cheney <glen@odopod.com>
  */
 
 var Stepper = function () {
   /**
    * Easy animation stepper.
    *
-   * @param {Object} options Options object.
-   * @param {number} options.start Starting number. Value to animate from.
-   * @param {number} options.end Ending number. Value to animate to.
-   * @param {function(number, number)} options.step Step function which will receive
-   *     the step value and the current percentage completed.
-   * @param {number} options.duration Length of the animation. Default is 250ms.
-   * @param {Object} options.context The object scope to invoke the function in.
-   * @param {Function} options.easing Easing function to apply.
+   * @param {Object} [options] Options object.
+   * @param {number} [options.start] Starting number. Value to animate from.
+   * @param {number} [options.end] Ending number. Value to animate to.
+   * @param {function(number, number):void} [options.step] Step function which
+   *     will receive the step value and the current percentage completed.
+   * @param {number} [options.duration] Length of the animation. Default is 250ms.
+   * @param {Object} [options.context] The object scope to invoke the function in.
+   * @param {function(number):number} [options.easing] Easing function to apply.
    * @constructor
    */
   function Stepper(options) {
@@ -174,7 +174,7 @@ var Stepper = function () {
 
     /**
      * Called at the end of the animation with `options.context`.
-     * @type {Function}
+     * @type {function:void}
      */
     this.onfinish = noop;
 
@@ -310,7 +310,6 @@ function getPointerEvent(event) {
  * built in, but will only listen to the prefixed on in certain cases
  * https://github.com/Modernizr/Modernizr/issues/897
  *
- * @param {string} transitionend The current transition end event name.
  * @return {string} A patched transition end event name.
  */
 function getTransitionEndEvent() {
@@ -635,7 +634,7 @@ var Coordinate = function () {
    * respectively.
    * @param {number|Coordinate} tx The value to translate x by or the
    *     the coordinate to translate this coordinate by.
-   * @param {number} ty The value to translate y by.
+   * @param {number} [ty] The value to translate y by.
    * @return {!Coordinate} This coordinate after translating.
    */
 
@@ -804,7 +803,7 @@ var domReady = new Promise(function (resolve) {
 
 /**
  * Determine which element in an array is the tallest.
- * @param {ArrayLike<Element>} elements Array-like of elements.
+ * @param {ArrayLike<HTMLElement>} elements Array-like of elements.
  * @return {number} Height of the tallest element.
  */
 function getTallest(elements) {
@@ -821,7 +820,7 @@ function getTallest(elements) {
 
 /**
  * Set the height of every element in an array to a value.
- * @param {ArrayLike<Element>} elements Array-like of elements.
+ * @param {ArrayLike<HTMLElement>} elements Array-like of elements.
  * @param {string} height Height value to set.
  */
 function setAllHeights(elements, height) {
@@ -833,8 +832,8 @@ function setAllHeights(elements, height) {
 /**
  * For groups of elements which should be the same height. Using this method
  * will create far less style recalculations and layouts.
- * @param {ArrayLike.<ArrayLike.<Element>>} groups An array-like collection of
- *     an array-like collection of elements.
+ * @param {ArrayLike.<HTMLElement>|ArrayLike.<ArrayLike.<HTMLElement>>} groups An
+ *     array-like collection of an array-like collection of elements.
  * @return {number|Array.<number>} An array containing the pixel value of the
  *     tallest element for each group, or just a number if it's one group.
  */
@@ -980,8 +979,7 @@ function fadeElement(elem, isOut) {
 
   /**
    * Internal callback when the element has finished its transition.
-   * @param {{target: Element, currentTarget: Element}}
-   *     evt Event object.
+   * @param {{target: Element, currentTarget: Element}} evt Event object.
    */
   function faded(evt) {
     // Element has faded out, add invisible class.
@@ -1045,7 +1043,7 @@ function forceRedraw() {
 
 /**
  * Gets the height and with of an element when the display is not none.
- * @param {Element} element Element to get size of.
+ * @param {HTMLElement} element Element to get size of.
  * @return {!{width: number, height: number}} Object with width/height.
  */
 function getSize(element) {
@@ -1100,7 +1098,7 @@ function getIOSVersion(userAgent) {
 
   // The iOS ua string doesn't include the patch version if it's zero.
   if (iosVersion.length === 2) {
-    iosVersion[2] = 0;
+    iosVersion[2] = '0';
   }
 
   return parseInt(iosVersion.reduce(function (str, number) {
@@ -1210,7 +1208,7 @@ function getRelativeDepth(node, parentNode) {
 /**
  * Set an id on an element if one doesn't exist.
  * @param {Element} element Element to give an id.
- * @param {function():string|string} fn Returns an id to set.
+ * @param {string|function(): string} fn Returns an id to set.
  */
 function giveId(element, fn) {
   if (!element.id) {
@@ -1280,7 +1278,7 @@ function hasScrollEvents(userAgent) {
 /**
  * Hyphenates a javascript style string to a css one. For example:
  * MozBoxSizing -> -moz-box-sizing.
- * @param {string|boolean} str The string to hyphenate.
+ * @param {string|false} str The string to hyphenate.
  * @return {string} The hyphenated string.
  */
 function hyphenate(str) {
@@ -1504,6 +1502,13 @@ function replaceWithHash(newHash) {
   }
 }
 
+/**
+ * Scroll the page to a destination.
+ * @param {number} [position] End scroll position.
+ * @param {number} [duration] Duration in milliseconds.
+ * @param {function:void} [callback] Optional callback.
+ * @param {function(number):number} [easing] Easing function.
+ */
 function scrollTo() {
   var position = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
   var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 400;
@@ -1554,7 +1559,7 @@ var Timer = function () {
    * initialized.
    * @param {Function} fn Callback for when the timer expires.
    * @param {number} delay Timer length in milliseconds.
-   * @param {boolean=} opt_continuous If true, the timer will automatically
+   * @param {boolean} [continuous] If true, the timer will automatically
    *     restart itself when it expires.
    * @constructor
    */

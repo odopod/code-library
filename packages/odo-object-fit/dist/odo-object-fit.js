@@ -53,7 +53,7 @@ var ObjectFit = function () {
   function ObjectFit(element, style) {
     classCallCheck(this, ObjectFit);
 
-    /** @type {Element} */
+    /** @type {HTMLImageElement|HTMLVideoElement} */
     this.element = element;
 
     /** @type {ObjectFit.Style} */
@@ -70,7 +70,7 @@ var ObjectFit = function () {
 
   /**
    * Calculate the dimenions of the media element and set them.
-   * @param {Element} el Element to size.
+   * @param {HTMLElement} el Element to size.
    * @private
    */
 
@@ -94,8 +94,8 @@ var ObjectFit = function () {
 
   ObjectFit.prototype._getParentSize = function _getParentSize() {
     return {
-      width: this.element.parentNode.offsetWidth,
-      height: this.element.parentNode.offsetHeight
+      width: this.element.parentElement.offsetWidth,
+      height: this.element.parentElement.offsetHeight
     };
   };
 
@@ -172,7 +172,7 @@ var ObjectFit = function () {
   /**
    * Videos have a readyState. Anything greater than zero means it has metadata.
    * Some browsers implement the `complete` property on images. Also test the `naturalWidth`.
-   * @param {Element} element Media element.
+   * @param {HTMLImageElement|HTMLVideoElement} element Media element.
    * @return {boolean}
    */
 

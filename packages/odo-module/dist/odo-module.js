@@ -24,7 +24,7 @@ var requestIdleCallback_2 = requestIdleCallback;
 /**
  * Utilities for the Odo Module component.
  *
- * @author Nathan Buchar <nathan@odopod.com>
+ * @author Nathan Buchar
  */
 
 /**
@@ -61,7 +61,7 @@ function isHTMLElement(thing) {
 /**
  * Any method defined here will be automatically applied to all OdoModules.
  *
- * @author Nathan Buchar <nathan@odopod.com>
+ * @author Nathan Buchar
  */
 
 var OdoModuleMethods = (function (Module, selector) {
@@ -196,7 +196,7 @@ var OdoModuleMethods = (function (Module, selector) {
  * static property, which when called will register the given base selector
  * with the given module class and apply several static methods and properties.
  *
- * @author Nathan Buchar <nathan@odopod.com>
+ * @author Nathan Buchar
  */
 
 /**
@@ -292,7 +292,7 @@ function unregister(Module, selector) {
   var _selector = getSelector(Module, selector);
 
   // Internally unregister the module.
-  store.delete(_selector, Module);
+  store.delete(_selector);
 }
 
 var module$1 = { register: register, unregister: unregister };

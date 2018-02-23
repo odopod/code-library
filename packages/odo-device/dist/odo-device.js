@@ -36,10 +36,10 @@ var element = document.createElement('div');
  * Returns the prefixed style property if it exists.
  * {@link http://perfectionkills.com/feature-testing-css-properties/}
  *
- * @param {string} propName The property name.
+ * @param {string} property The property name.
  * @param {string} [value] Value to set and test. If undefined, this test will
  *     only check that the property exists, not whether it supports the value.
- * @return {string|boolean} The style property or false.
+ * @return {string|false} The style property or false.
  */
 function prefixed(property, value) {
   var shouldTestValue = isDefined(value);
@@ -87,7 +87,7 @@ function prefixed(property, value) {
  * Hyphenates a javascript style string to a css one. For example:
  * MozBoxSizing -> -moz-box-sizing.
  *
- * @param {string|boolean} str The string to hyphenate.
+ * @param {string|false} str The string to hyphenate.
  * @return {string} The hyphenated string.
  */
 function hyphenate(str) {
@@ -104,7 +104,7 @@ function hyphenate(str) {
 
 /**
  * Prefixed style properties.
- * @enum {string|boolean}
+ * @type {{[key: string]: string|false}}
  */
 var Dom = {
   ANIMATION: prefixed('animation'),
@@ -119,7 +119,7 @@ var Dom = {
 
 /**
  * Prefixed css properties.
- * @enum {string}
+ * @type {{[key: string]: string}}
  */
 var Css = {
   ANIMATION: hyphenate(Dom.ANIMATION),

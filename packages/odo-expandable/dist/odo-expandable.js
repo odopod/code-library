@@ -92,7 +92,7 @@ var possibleConstructorReturn = function (self, call) {
  * @fileoverview An basic, expandable component that has both a trigger
  * and a target to open.
  *
- * @author Matt Zaso
+ * @author Matt Zaso <matt.zaso@odopod.com>
  */
 var ExpandableItem = function () {
   function ExpandableItem(id) {
@@ -232,7 +232,7 @@ Object.assign(ExpandableItem, Settings);
  * @fileoverview A wrapper for multiple Expandable elements that will
  * allow them to operate coherently in an accordion type fashion.
  *
- * @author Matt Zaso
+ * @author Matt Zaso <matt.zaso@odopod.com>
  */
 var ExpandableGroup = function () {
   function ExpandableGroup(elements) {
@@ -271,7 +271,7 @@ var ExpandableGroup = function () {
 
   /**
    * Will iterate over all grouped items and toggle the selected one while collapsing all others.
-   * @param {number} selectedId The ID of the selected target to expand.
+   * @param {string} selectedId The ID of the selected target to expand.
    * @private
    */
 
@@ -294,7 +294,7 @@ var ExpandableGroup = function () {
 
 
   ExpandableGroup.prototype.dispose = function dispose() {
-    document.body.removeEventListener('click', this._onTriggerClick);
+    document.body.removeEventListener('click', this._onClick);
     this.expandables.forEach(function (item) {
       return item.dispose();
     });
@@ -309,7 +309,7 @@ Object.assign(ExpandableGroup, Settings);
  * @fileoverview A subclass of ExpandableGroup which includes some additional
  * features like scrolling and collapsing animations.
  *
- * @author Matt Zaso
+ * @author Matt Zaso <matt.zaso@odopod.com>
  */
 var ExpandableAccordion = function (_ExpandableGroup) {
   inherits(ExpandableAccordion, _ExpandableGroup);
@@ -318,7 +318,7 @@ var ExpandableAccordion = function (_ExpandableGroup) {
     classCallCheck(this, ExpandableAccordion);
 
     /**
-     * @type {{item: number, offset: number}} Object A map of the expandable offsets.
+     * @type {Array.<{id: string, offset: number}>} Object A map of the expandable offsets.
      */
     var _this = possibleConstructorReturn(this, _ExpandableGroup.call(this, elements));
 
@@ -391,7 +391,7 @@ var ExpandableAccordion = function (_ExpandableGroup) {
    * When called we will check the accordion's position in the viewport and scroll
    * the user into view if needed.
    *
-   * @param {number} targetId The id of the ExpandableItem that was clicked.
+   * @param {string} targetId The id of the ExpandableItem that was clicked.
    * @private
    */
 
@@ -458,40 +458,32 @@ var ExpandableAccordion = function (_ExpandableGroup) {
  * Expandables and require different parameters. This helper chunks out and groups the
  * grouped expandables before instantiating all of them.
  *
- * @return {Array.<Expandable, ExpandableGroup>} all instances of both types.
+ * @return {Array.<ExpandableItem|ExpandableGroup|ExpandableAccordion>} all instances of both types.
  * @public
  */
 function initializeAll() {
   var elements = Array.from(document.querySelectorAll('[' + Settings.Attribute.TRIGGER + ']'));
 
-  var single = [];
-  var groups = [];
+  var singleInstances = [];
+  var groupInstances = [];
   var groupIds = [];
 
   elements.forEach(function (item) {
     var groupId = item.getAttribute(Settings.Attribute.GROUP);
     if (groupId) {
       if (!groupIds.includes(groupId)) {
-        groups.push(elements.filter(function (el) {
+        var group = elements.filter(function (el) {
           return el.getAttribute(Settings.Attribute.GROUP) === groupId;
-        }));
+        });
+        var isAnimated = group.some(function (el) {
+          return el.hasAttribute(Settings.Attribute.ANIMATED);
+        });
+        groupInstances.push(isAnimated ? new ExpandableAccordion(group) : new ExpandableGroup(group));
         groupIds.push(groupId);
       }
     } else {
-      single.push(item);
+      singleInstances.push(new ExpandableItem(item.getAttribute(Settings.Attribute.TRIGGER)));
     }
-  });
-
-  var singleInstances = single.map(function (trigger) {
-    return new ExpandableItem(trigger.getAttribute(Settings.Attribute.TRIGGER));
-  });
-  var groupInstances = groups.map(function (grouping) {
-    if (grouping.some(function (item) {
-      return item.hasAttribute(Settings.Attribute.ANIMATED);
-    })) {
-      return new ExpandableAccordion(grouping);
-    }
-    return new ExpandableGroup(grouping);
   });
 
   return singleInstances.concat(groupInstances);

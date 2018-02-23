@@ -62,7 +62,7 @@ var possibleConstructorReturn = function (self, call) {
  * default events and stopping event propagation when the scrollable element is
  * at the top or bottom of the scrollable area.
  *
- * @author Glen Cheney
+ * @author Glen Cheney <glen@odopod.com>
  */
 
 /**
@@ -224,7 +224,7 @@ var Dialog = function (_TinyEmitter) {
 
   /**
    * Dialog that can contain static images, carousels, or videos
-   * @param {Element} element Main element.
+   * @param {HTMLElement} element Main element.
    * @param {object} [opts] Instance options.
    * @constructor
    */
@@ -233,13 +233,13 @@ var Dialog = function (_TinyEmitter) {
 
     var _this = possibleConstructorReturn(this, _TinyEmitter.call(this));
 
-    if (!(element instanceof Element)) {
+    if (!(element instanceof HTMLElement)) {
       throw new TypeError('OdoDialog requires an element. Got: "' + element + '"');
     }
 
     /**
      * Base Element.
-     * @type {Element}
+     * @type {HTMLElement}
      */
     _this.element = element;
 
@@ -257,7 +257,7 @@ var Dialog = function (_TinyEmitter) {
 
     /**
      * Dialog backdrop
-     * @type {Element}
+     * @type {HTMLElement}
      * @protected
      */
     _this.backdrop = document.createElement('div');
@@ -265,14 +265,14 @@ var Dialog = function (_TinyEmitter) {
 
     /**
      * Dialog content (role=document).
-     * @type {Element}
+     * @type {HTMLElement}
      * @protected
      */
     _this.content = _this.getByClass(Dialog.Classes.CONTENT);
 
     /**
      * Elements which, when clicked, close the dialog.
-     * @type {Element}
+     * @type {HTMLElement[]}
      * @private
      */
     _this._closers = Array.from(_this.element.querySelectorAll('[data-odo-dialog-close]'));
@@ -348,7 +348,7 @@ var Dialog = function (_TinyEmitter) {
   /**
    * Find descendent element by class.
    * @param {string} name Name of the class to find.
-   * @return {?Element} The element or undefined.
+   * @return {Element|undefined} The element or undefined.
    */
 
 
@@ -365,6 +365,7 @@ var Dialog = function (_TinyEmitter) {
     this.onKeyPress = this.onKeyPress.bind(this);
     this.onClick = this.onClick.bind(this);
     this.close = this.close.bind(this);
+    this.closeWithAnimation = this.close.bind(this, false);
     // Bind undefined as the first parameter so that the event object will be
     // the second parameter and the optional viewportHeight parameter will work.
     this.onWindowResize = this.onResize.bind(this, undefined);
@@ -424,7 +425,7 @@ var Dialog = function (_TinyEmitter) {
   /**
    * Click handler on the main element. When the dialog is dismissable and the
    * user clicked outside the content (i.e. the backdrop), close it.
-   * @param {Event} evt Event object.
+   * @param {MouseEvent} evt Event object.
    * @protected
    */
 
@@ -437,7 +438,7 @@ var Dialog = function (_TinyEmitter) {
 
   /**
    * Keypress event handler
-   * @param {Event} evt Event object
+   * @param {KeyboardEvent} evt Event object
    * @protected
    */
 
@@ -533,7 +534,7 @@ var Dialog = function (_TinyEmitter) {
     window.addEventListener('resize', this.onWindowResize);
     this.element.addEventListener('click', this.onClick);
     this._closers.forEach(function (element) {
-      element.addEventListener('click', _this2.close);
+      element.addEventListener('click', _this2.closeWithAnimation);
     });
 
     if (sync === true) {
@@ -622,7 +623,7 @@ var Dialog = function (_TinyEmitter) {
     window.removeEventListener('resize', this.onWindowResize);
     this.element.removeEventListener('click', this.onClick);
     this._closers.forEach(function (element) {
-      element.removeEventListener('click', _this3.close);
+      element.removeEventListener('click', _this3.closeWithAnimation);
     });
 
     if (sync === true) {
@@ -781,7 +782,7 @@ var Dialog = function (_TinyEmitter) {
   /**
    * Trap the focus inside the given element.
    * @param {Element} node
-   * @param {Event} evt
+   * @param {KeyboardEvent} evt
    */
 
 
@@ -807,7 +808,7 @@ var Dialog = function (_TinyEmitter) {
   /**
    * Get the focusable children of the given element.
    * @param {Element} element
-   * @return {Array.<Element>}
+   * @return {Element[]}
    */
 
 
@@ -820,7 +821,7 @@ var Dialog = function (_TinyEmitter) {
    * `getClientRects` due to this issue:
    * https://github.com/jquery/jquery/issues/2227
    * http://jsfiddle.net/2tgw2yr3/
-   * @param {Element} el Element.
+   * @param {HTMLElement} el Element.
    * @return {boolean}
    */
 
@@ -837,7 +838,7 @@ var Dialog = function (_TinyEmitter) {
 
 
   Dialog._getSiblings = function _getSiblings(element) {
-    var children = Array.from(element.parentNode.children);
+    var children = Array.from(element.parentElement.children);
     var ignore = ['script', 'link', 'meta'];
     return children.filter(function (node) {
       return node !== element && !ignore.includes(node.nodeName.toLowerCase());
@@ -891,7 +892,7 @@ var Dialog = function (_TinyEmitter) {
 
   /**
    * Instantiates all instances of dialogs with the same settings
-   * @param {Object} options Object of all dialog options. Is optional.
+   * @param {object} options Object of all dialog options. Is optional.
    * @return {Dialog[]}
    */
 
@@ -988,7 +989,6 @@ Dialog.Keys = {
   TAB: 9
 };
 
-/** @type {!Object} */
 Dialog.Defaults = {
   dismissable: true,
   scrollableElement: '.odo-dialog'

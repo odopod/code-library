@@ -5,6 +5,7 @@
   "main": "dist/odo-scroll-feedback.js",
   "module": "dist/odo-scroll-feedback.esm.js",
   "odoModule": "src/scroll-feedback.js",
+  "types": "index.d.ts",
   "sideEffects": false,
   "author": "Odopod",
   "contributors": [
@@ -20,7 +21,8 @@
   "files": [
     "css",
     "dist",
-    "src"
+    "src",
+    "index.d.ts"
   ],
   "odoKeywords": [
     "events"

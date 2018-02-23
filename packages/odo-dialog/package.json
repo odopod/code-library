@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-dialog",
   "description": "Responsive window dialog component focused on a11y and extendibility",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "dist/odo-dialog.js",
   "module": "dist/odo-dialog.esm.js",
   "style": "css/odo-dialog.css",
@@ -16,8 +16,8 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-device": "^1.1.0",
-    "@odopod/odo-helpers": "^2.0.0",
+    "@odopod/odo-device": "^1.2.0",
+    "@odopod/odo-helpers": "^2.0.1",
     "tiny-emitter": "^2.0.1"
   },
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-dialog",

@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-scroll-animation",
   "description": "Performant scroll listeners.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "main": "dist/odo-scroll-animation.js",
   "module": "dist/odo-scroll-animation.esm.js",
   "odoModule": "src/scroll-animation.js",

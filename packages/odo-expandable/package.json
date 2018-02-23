@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-expandable",
   "description": "A simple, accessible combination of two elements; A trigger to handle clicks, and a target to toggle visibility.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/odo-expandable.js",
   "style": "css/odo-expandable.css",
   "module": "dist/odo-expandable.esm.js",
@@ -15,8 +15,8 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-helpers": "^2.0.0",
-    "@odopod/odo-window-events": "^1.1.0"
+    "@odopod/odo-helpers": "^2.0.1",
+    "@odopod/odo-window-events": "^1.2.0"
   },
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-expandable",
   "files": [

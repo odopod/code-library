@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-tabs",
   "description": "A component for switching between panes of content.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "dist/odo-tabs.js",
   "module": "dist/odo-tabs.esm.js",
   "style": "css/odo-tabs.css",
@@ -15,8 +15,8 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-helpers": "^2.0.0",
-    "@odopod/odo-window-events": "^1.1.0",
+    "@odopod/odo-helpers": "^2.0.1",
+    "@odopod/odo-window-events": "^1.2.0",
     "tiny-emitter": "^2.0.1"
   },
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-tabs",

@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-responsive-classes",
   "description": "Swap class names of elements using responsive attributes.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "dist/odo-responsive-classes.js",
   "module": "dist/odo-responsive-classes.esm.js",
   "odoModule": "src/responsive-classes.js",
@@ -14,8 +14,8 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-base-component": "^1.2.0",
-    "@odopod/odo-responsive-attributes": "^1.1.0"
+    "@odopod/odo-base-component": "^1.2.1",
+    "@odopod/odo-responsive-attributes": "^1.1.1"
   },
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-responsive-classes",
   "files": [

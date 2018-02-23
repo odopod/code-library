@@ -434,7 +434,7 @@ var Viewport = function () {
 
   /**
    * Add a viewport item to watch.
-   * @param {Object|Array.<Object>} options Optional options object or array of
+   * @param {object|object[]} options Optional options object or array of
    *     options objects to initialize.
    * @param {Element} options.element Element to watch.
    * @param {number|string} [options.threshold] Optional - either a number representing
@@ -442,7 +442,7 @@ var Viewport = function () {
    *     a percentage, or a string like '50%' for a percentage.
    * @param {function} options.enter Callback when the element enters view.
    * @param {function} [options.exit] Optional callback when the element exits view.
-   * @return {string|Array.<string>} Viewport item id or array of item ids if
+   * @return {string|string[]} Viewport item id or array of item ids if
    *     `options` is an array.
    */
 

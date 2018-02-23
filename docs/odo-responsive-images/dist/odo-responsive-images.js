@@ -237,7 +237,7 @@ var ResponsiveImages = function () {
     } else {
       // Create a new picture element with the same contents and replace the
       // placeholder with it.
-      var parent = placeholder.parentNode;
+      var parent = placeholder.parentElement;
       var picture = document.createElement('picture');
       picture.className = placeholder.className;
       transferChildren(placeholder, picture);
@@ -335,7 +335,7 @@ var ResponsiveImages = function () {
 
 
   ResponsiveImages.prototype._isBackgroundImage = function _isBackgroundImage(img) {
-    return img.parentNode.getAttribute('data-type') === 'background';
+    return img.parentElement.getAttribute('data-type') === 'background';
   };
 
   /**
@@ -372,14 +372,14 @@ var ResponsiveImages = function () {
 
   /**
    * Load event handler for images.
-   * @param {Event} evt Event object.
+   * @param {UIEvent} evt Image load event object.
    */
 
 
   ResponsiveImages.prototype._handleImageLoad = function _handleImageLoad(evt) {
     var _this2 = this;
 
-    var img = evt.target;
+    var img = /** @type {HTMLImageElement} */evt.target;
 
     // Exit early if this image is longer in the DOM.
     if (!img.parentNode) {
@@ -467,7 +467,7 @@ var ResponsiveImages = function () {
 
   /**
    * Remove watched images from this component.
-   * @param {Element|Array.<Element>} pictures An element or array of elements.
+   * @param {Element|Array.<Element>} placeholders An element or array of elements.
    *     The element should be the parent element of the <img>.
    */
 

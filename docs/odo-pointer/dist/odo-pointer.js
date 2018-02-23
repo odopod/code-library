@@ -1,86 +1,26 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@odopod/odo-device'), require('@odopod/odo-helpers'), require('tiny-emitter')) :
-	typeof define === 'function' && define.amd ? define(['@odopod/odo-device', '@odopod/odo-helpers', 'tiny-emitter'], factory) :
-	(global.OdoPointer = factory(global.OdoDevice,global.OdoHelpers,global.TinyEmitter));
-}(this, (function (OdoDevice,odoHelpers,TinyEmitter) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@odopod/odo-helpers'), require('tiny-emitter'), require('@odopod/odo-device')) :
+	typeof define === 'function' && define.amd ? define(['@odopod/odo-helpers', 'tiny-emitter', '@odopod/odo-device'], factory) :
+	(global.OdoPointer = factory(global.OdoHelpers,global.TinyEmitter,global.OdoDevice));
+}(this, (function (odoHelpers,TinyEmitter,OdoDevice) { 'use strict';
 
-OdoDevice = OdoDevice && OdoDevice.hasOwnProperty('default') ? OdoDevice['default'] : OdoDevice;
 TinyEmitter = TinyEmitter && TinyEmitter.hasOwnProperty('default') ? TinyEmitter['default'] : TinyEmitter;
+OdoDevice = OdoDevice && OdoDevice.hasOwnProperty('default') ? OdoDevice['default'] : OdoDevice;
 
-var settings = {
-  /** @enum {string} */
-  EventType: {
-    START: 'odopointer:start',
-    MOVE: 'odopointer:move',
-    END: 'odopointer:end'
-  },
+/** @enum {string} */
+var Direction = {
+  RIGHT: 'right',
+  LEFT: 'left',
+  UP: 'up',
+  DOWN: 'down',
+  NONE: 'no_movement'
+};
 
-  /** @enum {string} */
-  Direction: {
-    RIGHT: 'right',
-    LEFT: 'left',
-    UP: 'up',
-    DOWN: 'down',
-    NONE: 'no_movement'
-  },
-
-  /** @enum {string|boolean} */
-  TouchActionSupport: {
-    x: OdoDevice.prefixed('touchAction', 'pan-y'),
-    y: OdoDevice.prefixed('touchAction', 'pan-x'),
-    xy: OdoDevice.prefixed('touchAction', 'none')
-  },
-
-  /** @enum {string} */
-  TouchAction: {
-    x: 'pan-y',
-    y: 'pan-x',
-    xy: 'none'
-  },
-
-  /** @enum {string} */
-  Axis: {
-    X: 'x',
-    Y: 'y',
-    BOTH: 'xy'
-  },
-
-  Defaults: {
-    axis: 'xy',
-    preventEventDefault: true
-  },
-
-  /**
-   * The current velocity property will be clamped to this value (pixels/millisecond).
-   * @const {number}
-   */
-  MAX_VELOCITY: 12,
-
-  /**
-   * When the pointer is down, an interval starts to track the current velocity.
-   * @const {number}
-   */
-  VELOCITY_INTERVAL: 100,
-
-  /**
-   * Velocity required for a movement to be considered a swipe.
-   * @const {number}
-   */
-  SWIPE_VELOCITY: 0.6,
-
-  /**
-   * The scroll/drag amount (pixels) required on the draggable axis before
-   * stopping further page scrolling/movement.
-   * @const {number}
-   */
-  LOCK_THRESHOLD: 6,
-
-  /**
-   * The scroll/drag amount (pixels) required on the opposite draggable axis
-   * before dragging is deactivated for the rest of the interaction.
-   * @const {number}
-   */
-  DRAG_THRESHOLD: 5
+/** @enum {string} */
+var Axis = {
+  X: 'x',
+  Y: 'y',
+  BOTH: 'xy'
 };
 
 var classCallCheck = function (instance, Constructor) {
@@ -150,19 +90,19 @@ var possibleConstructorReturn = function (self, call) {
 };
 
 function isXAxis(axis) {
-  return axis === settings.Axis.X;
+  return axis === Axis.X;
 }
 
 function isYAxis(axis) {
-  return axis === settings.Axis.Y;
+  return axis === Axis.Y;
 }
 
 function isBothAxis(axis) {
-  return axis === settings.Axis.BOTH;
+  return axis === Axis.BOTH;
 }
 
 function hasDirection(direction) {
-  return direction !== settings.Direction.NONE;
+  return direction !== Direction.NONE;
 }
 
 function finiteOrZero(velocity) {
@@ -200,16 +140,16 @@ function getTheDirection(value1, value2, isGreater, isLess, isEqual) {
  */
 function getDirection(coord1, coord2) {
   if (Math.abs(coord1.x - coord2.x) >= Math.abs(coord1.y - coord2.y)) {
-    return getTheDirection(coord1.x, coord2.x, settings.Direction.LEFT, settings.Direction.RIGHT, settings.Direction.NONE);
+    return getTheDirection(coord1.x, coord2.x, Direction.LEFT, Direction.RIGHT, Direction.NONE);
   }
 
-  return getTheDirection(coord1.y, coord2.y, settings.Direction.UP, settings.Direction.DOWN, settings.Direction.NONE);
+  return getTheDirection(coord1.y, coord2.y, Direction.UP, Direction.DOWN, Direction.NONE);
 }
 
 function isOnAxis(axis, direction) {
-  var isXAndLeftOrRight = isXAxis(axis) && (direction === settings.Direction.LEFT || direction === settings.Direction.RIGHT);
+  var isXAndLeftOrRight = isXAxis(axis) && (direction === Direction.LEFT || direction === Direction.RIGHT);
 
-  var isYAndUpOrDown = isYAxis(axis) && (direction === settings.Direction.UP || direction === settings.Direction.DOWN);
+  var isYAndUpOrDown = isYAxis(axis) && (direction === Direction.UP || direction === Direction.DOWN);
 
   var isBothAndNotNone = isBothAxis(axis) && hasDirection(direction);
 
@@ -312,7 +252,7 @@ var PointerEvent = function () {
 
     /**
      * Direction of drag.
-     * @type {settings.Direction}
+     * @type {Direction}
      */
     this.direction = getDirection(options.start, options.end);
 
@@ -330,7 +270,7 @@ var PointerEvent = function () {
 
     /**
      * Direction of drag which excludes directions not on its axis.
-     * @type {settings.Direction}
+     * @type {Direction}
      */
     this.axisDirection = getAxisDirection(options.axis, options.start, options.end);
 
@@ -351,7 +291,7 @@ var PointerEvent = function () {
 /**
  * @fileoverview An abstraction for pointer, mouse, and touch events.
  *
- * @author Glen Cheney
+ * @author Glen Cheney <glen@odopod.com>
  */
 
 var Pointer = function (_TinyEmitter) {
@@ -359,8 +299,9 @@ var Pointer = function (_TinyEmitter) {
 
   /**
    * An abstraction layer for adding pointer events and calculating drag values.
-   * @param {Element} element Element to watch.
-   * @param {Object} options Options object.
+   * @param {HTMLElement} element Element to watch.
+   * @param {PointerOptions} options Options object.
+   * @throws {TypeError} Throws when the element parameter isn't an element.
    */
   function Pointer(element) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -372,21 +313,17 @@ var Pointer = function (_TinyEmitter) {
       throw new TypeError('OdoPointer requires an element.');
     }
 
-    var opts = Object.assign({}, Pointer.Defaults, options);
-
     /**
-     * Whether to prevent the default event action on move.
-     * @type {boolean}
-     * @private
+     * @type {PointerOptions}
      */
-    _this._shouldPreventDefault = opts.preventEventDefault;
+    _this.options = Object.assign({}, Pointer.Defaults, options);
 
     /**
      * The draggable element.
-     * @type {Element}
+     * @type {HTMLElement}
      * @private
      */
-    _this._el = element;
+    _this.element = element;
 
     /**
      * Starting location of the drag.
@@ -420,13 +357,6 @@ var Pointer = function (_TinyEmitter) {
      * @type {number}
      */
     _this._friction = 1;
-
-    /**
-     * Draggable axis.
-     * @type {string}
-     * @private
-     */
-    _this.axis = opts.axis;
 
     /**
      * Flag indicating dragging has happened. It is set on dragmove and reset
@@ -506,7 +436,7 @@ var Pointer = function (_TinyEmitter) {
      */
     _this.dragEventTarget = document;
 
-    var touchAction = Pointer.TouchActionSupport[_this.axis];
+    var touchAction = Pointer.TouchActionSupport[_this.options.axis];
 
     /**
      * Whether the browser supports the `touch-action` property associated with
@@ -516,9 +446,9 @@ var Pointer = function (_TinyEmitter) {
     _this._isTouchActionSupported = !!touchAction;
 
     // If the browser supports the touch action property, add it.
-    if (_this._shouldPreventDefault && _this._isTouchActionSupported) {
-      _this.element.style[touchAction] = Pointer.TouchAction[_this.axis];
-    } else if (_this._shouldPreventDefault && OdoDevice.HAS_TOUCH_EVENTS) {
+    if (_this.options.preventEventDefault && _this._isTouchActionSupported) {
+      _this.element.style[touchAction] = Pointer.TouchAction[_this.options.axis];
+    } else if (_this.options.preventEventDefault && OdoDevice.HAS_TOUCH_EVENTS) {
       window.addEventListener(odoHelpers.events.TOUCHMOVE, odoHelpers.noop);
     }
 
@@ -530,23 +460,23 @@ var Pointer = function (_TinyEmitter) {
     this._onStart = this._handleDragStart.bind(this);
 
     if (OdoDevice.HAS_POINTER_EVENTS) {
-      this._el.addEventListener(odoHelpers.events.POINTERDOWN, this._onStart);
+      this.element.addEventListener(odoHelpers.events.POINTERDOWN, this._onStart);
     } else {
-      this._el.addEventListener(odoHelpers.events.MOUSEDOWN, this._onStart);
+      this.element.addEventListener(odoHelpers.events.MOUSEDOWN, this._onStart);
 
       if (OdoDevice.HAS_TOUCH_EVENTS) {
-        this._el.addEventListener(odoHelpers.events.TOUCHSTART, this._onStart);
+        this.element.addEventListener(odoHelpers.events.TOUCHSTART, this._onStart);
       }
     }
 
     // Prevent images, links, etc from being dragged around.
     // http://www.html5rocks.com/en/tutorials/dnd/basics/
-    this._el.addEventListener(odoHelpers.events.DRAGSTART, Pointer._preventDefault);
+    this.element.addEventListener(odoHelpers.events.DRAGSTART, Pointer._preventDefault);
   };
 
   /**
-   * Returns the draggable element.
-   * @return {Element}
+   * Get whether dragger is enabled.
+   * @return {boolean} Whether dragger is enabled.
    */
 
 
@@ -554,7 +484,7 @@ var Pointer = function (_TinyEmitter) {
    * @return {boolean} Whether the draggable axis is the x direction.
    */
   Pointer.prototype.isXAxis = function isXAxis() {
-    return this.axis === Pointer.Axis.X;
+    return this.options.axis === Pointer.Axis.X;
   };
 
   /**
@@ -563,7 +493,7 @@ var Pointer = function (_TinyEmitter) {
 
 
   Pointer.prototype.isYAxis = function isYAxis() {
-    return this.axis === Pointer.Axis.Y;
+    return this.options.axis === Pointer.Axis.Y;
   };
 
   /**
@@ -572,7 +502,7 @@ var Pointer = function (_TinyEmitter) {
 
 
   Pointer.prototype.isBothAxis = function isBothAxis() {
-    return this.axis === Pointer.Axis.BOTH;
+    return this.options.axis === Pointer.Axis.BOTH;
   };
 
   /**
@@ -594,7 +524,7 @@ var Pointer = function (_TinyEmitter) {
   /**
    * If draggable is enabled and it's a left click with the mouse,
    * dragging can start.
-   * @param {Event} evt Event object.
+   * @param {TouchEvent|MouseEvent|PointerEvent} evt Event object.
    * @return {boolean}
    * @private
    */
@@ -617,7 +547,7 @@ var Pointer = function (_TinyEmitter) {
 
   /**
    * Drag start handler.
-   * @param  {Event} evt The drag event object.
+   * @param {TouchEvent|MouseEvent|PointerEvent} evt The drag event object.
    * @private
    */
 
@@ -646,7 +576,7 @@ var Pointer = function (_TinyEmitter) {
 
   /**
    * Drag move, after applyDraggableElementPosition has happened
-   * @param {Event} evt The dragger event.
+   * @param {TouchEvent|MouseEvent|PointerEvent} evt The dragger event.
    * @private
    */
 
@@ -662,14 +592,14 @@ var Pointer = function (_TinyEmitter) {
 
     // Abort if the developer prevented default on the custom event or if the
     // browser supports touch-action (which will do the "locking" for us).
-    if (!isPrevented && this._shouldPreventDefault && !this._isTouchActionSupported) {
+    if (!isPrevented && this.options.preventEventDefault && !this._isTouchActionSupported) {
       this._finishDragMove(evt);
     }
   };
 
   /**
    * Finish the drag move function.
-   * @param {Event} evt Event object.
+   * @param {TouchEvent|MouseEvent|PointerEvent} evt Event object.
    * @private
    */
 
@@ -826,7 +756,7 @@ var Pointer = function (_TinyEmitter) {
    * Make a new event with data.
    * @param {Pointer.EventType} type Event type.
    * @param {Event} evt Native event object.
-   * @return {!PointerEvent}
+   * @return {!Pointer.Event}
    * @private
    */
 
@@ -837,7 +767,7 @@ var Pointer = function (_TinyEmitter) {
       pointerId: this.id,
       currentTarget: this.element,
       target: evt.target,
-      axis: this.axis,
+      axis: this.options.axis,
       deltaTime: this.deltaTime,
       delta: this.delta,
       start: this.pageStart,
@@ -970,23 +900,23 @@ var Pointer = function (_TinyEmitter) {
     this._removeDragHandlers();
 
     // Remove pointer/mouse/touch events.
-    this._el.removeEventListener(odoHelpers.events.POINTERDOWN, this._onStart);
-    this._el.removeEventListener(odoHelpers.events.MOUSEDOWN, this._onStart);
-    this._el.removeEventListener(odoHelpers.events.TOUCHSTART, this._onStart);
+    this.element.removeEventListener(odoHelpers.events.POINTERDOWN, this._onStart);
+    this.element.removeEventListener(odoHelpers.events.MOUSEDOWN, this._onStart);
+    this.element.removeEventListener(odoHelpers.events.TOUCHSTART, this._onStart);
 
     if (this._isTouchActionSupported) {
-      this._el.style[Pointer.TouchActionSupport[this.axis]] = '';
-    } else if (this._shouldPreventDefault && OdoDevice.HAS_TOUCH_EVENTS) {
+      this.element.style[Pointer.TouchActionSupport[this.options.axis]] = '';
+    } else if (this.options.preventEventDefault && OdoDevice.HAS_TOUCH_EVENTS) {
       window.removeEventListener(odoHelpers.events.TOUCHMOVE, odoHelpers.noop);
     }
 
-    this._el = null;
+    this.element = null;
     this.dragEventTarget = null;
   };
 
   /**
    * Whether the event is from a touch.
-   * @param {Event} evt Event object.
+   * @param {object} evt Event object.
    * @return {boolean}
    */
 
@@ -997,7 +927,7 @@ var Pointer = function (_TinyEmitter) {
 
   /**
    * Whether the event is from a pointer cancel or touch cancel.
-   * @param {Event} evt Event object.
+   * @param {TouchEvent|MouseEvent|PointerEvent} evt Event object.
    * @return {boolean}
    * @private
    */
@@ -1010,7 +940,7 @@ var Pointer = function (_TinyEmitter) {
   /**
    * Retrieve the page x and page y based on an event. It normalizes
    * touch events, mouse events, and pointer events.
-   * @param {Event} evt Event object.
+   * @param {TouchEvent|MouseEvent|PointerEvent} evt Event object.
    * @return {!Coordinate} The pageX and pageY of the press.
    * @private
    */
@@ -1034,17 +964,6 @@ var Pointer = function (_TinyEmitter) {
   };
 
   createClass(Pointer, [{
-    key: 'element',
-    get: function get$$1() {
-      return this._el;
-    }
-
-    /**
-     * Get whether dragger is enabled.
-     * @return {boolean} Whether dragger is enabled.
-     */
-
-  }, {
     key: 'isEnabled',
     get: function get$$1() {
       return this._enabled;
@@ -1076,9 +995,77 @@ var Pointer = function (_TinyEmitter) {
   return Pointer;
 }(TinyEmitter);
 
-Object.assign(Pointer, settings);
+/** @enum {string} */
 
-/** @type {PointerEvent} */
+
+Pointer.Direction = Direction;
+
+/** @enum {string} */
+Pointer.Axis = Axis;
+
+/** @enum {string} */
+Pointer.EventType = {
+  START: 'odopointer:start',
+  MOVE: 'odopointer:move',
+  END: 'odopointer:end'
+};
+
+/** @enum {string|boolean} */
+Pointer.TouchActionSupport = {
+  x: OdoDevice.prefixed('touchAction', 'pan-y'),
+  y: OdoDevice.prefixed('touchAction', 'pan-x'),
+  xy: OdoDevice.prefixed('touchAction', 'none')
+};
+
+/** @enum {string} */
+Pointer.TouchAction = {
+  x: 'pan-y',
+  y: 'pan-x',
+  xy: 'none'
+};
+
+/**
+ * @typedef {{axis: Axis, preventEventDefault: boolean}} PointerOptions
+ */
+
+/** @type {PointerOptions} */
+Pointer.Defaults = {
+  axis: 'xy',
+  preventEventDefault: true
+};
+
+/**
+ * The current velocity property will be clamped to this value (pixels/millisecond).
+ * @const {number}
+ */
+Pointer.MAX_VELOCITY = 12;
+
+/**
+ * When the pointer is down, an interval starts to track the current velocity.
+ * @const {number}
+ */
+Pointer.VELOCITY_INTERVAL = 100;
+
+/**
+ * Velocity required for a movement to be considered a swipe.
+ * @const {number}
+ */
+Pointer.SWIPE_VELOCITY = 0.6;
+
+/**
+ * The scroll/drag amount (pixels) required on the draggable axis before
+ * stopping further page scrolling/movement.
+ * @const {number}
+ */
+Pointer.LOCK_THRESHOLD = 6;
+
+/**
+ * The scroll/drag amount (pixels) required on the opposite draggable axis
+ * before dragging is deactivated for the rest of the interaction.
+ * @const {number}
+ */
+Pointer.DRAG_THRESHOLD = 5;
+
 Pointer.Event = PointerEvent;
 
 return Pointer;

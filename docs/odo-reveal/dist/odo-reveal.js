@@ -22,12 +22,11 @@ var classCallCheck = function (instance, Constructor) {
  * TODO: Add a (better) way to ignore/add/remove images or videos.
  */
 
-/**
- * @param {Element} element Main element for the module.
- * @constructor
- */
-
 var Reveal = function () {
+  /**
+   * @param {Element} element Main element for the module.
+   * @constructor
+   */
   function Reveal(element) {
     var _this = this;
 
@@ -55,6 +54,10 @@ var Reveal = function () {
     // the type is faded in immediately and not given to the viewport
     // to track.
     if (Reveal.HAS_SCROLL_ANIMATION) {
+      /**
+       * Viewport id to remove it later.
+       * @type {string}
+       */
       this.id = OdoViewport.add({
         element: element,
         threshold: odoHelpers.getPercentageOption(element.getAttribute('data-threshold'), '25%'),
@@ -161,7 +164,7 @@ var Reveal = function () {
 
   /**
    * Auto-initialize all odo reveal elements currently on the page.
-   * @param {Element} [context] Optional context to initialize elements within.
+   * @param {Element|Document} [context] Optional context to initialize elements within.
    * @return {Array.<Reveal>}
    */
 

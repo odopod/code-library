@@ -6,6 +6,40 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Affix [1.2.0], Device [1.2.0], Draggable [1.2.0], Dropdown [2.1.0], Responsive Images [1.2.0], Scroll Animation [1.2.0], Scroll Feedback [1.2.0], Sticky Headers [1.2.0], Window Events [1.2.0] - 2018-02-23
+### Added
+* `index.d.ts` type definitions.
+
+### Changed
+* JSDoc updates/fixes
+
+## Background Video [1.1.1], Dual-viewer [1.1.1], Expandable [0.1.1], Helpers [2.0.1], Hotspots [1.2.1], Module [1.2.1], Object-fit [1.1.1], On-swipe [1.1.1], Responsive Attributes [1.1.1], Responsive Classes [1.1.1], Reveal [2.0.1], Share [1.1.1], Tabs [2.0.1], Tap [1.1.1], Video [1.2.1], Viewport [1.1.1] - 2018-02-23
+### Changed
+* JSDoc updates/fixes
+
+## Base Component [1.2.1], Dialog [2.0.1] - 2018-02-23
+### Changed
+* JSDoc updates/fixes
+* Type definitions updates.
+
+## Carousel [2.1.0] - 2018-02-23
+### Added
+* `index.d.ts` type definitions.
+* Export `CarouselEvent` from `OdoCarousel` (`OdoCarousel.CarouselEvent`).
+
+### Changed
+* JSDoc updates/fixes
+
+## Pointer [1.2.0] - 2018-02-23
+### Added
+* `index.d.ts` type definitions.
+
+### Changed
+* JSDoc updates/fixes
+
+### Removed
+* Remove private `axis` property. Use `options.axis` instead.
+
 ## Expandable [0.1.0] - 2018-02-14
 ### Added
 * New OdoExpandable (accordion) component.

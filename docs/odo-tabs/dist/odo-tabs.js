@@ -135,7 +135,7 @@ var Tabs = function (_TinyEmitter) {
 
     /**
      * Tab pane elements.
-     * @type {Array.<Element>}
+     * @type {Array.<HTMLElement>}
      */
     _this.panes = _this.anchors.map(function (anchor) {
       return document.getElementById(anchor.getAttribute('href').substring(1));
@@ -143,9 +143,9 @@ var Tabs = function (_TinyEmitter) {
 
     /**
      * Wrapper for the panes.
-     * @type {Element}
+     * @type {HTMLElement}
      */
-    _this.panesContainer = _this.panes[0].parentNode;
+    _this.panesContainer = _this.panes[0].parentElement;
 
     /**
      * Get an array of [possible] hashes.
@@ -334,7 +334,7 @@ var Tabs = function (_TinyEmitter) {
 
   /**
    * Retrieve the hash without the `#` from the url.
-   * @return {string}
+   * @return {number}
    * @private
    */
 

@@ -89,7 +89,7 @@ var CarouselEvent = function () {
 
     this.type = type;
 
-    /** @type {Element} */
+    /** @type {HTMLElement} */
     this.target = carousel.element;
 
     /** @type {number} carousel slid from this index. */
@@ -189,27 +189,29 @@ var settings = {
  * A simple string replacement template with double curly braces. You can use
  * nested objects and functions too.
  *
- * Usage:
- *     template("Today is {{ day }}", {
- *       day: 'Friday'
- *     }); // "Today is Friday"
+ * @example
+ * // "Today is Thursday"
+ * template("Today is {{ day }}", {
+ *   day: 'Thursday',
+ * });
  *
- *     template("Today is {{ month.day }}", {
- *       month: {
- *         day: "Friday"
- *       }
- *     }); // "Today is Friday
+ * // "Today is Friday"
+ * template("Today is {{ month.day }}", {
+ *   month: {
+ *     day: 'Friday',
+ *   },
+ * });
  *
- *     template("Today is {{ day }}", {
- *       dayOfTheWeek: 'Friday',
- *       day: function() {
- *         return this.dayOfTheWeek;
- *       }
- *     }); // "Today is Friday"
- *
+ * // "Today is Saturday"
+ * template("Today is {{ day }}", {
+ *   today: 'Saturday',
+ *   day() {
+ *     return this.today;
+ *   },
+ * });
  *
  * @param {string} str Template.
- * @param {Object} data Data object with keys which match your template.
+ * @param {object} data Data object with keys which match your template.
  * @return {string}
  */
 function template(str, data) {
@@ -251,6 +253,11 @@ function template(str, data) {
   });
 }
 
+/**
+ * Parse the transform matrix into x and y translation values.
+ * @param {string} str Transform matrix, or "none".
+ * @return {{ x: number, y: number}}
+ */
 function getTranslate(str) {
   // If no transform is set, the computed transform will be "none".
   if (str === 'none') {
@@ -306,14 +313,14 @@ function toggleFocusability(parent, canFocus) {
  * @fileoverview A UI Component for creating versatile carousels. They are
  * peformant, draggable, and can ininitely loop.
  *
- * @author glen@odopod.com (Glen Cheney)
+ * @author Glen Cheney <glen@odopod.com>
  */
 
 var Carousel = function (_TinyEmitter) {
   inherits(Carousel, _TinyEmitter);
 
   /**
-   * @param {Element} element The outermost carousel element.
+   * @param {HTMLElement} element The outermost carousel element.
    * @param {Object} [options] An options object.
    * @constructor
    * @throws {TypeError} if element isn't an element.
@@ -324,7 +331,7 @@ var Carousel = function (_TinyEmitter) {
 
     var _this = possibleConstructorReturn(this, _TinyEmitter.call(this));
 
-    if (!(element instanceof Element)) {
+    if (!(element instanceof HTMLElement)) {
       throw new TypeError('OdoCarousel requires an element. Got: "' + element + '"');
     }
 
@@ -371,7 +378,7 @@ var Carousel = function (_TinyEmitter) {
 
     /**
      * The slide container's parent.
-     * @type {Element}
+     * @type {HTMLElement}
      * @private
      */
     _this._slideContainerParentEl = null;
@@ -379,14 +386,14 @@ var Carousel = function (_TinyEmitter) {
     /**
      * The container for the slides and the element which is moved around with
      * transforms or absolute positioning.
-     * @type {Element}
+     * @type {HTMLElement}
      * @private
      */
     _this._carouselEl = null;
 
     /**
      * An array of slides (elements) in the carousel.
-     * @type {Array.<!Element>}
+     * @type {Array.<!HTMLElement>}
      * @private
      */
     _this._slides = [];
@@ -448,7 +455,7 @@ var Carousel = function (_TinyEmitter) {
     /**
      * The id returned from onTransitionEnd which is used to cancel
      * the transitionend listener.
-     * @type {string}
+     * @type {number}
      */
     _this._transitionId = null;
 
@@ -512,7 +519,7 @@ var Carousel = function (_TinyEmitter) {
 
     /**
      * Pointer attached to the main element. Used for fading carousels.
-     * @type {OdoDraggable}
+     * @type {OdoPointer}
      */
     _this.pointer = null;
 
@@ -539,9 +546,9 @@ var Carousel = function (_TinyEmitter) {
   /**
    * Finds an element within this class' main element based on a class name.
    * @param {string} className Class name to search for.
-   * @param {Element} [context] Optionally provide the context (scope)
+   * @param {HTMLElement} [context] Optionally provide the context (scope)
    *     for the query. Default is the main element of the class.
-   * @return {Array.<Element>} An array which may or may not contain the element
+   * @return {HTMLElement[]} An array which may or may not contain the element
    *     which was searched for.
    */
 
@@ -555,8 +562,8 @@ var Carousel = function (_TinyEmitter) {
   /**
    * Retrieve an element by its class name.
    * @param {string} className Class name to search for.
-   * @param {Element} [context] Optinal scope for search.
-   * @return {?Element} The element or null if it isn't found.
+   * @param {HTMLElement} [context] Optinal scope for search.
+   * @return {HTMLElement|null} The element or null if it isn't found.
    */
 
 
@@ -960,7 +967,7 @@ var Carousel = function (_TinyEmitter) {
 
   /**
    * Retreives the cached carousel wrapper element.
-   * @return {Element}
+   * @return {HTMLElement}
    */
 
 
@@ -970,7 +977,7 @@ var Carousel = function (_TinyEmitter) {
 
   /**
    * Retreives the cached carousel element.
-   * @return {Element}
+   * @return {HTMLElement}
    */
 
 
@@ -980,7 +987,7 @@ var Carousel = function (_TinyEmitter) {
 
   /**
    * Returns the array of slides in the carousel.
-   * @return {!Array.<!Element>} The slides array.
+   * @return {!Array.<!HTMLElement>} The slides array.
    */
 
 
@@ -991,7 +998,7 @@ var Carousel = function (_TinyEmitter) {
   /**
    * Get the slide element at the given index.
    * @param {number} index The logical index of the slide you want.
-   * @return {Element} The slide element.
+   * @return {HTMLElement} The slide element.
    */
 
 
@@ -1057,18 +1064,18 @@ var Carousel = function (_TinyEmitter) {
    * @param {number} index Starting index.
    * @param {number} displacement Offset from the starting index. Can be negative
    *     or positive. For example, -2 or 2.
-   * @param {number} length Length of the list.
    * @return {number} The index of the relative displacement, wrapping around
    *     the end of the list to the start when the displacement is larger than
    *     what's left in the list.
    */
 
 
-  Carousel.prototype._getRelativeIndex = function _getRelativeIndex(index, displacment) {
-    return odoHelpers.wrapAroundList(index, displacment, this._slides.length);
+  Carousel.prototype._getRelativeIndex = function _getRelativeIndex(index, displacement) {
+    return odoHelpers.wrapAroundList(index, displacement, this._slides.length);
   };
 
   /**
+   * @param {number} index Index to test.
    * @return {boolean} Whether a given index is out of range of the carousel.
    */
 
@@ -1076,6 +1083,13 @@ var Carousel = function (_TinyEmitter) {
   Carousel.prototype.isIndexOutOfRange = function isIndexOutOfRange(index) {
     return index <= -1 || index >= this._slides.length;
   };
+
+  /**
+   * Constrain an index within bounds.
+   * @param {number} index Index to clamp.
+   * @return {number}
+   */
+
 
   Carousel.prototype.clampIndexToSlides = function clampIndexToSlides(index) {
     return odoHelpers.clamp(index, 0, this._slides.length - 1);
@@ -1123,8 +1137,8 @@ var Carousel = function (_TinyEmitter) {
 
   /**
    * Retrieves the slide children.
-   * @param {Element=} optSlide Slide to look within.
-   * @return {Array.<Element>} NodeList of slide children.
+   * @param {HTMLElement} [optSlide] Slide to look within.
+   * @return {HTMLElement[]} NodeList of slide children.
    * @private
    */
 
@@ -1171,7 +1185,7 @@ var Carousel = function (_TinyEmitter) {
 
   /**
    * Gets the slide positions (offsets from the left|top) array.
-   * @param {Array.<Element>} slideSet the slides array.
+   * @param {HTMLElement[]} slideSet the slides array.
    * @return {Array.<number>} array of slide positions.
    * @private
    */
@@ -1220,7 +1234,7 @@ var Carousel = function (_TinyEmitter) {
 
   /**
    * Gets the adjusted position.
-   * @param {Element} destinationSlide The slide the carousel is headed to.
+   * @param {HTMLElement} destinationSlide The slide the carousel is headed to.
    * @return {number} The position it is.
    * @private
    */
@@ -1250,7 +1264,7 @@ var Carousel = function (_TinyEmitter) {
 
   /**
    * Adjust the destination position again if there are slide children.
-   * @param {Element} destinationSlide Slide element.
+   * @param {HTMLElement} destinationSlide Slide element.
    * @param {number} destinationPosition Where the slide would initially go.
    * @param {number} carouselSize Width or height of the carousel element.
    * @return {number} New destination position.
@@ -1612,18 +1626,18 @@ var Carousel = function (_TinyEmitter) {
   /**
    * Goes to a given slide.
    * @param {!number} domIndex The slide index relative to DOM order.
-   * @param {boolean=} optNoAnimation Whether going to the slide should animate.
+   * @param {boolean} [noAnimation] Whether going to the slide should animate.
    * @protected
    */
 
 
-  Carousel.prototype.fadeToSlide = function fadeToSlide(domIndex, optNoAnimation) {
+  Carousel.prototype.fadeToSlide = function fadeToSlide(domIndex, noAnimation) {
     // Get next and previous slides.
-    var nextSlide = this.getSlide(domIndex, true);
-    var previousSlide = this.getSlide(this.domIndex, true);
+    var nextSlide = this.getSlide(domIndex);
+    var previousSlide = this.getSlide(this.domIndex);
 
     // Listen for transitionend if it will animate.
-    if (!optNoAnimation) {
+    if (!noAnimation) {
       // Going to a new slide, wait for callback.
       this._transitionId = odoHelpers.onTransitionEnd(nextSlide, this._transitionDone, this);
     }
@@ -1648,7 +1662,7 @@ var Carousel = function (_TinyEmitter) {
     this.domIndex = domIndex;
 
     // Emit event for slide start.
-    if (!optNoAnimation) {
+    if (!noAnimation) {
       this._toNewSlide();
     }
   };
@@ -1656,19 +1670,19 @@ var Carousel = function (_TinyEmitter) {
   /**
    * Goes to a given slide.
    * @param {!number} domIndex The slide index relative to DOM order.
-   * @param {boolean=} optNoAnimation Whether going to the slide should animate.
+   * @param {boolean} [noAnimation] Whether going to the slide should animate.
    * @protected
    */
 
 
-  Carousel.prototype.goToSlide = function goToSlide(domIndex, optNoAnimation) {
+  Carousel.prototype.goToSlide = function goToSlide(domIndex, noAnimation) {
     // Get the destion slide element from the current DOM order.
     var destinationSlide = this.getSlide(this._getLogicalIndex(domIndex));
 
     // If the carousel skips inbetween slides, reposition them.
     // DOM index is reassinged here because if the slides are repositioned,
     // the DOM index of the carousel changes.
-    var updatedDomIndex = this._maybeSetJumpedSlides(domIndex, optNoAnimation);
+    var updatedDomIndex = this._maybeSetJumpedSlides(domIndex, noAnimation);
 
     // The position the container will go to.
     var adjustedPosition = this._getNewPosition(destinationSlide) * -100 + '%';
@@ -1679,7 +1693,7 @@ var Carousel = function (_TinyEmitter) {
 
     // Set the css styles to move the carousel element. This also dispatches
     // the slide start event if the carousel element will move with animation.
-    this._moveToPosition(adjustedPosition, optNoAnimation);
+    this._moveToPosition(adjustedPosition, noAnimation);
   };
 
   /**
@@ -1687,14 +1701,14 @@ var Carousel = function (_TinyEmitter) {
    * instead of the private one to abstract the DOM order stuff.
    * @param {number} index The logical, zero based index of the slide you wish
    *     the carousel to go to.
-   * @param {boolean=} optNoAnimation Optional skip the animation in goToSlide.
+   * @param {boolean} [noAnimation] Optional skip the animation in goToSlide.
    * @return {boolean} Whether the carousel will go to the specified slide.
    */
 
 
-  Carousel.prototype.setSelectedIndex = function setSelectedIndex(index, optNoAnimation) {
+  Carousel.prototype.setSelectedIndex = function setSelectedIndex(index, noAnimation) {
     var domIndex = this._getDomIndex(index);
-    var canNavigate = this._canNavigate(domIndex, optNoAnimation);
+    var canNavigate = this._canNavigate(domIndex, noAnimation);
 
     // Will go the the give slide.
     if (canNavigate) {
@@ -1716,9 +1730,9 @@ var Carousel = function (_TinyEmitter) {
       this._setPaddleState();
       this._setPaginationState();
       if (this.options.isFade) {
-        this.fadeToSlide(domIndex, optNoAnimation);
+        this.fadeToSlide(domIndex, noAnimation);
       } else {
-        this.goToSlide(domIndex, optNoAnimation);
+        this.goToSlide(domIndex, noAnimation);
       }
     }
 
@@ -1728,7 +1742,7 @@ var Carousel = function (_TinyEmitter) {
 
   /**
    * Find the nearest slide, and move the carousel to that.
-   * @param {boolean} isNext Whether it should go to the nearest slide, but
+   * @param {boolean} [isNext] Whether it should go to the nearest slide, but
    *     only in the next direction. False means it should go previous and
    *     anything not true or false will go to the nearest slide regardless
    *     of direction.
@@ -2014,6 +2028,15 @@ var Carousel = function (_TinyEmitter) {
     return hasVelocity && (this.options.isLooped || !this.isLastSlide()) && (direction === OdoPointer.Direction.LEFT || direction === OdoPointer.Direction.UP);
   };
 
+  /**
+   * Decide what to do after the user drags the carousel.
+   * @param {Coordinate} velocity Velocity for x and y directions.
+   * @param {OdoPointer.Direction} direction Drag direction.
+   * @param {boolean} didMoveOnAxis Whether the drag direction was on the defined axis.
+   * @protected
+   */
+
+
   Carousel.prototype.navigateAfterDrag = function navigateAfterDrag(velocity, direction, didMoveOnAxis) {
     var hasVelocity = this.hasDragged && this.draggable.pointer.hasVelocity(velocity);
 
@@ -2168,6 +2191,7 @@ var Carousel = function (_TinyEmitter) {
 Object.assign(Carousel, settings);
 
 Carousel.template = template;
+Carousel.CarouselEvent = CarouselEvent;
 
 // Export for testing.
 Carousel._getTranslate = getTranslate;

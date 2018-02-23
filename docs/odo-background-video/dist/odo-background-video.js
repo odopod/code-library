@@ -39,7 +39,7 @@ var createClass = function () {
  * the element comes into view and falls back to an image if the browser cannot
  * autoplay video.
  *
- * @author glen@odopod.com (Glen Cheney)
+ * @author Glen Cheney <glen@odopod.com>
  * @author Evan Vaughn
  */
 

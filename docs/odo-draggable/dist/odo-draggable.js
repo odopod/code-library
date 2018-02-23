@@ -139,7 +139,7 @@ var Draggable = function (_TinyEmitter) {
 
     /**
      * The draggable element.
-     * @type {Element}
+     * @type {HTMLElement}
      * @private
      */
     var _this = possibleConstructorReturn(this, _TinyEmitter.call(this));
@@ -154,7 +154,7 @@ var Draggable = function (_TinyEmitter) {
 
     /**
      * The element which contains the target.
-     * @type {Element}
+     * @type {HTMLElement}
      * @private
      */
     _this._parentEl = element.parentNode;
@@ -559,14 +559,14 @@ var Draggable = function (_TinyEmitter) {
 
   /**
    * Returns the current position of the draggable element.
-   * @param {boolean} optAsPercent Optionally retrieve percentage values instead
+   * @param {boolean} [asPercent] Optionally retrieve percentage values instead
    *     of pixel values.
    * @return {Coordinate} X and Y coordinates of the draggable element.
    */
 
 
-  Draggable.prototype.getPosition = function getPosition(optAsPercent) {
-    if (optAsPercent) {
+  Draggable.prototype.getPosition = function getPosition(asPercent) {
+    if (asPercent) {
       return new odoHelpers.Coordinate(this._currentPosition.x / this._parentEl.offsetWidth * 100, this._currentPosition.y / this._parentEl.offsetHeight * 100);
     }
     return this._currentPosition;

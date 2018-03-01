@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Video [1.2.2] - 2018-02-28
+### Fixed
+* Update autoplay test so that iOS 11 passes [stricter requirements](https://webkit.org/blog/6784/new-video-policies-for-ios/).
+* Update base64 encoded video string to be shorter.
+
+## Background Video [1.1.2] - 2018-02-28
+### Fixed
+* Update `OdoVideo` dependency.
+
 ## Affix [1.2.0], Device [1.2.0], Draggable [1.2.0], Dropdown [2.1.0], Responsive Images [1.2.0], Scroll Animation [1.2.0], Scroll Feedback [1.2.0], Sticky Headers [1.2.0], Window Events [1.2.0] - 2018-02-23
 ### Added
 * `index.d.ts` type definitions.

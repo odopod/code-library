@@ -51,9 +51,8 @@ This has a couple benefits:
 
 * No dependencies for odo are bundled with their dist files. For example, the `debounce` package is bundled in a couple odo components.
 * Use the same babel preset for your app's code _and_ odo components. Maybe you're using [`babel-preset-env`](https://github.com/babel/babel-preset-env) so that you can compile less.
-* Less boilerplate code. Each odo component comes with webpack's [UMD](https://github.com/umdjs/umd) [wrapper](https://webpack.js.org/configuration/output/#output-librarytarget) so that it can work in multiple environments.
 
-Use the `alias` object to map requests for odo components to their source files instead of dist files. This configuration is intended for webpack v2.
+Use the `alias` object to map requests for odo components to their source files instead of dist files. This configuration is intended for webpack 2, 3, or 4.
 
 ```js
 // Webpack config

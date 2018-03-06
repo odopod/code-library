@@ -1,3 +1,10 @@
+// .grid
+.#{$grid-grid},
+.#{$grid-container} {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-gap: map-get($grid-gutter-width, xs);
+}
 
 // .container
 .#{$grid-container} {
@@ -5,35 +12,11 @@
   max-width: $grid-max-width--mobile;
   margin-left: auto;
   margin-right: auto;
-  @include clearfix();
 }
 
 .#{$grid-container}--full\@xs {
   width: auto;
   max-width: none;
-}
-
-// .row
-.#{$grid-row} {
-  margin-left: map-get($grid-gutter-width, xs) / -2;
-  margin-right: map-get($grid-gutter-width, xs) / -2;
-  @include clearfix();
-}
-
-.#{$grid-row}--flex {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.#{$grid-row}--centered {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.#{$grid-row}--flex::after,
-.#{$grid-row}--centered::after {
-  content: none;
 }
 
 // .aspect
@@ -51,55 +34,73 @@
 }
 
 // Create basic styles for every grid class.
-@include sassplate-grid-columns();
+@include sassplate-grid-item-styles();
 
 @include breakpoint(sm, true) {
-  @include sassplate-grid(xs, 6);
-  @include sassplate-gutterless-row(xs);
+  @include sassplate-grid-spans-offsets(xs, 6);
+  @include sassplate-grid-ratios(xs);
+  @include sassplate-gutterless-class(xs);
 }
 
 @include breakpoint(sm) {
 
   @if map-has-key($grid-gutter-width, sm) {
-    @include sassplate-breakpoint-grid-gutters(sm);
+    .#{$grid-container},
+    .#{$grid-grid} {
+      grid-gap: map-get($grid-gutter-width, sm);
+      grid-template-columns: repeat(#{$grid-columns}, minmax(0, 1fr));
+    }
+  } @else {
+    .#{$grid-container},
+    .#{$grid-grid} {
+      grid-template-columns: repeat(#{$grid-columns}, minmax(0, 1fr));
+    }
   }
 
-  @include sassplate-grid(sm);
-  @include sassplate-gutterless-row(sm);
-
-  // Add more padding to the container class.
   .#{$grid-container} {
     width: map-get($grid-container-size, sm);
     max-width: $grid-max-width--desktop;
   }
+
+  @include sassplate-grid-spans-offsets(sm, $grid-columns);
+  @include sassplate-grid-ratios(sm);
+  @include sassplate-gutterless-class(sm);
 }
 
 @include breakpoint(md) {
 
   @if map-has-key($grid-gutter-width, md) {
-    @include sassplate-breakpoint-grid-gutters(md);
+    .#{$grid-container},
+    .#{$grid-grid} {
+      grid-gap: map-get($grid-gutter-width, md);
+    }
   }
-
-  @include sassplate-grid(md);
-  @include sassplate-gutterless-row(md);
 
   .#{$grid-container} {
     width: map-get($grid-container-size, md);
   }
+
+  @include sassplate-grid-spans-offsets(md, $grid-columns);
+  @include sassplate-grid-ratios(md);
+  @include sassplate-gutterless-class(md);
 }
 
 @include breakpoint(lg) {
 
   @if map-has-key($grid-gutter-width, lg) {
-    @include sassplate-breakpoint-grid-gutters(lg);
+    .#{$grid-container},
+    .#{$grid-grid} {
+      grid-gap: map-get($grid-gutter-width, lg);
+    }
   }
-
-  @include sassplate-grid(lg);
-  @include sassplate-gutterless-row(lg);
 
   .#{$grid-container} {
     width: map-get($grid-container-size, lg);
   }
+
+  @include sassplate-grid-spans-offsets(lg, $grid-columns);
+  @include sassplate-grid-ratios(lg);
+  @include sassplate-gutterless-class(lg);
 }
 
-@include sassplate-gutterless-row();
+@include sassplate-gutterless-class();

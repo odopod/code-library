@@ -1,5 +1,5 @@
 @function sassplate-get-column-selector($number, $breakpoint) {
-  @return ".#{$grid-prefix}-#{$number}\\@#{$breakpoint}";
+  @return ".#{$grid-prefix}-#{$number}#{sassplate-get-breakpoint-suffix($breakpoint)}";
 }
 
 @function sassplate-get-breakpoint-suffix($breakpoint-name: "") {
@@ -28,39 +28,11 @@
   @return $selectors;
 }
 
-@mixin sassplate-grid-columns() {
-  $selectors: sassplate-get-all-grid-breakpoint-selectors();
-
-  #{$selectors} {
-    position: relative;
-    box-sizing: border-box;
-    // Prevent columns from collapsing when empty
-    min-height: 1px;
-    // Inner gutter via padding
-    padding-left: map-get($grid-gutter-width, xs) / 2;
-    padding-right: map-get($grid-gutter-width, xs) / 2;
-  }
-}
-
-@mixin sassplate-breakpoint-grid-gutters($breakpoint-name) {
-  .#{$grid-row} {
-    margin-left: map-get($grid-gutter-width, $breakpoint-name) / -2;
-    margin-right: map-get($grid-gutter-width, $breakpoint-name) / -2;
-  }
-
-  $selectors: sassplate-get-all-grid-breakpoint-selectors();
-
-  #{$selectors} {
-    padding-left: map-get($grid-gutter-width, $breakpoint-name) / 2;
-    padding-right: map-get($grid-gutter-width, $breakpoint-name) / 2;
-  }
-}
-
-@mixin sassplate-float-grid-columns($breakpoint) {
-  $selectors: sassplate-get-grid-breakpoint-selectors($breakpoint);
-
-  #{$selectors} {
-    float: left;
+@mixin sassplate-grid-item-styles() {
+  // `display: subgrid` should be used here in the future when it's supported.
+  #{sassplate-get-all-grid-breakpoint-selectors()} {
+    display: grid;
+    grid-column: 1 / -1;
   }
 }
 
@@ -87,59 +59,26 @@
   }
 }
 
-@mixin sassplate-grid-column($index, $columns, $breakpoint, $type) {
-  @if ($type == "width") and ($index > 0) {
-    .#{$grid-prefix}-#{$index}\@#{$breakpoint} {
-      width: percentage($index / $columns);
-    }
-  }
-  @if $type == "push" {
-    .#{$grid-prefix}-push-#{$index}\@#{$breakpoint} {
-      left: if($index > 0, percentage($index / $columns), auto);
-    }
-  }
-  @if $type == "pull" {
-    .#{$grid-prefix}-pull-#{$index}\@#{$breakpoint} {
-      right: if($index > 0, percentage($index / $columns), auto);
-    }
-  }
-  @if ($type == "offset") {
-    .#{$grid-prefix}-offset-#{$index}\@#{$breakpoint} {
-      margin-left: percentage($index / $columns);
-    }
-  }
-}
-
-@mixin sassplate-gutterless-row($breakpoint-name: "") {
-  $modifier: sassplate-get-breakpoint-suffix($breakpoint-name);
-
-  // .row@md
-  .#{$grid-row}--gutterless#{$modifier} {
-    margin-left: 0;
-    margin-right: 0;
-
-    // *[class*="col-"]
-    > *[class*="#{$grid-prefix}-"] {
-      padding-left: 0;
-      padding-right: 0;
-    }
-  }
-}
-
-@mixin sassplate-loop-grid-columns($columns, $breakpoint, $type) {
-  @for $i from 0 through $columns {
-    @include sassplate-grid-column($i, $columns, $breakpoint, $type);
+// .gutterless@md
+@mixin sassplate-gutterless-class($breakpoint-name: "") {
+  .gutterless#{sassplate-get-breakpoint-suffix($breakpoint-name)} {
+    grid-gap: 0;
   }
 }
 
 // Create grid for specific class
-@mixin sassplate-grid($breakpoint, $columns: $grid-columns) {
-  // Add float:left to all grid selectors for this breakpoint.
-  @include sassplate-float-grid-columns($breakpoint);
-  @include sassplate-grid-ratios($breakpoint);
+@mixin sassplate-grid-spans-offsets($breakpoint, $columns) {
+  // Spans
+  @for $index from 1 through $columns {
+    .#{$grid-prefix}-#{$index}\@#{$breakpoint} {
+      grid-column: auto / span $index;
+    }
+  }
 
-  @include sassplate-loop-grid-columns($columns, $breakpoint, "width");
-  @include sassplate-loop-grid-columns($columns, $breakpoint, "pull");
-  @include sassplate-loop-grid-columns($columns, $breakpoint, "push");
-  @include sassplate-loop-grid-columns($columns, $breakpoint, "offset");
+  // Offsets
+  @for $index from 1 through $columns {
+    .#{$grid-prefix}-start-#{$index}\@#{$breakpoint} {
+      grid-column-start: $index;
+    }
+  }
 }

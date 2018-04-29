@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-draggable",
   "description": "A class for versatile, performant draggability.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "dist/odo-draggable.js",
   "module": "dist/odo-draggable.esm.js",
   "odoModule": "src/draggable.js",

@@ -1,14 +1,14 @@
 (function () {
-'use strict';
+	'use strict';
 
-var _window = window;
-var OdoReveal = _window.OdoReveal;
-var OdoResponsiveImages = _window.OdoResponsiveImages;
+	var _window = window,
+	    OdoReveal = _window.OdoReveal,
+	    OdoResponsiveImages = _window.OdoResponsiveImages;
 
 
-OdoResponsiveImages.initialize();
+	OdoResponsiveImages.initialize();
 
-var instances = OdoReveal.initializeAll();
-console.log(instances);
+	var instances = OdoReveal.initializeAll();
+	console.log(instances);
 
 }());

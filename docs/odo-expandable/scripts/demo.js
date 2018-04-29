@@ -1,7 +1,7 @@
 (function () {
-'use strict';
+	'use strict';
 
-var OdoExpandable = window.OdoExpandable;
-OdoExpandable.initializeAll();
+	var OdoExpandable = window.OdoExpandable;
+	OdoExpandable.initializeAll();
 
 }());

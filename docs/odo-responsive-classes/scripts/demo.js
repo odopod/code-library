@@ -1,6 +1,6 @@
 (function () {
-'use strict';
+	'use strict';
 
-var OdoResponsiveClasses = window.OdoResponsiveClasses;
+	var OdoResponsiveClasses = window.OdoResponsiveClasses;
 
 }());

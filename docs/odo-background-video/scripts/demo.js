@@ -1,9 +1,9 @@
 (function () {
-'use strict';
+	'use strict';
 
-var OdoBackgroundVideo = window.OdoBackgroundVideo;
+	var OdoBackgroundVideo = window.OdoBackgroundVideo;
 
-var backgroundOne = new OdoBackgroundVideo(document.querySelector('#background-example-one'));
-window.backgroundOne = backgroundOne;
+	var backgroundOne = new OdoBackgroundVideo(document.querySelector('#background-example-one'));
+	window.backgroundOne = backgroundOne;
 
 }());

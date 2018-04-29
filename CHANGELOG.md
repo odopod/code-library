@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Draggable [1.2.1], Carousel [2.1.1], Dual Viewer [1.1.2] - 2018-4-28
+### Fixed
+* Incorrect draggable event property calculations related to the axis (`didMoveOnAxis`, `isDirectionOnAxis`). This caused the carousel to not navigate after dragging.
+
 ## Video [1.2.2] - 2018-02-28
 ### Fixed
 * Update autoplay test so that iOS 11 passes [stricter requirements](https://webkit.org/blog/6784/new-video-policies-for-ios/).

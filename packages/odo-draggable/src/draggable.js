@@ -370,7 +370,7 @@ class Draggable extends TinyEmitter {
     this._emitEvent(new OdoPointer.Event({
       type: Draggable.EventType.SETTLE,
       target: this.element,
-      axis: this.pointer.axis,
+      axis: this.pointer.options.axis,
       deltaTime: Date.now() - this.pointer.startTime,
       delta: Coordinate.difference(this._relativeZero, this._currentPosition),
       start: this._relativeZero,
@@ -395,7 +395,7 @@ class Draggable extends TinyEmitter {
       type,
       target: evt.target,
       currentTarget: this.element,
-      axis: this.pointer.axis,
+      axis: this.pointer.options.axis,
       deltaTime: this.pointer.deltaTime,
       delta: Coordinate.difference(this._currentPosition, this._relativeZero),
       start: this._relativeZero,

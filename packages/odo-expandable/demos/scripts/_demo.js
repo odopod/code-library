@@ -1,2 +1,2 @@
 const OdoExpandable = window.OdoExpandable;
-OdoExpandable.initializeAll();
+window.expandableInstances = OdoExpandable.initializeAll();

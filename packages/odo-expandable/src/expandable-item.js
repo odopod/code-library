@@ -23,7 +23,14 @@ class ExpandableItem {
     /** @type {Element} */
     this.target = document.body.querySelector(`[${Settings.Attribute.TARGET}="${id}"]`);
 
+    /** @type {boolean} */
+    this.isOpen = this.target.classList.contains(Settings.ClassName.TARGET_OPEN);
+
     this._setA11yAttributes();
+
+    if (this.isOpen) {
+      this.open();
+    }
 
     if (!this.options.groupedItem) {
       this._onTriggerClick = this._triggerClickHandler.bind(this);
@@ -91,6 +98,7 @@ class ExpandableItem {
     this.trigger.classList.add(Settings.ClassName.TRIGGER_OPEN);
     this.trigger.setAttribute('aria-expanded', 'true');
     this.target.setAttribute('aria-hidden', 'false');
+    this.isOpen = true;
   }
 
   /**
@@ -101,10 +109,7 @@ class ExpandableItem {
     this.trigger.classList.remove(Settings.ClassName.TRIGGER_OPEN);
     this.trigger.setAttribute('aria-expanded', 'false');
     this.target.setAttribute('aria-hidden', 'true');
-  }
-
-  get isOpen() {
-    return this.target.classList.contains(Settings.ClassName.TARGET_OPEN);
+    this.isOpen = false;
   }
 
   /**

@@ -41,12 +41,12 @@ class ExpandableGroup {
 
   /**
    * Will iterate over all grouped items and toggle the selected one while collapsing all others.
-   * @param {string} selectedId The ID of the selected target to expand.
+   * @param {string} id The ID of the selected target to expand.
    * @private
    */
-  toggleVisibility(selectedId) {
+  toggleVisibility(id) {
     this.expandables.forEach((expandable) => {
-      if (expandable.id === selectedId) {
+      if (expandable.id === id) {
         expandable.toggle();
       } else {
         expandable.close();

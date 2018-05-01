@@ -243,17 +243,32 @@ describe('the OdoExpandable Component', function expandable() {
     it('will update heights for each expandable on resize', () => {
       const setHeight = sinon.spy(instance, '_setHeight');
 
-      instance._handleResize();
+      instance.update();
 
-      expect(setHeight.callCount).to.equal(instance.expandables.length);
+      // setHeights is called once to collapse the content, then again to
+      // expand it.
+      expect(setHeight.callCount).to.equal(instance.expandables.length * 2);
     });
 
     it('will scroll the viewport into view if needed', () => {
-      window.pageYOffset = 0;
-      window.innerHeight = 10;
-
       const scrollTo = sinon.spy(OdoHelpers, 'scrollTo');
 
+      window.pageYOffset = 210;
+
+      instance._expandableOffsets = [
+        {
+          id: 'demo-expand-9',
+          offset: 100,
+        },
+        {
+          id: 'demo-expand-10',
+          offset: 200,
+        },
+        {
+          id: 'demo-expand-11',
+          offset: 300,
+        },
+      ];
       instance._scrollToSelected('demo-expand-10');
 
       expect(scrollTo.callCount).to.equal(1);

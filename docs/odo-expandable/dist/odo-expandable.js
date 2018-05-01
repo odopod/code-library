@@ -13,7 +13,6 @@
     },
     Attribute: {
       TRIGGER: 'data-expandable-trigger',
-      TARGET: 'data-expandable-target',
       GROUP: 'data-expandable-group',
       ANIMATED: 'data-expandable-animated'
     },
@@ -27,24 +26,6 @@
       throw new TypeError("Cannot call a class as a function");
     }
   };
-
-  var createClass = function () {
-    function defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, descriptor.key, descriptor);
-      }
-    }
-
-    return function (Constructor, protoProps, staticProps) {
-      if (protoProps) defineProperties(Constructor.prototype, protoProps);
-      if (staticProps) defineProperties(Constructor, staticProps);
-      return Constructor;
-    };
-  }();
 
   var inherits = function (subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
@@ -95,9 +76,20 @@
       this.trigger = document.body.querySelector('[' + Settings.Attribute.TRIGGER + '="' + id + '"]');
 
       /** @type {Element} */
-      this.target = document.body.querySelector('[' + Settings.Attribute.TARGET + '="' + id + '"]');
+      this.target = document.getElementById(id);
+
+      /** @type {boolean} */
+      this.isOpen = this.target.classList.contains(Settings.ClassName.TARGET_OPEN);
+
+      if (!this.trigger.id) {
+        this.trigger.id = 'odo-expandable-trigger--' + this.id;
+      }
 
       this._setA11yAttributes();
+
+      if (this.isOpen) {
+        this.open();
+      }
 
       if (!this.options.groupedItem) {
         this._onTriggerClick = this._triggerClickHandler.bind(this);
@@ -128,13 +120,10 @@
 
 
     ExpandableItem.prototype._setA11yAttributes = function _setA11yAttributes() {
-      var elementId = 'expandable-' + this.id;
-
-      this.trigger.setAttribute('aria-describedby', elementId);
-      this.target.setAttribute('id', elementId);
       this.trigger.setAttribute('aria-expanded', this.isOpen.toString());
-      this.trigger.setAttribute('aria-controls', elementId);
-      this.target.setAttribute('aria-labelledby', elementId);
+      this.trigger.setAttribute('aria-controls', this.id);
+
+      this.target.setAttribute('aria-labelledby', this.trigger.id);
       this.target.setAttribute('aria-hidden', (!this.isOpen).toString());
     };
 
@@ -145,9 +134,9 @@
 
 
     ExpandableItem.prototype._removeA11yAttributes = function _removeA11yAttributes() {
-      this.trigger.removeAttribute('aria-describedby');
-      this.target.removeAttribute('id');
       this.trigger.removeAttribute('aria-expanded');
+      this.trigger.removeAttribute('aria-controls');
+
       this.target.removeAttribute('aria-labelledby');
       this.target.removeAttribute('aria-hidden');
     };
@@ -175,6 +164,7 @@
       this.trigger.classList.add(Settings.ClassName.TRIGGER_OPEN);
       this.trigger.setAttribute('aria-expanded', 'true');
       this.target.setAttribute('aria-hidden', 'false');
+      this.isOpen = true;
     };
 
     /**
@@ -187,11 +177,14 @@
       this.trigger.classList.remove(Settings.ClassName.TRIGGER_OPEN);
       this.trigger.setAttribute('aria-expanded', 'false');
       this.target.setAttribute('aria-hidden', 'true');
+      this.isOpen = false;
     };
 
     /**
      * Dispose this instance and its handlers.
      */
+
+
     ExpandableItem.prototype.dispose = function dispose() {
       if (!this.options.groupedItem) {
         document.body.removeEventListener('click', this._onTriggerClick);
@@ -200,12 +193,6 @@
       this._removeA11yAttributes();
     };
 
-    createClass(ExpandableItem, [{
-      key: 'isOpen',
-      get: function get$$1() {
-        return this.target.classList.contains(Settings.ClassName.TARGET_OPEN);
-      }
-    }]);
     return ExpandableItem;
   }();
 
@@ -255,14 +242,14 @@
 
     /**
      * Will iterate over all grouped items and toggle the selected one while collapsing all others.
-     * @param {string} selectedId The ID of the selected target to expand.
+     * @param {string} id The ID of the selected target to expand.
      * @private
      */
 
 
-    ExpandableGroup.prototype.toggleVisibility = function toggleVisibility(selectedId) {
+    ExpandableGroup.prototype.toggleVisibility = function toggleVisibility(id) {
       this.expandables.forEach(function (expandable) {
-        if (expandable.id === selectedId) {
+        if (expandable.id === id) {
           expandable.toggle();
         } else {
           expandable.close();
@@ -307,96 +294,112 @@
        */
       var _this = possibleConstructorReturn(this, _ExpandableGroup.call(this, elements));
 
-      _this._expandableOffsets = null;
-
-      _this._saveOffsets();
+      _this._expandableOffsets = [];
 
       // Set the initial value of each element based on its state.
-      _this.expandables.forEach(function (item) {
-        return _this._setHeight(item, item.isOpen);
-      });
+      _this.update();
 
       // A resize handler for when the DOM updates.
-      _this._resizeId = OdoWindowEvents.onResize(_this._handleResize.bind(_this));
+      _this._resizeId = OdoWindowEvents.onResize(_this.update.bind(_this));
       return _this;
     }
 
     /**
      * Called by OdoWindowEvents when the browser is resized. Allows us to update
      * our saved offsets and animate to their new positions.
-     *
      * @private
      */
 
 
-    ExpandableAccordion.prototype._handleResize = function _handleResize() {
+    ExpandableAccordion.prototype.update = function update() {
       var _this2 = this;
 
-      this._saveOffsets();
-      this.expandables.forEach(function (item) {
-        return _this2._setHeight(item, item.isOpen);
+      // Find any already open expandables.
+      var openExpandables = this.expandables.map(function (expandable) {
+        return expandable.isOpen;
+      });
+
+      // Set the transition duration to zero so there is no animation when measuring.
+      this.expandables.forEach(function (expandable) {
+        expandable.target.style.transitionDuration = '0s';
+        expandable.close();
+        _this2._setHeight(expandable, false);
+      });
+
+      // Save offsets now that all expandables are collapsed.
+      this._expandableOffsets = this._getOffsets();
+
+      // Reopen any expandables that were open before.
+      this.expandables.forEach(function (expandable, i) {
+        _this2._setHeight(expandable, openExpandables[i]);
+      });
+
+      // Cause the browser to do a layout and set the heights of the elements
+      // with a transition duration of zero.
+      this.expandables[0].trigger.offsetWidth; // eslint-disable-line no-unused-expressions
+
+      // Now that everything has been reset, enable transitions again.
+      this.expandables.forEach(function (expandable, i) {
+        expandable.target.style.transitionDuration = '';
+        if (openExpandables[i]) {
+          expandable.open();
+        }
       });
     };
 
     /**
      * When an item is clicked, we animate the accordion.
-     *
      * @override
      */
 
 
-    ExpandableAccordion.prototype.toggleVisibility = function toggleVisibility(selectedId) {
+    ExpandableAccordion.prototype.toggleVisibility = function toggleVisibility(id) {
       var _this3 = this;
 
-      this._scrollToSelected(selectedId);
-      this.expandables.forEach(function (item) {
-        return _this3._animateHeight(item, item.id === selectedId);
+      this.expandables.forEach(function (expandable) {
+        _this3._animateHeight(expandable, expandable.id === id);
       });
-      _ExpandableGroup.prototype.toggleVisibility.call(this, selectedId);
+      _ExpandableGroup.prototype.toggleVisibility.call(this, id);
+      this._scrollToSelected(id);
     };
 
     /**
      * On load and any other time the DOM updates, this function will save the offsets
      * of each accordion item into an object so we don't have to read the DOM every time.
-     *
      * @private
+     * @return {Array.<{id: string, offset: number}>}
      */
 
 
-    ExpandableAccordion.prototype._saveOffsets = function _saveOffsets() {
+    ExpandableAccordion.prototype._getOffsets = function _getOffsets() {
       var scrollY = window.pageYOffset;
-      var containerOffset = scrollY + this.expandables[0].trigger.getBoundingClientRect().top;
-      this._expandableOffsets = this.expandables.map(function (el, i) {
-        var offset = containerOffset + i * el.target.firstElementChild.offsetHeight;
-        return { id: el.id, offset: offset };
+      return this.expandables.map(function (expandable) {
+        return {
+          id: expandable.id,
+          offset: scrollY + expandable.trigger.getBoundingClientRect().top
+        };
       });
     };
 
     /**
      * When called we will check the accordion's position in the viewport and scroll
      * the user into view if needed.
-     *
-     * @param {string} targetId The id of the ExpandableItem that was clicked.
+     * @param {string} id The id of the ExpandableItem that was clicked.
      * @private
      */
 
 
-    ExpandableAccordion.prototype._scrollToSelected = function _scrollToSelected(targetId) {
-      var viewportTop = window.pageYOffset;
-      var viewportBottom = viewportTop + window.innerHeight;
+    ExpandableAccordion.prototype._scrollToSelected = function _scrollToSelected(id) {
       var item = this._expandableOffsets.find(function (item) {
-        return item.id === targetId;
+        return item.id === id;
       });
-      var itemOffset = item.offset;
-      var isOutOfView = itemOffset < viewportTop || itemOffset > viewportBottom;
-      if (isOutOfView) {
-        odoHelpers.scrollTo(itemOffset, 300);
+      if (item.offset < window.pageYOffset) {
+        odoHelpers.scrollTo(item.offset, 300);
       }
     };
 
     /**
      * Sets the height of a given Expandable item.
-     *
      * @param {Expandable} expandable The Expandable instance to modify.
      * @param {boolean} setToOpen Whether we setting the Expandable to it's open state.
      */
@@ -411,7 +414,6 @@
      * Called if we need to alter the Expandable state. Only does so if either the same
      * Expandable that is open is clicked or another one was clicked and this one needs
      * to be closed.
-     *
      * @param {Expandable} expandable The expandable to test and potentially alter.
      * @param {boolean} isTarget Whether or not the current expandable was the one clicked.
      */
@@ -425,7 +427,6 @@
 
     /**
      * Remove the resize handler and dispose.
-     *
      * @override
      */
 

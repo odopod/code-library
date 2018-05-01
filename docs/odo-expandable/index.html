@@ -26,9 +26,9 @@
         <p>Odo Helpers, OdoWindowEvents.</p>
 
         <h2>Markup</h2>
-        <p>The only two required pieces are a <code>button</code> element with a <code>data-expandable-trigger="{id}"</code> attribute and any other element with a <code>data-expandable-target="{id}"</code> attribute.</p>
-<pre><code class="language-markup">&lt;button data-expandable-trigger=&quot;demo-expand-1&quot;&gt;Trigger&lt;/button&gt;
-&lt;div data-expandable-target=&quot;demo-expand-1&quot;&gt;Target&lt;/div&gt;</code></pre>
+        <p>The only two required pieces are a <code>button</code> element with a <code>data-expandable-trigger="{id}"</code> attribute and any other element with a <code>id="{id}"</code> attribute.</p>
+<pre><code class="language-markup">&lt;button data-expandable-trigger=&quot;demo-single-expand&quot;&gt;Trigger&lt;/button&gt;
+&lt;div id=&quot;demo-single-expand&quot;&gt;Target&lt;/div&gt;</code></pre>
 
         <h2>Setup</h2>
         <p>Simply call the static method, <code>initializeAll()</code> and Expandable will instantiate all instances of itself.</p>
@@ -37,23 +37,20 @@
         <pre><code class="language-javascript">import { ExpandableItem } from '@odopod/odo-expandable';
 
 new ExpandableItem(triggerEl);</code></pre>
-        <p>...or you can initialize individual Expandable Items with <code>new ExpandableGroup(Elements);</code>...</p>
+        <p>...or you can initialize individual Expandable Items with <code>new ExpandableGroup(triggerElements);</code>...</p>
         <pre><code class="language-javascript">import { ExpandableGroup } from '@odopod/odo-expandable';
 
-new ExpandableGroup(Elements);</code></pre>
-        <p>...or you can initialize an animated accordion with <code>new ExpandableAccordion(Elements);</code></p>
+new ExpandableGroup(triggerElements);</code></pre>
+        <p>...or you can initialize an animated accordion with <code>new ExpandableAccordion(triggerElements);</code></p>
         <pre><code class="language-javascript">import { ExpandableAccordion } from '@odopod/odo-expandable';
 
-new ExpandableAccordion(Elements);</code></pre>
+new ExpandableAccordion(triggerElements);</code></pre>
 
         <div class="demo">
           <h2>Single Element</h2>
-          <button style="font-size: 16px;" class="" data-expandable-trigger="demo-expand-1">Show/Hide Content</button>
+          <button style="font-size: 16px;" data-expandable-trigger="demo-single-expand">Show/Hide Content</button>
           <p>Since the expandable doesn't require a container element you can use it to toggle a class on another element anywhere in the DOM.</p>
-          <div class="expandable__target" data-expandable-target="demo-expand-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+          <div class="demo-expand-content" id="demo-single-expand">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
         </div>
         <div class="demo">
           <h2>Group (first expanded)</h2>
@@ -61,103 +58,60 @@ new ExpandableAccordion(Elements);</code></pre>
           <p>Add the <code>odo-expandable__trigger--open</code> and <code>odo-expandable__target--open</code> classes to have an element be expanded on load</p>
           <p>Example:</p>
 <pre><code class="language-markup">&lt;button class=&quot;odo-expandable__trigger--open&quot; data-expandable-trigger=&quot;demo-expand-1&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;Trigger 1&lt;/button&gt;
-&lt;div class=&quot;odo-expandable__target--open&quot; data-expandable-target=&quot;demo-expand-1&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;First Content&lt;/div&gt;
+&lt;div class=&quot;odo-expandable__target--open&quot; id=&quot;demo-expand-1&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;First Content&lt;/div&gt;
 
 &lt;button data-expandable-trigger=&quot;demo-expand-2&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;Trigger2&lt;/button&gt;
-&lt;div data-expandable-target=&quot;demo-expand-2&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;Second Content&lt;/div&gt;
+&lt;div id=&quot;demo-expand-2&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;Second Content&lt;/div&gt;
 
 &lt;button data-expandable-trigger=&quot;demo-expand-3&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;Trigger 3&lt;/button&gt;
-&lt;div data-expandable-target=&quot;demo-expand-3&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;Third Content&lt;/div&gt;</code></pre>
+&lt;div id=&quot;demo-expand-3&quot; data-expandable-group=&quot;demo-group-1&quot;&gt;Third Content&lt;/div&gt;</code></pre>
 
+          <button class="demo-trigger odo-expandable__trigger--open" data-expandable-trigger="demo-expand-1" data-expandable-group="demo-group-1">Trigger 1</button>
+          <div class="demo-expand-content odo-expandable__target--open" id="demo-expand-1" data-expandable-group="demo-group-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
 
-          <button class="expandable__trigger odo-expandable__trigger--open" data-expandable-trigger="demo-expand-3" data-expandable-group="demo-group-1">Trigger 1</button>
-          <div class="expandable__target odo-expandable__target--open" data-expandable-target="demo-expand-3" data-expandable-group="demo-group-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-          dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-          non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-          <button class="expandable__trigger" data-expandable-trigger="demo-expand-4" data-expandable-group="demo-group-1">Trigger 2</button>
-          <div class="expandable__target" data-expandable-target="demo-expand-4" data-expandable-group="demo-group-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-          dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-          non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-          <button class="expandable__trigger" data-expandable-trigger="demo-expand-5" data-expandable-group="demo-group-1">Trigger 3</button>
-          <div class="expandable__target" data-expandable-target="demo-expand-5" data-expandable-group="demo-group-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-          dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-          non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+          <button class="demo-trigger" data-expandable-trigger="demo-expand-2" data-expandable-group="demo-group-1">Trigger 2</button>
+          <div class="demo-expand-content" id="demo-expand-2" data-expandable-group="demo-group-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+
+          <button class="demo-trigger" data-expandable-trigger="demo-expand-3" data-expandable-group="demo-group-1">Trigger 3</button>
+          <div class="demo-expand-content" id="demo-expand-3" data-expandable-group="demo-group-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
         </div>
         <div class="demo">
           <h2>Group (none expanded)</h2>
           <p>If no "open" class is assigned to an element when instantiated, all targets will remain collapsed</p>
-          <button class="expandable__trigger" data-expandable-trigger="demo-expand-6" data-expandable-group="demo-group-2">Trigger 1</button>
-          <div class="expandable__target" data-expandable-target="demo-expand-6" data-expandable-group="demo-group-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-          <button class="expandable__trigger" data-expandable-trigger="demo-expand-7" data-expandable-group="demo-group-2">Trigger 2</button>
-          <div class="expandable__target" data-expandable-target="demo-expand-7" data-expandable-group="demo-group-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-          <button class="expandable__trigger" data-expandable-trigger="demo-expand-8" data-expandable-group="demo-group-2">Trigger 3</button>
-          <div class="expandable__target" data-expandable-target="demo-expand-8" data-expandable-group="demo-group-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+          <button class="demo-trigger" data-expandable-trigger="demo-expand-4" data-expandable-group="demo-group-2">Trigger 1</button>
+          <div class="demo-expand-content" id="demo-expand-4" data-expandable-group="demo-group-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+
+          <button class="demo-trigger" data-expandable-trigger="demo-expand-5" data-expandable-group="demo-group-2">Trigger 2</button>
+          <div class="demo-expand-content" id="demo-expand-5" data-expandable-group="demo-group-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+
+          <button class="demo-trigger" data-expandable-trigger="demo-expand-6" data-expandable-group="demo-group-2">Trigger 3</button>
+          <div class="demo-expand-content" id="demo-expand-6" data-expandable-group="demo-group-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
         </div>
         <div class="demo">
           <h2>Animated Accordion (ExpandableAccordion)</h2>
           <p>The Animated Accordion includes animations for expanding/contracting as well as viewport scrolling right out of the box without any additional configuration.</p>
           <p>To include animations just include the <code>data-expandable-animated</code> attribute on each trigger in your markup.</p>
           <p>Example</p>
-<pre><code class="language-markup">&lt;button data-expandable-animated data-expandable-trigger=&quot;demo-expand-9&quot; data-expandable-group=&quot;demo-group-3&quot;&gt;Trigger&lt;/button&gt;
-&lt;div data-expandable-target=&quot;demo-expand-9&quot; data-expandable-group=&quot;demo-group-3&quot;&gt;&lt;div&gt;Target&lt;/div&gt;&lt;/div&gt;
+<pre><code class="language-markup">&lt;button data-expandable-animated data-expandable-trigger=&quot;demo-expand-7&quot; data-expandable-group=&quot;demo-group-3&quot;&gt;Trigger&lt;/button&gt;
+&lt;div id=&quot;demo-expand-7&quot; data-expandable-group=&quot;demo-group-3&quot;&gt;&lt;div&gt;Target&lt;/div&gt;&lt;/div&gt;
 
-&lt;button data-expandable-animated data-expandable-trigger=&quot;demo-expand-10&quot; data-expandable-group=&quot;demo-group-3&quot;&gt;Trigger&lt;/button&gt;
-&lt;div data-expandable-target=&quot;demo-expand-10&quot; data-expandable-group=&quot;demo-group-3&quot;&gt;&lt;div&gt;Target&lt;/div&gt;&lt;/div&gt;</code></pre>
+&lt;button data-expandable-animated data-expandable-trigger=&quot;demo-expand-8&quot; data-expandable-group=&quot;demo-group-3&quot;&gt;Trigger&lt;/button&gt;
+&lt;div id=&quot;demo-expand-8&quot; data-expandable-group=&quot;demo-group-3&quot;&gt;&lt;div&gt;Target&lt;/div&gt;&lt;/div&gt;</code></pre>
 
           <p><em>Note:</em> Animated Accordions require a second, nested element inside of the <code>target</code> element to read the height of when its parent is collapsed.</p>
 
-          <button class="expandable__trigger--animated odo-expandable__trigger--open" data-expandable-animated data-expandable-trigger="demo-expand-9" data-expandable-group="demo-group-3">Trigger 1</button>
-          <div class="expandable__target--animated odo-expandable__target--open" data-expandable-target="demo-expand-9"
-            data-expandable-group="demo-group-3"><div class="expandable-target__inner">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-            dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div></div>
-          <button class="expandable__trigger--animated" data-expandable-trigger="demo-expand-10" data-expandable-animated data-expandable-group="demo-group-3">Trigger 2</button>
-          <div class="expandable__target--animated" data-expandable-target="demo-expand-10" data-expandable-group="demo-group-3"><div class="expandable-target__inner">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-          dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-          non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing
-          elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-          anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-          et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</div></div>
-          <button class="expandable__trigger--animated" data-expandable-trigger="demo-expand-11" data-expandable-animated data-expandable-group="demo-group-3">Trigger 3</button>
-          <div class="expandable__target--animated" data-expandable-target="demo-expand-11" data-expandable-group="demo-group-3"><div class="expandable-target__inner">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-          sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-          sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-          in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-          qui officia deserunt mollit anim id est laborum.</div></div>
+          <button class="an-accordion-trigger odo-expandable__trigger--open" data-expandable-animated data-expandable-trigger="demo-expand-7" data-expandable-group="demo-group-3">Trigger 1</button>
+          <div class="some-accordion-content odo-expandable__target--open" id="demo-expand-7" data-expandable-group="demo-group-3">
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+          </div>
+          <button class="an-accordion-trigger" data-expandable-trigger="demo-expand-8" data-expandable-animated data-expandable-group="demo-group-3">Trigger 2</button>
+          <div class="some-accordion-content" id="demo-expand-8" data-expandable-group="demo-group-3">
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+          </div>
+          <button class="an-accordion-trigger" data-expandable-trigger="demo-expand-9" data-expandable-animated data-expandable-group="demo-group-3">Trigger 3</button>
+          <div class="some-accordion-content" id="demo-expand-9" data-expandable-group="demo-group-3">
+            <div>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+          </div>
         </div>
         <h2>CSS</h2>
         <p>The only CSS needed is to style the <code>odo-expandable__trigger--open</code> and <code>odo-expandable__target--open</code> classes to your need.</p>
@@ -178,7 +132,8 @@ expandableItem.open() // opens an expandable item (if it is closed).
 expandableItem.close() // opens an expandable item (if it is open).
 expandableGroup.toggleVisibility(id) // toggles the visibility of the selected item and collapses the others.
 expandableItem.dispose()
-expandableGroup.dispose()</code></pre>
+expandableGroup.dispose()
+expandableAccordion.update() // update scroll-to offsets</code></pre>
       </div>
     </main>
 

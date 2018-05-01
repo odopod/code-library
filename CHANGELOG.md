@@ -1,10 +1,26 @@
 # Changelog
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## Expandable [0.2.0] - 2018-5-1
+### Added
+* `update()` method to which will update the scroll-to offsets for expandable accordions #20.
+
+### Fixed
+* Issue #19 where the scroll-to behavior was scrolling to the wrong position under some conditions.
+
+### Removed
+* `data-expandable-target` has been replaced with `id`. Always give the target/content an id attribute.
+* `aria-describedby` on the trigger. This isn't necessary when the trigger has content within in.
+
+### Changed
+* Triggers are automatically given an `id` if they do not have one so that the `aria-labelledby` attribute on the target/content can reference the correct element.
+* `expandableItem.isOpen` changed from a getter which checked the existence of a class name to a boolean which is set on `open()` and `close()`.
 
 ## Draggable [1.2.1], Carousel [2.1.1], Dual Viewer [1.1.2] - 2018-4-28
 ### Fixed

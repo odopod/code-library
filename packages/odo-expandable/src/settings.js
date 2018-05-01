@@ -5,7 +5,6 @@ export default {
   },
   Attribute: {
     TRIGGER: 'data-expandable-trigger',
-    TARGET: 'data-expandable-target',
     GROUP: 'data-expandable-group',
     ANIMATED: 'data-expandable-animated',
   },

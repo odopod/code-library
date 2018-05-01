@@ -14,10 +14,8 @@ describe('the OdoExpandable Component', function expandable() {
 
   let instance;
 
-  const noop = () => {};
-
   // Clone the fixture and append it to the body. Then create a new instance.
-  function createFixture(id, options) {
+  function createFixture(id) {
     fixture.load(`${id}.html`);
 
     const instances = OdoExpandable.initializeAll();
@@ -65,12 +63,11 @@ describe('the OdoExpandable Component', function expandable() {
     });
 
     it('will set the proper ARIA attributes on the elements', () => {
-      const elementId = `expandable-${instance.id}`;
-      expect(instance.trigger.getAttribute('aria-describedby')).to.equal(elementId);
-      expect(instance.target.getAttribute('id')).to.equal(elementId);
+      expect(instance.trigger.id).to.equal('odo-expandable-trigger--basic-expand');
       expect(instance.trigger.getAttribute('aria-expanded')).to.equal('false');
-      expect(instance.trigger.getAttribute('aria-controls')).to.equal(elementId);
-      expect(instance.target.getAttribute('aria-labelledby')).to.equal(elementId);
+      expect(instance.trigger.getAttribute('aria-controls')).to.equal('basic-expand');
+      expect(instance.target.id).to.equal('basic-expand');
+      expect(instance.target.getAttribute('aria-labelledby')).to.equal('odo-expandable-trigger--basic-expand');
       expect(instance.target.getAttribute('aria-hidden')).to.equal('true');
     });
 
@@ -122,9 +119,8 @@ describe('the OdoExpandable Component', function expandable() {
 
     it('will properly remove all ARIA attributes on dispose', () => {
       instance.dispose();
-      expect(instance.trigger.getAttribute('aria-describedby')).to.equal(null);
-      expect(instance.target.getAttribute('id')).to.equal(null);
-      expect(instance.trigger.getAttribute('expanded')).to.equal(null);
+      expect(instance.trigger.getAttribute('aria-expanded')).to.equal(null);
+      expect(instance.trigger.getAttribute('aria-controls')).to.equal(null);
       expect(instance.target.getAttribute('aria-hidden')).to.equal(null);
       expect(instance.target.getAttribute('aria-labelledby')).to.equal(null);
     });

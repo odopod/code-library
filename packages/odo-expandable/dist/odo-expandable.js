@@ -13,7 +13,6 @@ var Settings = {
   },
   Attribute: {
     TRIGGER: 'data-expandable-trigger',
-    TARGET: 'data-expandable-target',
     GROUP: 'data-expandable-group',
     ANIMATED: 'data-expandable-animated'
   },
@@ -96,10 +95,14 @@ var ExpandableItem = function () {
     this.trigger = document.body.querySelector('[' + Settings.Attribute.TRIGGER + '="' + id + '"]');
 
     /** @type {Element} */
-    this.target = document.body.querySelector('[' + Settings.Attribute.TARGET + '="' + id + '"]');
+    this.target = document.getElementById(id);
 
     /** @type {boolean} */
     this.isOpen = this.target.classList.contains(Settings.ClassName.TARGET_OPEN);
+
+    if (!this.trigger.id) {
+      this.trigger.id = 'odo-expandable-trigger--' + this.id;
+    }
 
     this._setA11yAttributes();
 
@@ -136,13 +139,10 @@ var ExpandableItem = function () {
 
 
   ExpandableItem.prototype._setA11yAttributes = function _setA11yAttributes() {
-    var elementId = 'expandable-' + this.id;
-
-    this.trigger.setAttribute('aria-describedby', elementId);
-    this.target.setAttribute('id', elementId);
     this.trigger.setAttribute('aria-expanded', this.isOpen.toString());
-    this.trigger.setAttribute('aria-controls', elementId);
-    this.target.setAttribute('aria-labelledby', elementId);
+    this.trigger.setAttribute('aria-controls', this.id);
+
+    this.target.setAttribute('aria-labelledby', this.trigger.id);
     this.target.setAttribute('aria-hidden', (!this.isOpen).toString());
   };
 
@@ -153,9 +153,9 @@ var ExpandableItem = function () {
 
 
   ExpandableItem.prototype._removeA11yAttributes = function _removeA11yAttributes() {
-    this.trigger.removeAttribute('aria-describedby');
-    this.target.removeAttribute('id');
     this.trigger.removeAttribute('aria-expanded');
+    this.trigger.removeAttribute('aria-controls');
+
     this.target.removeAttribute('aria-labelledby');
     this.target.removeAttribute('aria-hidden');
   };

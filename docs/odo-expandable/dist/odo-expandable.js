@@ -105,10 +105,10 @@
 
 
     ExpandableItem.prototype._triggerClickHandler = function _triggerClickHandler(evt) {
-      evt.preventDefault();
       var closest = evt.target.closest('[' + Settings.Attribute.TRIGGER + ']');
 
       if (closest === this.trigger) {
+        evt.preventDefault();
         this.toggle();
       }
     };
@@ -232,10 +232,10 @@
 
 
     ExpandableGroup.prototype._onClickHandler = function _onClickHandler(evt) {
-      evt.preventDefault();
       var closest = evt.target.closest('[' + Settings.Attribute.TRIGGER + ']');
 
       if (this._elements.includes(closest)) {
+        evt.preventDefault();
         this.toggleVisibility(closest.getAttribute(Settings.Attribute.TRIGGER));
       }
     };

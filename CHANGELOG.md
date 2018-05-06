@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Expandable [0.2.1] - 2018-5-5
+
+### Fixed
+
+* All click events on the entire page were having their default prevented. Now `preventDefault()` is only used when the expandable is going to be toggled.
+
 ## Expandable [0.2.0] - 2018-5-1
 ### Added
 * `update()` method to which will update the scroll-to offsets for expandable accordions #20.

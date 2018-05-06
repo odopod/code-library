@@ -31,10 +31,10 @@ class ExpandableGroup {
    * @private
    */
   _onClickHandler(evt) {
-    evt.preventDefault();
     const closest = evt.target.closest(`[${Settings.Attribute.TRIGGER}]`);
 
     if (this._elements.includes(closest)) {
+      evt.preventDefault();
       this.toggleVisibility(closest.getAttribute(Settings.Attribute.TRIGGER));
     }
   }

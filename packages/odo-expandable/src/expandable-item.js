@@ -48,10 +48,10 @@ class ExpandableItem {
    * @private
    */
   _triggerClickHandler(evt) {
-    evt.preventDefault();
     const closest = evt.target.closest(`[${Settings.Attribute.TRIGGER}]`);
 
     if (closest === this.trigger) {
+      evt.preventDefault();
       this.toggle();
     }
   }

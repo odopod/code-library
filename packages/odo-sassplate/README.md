@@ -15,7 +15,7 @@
 4. Install the [node-sass-json-importer](https://github.com/Updater/node-sass-json-importer) and **integrate it** into your build.
 
   ```
-  npm install node-sass-json-importer --save
+  npm install node-sass-json-importer --save-dev
   ```
 
 At this point, you should be able to compile your SCSS without any issues.

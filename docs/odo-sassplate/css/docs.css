@@ -87,7 +87,7 @@ pre[class*="language-"] {
 .token.url,
 .language-css .token.string,
 .style .token.string {
-  color: #a67f59;
+  color: #9a6e3a;
   background: rgba(255, 255, 255, 0.5); }
 
 .token.atrule,
@@ -95,7 +95,8 @@ pre[class*="language-"] {
 .token.keyword {
   color: #07a; }
 
-.token.function {
+.token.function,
+.token.class-name {
   color: #DD4A68; }
 
 .token.regex,

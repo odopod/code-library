@@ -45,6 +45,9 @@
    * @author Glen Cheney <glen@odopod.com>
    */
 
+  /* istanbul ignore next */
+  var listenerOptions = OdoDevice.HAS_PASSIVE_LISTENERS ? { passive: false } : false;
+
   /**
    * Makes the element scrollable with some smart listeners because iOS
    * behaves unsatisfactory.
@@ -78,9 +81,9 @@
 
 
     ScrollFix.prototype._registerEvents = function _registerEvents() {
-      document.body.addEventListener('touchstart', this._touchStartBound);
-      document.body.addEventListener('touchmove', this._touchMoveBound);
-      document.addEventListener('touchmove', this._preventDefaultBound);
+      document.body.addEventListener('touchstart', this._touchStartBound, listenerOptions);
+      document.body.addEventListener('touchmove', this._touchMoveBound, listenerOptions);
+      document.addEventListener('touchmove', this._preventDefaultBound, listenerOptions);
     };
 
     /**
@@ -136,9 +139,9 @@
 
 
     ScrollFix.prototype.dispose = function dispose() {
-      document.body.removeEventListener('touchstart', this._touchStartBound);
-      document.body.removeEventListener('touchmove', this._touchMoveBound);
-      document.removeEventListener('touchmove', this._preventDefaultBound);
+      document.body.removeEventListener('touchstart', this._touchStartBound, listenerOptions);
+      document.body.removeEventListener('touchmove', this._touchMoveBound, listenerOptions);
+      document.removeEventListener('touchmove', this._preventDefaultBound, listenerOptions);
 
       this.element = null;
       this.id = null;

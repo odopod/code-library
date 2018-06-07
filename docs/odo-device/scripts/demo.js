@@ -23,6 +23,7 @@
   setText('has-touch-events', Device.HAS_TOUCH_EVENTS);
   setText('has-pointer-events', Device.HAS_POINTER_EVENTS);
   setText('has-local-storage', Device.HAS_LOCAL_STORAGE);
+  setText('has-passive-listeners', Device.HAS_PASSIVE_LISTENERS);
 
   setText('dom-animation', quote(Device.Dom.ANIMATION));
   setText('dom-animationDuration', quote(Device.Dom.ANIMATION_DURATION));

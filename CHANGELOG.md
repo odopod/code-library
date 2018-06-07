@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Device [1.3.0] - 2018-6-7
+
+### Added
+
+* Test for `passive` property in event listener options. Use `OdoDevice.HAS_PASSIVE_LISTENERS` to check if you can use the third argument of `addEventListener` as an object. Needed for newer versions of iOS and Chrome which make `touchstart` and `touchmove` events on the document passive by default.
+
+## Dialog [2.0.2] - 2018-6-7
+
+### Fixed
+
+* Use the new `OdoDevice.HAS_PASSIVE_LISTENERS` in `ScrollFix` to prevent scrolling the page behind the dialog in iOS 11.3+ again.
+
+## Sassplate [2.0.1] - 2018-6-7
+
+### Fixed
+
+* Add `min-width`, `max-width`, `min-height`, `max-height`, `letter-spacing` to numeric props.
+
+### Added
+
+* `!default` flag to component framework variables so they can be overriden by the consumer.
+
+## Carousel [2.1.2] Draggable [1.2.2] Dropdown [2.1.1] Dual-viewer [1.1.3] Expandable [0.2.2] Helpers [2.0.2] On-swipe [1.1.2] Pointer [1.2.1] Reveal [2.0.2] Tabs [2.0.2] Tap [1.1.2] - 2018-6-7
+
+Bumped because `OdoDevice` is a dependency.
+
 ## Expandable [0.2.1] - 2018-5-5
 
 ### Fixed

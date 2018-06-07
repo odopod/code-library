@@ -1,6 +1,10 @@
 $number-properties: (
   "width",
+  "min-width",
+  "max-width",
   "height",
+  "min-height",
+  "max-height",
   "top",
   "right",
   "bottom",
@@ -20,8 +24,9 @@ $number-properties: (
   "border-bottom-width",
   "border-left-width",
   "border-radius",
-  "font-size"
-);
+  "font-size",
+  "letter-spacing"
+) !default;
 
 $color-properties: (
   "color",
@@ -34,7 +39,7 @@ $color-properties: (
   "outline-color",
   "fill",
   "stroke",
-);
+) !default;
 
 $pseudo-classes: (
   "active",
@@ -70,7 +75,7 @@ $pseudo-classes: (
   "target",
   "valid",
   "visited",
-);
+) !default;
 
 $special-properties: (
   "__comment__",
@@ -85,7 +90,7 @@ $special-properties: (
   "size",
   "font-family",
   "line-height",
-);
+) !default;
 
 // Compiles all supplied properties in a map to css. ui elements (buttons, etc)
 // go through this as well.

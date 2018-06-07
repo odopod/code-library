@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-pointer",
   "description": "An abstraction for pointer, mouse, and touch events.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "dist/odo-pointer.js",
   "module": "dist/odo-pointer.esm.js",
   "odoModule": "src/pointer.js",
@@ -15,8 +15,8 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-device": "^1.2.0",
-    "@odopod/odo-helpers": "^2.0.1",
+    "@odopod/odo-device": "^1.3.0",
+    "@odopod/odo-helpers": "^2.0.2",
     "tiny-emitter": "^2.0.1"
   },
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-pointer",

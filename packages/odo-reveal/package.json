@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-reveal",
   "description": "Reveal elements on the page as they come into view.",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "dist/odo-reveal.js",
   "module": "dist/odo-reveal.esm.js",
   "style": "css/odo-reveal.css",
@@ -15,8 +15,8 @@
     }
   ],
   "dependencies": {
-    "@odopod/odo-device": "^1.2.0",
-    "@odopod/odo-helpers": "^2.0.1",
+    "@odopod/odo-device": "^1.3.0",
+    "@odopod/odo-helpers": "^2.0.2",
     "@odopod/odo-viewport": "^1.1.1"
   },
   "devDependencies": {

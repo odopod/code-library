@@ -2,13 +2,13 @@
 # yarn lockfile v1
 
 
-"@odopod/odo-scroll-animation@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-scroll-animation/-/odo-scroll-animation-1.1.0.tgz#92402b9f6a576d10a1ef9630f057a36e2e50b52e"
+"@odopod/odo-scroll-animation@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-scroll-animation/-/odo-scroll-animation-1.2.0.tgz#eb456751dbef9e1fb9f457755ebd19527968c3bf"
 
-"@odopod/odo-window-events@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-window-events/-/odo-window-events-1.1.0.tgz#40308604c94648105b4b7f463896d8f252150bbe"
+"@odopod/odo-window-events@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-window-events/-/odo-window-events-1.2.0.tgz#59564a946b515327cb109630463e5ea7e1b18ce6"
   dependencies:
     debounce "^1.0.0"
     throttleit "^1.0.0"

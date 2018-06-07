@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 const babel = require('rollup-plugin-babel');
 const resolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
-const uglify = require('rollup-plugin-uglify');
+const { terser } = require('rollup-plugin-terser');
 const getClassName = require('./get-class-name');
 const getExternalDeps = require('./get-external-deps');
 const getPackageDirectory = require('./get-package-directory');
@@ -44,7 +44,7 @@ const BABEL_CONFIG_INSTRUMENTED = JSON.parse(JSON.stringify(BABEL_CONFIG));
 // Add the istanbul plugin.
 BABEL_CONFIG_INSTRUMENTED.plugins.push(['babel-plugin-istanbul']);
 
-const UGLIFY_CONFIG = {
+const MINIFY_CONFIG = {
   sourceMap: true,
   compress: {
     warnings: true,
@@ -89,7 +89,7 @@ const config = {
         resolve(),
         commonjs(COMMONJS_CONFIG),
         babel(BABEL_CONFIG),
-        uglify(UGLIFY_CONFIG),
+        terser(MINIFY_CONFIG),
       ],
     },
     output: {

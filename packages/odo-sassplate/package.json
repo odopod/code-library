@@ -18,7 +18,7 @@
     "mkdirp": "^0.5.1",
     "node-sass": "^4.3.0",
     "node-sass-json-importer": "^3.0.0",
-    "sass-true": "^3.0.2"
+    "sass-true": "^4.0.0"
   },
   "homepage": "https://github.com/odopod/code-library/tree/master/packages/odo-sassplate",
   "files": [

@@ -186,6 +186,10 @@
     }
   }();
 
+  /**
+   * Whether the browser supports the `passive` property in `EventListenerOptions`.
+   * @type {boolean}
+   */
   var HAS_PASSIVE_LISTENERS = function () {
     var supportsPassiveOption = false;
     try {

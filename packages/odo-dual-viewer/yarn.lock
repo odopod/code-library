@@ -2,40 +2,40 @@
 # yarn lockfile v1
 
 
-"@odopod/odo-device@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-device/-/odo-device-1.1.0.tgz#26fcae95cfbed1242e3ce89f3f10d908d467726e"
+"@odopod/odo-device@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-device/-/odo-device-1.2.0.tgz#b0c7d6ce58091a54e6e0233ef56acee96fec6755"
 
-"@odopod/odo-draggable@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-draggable/-/odo-draggable-1.1.0.tgz#684a53f2bc998cc79e4afa9edd600b1f328bf33c"
+"@odopod/odo-draggable@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-draggable/-/odo-draggable-1.2.1.tgz#6e8d5e757440591634f566ec269885cd0ae0c2f4"
   dependencies:
-    "@odopod/odo-device" "^1.1.0"
-    "@odopod/odo-helpers" "^2.0.0"
-    "@odopod/odo-pointer" "^1.1.0"
+    "@odopod/odo-device" "^1.2.0"
+    "@odopod/odo-helpers" "^2.0.1"
+    "@odopod/odo-pointer" "^1.2.0"
     tiny-emitter "^2.0.1"
 
-"@odopod/odo-helpers@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-helpers/-/odo-helpers-2.0.0.tgz#e8157d4d1b1cd26b804769445422840a8286b9a0"
+"@odopod/odo-helpers@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-helpers/-/odo-helpers-2.0.1.tgz#9266cf8ea8a10b7ef437ee2efcf9a231a0bd25eb"
   dependencies:
-    "@odopod/odo-device" "^1.1.0"
+    "@odopod/odo-device" "^1.2.0"
 
-"@odopod/odo-object-fit@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-object-fit/-/odo-object-fit-1.1.0.tgz#ea07afeddd5f78428d45edd51dfcacc847c4570b"
+"@odopod/odo-object-fit@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-object-fit/-/odo-object-fit-1.1.1.tgz#b5456a39ca45105f1e6f989ba60ed592b0004f44"
 
-"@odopod/odo-pointer@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-pointer/-/odo-pointer-1.1.0.tgz#7448a15899b485d5a8e34f04bd4fee891741c9bf"
+"@odopod/odo-pointer@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-pointer/-/odo-pointer-1.2.0.tgz#62e344a7beb3975ba959e79e2c324dbd619c9aca"
   dependencies:
-    "@odopod/odo-device" "^1.1.0"
-    "@odopod/odo-helpers" "^2.0.0"
+    "@odopod/odo-device" "^1.2.0"
+    "@odopod/odo-helpers" "^2.0.1"
     tiny-emitter "^2.0.1"
 
-"@odopod/odo-window-events@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-window-events/-/odo-window-events-1.1.0.tgz#40308604c94648105b4b7f463896d8f252150bbe"
+"@odopod/odo-window-events@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-window-events/-/odo-window-events-1.2.0.tgz#59564a946b515327cb109630463e5ea7e1b18ce6"
   dependencies:
     debounce "^1.0.0"
     throttleit "^1.0.0"

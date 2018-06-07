@@ -2,22 +2,22 @@
 # yarn lockfile v1
 
 
-"@odopod/odo-base-component@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-base-component/-/odo-base-component-1.2.0.tgz#42dbc7bc191f63b7b5bf71c31261b44736dd6cee"
+"@odopod/odo-base-component@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-base-component/-/odo-base-component-1.2.1.tgz#512fffeeefa407741d845444e691d530e64b3b4d"
   dependencies:
     debounce "^1.0.0"
     tiny-emitter "^2.0.1"
 
-"@odopod/odo-device@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-device/-/odo-device-1.1.0.tgz#26fcae95cfbed1242e3ce89f3f10d908d467726e"
+"@odopod/odo-device@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-device/-/odo-device-1.2.0.tgz#b0c7d6ce58091a54e6e0233ef56acee96fec6755"
 
-"@odopod/odo-helpers@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-helpers/-/odo-helpers-2.0.0.tgz#e8157d4d1b1cd26b804769445422840a8286b9a0"
+"@odopod/odo-helpers@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-helpers/-/odo-helpers-2.0.1.tgz#9266cf8ea8a10b7ef437ee2efcf9a231a0bd25eb"
   dependencies:
-    "@odopod/odo-device" "^1.1.0"
+    "@odopod/odo-device" "^1.2.0"
 
 debounce@^1.0.0:
   version "1.1.0"

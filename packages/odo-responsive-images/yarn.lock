@@ -2,15 +2,15 @@
 # yarn lockfile v1
 
 
-"@odopod/odo-viewport@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-viewport/-/odo-viewport-1.1.0.tgz#f88f51044a432250ff663558c1824d2e20e254d9"
+"@odopod/odo-viewport@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-viewport/-/odo-viewport-1.1.1.tgz#480956575e5b0bae9ac09684831e803cc4a6c357"
   dependencies:
-    "@odopod/odo-window-events" "^1.1.0"
+    "@odopod/odo-window-events" "^1.2.0"
 
-"@odopod/odo-window-events@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@odopod/odo-window-events/-/odo-window-events-1.1.0.tgz#40308604c94648105b4b7f463896d8f252150bbe"
+"@odopod/odo-window-events@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@odopod/odo-window-events/-/odo-window-events-1.2.0.tgz#59564a946b515327cb109630463e5ea7e1b18ce6"
   dependencies:
     debounce "^1.0.0"
     throttleit "^1.0.0"

@@ -186,6 +186,24 @@
     }
   }();
 
+  var HAS_PASSIVE_LISTENERS = function () {
+    var supportsPassiveOption = false;
+    try {
+      var options = {
+        get passive /* istanbul ignore next */() {
+          // eslint-disable-line getter-return
+          supportsPassiveOption = true;
+        }
+      };
+
+      window.addEventListener('test', null, options);
+      return supportsPassiveOption;
+    } catch (e) {
+      /* istanbul ignore next */
+      return false;
+    }
+  }();
+
   // Export everything as an object otherwise other components are unable to stub
   // properties because webpack writes them as getters and non-configurable.
   var device = {
@@ -199,7 +217,8 @@
     CAN_TRANSITION_TRANSFORMS: CAN_TRANSITION_TRANSFORMS,
     HAS_TOUCH_EVENTS: HAS_TOUCH_EVENTS,
     HAS_POINTER_EVENTS: HAS_POINTER_EVENTS,
-    HAS_LOCAL_STORAGE: HAS_LOCAL_STORAGE
+    HAS_LOCAL_STORAGE: HAS_LOCAL_STORAGE,
+    HAS_PASSIVE_LISTENERS: HAS_PASSIVE_LISTENERS
   };
 
   return device;

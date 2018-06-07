@@ -82,4 +82,10 @@ declare namespace OdoDevice {
    * @type {boolean}
    */
   const HAS_LOCAL_STORAGE: boolean;
+
+  /**
+   * Whether the browser supports the `passive` property in `EventListenerOptions`.
+   * @type {boolean}
+   */
+  const HAS_PASSIVE_LISTENERS: boolean;
 }

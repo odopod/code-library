@@ -183,6 +183,27 @@ const HAS_LOCAL_STORAGE = (() => {
   }
 })();
 
+/**
+ * Whether the browser supports the `passive` property in `EventListenerOptions`.
+ * @type {boolean}
+ */
+const HAS_PASSIVE_LISTENERS = (() => {
+  let supportsPassiveOption = false;
+  try {
+    const options = {
+      get passive/* istanbul ignore next */() { // eslint-disable-line getter-return
+        supportsPassiveOption = true;
+      },
+    };
+
+    window.addEventListener('test', null, options);
+    return supportsPassiveOption;
+  } catch (e) {
+    /* istanbul ignore next */
+    return false;
+  }
+})();
+
 // Export everything as an object otherwise other components are unable to stub
 // properties because webpack writes them as getters and non-configurable.
 export default {
@@ -197,4 +218,5 @@ export default {
   HAS_TOUCH_EVENTS,
   HAS_POINTER_EVENTS,
   HAS_LOCAL_STORAGE,
+  HAS_PASSIVE_LISTENERS,
 };

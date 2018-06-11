@@ -1213,8 +1213,13 @@ class Carousel extends TinyEmitter {
     this.isTransitioning = false;
     cancelTransitionEnd(this._transitionId);
 
-    // Fading carousels do not need to reposition themselves.
     if (this.options.isFade) {
+      // Remove the "behind" class which is usually removed after the on
+      // transition end.
+      this.getSlide(this._getLogicalIndex(this.lastDomIndex))
+        .classList
+        .remove(Carousel.Classes.BEHIND);
+      // Fading carousels do not need to reposition themselves, end here.
       return;
     }
 

@@ -1,7 +1,7 @@
 {
   "name": "@odopod/odo-carousel",
   "description": "Performant, awesome carousels.",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "main": "dist/odo-carousel.js",
   "module": "dist/odo-carousel.esm.js",
   "style": "css/odo-carousel.css",

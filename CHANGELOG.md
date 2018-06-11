@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## Carousel [2.1.3] - 2018-6-11
+
+### Fixed
+
+* When clicking through fading carousel faster than their transition speed, the `odo-carousel__slide--behind` class was never removed from the slide.
+
 ## Device [1.3.0] - 2018-6-7
 
 ### Added

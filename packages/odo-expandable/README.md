@@ -13,7 +13,7 @@ npm install @odopod/odo-expandable --save
 ```js
 import OdoExpandable from '@odopod/odo-expandable';
 
-const instances = OdoExpandable.initializeAll();;
+const instances = OdoExpandable.initializeAll();
 ```
 
 ## [Documentation][permalink]
